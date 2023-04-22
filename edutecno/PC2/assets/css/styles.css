@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    /* background-image: url(../img/digimon.png); */
+    /* background-color: rgba(255, 255, 255, 0.5); */
+  }
+  
+  nav {
+    background-color: #006699;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+  }
+  
+  nav h1 {
+    margin: 0;
+  }
+  
+  .digifont {
+    font-family: 'Pixel Digivolve', sans-serif;
+    font-size: 30px;
+  }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .digimon-list {
+    float: left;
+    width: 40%;
+  }
+  
+  .digimon-list h2 {
+    margin-top: 0;
+    text-align: center;
+  }
+  
+  .digimon-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 400px;
+    overflow: auto;
+    
+  }
+  
+  .digimon-list li {
+    cursor: pointer;
+  }
+  
+  .digimon-details {
+    float: right;
+    width: 50%;
+    text-align: center;
+  }
+  
+  .digimon-details h2 {
+    margin-top: 0;
+  }
+  
+  .digimon {
+    text-align: center;
+  }
+  
+  .footer-image {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+  }
+  
+
+
+  
+  @media only screen and (max-width: 768px) {
+    .digimon-list,
+    .digimon-details {
+      float: none;
+      width: 100%;
+    }
+  }
+  

@@ -5,6 +5,9 @@
   
   body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
   
   nav {
@@ -27,33 +30,36 @@
   }
 
   main {
+    flex-grow: 1;
     max-width: 960px;
     margin: 0 auto;
-    padding: 20px;
+    padding-bottom: 2em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+    align-items: center;
   }
   
   .digimon-list {
     float: left;
-    width: 40%;
-    padding-left: 10em;
+    width: 50%;
   }
   
   .digimon-list h2 {
     margin-top: 0;
-    text-align: center;
+    text-align: left;
   }
   
   .digimon-list ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    margin-right: 6em;
     height: 400px;
+    width: 200px;
     overflow: auto;
-    
+    border: 1px solid #ccc;
   }
   
   .digimon-list li {
@@ -68,20 +74,31 @@
   
   .digimon-details h2 {
     margin-top: 0;
+    text-align: center;
+    width: 300px;
   }
   
   .digimon {
     text-align: center;
     height: 400px;
-    max-width: 500px;
+    width: 300px;
+    max-width: 480px;
   }
-    
+
+  footer {
+    margin-top: auto;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    font-size: small;
+    }  
   
   @media only screen and (max-width: 768px) {
     .digimon-list,
     .digimon-details {
       float: none;
       width: 100%;
+      padding: 20px;
     }
   }
   

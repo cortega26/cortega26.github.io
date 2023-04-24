@@ -25,7 +25,7 @@ fetch(apiUrl)
 // Muestra los detalles de un Digimon en específico
 function showDigimonDetails(digimon) {
   digimonDetails.innerHTML = `
-    <h3>${digimon.name}</h3>
+    <h4>${digimon.name}</h4>
     <img src="${digimon.img}" alt="${digimon.name}">
     <p><strong>Nivel:</strong> ${digimon.level}</p>
   `;

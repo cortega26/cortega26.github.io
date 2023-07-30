@@ -1,0 +1,131 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: black;
+    color: white;
+  }
+  
+  .navbar {
+    background-color: black !important;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .navbar-brand {
+    font-size: 18px;
+  }
+
+  /* Custom CSS to increase font size for navbar links */
+  .navbar-nav {
+    font-size: 14px;
+  }
+
+  .landing {
+    background: linear-gradient(to bottom, black, #333);
+    padding: 80px 0;
+  }
+
+  .profile-image {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    margin-top: 26px;
+    margin-bottom: 26px;
+    border: 5px solid white;
+  }
+  
+h2 {
+  font-family: 'Arial', sans-serif; /* Choose a font that suits your preference */
+  font-size: 36px; /* Adjust the size as needed */
+  font-weight: bold;
+}
+
+.about p {
+  font-size: 18px; /* Adjust the size as needed */
+  line-height: 1.6; /* Add line height for better readability */
+  margin-bottom: 26px;
+}
+
+  .about,
+  .portfolio,
+  .contact {
+    padding: 100px 0;
+  }
+
+  #pi {
+    font-family: Times, serif, Arial, Helvetica, sans-serif, serif;
+  }
+
+.social-media-buttons a.btn.btn-dark,
+.social-media-buttons a.btn.btn-primary,
+.social-media-buttons a.btn.btn-success {
+  border-radius: 50% !important;
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height */
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.social-media-buttons .btn-dark,
+.social-media-buttons a.btn.btn-primary,
+.social-media-buttons .btn-success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-media-buttons .btn-dark i,
+.social-media-buttons a.btn.btn-primary,
+.social-media-buttons .btn-success i {
+  font-size: 24px;
+}
+
+
+.custom-card {
+  background-color: black;
+  color: white;
+  border: 1px solid #333;
+}
+
+
+.certifications {
+  background-color: #333;
+  color: white;
+  padding: 100px 0;
+}
+
+.certifications h2 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.certifications ul {
+  list-style: none;
+  padding: 0;
+}
+
+.certifications li {
+  margin-bottom: 20px;
+  border: 1px solid white;
+  padding: 20px;
+}
+
+.certifications li strong {
+  font-size: 20px;
+  display: block;
+}
+
+.certifications li span {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* Style the "Show Credential" link */
+.certifications li a {
+  color: white;
+  text-decoration: none;
+}
+
+.certifications li a:hover {
+  text-decoration: underline;
+}

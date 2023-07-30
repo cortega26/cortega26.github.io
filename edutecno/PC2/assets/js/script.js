@@ -1,5 +1,5 @@
+// Declaración de variables
 const apiUrl = 'https://digimon-api.vercel.app/api/digimon';
-
 const digimonList = document.querySelector('.digimon-list ul');
 const digimonDetails = document.querySelector('.digimon-details .digimon');
 

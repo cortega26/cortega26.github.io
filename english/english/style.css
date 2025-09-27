@@ -33,9 +33,48 @@ body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.hero-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 24px auto 0;
+  max-width: 640px;
+  text-align: left;
+}
+
+.hero-highlights li {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  padding-left: 28px;
+  position: relative;
+}
+
+.hero-highlights li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00d1ff;
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+
 .hero-cta .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
+}
+
+.hero-cta .btn-cta {
+  background-color: #00d1ff;
+  border-color: #00d1ff;
+  color: #000;
+  box-shadow: 0 8px 18px rgba(0, 209, 255, 0.3);
+}
+
+.hero-cta .btn-cta:hover {
+  background-color: #1ae0ff;
+  border-color: #1ae0ff;
+  color: #000;
 }
 
 .hero-cta .btn-primary:hover,
@@ -52,6 +91,21 @@ body {
 .hero-cta .btn-outline-light:hover {
   background-color: #f8f9fa;
   color: #000;
+}
+
+@media (max-width: 576px) {
+  .hero-highlights {
+    margin-top: 20px;
+    padding: 0 16px;
+  }
+
+  .hero-highlights li {
+    font-size: 1rem;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
 }
 
   .profile-image {

@@ -281,27 +281,38 @@
     <div class="container">
       <h2 class="text-center">Contact</h2><br>
       <div class="row">
-        <!-- First container with the form -->
-        <div class="col-md-8 mb-4">
+        <div class="col-lg-5 mb-4">
+          <div class="contact-summary h-100">
+            <p>Let's build resilient data products together. Share a short brief or invite me to a discovery call—I'll respond with next steps and resources tailored to your roadmap.</p>
+            <div class="contact-actions">
+              <a class="btn btn-cta contact-btn" href="https://example.com/carlos-ortega-resume.pdf" target="_blank" rel="noopener">Download Résumé</a>
+              <a class="btn btn-outline-light contact-btn" href="https://www.linkedin.com/in/cortega26" target="_blank" rel="noopener">Connect on LinkedIn</a>
+              <a class="btn btn-success contact-btn" href="https://calendly.com/cortega26/discovery-call" target="_blank" rel="noopener">Schedule via Calendly</a>
+            </div>
+            <p class="contact-response">Preferred response window: within 48 business hours, with calls available Tuesday–Thursday, 9:00–15:00 CLT.</p>
+            <p class="contact-response">Need a faster answer? Email me directly and I'll prioritize urgent production issues.</p>
+          </div>
+        </div>
+        <div class="col-lg-7 mb-4">
           <form class="contact-form" id="contact-form">
             <div class="form-group">
-              <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+              <label class="sr-only" for="name">Your Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+              <label class="sr-only" for="email">Your Email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="subject" placeholder="Subject" required>
+              <label class="sr-only" for="subject">Subject</label>
+              <input type="text" class="form-control" id="subject" name="subject" placeholder="Project or Role" required>
             </div>
             <div class="form-group">
-              <textarea class="form-control" id="message" rows="5" placeholder="Message" required></textarea>
+              <label class="sr-only" for="message">Message</label>
+              <textarea class="form-control" id="message" name="message" rows="5" placeholder="Share context, timelines, and goals" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="submit" class="btn btn-primary contact-submit">Open Email Draft</button>
           </form>
-        </div>
-        <!-- Second container with text -->
-        <div class="col-md-4 mb-4">
-          <p class="text-center">I'm excited to connect with you! If you're interested in collaborating on innovative projects or exploring opportunities together, feel free to reach out. Let's create something extraordinary!</p>
         </div>
       </div>
 
@@ -325,7 +336,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script src="./english/script.js"></script>
 
 </body>

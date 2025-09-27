@@ -129,6 +129,38 @@ h2 {
   margin-bottom: 26px;
 }
 
+.about-intro {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.about-highlights {
+  list-style: none;
+  max-width: 880px;
+  margin: 32px auto 0;
+  padding: 0;
+}
+
+.about-highlights li {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  padding-left: 28px;
+  position: relative;
+}
+
+.about-highlights li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00d1ff;
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
   .about,
   .portfolio,
   .contact {

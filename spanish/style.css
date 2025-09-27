@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Montserrat', 'Courier New', monospace;
+    background-color: black;
+    color: white;
+  }
+  
+  .navbar {
+    background-color: black !important;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .navbar-brand {
+    font-size: 18px;
+  }
+
+  .navbar-nav {
+    font-size: 14px;
+  }
+
+  .landing {
+    background: linear-gradient(to bottom, black, #333);
+    padding: 80px 0;
+  }
+
+.hero-cta {
+  margin-top: 24px;
+}
+
+.hero-cta .btn {
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 50px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 24px auto 0;
+  max-width: 640px;
+  text-align: left;
+}
+
+.hero-highlights li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 14px;
+  padding-left: 28px;
+  position: relative;
+}
+
+.hero-highlights li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00d1ff;
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+
+.hero-cta .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.hero-cta .btn-cta {
+  background-color: #00d1ff;
+  border-color: #00d1ff;
+  color: #000;
+  box-shadow: 0 8px 18px rgba(0, 209, 255, 0.3);
+}
+
+.hero-cta .btn-cta:hover {
+  background-color: #1ae0ff;
+  border-color: #1ae0ff;
+  color: #000;
+}
+
+.hero-cta .btn-primary:hover,
+.hero-cta .btn-outline-light:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+.hero-cta .btn-outline-light {
+  color: #fff;
+  border-color: #f8f9fa;
+}
+
+.hero-cta .btn-outline-light:hover {
+  background-color: #f8f9fa;
+  color: #000;
+}
+
+@media (max-width: 576px) {
+  .hero-highlights {
+    margin-top: 20px;
+    padding: 0 16px;
+  }
+
+  .hero-highlights li {
+    font-size: 1rem;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
+}
+
+  .profile-image {
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    margin-top: 26px;
+    margin-bottom: 26px;
+    border: 5px solid white;
+  }
+  
+h2 {
+  font-family: 'Arial', sans-serif; /* Choose a font that suits your preference */
+  font-size: 36px; /* Adjust the size as needed */
+  font-weight: bold;
+}
+
+.about p {
+  font-size: 18px; /* Adjust the size as needed */
+  line-height: 1.6; /* Add line height for better readability */
+  margin-bottom: 26px;
+}
+
+.about-intro {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.about-highlights {
+  list-style: none;
+  max-width: 880px;
+  margin: 32px auto 0;
+  padding: 0;
+}
+
+.about-highlights li {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  padding-left: 28px;
+  position: relative;
+}
+
+.about-highlights li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00d1ff;
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.about,
+  .portfolio,
+  .contact {
+    padding: 100px 0;
+  }
+
+  #pi {
+    font-family: Times, serif, Arial, Helvetica, sans-serif, serif;
+  }
+
+.contact-summary {
+  background-color: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.contact .btn {
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.contact-btn {
+  width: 100%;
+  text-align: center;
+}
+
+.contact-response {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  color: #d0d0d0;
+}
+
+.contact-submit {
+  padding: 12px 28px;
+  width: 100%;
+}
+
+.contact-form .form-group {
+  margin-bottom: 18px;
+}
+
+.contact-form .form-control {
+  background-color: #0a0a0a;
+  border-color: #333;
+  color: #fff;
+}
+
+.contact-form .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 209, 255, 0.25);
+  border-color: #00d1ff;
+}
+
+@media (min-width: 576px) {
+  .contact-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .contact-btn {
+    flex: 1 1 180px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .contact-summary {
+    padding: 24px 20px;
+  }
+}
+
+.social-media-buttons a.btn.btn-dark,
+.social-media-buttons a.btn.btn-primary,
+.social-media-buttons a.btn.btn-success {
+  border-radius: 50% !important;
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height */
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.social-media-buttons .btn-dark,
+.social-media-buttons a.btn.btn-primary,
+.social-media-buttons .btn-success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-media-buttons .btn-dark i,
+.social-media-buttons a.btn.btn-primary,
+.social-media-buttons .btn-success i {
+  font-size: 24px;
+}
+
+
+.custom-card {
+  background-color: black;
+  color: white;
+  border: 1px solid #333;
+}
+
+.project-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 6px;
+}
+
+.badge-tech {
+  background-color: #1ae0ff;
+  color: #000;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.4px;
+}
+
+.card-body .project-details {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 16px;
+}
+
+.card-body .project-details li {
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.card-body .project-details li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00d1ff;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.project-links {
+  margin-bottom: 12px;
+}
+
+.project-links .btn {
+  margin: 0 4px 8px;
+}
+
+
+.certifications {
+  background-color: #333;
+  color: white;
+  padding: 100px 0;
+}
+
+.certifications h2 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.certifications ul {
+  list-style: none;
+  padding: 0;
+}
+
+.certifications li {
+  margin-bottom: 20px;
+  border: 1px solid white;
+  padding: 20px;
+}
+
+.certifications li strong {
+  font-size: 20px;
+  display: block;
+}
+
+.certifications li span {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.certifications li a {
+  color: white;
+  text-decoration: none;
+}
+
+.certifications li a:hover {
+  text-decoration: underline;
+}

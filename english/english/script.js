@@ -103,35 +103,43 @@ function showPiMessage() {
 
 
 
-// Initialize EmailJS with your user ID and service ID
-emailjs.init("FR00XbHCNqyr4xeQy");
-
-// Function to send the form data to your email template
-function sendEmail() {
+function sendEmailFallback(event) {
   const contactForm = document.getElementById("contact-form");
-  const formData = {
-    name: contactForm.name.value,
-    email: contactForm.email.value,
-    subject: contactForm.subject.value,
-    message: contactForm.message.value
-  };
 
-  // Use the emailjs.send() function to send the email
-  emailjs.send("service_ta54kdn", "template_uq1sv2c", formData)
-    .then(function(response) {
-      console.log("Email sent successfully:", response);
-      // Show a success message or redirect to a thank-you page
-      alert("Your message has been sent successfully!");
-      contactForm.reset();
-    }, function(error) {
-      console.log("Failed to send email:", error);
-      // Show an error message
-      alert("Failed to send message. Please try again later.");
-    });
+  if (!contactForm) {
+    return;
+  }
+
+  event.preventDefault();
+
+  const name = contactForm.elements["name"].value.trim();
+  const email = contactForm.elements["email"].value.trim();
+  const subject = contactForm.elements["subject"].value.trim();
+  const message = contactForm.elements["message"].value.trim();
+
+  const composedSubject = subject ? `${subject} — ${name || "Portfolio Inquiry"}` : `Portfolio Inquiry from ${name || "Website Visitor"}`;
+  const bodyLines = [
+    `Name: ${name || "Not provided"}`,
+    `Email: ${email || "Not provided"}`,
+    "",
+    message || "",
+  ];
+
+  const mailtoLink = `mailto:carlosortega77@gmail.com?subject=${encodeURIComponent(composedSubject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+
+  window.location.href = mailtoLink;
+
+  setTimeout(() => {
+    contactForm.reset();
+  }, 300);
+
+  alert("Your message details have been prepared in your email client. Please review and send it to complete your outreach.");
 }
 
-// Add event listener to the form submission
-document.getElementById("contact-form").addEventListener("submit", function(event) {
-  event.preventDefault();
-  sendEmail();
+document.addEventListener("DOMContentLoaded", function() {
+  const contactForm = document.getElementById("contact-form");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", sendEmailFallback);
+  }
 });

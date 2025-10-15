@@ -409,11 +409,27 @@ body {
 
   .navbar-collapse {
     display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    position: static;
+    width: auto;
+    padding: 0;
+    margin-top: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
 
   .navbar-nav {
     flex-direction: row;
+    align-items: center;
     gap: 0.5rem;
+  }
+
+  .navbar-nav .nav-link {
+    width: auto;
+    justify-content: center;
   }
 
   .row {
@@ -437,6 +453,10 @@ body {
 
   .offset-lg-1 {
     margin-left: 8.333%;
+  }
+
+  .hero-layout {
+    align-items: center;
   }
 }
 
@@ -1134,3 +1154,4 @@ main section {
     max-width: 260px;
   }
 }
+

@@ -65,7 +65,18 @@
           <li class="nav-item"><a class="nav-link" href="#capabilities">Capabilities</a></li>
           <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
           <li class="nav-item"><a class="nav-link" href="#credentials">Credentials</a></li>
-          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item nav-item--has-submenu">
+            <button class="nav-link nav-link--toggle" type="button" data-submenu-toggle aria-expanded="false" aria-controls="portfolio-submenu" aria-haspopup="true">
+              Portfolio
+              <span class="sr-only">Toggle portfolio submenu</span>
+            </button>
+            <ul class="nav-submenu" id="portfolio-submenu" hidden>
+              <li><a class="nav-submenu__link" href="#project-gdp">Data viz · GDP tracker</a></li>
+              <li><a class="nav-submenu__link" href="#project-fastsearch">Search API platform</a></li>
+              <li><a class="nav-submenu__link" href="#project-file-extractor">Compliance automation</a></li>
+              <li><a class="nav-submenu__link" href="#project-pdf">PDF anomaly toolkit</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="#math-lab">Math Lab</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
@@ -93,7 +104,7 @@
           </div>
           <div class="col-lg-5 offset-lg-1">
             <figure class="hero-figure">
-              <img class="profile-image" src="./english/Me&wify.png" alt="Portrait of Carlos Ortega">
+              <img class="profile-image" src="./english/Me&wify.png" alt="Portrait of Carlos Ortega" width="952" height="939" loading="eager" decoding="async">
               <figcaption>Based in Santiago, Chile · Open to remote or hybrid roles within LATAM and U.S.-friendly time zones.</figcaption>
             </figure>
             <div class="hero-meta-grid" role="list">
@@ -254,7 +265,7 @@
         <p class="section-subtitle text-center">Case studies spanning automation, APIs, and interactive analytics. Every repository includes setup guides, issue roadmaps, and metrics to replicate the results.</p>
         <div class="row">
           <div class="col-md-6">
-            <article class="card custom-card h-100">
+            <article class="card custom-card h-100" id="project-gdp">
               <div class="card-body">
                 <h3 class="card-title">Data Viz: GDP per Capita Growth (Americas)</h3>
                 <p class="card-text">Animated Flourish stories tracking GDP per capita PPP growth across 22 American countries since 1990.</p>
@@ -272,7 +283,7 @@
             </article>
           </div>
           <div class="col-md-6">
-            <article class="card custom-card h-100">
+            <article class="card custom-card h-100" id="project-inflation">
               <div class="card-body">
                 <h3 class="card-title">Data Viz: OECD Inflation Monitor</h3>
                 <p class="card-text">Cumulative inflation bar race covering 38 OECD members across three decades.</p>
@@ -290,7 +301,7 @@
             </article>
           </div>
           <div class="col-md-6">
-            <article class="card custom-card h-100">
+            <article class="card custom-card h-100" id="project-prize-scraper">
               <div class="card-body">
                 <h3 class="card-title">Prize Scraper for polla.cl</h3>
                 <p class="card-text">Automated data ingestion for the Chilean betting platform, publishing daily prize updates to Google Sheets.</p>
@@ -311,7 +322,7 @@
             </article>
           </div>
           <div class="col-md-6">
-            <article class="card custom-card h-100">
+            <article class="card custom-card h-100" id="project-pdf">
               <div class="card-body">
                 <h3 class="card-title">PDF to Text Analyzer</h3>
                 <p class="card-text">CLI toolkit for downloading PDFs, extracting text, and detecting anomalies across multilingual corpora.</p>
@@ -332,7 +343,7 @@
             </article>
           </div>
           <div class="col-md-6">
-            <article class="card custom-card h-100">
+            <article class="card custom-card h-100" id="project-fastsearch">
               <div class="card-body">
                 <h3 class="card-title">FastSearchAPI</h3>
                 <p class="card-text">High-performance FastAPI service delivering millisecond searches across citizen records and fraud watchlists.</p>
@@ -353,7 +364,7 @@
             </article>
           </div>
           <div class="col-md-6">
-            <article class="card custom-card h-100">
+            <article class="card custom-card h-100" id="project-file-extractor">
               <div class="card-body">
                 <h3 class="card-title">File Extractor Pro</h3>
                 <p class="card-text">Desktop automation suite that inventories folders, applies compliance filters, and produces tamper-evident audit reports.</p>
@@ -374,7 +385,7 @@
             </article>
           </div>
           <div class="col-md-6">
-            <article class="card custom-card h-100">
+            <article class="card custom-card h-100" id="project-crypto">
               <div class="card-body">
                 <h3 class="card-title">Crypto Price Tracker</h3>
                 <p class="card-text">Real-time Binance monitor delivering configurable alerts via email digests and threshold triggers.</p>
@@ -395,7 +406,7 @@
             </article>
           </div>
           <div class="col-md-6">
-            <article class="card custom-card h-100">
+            <article class="card custom-card h-100" id="project-pogo">
               <div class="card-body">
                 <h3 class="card-title">PoGo Rarity Intelligence</h3>
                 <p class="card-text">CLI and Streamlit experience ranking Pokémon GO spawns to optimize trades, evolutions, and community days.</p>

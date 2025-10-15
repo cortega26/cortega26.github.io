@@ -130,11 +130,25 @@
     </script>
 </head>
     <body>
-        <div class="container py-5">
+        <a class="visually-hidden-focusable" href="#contenido-principal">Saltar al contenido principal</a>
+        <header class="bg-dark text-white py-3" role="banner">
+            <div class="container">
+                <p class="h6 mb-1">Portal EduTecno</p>
+                <h1 class="h3 mb-0">Prácticas de Consolidación EduTecno</h1>
+            </div>
+        </header>
+        <nav class="bg-light border-bottom" aria-label="Miga de pan">
+            <ol class="breadcrumb container my-0 py-3">
+                <li class="breadcrumb-item"><a href="../../index.html">Inicio</a></li>
+                <li class="breadcrumb-item active" aria-current="page">EduTecno</li>
+            </ol>
+        </nav>
+        <main id="contenido-principal" class="container py-5" role="main">
             <header class="mb-4 text-center">
-                <h1 class="h3">Prácticas de Consolidación EduTecno</h1>
-                <p class="text-muted mb-0">Estado actualizado de los accesos a evaluaciones por módulo. Los botones deshabilitados indican material en preparación.</p>
+                <p class="text-muted mb-2">Accede rápidamente a los botones de práctica por módulo. Los enlaces habilitados llevan directamente a la evaluación correspondiente.</p>
+                <p class="text-muted mb-0">Actualizado semanalmente por el equipo de Analytics Engineering.</p>
             </header>
+            <h2 class="visually-hidden">Listado de prácticas por módulo</h2>
             <div class="row" role="list">
                 <div class="col-sm-4 mb-3" id="modulo-1" role="listitem">
                     <button type="button" class="btn btn-outline-secondary w-100" disabled aria-disabled="true">Módulo 1 · En preparación</button>
@@ -164,7 +178,13 @@
                     <button type="button" class="btn btn-outline-secondary w-100" disabled aria-disabled="true">Módulo 9 · En preparación</button>
                 </div>
             </div>
-        </div>
+        </main>
+        <footer class="bg-dark text-white py-4" role="contentinfo">
+            <div class="container">
+                <p class="mb-1">¿Necesitas soporte o nuevos accesos? Escríbenos a <a class="text-white font-weight-bold" href="mailto:carlosortega77@gmail.com">carlosortega77@gmail.com</a>.</p>
+                <p class="mb-0 small">Última sincronización: julio 2024 · Equipo EduTecno Analytics.</p>
+            </div>
+        </footer>
     </body>
 </html>
     

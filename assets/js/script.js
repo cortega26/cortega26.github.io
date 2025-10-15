@@ -62,19 +62,19 @@ function initSmoothScroll() {
 }
 
 const messagesEn = [
-  "Analytics should feel calm and reliable—curious how I returned 420 hours to analysts?",
-  "Bilingual partner here. Need a guide through compliance, fraud, or growth dashboards?",
-  "FastAPI, SQL, and storytelling—pick two and I'll add the third.",
-  "Serious about automation readiness? Let's co-design your next delivery playbook.",
-  "Looking for algorithmic proof? My math lab is just a few scrolls away."
+  "Automation roadmap in play: exploring pilots that could free 420 analyst hours—want to see the backlog?",
+  "Lookup vision alert: building toward 6× faster fraud reviews once benchmarks land.",
+  "Transparency first: aiming to earn trusted-partner status with fintech, cyber, and public teams.",
+  "FastAPI, SQL, and storytelling—pick two and I'll scope the third.",
+  "Ready to prototype together? Let's co-design the next delivery sprint."
 ];
 
 const messagesEs = [
-  "La analítica debe sentirse segura y predecible—¿quieres saber cómo devolví 420 horas a los analistas?",
-  "Compañero bilingüe disponible. ¿Necesitas guía en cumplimiento, fraude o dashboards de crecimiento?",
-  "FastAPI, SQL y storytelling: elige dos y yo sumo el tercero.",
-  "¿Listo para automatizar con solidez? Diseñemos juntos tu próximo playbook de entrega.",
-  "¿Buscas evidencia algorítmica? Mi laboratorio matemático está unas secciones más abajo."
+  "Hoja de ruta en marcha: explorando pilotos que podrían liberar 420 horas de analistas—¿quieres ver el backlog?",
+  "Alerta de visión en consultas: construyendo hacia revisiones antifraude 6× más rápidas cuando lleguen los benchmarks.",
+  "Transparencia primero: objetivo de ganar condición de socio de confianza con equipos fintech, ciber y públicos.",
+  "FastAPI, SQL y storytelling: elige dos y yo planifico el tercero.",
+  "¿Listo para prototipar? Diseñemos juntos el próximo sprint de entrega."
 ];
 
 let clickCount = 0;

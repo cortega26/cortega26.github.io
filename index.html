@@ -3,28 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome / Bienvenido</title>
+  <title>Select language · Carlos Ortega Portfolio</title>
+  <meta name="description" content="Choose English or Spanish to review Carlos Ortega's analytics engineering portfolio and case studies.">
+  <link rel="canonical" href="https://cortega26.github.io/">
+  <link rel="alternate" hreflang="es" href="https://cortega26.github.io/index-spa.html">
+  <link rel="alternate" hreflang="en" href="https://cortega26.github.io/english/english.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/landing.css">
 </head>
 <body>
+  <a class="skip-link" href="#language-options">Skip to language options</a>
   <main class="hero" aria-labelledby="landing-title">
     <div class="hero-content">
       <header class="hero-header">
-        <p class="hero-eyebrow">Select your access channel</p>
-        <h1 id="landing-title">Welcome to the Cortega Mainframe</h1>
-        <p class="hero-subhead">Choose your preferred language to enter this synthwave-powered portfolio experience.</p>
+        <p class="hero-eyebrow">Choose your preferred language</p>
+        <h1 id="landing-title">Welcome to the Carlos Ortega portfolio</h1>
+        <p class="hero-subhead">Review case studies, credentials, and contact options in English or Spanish without losing context.</p>
       </header>
-      <div class="lang-grid">
-        <section class="lang-card" aria-labelledby="english-card">
+      <div class="lang-grid" id="language-options">
+        <section class="lang-card" aria-labelledby="english-card" aria-describedby="english-summary">
           <div class="lang-card__glow" aria-hidden="true"></div>
           <header class="lang-card__header">
             <span class="lang-card__flag" aria-hidden="true">EN</span>
             <h2 id="english-card">English</h2>
           </header>
-          <p class="lang-card__copy">Dive into the English version of the site to explore projects, skills, and the story behind the work.</p>
+          <p class="lang-card__copy" id="english-summary">Explore documented projects, workflows, and measurable outcomes in English.</p>
           <a class="lang-card__cta" href="./english/english.html">
             <span>Enter the portal</span>
             <svg class="cta-icon" viewBox="0 0 24 24" role="presentation" focusable="false" aria-hidden="true">
@@ -32,13 +37,13 @@
             </svg>
           </a>
         </section>
-        <section class="lang-card" aria-labelledby="spanish-card">
+        <section class="lang-card" aria-labelledby="spanish-card" aria-describedby="spanish-summary">
           <div class="lang-card__glow" aria-hidden="true"></div>
           <header class="lang-card__header">
             <span class="lang-card__flag" aria-hidden="true">ES</span>
             <h2 id="spanish-card">Español</h2>
           </header>
-          <p class="lang-card__copy">Ingresa a la versión en español para conocer los proyectos, habilidades y la historia detrás del trabajo.</p>
+          <p class="lang-card__copy" id="spanish-summary">Consulta el portafolio en español con entregables, aprendizajes y vías de contacto.</p>
           <a class="lang-card__cta" href="index-spa.html">
             <span>Ingresar al portal</span>
             <svg class="cta-icon" viewBox="0 0 24 24" role="presentation" focusable="false" aria-hidden="true">

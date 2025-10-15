@@ -8,6 +8,7 @@ Ship the three highest-impact fixes discovered during the audit while leaving cl
    - Convert Portfolio nav item to button + submenu structure (EN + ES).
    - Add ARIA wiring, case-study anchors, and keyboard interactions.
    - Update localized stylesheets for submenu layout + focus rings.
+   - Centralize submenu state with 170 ms debounce + composedPath outside-click guard.
 2. **Hero imagery stability**
    - Add intrinsic `width`/`height`, `loading`, and `decoding` hints to hero portrait in both locales.
 3. **Focus visibility baseline**

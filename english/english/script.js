@@ -95,102 +95,173 @@ function initAccessibleSubmenus() {
     return;
   }
 
-  const setExpanded = (toggle, expanded) => {
+  const submenuByToggle = new Map();
+
+  toggles.forEach((toggle) => {
     const controlledId = toggle.getAttribute('aria-controls');
     const submenu = controlledId ? document.getElementById(controlledId) : null;
+    submenuByToggle.set(toggle, submenu || null);
+  });
 
+  const setExpandedState = (toggle, expanded) => {
+    const submenu = submenuByToggle.get(toggle);
     toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-
     if (submenu) {
       submenu.hidden = !expanded;
     }
   };
 
-  const closeOthers = (currentToggle) => {
-    toggles.forEach((toggle) => {
-      if (toggle !== currentToggle) {
-        setExpanded(toggle, false);
+  const focusFirstItem = (submenu) => {
+    if (!submenu) {
+      return;
+    }
+
+    window.setTimeout(() => {
+      const firstFocusable = submenu.querySelector('a, button');
+      if (firstFocusable) {
+        firstFocusable.focus({ preventScroll: true });
       }
-    });
+    }, 64);
+  };
+
+  let activeToggle = null;
+  let toggleTimer = null;
+  let pendingToggle = null;
+  let pendingState = null;
+
+  const applyToggleState = (toggle, shouldOpen, options = {}) => {
+    if (!toggle) {
+      return;
+    }
+
+    if (shouldOpen) {
+      toggles.forEach((otherToggle) => {
+        if (otherToggle !== toggle) {
+          setExpandedState(otherToggle, false);
+        }
+      });
+
+      setExpandedState(toggle, true);
+      activeToggle = toggle;
+
+      if (options.focusOnOpen) {
+        focusFirstItem(submenuByToggle.get(toggle));
+      }
+
+      return;
+    }
+
+    setExpandedState(toggle, false);
+    if (activeToggle === toggle) {
+      activeToggle = null;
+    }
+  };
+
+  const scheduleToggleState = (toggle, shouldOpen, options = {}) => {
+    pendingToggle = toggle;
+    pendingState = shouldOpen;
+    window.clearTimeout(toggleTimer);
+    toggleTimer = window.setTimeout(() => {
+      pendingToggle = null;
+      pendingState = null;
+      applyToggleState(toggle, shouldOpen, options);
+    }, 170);
+  };
+
+  const buildEventPath = (event) => {
+    if (typeof event.composedPath === 'function') {
+      const composed = event.composedPath();
+      if (Array.isArray(composed) && composed.length) {
+        return composed;
+      }
+    }
+
+    const fallbackPath = [];
+    let node = event.target;
+
+    while (node) {
+      fallbackPath.push(node);
+      node = node.parentNode;
+    }
+
+    return fallbackPath;
   };
 
   toggles.forEach((toggle) => {
-    const controlledId = toggle.getAttribute('aria-controls');
-    const submenu = controlledId ? document.getElementById(controlledId) : null;
+    const submenu = submenuByToggle.get(toggle);
 
     toggle.addEventListener('click', (event) => {
       event.preventDefault();
       const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
       if (isExpanded) {
-        setExpanded(toggle, false);
+        scheduleToggleState(toggle, false);
         return;
       }
 
-      closeOthers(toggle);
-      setExpanded(toggle, true);
-
-      if (submenu) {
-        const firstFocusable = submenu.querySelector('a, button');
-        if (firstFocusable) {
-          window.setTimeout(() => {
-            firstFocusable.focus({ preventScroll: true });
-          }, 160);
-        }
-      }
+      scheduleToggleState(toggle, true, { focusOnOpen: true });
     });
 
     toggle.addEventListener('keydown', (event) => {
       if (event.key === ' ' || event.key === 'Enter') {
         event.preventDefault();
-        toggle.click();
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          scheduleToggleState(toggle, false);
+        } else {
+          scheduleToggleState(toggle, true, { focusOnOpen: true });
+        }
       }
 
       if (event.key === 'Escape') {
-        setExpanded(toggle, false);
-        toggle.focus();
+        scheduleToggleState(toggle, false);
+        window.setTimeout(() => {
+          toggle.focus();
+        }, 0);
       }
     });
 
-    if (submenu) {
-      submenu.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          setExpanded(toggle, false);
-          toggle.focus();
-        }
-      });
-
-      submenu.querySelectorAll('a, button').forEach((item) => {
-        item.addEventListener('click', () => {
-          window.setTimeout(() => {
-            setExpanded(toggle, false);
-          }, 160);
-        });
-      });
+    if (!submenu) {
+      return;
     }
+
+    submenu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        scheduleToggleState(toggle, false);
+        window.setTimeout(() => {
+          toggle.focus();
+        }, 0);
+      }
+    });
+
+    submenu.querySelectorAll('a, button').forEach((item) => {
+      item.addEventListener('click', () => {
+        scheduleToggleState(toggle, false);
+      });
+    });
   });
 
-  const closeIfOutside = (event) => {
-    const path = event.composedPath();
+  document.addEventListener('pointerdown', (event) => {
+    const path = buildEventPath(event);
 
     const interactedInside = toggles.some((toggle) => {
-      const controlledId = toggle.getAttribute('aria-controls');
-      const submenu = controlledId ? document.getElementById(controlledId) : null;
+      const submenu = submenuByToggle.get(toggle);
       return path.includes(toggle) || (submenu && path.includes(submenu));
     });
 
-    if (!interactedInside) {
-      toggles.forEach((toggle) => setExpanded(toggle, false));
+    if (interactedInside) {
+      return;
     }
-  };
 
-  let outsidePointerTimer = null;
+    if (pendingToggle && pendingState) {
+      if (pendingState === true) {
+        return;
+      }
+    }
 
-  document.addEventListener('pointerdown', (event) => {
-    window.clearTimeout(outsidePointerTimer);
-    outsidePointerTimer = window.setTimeout(() => {
-      closeIfOutside(event);
-    }, 180);
+    if (activeToggle) {
+      scheduleToggleState(activeToggle, false);
+    }
   });
 }
 

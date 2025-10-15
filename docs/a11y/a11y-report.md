@@ -38,7 +38,7 @@ Mirrors the English map with localized strings. Same recommendation for section 
 - EduTecno hub: lacks `<header>` and `<footer>`; consider wrapping for consistent navigation semantics (backlog B-007).
 
 ## Keyboard & focus
-- Prior issue: anchors/buttons lost focus outline. Resolved via new `:focus-visible` styling (`english/english/style.css`, `spanish/style.css`).
+- Prior issue: anchors/buttons lost focus outline. Resolved via new `:focus-visible` styling (`assets/css/style.css`).
 - Nav submenu toggles now respond to `Enter`/`Space`, close on `Escape`, and trap focus to submenu items before returning to toggle.
 - Remaining gap: alerts in contact flow trap focus (backlog B-005).
 

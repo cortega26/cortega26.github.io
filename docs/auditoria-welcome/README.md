@@ -15,7 +15,7 @@
 ## Enlaces revisados
 - Portafolio EN → 47 enlaces auditados (35 externos con `rel="noopener noreferrer"`, 9 internos, 1 descarga, 2 `mailto`).
 - Portafolio ES → 47 enlaces auditados (35 externos con `rel="noopener noreferrer"`, 9 internos, 1 descarga, 2 `mailto`).
-- Hub EduTecno → 1 enlace interno activo (`./PC2/prueba_consolidacion_2.html`) y 8 módulos señalados como "En preparación" con botones deshabilitados.
+- Hub EduTecno → 1 enlace interno activo (`./pc2/prueba_consolidacion_2.html`) y 8 módulos señalados como "En preparación" con botones deshabilitados.
 
 ### Evidencia técnica
 - Script de inventario de enlaces ejecutado localmente (`html.parser`) confirma cero enlaces externos sin `rel`. Ver salida adjunta en esta rama.
@@ -33,6 +33,7 @@
 - es/index.html · Paridad SEO en español + JSON-LD.
 - projects/edutecno/index.html · Tablero accesible con estados y schema `ItemList`.
 - docs/auditoria-welcome/inventory.md · Inventario actualizado tras la auditoría.
+- Infraestructura · Se retiraron los HTML de redirección legado para `/en`, `/es` y `/projects/edutecno/`.
 
 ## Checklist de calidad (parcial)
 - [x] Contenido conciso en selector de idioma.

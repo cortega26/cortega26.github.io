@@ -1091,6 +1091,55 @@ main section {
   border-radius: 14px;
 }
 
+.contact-toast {
+  margin-top: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(91, 141, 239, 0.5);
+  background: rgba(12, 19, 31, 0.94);
+  box-shadow: 0 18px 40px rgba(9, 14, 24, 0.45);
+  color: var(--text);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.contact-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.contact-toast__body {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+}
+
+.contact-toast__message {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.contact-toast__dismiss {
+  background: none;
+  border: 0;
+  color: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.contact-toast__dismiss:focus,
+.contact-toast__dismiss:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
 .social-media-container {
   margin-top: 32px;
 }

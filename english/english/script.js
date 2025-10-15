@@ -15,6 +15,7 @@ const messagesEs = [
 ];
 
 let clickCount = 0;
+let contactToastController = null;
 
 function showPiMessage() {
   const langAttribute = document.documentElement.getAttribute('lang');
@@ -71,9 +72,85 @@ function sendEmailFallback(event) {
     contactForm.reset();
   }, 300);
 
-  alert(isSpanish
+  const toastMessage = isSpanish
     ? 'Tu mensaje está listo en tu cliente de correo. Revísalo y envíalo para completar el contacto.'
-    : 'Your message draft is ready in your email client. Review and send it to complete your outreach.');
+    : 'Your message draft is ready in your email client. Review and send it to complete your outreach.';
+
+  if (contactToastController && typeof contactToastController.show === 'function') {
+    contactToastController.show(toastMessage);
+  } else {
+    alert(toastMessage);
+  }
+}
+
+function initContactToast() {
+  const toast = document.getElementById('contact-toast');
+
+  if (!toast) {
+    return null;
+  }
+
+  const messageEl = toast.querySelector('#contact-toast-message');
+  const dismissButton = toast.querySelector('[data-toast-dismiss]');
+  let hideTimer = null;
+
+  const hideToast = () => {
+    window.clearTimeout(hideTimer);
+
+    if (!toast.classList.contains('is-visible')) {
+      toast.setAttribute('hidden', '');
+      return;
+    }
+
+    toast.classList.remove('is-visible');
+  };
+
+  const showToast = (text) => {
+    if (messageEl) {
+      messageEl.textContent = text;
+    }
+
+    if (toast.hasAttribute('hidden')) {
+      toast.removeAttribute('hidden');
+    }
+
+    window.clearTimeout(hideTimer);
+
+    window.requestAnimationFrame(() => {
+      toast.classList.add('is-visible');
+    });
+
+    hideTimer = window.setTimeout(() => {
+      hideToast();
+    }, 8000);
+  };
+
+  if (dismissButton) {
+    dismissButton.addEventListener('click', () => {
+      hideToast();
+    });
+  }
+
+  toast.addEventListener('transitionend', (event) => {
+    if (event.propertyName !== 'opacity') {
+      return;
+    }
+
+    if (!toast.classList.contains('is-visible')) {
+      toast.setAttribute('hidden', '');
+    }
+  });
+
+  toast.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      hideToast();
+    }
+  });
+
+  return {
+    show: showToast,
+    hide: hideToast
+  };
 }
 
 function initSmoothScroll(onNavigate = () => {}) {
@@ -445,6 +522,8 @@ function initSiteInteractions() {
   if (contactForm) {
     contactForm.addEventListener('submit', sendEmailFallback);
   }
+
+  contactToastController = initContactToast();
 
   initAccessibleSubmenus();
 }

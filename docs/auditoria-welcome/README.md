@@ -9,7 +9,7 @@
 | Metadatos incompletos | Sin meta description ni `hreflang`. | Se añadieron description, canonical y `link rel="alternate"`. | feat/seo-audit |
 | Acceso por teclado | Sin skip link hacia las opciones de idioma. | Se agregó enlace de salto visible al enfocarse. | feat/seo-audit |
 | Copy con exceso de marketing | Frases vagas sobre "mainframe" y "synthwave". | Mensajes neutrales centrados en navegación y contenido verificable. | feat/seo-audit |
-| SEO extendido páginas internas | Sin Open Graph ni datos estructurados en `/english`, `/index-spa`, `/edutecno`. | Descripciones enriquecidas, etiquetas OG/Twitter y JSON-LD por página. | feat/seo-audit |
+| SEO extendido páginas internas | Sin Open Graph ni datos estructurados en `/en`, `/es`, `/projects/edutecno`. | Descripciones enriquecidas, etiquetas OG/Twitter y JSON-LD por página. | feat/seo-audit |
 | Auditoría de enlaces | Atributo `rel` faltante y botones sin estado. | `rel="noopener noreferrer"` aplicado y tablero EduTecno con estados de módulos. | feat/seo-audit |
 
 ## Enlaces revisados
@@ -29,9 +29,9 @@
 
 ## Mini changelog
 - docs/welcome-audit-failsafe · Ajustes iniciales en selector bilingüe.
-- english/english.html · Metadatos extendidos, JSON-LD y hardening de enlaces.
-- index-spa.html · Paridad SEO en español + JSON-LD.
-- edutecno/edu-index.html · Tablero accesible con estados y schema `ItemList`.
+- en/index.html · Metadatos extendidos, JSON-LD y hardening de enlaces.
+- es/index.html · Paridad SEO en español + JSON-LD.
+- projects/edutecno/index.html · Tablero accesible con estados y schema `ItemList`.
 - docs/auditoria-welcome/inventory.md · Inventario actualizado tras la auditoría.
 
 ## Checklist de calidad (parcial)

@@ -1,11 +1,11 @@
 # Accessibility Notes — elrincondeebano
 
 ## Method
-Static code review of key templates (`index.html`, `english/english.html`, `index-spa.html`, `edutecno/edu-index.html`, `edutecno/PC2/prueba_consolidacion_2.html`) with emphasis on WCAG 2.2 AA success criteria.
+Static code review of key templates (`index.html`, `en/index.html`, `es/index.html`, `projects/edutecno/index.html`, `projects/edutecno/pc2/prueba_consolidacion_2.html`) with emphasis on WCAG 2.2 AA success criteria.
 
 ## Heading structure snapshots
 
-### English portfolio (`english/english.html`)
+### English portfolio (`en/index.html`)
 1. `h1` — "Carlos Ortega González" (hero)
 2. `h2` — Profile at a Glance
 3. `h2` — Core Capabilities
@@ -16,18 +16,18 @@ Static code review of key templates (`index.html`, `english/english.html`, `inde
 8. `h2` — Contact
    - Multiple `h3` elements inside each section (cards, timeline items). Recommend adding hidden `h2` sub-group labels to reduce monotony.
 
-### Spanish portfolio (`index-spa.html`)
+### Spanish portfolio (`es/index.html`)
 Mirrors the English map with localized strings. Same recommendation for section grouping.
 
 ### Landing selector (`index.html`)
 - `h1` — Welcome to the Carlos Ortega portfolio
 - `h2` (x2) — English / Español cards
 
-### EduTecno hub (`edutecno/edu-index.html`)
+### EduTecno hub (`projects/edutecno/index.html`)
 - `h1` — Prácticas de Consolidación EduTecno
 - No additional headings per module; consider adding `h2`/`h3` wrappers to reinforce structure.
 
-### Digimon practice (`edutecno/PC2/prueba_consolidacion_2.html`)
+### Digimon practice (`projects/edutecno/pc2/prueba_consolidacion_2.html`)
 - `h1` — Digimon API
 - `h2` — Lista de Digimon
 - `h2` — Detalles del Digimon

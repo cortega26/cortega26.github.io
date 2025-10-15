@@ -653,6 +653,23 @@ main section {
   border-radius: 14px;
 }
 
+.contact-form__status {
+  margin-top: 0.75rem;
+  min-height: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.contact-form__status[data-state="success"] {
+  color: var(--success);
+}
+
+.contact-form__status[data-state="error"] {
+  color: #ff6b6b;
+}
+
 .social-media-container {
   margin-top: 32px;
 }

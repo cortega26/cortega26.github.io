@@ -1,20 +1,20 @@
-# PR Plan — fix/backlog-b008-b009
+# PR Plan — fix/remove-legacy-js
 
 ## Objective
-Resolve the pending trust & safety and SEO backlog items by replacing the EduTecno PC2 footer joke with a legitimate support contact and expanding English portfolio structured data.
+Improve first meaningful paint and contact accessibility by eliminating third-party JavaScript dependencies and delivering an inline status message for the portfolio contact form (backlog items B-010 and B-011).
 
 ## Scope of this PR
-1. **EduTecno PC2 trust copy (B-008)**
-   - Remove the "hack the Pentagon" gag link.
-   - Replace it with a support-focused mailto call-to-action in the footer.
-2. **Portfolio structured data expansion (B-009)**
-   - Publish a Schema.org `ItemList` of highlighted case studies.
-   - Annotate each featured project as a `CreativeWork` with descriptive metadata.
+1. **Remove CDN JavaScript dependencies (B-010)**
+   - Rewrite smooth scrolling logic without jQuery.
+   - Implement a vanilla navbar collapse controller so Bootstrap JS, Popper, and jQuery are no longer required.
+2. **Accessible contact confirmation (B-011)**
+   - Add an aria-live status region that announces the email draft fallback.
+   - Reset and localize messaging without disruptive alerts.
 
 ## Deferred to follow-up PRs
-- None; backlog cleared.
+- Assess migrating Bootstrap CSS utility usage to a fully custom layout to drop the CSS CDN dependency.
 
 ## Testing plan
-- Manual check of EduTecno PC2 footer link destination and label.
-- Structured data validation via Google Rich Results Test (static reasoning in lieu of live run).
+- Manual verification of navbar toggle behavior on mobile and desktop breakpoints without Bootstrap JS.
+- Manual verification that the contact form status message announces in NVDA (reasoned) and updates when submitting.
 

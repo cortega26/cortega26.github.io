@@ -1,15 +1,3 @@
-$(document).ready(function() {
-  $('a[href^="#"]').on('click', function(event) {
-    const target = $(this.getAttribute('href'));
-    if (target.length) {
-      event.preventDefault();
-      $('html, body').animate({
-        scrollTop: target.offset().top
-      }, 800);
-    }
-  });
-});
-
 const messagesEn = [
   "Analytics should feel calm and reliable—curious how I returned 420 hours to analysts?",
   "Bilingual partner here. Need a guide through compliance, fraud, or growth dashboards?",
@@ -79,13 +67,188 @@ function sendEmailFallback(event) {
 
   window.location.href = mailtoLink;
 
-  setTimeout(() => {
+  window.setTimeout(() => {
     contactForm.reset();
   }, 300);
 
   alert(isSpanish
     ? 'Tu mensaje está listo en tu cliente de correo. Revísalo y envíalo para completar el contacto.'
     : 'Your message draft is ready in your email client. Review and send it to complete your outreach.');
+}
+
+function initSmoothScroll(onNavigate = () => {}) {
+  const anchorLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
+
+  if (!anchorLinks.length) {
+    return;
+  }
+
+  const focusTarget = (element) => {
+    if (!element) {
+      return;
+    }
+
+    const hadTabIndex = element.hasAttribute('tabindex');
+    const previousTabIndex = element.getAttribute('tabindex');
+
+    if (!hadTabIndex) {
+      element.setAttribute('tabindex', '-1');
+    }
+
+    element.focus({ preventScroll: true });
+
+    if (!hadTabIndex) {
+      element.removeAttribute('tabindex');
+    } else if (previousTabIndex !== null) {
+      element.setAttribute('tabindex', previousTabIndex);
+    }
+  };
+
+  anchorLinks.forEach((link) => {
+    const href = link.getAttribute('href');
+
+    if (!href || href === '#') {
+      return;
+    }
+
+    const target = document.querySelector(href);
+
+    if (!target) {
+      return;
+    }
+
+    link.addEventListener('click', (event) => {
+      if (link.hasAttribute('data-submenu-toggle')) {
+        return;
+      }
+
+      event.preventDefault();
+
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      onNavigate();
+
+      window.setTimeout(() => {
+        focusTarget(target);
+      }, 420);
+
+      if (window.history && typeof window.history.replaceState === 'function') {
+        window.history.replaceState(null, '', href);
+      }
+    });
+  });
+}
+
+function initNavbarCollapse() {
+  const toggleButton = document.querySelector('[data-nav-toggle]');
+  const collapseTarget = document.querySelector('[data-nav-collapse]');
+
+  if (!toggleButton || !collapseTarget) {
+    return () => {};
+  }
+
+  const desktopMedia = window.matchMedia('(min-width: 992px)');
+  let expanded = false;
+
+  const dispatchState = () => {
+    const eventName = expanded ? 'nav:expanded' : 'nav:collapsed';
+    document.dispatchEvent(new CustomEvent(eventName));
+  };
+
+  const syncState = () => {
+    if (desktopMedia.matches) {
+      collapseTarget.classList.remove('is-open');
+      collapseTarget.removeAttribute('aria-hidden');
+      toggleButton.setAttribute('aria-expanded', 'false');
+      return;
+    }
+
+    collapseTarget.classList.toggle('is-open', expanded);
+    collapseTarget.setAttribute('aria-hidden', expanded ? 'false' : 'true');
+    toggleButton.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  };
+
+  const closeMenu = () => {
+    const wasExpanded = expanded;
+    expanded = false;
+    syncState();
+
+    if (wasExpanded) {
+      dispatchState();
+    }
+  };
+
+  const openMenu = () => {
+    if (desktopMedia.matches) {
+      return;
+    }
+
+    if (!expanded) {
+      expanded = true;
+      syncState();
+      dispatchState();
+    }
+  };
+
+  toggleButton.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    if (desktopMedia.matches) {
+      return;
+    }
+
+    if (expanded) {
+      closeMenu();
+      return;
+    }
+
+    openMenu();
+  });
+
+  collapseTarget.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+      window.setTimeout(() => {
+        toggleButton.focus({ preventScroll: true });
+      }, 0);
+    }
+  });
+
+  collapseTarget.querySelectorAll('a, button').forEach((interactive) => {
+    interactive.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  document.addEventListener('pointerdown', (event) => {
+    if (!expanded || desktopMedia.matches) {
+      return;
+    }
+
+    if (!(event.target instanceof Node)) {
+      return;
+    }
+
+    const clickedInside = collapseTarget.contains(event.target) || toggleButton.contains(event.target);
+
+    if (!clickedInside) {
+      closeMenu();
+    }
+  });
+
+  const handleViewportChange = () => {
+    closeMenu();
+    syncState();
+  };
+
+  if (typeof desktopMedia.addEventListener === 'function') {
+    desktopMedia.addEventListener('change', handleViewportChange);
+  } else if (typeof desktopMedia.addListener === 'function') {
+    desktopMedia.addListener(handleViewportChange);
+  }
+
+  syncState();
+
+  return closeMenu;
 }
 
 function initAccessibleSubmenus() {
@@ -263,9 +426,20 @@ function initAccessibleSubmenus() {
       scheduleToggleState(activeToggle, false);
     }
   });
+
+  document.addEventListener('nav:collapsed', () => {
+    window.clearTimeout(toggleTimer);
+    pendingToggle = null;
+    pendingState = null;
+    toggles.forEach((toggle) => setExpandedState(toggle, false));
+    activeToggle = null;
+  });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function initSiteInteractions() {
+  const closeNav = initNavbarCollapse();
+  initSmoothScroll(closeNav);
+
   const contactForm = document.getElementById('contact-form');
 
   if (contactForm) {
@@ -273,4 +447,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   initAccessibleSubmenus();
-});
+}
+
+document.addEventListener('DOMContentLoaded', initSiteInteractions);

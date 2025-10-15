@@ -20,8 +20,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="./english/style.css">
   <script type="application/ld+json">
     {
@@ -53,13 +51,14 @@
 </head>
 <body>
   <a class="skip-link" href="#overview">Skip to main content</a>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" aria-label="Primary navigation">
+  <nav class="navbar" aria-label="Primary navigation">
     <div class="container">
       <a class="navbar-brand" href="#overview" id="pi" onclick="showPiMessage()" aria-label="Playful PI easter egg">π</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler" type="button" data-nav-toggle aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" aria-hidden="true"></span>
+        <span class="sr-only">Toggle navigation</span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-collapse" id="navbarNav" data-nav-collapse>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">Profile</a></li>
@@ -502,20 +501,37 @@
         </div>
         <div class="social-media-container text-center">
           <div class="social-media-buttons btn-group" role="group" aria-label="Social media links">
-            <a href="https://github.com/cortega26" class="btn btn-dark" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/cortega26" class="btn btn-primary" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://twitter.com/cortega26" class="btn btn-dark" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://wa.me/56951118901" class="btn btn-success" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="mailto:carlosortega77@gmail.com" class="btn btn-dark" aria-label="Email"><i class="far fa-envelope"></i></a>
+            <a href="https://github.com/cortega26" class="btn btn-dark btn-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <svg class="icon" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <path d="M12 2a10 10 0 0 0-3.16 19.48c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.92-.63.07-.62.07-.62 1.02.07 1.56 1.06 1.56 1.06.9 1.57 2.36 1.12 2.94.85.09-.66.36-1.12.65-1.38-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.41.1 2.66.64.7 1.03 1.6 1.03 2.68 0 3.85-2.35 4.7-4.58 4.95.37.32.7.94.7 1.9v2.82c0 .27.18.59.69.48A10 10 0 0 0 12 2Z" />
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/cortega26" class="btn btn-primary btn-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg class="icon" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <path d="M20.45 3H3.55A1.55 1.55 0 0 0 2 4.55v14.9C2 20.8 3.2 22 4.55 22h15.9A1.55 1.55 0 0 0 22 20.45V4.55A1.55 1.55 0 0 0 20.45 3ZM8.3 18.34H5.67V9.6H8.3Zm-1.32-9.9a1.53 1.53 0 1 1 1.52-1.53 1.52 1.52 0 0 1-1.52 1.53ZM18.33 18.34h-2.62v-4.25c0-1.02 0-2.33-1.42-2.33-1.42 0-1.64 1.11-1.64 2.26v4.32H10v-8.74h2.52v1.19h.03a2.76 2.76 0 0 1 2.48-1.36c2.65 0 3.13 1.74 3.13 4Z" />
+              </svg>
+            </a>
+            <a href="https://twitter.com/cortega26" class="btn btn-dark btn-icon" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <svg class="icon" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <path d="M20.93 4.13a9.92 9.92 0 0 1-2.86.8 4.92 4.92 0 0 0 2.16-2.72 9.86 9.86 0 0 1-3.12 1.19A4.93 4.93 0 0 0 12 8.51a14 14 0 0 1-10.17-5.16 4.93 4.93 0 0 0 1.53 6.58 4.85 4.85 0 0 1-2.23-.62v.06a4.93 4.93 0 0 0 3.95 4.83 4.9 4.9 0 0 1-2.22.08 4.94 4.94 0 0 0 4.6 3.42A9.9 9.9 0 0 1 2 18.58a13.93 13.93 0 0 0 7.56 2.22c9.05 0 14-7.5 14-14 0-.21 0-.42-.02-.63a9.95 9.95 0 0 0 2.47-2.54 9.84 9.84 0 0 1-2.86.79 4.94 4.94 0 0 0 2.16-2.75Z" />
+              </svg>
+            </a>
+            <a href="https://wa.me/56951118901" class="btn btn-success btn-icon" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <svg class="icon" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <path d="M12.04 2a9.92 9.92 0 0 0-8.44 15.21L2.05 22l4.93-1.46A9.93 9.93 0 1 0 12.04 2Zm.04 18.05a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-2.93.86.85-2.82-.19-.29a8.12 8.12 0 1 1 6.7 3.56Zm4.48-5.92c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.2-.7-.62-1.17-1.38-1.31-1.61-.14-.24-.02-.36.1-.48.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.28-.74-1.76-.2-.48-.4-.42-.54-.43h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.68 2.6 4.07 3.65.57.25 1.01.4 1.35.51.57.18 1.1.15 1.5.09.46-.07 1.44-.59 1.64-1.17.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.46-.28Z" />
+              </svg>
+            </a>
+            <a href="mailto:carlosortega77@gmail.com" class="btn btn-dark btn-icon" aria-label="Email">
+              <svg class="icon" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false">
+                <path d="M20.5 4h-17A1.5 1.5 0 0 0 2 5.5v13A1.5 1.5 0 0 0 3.5 20h17a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 20.5 4Zm-.44 2L12 11.77 3.94 6ZM4 18v-9l7.65 5.1a.5.5 0 0 0 .55 0L20 9v9Z" />
+              </svg>
+            </a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="./english/script.js"></script>
 </body>
 </html>

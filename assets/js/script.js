@@ -1,14 +1,65 @@
-$(document).ready(function() {
-  $('a[href^="#"]').on('click', function(event) {
-    const target = $(this.getAttribute('href'));
-    if (target.length) {
-      event.preventDefault();
-      $('html, body').animate({
-        scrollTop: target.offset().top
-      }, 800);
+const focusableSelector = 'a[href], area[href], button, input, textarea, select, details, summary, iframe, [tabindex]:not([tabindex="-1"])';
+
+function initSmoothScroll() {
+  const internalLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
+
+  if (!internalLinks.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  internalLinks.forEach((link) => {
+    const href = link.getAttribute('href');
+
+    if (!href || href === '#' || href === '#0') {
+      return;
     }
+
+    link.addEventListener('click', (event) => {
+      const targetId = href.slice(1);
+      if (!targetId) {
+        return;
+      }
+
+      const target = document.getElementById(targetId);
+      if (!target) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const shouldReduceMotion = prefersReducedMotion.matches;
+      target.scrollIntoView({
+        behavior: shouldReduceMotion ? 'auto' : 'smooth',
+        block: 'start'
+      });
+
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+
+      const isNaturallyFocusable = target.matches(focusableSelector);
+      let addedTemporaryTabIndex = false;
+
+      if (!isNaturallyFocusable) {
+        target.setAttribute('tabindex', '-1');
+        addedTemporaryTabIndex = true;
+      }
+
+      target.focus({ preventScroll: true });
+
+      if (addedTemporaryTabIndex) {
+        const removeTemporaryTabIndex = () => {
+          target.removeAttribute('tabindex');
+          target.removeEventListener('blur', removeTemporaryTabIndex);
+        };
+
+        target.addEventListener('blur', removeTemporaryTabIndex);
+      }
+    });
   });
-});
+}
 
 const messagesEn = [
   "Analytics should feel calm and reliable—curious how I returned 420 hours to analysts?",
@@ -27,6 +78,26 @@ const messagesEs = [
 ];
 
 let clickCount = 0;
+let contactStatusRegion = null;
+
+function clearContactStatus() {
+  if (!contactStatusRegion) {
+    return;
+  }
+
+  contactStatusRegion.textContent = '';
+  contactStatusRegion.removeAttribute('data-state');
+}
+
+function setContactStatus(message, state = 'info') {
+  if (!contactStatusRegion) {
+    return false;
+  }
+
+  contactStatusRegion.dataset.state = state;
+  contactStatusRegion.textContent = message;
+  return true;
+}
 
 function showPiMessage() {
   const langAttribute = document.documentElement.getAttribute('lang');
@@ -54,6 +125,7 @@ function sendEmailFallback(event) {
   }
 
   event.preventDefault();
+  clearContactStatus();
 
   const langAttribute = document.documentElement.getAttribute('lang');
   const isSpanish = langAttribute && langAttribute.startsWith('es');
@@ -79,13 +151,17 @@ function sendEmailFallback(event) {
 
   window.location.href = mailtoLink;
 
-  setTimeout(() => {
+  window.setTimeout(() => {
     contactForm.reset();
   }, 300);
 
-  alert(isSpanish
+  const successMessage = isSpanish
     ? 'Tu mensaje está listo en tu cliente de correo. Revísalo y envíalo para completar el contacto.'
-    : 'Your message draft is ready in your email client. Review and send it to complete your outreach.');
+    : 'Your message draft is ready in your email client. Review and send it to complete your outreach.';
+
+  if (!setContactStatus(successMessage, 'success')) {
+    window.alert(successMessage);
+  }
 }
 
 function initAccessibleSubmenus() {
@@ -265,12 +341,117 @@ function initAccessibleSubmenus() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function initNavbarToggle() {
+  const toggle = document.querySelector('[data-nav-toggle]');
+
+  if (!toggle) {
+    return;
+  }
+
+  const controlsId = toggle.getAttribute('aria-controls');
+  const nav = controlsId ? document.getElementById(controlsId) : null;
+
+  if (!nav) {
+    return;
+  }
+
+  const desktopBreakpoint = window.matchMedia('(min-width: 992px)');
+
+  const openNav = () => {
+    nav.classList.add('show');
+    toggle.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeNav = () => {
+    nav.classList.remove('show');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  const syncWithViewport = () => {
+    if (desktopBreakpoint.matches) {
+      nav.classList.add('show');
+      toggle.setAttribute('aria-expanded', 'true');
+      return;
+    }
+
+    nav.classList.remove('show');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
+  syncWithViewport();
+
+  if (typeof desktopBreakpoint.addEventListener === 'function') {
+    desktopBreakpoint.addEventListener('change', syncWithViewport);
+  } else if (typeof desktopBreakpoint.addListener === 'function') {
+    desktopBreakpoint.addListener(syncWithViewport);
+  }
+
+  toggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+    if (isExpanded) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  toggle.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      closeNav();
+      toggle.blur();
+    }
+  });
+
+  nav.addEventListener('click', (event) => {
+    if (desktopBreakpoint.matches) {
+      return;
+    }
+
+    if (event.target instanceof Element && event.target.closest('.nav-link')) {
+      closeNav();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (desktopBreakpoint.matches) {
+      return;
+    }
+
+    const target = event.target;
+
+    if (!(target instanceof Node)) {
+      return;
+    }
+
+    if (!nav.contains(target) && !toggle.contains(target)) {
+      closeNav();
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initSmoothScroll();
+  initAccessibleSubmenus();
+  initNavbarToggle();
+
   const contactForm = document.getElementById('contact-form');
+
+  contactStatusRegion = document.getElementById('contact-form-status');
+  clearContactStatus();
 
   if (contactForm) {
     contactForm.addEventListener('submit', sendEmailFallback);
-  }
 
-  initAccessibleSubmenus();
+    contactForm.addEventListener('input', () => {
+      clearContactStatus();
+    });
+
+    contactForm.addEventListener('reset', () => {
+      window.setTimeout(() => {
+        clearContactStatus();
+      }, 0);
+    });
+  }
 });

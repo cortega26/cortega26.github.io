@@ -88,10 +88,118 @@ function sendEmailFallback(event) {
     : 'Your message draft is ready in your email client. Review and send it to complete your outreach.');
 }
 
+function initAccessibleSubmenus() {
+  const toggles = Array.from(document.querySelectorAll('[data-submenu-toggle]'));
+
+  if (!toggles.length) {
+    return;
+  }
+
+  const setExpanded = (toggle, expanded) => {
+    const controlledId = toggle.getAttribute('aria-controls');
+    const submenu = controlledId ? document.getElementById(controlledId) : null;
+
+    toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
+    if (submenu) {
+      submenu.hidden = !expanded;
+    }
+  };
+
+  const closeOthers = (currentToggle) => {
+    toggles.forEach((toggle) => {
+      if (toggle !== currentToggle) {
+        setExpanded(toggle, false);
+      }
+    });
+  };
+
+  toggles.forEach((toggle) => {
+    const controlledId = toggle.getAttribute('aria-controls');
+    const submenu = controlledId ? document.getElementById(controlledId) : null;
+
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        setExpanded(toggle, false);
+        return;
+      }
+
+      closeOthers(toggle);
+      setExpanded(toggle, true);
+
+      if (submenu) {
+        const firstFocusable = submenu.querySelector('a, button');
+        if (firstFocusable) {
+          window.setTimeout(() => {
+            firstFocusable.focus({ preventScroll: true });
+          }, 160);
+        }
+      }
+    });
+
+    toggle.addEventListener('keydown', (event) => {
+      if (event.key === ' ' || event.key === 'Enter') {
+        event.preventDefault();
+        toggle.click();
+      }
+
+      if (event.key === 'Escape') {
+        setExpanded(toggle, false);
+        toggle.focus();
+      }
+    });
+
+    if (submenu) {
+      submenu.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          setExpanded(toggle, false);
+          toggle.focus();
+        }
+      });
+
+      submenu.querySelectorAll('a, button').forEach((item) => {
+        item.addEventListener('click', () => {
+          window.setTimeout(() => {
+            setExpanded(toggle, false);
+          }, 160);
+        });
+      });
+    }
+  });
+
+  const closeIfOutside = (event) => {
+    const path = event.composedPath();
+
+    const interactedInside = toggles.some((toggle) => {
+      const controlledId = toggle.getAttribute('aria-controls');
+      const submenu = controlledId ? document.getElementById(controlledId) : null;
+      return path.includes(toggle) || (submenu && path.includes(submenu));
+    });
+
+    if (!interactedInside) {
+      toggles.forEach((toggle) => setExpanded(toggle, false));
+    }
+  };
+
+  let outsidePointerTimer = null;
+
+  document.addEventListener('pointerdown', (event) => {
+    window.clearTimeout(outsidePointerTimer);
+    outsidePointerTimer = window.setTimeout(() => {
+      closeIfOutside(event);
+    }, 180);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   const contactForm = document.getElementById('contact-form');
 
   if (contactForm) {
     contactForm.addEventListener('submit', sendEmailFallback);
   }
+
+  initAccessibleSubmenus();
 });

@@ -7,12 +7,12 @@ _Last updated: 2025-10-15 16:30:12Z_
 - English portfolio (`/english/english.html`)
 - Spanish portfolio (`/index-spa.html`)
 - EduTecno hub (`/edutecno/edu-index.html` and `/edutecno/PC2/prueba_consolidacion_2.html`)
-- Shared assets (`/assets`, `/english/english/style.css`, `/spanish/style.css`, JS helpers)
+- Shared assets (`/assets`, `/assets/css/style.css`, `/assets/js/script.js`, JS helpers)
 
 ## Summary of fixes shipped now
-1. Hardened navigation submenu toggle with debounced outside-click guard, keyboard support, and ARIA sync. Fixes the instant-close defect and creates anchor targets for key portfolio case studies. (See `english/english.html`, `index-spa.html`, `english/english/script.js`, `spanish/script.js`, and localized stylesheets.)
+1. Hardened navigation submenu toggle with debounced outside-click guard, keyboard support, and ARIA sync. Fixes the instant-close defect and creates anchor targets for key portfolio case studies. (See `english/english.html`, `index-spa.html`, and shared assets in `/assets/js/script.js` and `/assets/css/style.css`.)
 2. Added intrinsic sizing (`width`/`height`) and async decoding hints to hero imagery to eliminate layout shift in both locales. (See `english/english.html` and `index-spa.html`.)
-3. Restored visible focus states across nav buttons, submenu links, and global anchors to bring keyboard parity in both languages. (See `english/english/style.css` and `spanish/style.css`.)
+3. Restored visible focus states across nav buttons, submenu links, and global anchors to bring keyboard parity in both languages. (See `/assets/css/style.css`.)
 
 ## Detailed findings & remediation
 
@@ -32,7 +32,7 @@ _Last updated: 2025-10-15 16:30:12Z_
 
 ### 3. Invisible focus outlines (Resolved)
 - **Observation**: Global styles removed focus outlines (`a:focus { text-decoration: none; }`) and nav buttons inherited no keyboard affordance.
-- **Evidence**: `english/english/style.css` prior to change had no `:focus-visible` styles.
+- **Evidence**: `assets/css/style.css` prior to change had no `:focus-visible` styles.
 - **Impact**: Keyboard users could not see where focus landed, failing WCAG 2.4.7.
 - **Root cause**: Hover-focused theming without accessible fallback.
 - **Fix**: Introduced `:focus-visible` outlines for anchors and buttons, highlighted submenu links on focus, and ensured nav toggles inherit typography.

@@ -26,6 +26,34 @@ body {
   line-height: 1.7;
 }
 
+.skip-link {
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -120%);
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+  z-index: 2000;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skip-link:focus-visible {
+  transform: translate(-50%, 1rem);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
 a {
   color: var(--accent);
   transition: color 0.2s ease, opacity 0.2s ease;

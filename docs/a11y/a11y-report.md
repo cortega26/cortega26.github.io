@@ -33,14 +33,14 @@ Mirrors the English map with localized strings. Same recommendation for section 
 - `h2` — Detalles del Digimon
 
 ## Landmark coverage
-- Portfolio pages: `<nav>` (primary), `<main>`, `<footer>`. Missing skip links (logged B-002).
+- Portfolio pages: `<nav>` (primary), `<main>`, `<footer>` plus localized skip links leading to `#overview` (B-002 resolved).
 - Landing selector: includes `.skip-link` anchored to hero grid.
 - EduTecno hub: lacks `<header>` and `<footer>`; consider wrapping for consistent navigation semantics (backlog B-007).
 
 ## Keyboard & focus
 - Prior issue: anchors/buttons lost focus outline. Resolved via new `:focus-visible` styling (`english/english/style.css`, `spanish/style.css`).
 - Nav submenu toggles now respond to `Enter`/`Space`, close on `Escape`, and trap focus to submenu items before returning to toggle.
-- Remaining gap: no skip links on portfolio pages; alerts in contact flow trap focus (backlog B-002, B-005).
+- Remaining gap: alerts in contact flow trap focus (backlog B-005).
 
 ## Color & contrast quick check
 - Primary palette (#5b8def on dark backgrounds) meets contrast >4.5:1. Secondary muted text (#c3cadc) on #0b0d17 is ~4.2:1—acceptable for larger text but monitor for small font usage.

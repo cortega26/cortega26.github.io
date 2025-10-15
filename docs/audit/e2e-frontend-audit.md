@@ -4,28 +4,28 @@ _Last updated: 2025-10-15 16:30:12Z_
 
 ## Scope
 - Landing selector (`/index.html`)
-- English portfolio (`/english/english.html`)
-- Spanish portfolio (`/index-spa.html`)
-- EduTecno hub (`/edutecno/edu-index.html` and `/edutecno/PC2/prueba_consolidacion_2.html`)
+- English portfolio (`/en/`)
+- Spanish portfolio (`/es/`)
+- EduTecno hub (`/projects/edutecno/` and `/projects/edutecno/pc2/prueba_consolidacion_2.html`)
 - Shared assets (`/assets`, `/assets/css/style.css`, `/assets/js/script.js`, JS helpers)
 
 ## Summary of fixes shipped now
-1. Hardened navigation submenu toggle with debounced outside-click guard, keyboard support, and ARIA sync. Fixes the instant-close defect and creates anchor targets for key portfolio case studies. (See `english/english.html`, `index-spa.html`, and shared assets in `/assets/js/script.js` and `/assets/css/style.css`.)
-2. Added intrinsic sizing (`width`/`height`) and async decoding hints to hero imagery to eliminate layout shift in both locales. (See `english/english.html` and `index-spa.html`.)
+1. Hardened navigation submenu toggle with debounced outside-click guard, keyboard support, and ARIA sync. Fixes the instant-close defect and creates anchor targets for key portfolio case studies. (See `en/index.html`, `es/index.html`, and shared assets in `/assets/js/script.js` and `/assets/css/style.css`.)
+2. Added intrinsic sizing (`width`/`height`) and async decoding hints to hero imagery to eliminate layout shift in both locales. (See `en/index.html` and `es/index.html`.)
 3. Restored visible focus states across nav buttons, submenu links, and global anchors to bring keyboard parity in both languages. (See `/assets/css/style.css`.)
 
 ## Detailed findings & remediation
 
 ### 1. Navigation submenu collapses immediately (Resolved)
 - **Observation**: Portfolio nav entry used a simple anchor, so the dropdown pattern closed on the same click due to Bootstrap collapse + document click listeners.
-- **Evidence**: Original markup in `english/english.html` and `index-spa.html` lacked a stable state hook; there was no ARIA state or debounce (`git show HEAD^:english/english.html`).
+- **Evidence**: Original markup in `en/index.html` and `es/index.html` lacked a stable state hook; there was no ARIA state or debounce (`git show HEAD^:en/index.html`).
 - **Impact**: Users could not reach deep portfolio anchors; keyboard users especially lost context because focus returned to page body.
 - **Root cause**: No dedicated state management for nested navigation; reliance on Bootstrap's default collapse and global click handler.
 - **Fix**: Converted the Portfolio item into a button-controlled submenu with `aria-expanded`, `aria-controls`, 180 ms outside-click debounce, Escape handling, and focus transfer. Added anchor IDs for flagship case studies to make submenu destinations meaningful.
 
 ### 2. Layout shift from hero portrait (Resolved)
 - **Observation**: The above-the-fold hero image had no intrinsic dimensions, so the first contentful paint pushed text as the PNG loaded.
-- **Evidence**: Prior markup lacked `width`/`height` and `decoding` attributes (`git show HEAD^:english/english.html` lines around the hero figure).
+- **Evidence**: Prior markup lacked `width`/`height` and `decoding` attributes (`git show HEAD^:en/index.html` lines around the hero figure).
 - **Impact**: 150–200px CLS during hero render, harming Core Web Vitals and visual polish on mobile.
 - **Root cause**: Static HTML without responsive image hints; reliance on CSS max-width alone.
 - **Fix**: Parsed the PNG header to obtain 952×939 dimensions, set `loading="eager"` and `decoding="async"` to keep hero crisp without layout shift.
@@ -62,7 +62,7 @@ _Last updated: 2025-10-15 16:30:12Z_
 - **Plan**: Add `<header>`, `<nav aria-label="Módulos">`, and breadcrumb schema. Logged in backlog item B-007.
 
 ### 8. Digimon practice page footer contains joking “hack the Pentagon” link (Open)
-- **Observation**: `/edutecno/PC2/prueba_consolidacion_2.html` features a novelty link that could alarm auditors and hamper trust.
+- **Observation**: `/projects/edutecno/pc2/prueba_consolidacion_2.html` features a novelty link that could alarm auditors and hamper trust.
 - **Impact**: Potential policy/security concern for students.
 - **Root cause**: Leftover easter egg from training material.
 - **Plan**: Replace with legitimate resource link or remove. Logged in backlog item B-008.

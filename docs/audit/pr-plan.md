@@ -1,22 +1,20 @@
-# PR Plan — fix/edutecno-ia
+# PR Plan — fix/backlog-b008-b009
 
 ## Objective
-Address the next highest-impact backlog items by improving the EduTecno project hub landmarks and restoring heading hierarchy for English portfolio sections.
+Resolve the pending trust & safety and SEO backlog items by replacing the EduTecno PC2 footer joke with a legitimate support contact and expanding English portfolio structured data.
 
 ## Scope of this PR
-1. **EduTecno hub information architecture (B-007)**
-   - Add banner header, breadcrumb navigation, and semantic `<main>` landmark.
-   - Provide skip link and visually hidden list heading for module cards.
-   - Introduce structured footer with support contact and update metadata.
-2. **Heading hierarchy for capability and portfolio groups (B-006)**
-   - Insert visually hidden `<h2>` elements before repeated `<h3>` groups.
-   - Ensure bootstrap utility classes keep hidden headings accessible to screen readers.
+1. **EduTecno PC2 trust copy (B-008)**
+   - Remove the "hack the Pentagon" gag link.
+   - Replace it with a support-focused mailto call-to-action in the footer.
+2. **Portfolio structured data expansion (B-009)**
+   - Publish a Schema.org `ItemList` of highlighted case studies.
+   - Annotate each featured project as a `CreativeWork` with descriptive metadata.
 
 ## Deferred to follow-up PRs
-- Footer trust copy update on EduTecno PC2 detail page (B-008).
-- Portfolio structured data expansion (B-009).
+- None; backlog cleared.
 
 ## Testing plan
-- Manual keyboard traversal of EduTecno skip link, breadcrumb, and module buttons (desktop breakpoint).
-- Screen reader heading outline audit via VoiceOver rotor or NVDA (static reasoning based on heading order).
+- Manual check of EduTecno PC2 footer link destination and label.
+- Structured data validation via Google Rich Results Test (static reasoning in lieu of live run).
 

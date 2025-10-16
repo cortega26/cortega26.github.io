@@ -62,16 +62,16 @@ function initSmoothScroll() {
 }
 
 const messagesEn = [
-  "Automation roadmap in play: exploring pilots that could free 420 analyst hours—want to see the backlog?",
-  "Lookup vision alert: building toward 6× faster fraud reviews once benchmarks land.",
+  "Automation roadmap in play: instrumenting pilots to document real analyst time saved—want to see the backlog?",
+  "Lookup vision alert: scheduling load tests to verify fraud review gains before sharing numbers.",
   "Transparency first: aiming to earn trusted-partner status with fintech, cyber, and public teams.",
   "FastAPI, SQL, and storytelling—pick two and I'll scope the third.",
   "Ready to prototype together? Let's co-design the next delivery sprint."
 ];
 
 const messagesEs = [
-  "Hoja de ruta en marcha: explorando pilotos que podrían liberar 420 horas de analistas—¿quieres ver el backlog?",
-  "Alerta de visión en consultas: construyendo hacia revisiones antifraude 6× más rápidas cuando lleguen los benchmarks.",
+  "Hoja de ruta en marcha: instrumentando pilotos para documentar horas liberadas realmente—¿quieres ver el backlog?",
+  "Alerta de visión en consultas: programando pruebas de carga para comprobar mejoras antifraude antes de divulgar cifras.",
   "Transparencia primero: objetivo de ganar condición de socio de confianza con equipos fintech, ciber y públicos.",
   "FastAPI, SQL y storytelling: elige dos y yo planifico el tercero.",
   "¿Listo para prototipar? Diseñemos juntos el próximo sprint de entrega."

@@ -62,19 +62,19 @@ function initSmoothScroll() {
 }
 
 const messagesEn = [
-  "You found the Praetorians' π—Angela Bennett would be proud of that trace route.",
-  "No floppy disk here: I surface the secure backlog once we scope the engagement.",
-  "Ask about the zero-trust automation playbook that keeps regulated teams hardened.",
-  "Curious how the incident drills run now that Gatekeeper is retired? I'll walk you through it.",
-  "Ready to exit teaser mode? Let's pair the roadmap with outcomes and metrics."
+  "π ping received—Praetorians can't trace this breadcrumb, but you just did.",
+  "Sneak peek: the redacted incident notebooks unlock once we co-design the runbook.",
+  "Ask about the air-gapped analytics lab that prototypes fraud sleuthing drills.",
+  "Curious which signals replaced Gatekeeper? I'll decode the zero-trust lattice for you.",
+  "Ready to flip from teaser mode to delivery? Let's stitch metrics straight to the narrative."
 ];
 
 const messagesEs = [
-  "Encontraste el π de los Praetorians—Angela Bennett aprobaría esa ruta de rastreo.",
-  "Sin disquete: comparto el backlog seguro cuando definamos el alcance juntos.",
-  "Pregunta por el playbook de automatización zero-trust que protege a equipos regulados.",
-  "¿Quieres saber cómo corren los simulacros ahora que Gatekeeper quedó atrás? Te lo explico.",
-  "¿Listo para salir del modo teaser? Conectemos la hoja de ruta con métricas reales."
+  "Ping π recibido—ni los Praetorians rastrean esta pista, pero tú sí.",
+  "Avance exclusivo: los cuadernos de incidentes se liberan cuando co-diseñamos el runbook.",
+  "Pregunta por el laboratorio analítico aislado que ensaya las búsquedas antifraude.",
+  "¿Intriga el relevo de Gatekeeper? Te decodifico la malla zero-trust al detalle.",
+  "¿Listo para dejar el modo teaser? Enlazamos métricas con la historia de entrega."
 ];
 
 let clickCount = 0;
@@ -106,8 +106,8 @@ function showPiMessage() {
 
   if (clickCount >= messages.length) {
     const finalMessage = isSpanish
-      ? 'Sal del laberinto digital y agenda una llamada de descubrimiento para coordinar el traspaso.'
-      : 'Jack out of the Net and book a discovery call so we can plan the handoff.';
+      ? 'Momento de salir del laberinto digital: agenda una llamada y bosquejamos el brief operativo.'
+      : 'Time to exit the rabbit hole—book a discovery call and we will draft the ops brief.';
     alert(finalMessage);
     clickCount = 0;
     return;

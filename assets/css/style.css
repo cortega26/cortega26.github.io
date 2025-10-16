@@ -616,14 +616,14 @@ main section {
 
 .math-lab-teaser__glyph {
   display: inline-block;
-  font-family: 'Times New Roman', 'Cambria', 'STIX Two Text', 'Georgia', serif;
-  font-weight: 600;
-  font-size: 0.85rem;
+  font-family: 'STIX Two Math', 'STIX Two Text', 'Cambria Math', 'Times New Roman', 'Georgia', serif;
+  font-weight: 700;
+  font-size: 1rem;
   line-height: 1;
   color: var(--accent);
   text-decoration: none;
-  padding: 0.1rem 0.2rem;
-  border-radius: 0.3rem;
+  padding: 0.1rem 0.28rem;
+  border-radius: 0.35rem;
   transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
 }
 

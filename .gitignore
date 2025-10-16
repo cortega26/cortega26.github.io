@@ -1,1 +1,9 @@
+# Editor swap/backup files
+*.swp
+*.swo
+*.swx
+*~
+.DS_Store
+
+# Archives
 *.zip

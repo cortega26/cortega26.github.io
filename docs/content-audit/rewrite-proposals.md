@@ -1,10 +1,10 @@
 # Hero Copy Rewrite Proposals
 
-## Automation Roadmap / Hoja de ruta de automatización
+## Automation Initiative / Iniciativa de automatización
 - **Original claim**: Returned 420 quarterly analyst hours to product execution through regulatory reporting automation.
 - **Evidence search**: Reviewed public repositories (https://github.com/cortega26?tab=repositories) and attempted GitHub code search (`https://api.github.com/search/code?q="420"+user:cortega26`) without authenticated access; no published metrics located.
-- **Revised copy (EN)**: “Automation roadmap: Prioritize regulatory reporting sprints with instrumented pilots that document actual time saved before scaling decisions.”
-- **Revised copy (ES)**: “Hoja de ruta de automatización: Priorizar sprints de reportes regulatorios con pilotos instrumentados que documenten las horas realmente liberadas antes de escalar.”
+- **Revised copy (EN)**: “Automation initiative: Prioritize regulatory reporting sprints with instrumented pilots that document actual time saved before scaling decisions.”
+- **Revised copy (ES)**: “Iniciativa de automatización: Priorizar sprints de reportes regulatorios con pilotos instrumentados que documenten las horas realmente liberadas antes de escalar.”
 - **Rationale**: Removes unverified metrics entirely and emphasizes the need for measured evidence prior to broader rollout.
 
 ## Lookup Vision / Visión de consultas

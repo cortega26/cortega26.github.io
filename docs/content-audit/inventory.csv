@@ -1,17 +1,17 @@
 page,section,locale,snippet,claim_type,evidence,status
-en/index.html,hero,en,"Automation roadmap: Prioritize regulatory reporting sprints with instrumented pilots that document actual time saved before scaling decisions.",impact,"Roadmap: publish pilot findings once time-savings data is captured.",needs-evidence
-en/index.html,hero,en,"Lookup vision: Iterate FastAPI services and asynchronous pipelines with scheduled load testing to validate fraud lookup gains prior to public benchmarks.",impact,"Roadmap: release benchmark study after coordinated load testing.",needs-evidence
-en/index.html,hero,en,"Partnership goal: Earn trusted-partner status with fintech, cybersecurity, and public-sector squads through transparent delivery playbooks.",trust,"Roadmap: gather third-party testimonials or case studies validating partner status.",needs-evidence
-es/index.html,hero,es,"Hoja de ruta de automatización: Priorizar sprints de reportes regulatorios con pilotos instrumentados que documenten las horas realmente liberadas antes de escalar.",impact,"Hoja de ruta: publicar resultados piloto cuando existan datos de horas ahorradas.",needs-evidence
-es/index.html,hero,es,"Visión de consultas: Iterar servicios FastAPI y pipelines asíncronos con pruebas de carga planificadas para validar mejoras en consultas antifraude antes de publicarlas.",impact,"Hoja de ruta: difundir benchmarks tras ejecutar las pruebas de carga coordinadas.",needs-evidence
-es/index.html,hero,es,"Meta de colaboración: Ganar la condición de socio de confianza con escuadras fintech, de ciberseguridad y del sector público mediante playbooks de entrega transparentes.",trust,"Hoja de ruta: recopilar testimonios o estudios de caso que acrediten el estatus de socio.",needs-evidence
+en/index.html,hero,en,"Automation initiative: Prioritize regulatory reporting sprints with instrumented pilots that document actual time saved before scaling decisions.",impact,"",needs-evidence
+en/index.html,hero,en,"Lookup vision: Iterate FastAPI services and asynchronous pipelines with scheduled load testing to validate fraud lookup gains prior to public benchmarks.",impact,"",needs-evidence
+en/index.html,hero,en,"Partnership goal: Earn trusted-partner status with fintech, cybersecurity, and public-sector squads through transparent delivery playbooks.",trust,"",needs-evidence
+es/index.html,hero,es,"Iniciativa de automatización: Priorizar sprints de reportes regulatorios con pilotos instrumentados que documenten las horas realmente liberadas antes de escalar.",impact,"",needs-evidence
+es/index.html,hero,es,"Visión de consultas: Iterar servicios FastAPI y pipelines asíncronos con pruebas de carga planificadas para validar mejoras en consultas antifraude antes de publicarlas.",impact,"",needs-evidence
+es/index.html,hero,es,"Meta de colaboración: Ganar la condición de socio de confianza con escuadras fintech, de ciberseguridad y del sector público mediante playbooks de entrega transparentes.",trust,"",needs-evidence
 en/index.html,experience,en,"Launched World Bank GDP per-capita automations and Flourish dashboards reused quarterly by executives, unlocking new reporting cadences.",impact,"Demo reference: https://public.flourish.studio/visualisation/9177797/ (does not confirm executive reuse).",needs-evidence
 en/index.html,experience,en,"Shipped Crypto Price Tracker alerts and PoGo rarity intelligence, documenting decision-intelligence learnings in weekly public logs.",impact,"Repo references: https://github.com/cortega26/crypto-price-tracker, https://github.com/cortega26/PoGo (no usage analytics).",needs-evidence
-en/index.html,contact,en,"I will respond with next steps and tailored resources within two business days.",process,"Roadmap: add SLA tracking evidence (CRM screenshots or auto-responder logs).",needs-evidence
-es/index.html,contacto,es,"Responderé con próximos pasos y recursos personalizados dentro de dos días hábiles.",process,"Hoja de ruta: adjuntar evidencia de cumplimiento SLA (registros CRM o auto-respuesta).",needs-evidence
-projects/edutecno/index.html,overview,es,"Actualizado semanalmente por el equipo de Analytics Engineering.",process,"Hoja de ruta: incluir historial de cambios o sello con fecha automatizado.",needs-evidence
+en/index.html,contact,en,"I will respond with next steps and tailored resources within two business days.",process,"",needs-evidence
+es/index.html,contacto,es,"Responderé con próximos pasos y recursos personalizados dentro de dos días hábiles.",process,"",needs-evidence
+projects/edutecno/index.html,overview,es,"Actualizado semanalmente por el equipo de Analytics Engineering.",process,"",needs-evidence
 projects/edutecno/index.html,modules,es,"Los enlaces habilitados llevan directamente a la evaluación correspondiente.",capability,"Verified on-site link to Module 2: projects/edutecno/pc2/prueba_consolidacion_2.html.",verified
-projects/edutecno/pc2/prueba_consolidacion_2.html,main,es,"Digimon API" landing lacks contextual briefing or reliability notes.",gap,"Roadmap: add usage instructions plus API uptime disclosure.",needs-evidence
-search/index.html,search,global,"Site search experience not implemented.",gap,"Roadmap: design search UI and index strategy.",missing
-404.html,system,global,"Custom 404 page is absent; default GitHub Pages response served.",gap,"Roadmap: build branded 404 template with navigation recovery.",missing
-policy/privacy.html,policy,global,"No privacy, cookie, or terms policy pages exist.",compliance,"Roadmap: draft bilingual privacy/cookie/terms policies aligned with hosting stack.",missing
+projects/edutecno/pc2/prueba_consolidacion_2.html,main,es,"Digimon API" landing lacks contextual briefing or reliability notes.",gap,"",needs-evidence
+search/index.html,search,global,"Site search experience not implemented.",gap,"",missing
+404.html,system,global,"Custom 404 page is absent; default GitHub Pages response served.",gap,"",missing
+policy/privacy.html,policy,global,"No privacy, cookie, or terms policy pages exist.",compliance,"",missing

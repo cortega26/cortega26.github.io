@@ -3,16 +3,16 @@
 ## Automation Roadmap / Hoja de ruta de automatización
 - **Original claim**: Returned 420 quarterly analyst hours to product execution through regulatory reporting automation.
 - **Evidence search**: Reviewed public repositories (https://github.com/cortega26?tab=repositories) and attempted GitHub code search (`https://api.github.com/search/code?q="420"+user:cortega26`) without authenticated access; no published metrics located.
-- **Revised copy (EN)**: “Automation roadmap: Prioritize regulatory reporting sprints that could return up to 420 analyst hours per quarter once piloted and measured.”
-- **Revised copy (ES)**: “Hoja de ruta de automatización: Priorizar sprints de reportes regulatorios que podrían devolver hasta 420 horas trimestrales de analistas una vez piloteados y medidos.”
-- **Rationale**: Recasts the statement as an aspirational roadmap item pending validation, eliminating unverified results while preserving the strategic focus.
+- **Revised copy (EN)**: “Automation roadmap: Prioritize regulatory reporting sprints with instrumented pilots that document actual time saved before scaling decisions.”
+- **Revised copy (ES)**: “Hoja de ruta de automatización: Priorizar sprints de reportes regulatorios con pilotos instrumentados que documenten las horas realmente liberadas antes de escalar.”
+- **Rationale**: Removes unverified metrics entirely and emphasizes the need for measured evidence prior to broader rollout.
 
 ## Lookup Vision / Visión de consultas
 - **Original claim**: Delivered a 6× faster fraud lookup experience by engineering FastAPI services and asynchronous data pipelines.
 - **Evidence search**: Reviewed FastSearchAPI repository (https://github.com/cortega26/FastSearchAPI) on 2025-10-15; README and issues do not document benchmark data or supporting PRs.
-- **Revised copy (EN)**: “Lookup vision: Iterate FastAPI services and asynchronous pipelines toward a 6× faster fraud lookup target pending production benchmarks.”
-- **Revised copy (ES)**: “Visión de consultas: Iterar servicios FastAPI y pipelines asíncronos hacia una meta de consultas antifraude 6× más rápidas, pendiente de benchmarks en producción.”
-- **Rationale**: Frames the 6× improvement as an objective for future validation rather than a completed outcome.
+- **Revised copy (EN)**: “Lookup vision: Iterate FastAPI services and asynchronous pipelines with scheduled load testing to validate fraud lookup gains prior to public benchmarks.”
+- **Revised copy (ES)**: “Visión de consultas: Iterar servicios FastAPI y pipelines asíncronos con pruebas de carga planificadas para validar mejoras en consultas antifraude antes de publicarlas.”
+- **Rationale**: Replaces the numeric multiplier with validation-focused language that defers any performance claims until data is available.
 
 ## Partnership Goal / Meta de colaboración
 - **Original claim**: Trusted partner to fintech, cybersecurity, and public-sector innovators across Chile, LATAM, and remote U.S. squads.

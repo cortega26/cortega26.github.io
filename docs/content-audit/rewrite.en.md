@@ -1,8 +1,8 @@
 # Rewrite Proposals (English)
 
 ## Home · en/index.html
-- Replace the hero metric "return up to 420 analyst hours per quarter" with a verifiable outcome grounded in delivered tooling (e.g., "File Extractor Pro reduced manual folder review steps from X to Y during pilot") once supporting logs are captured. **Roadmap** — capture time-tracking exports after automation pilots.
-- Reframe the "6× faster fraud lookup" promise to highlight the documented FastSearchAPI features (async filters, Swagger docs) and reserve performance multipliers for a future benchmarks section backed by load-test results. [Evidence](https://github.com/cortega26/FastSearchAPI#api-endpoints) · **Roadmap** for latency study.
+- Recast the hero automation message to stress instrumented pilots that document actual time savings before any scaling claims. **Roadmap** — capture time-tracking exports after automation pilots and publish summaries.
+- Rework the fraud lookup highlight to focus on planned load testing and validation milestones rather than numerical multipliers. [Evidence](https://github.com/cortega26/FastSearchAPI#api-endpoints) · **Roadmap** — schedule latency study and release benchmarks once complete.
 - Swap the "trusted-partner status" claim for proof-backed signals such as published testimonials or case-study quotes; until then, describe the collaboration framework (playbooks, cadences) without status language. **Roadmap** — collect stakeholder testimonials.
 - In the experience timeline, cite tangible artifacts instead of implied executive adoption (e.g., "Published GDP per-capita dashboard used in quarterly briefings" with link to the Flourish story). [Evidence](https://public.flourish.studio/visualisation/9177797/)
 - Document measurable outcomes for the 2024 decision-intelligence initiatives or soften to "maintained" language referencing the public repos until usage analytics are added. [Evidence](https://github.com/cortega26/crypto-price-tracker) · [Evidence](https://github.com/cortega26/PoGo)

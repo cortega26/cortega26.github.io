@@ -1,8 +1,8 @@
 # Propuestas de Reescritura (Español)
 
 ## Inicio · es/index.html
-- Sustituir la métrica de "hasta 420 horas trimestrales" por un resultado comprobable basado en automatizaciones entregadas (p. ej., "File Extractor Pro redujo los pasos manuales de revisión de carpetas de X a Y durante el piloto") cuando existan registros. **Hoja de ruta** — capturar exportaciones de control de tiempo tras los pilotos.
-- Reformular la promesa de "consultas 6× más rápidas" para enfatizar las capacidades documentadas de FastSearchAPI (filtros asíncronos, Swagger) y reservar multiplicadores de desempeño para una sección de benchmarks respaldada por pruebas de carga. [Evidencia](https://github.com/cortega26/FastSearchAPI#api-endpoints) · **Hoja de ruta** para estudio de latencia.
+- Replantear el mensaje de automatización para destacar pilotos instrumentados que documenten horas realmente liberadas antes de afirmar escalamiento. **Hoja de ruta** — capturar exportaciones de control de tiempo tras los pilotos y publicar resúmenes.
+- Reformular la promesa de consultas antifraude para centrarse en pruebas de carga planificadas y hitos de validación en lugar de multiplicadores numéricos. [Evidencia](https://github.com/cortega26/FastSearchAPI#api-endpoints) · **Hoja de ruta** — agendar estudio de latencia y difundir benchmarks una vez completados.
 - Cambiar la afirmación de "estatus de socio de confianza" por señales verificables como testimonios o casos publicados; mientras tanto, describir el marco de colaboración sin lenguaje de estatus. **Hoja de ruta** — recopilar testimonios de stakeholders.
 - En la línea de tiempo, referenciar artefactos tangibles en lugar de adopción implícita (p. ej., "Tablero de PIB per cápita publicado para briefings trimestrales" con enlace a la historia Flourish). [Evidencia](https://public.flourish.studio/visualisation/9177797/)
 - Documentar resultados medibles para las iniciativas de inteligencia de decisiones 2024 o suavizar a lenguaje de mantenimiento mientras se añaden analíticas de uso. [Evidencia](https://github.com/cortega26/crypto-price-tracker) · [Evidencia](https://github.com/cortega26/PoGo)

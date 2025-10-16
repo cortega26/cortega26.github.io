@@ -1,3 +1,20 @@
+claim_types:
+  impact: Quantitative or outcome-driven statements that reference saved time, revenue, or performance deltas.
+  trust: Assertions about reputation, partnership status, or stakeholder confidence.
+  process: Promises about ways of working, SLAs, cadences, or maintenance routines.
+  capability: Claims describing shipped features, functional coverage, or technical affordances.
+  compliance: Obligations related to legal, regulatory, or policy requirements.
+  gap: Missing experiences, absent copy, or incomplete context identified during the audit.
+statuses:
+  verified: Evidence confirms the statement as written (link, screenshot, or artifact captured in the evidence column).
+  needs-evidence: Statement remains published but lacks sufficient proof; remediation required or proof pending.
+  missing: Experience or policy is absent; requires net-new content before the claim can exist.
+evidence_tags:
+  Roadmap: Follow-up action is planned but documentation is not yet available; do not market the claim until addressed.
+locales:
+  en: English content paths (e.g., en/index.html sections).
+  es: Spanish content paths (e.g., es/index.html sections).
+  global: Cross-locale gaps where no localized asset exists.
 products:
   - canonical: FastSearchAPI
     allowed:

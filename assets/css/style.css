@@ -216,10 +216,31 @@ main section {
   margin-bottom: 18px;
 }
 
+.hero-subhead {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #f2f4ff;
+  margin-bottom: 12px;
+}
+
+.hero-name {
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
 .hero-lede {
   font-size: 1.15rem;
   color: var(--muted);
   margin-top: 18px;
+}
+
+.hero-lockup {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-top: 16px;
 }
 
 .hero-highlights {
@@ -745,6 +766,14 @@ main section {
 
   .hero-highlights li {
     font-size: 0.98rem;
+  }
+
+  .hero-subhead {
+    font-size: 1.25rem;
+  }
+
+  .hero-name {
+    letter-spacing: 0.12em;
   }
 
   .hero-meta-grid {

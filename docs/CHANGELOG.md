@@ -6,6 +6,8 @@
 - Consolidated the English-language entry point under `/en/` and replaced the
   legacy `/english/` folder with a zero-delay redirect to preserve existing
   inbound links.
+- Added hreflang annotations to the `/english/` redirect shell so search bots
+  discover the canonical `/en/` and `/es/` destinations without duplication.
 
 ## 2025-10-15
 

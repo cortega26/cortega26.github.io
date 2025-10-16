@@ -521,11 +521,25 @@ main section {
   background: #0c121f;
 }
 
+.portfolio .col-md-6 {
+  margin-bottom: 28px;
+}
+
+.portfolio .row {
+  row-gap: 28px;
+}
+
+@supports (row-gap: 1px) {
+  .portfolio .col-md-6 {
+    margin-bottom: 0;
+  }
+}
+
 .custom-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 22px;
-  margin-bottom: 28px;
+  margin-bottom: 0;
 }
 
 .custom-card .card-title {

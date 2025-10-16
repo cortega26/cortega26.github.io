@@ -71,6 +71,16 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
+.evidence {
+  font-size: 0.92rem;
+  color: #a3a3a3;
+}
+
+.evidence a {
+  margin-right: 0.8rem;
+  text-decoration: underline;
+}
+
 .navbar {
   background-color: rgba(8, 10, 18, 0.95) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);

@@ -781,6 +781,42 @@ main section {
   transform: translateY(-2px);
 }
 
+.proof-block {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.proof-title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+}
+
+.proof-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.proof-list li + li {
+  margin-top: 0.75rem;
+}
+
+.proof-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.proof-link:hover,
+.proof-link:focus {
+  text-decoration: underline;
+}
+
 @media (min-width: 768px) {
   .about-grid {
     grid-template-columns: repeat(3, 1fr);

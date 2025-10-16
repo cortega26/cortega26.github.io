@@ -62,19 +62,19 @@ function initSmoothScroll() {
 }
 
 const messagesEn = [
-  "Automation roadmap in play: instrumenting pilots to document real analyst time saved—want to see the backlog?",
-  "Lookup vision alert: scheduling load tests to verify fraud review gains before sharing numbers.",
-  "Transparency first: aiming to earn trusted-partner status with fintech, cyber, and public teams.",
-  "FastAPI, SQL, and storytelling—pick two and I'll scope the third.",
-  "Ready to prototype together? Let's co-design the next delivery sprint."
+  "You found the Praetorians' π—Angela Bennett would be proud of that trace route.",
+  "No floppy disk here: I surface the secure backlog once we scope the engagement.",
+  "Ask about the zero-trust automation playbook that keeps regulated teams hardened.",
+  "Curious how the incident drills run now that Gatekeeper is retired? I'll walk you through it.",
+  "Ready to exit teaser mode? Let's pair the roadmap with outcomes and metrics."
 ];
 
 const messagesEs = [
-  "Hoja de ruta en marcha: instrumentando pilotos para documentar horas liberadas realmente—¿quieres ver el backlog?",
-  "Alerta de visión en consultas: programando pruebas de carga para comprobar mejoras antifraude antes de divulgar cifras.",
-  "Transparencia primero: objetivo de ganar condición de socio de confianza con equipos fintech, ciber y públicos.",
-  "FastAPI, SQL y storytelling: elige dos y yo planifico el tercero.",
-  "¿Listo para prototipar? Diseñemos juntos el próximo sprint de entrega."
+  "Encontraste el π de los Praetorians—Angela Bennett aprobaría esa ruta de rastreo.",
+  "Sin disquete: comparto el backlog seguro cuando definamos el alcance juntos.",
+  "Pregunta por el playbook de automatización zero-trust que protege a equipos regulados.",
+  "¿Quieres saber cómo corren los simulacros ahora que Gatekeeper quedó atrás? Te lo explico.",
+  "¿Listo para salir del modo teaser? Conectemos la hoja de ruta con métricas reales."
 ];
 
 let clickCount = 0;
@@ -106,8 +106,8 @@ function showPiMessage() {
 
   if (clickCount >= messages.length) {
     const finalMessage = isSpanish
-      ? '¿Listo para conversar? Agenda una llamada de descubrimiento y avancemos.'
-      : 'Ready to talk? Book a discovery call and let’s move forward.';
+      ? 'Sal del laberinto digital y agenda una llamada de descubrimiento para coordinar el traspaso.'
+      : 'Jack out of the Net and book a discovery call so we can plan the handoff.';
     alert(finalMessage);
     clickCount = 0;
     return;

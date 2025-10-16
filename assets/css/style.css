@@ -582,6 +582,82 @@ main section {
   margin: 18px 0;
 }
 
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.project-meta:last-child {
+  margin-bottom: 0;
+}
+
+.cred-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cred-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  background: rgba(91, 141, 239, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 4px 6px;
+}
+
+.cred-badge:focus,
+.cred-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+
+.cred-badge img {
+  height: 18px;
+  width: auto;
+  display: block;
+}
+
+.project-prs {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.project-prs__label {
+  font-weight: 600;
+  color: var(--text, #e8edf9);
+  margin-right: 6px;
+}
+
+.project-prs a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.project-prs a:hover,
+.project-prs a:focus {
+  text-decoration: underline;
+}
+
+.project-prs__divider {
+  color: var(--muted);
+  margin: 0 6px;
+}
+
+@media (max-width: 576px) {
+  .cred-badge img {
+    height: 16px;
+  }
+
+  .project-prs {
+    line-height: 1.6;
+  }
+}
+
 .badge-tech {
   background: rgba(91, 141, 239, 0.18);
   color: var(--accent);

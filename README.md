@@ -14,7 +14,9 @@ The production code for highlighted projects lives in dedicated repositories:
 
 ## Repository structure
 
-- `en/`, `es/` — Localized builds of the static site.
+- `en/`, `es/` — Localized builds of the static site. The legacy `english/`
+  directory only hosts a redirect shim that points to `/en/` for backwards
+  compatibility.
 - `assets/` — Shared images, styles, and scripts.
 - `docs/` — Internal documentation, change history, and content governance aids.
 

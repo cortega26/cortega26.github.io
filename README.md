@@ -14,9 +14,9 @@ This repo contains the static site shell (HTML, CSS, assets) only. The productio
 
 ## Repository structure
 
-- `en/`, `es/` — Localized builds of the static site. The legacy `english/`
-  directory only hosts a redirect shim that points to `/en/` for backwards
-  compatibility.
+- `en/`, `es/` — Localized builds of the static site. The legacy `/english/`
+  path is now served by a redirect rule configured in `_config.yml` using the
+  `jekyll-redirect-from` plugin.
 - `assets/` — Shared images, styles, and scripts.
 - `docs/` — Internal documentation, change history, and content governance aids.
 

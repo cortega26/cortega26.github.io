@@ -616,7 +616,7 @@ main section {
 
 .math-lab-teaser__glyph {
   display: inline-block;
-  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-family: 'Times New Roman', 'Cambria', 'STIX Two Text', 'Georgia', serif;
   font-weight: 600;
   font-size: 0.85rem;
   line-height: 1;

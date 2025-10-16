@@ -15,3 +15,39 @@ locales:
   en: English content paths (e.g., en/index.html sections).
   es: Spanish content paths (e.g., es/index.html sections).
   global: Cross-locale gaps where no localized asset exists.
+products:
+  - canonical: FastSearchAPI
+    allowed:
+      - FastSearchAPI
+    forbidden:
+      - FastSearch API
+      - Fast Search API
+      - FastSearch Api
+      - FastsearchAPI
+  - canonical: File Extractor Pro
+    allowed:
+      - File Extractor Pro
+    forbidden:
+      - FileExtractor Pro
+      - FileExtractorPro
+      - File extractor pro
+      - File extractor Pro
+  - canonical: PDF Text Analyzer
+    allowed:
+      - PDF Text Analyzer
+    forbidden:
+      - PDF to Text Analyzer
+      - PDF-to-Text Analyzer
+      - PDF Text analyser
+  - canonical: Crypto Price Tracker
+    allowed:
+      - Crypto Price Tracker
+    forbidden:
+      - CryptoPriceTracker
+      - Crypto price tracker
+  - canonical: PoGo Rarity Intelligence
+    allowed:
+      - PoGo Rarity Intelligence
+    forbidden:
+      - POGO Rarity Intelligence
+      - PoGo rarity intelligence

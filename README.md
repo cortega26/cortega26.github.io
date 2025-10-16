@@ -4,13 +4,13 @@
 
 This repository hosts the bilingual static portfolio site served at [cortega26.github.io](https://cortega26.github.io/) (English) and [cortega26.github.io/es/](https://cortega26.github.io/es/) (Spanish).
 
-## Where is the code?
+## Scope
 
-The production code for highlighted projects lives in dedicated repositories:
+This repo contains the static site shell (HTML, CSS, assets) only. The production code for featured projects lives in their own repositories:
 
-- [Portfolio Manager](https://github.com/cortega26/Portfolio-Manager) — Maintains the capital-markets analytics toolkit featured in the portfolio.
-- [elrincondeebano](https://github.com/cortega26/elrincondeebano) — Houses the El Rincón de Ébano educational content referenced on the site.
-- [noticiencias](https://github.com/cortega26/noticiencias) — Hosts the Noticiencias news automation workflows cited in the case studies.
+- [Portfolio Manager](https://github.com/cortega26/Portfolio-Manager) — Capital-markets analytics toolkit powering the portfolio case study dashboards.
+- [elrincondeebano](https://github.com/cortega26/elrincondeebano) — Learning resources and curriculum materials showcased under the El Rincón de Ébano initiative.
+- [noticiencias](https://github.com/cortega26/noticiencias) — Automated news aggregation pipelines referenced throughout the Noticiencias write-up.
 
 ## Repository structure
 

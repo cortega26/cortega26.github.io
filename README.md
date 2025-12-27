@@ -1,6 +1,6 @@
 # Tooltician Portfolio
 
-> Professional portfolio — Tooltician. Static site (EN/ES) with case studies, links to active projects and contact.
+> Client-focused portfolio — Tooltician. Static site (EN/ES) with case studies, service offerings, and contact channels.
 
 This repository hosts the bilingual static portfolio site served at [cortega26.github.io](https://cortega26.github.io/) (English) and [cortega26.github.io/es/](https://cortega26.github.io/es/) (Spanish).
 
@@ -23,6 +23,12 @@ This repo contains the static site shell (HTML, CSS, assets) only. The productio
 ## Local development
 
 This portfolio is a static site. Serve it with your preferred HTTP server (for example, `npx serve .`) to preview content updates before publishing through GitHub Pages.
+
+## Configuration
+
+| name | type | default | required | description |
+| --- | --- | --- | --- | --- |
+| N/A | N/A | N/A | no | Static site; no runtime configuration is required. |
 
 ## About field follow-up
 

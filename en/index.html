@@ -49,7 +49,7 @@ redirect_from:
       "@type": "ItemList",
       "name": "Featured Portfolio Projects",
       "itemListOrder": "http://schema.org/ItemListOrderAscending",
-      "numberOfItems": 6,
+      "numberOfItems": 7,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -85,6 +85,16 @@ redirect_from:
           "@type": "ListItem",
           "position": 4,
           "item": {
+            "@type": "WebSite",
+            "name": "Monedario",
+            "description": "Chile-focused personal finance education site with practical calculators and evergreen guides.",
+            "url": "https://tooltician.com/en/#project-monedario"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
             "@type": "SoftwareSourceCode",
             "name": "Polla App",
             "description": "Reliable jackpot ingestion workflow with deterministic fallbacks and Google Sheets publishing.",
@@ -93,7 +103,7 @@ redirect_from:
         },
         {
           "@type": "ListItem",
-          "position": 5,
+          "position": 6,
           "item": {
             "@type": "SoftwareSourceCode",
             "name": "PDF Text Analyzer",
@@ -103,7 +113,7 @@ redirect_from:
         },
         {
           "@type": "ListItem",
-          "position": 6,
+          "position": 7,
           "item": {
             "@type": "SoftwareSourceCode",
             "name": "Crypto Price Tracker",
@@ -139,6 +149,7 @@ redirect_from:
               <li><a class="nav-submenu__link" href="#project-rutificador">Rutificador</a></li>
               <li><a class="nav-submenu__link" href="#project-conciliador">Conciliador Bancario</a></li>
               <li><a class="nav-submenu__link" href="#project-noticiencias">Noticiencias</a></li>
+              <li><a class="nav-submenu__link" href="#project-monedario">Monedario</a></li>
               <li><a class="nav-submenu__link" href="#project-polla">Polla App</a></li>
               <li><a class="nav-submenu__link" href="#project-pdf">PDF Text Analyzer</a></li>
               <li><a class="nav-submenu__link" href="#project-crypto">Crypto Price Tracker</a></li>
@@ -283,7 +294,7 @@ redirect_from:
           <article class="roadmap-item">
             <span class="roadmap-date">Packaging</span>
             <h3>Reusable libraries and CLIs</h3>
-            <p>Projects like <a href="https://pypi.org/project/rutificador/" target="_blank" rel="noopener noreferrer">rutificador</a> and <a href="https://pypi.org/project/bankrecon/" target="_blank" rel="noopener noreferrer">bankrecon</a> package operational workflows so they are installable, documented, and easier to adopt.</p>
+            <p>Projects like <a href="https://pypi.org/project/rutificador/" target="_blank" rel="noopener noreferrer">rutificador</a>, <a href="https://pypi.org/project/bankrecon/" target="_blank" rel="noopener noreferrer">bankrecon</a>, and <a href="https://monedario.cl/" target="_blank" rel="noopener noreferrer">Monedario</a> show the same packaging instinct across code and content: reliable structure, clear docs, and outputs people can actually use.</p>
           </article>
           <article class="roadmap-item">
             <span class="roadmap-date">Quality</span>
@@ -307,6 +318,7 @@ redirect_from:
             <li><strong>Rutificador:</strong> published package, CI workflows, CodeQL, and batch-friendly CLI documentation on <a href="https://github.com/cortega26/rutificador" target="_blank" rel="noopener noreferrer">GitHub</a> and <a href="https://pypi.org/project/rutificador/" target="_blank" rel="noopener noreferrer">PyPI</a>.</li>
             <li><strong>Conciliador Bancario:</strong> explicit fail-closed behavior, append-only audit logs, architecture diagrams, and installable distribution via <a href="https://github.com/cortega26/conciliador_bancario" target="_blank" rel="noopener noreferrer">GitHub</a> and <a href="https://pypi.org/project/bankrecon/" target="_blank" rel="noopener noreferrer">PyPI</a>.</li>
             <li><strong>Noticiencias:</strong> public front end at <a href="https://www.noticiencias.com" target="_blank" rel="noopener noreferrer">noticiencias.com</a> backed by a documented repo boundary and content validation workflow.</li>
+            <li><strong>Monedario:</strong> live public site at <a href="https://monedario.cl/" target="_blank" rel="noopener noreferrer">monedario.cl</a> with finance calculators, editorial governance docs, and deterministic economic-data fallback strategy in <a href="https://github.com/cortega26/tuplatainforma" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
             <li><strong>Resume:</strong> broader background and credentials are available in the <a href="../assets/docs/carlos-ortega-resume.pdf" target="_blank" rel="noopener noreferrer">resume PDF</a>.</li>
           </ul>
         </div>
@@ -347,7 +359,7 @@ redirect_from:
     <section class="portfolio" id="portfolio">
       <div class="container">
         <h2 class="section-title text-center">Featured Portfolio</h2>
-        <p class="section-subtitle text-center">Six public projects that best represent how I build: practical systems, careful packaging, and proof that goes beyond screenshots.</p>
+        <p class="section-subtitle text-center">Seven public projects that best represent how I build: practical systems, careful packaging, and proof that goes beyond screenshots.</p>
         <div class="row">
           <div class="col-md-6">
             <article class="card custom-card h-100" id="project-rutificador">
@@ -412,6 +424,28 @@ redirect_from:
                   <a href="https://github.com/cortega26/noticiencias" target="_blank" rel="noopener noreferrer">Repo</a>
                 </p>
                 <a href="https://github.com/cortega26/noticiencias" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-6">
+            <article class="card custom-card h-100" id="project-monedario">
+              <div class="card-body">
+                <h3 class="card-title">Monedario</h3>
+                <p class="card-text">Chile-focused personal finance education site that combines practical calculators, evergreen guides, and careful content governance for readers who need clarity without fine print.</p>
+                <div class="project-badges">
+                  <span class="badge badge-tech">Astro</span>
+                  <span class="badge badge-tech">TypeScript</span>
+                  <span class="badge badge-tech">Finance calculators</span>
+                </div>
+                <ul class="project-details">
+                  <li><strong>Problem solved:</strong> Makes Chilean personal finance topics more understandable and actionable through educational content and interactive tools.</li>
+                  <li><strong>Quality signal:</strong> Live production site, editorial governance docs, and deterministic fallback handling for economic parameters used by calculators.</li>
+                </ul>
+                <p class="evidence">
+                  <a href="https://monedario.cl/" target="_blank" rel="noopener noreferrer">Live site</a>
+                  <a href="https://github.com/cortega26/tuplatainforma" target="_blank" rel="noopener noreferrer">Repo</a>
+                </p>
+                <a href="https://github.com/cortega26/tuplatainforma" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View on GitHub</a>
               </div>
             </article>
           </div>

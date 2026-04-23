@@ -3,7 +3,7 @@ interface Props { lang: 'en' | 'es'; }
 const { lang } = Astro.props;
 
 const en = {
-  eyebrow: 'About', title: 'Profile at a Glance',
+  eyebrow: 'About', title: 'Who I Work With & How',
   intro: 'My strongest work starts from practical operational pain: data that arrives late, reporting that breaks easily, and workflows that depend too much on manual attention. I focus on solving the workflow first, then packaging the result so it is testable, documented, and easier to keep running.',
   cards: [
     { title: 'Who I help', icon: '👥', items: ['Operations-heavy teams still relying on spreadsheets, manual checks, or brittle scripts.', 'Founders and managers who need reliable internal tools without overbuilding a full product team.', 'Organizations that benefit from bilingual technical communication.'] },
@@ -13,7 +13,7 @@ const en = {
 };
 
 const es = {
-  eyebrow: 'Perfil', title: 'Perfil en Resumen',
+  eyebrow: 'Perfil', title: 'Con quién trabajo y cómo',
   intro: 'Mi trabajo más sólido parte del dolor operativo concreto: datos que llegan tarde, reportes que se rompen fácilmente y flujos que dependen demasiado de atención manual. Me enfoco primero en resolver el flujo, luego en empaquetar el resultado para que sea testeable, documentado y más fácil de mantener.',
   cards: [
     { title: 'A quién ayudo', icon: '👥', items: ['Equipos con operaciones intensas que todavía dependen de hojas de cálculo, revisiones manuales o scripts frágiles.', 'Fundadores y gerentes que necesitan herramientas internas confiables sin armar un equipo de producto completo.', 'Organizaciones que se benefician de comunicación técnica bilingüe.'] },

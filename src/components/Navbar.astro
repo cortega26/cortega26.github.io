@@ -12,8 +12,11 @@ interface Props {
 const { lang, items } = Astro.props;
 const ctaLabel = lang === 'en' ? 'Hire me' : 'Contrátame';
 const ctaHref  = lang === 'en'
-  ? 'mailto:carlosortega77@gmail.com?subject=Project%20Inquiry'
-  : 'mailto:carlosortega77@gmail.com?subject=Consulta%20de%20Proyecto';
+  ? '#contact'
+  : '#contact';
+
+const switchLabel = lang === 'en' ? 'ES' : 'EN';
+const switchHref  = lang === 'en' ? '/es/' : '/en/';
 ---
 <nav class="navbar" aria-label={lang === 'en' ? 'Primary navigation' : 'Navegación principal'}>
   <div class="container">
@@ -36,6 +39,14 @@ const ctaHref  = lang === 'en'
           </li>
         ))}
         <li>
+          <a
+            class="navbar__lang-switch"
+            href={switchHref}
+            aria-label={lang === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés'}
+            title={lang === 'en' ? 'Ver en español' : 'View in English'}
+          >{switchLabel}</a>
+        </li>
+        <li>
           <a class="navbar__cta" href={ctaHref}>
             {ctaLabel}
           </a>
@@ -44,3 +55,23 @@ const ctaHref  = lang === 'en'
     </div>
   </div>
 </nav>
+
+<style>
+.navbar__lang-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--clr-text-muted);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-full);
+  transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+}
+.navbar__lang-switch:hover {
+  color: var(--clr-text);
+  border-color: var(--clr-border-glow);
+  background: var(--clr-bg-card);
+}
+</style>

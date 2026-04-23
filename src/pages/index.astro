@@ -7,10 +7,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0;url=/en/" />
+  <script>
+    const userLang = navigator.language || navigator.userLanguage;
+    if (userLang && userLang.toLowerCase().startsWith('es')) {
+      window.location.replace('/es/');
+    } else {
+      window.location.replace('/en/');
+    }
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=/en/" />
+  </noscript>
   <link rel="canonical" href="https://tooltician.com/en/" />
 </head>
 <body>
-  <p>Redirecting to <a href="/en/">English version</a>...</p>
+  <p>Redirecting... / Redirigiendo...</p>
 </body>
 </html>

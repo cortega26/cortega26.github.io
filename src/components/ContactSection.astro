@@ -1,0 +1,151 @@
+---
+interface Props { lang: 'en' | 'es'; }
+const { lang } = Astro.props;
+
+const en = {
+  eyebrow: 'Contact', title: 'Work With Me',
+  subtitle: 'I usually reply within two business days. The best first message includes your current workflow, the pain point, and what "done" should look like.',
+  copy: 'If you need help turning repetitive data work into a cleaner, more reliable system, send me a short project brief. I am most useful when the work needs both implementation and clear communication with non-engineering stakeholders.',
+  preferred: 'Preferred engagements: scoped builds, workflow automation, internal tooling, and cleanup passes that make existing systems easier to trust.',
+  email: 'Email Carlos',
+  emailHref: 'mailto:carlosortega77@gmail.com?subject=Project%20Inquiry',
+  emailCopy: 'carlosortega77@gmail.com',
+  linkedin: 'LinkedIn',
+  calendly: 'Calendly',
+  namePh: 'Your name',
+  emailPh: 'Your email',
+  subjectPh: 'Project scope (one line)',
+  messagePh: 'Describe the workflow, the bottleneck, and the outcome you want...',
+  submit: 'Open email draft',
+  copied: 'Copied!',
+};
+
+const es = {
+  eyebrow: 'Contacto', title: 'Trabaja Conmigo',
+  subtitle: 'Respondo dentro de dos días hábiles. El mejor primer mensaje incluye tu flujo actual, el problema y cómo se ve "terminado".',
+  copy: 'Si necesitas ayuda para convertir trabajo de datos repetitivo en un sistema más limpio y confiable, envíame un breve resumen del proyecto. Soy más útil cuando el trabajo requiere tanto implementación como comunicación clara con stakeholders no técnicos.',
+  preferred: 'Trabajos preferidos: builds acotados, automatización de flujos, herramientas internas y revisiones que hagan los sistemas más confiables.',
+  email: 'Enviar correo',
+  emailHref: 'mailto:carlosortega77@gmail.com?subject=Consulta%20de%20Proyecto',
+  emailCopy: 'carlosortega77@gmail.com',
+  linkedin: 'LinkedIn',
+  calendly: 'Calendly',
+  namePh: 'Tu nombre',
+  emailPh: 'Tu correo',
+  subjectPh: 'Alcance del proyecto (una línea)',
+  messagePh: 'Describe el flujo, el problema y el resultado que quieres...',
+  submit: 'Abrir borrador de correo',
+  copied: '¡Copiado!',
+};
+
+const c = lang === 'en' ? en : es;
+---
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-eyebrow reveal">{c.eyebrow}</span>
+      <h2 class="section-title reveal">{c.title}</h2>
+      <div class="divider reveal"></div>
+      <p class="section-subtitle reveal">{c.subtitle}</p>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-info reveal">
+        <p class="contact-copy">{c.copy}</p>
+        <p class="contact-preferred">{c.preferred}</p>
+        <div class="contact-actions">
+          <button class="btn btn-primary copy-email-btn" data-email={c.emailCopy} aria-label={lang === 'en' ? 'Copy email address' : 'Copiar correo'}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+            </svg>
+            {c.email}
+          </button>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/cortega26" target="_blank" rel="noopener noreferrer">{c.linkedin}</a>
+          <a class="btn btn-secondary" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" aria-label="Schedule a call on Calendly">Calendly</a>
+        </div>
+        <p class="copy-confirm" id="copy-confirm" aria-live="polite">{c.copied}</p>
+      </div>
+
+      <form class="contact-form card-glass reveal reveal-delay-1" id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="cf-name">{c.namePh}</label>
+          <input type="text" id="cf-name" name="name" placeholder={c.namePh} required autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="cf-email">{c.emailPh}</label>
+          <input type="email" id="cf-email" name="email" placeholder={c.emailPh} required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="cf-subject">{c.subjectPh}</label>
+          <input type="text" id="cf-subject" name="subject" placeholder={c.subjectPh} required />
+        </div>
+        <div class="form-group">
+          <label for="cf-message">{c.messagePh}</label>
+          <textarea id="cf-message" name="message" rows={5} placeholder={c.messagePh} required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">{c.submit}</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+.contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; align-items: start; }
+.contact-copy { font-size: 0.95rem; color: var(--clr-text-muted); line-height: 1.7; margin-bottom: 1rem; }
+.contact-preferred { font-size: 0.85rem; color: var(--clr-text-faint); line-height: 1.6; margin-bottom: 1.5rem; }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.75rem; }
+.copy-confirm {
+  font-size: 0.8rem; color: var(--clr-accent-2); opacity: 0;
+  transition: opacity 300ms; font-weight: 600;
+}
+.copy-confirm.show { opacity: 1; }
+
+.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 0.8rem; font-weight: 600; color: var(--clr-text-muted); }
+.form-group input,
+.form-group textarea {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm); padding: 0.65rem 0.9rem;
+  font-family: var(--ff-body); font-size: 0.9rem; color: var(--clr-text);
+  transition: border-color 150ms, box-shadow 150ms; resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none; border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.15);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--clr-text-faint); }
+
+@media (max-width: 768px) { .contact-layout { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+// Copy email
+const copyBtn = document.querySelector<HTMLButtonElement>('.copy-email-btn');
+const confirm = document.getElementById('copy-confirm');
+copyBtn?.addEventListener('click', async () => {
+  const email = copyBtn.dataset.email ?? '';
+  try {
+    await navigator.clipboard.writeText(email);
+    confirm?.classList.add('show');
+    setTimeout(() => confirm?.classList.remove('show'), 2500);
+  } catch {
+    window.location.href = 'mailto:' + email;
+  }
+});
+
+// Contact form -> mailto
+const form = document.getElementById('contact-form') as HTMLFormElement | null;
+form?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const fd = new FormData(form);
+  const name    = fd.get('name')    as string;
+  const email   = fd.get('email')   as string;
+  const subject = fd.get('subject') as string;
+  const message = fd.get('message') as string;
+  const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+  window.location.href = `mailto:carlosortega77@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+});
+</script>

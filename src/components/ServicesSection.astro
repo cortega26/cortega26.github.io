@@ -1,0 +1,71 @@
+---
+interface Props { lang: 'en' | 'es'; }
+const { lang } = Astro.props;
+
+const en = {
+  eyebrow: 'Services', title: 'What I Build',
+  subtitle: 'The common pattern: replace brittle manual work with dependable, documented automation.',
+  services: [
+    { icon: '🔄', title: 'ETL & Workflow Automation', desc: 'I turn repetitive reporting and back-office work into scheduled or reproducible pipelines with clear outputs.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
+    { icon: '🕷️', title: 'Scraping & Data Acquisition', desc: 'I build collection workflows resilient enough for recurring use — not just one-off demos.', examples: [{ name: 'PDF Text Analyzer', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }] },
+    { icon: '🔌', title: 'Internal APIs & Reliability', desc: 'I package workflows so they are usable by teams, not only by the person who wrote the script.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'Crypto Price Tracker', href: 'https://github.com/cortega26/crypto-price-tracker' }] },
+    { icon: '🌐', title: 'Static Sites & Front Ends', desc: 'Production-ready Astro sites with SEO, performance, and editorial discipline baked in.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }] },
+    { icon: '🏦', title: 'Financial & Audit Tooling', desc: 'Fail-closed reconciliation workflows with deterministic audit artifacts for review and compliance.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }] },
+    { icon: '📊', title: 'Reporting & Data Delivery', desc: 'Structured outputs, dashboards, and publishing workflows that eliminate manual copy-paste from the chain.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'PDF Text Analyzer', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }] },
+  ],
+  examplesLabel: 'Examples:',
+};
+
+const es = {
+  eyebrow: 'Servicios', title: 'Qué Construyo',
+  subtitle: 'El patrón común: reemplazar trabajo manual frágil con automatización confiable y documentada.',
+  services: [
+    { icon: '🔄', title: 'ETL y Automatización de Flujos', desc: 'Convierto trabajo repetitivo de reportes y back-office en pipelines programados o reproducibles con salidas claras.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
+    { icon: '🕷️', title: 'Scraping y Adquisición de Datos', desc: 'Construyo flujos de recolección lo suficientemente resilientes para uso recurrente — no solo demostraciones.', examples: [{ name: 'PDF Text Analyzer', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }] },
+    { icon: '🔌', title: 'APIs Internas y Confiabilidad', desc: 'Empaqueto flujos para que sean utilizables por equipos, no solo por quien escribió el script.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'Crypto Price Tracker', href: 'https://github.com/cortega26/crypto-price-tracker' }] },
+    { icon: '🌐', title: 'Sitios Estáticos y Frontends', desc: 'Sitios Astro listos para producción con SEO, rendimiento y disciplina editorial integrados.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }] },
+    { icon: '🏦', title: 'Herramientas Financieras y de Auditoría', desc: 'Flujos de conciliación fail-closed con artefactos de auditoría deterministas para revisión y cumplimiento.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }] },
+    { icon: '📊', title: 'Reportes y Entrega de Datos', desc: 'Salidas estructuradas, dashboards y flujos de publicación que eliminan el copia-pega manual de la cadena.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'PDF Text Analyzer', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }] },
+  ],
+  examplesLabel: 'Ejemplos:',
+};
+
+const c = lang === 'en' ? en : es;
+---
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-eyebrow reveal">{c.eyebrow}</span>
+      <h2 class="section-title reveal">{c.title}</h2>
+      <div class="divider reveal"></div>
+      <p class="section-subtitle reveal">{c.subtitle}</p>
+    </div>
+    <div class="grid-3">
+      {c.services.map((svc, i) => (
+        <article class={`card-glass svc-card reveal reveal-delay-${(i % 3) + 1}`}>
+          <div class="svc-icon">{svc.icon}</div>
+          <h3 class="svc-title">{svc.title}</h3>
+          <p class="svc-desc">{svc.desc}</p>
+          <p class="svc-examples-label">{c.examplesLabel}</p>
+          <div class="svc-examples">
+            {svc.examples.map(ex => (
+              <a class="badge badge-accent" href={ex.href} target="_blank" rel="noopener noreferrer">{ex.name}</a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.svc-icon { font-size: 2rem; margin-bottom: 1rem; }
+.svc-title {
+  font-family: var(--ff-heading); font-size: 1rem; font-weight: 700;
+  color: var(--clr-text); margin-bottom: 0.6rem;
+}
+.svc-desc { font-size: 0.87rem; color: var(--clr-text-muted); line-height: 1.55; margin-bottom: 1rem; flex: 1; }
+.svc-examples-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--clr-text-faint); margin-bottom: 0.5rem; }
+.svc-examples { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.svc-card { display: flex; flex-direction: column; }
+</style>

@@ -1,0 +1,46 @@
+---
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  lang: 'en' | 'es';
+  items: NavItem[];
+}
+
+const { lang, items } = Astro.props;
+const ctaLabel = lang === 'en' ? 'Hire me' : 'Contrátame';
+const ctaHref  = lang === 'en'
+  ? 'mailto:carlosortega77@gmail.com?subject=Project%20Inquiry'
+  : 'mailto:carlosortega77@gmail.com?subject=Consulta%20de%20Proyecto';
+---
+<nav class="navbar" aria-label={lang === 'en' ? 'Primary navigation' : 'Navegación principal'}>
+  <div class="container">
+    <div class="navbar__inner">
+      <a class="navbar__brand" href={lang === 'en' ? '/en/' : '/es/'}>Tooltician</a>
+
+      <button
+        class="navbar__toggle"
+        aria-controls="nav-links"
+        aria-expanded="false"
+        aria-label={lang === 'en' ? 'Toggle menu' : 'Abrir menú'}
+      >
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="navbar__links" id="nav-links" role="list">
+        {items.map(item => (
+          <li>
+            <a class="navbar__link" href={item.href}>{item.label}</a>
+          </li>
+        ))}
+        <li>
+          <a class="navbar__cta" href={ctaHref}>
+            {ctaLabel}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,249 @@
+---
+interface Props {
+  lang: 'en' | 'es';
+}
+const { lang } = Astro.props;
+
+const en = {
+  availability: 'Open to new projects',
+  eyebrow: 'Tooltician',
+  name: 'Carlos Ortega Gonzalez',
+  role: 'Python automation & data systems consultant',
+  location: 'Santiago, Chile · LATAM & US-friendly time zones',
+  lede: 'I help teams turn repetitive, fragile data work into dependable workflows: ETL pipelines, scrapers, internal APIs, and reporting systems that are easier to run, trust, and hand off.',
+  lockup: 'I work in English and Spanish with teams across LATAM and U.S.-friendly time zones.',
+  highlights: [
+    'Production-grade Python automation for reporting, operations, and data ingestion.',
+    'Bilingual delivery with documentation, tests, and stakeholder-friendly handoff.',
+    'Strong preference for correctness, observability, and maintainable systems over quick hacks.',
+  ],
+  cta1: 'See portfolio',
+  cta2: 'Email Carlos',
+  cta3: 'GitHub',
+  card1Title: 'Best-fit work',
+  card1Body: 'Automation sprints, scraping pipelines, internal tools, and reporting workflows that need order and reliability.',
+  card2Title: 'How I deliver',
+  card2Body: 'Scoped project work, hands-on implementation, and readable docs so your team can operate the system after handoff.',
+  card3Title: 'Trust signals',
+  card3Body: 'PyPI packages, CI pipelines, code scanning, production-focused README docs, and public project history on GitHub.',
+};
+
+const es = {
+  availability: 'Disponible para proyectos',
+  eyebrow: 'Tooltician',
+  name: 'Carlos Ortega González',
+  role: 'Consultor de automatización Python y sistemas de datos',
+  location: 'Santiago, Chile · Zonas horarias LATAM y compatibles con EE.UU.',
+  lede: 'Ayudo a equipos a convertir trabajo de datos repetitivo y frágil en flujos confiables: pipelines ETL, scrapers, APIs internas y sistemas de reportes fáciles de operar y entregar.',
+  lockup: 'Trabajo en español e inglés con equipos de LATAM y zonas horarias compatibles con EE.UU.',
+  highlights: [
+    'Automatización Python de nivel productivo para reportes, operaciones e ingestión de datos.',
+    'Entrega bilingüe con documentación, pruebas y materiales de traspaso para stakeholders.',
+    'Preferencia por corrección, observabilidad y sistemas mantenibles sobre soluciones rápidas.',
+  ],
+  cta1: 'Ver portafolio',
+  cta2: 'Enviar correo',
+  cta3: 'GitHub',
+  card1Title: 'Trabajo ideal',
+  card1Body: 'Sprints de automatización, pipelines de scraping, herramientas internas y flujos de reportes que necesitan orden y confiabilidad.',
+  card2Title: 'Cómo entrego',
+  card2Body: 'Trabajo de proyecto acotado, implementación directa y documentación legible para que tu equipo pueda operar el sistema tras el traspaso.',
+  card3Title: 'Señales de confianza',
+  card3Body: 'Paquetes PyPI, pipelines CI, escaneo de código, READMEs orientados a producción e historial público de proyectos en GitHub.',
+};
+
+const c = lang === 'en' ? en : es;
+---
+<header class="hero" id="overview">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__orb hero__orb--1"></div>
+    <div class="hero__orb hero__orb--2"></div>
+    <div class="hero__mesh"></div>
+  </div>
+  <div class="container">
+    <div class="hero__layout">
+      <div class="hero__copy">
+        <div class="avail-badge reveal">
+          <span class="avail-badge__dot"></span>
+          {c.availability}
+        </div>
+        <p class="hero__eyebrow reveal reveal-delay-1">{c.eyebrow}</p>
+        <h1 class="hero__name reveal reveal-delay-1">{c.name}</h1>
+        <h2 class="hero__role reveal reveal-delay-2">{c.role}</h2>
+        <p class="hero__location reveal reveal-delay-2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M20 10c0 6-8 13-8 13s-8-7-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          {c.location}
+        </p>
+        <p class="hero__lede reveal reveal-delay-2">{c.lede}</p>
+        <ul class="hero__highlights reveal reveal-delay-3">
+          {c.highlights.map(h => (
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              {h}
+            </li>
+          ))}
+        </ul>
+        <div class="hero__actions reveal reveal-delay-4">
+          <a class="btn btn-primary" href="#portfolio">{c.cta1}</a>
+          <a class="btn btn-ghost" href="mailto:carlosortega77@gmail.com?subject=Project%20Inquiry">{c.cta2}</a>
+          <a class="btn btn-ghost" href="https://github.com/cortega26" target="_blank" rel="noopener noreferrer">{c.cta3}</a>
+        </div>
+      </div>
+
+      <div class="hero__aside reveal reveal-delay-2">
+        <figure class="hero__figure">
+          <div class="hero__photo-ring" aria-hidden="true"></div>
+          <img
+            class="hero__photo"
+            src="/assets/images/profile-photo.webp"
+            alt="Professional portrait of Carlos Ortega"
+            width="380" height="380"
+            loading="eager"
+            decoding="async"
+            onerror="this.src='/assets/images/profile-photo.png'"
+          />
+        </figure>
+        <div class="hero__cards">
+          <article class="hero__card card-glass">
+            <h3>{c.card1Title}</h3>
+            <p>{c.card1Body}</p>
+          </article>
+          <article class="hero__card card-glass">
+            <h3>{c.card2Title}</h3>
+            <p>{c.card2Body}</p>
+          </article>
+          <article class="hero__card card-glass">
+            <h3>{c.card3Title}</h3>
+            <p>{c.card3Body}</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--nav-height) + 3rem);
+  padding-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero__bg { position: absolute; inset: 0; pointer-events: none; }
+.hero__mesh {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(108,99,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,99,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+.hero__orb {
+  position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.35;
+  animation: hero-float 10s ease-in-out infinite;
+}
+.hero__orb--1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #6c63ff, transparent 70%);
+  top: -200px; left: -200px;
+}
+.hero__orb--2 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, #00d4aa, transparent 70%);
+  bottom: -100px; right: -100px;
+  animation-delay: 5s;
+}
+@keyframes hero-float {
+  0%,100% { transform: translate(0,0); }
+  50% { transform: translate(30px,-30px); }
+}
+
+.hero__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero__copy { position: relative; z-index: 1; }
+
+.hero__eyebrow {
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--clr-accent); margin-bottom: 0.5rem;
+}
+.hero__name {
+  font-family: var(--ff-heading);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 700; line-height: 1.1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #fff 50%, var(--clr-accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero__role {
+  font-family: var(--ff-heading);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 500; color: var(--clr-text-muted); margin-bottom: 0.5rem;
+}
+.hero__location {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.875rem; color: var(--clr-text-faint); margin-bottom: 1.25rem;
+}
+.hero__lede {
+  font-size: clamp(1rem, 1.5vw, 1.05rem);
+  color: var(--clr-text-muted); line-height: 1.7; margin-bottom: 1.25rem;
+}
+.hero__highlights {
+  display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem;
+}
+.hero__highlights li {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  font-size: 0.9rem; color: var(--clr-text-muted);
+}
+.hero__highlights li svg {
+  flex-shrink: 0; margin-top: 2px; color: var(--clr-accent-2);
+}
+.hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.hero__aside { position: relative; z-index: 1; }
+.hero__figure {
+  position: relative; width: 300px; height: 300px;
+  margin: 0 auto 2rem;
+}
+.hero__photo-ring {
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--clr-accent), var(--clr-accent-2), var(--clr-accent));
+  animation: spin-ring 8s linear infinite;
+  opacity: 0.7;
+}
+@keyframes spin-ring { to { transform: rotate(360deg); } }
+.hero__photo {
+  position: absolute; inset: 4px;
+  width: calc(100% - 8px); height: calc(100% - 8px);
+  border-radius: 50%; object-fit: cover;
+  background: var(--clr-surface);
+}
+.hero__cards {
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+.hero__card h3 {
+  font-family: var(--ff-heading); font-size: 0.9rem; font-weight: 600;
+  margin-bottom: 0.3rem; color: var(--clr-text);
+}
+.hero__card p { font-size: 0.82rem; color: var(--clr-text-muted); line-height: 1.5; }
+.hero__card { padding: 1rem 1.25rem; }
+
+@media (max-width: 900px) {
+  .hero__layout { grid-template-columns: 1fr; }
+  .hero__aside { display: none; }
+  .hero { min-height: auto; }
+}
+</style>

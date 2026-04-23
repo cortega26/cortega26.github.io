@@ -1,0 +1,138 @@
+---
+interface Props { lang: 'en' | 'es'; }
+const { lang } = Astro.props;
+
+const en = {
+  eyebrow: 'Proof', title: 'Production Evidence',
+  subtitle: 'Public signals I want prospective collaborators to see quickly: packaging discipline, quality systems, and real delivery.',
+  steps: [
+    { label: 'Packaging', title: 'Reusable libraries & CLIs', body: 'Projects like rutificador, bankrecon, and Monedario show the same packaging instinct across code and content: reliable structure, clear docs, and outputs people can actually use.' },
+    { label: 'Quality', title: 'CI, scans & auditability', body: 'I bias toward test coverage, code scanning, deterministic outputs, and logs that make incidents easier to understand rather than harder to trace.' },
+    { label: 'Communication', title: 'English-first, bilingual delivery', body: 'I write public project docs in a way that works for international readers while still supporting Spanish-speaking collaborators and clients.' },
+    { label: 'Delivery', title: 'Lightweight systems that hold up', body: 'Automation that saves operator time, front ends that improve comprehension, and repositories that show how the work is maintained.' },
+  ],
+  proof: [
+    { name: 'Rutificador', body: 'Published package, CI workflows, CodeQL, and batch-friendly CLI documentation.', links: [{ label: 'GitHub', href: 'https://github.com/cortega26/rutificador' }, { label: 'PyPI', href: 'https://pypi.org/project/rutificador/' }] },
+    { name: 'Conciliador Bancario', body: 'Fail-closed behavior, append-only audit logs, architecture diagrams, and installable distribution.', links: [{ label: 'GitHub', href: 'https://github.com/cortega26/conciliador_bancario' }, { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/' }] },
+    { name: 'Noticiencias', body: 'Public front end with documented repo boundary and content validation workflow.', links: [{ label: 'Live site', href: 'https://www.noticiencias.com' }, { label: 'Repo', href: 'https://github.com/cortega26/noticiencias' }] },
+    { name: 'Monedario', body: 'Live site with finance calculators, editorial governance docs, and deterministic economic-data fallback.', links: [{ label: 'Live site', href: 'https://monedario.cl' }, { label: 'Repo', href: 'https://github.com/cortega26/tuplatainforma' }] },
+  ],
+  resumeLabel: 'Download Resume (PDF)',
+  resumeHref: '/assets/docs/carlos-ortega-resume.pdf',
+};
+
+const es = {
+  eyebrow: 'Evidencia', title: 'Evidencia de Producción',
+  subtitle: 'Señales públicas que quiero que los colaboradores potenciales vean rápido: disciplina de empaquetado, sistemas de calidad y entrega real.',
+  steps: [
+    { label: 'Empaquetado', title: 'Librerías y CLIs reutilizables', body: 'Proyectos como rutificador, bankrecon y Monedario muestran el mismo instinto de empaquetado en código y contenido: estructura confiable, docs claros y salidas que la gente puede usar.' },
+    { label: 'Calidad', title: 'CI, escaneo y auditabilidad', body: 'Priorizo cobertura de pruebas, escaneo de código, salidas deterministas y logs que facilitan entender incidentes en lugar de complicarlos.' },
+    { label: 'Comunicación', title: 'English-first, entrega bilingüe', body: 'Escribo docs públicos de proyectos de forma que funcionen para lectores internacionales sin dejar de apoyar colaboradores y clientes hispanohablantes.' },
+    { label: 'Entrega', title: 'Sistemas livianos que aguantan', body: 'Automatización que ahorra tiempo al operador, frontends que mejoran la comprensión y repositorios que muestran cómo se mantiene el trabajo.' },
+  ],
+  proof: [
+    { name: 'Rutificador', body: 'Paquete publicado, flujos CI, CodeQL y documentación CLI batch-friendly.', links: [{ label: 'GitHub', href: 'https://github.com/cortega26/rutificador' }, { label: 'PyPI', href: 'https://pypi.org/project/rutificador/' }] },
+    { name: 'Conciliador Bancario', body: 'Comportamiento fail-closed, logs de auditoría append-only, diagramas de arquitectura y distribución instalable.', links: [{ label: 'GitHub', href: 'https://github.com/cortega26/conciliador_bancario' }, { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/' }] },
+    { name: 'Noticiencias', body: 'Frontend público con límites de repositorio documentados y flujo de validación de contenido.', links: [{ label: 'Sitio', href: 'https://www.noticiencias.com' }, { label: 'Repo', href: 'https://github.com/cortega26/noticiencias' }] },
+    { name: 'Monedario', body: 'Sitio activo con calculadoras financieras, docs de gobernanza editorial y manejo de parámetros económicos.', links: [{ label: 'Sitio', href: 'https://monedario.cl' }, { label: 'Repo', href: 'https://github.com/cortega26/tuplatainforma' }] },
+  ],
+  resumeLabel: 'Descargar CV (PDF)',
+  resumeHref: '/assets/docs/carlos-ortega-resume.pdf',
+};
+
+const c = lang === 'en' ? en : es;
+---
+<section class="section section--alt" id="proof">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-eyebrow reveal">{c.eyebrow}</span>
+      <h2 class="section-title reveal">{c.title}</h2>
+      <div class="divider reveal"></div>
+      <p class="section-subtitle reveal">{c.subtitle}</p>
+    </div>
+
+    <div class="timeline">
+      {c.steps.map((step, i) => (
+        <article class={`timeline-item reveal reveal-delay-${(i % 3) + 1}`}>
+          <div class="timeline-marker" aria-hidden="true">
+            <div class="timeline-dot"></div>
+          </div>
+          <div class="timeline-body">
+            <span class="timeline-label">{step.label}</span>
+            <h3 class="timeline-title">{step.title}</h3>
+            <p class="timeline-text">{step.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="proof-grid">
+      {c.proof.map((p, i) => (
+        <article class={`card-glass reveal reveal-delay-${(i % 2) + 1}`}>
+          <h4 class="proof-name">{p.name}</h4>
+          <p class="proof-body">{p.body}</p>
+          <div class="proof-links">
+            {p.links.map(l => (
+              <a class="badge badge-teal" href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="proof-resume reveal">
+      <a class="btn btn-ghost" href={c.resumeHref} target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        {c.resumeLabel}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+.timeline {
+  display: flex; flex-direction: column; gap: 0;
+  position: relative; margin-bottom: 3rem;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: ''; position: absolute; left: 0.6rem; top: 0.6rem; bottom: 0.6rem;
+  width: 2px; background: linear-gradient(to bottom, var(--clr-accent), var(--clr-accent-2));
+  border-radius: 2px;
+}
+.timeline-item {
+  display: grid; grid-template-columns: auto 1fr; gap: 1.5rem;
+  margin-left: -2rem; padding-left: 2rem; padding-bottom: 2rem; position: relative;
+}
+.timeline-marker { display: flex; flex-direction: column; align-items: center; }
+.timeline-dot {
+  width: 14px; height: 14px; border-radius: 50%; margin-top: 2px;
+  background: var(--clr-accent);
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.25), 0 0 12px rgba(108,99,255,0.4);
+  flex-shrink: 0;
+}
+.timeline-label {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--clr-accent); display: block; margin-bottom: 0.25rem;
+}
+.timeline-title {
+  font-family: var(--ff-heading); font-size: 1rem; font-weight: 700;
+  color: var(--clr-text); margin-bottom: 0.4rem;
+}
+.timeline-text { font-size: 0.87rem; color: var(--clr-text-muted); line-height: 1.6; }
+
+.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+.proof-name {
+  font-family: var(--ff-heading); font-size: 0.95rem; font-weight: 700;
+  color: var(--clr-text); margin-bottom: 0.4rem;
+}
+.proof-body { font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 0.75rem; line-height: 1.5; }
+.proof-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.proof-resume { text-align: center; margin-top: 1rem; }
+
+@media (max-width: 640px) {
+  .proof-grid { grid-template-columns: 1fr; }
+}
+</style>

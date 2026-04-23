@@ -1,9 +1,22 @@
-# Editor swap/backup files
-*.swp
-*.swo
-*.swx
-*~
-.DS_Store
+# Build output
+dist/
+.astro/
 
-# Archives
-*.zip
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json

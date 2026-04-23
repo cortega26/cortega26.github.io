@@ -1,0 +1,241 @@
+---
+interface Project {
+  id: string;
+  title: string;
+  impact: string;
+  desc: string;
+  tags: string[];
+  tagType: 'accent' | 'teal' | 'warm' | 'neutral';
+  links: { label: string; href: string }[];
+  isNew?: boolean;
+}
+
+interface Props { lang: 'en' | 'es'; }
+const { lang } = Astro.props;
+
+const projectsEN: Project[] = [
+  {
+    id: 'rutificador',
+    title: 'Rutificador',
+    impact: '⭐ 12 stars · 3 forks · Published on PyPI',
+    desc: 'Python package and CLI for validating, normalizing, and formatting Chilean RUT identifiers for downstream systems and batch workflows.',
+    tags: ['Python', 'PyPI', 'CLI'],
+    tagType: 'accent',
+    links: [{ label: 'GitHub', href: 'https://github.com/cortega26/rutificador' }, { label: 'PyPI', href: 'https://pypi.org/project/rutificador/' }],
+  },
+  {
+    id: 'conciliador',
+    title: 'Conciliador Bancario',
+    impact: 'Published on PyPI · Fail-closed audit CLI',
+    desc: 'Chile-first bank reconciliation CLI designed fail-closed, with deterministic outputs and append-only audit artifacts for human review.',
+    tags: ['Python', 'CLI', 'Audit'],
+    tagType: 'accent',
+    links: [{ label: 'GitHub', href: 'https://github.com/cortega26/conciliador_bancario' }, { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/' }],
+  },
+  {
+    id: 'noticiencias',
+    title: 'Noticiencias',
+    impact: 'Live production site at noticiencias.com',
+    desc: 'Science-news presentation layer built for readability, context, accessibility, and SEO rather than content overload.',
+    tags: ['Astro', 'SEO', 'Accessibility'],
+    tagType: 'teal',
+    links: [{ label: 'Live site', href: 'https://www.noticiencias.com' }, { label: 'Repo', href: 'https://github.com/cortega26/noticiencias' }],
+  },
+  {
+    id: 'monedario',
+    title: 'Monedario',
+    impact: 'Live at monedario.cl · Interactive finance calculators',
+    desc: 'Chile-focused personal finance education site combining practical calculators, evergreen guides, and editorial governance.',
+    tags: ['Astro', 'TypeScript', 'Finance'],
+    tagType: 'teal',
+    links: [{ label: 'Live site', href: 'https://monedario.cl' }, { label: 'Repo', href: 'https://github.com/cortega26/tuplatainforma' }],
+  },
+  {
+    id: 'polla',
+    title: 'Polla App',
+    impact: '⭐ 5 stars · 1 fork · Production pipeline',
+    desc: 'Reliable jackpot ingestion pipeline for Chilean lottery data, designed to publish structured outputs and survive source volatility.',
+    tags: ['Python', 'Scraping', 'Google Sheets'],
+    tagType: 'accent',
+    links: [{ label: 'Repo', href: 'https://github.com/cortega26/polla' }, { label: 'Docs', href: 'https://github.com/cortega26/polla#readme' }],
+  },
+  {
+    id: 'pdf',
+    title: 'PDF Text Analyzer',
+    impact: '⭐ 5 stars · Multilingual extraction',
+    desc: 'Toolkit for downloading PDFs, extracting multilingual text, analyzing content, and surfacing searchable results for review workflows.',
+    tags: ['Python', 'PDF', 'NLP'],
+    tagType: 'accent',
+    links: [{ label: 'Repo', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }, { label: 'Docs', href: 'https://github.com/cortega26/PDF-Text-Analyzer#usage' }],
+  },
+  {
+    id: 'crypto',
+    title: 'Crypto Price Tracker',
+    impact: '⭐ 1 star · Real-time desktop monitor',
+    desc: 'Real-time Binance monitor with configurable alerts, threshold logic, and digest notifications for active tracking workflows.',
+    tags: ['Python', 'WebSocket', 'Desktop'],
+    tagType: 'accent',
+    links: [{ label: 'Repo', href: 'https://github.com/cortega26/crypto-price-tracker' }],
+  },
+  {
+    id: 'dnspect',
+    title: 'DNSpect',
+    impact: 'NEW · DNS benchmarking with statistical rigor',
+    desc: 'Statistically defensible DNS benchmarking framework — because p50 lies. Combines a TypeScript CLI, FastAPI backend, and React dashboard.',
+    tags: ['TypeScript', 'FastAPI', 'React'],
+    tagType: 'warm',
+    links: [{ label: 'Repo', href: 'https://github.com/cortega26/DNSpect' }],
+    isNew: true,
+  },
+  {
+    id: 'ebano',
+    title: 'El Rincón de Ébano',
+    impact: 'NEW · Live e-commerce at elrincondeebano.com',
+    desc: 'Full production Astro e-commerce storefront with Vite, Vitest, and a custom design system — built from scratch and deployed live.',
+    tags: ['Astro', 'E-commerce', 'Vite'],
+    tagType: 'teal',
+    links: [{ label: 'Live site', href: 'https://elrincondeebano.com' }, { label: 'Repo', href: 'https://github.com/cortega26/elrincondeebano' }],
+    isNew: true,
+  },
+];
+
+const projectsES: Project[] = projectsEN.map(p => ({
+  ...p,
+  links: p.links.map(l => ({
+    ...l,
+    label: l.label === 'Live site' ? 'Sitio' : l.label,
+  })),
+  impact: p.impact.replace('NEW ·', 'NUEVO ·').replace('Live production site at', 'Sitio activo en').replace('Live at', 'Activo en').replace('Real-time desktop monitor', 'Monitor de escritorio en tiempo real').replace('Multilingual extraction', 'Extracción multilingüe').replace('Production pipeline', 'Pipeline de producción').replace('Fail-closed audit CLI', 'CLI de auditoría fail-closed').replace('Published on PyPI ·', 'Publicado en PyPI ·'),
+}));
+
+const filterLabels = {
+  en: { all: 'All', python: 'Python', web: 'Astro / Web', cli: 'CLI / Tools', data: 'Data', label: 'Filter by:' },
+  es: { all: 'Todos', python: 'Python', web: 'Astro / Web', cli: 'CLI / Herramientas', data: 'Datos', label: 'Filtrar por:' },
+};
+
+const c = { projects: lang === 'en' ? projectsEN : projectsES, title: lang === 'en' ? 'Featured Portfolio' : 'Portafolio Destacado', eyebrow: lang === 'en' ? 'Portfolio' : 'Portafolio', subtitle: lang === 'en' ? 'Nine public projects that best represent how I build: practical systems, careful packaging, and proof that goes beyond screenshots.' : 'Nueve proyectos públicos que mejor representan cómo construyo: sistemas prácticos, empaquetado cuidadoso y evidencia que va más allá de capturas de pantalla.', fl: filterLabels[lang] };
+
+const tagCategories: Record<string, string> = {
+  'Python': 'python', 'PyPI': 'python', 'CLI': 'cli', 'Audit': 'cli',
+  'Astro': 'web', 'SEO': 'web', 'Accessibility': 'web', 'TypeScript': 'web', 'Finance': 'web', 'E-commerce': 'web', 'Vite': 'web',
+  'Scraping': 'data', 'PDF': 'data', 'NLP': 'data', 'Google Sheets': 'data',
+  'WebSocket': 'python', 'Desktop': 'python', 'FastAPI': 'python', 'React': 'web',
+};
+
+function getCategory(tags: string[]): string {
+  for (const tag of tags) {
+    const cat = tagCategories[tag];
+    if (cat) return cat;
+  }
+  return 'python';
+}
+---
+<section class="section" id="portfolio">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-eyebrow reveal">{c.eyebrow}</span>
+      <h2 class="section-title reveal">{c.title}</h2>
+      <div class="divider reveal"></div>
+      <p class="section-subtitle reveal">{c.subtitle}</p>
+    </div>
+
+    <div class="filter-bar reveal" role="group" aria-label={c.fl.label}>
+      <span class="filter-label">{c.fl.label}</span>
+      <button class="filter-btn active" data-filter="all">{c.fl.all}</button>
+      <button class="filter-btn" data-filter="python">{c.fl.python}</button>
+      <button class="filter-btn" data-filter="web">{c.fl.web}</button>
+      <button class="filter-btn" data-filter="cli">{c.fl.cli}</button>
+      <button class="filter-btn" data-filter="data">{c.fl.data}</button>
+    </div>
+
+    <div class="portfolio-grid" id="portfolio-grid">
+      {c.projects.map((proj, i) => (
+        <article
+          class={`card-glass project-card reveal reveal-delay-${(i % 3) + 1}`}
+          id={`project-${proj.id}`}
+          data-category={getCategory(proj.tags)}
+        >
+          {proj.isNew && <span class="new-badge">{lang === 'en' ? 'New' : 'Nuevo'}</span>}
+          <div class="project-tags">
+            {proj.tags.map(tag => (
+              <span class={`badge badge-${proj.tagType}`}>{tag}</span>
+            ))}
+          </div>
+          <h3 class="project-title">{proj.title}</h3>
+          <p class="project-impact">{proj.impact}</p>
+          <p class="project-desc">{proj.desc}</p>
+          <div class="project-links">
+            {proj.links.map(l => (
+              <a class="btn btn-ghost btn-sm" href={l.href} target="_blank" rel="noopener noreferrer">{l.label} →</a>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.filter-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+  margin-bottom: 2.5rem; justify-content: center;
+}
+.filter-label {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--clr-text-faint); margin-right: 0.25rem;
+}
+.filter-btn {
+  padding: 6px 16px; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600;
+  border: 1px solid var(--clr-border); background: transparent; color: var(--clr-text-muted);
+  cursor: pointer; transition: all 150ms;
+}
+.filter-btn:hover { border-color: var(--clr-border-glow); color: var(--clr-text); }
+.filter-btn.active {
+  background: var(--clr-accent); border-color: var(--clr-accent); color: #fff;
+}
+
+.portfolio-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+}
+.project-card {
+  position: relative; display: flex; flex-direction: column; gap: 0.75rem;
+  transition: background 300ms, border-color 300ms, transform 300ms, box-shadow 300ms, opacity 300ms;
+}
+.project-card.hidden { opacity: 0; pointer-events: none; transform: scale(0.95); }
+.new-badge {
+  position: absolute; top: 1rem; right: 1rem;
+  background: var(--clr-accent-warm); color: #fff;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: var(--radius-full);
+}
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.project-title {
+  font-family: var(--ff-heading); font-size: 1.05rem; font-weight: 700; color: var(--clr-text);
+}
+.project-impact {
+  font-size: 0.75rem; font-weight: 600; color: var(--clr-accent-2);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.project-desc { font-size: 0.87rem; color: var(--clr-text-muted); line-height: 1.55; flex: 1; }
+.project-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
+
+@media (max-width: 1024px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px)  { .portfolio-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+const cards = document.querySelectorAll<HTMLElement>('.project-card');
+
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter!;
+    cards.forEach(card => {
+      const match = f === 'all' || card.dataset.category === f;
+      card.classList.toggle('hidden', !match);
+    });
+  });
+});
+</script>

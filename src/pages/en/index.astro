@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import AboutSection from '../../components/AboutSection.astro';
+import ServicesSection from '../../components/ServicesSection.astro';
+import ProofSection from '../../components/ProofSection.astro';
+import CredentialsSection from '../../components/CredentialsSection.astro';
+import PortfolioSection from '../../components/PortfolioSection.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import '../../styles/global.css';
+
+const navItems = [
+  { href: '#overview',     label: 'Overview' },
+  { href: '#about',        label: 'Profile' },
+  { href: '#services',     label: 'Services' },
+  { href: '#proof',        label: 'Proof' },
+  { href: '#credentials',  label: 'Credentials' },
+  { href: '#portfolio',    label: 'Portfolio' },
+  { href: '#contact',      label: 'Contact' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Carlos Ortega Gonzalez',
+  alternateName: 'Tooltician',
+  url: 'https://tooltician.com/',
+  sameAs: ['https://github.com/cortega26', 'https://www.linkedin.com/in/cortega26'],
+  jobTitle: 'Python Automation and Data Systems Consultant',
+  description: 'I help teams ship dependable ETL, scraping, API, and reporting workflows with clear documentation and production-minded engineering.',
+};
+---
+<BaseLayout
+  title="Tooltician | Carlos Ortega Gonzalez — Python Automation & Data Systems"
+  description="Python automation and data systems consultant focused on ETL, scraping, APIs, and reliable reporting workflows. Production-grade delivery with bilingual support."
+  lang="en"
+  canonical="https://tooltician.com/en/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <Navbar lang="en" items={navItems} />
+
+  <main id="main">
+    <HeroSection lang="en" />
+    <AboutSection lang="en" />
+    <ServicesSection lang="en" />
+    <ProofSection lang="en" />
+    <CredentialsSection lang="en" />
+    <PortfolioSection lang="en" />
+    <ContactSection lang="en" />
+  </main>
+
+  <Footer lang="en" />
+</BaseLayout>

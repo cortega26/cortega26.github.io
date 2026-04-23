@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import AboutSection from '../../components/AboutSection.astro';
+import ServicesSection from '../../components/ServicesSection.astro';
+import ProofSection from '../../components/ProofSection.astro';
+import CredentialsSection from '../../components/CredentialsSection.astro';
+import PortfolioSection from '../../components/PortfolioSection.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import '../../styles/global.css';
+
+const navItems = [
+  { href: '#overview',     label: 'Resumen' },
+  { href: '#about',        label: 'Perfil' },
+  { href: '#services',     label: 'Servicios' },
+  { href: '#proof',        label: 'Evidencia' },
+  { href: '#credentials',  label: 'Credenciales' },
+  { href: '#portfolio',    label: 'Portafolio' },
+  { href: '#contact',      label: 'Contacto' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Carlos Ortega González',
+  alternateName: 'Tooltician',
+  url: 'https://tooltician.com/',
+  sameAs: ['https://github.com/cortega26', 'https://www.linkedin.com/in/cortega26'],
+  jobTitle: 'Consultor de Automatización Python y Sistemas de Datos',
+  description: 'Ayudo a equipos a entregar flujos ETL, scraping, APIs y reportes confiables con documentación clara e ingeniería orientada a producción.',
+};
+---
+<BaseLayout
+  title="Tooltician | Carlos Ortega González — Automatización Python y Sistemas de Datos"
+  description="Consultor de automatización Python y sistemas de datos. ETL, scraping, APIs y flujos de reportes de nivel productivo con entrega bilingüe."
+  lang="es"
+  canonical="https://tooltician.com/es/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <Navbar lang="es" items={navItems} />
+
+  <main id="main">
+    <HeroSection lang="es" />
+    <AboutSection lang="es" />
+    <ServicesSection lang="es" />
+    <ProofSection lang="es" />
+    <CredentialsSection lang="es" />
+    <PortfolioSection lang="es" />
+    <ContactSection lang="es" />
+  </main>
+
+  <Footer lang="es" />
+</BaseLayout>

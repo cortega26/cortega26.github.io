@@ -1,10 +1,16 @@
 ---
-// Redirect root to English version. Language switcher lives in the navbar.
-// This eliminates the conversion-killing splash page while keeping /es/ fully accessible.
-export async function GET() {
-  return new Response(null, {
-    status: 301,
-    headers: { Location: '/en/' },
-  });
-}
+// This is a static site (GitHub Pages), so we must use a meta refresh redirect
+// instead of a server-side SSR GET() function.
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <meta http-equiv="refresh" content="0;url=/en/" />
+  <link rel="canonical" href="https://tooltician.com/en/" />
+</head>
+<body>
+  <p>Redirecting to <a href="/en/">English version</a>...</p>
+</body>
+</html>

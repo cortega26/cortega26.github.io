@@ -1,63 +1,53 @@
 # Tooltician Portfolio
 
-> Bilingual (EN/ES) portfolio showcasing data products, automation, and open-source highlights.
+Static bilingual portfolio for Carlos Ortega Gonzalez.
 
-This repository hosts the bilingual static portfolio site served at
-[cortega26.github.io](https://cortega26.github.io/) (English) and
-[cortega26.github.io/es/](https://cortega26.github.io/es/) (Spanish).
+Live URLs:
 
-## Profile snapshot
+- `https://tooltician.com/`
+- `https://tooltician.com/en/`
+- `https://tooltician.com/es/`
+- Fallback: `https://cortega26.github.io/`
 
-- Data product consultant focused on analytics automation, APIs, and KPI storytelling.
-- Builds Python-first tooling: pipelines, scrapers, and reporting systems.
-- Bilingual delivery (ES/EN) across LATAM and U.S.-aligned time zones.
+## Positioning
 
-## Scope
+This site is the public portfolio for Python automation and data systems consulting.
+It is intentionally lightweight and focused on:
 
-This repo contains the static site shell (HTML, CSS, assets) only. The production code for featured projects lives in their own repositories:
+- clear value proposition
+- strong featured project proofs
+- bilingual access
+- direct contact paths
 
-- [Portfolio Manager (Server Edition)](https://github.com/cortega26/portfolio-manager-server) — Full-stack portfolio tracker with analytics, security, and observability.
-- [Rutificador](https://github.com/cortega26/rutificador) — Python package for Chilean RUT validation, formatting, and batch processing.
-- [Polla App](https://github.com/cortega26/polla) — Jackpot ingestion pipeline with CLI workflows and Google Sheets updates.
-- [Noticiencias News Collector](https://github.com/cortega26/noticiencias_news_collector) — Modular news ingestion and scoring pipeline with runbooks.
-- [El Rincón de Ébano](https://github.com/cortega26/elrincondeebano) — Offline-first static catalog with automated asset and data pipelines.
-- [PDF Text Analyzer](https://github.com/cortega26/PDF-Text-Analyzer) — PDF extraction + NLP analysis for multilingual documents.
-- [Crypto Price Tracker](https://github.com/cortega26/crypto-price-tracker) — Real-time price alerts, GUI, and reporting.
-- [PoGo Rarity](https://github.com/cortega26/PoGo) — Data aggregation + Streamlit UI for Pokémon GO rarity scoring.
+## Featured projects
 
-## Highlighted repositories
-
-These repos are the best entry points for recruiters and collaborators:
-
-1. **rutificador** — packaged library + CI + coverage and a clear user-facing API.
-2. **polla** — production-minded scraping pipeline with observability and CLI tooling.
-3. **noticiencias_news_collector** — end-to-end ingestion system with runbooks.
-4. **portfolio-manager-server** — full-stack analytics platform with security controls.
-5. **elrincondeebano** — offline-first static site with automated asset workflows.
-6. **PDF-Text-Analyzer** — focused NLP pipeline with practical, reusable utilities.
-7. **crypto-price-tracker** — real-time alerts + GUI for daily operations.
-8. **PoGo** — data aggregation and Streamlit delivery for gaming analytics.
+- [rutificador](https://github.com/cortega26/rutificador) — Python library and CLI for Chilean RUT validation and formatting.
+- [conciliador_bancario](https://github.com/cortega26/conciliador_bancario) — fail-closed bank reconciliation CLI with deterministic audit artifacts.
+- [noticiencias](https://github.com/cortega26/noticiencias) — science-news frontend focused on readability, accessibility, and SEO.
+- [polla](https://github.com/cortega26/polla) — reliable jackpot ingestion workflow with deterministic fallbacks and Google Sheets publishing.
+- [PDF-Text-Analyzer](https://github.com/cortega26/PDF-Text-Analyzer) — multilingual PDF extraction, search, and analysis toolkit.
+- [crypto-price-tracker](https://github.com/cortega26/crypto-price-tracker) — real-time crypto monitor with configurable alerts and GUI-based setup.
 
 ## Repository structure
 
-- `en/`, `es/` — Localized builds of the static site. The legacy `/english/`
-  path is now served by a redirect rule configured in `_config.yml` using the
-  `jekyll-redirect-from` plugin.
-- `assets/` — Shared images, styles, and scripts.
-- `docs/` — Internal documentation, change history, and content governance aids.
+- `index.html` — language selector landing page
+- `en/`, `es/` — localized portfolio pages
+- `assets/css/` — shared styling
+- `assets/js/` — shared client-side behavior
+- `assets/images/` — profile and site imagery
+- `assets/docs/` — downloadable resume and supporting assets
+- `CNAME` — GitHub Pages custom domain binding
 
-## Local development
+## Local preview
 
-This portfolio is a static site. Serve it with your preferred HTTP server (for example, `npx serve .`) to preview content updates before publishing through GitHub Pages.
+This is a static site. Preview it with any HTTP server, for example:
 
-## Configuration
+```bash
+npx serve .
+```
 
-| name | type | default | required | description |
-| --- | --- | --- | --- | --- |
-| N/A | N/A | N/A | no | Static site; no runtime configuration is required. |
+## Notes
 
-## About field follow-up
-
-The GitHub About description must be updated manually to match the README.
-See [docs/tasks/update-about-field.md](docs/tasks/update-about-field.md) for
-the exact copy to apply.
+- GitHub Pages publishes from the `master` branch root.
+- The custom domain is `tooltician.com`.
+- The GitHub profile README in `cortega26/cortega26` is intended to route visitors here.

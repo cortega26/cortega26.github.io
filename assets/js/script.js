@@ -61,23 +61,6 @@ function initSmoothScroll() {
   });
 }
 
-const messagesEn = [
-  "π ping received—Praetorians can't trace this breadcrumb, but you just did.",
-  "Sneak peek: the redacted incident notebooks unlock once we co-design the runbook.",
-  "Ask about the air-gapped analytics lab that prototypes fraud sleuthing drills.",
-  "Curious which signals replaced Gatekeeper? I'll decode the zero-trust lattice for you.",
-  "Ready to flip from teaser mode to delivery? Let's stitch metrics straight to the narrative."
-];
-
-const messagesEs = [
-  "Ping π recibido—ni los Praetorians rastrean esta pista, pero tú sí.",
-  "Avance exclusivo: los cuadernos de incidentes se liberan cuando co-diseñamos el runbook.",
-  "Pregunta por el laboratorio analítico aislado que ensaya las búsquedas antifraude.",
-  "¿Intriga el relevo de Gatekeeper? Te decodifico la malla zero-trust al detalle.",
-  "¿Listo para dejar el modo teaser? Enlazamos métricas con la historia de entrega."
-];
-
-let clickCount = 0;
 let contactStatusRegion = null;
 
 function clearContactStatus() {
@@ -97,24 +80,6 @@ function setContactStatus(message, state = 'info') {
   contactStatusRegion.dataset.state = state;
   contactStatusRegion.textContent = message;
   return true;
-}
-
-function showPiMessage() {
-  const langAttribute = document.documentElement.getAttribute('lang');
-  const isSpanish = langAttribute && langAttribute.startsWith('es');
-  const messages = isSpanish ? messagesEs : messagesEn;
-
-  if (clickCount >= messages.length) {
-    const finalMessage = isSpanish
-      ? 'Momento de salir del laberinto digital: agenda una llamada y bosquejamos el brief operativo.'
-      : 'Time to exit the rabbit hole—book a discovery call and we will draft the ops brief.';
-    alert(finalMessage);
-    clickCount = 0;
-    return;
-  }
-
-  alert(messages[clickCount]);
-  clickCount += 1;
 }
 
 function sendEmailFallback(event) {

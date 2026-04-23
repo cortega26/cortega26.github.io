@@ -1,16 +1,16 @@
 :root {
-  --bg: #0b0d17;
-  --surface: #11182a;
-  --surface-alt: #141d33;
-  --surface-light: #18233a;
-  --border: #1f2a40;
-  --text: #f5f7ff;
-  --muted: #c3cadc;
-  --accent: #5b8def;
-  --accent-soft: rgba(91, 141, 239, 0.18);
-  --success: #41b883;
-  --font-body: 'Inter', 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Playfair Display', 'Times New Roman', serif;
+  --bg: #12100f;
+  --surface: #1a1716;
+  --surface-alt: #211d1b;
+  --surface-light: #292320;
+  --border: #332c28;
+  --text: #f3eee7;
+  --muted: #c9bfb2;
+  --accent: #d07b24;
+  --accent-soft: rgba(208, 123, 36, 0.18);
+  --success: #4ea06d;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-display: 'IBM Plex Sans Condensed', sans-serif;
 }
 
 * {
@@ -96,14 +96,14 @@ button:focus-visible {
 }
 
 .navbar {
-  background-color: rgba(8, 10, 18, 0.95) !important;
+  background-color: rgba(18, 16, 15, 0.94) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  letter-spacing: 0.02em;
 }
 
 .navbar-brand {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.45rem;
+  letter-spacing: 0.01em;
 }
 
 .navbar-nav .nav-link {
@@ -151,7 +151,7 @@ button:focus-visible {
   top: calc(100% - 0.25rem);
   right: 0.25rem;
   min-width: 220px;
-  border-radius: 14px;
+  border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
@@ -207,9 +207,9 @@ main section {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 2.35rem;
   margin-bottom: 0.75rem;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.02em;
 }
 
 .section-subtitle,
@@ -225,19 +225,19 @@ main section {
 }
 
 .landing {
-  background: radial-gradient(circle at top left, rgba(91, 141, 239, 0.12), transparent 45%),
-              radial-gradient(circle at bottom right, rgba(65, 184, 131, 0.18), transparent 55%),
-              linear-gradient(140deg, #090b13 0%, #0f1626 60%, #0b0d17 100%);
+  background: radial-gradient(circle at top left, rgba(208, 123, 36, 0.12), transparent 38%),
+              radial-gradient(circle at bottom right, rgba(78, 160, 109, 0.12), transparent 44%),
+              linear-gradient(160deg, #141211 0%, #191615 58%, #12100f 100%);
   padding: 140px 0 120px;
 }
 
 .hero-eyebrow {
-  display: inline-block;
-  font-size: 0.85rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  display: block;
+  font-size: 0.95rem;
+  letter-spacing: 0;
   color: var(--muted);
   margin-bottom: 18px;
+  font-weight: 600;
 }
 
 .hero-subhead {
@@ -249,10 +249,10 @@ main section {
 
 .hero-name {
   font-size: 1rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: var(--muted);
   margin-bottom: 16px;
+  font-weight: 600;
 }
 
 .hero-lede {
@@ -295,7 +295,7 @@ main section {
 .hero-cta .btn {
   font-weight: 600;
   padding: 14px 30px;
-  border-radius: 999px;
+  border-radius: 10px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -303,13 +303,13 @@ main section {
   background: var(--accent);
   border: 1px solid transparent;
   color: #05060a;
-  box-shadow: 0 18px 40px rgba(91, 141, 239, 0.28);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
 }
 
 .btn-cta:hover,
 .btn-cta:focus {
-  transform: translateY(-2px);
-  background: #779ef5;
+  transform: translateY(-1px);
+  background: #dda15b;
 }
 
 .btn-outline-light:hover,
@@ -321,9 +321,9 @@ main section {
 }
 
 .hero-figure {
-  background: rgba(10, 13, 22, 0.8);
+  background: rgba(18, 16, 15, 0.78);
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: 14px;
   padding: 28px;
   text-align: center;
   margin-bottom: 24px;
@@ -333,7 +333,7 @@ main section {
   width: 100%;
   max-width: 320px;
   height: auto;
-  border-radius: 24px;
+  border-radius: 14px;
   border: 4px solid rgba(255, 255, 255, 0.12);
   margin-bottom: 18px;
 }
@@ -351,7 +351,7 @@ main section {
 .hero-meta-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 12px;
   padding: 20px 22px;
 }
 
@@ -366,7 +366,7 @@ main section {
 }
 
 .about {
-  background: #0c121f;
+  background: #161311;
 }
 
 .about-grid {
@@ -378,7 +378,7 @@ main section {
 .about-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 12px;
   padding: 28px;
   min-height: 100%;
 }
@@ -410,13 +410,13 @@ main section {
 }
 
 .capabilities {
-  background: linear-gradient(160deg, #0c121f 0%, #0b0d17 60%, #0c111c 100%);
+  background: linear-gradient(160deg, #161311 0%, #12100f 60%, #171413 100%);
 }
 
 .capability-card {
   background: var(--surface-alt);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 12px;
   padding: 28px;
   display: flex;
   flex-direction: column;

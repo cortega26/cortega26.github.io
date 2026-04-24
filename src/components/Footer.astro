@@ -7,6 +7,7 @@ const year = new Date().getFullYear();
 
 const copy = {
   en: {
+    tagline: 'Tools. Precision. Results.',
     desc: 'Python automation and data systems consulting.',
     rights: `© ${year} Carlos Ortega Gonzalez · All rights reserved.`,
     source: 'Source on GitHub',
@@ -14,6 +15,7 @@ const copy = {
     langHref: '/es/',
   },
   es: {
+    tagline: 'Herramientas. Precisión. Resultados.',
     desc: 'Consultoría en automatización Python y sistemas de datos.',
     rights: `© ${year} Carlos Ortega Gonzalez · Todos los derechos reservados.`,
     source: 'Código en GitHub',
@@ -28,6 +30,7 @@ const c = copy[lang];
     <div class="footer__grid">
       <div>
         <p class="footer__brand">Tooltician</p>
+        <p class="footer__tagline">{c.tagline}</p>
         <p class="footer__desc">{c.desc}</p>
       </div>
       <div class="footer__social" aria-label="Social links">

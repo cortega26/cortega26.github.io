@@ -471,6 +471,12 @@ ul { list-style: none; }
   background-clip: text;
   margin-bottom: var(--sp-2);
 }
+.footer__tagline {
+  font-size: var(--fs-sm);
+  font-style: italic;
+  color: var(--clr-text-faint);
+  margin-bottom: var(--sp-1);
+}
 .footer__desc {
   color: var(--clr-text-muted);
   font-size: var(--fs-sm);

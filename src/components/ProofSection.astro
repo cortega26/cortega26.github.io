@@ -66,19 +66,6 @@ const c = lang === 'en' ? en : es;
       ))}
     </div>
 
-    <div class="testimonial-placeholder reveal">
-      <div class="testimonial-placeholder__inner">
-        <svg class="testimonial-quote" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M11.3 9H7.5C7.5 6 9 4.5 12 4v1.5c-1.5.5-2 1.5-2 2.5h1.3c.7 0 1.2.5 1.2 1.2v2.1c0 .7-.5 1.2-1.2 1.2zm7 0h-3.8C14.5 6 16 4.5 19 4v1.5c-1.5.5-2 1.5-2 2.5h1.3c.7 0 1.2.5 1.2 1.2v2.1c0 .7-.5 1.2-1.2 1.2z"/>
-        </svg>
-        <p class="testimonial-placeholder__text">
-          {lang === 'en'
-            ? 'Currently gathering client testimonials — the work speaks in the meantime.'
-            : 'Recopilando testimonios de clientes — mientras tanto, el trabajo habla por sí solo.'}
-        </p>
-      </div>
-    </div>
-
     <div class="proof-grid">
       {c.proof.map((p, i) => (
         <article class={`card-glass reveal reveal-delay-${(i % 2) + 1}`}>
@@ -144,22 +131,6 @@ const c = lang === 'en' ? en : es;
 .proof-body { font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 0.75rem; line-height: 1.5; }
 .proof-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .proof-resume { text-align: center; margin-top: 1rem; }
-
-.testimonial-placeholder {
-  margin-bottom: 2.5rem;
-  border: 1px dashed var(--clr-border);
-  border-radius: var(--radius-md);
-  padding: 1.5rem 2rem;
-  text-align: center;
-}
-.testimonial-placeholder__inner {
-  display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
-}
-.testimonial-quote { color: var(--clr-accent); opacity: 0.5; }
-.testimonial-placeholder__text {
-  font-size: 0.9rem; color: var(--clr-text-faint);
-  font-style: italic; max-width: 50ch;
-}
 
 @media (max-width: 640px) {
   .proof-grid { grid-template-columns: 1fr; }

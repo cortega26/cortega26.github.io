@@ -13,8 +13,8 @@ import '../../styles/global.css';
 
 const navItems = [
   { href: '#overview',     label: 'Overview' },
-  { href: '#services',     label: 'Services' },
   { href: '#portfolio',    label: 'Work' },
+  { href: '#services',     label: 'Services' },
   { href: '#about',        label: 'About' },
   { href: '#credentials',  label: 'Credentials' },
   { href: '#contact',      label: 'Contact' },
@@ -28,30 +28,45 @@ const jsonLd = {
   url: 'https://tooltician.com/',
   sameAs: ['https://github.com/cortega26', 'https://www.linkedin.com/in/cortega26'],
   jobTitle: 'Python Automation and Data Systems Consultant',
-  description: 'I build Python automation systems — ETL pipelines, scrapers, internal APIs, and reporting workflows — clean, documented, and designed to keep working after handoff.',
+  description: 'I build Python automation systems — ETL pipelines, scrapers, internal APIs, and reporting workflows — scoped, documented, and designed to keep running after handoff.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Santiago',
     addressCountry: 'CL',
   },
+  makesOffer: [
+    { '@type': 'Offer', name: 'ETL & Workflow Automation', description: 'Scheduled and reproducible ETL pipelines with clear outputs.' },
+    { '@type': 'Offer', name: 'Scraping & Data Acquisition', description: 'Resilient collection workflows built for recurring production use.' },
+    { '@type': 'Offer', name: 'Internal APIs & Reliability', description: 'Packaged workflows and APIs usable by teams, not just the author.' },
+    { '@type': 'Offer', name: 'Static Sites & Front Ends', description: 'Production-ready Astro sites with SEO and performance baked in.' },
+    { '@type': 'Offer', name: 'Financial & Audit Tooling', description: 'Fail-closed reconciliation workflows with deterministic audit artifacts.' },
+    { '@type': 'Offer', name: 'Reporting & Data Delivery', description: 'Structured outputs and dashboards that eliminate manual copy-paste.' },
+  ],
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, item: { '@type': 'SoftwareApplication', name: 'El Rincón de Ébano', url: 'https://elrincondeebano.com', description: 'Live e-commerce storefront for a private residential community, actively operated.' } },
+    { '@type': 'ListItem', position: 2, item: { '@type': 'SoftwareApplication', name: 'Monedario', url: 'https://monedario.cl', description: 'Personal finance platform for Chile with real-time economic indicators and interactive calculators.' } },
+    { '@type': 'ListItem', position: 3, item: { '@type': 'SoftwareApplication', name: 'Rutificador', url: 'https://pypi.org/project/rutificador/', description: 'Published PyPI library for validating and normalizing Chilean RUT numbers.' } },
+    { '@type': 'ListItem', position: 4, item: { '@type': 'SoftwareApplication', name: 'Conciliador Bancario', url: 'https://pypi.org/project/bankrecon/', description: 'Fail-closed bank reconciliation tool published on PyPI with audit-grade output.' } },
+    { '@type': 'ListItem', position: 5, item: { '@type': 'WebSite', name: 'Noticiencias', url: 'https://noticiencias.com', description: 'Spanish-language science media site covering 8 disciplines.' } },
+  ],
 };
 ---
 <BaseLayout
-  title="Carlos Ortega | Python Automation Consultant — Santiago, Chile"
-  description="Python automation consultant specializing in ETL, scraping, internal APIs, and reliable reporting workflows. Production-grade delivery with bilingual (EN/ES) support. Based in Santiago, Chile."
+  title="Carlos Ortega — Python Automation Consultant | Tooltician"
+  description="Bilingual Python automation consultant (EN/ES) based in Santiago, Chile. ETL pipelines, scraping workflows, internal APIs, and reporting automation — scoped delivery with CI, documentation, and handoff-ready systems."
   lang="en"
   canonical="https://tooltician.com/en/"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
   <Navbar lang="en" items={navItems} />
 
   <main id="main">
     <HeroSection lang="en" />
-    <ServicesSection lang="en" />
     <PortfolioSection lang="en" />
+    <ServicesSection lang="en" />
     <AboutSection lang="en" />
     <ProofSection lang="en" />
     <CredentialsSection lang="en" />

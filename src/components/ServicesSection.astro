@@ -2,30 +2,37 @@
 interface Props { lang: 'en' | 'es'; }
 const { lang } = Astro.props;
 
+const SVG_REFRESH  = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>';
+const SVG_SEARCH   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>';
+const SVG_LAYERS   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>';
+const SVG_GLOBE    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
+const SVG_SHIELD   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+const SVG_CHART    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>';
+
 const en = {
-  eyebrow: 'Services', title: 'What I Build',
-  subtitle: 'The common pattern: replace brittle manual work with dependable, documented automation.',
+  eyebrow: 'Services', title: 'How I Can Help',
+  subtitle: 'The recurring problem I solve: brittle manual work that should be automated, documented, and handed off.',
   services: [
-    { icon: '🔄', title: 'ETL & Workflow Automation', desc: 'I turn repetitive reporting and back-office work into scheduled or reproducible pipelines with clear outputs.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
-    { icon: '🕷️', title: 'Scraping & Data Acquisition', desc: 'I build collection workflows resilient enough for recurring use — not just one-off demos.', examples: [{ name: 'PDF Text Analyzer', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }] },
-    { icon: '🔌', title: 'Internal APIs & Reliability', desc: 'I package workflows so they are usable by teams, not only by the person who wrote the script.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'Crypto Price Tracker', href: 'https://github.com/cortega26/crypto-price-tracker' }] },
-    { icon: '🌐', title: 'Static Sites & Front Ends', desc: 'Production-ready Astro sites with SEO, performance, and editorial discipline baked in.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }] },
-    { icon: '🏦', title: 'Financial & Audit Tooling', desc: 'Fail-closed reconciliation workflows with deterministic audit artifacts for review and compliance.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }] },
-    { icon: '📊', title: 'Reporting & Data Delivery', desc: 'Structured outputs, dashboards, and publishing workflows that eliminate manual copy-paste from the chain.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'PDF Text Analyzer', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }] },
+    { icon: SVG_REFRESH, title: 'ETL & Workflow Automation', desc: 'I turn repetitive reporting and back-office work into scheduled or reproducible pipelines with clear outputs.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
+    { icon: SVG_SEARCH,  title: 'Scraping & Data Acquisition', desc: 'I build collection workflows resilient enough for recurring use — not just one-off demos.', examples: [{ name: 'Jackpot Pipeline', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }] },
+    { icon: SVG_LAYERS,  title: 'Internal APIs & Reliability', desc: 'I package workflows so they are usable by teams, not only by the person who wrote the script.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }] },
+    { icon: SVG_GLOBE,   title: 'Static Sites & Front Ends', desc: 'Production-ready Astro sites with SEO, performance, and editorial discipline baked in.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }] },
+    { icon: SVG_SHIELD,  title: 'Financial & Audit Tooling', desc: 'Fail-closed reconciliation workflows with deterministic audit artifacts for review and compliance.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }] },
+    { icon: SVG_CHART,   title: 'Reporting & Data Delivery', desc: 'Structured outputs, dashboards, and publishing workflows that eliminate manual copy-paste from the chain.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
   ],
   examplesLabel: 'Examples:',
 };
 
 const es = {
-  eyebrow: 'Servicios', title: 'Qué Construyo',
-  subtitle: 'El patrón común: reemplazar trabajo manual frágil con automatización confiable y documentada.',
+  eyebrow: 'Servicios', title: 'Cómo Puedo Ayudar',
+  subtitle: 'El problema recurrente que resuelvo: trabajo manual frágil que debería estar automatizado, documentado y traspasado.',
   services: [
-    { icon: '🔄', title: 'ETL y Automatización de Flujos', desc: 'Convierto trabajo repetitivo de reportes y back-office en pipelines programados o reproducibles con salidas claras.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
-    { icon: '🕷️', title: 'Scraping y Adquisición de Datos', desc: 'Construyo flujos de recolección lo suficientemente resilientes para uso recurrente — no solo demostraciones.', examples: [{ name: 'PDF Text Analyzer', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }] },
-    { icon: '🔌', title: 'APIs Internas y Confiabilidad', desc: 'Empaqueto flujos para que sean utilizables por equipos, no solo por quien escribió el script.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'Crypto Price Tracker', href: 'https://github.com/cortega26/crypto-price-tracker' }] },
-    { icon: '🌐', title: 'Sitios Estáticos y Frontends', desc: 'Sitios Astro listos para producción con SEO, rendimiento y disciplina editorial integrados.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }] },
-    { icon: '🏦', title: 'Herramientas Financieras y de Auditoría', desc: 'Flujos de conciliación fail-closed con artefactos de auditoría deterministas para revisión y cumplimiento.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }] },
-    { icon: '📊', title: 'Reportes y Entrega de Datos', desc: 'Salidas estructuradas, dashboards y flujos de publicación que eliminan el copia-pega manual de la cadena.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'PDF Text Analyzer', href: 'https://github.com/cortega26/PDF-Text-Analyzer' }] },
+    { icon: SVG_REFRESH, title: 'ETL y Automatización de Flujos', desc: 'Convierto trabajo repetitivo de reportes y back-office en pipelines programados o reproducibles con salidas claras.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
+    { icon: SVG_SEARCH,  title: 'Scraping y Adquisición de Datos', desc: 'Construyo flujos de recolección lo suficientemente resilientes para uso recurrente — no solo demostraciones.', examples: [{ name: 'Pipeline de Lotería', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }] },
+    { icon: SVG_LAYERS,  title: 'APIs Internas y Confiabilidad', desc: 'Empaqueto flujos para que sean utilizables por equipos, no solo por quien escribió el script.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }] },
+    { icon: SVG_GLOBE,   title: 'Sitios Estáticos y Frontends', desc: 'Sitios Astro listos para producción con SEO, rendimiento y disciplina editorial integrados.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }] },
+    { icon: SVG_SHIELD,  title: 'Herramientas Financieras y de Auditoría', desc: 'Flujos de conciliación fail-closed con artefactos de auditoría deterministas para revisión y cumplimiento.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }] },
+    { icon: SVG_CHART,   title: 'Reportes y Entrega de Datos', desc: 'Salidas estructuradas, dashboards y flujos de publicación que eliminan el copia-pega manual de la cadena.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
   ],
   examplesLabel: 'Ejemplos:',
 };
@@ -43,7 +50,7 @@ const c = lang === 'en' ? en : es;
     <div class="grid-3">
       {c.services.map((svc, i) => (
         <article class={`card-glass svc-card reveal reveal-delay-${(i % 3) + 1}`}>
-          <div class="svc-icon">{svc.icon}</div>
+          <div class="svc-icon" set:html={svc.icon}></div>
           <h3 class="svc-title">{svc.title}</h3>
           <p class="svc-desc">{svc.desc}</p>
           <p class="svc-examples-label">{c.examplesLabel}</p>
@@ -59,7 +66,8 @@ const c = lang === 'en' ? en : es;
 </section>
 
 <style>
-.svc-icon { font-size: 2rem; margin-bottom: 1rem; }
+.svc-icon { margin-bottom: 1rem; display: flex; }
+.svc-icon svg { color: var(--clr-accent); }
 .svc-title {
   font-family: var(--ff-heading); font-size: 1rem; font-weight: 700;
   color: var(--clr-text); margin-bottom: 0.6rem;

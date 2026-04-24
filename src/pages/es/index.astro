@@ -13,8 +13,8 @@ import '../../styles/global.css';
 
 const navItems = [
   { href: '#overview',     label: 'Resumen' },
-  { href: '#services',     label: 'Servicios' },
   { href: '#portfolio',    label: 'Trabajo' },
+  { href: '#services',     label: 'Servicios' },
   { href: '#about',        label: 'Perfil' },
   { href: '#credentials',  label: 'Credenciales' },
   { href: '#contact',      label: 'Contacto' },
@@ -28,30 +28,45 @@ const jsonLd = {
   url: 'https://tooltician.com/',
   sameAs: ['https://github.com/cortega26', 'https://www.linkedin.com/in/cortega26'],
   jobTitle: 'Consultor de Automatización Python y Sistemas de Datos',
-  description: 'Construyo sistemas de automatización Python — pipelines ETL, scrapers, APIs internas y flujos de reportes — limpios, documentados y diseñados para seguir funcionando después del traspaso.',
+  description: 'Construyo sistemas de automatización Python — pipelines ETL, scrapers, APIs internas y flujos de reportes — acotados, documentados y diseñados para seguir funcionando después del traspaso.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Santiago',
     addressCountry: 'CL',
   },
+  makesOffer: [
+    { '@type': 'Offer', name: 'ETL y Automatización de Flujos', description: 'Pipelines ETL programados y reproducibles con salidas claras.' },
+    { '@type': 'Offer', name: 'Scraping y Adquisición de Datos', description: 'Flujos de recolección resilientes para uso recurrente.' },
+    { '@type': 'Offer', name: 'APIs Internas y Confiabilidad', description: 'Paquetes y APIs utilizables por equipos, no solo por el autor.' },
+    { '@type': 'Offer', name: 'Sitios Estáticos y Frontends', description: 'Sitios Astro listos para producción con SEO y rendimiento integrados.' },
+    { '@type': 'Offer', name: 'Herramientas Financieras y de Auditoría', description: 'Flujos fail-closed con artefactos de auditoría deterministas.' },
+    { '@type': 'Offer', name: 'Reportes y Entrega de Datos', description: 'Salidas estructuradas y dashboards que eliminan el copia-pega manual.' },
+  ],
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, item: { '@type': 'SoftwareApplication', name: 'El Rincón de Ébano', url: 'https://elrincondeebano.com', description: 'Tienda e-commerce para comunidad residencial privada, operada activamente.' } },
+    { '@type': 'ListItem', position: 2, item: { '@type': 'SoftwareApplication', name: 'Monedario', url: 'https://monedario.cl', description: 'Plataforma de finanzas personales para Chile con calculadoras y datos en tiempo real.' } },
+    { '@type': 'ListItem', position: 3, item: { '@type': 'SoftwareApplication', name: 'Rutificador', url: 'https://pypi.org/project/rutificador/', description: 'Librería Python publicada en PyPI para validar y normalizar RUTs chilenos.' } },
+    { '@type': 'ListItem', position: 4, item: { '@type': 'SoftwareApplication', name: 'Conciliador Bancario', url: 'https://pypi.org/project/bankrecon/', description: 'Herramienta de conciliación bancaria fail-closed publicada en PyPI.' } },
+    { '@type': 'ListItem', position: 5, item: { '@type': 'WebSite', name: 'Noticiencias', url: 'https://noticiencias.com', description: 'Sitio de divulgación científica en español, 8 disciplinas.' } },
+  ],
 };
 ---
 <BaseLayout
-  title="Carlos Ortega | Consultor de Automatización Python — Santiago, Chile"
-  description="Consultor de automatización Python especializado en ETL, scraping, APIs internas y flujos de reportes confiables. Entrega bilingüe (ES/EN) orientada a producción. Basado en Santiago, Chile."
+  title="Carlos Ortega — Consultor de Automatización Python | Tooltician"
+  description="Consultor de automatización Python bilingüe (ES/EN) en Santiago de Chile. Pipelines ETL, flujos de scraping, APIs internas y automatización de reportes — entrega acotada con CI, documentación y sistemas listos para traspaso."
   lang="es"
   canonical="https://tooltician.com/es/"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
   <Navbar lang="es" items={navItems} />
 
   <main id="main">
     <HeroSection lang="es" />
-    <ServicesSection lang="es" />
     <PortfolioSection lang="es" />
+    <ServicesSection lang="es" />
     <AboutSection lang="es" />
     <ProofSection lang="es" />
     <CredentialsSection lang="es" />

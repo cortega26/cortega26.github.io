@@ -2,23 +2,27 @@
 interface Props { lang: 'en' | 'es'; }
 const { lang } = Astro.props;
 
+const SVG_USERS   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+const SVG_PACKAGE = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>';
+const SVG_GEAR    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>';
+
 const en = {
-  eyebrow: 'About', title: 'Who I Work With & How',
-  intro: 'My strongest work starts from practical operational pain: data that arrives late, reporting that breaks easily, and workflows that depend too much on manual attention. I focus on solving the workflow first, then packaging the result so it is testable, documented, and easier to keep running.',
+  eyebrow: 'About', title: 'Who I Help and What They Get',
+  intro: 'Operations teams accumulate the same category of pain: data that arrives late, reports that break unpredictably, and workflows nobody truly owns. I solve that — starting with the workflow, then packaging the result so it is testable, documented, and easier to keep running.',
   cards: [
-    { title: 'Who I help', icon: '👥', items: ['Operations-heavy teams still relying on spreadsheets, manual checks, or brittle scripts.', 'Founders and managers who need reliable internal tools without overbuilding a full product team.', 'Organizations that benefit from bilingual technical communication.'] },
-    { title: 'What clients get', icon: '📦', items: ['Clear scope, documented assumptions, and honest tradeoffs before implementation starts.', 'Python-first delivery with CI, structured logging, deterministic outputs, and readable README docs.', 'Practical handoff materials so the workflow survives after the initial delivery.'] },
-    { title: 'Preferred stack', icon: '⚙️', items: ['Python, SQL, Bash, FastAPI, Selenium, BeautifulSoup, Pandas, and static-site tooling.', 'GitHub Actions, CodeQL, package publishing, and docs-focused repository packaging.', 'Interfaces that reduce cognitive load for operators instead of adding more software to babysit.'] },
+    { title: 'Who I help', icon: SVG_USERS,   items: ['Operations-heavy teams still relying on spreadsheets, manual checks, or brittle scripts.', 'Founders and managers who need reliable internal tools without overbuilding a full product team.', 'Organizations that benefit from bilingual technical communication.'] },
+    { title: 'What clients get', icon: SVG_PACKAGE, items: ['Clear scope, documented assumptions, and honest tradeoffs before implementation starts.', 'Python-first delivery with CI, structured logging, deterministic outputs, and readable README docs.', 'Practical handoff materials so the workflow survives after the initial delivery.'] },
+    { title: 'Preferred stack', icon: SVG_GEAR,    items: ['Python, SQL, Bash, FastAPI, Selenium, BeautifulSoup, Pandas, and static-site tooling.', 'GitHub Actions, CodeQL, package publishing, and docs-focused repository packaging.', 'Interfaces that reduce cognitive load for operators instead of adding more software to babysit.'] },
   ],
 };
 
 const es = {
-  eyebrow: 'Perfil', title: 'Con quién trabajo y cómo',
-  intro: 'Mi trabajo más sólido parte del dolor operativo concreto: datos que llegan tarde, reportes que se rompen fácilmente y flujos que dependen demasiado de atención manual. Me enfoco primero en resolver el flujo, luego en empaquetar el resultado para que sea testeable, documentado y más fácil de mantener.',
+  eyebrow: 'Perfil', title: 'A quién ayudo y qué obtienen',
+  intro: 'Los equipos operativos acumulan la misma categoría de problemas: datos que llegan tarde, reportes que se rompen impredeciblemente y flujos que nadie realmente posee. Eso es lo que resuelvo — empezando por el flujo, luego empaquetando el resultado para que sea testeable, documentado y más fácil de mantener.',
   cards: [
-    { title: 'A quién ayudo', icon: '👥', items: ['Equipos con operaciones intensas que todavía dependen de hojas de cálculo, revisiones manuales o scripts frágiles.', 'Fundadores y gerentes que necesitan herramientas internas confiables sin armar un equipo de producto completo.', 'Organizaciones que se benefician de comunicación técnica bilingüe.'] },
-    { title: 'Qué reciben los clientes', icon: '📦', items: ['Alcance claro, supuestos documentados y tradeoffs honestos antes de comenzar la implementación.', 'Entrega Python-first con CI, logging estructurado, salidas deterministas y READMEs legibles.', 'Materiales de traspaso prácticos para que el flujo sobreviva después de la entrega inicial.'] },
-    { title: 'Stack preferido', icon: '⚙️', items: ['Python, SQL, Bash, FastAPI, Selenium, BeautifulSoup, Pandas y herramientas de sitios estáticos.', 'GitHub Actions, CodeQL, publicación de paquetes y empaquetado de repositorios orientado a docs.', 'Interfaces que reducen la carga cognitiva en lugar de agregar más software que supervisar.'] },
+    { title: 'A quién ayudo', icon: SVG_USERS,   items: ['Equipos con operaciones intensas que todavía dependen de hojas de cálculo, revisiones manuales o scripts frágiles.', 'Fundadores y gerentes que necesitan herramientas internas confiables sin armar un equipo de producto completo.', 'Organizaciones que se benefician de comunicación técnica bilingüe.'] },
+    { title: 'Qué reciben los clientes', icon: SVG_PACKAGE, items: ['Alcance claro, supuestos documentados y tradeoffs honestos antes de comenzar la implementación.', 'Entrega Python-first con CI, logging estructurado, salidas deterministas y READMEs legibles.', 'Materiales de traspaso prácticos para que el flujo sobreviva después de la entrega inicial.'] },
+    { title: 'Stack preferido', icon: SVG_GEAR,    items: ['Python, SQL, Bash, FastAPI, Selenium, BeautifulSoup, Pandas y herramientas de sitios estáticos.', 'GitHub Actions, CodeQL, publicación de paquetes y empaquetado de repositorios orientado a docs.', 'Interfaces que reducen la carga cognitiva en lugar de agregar más software que supervisar.'] },
   ],
 };
 
@@ -35,7 +39,7 @@ const c = lang === 'en' ? en : es;
     <div class="grid-3">
       {c.cards.map((card, i) => (
         <article class={`card-glass reveal reveal-delay-${i + 1}`}>
-          <div class="about-icon">{card.icon}</div>
+          <div class="about-icon" set:html={card.icon}></div>
           <h3 class="about-card-title">{card.title}</h3>
           <ul class="about-list">
             {card.items.map(item => <li>{item}</li>)}
@@ -47,7 +51,8 @@ const c = lang === 'en' ? en : es;
 </section>
 
 <style>
-.about-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+.about-icon { margin-bottom: 0.75rem; display: flex; }
+.about-icon svg { color: var(--clr-accent); }
 .about-card-title {
   font-family: var(--ff-heading); font-size: 1rem; font-weight: 700;
   color: var(--clr-text); margin-bottom: 0.75rem;

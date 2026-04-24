@@ -6,11 +6,11 @@ const { lang } = Astro.props;
 
 const en = {
   availability: 'Open to new projects',
-  eyebrow: 'Tooltician',
+  eyebrow: 'Freelance Consultant · LATAM & US',
   name: 'Carlos Ortega Gonzalez',
   role: 'Python automation consultant — LATAM & US time zones',
   location: 'Santiago, Chile · LATAM & US-friendly time zones',
-  lede: 'If your team is spending hours on reports that could run themselves — or maintaining data workflows nobody fully understands — I can fix that. I build Python automation systems: clean, documented, and designed to keep working after I leave.',
+  lede: 'If your team is spending hours on reports that could run themselves — or maintaining data workflows nobody fully understands — I can fix that. I build Python automation systems: scoped, documented, and designed to keep running after I hand them off.',
   lockup: 'I work in English and Spanish with teams across LATAM and U.S.-friendly time zones.',
   highlights: [
     'ETL pipelines, scrapers, and internal APIs delivered with CI, tests, and handoff documentation.',
@@ -20,6 +20,7 @@ const en = {
   cta1: 'See my work',
   cta2: 'Start a project',
   cta3: 'GitHub',
+  cta4: 'Schedule a call',
   card1Title: 'Best-fit work',
   card1Body: 'Reporting automation, ETL pipelines, scraping workflows, and internal tools that need to be reliable and maintainable — not just working.',
   card2Title: 'How I deliver',
@@ -30,11 +31,11 @@ const en = {
 
 const es = {
   availability: 'Disponible para proyectos',
-  eyebrow: 'Tooltician',
+  eyebrow: 'Consultor Independiente · LATAM y EE.UU.',
   name: 'Carlos Ortega González',
   role: 'Consultor de automatización Python — LATAM y EE.UU.',
   location: 'Santiago, Chile · Zonas horarias LATAM y compatibles con EE.UU.',
-  lede: 'Si tu equipo pierde horas en reportes que podrían ejecutarse solos — o mantiene flujos de datos que nadie entiende del todo — puedo resolver eso. Construyo sistemas de automatización Python: limpios, documentados y diseñados para seguir funcionando cuando no estoy.',
+  lede: 'Si tu equipo pierde horas en reportes que podrían ejecutarse solos — o mantiene flujos de datos que nadie entiende del todo — puedo resolver eso. Construyo sistemas de automatización Python: acotados, documentados y diseñados para seguir funcionando cuando los traspaso.',
   lockup: 'Trabajo en español e inglés con equipos de LATAM y zonas horarias compatibles con EE.UU.',
   highlights: [
     'Pipelines ETL, scrapers y APIs internas entregados con CI, pruebas y documentación de traspaso.',
@@ -44,6 +45,7 @@ const es = {
   cta1: 'Ver mi trabajo',
   cta2: 'Iniciar proyecto',
   cta3: 'GitHub',
+  cta4: 'Agendar llamada',
   card1Title: 'Trabajo ideal',
   card1Body: 'Automatización de reportes, pipelines ETL, flujos de scraping y herramientas internas que necesitan ser confiables y mantenibles — no solo funcionales.',
   card2Title: 'Cómo entrego',
@@ -89,8 +91,9 @@ const c = lang === 'en' ? en : es;
         </ul>
         <div class="hero__actions reveal reveal-delay-4">
           <a class="btn btn-primary" href="#portfolio">{c.cta1}</a>
-          <a class="btn btn-ghost" href="mailto:carlosortega77@gmail.com?subject=Project%20Inquiry">{c.cta2}</a>
+          <a class="btn btn-ghost" href="mailto:carlos@tooltician.com?subject=Project%20Inquiry">{c.cta2}</a>
           <a class="btn btn-ghost" href="https://github.com/cortega26" target="_blank" rel="noopener noreferrer">{c.cta3}</a>
+          <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">{c.cta4}</a>
         </div>
       </div>
 
@@ -146,8 +149,7 @@ const c = lang === 'en' ? en : es;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
 }
 .hero__orb {
-  position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.35;
-  animation: hero-float 10s ease-in-out infinite;
+  position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.18;
 }
 .hero__orb--1 {
   width: 600px; height: 600px;
@@ -158,11 +160,6 @@ const c = lang === 'en' ? en : es;
   width: 450px; height: 450px;
   background: radial-gradient(circle, #00d4aa, transparent 70%);
   bottom: -100px; right: -100px;
-  animation-delay: 5s;
-}
-@keyframes hero-float {
-  0%,100% { transform: translate(0,0); }
-  50% { transform: translate(30px,-30px); }
 }
 
 .hero__layout {
@@ -221,10 +218,8 @@ const c = lang === 'en' ? en : es;
   position: absolute; inset: -8px;
   border-radius: 50%;
   background: conic-gradient(from 0deg, var(--clr-accent), var(--clr-accent-2), var(--clr-accent));
-  animation: spin-ring 8s linear infinite;
-  opacity: 0.7;
+  opacity: 0.55;
 }
-@keyframes spin-ring { to { transform: rotate(360deg); } }
 .hero__photo {
   position: absolute; inset: 4px;
   width: calc(100% - 8px); height: calc(100% - 8px);
@@ -242,8 +237,14 @@ const c = lang === 'en' ? en : es;
 .hero__card { padding: 1rem 1.25rem; }
 
 @media (max-width: 900px) {
-  .hero__layout { grid-template-columns: 1fr; }
-  .hero__aside { display: none; }
-  .hero { min-height: auto; }
+  .hero__layout { grid-template-columns: 1fr; gap: 2rem; }
+  .hero__copy { order: 2; }
+  .hero__aside { order: 1; display: flex; flex-direction: column; align-items: center; }
+  .hero__figure { width: 200px; height: 200px; }
+  .hero__cards { width: 100%; }
+  .hero { min-height: auto; padding-top: calc(var(--nav-height) + 2rem); }
+}
+@media (max-width: 640px) {
+  .hero__card:nth-child(3) { display: none; }
 }
 </style>

@@ -1,27 +1,38 @@
 ---
-// This is a static site (GitHub Pages), so we must use a meta refresh redirect
-// instead of a server-side SSR GET() function.
+// Static GitHub Pages — use meta refresh for language redirect.
+// JS-based redirect handles modern browsers; noscript meta handles the rest.
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tooltician — Python Automation Consultant | Carlos Ortega</title>
+  <meta name="description" content="Bilingual Python automation consultant (EN/ES) based in Santiago, Chile. ETL pipelines, scraping workflows, internal APIs, and reporting automation — scoped delivery with CI, documentation, and handoff-ready systems." />
+  <link rel="canonical" href="https://tooltician.com/en/" />
+  <link rel="alternate" hreflang="es" href="https://tooltician.com/es/" />
+  <link rel="alternate" hreflang="en" href="https://tooltician.com/en/" />
+  <meta http-equiv="refresh" content="0;url=/en/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tooltician — Python Automation Consultant | Carlos Ortega" />
+  <meta property="og:description" content="Bilingual Python automation consultant (EN/ES). ETL pipelines, scraping, internal APIs, and reporting automation. Santiago, Chile." />
+  <meta property="og:url" content="https://tooltician.com/" />
+  <meta property="og:image" content="https://tooltician.com/assets/images/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tooltician — Python Automation Consultant | Carlos Ortega" />
+  <meta name="twitter:description" content="Bilingual Python automation consultant (EN/ES). ETL pipelines, scraping, internal APIs, and reporting automation." />
+  <meta name="twitter:image" content="https://tooltician.com/assets/images/og-card.png" />
   <style>
     body { background-color: #070d1a; margin: 0; padding: 0; }
   </style>
   <script>
-    const userLang = navigator.language || navigator.userLanguage;
+    const userLang = navigator.language;
     if (userLang && userLang.toLowerCase().startsWith('es')) {
       window.location.replace('/es/');
     } else {
       window.location.replace('/en/');
     }
   </script>
-  <noscript>
-    <meta http-equiv="refresh" content="0;url=/en/" />
-  </noscript>
-  <link rel="canonical" href="https://tooltician.com/en/" />
 </head>
 <body>
 </body>

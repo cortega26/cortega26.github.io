@@ -21,7 +21,17 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
 <nav class="navbar" aria-label={lang === 'en' ? 'Primary navigation' : 'Navegación principal'}>
   <div class="container">
     <div class="navbar__inner">
-      <a class="navbar__brand" href={lang === 'en' ? '/en/' : '/es/'}>Tooltician</a>
+      <a class="navbar__brand" href={lang === 'en' ? '/en/' : '/es/'} aria-label="Tooltician">
+        <img
+          class="navbar__brand-logo"
+          src="/assets/images/tooltician-logo.png"
+          alt=""
+          width="1254"
+          height="1254"
+          decoding="async"
+        />
+        <span>Tooltician</span>
+      </a>
 
       <button
         class="navbar__toggle"

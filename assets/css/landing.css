@@ -61,10 +61,21 @@ body {
 }
 
 .hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   margin: 0 0 0.75rem;
   color: var(--muted-color);
   font-size: 0.95rem;
   font-weight: 600;
+}
+
+.hero-logo {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  border-radius: 8px;
+  object-fit: contain;
 }
 
 .hero-header h1 {

@@ -12,7 +12,7 @@ const {
   description,
   lang,
   canonical,
-  ogImage = 'https://tooltician.com/assets/images/og-card.png',
+  ogImage = 'https://tooltician.com/assets/images/tooltician-logo.png',
 } = Astro.props;
 ---
 <!doctype html>
@@ -34,12 +34,14 @@ const {
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogImage} />
+  <meta property="og:image:alt" content="Tooltician logo" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content="Tooltician logo" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,7 +50,8 @@ const {
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/images/tooltician-logo.png" />
 
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="uU7HA5yyjlR9jxjk2RvjzA" async></script>
 

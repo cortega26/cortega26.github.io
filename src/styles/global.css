@@ -200,13 +200,26 @@ ul { list-style: none; }
   width: 100%;
 }
 .navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
   font-family: var(--ff-heading);
   font-size: var(--fs-xl);
   font-weight: 700;
+  color: var(--clr-text);
+}
+.navbar__brand span {
   background: linear-gradient(135deg, #fff 30%, var(--clr-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+.navbar__brand-logo {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 8px;
+  object-fit: contain;
 }
 .navbar__links {
   display: flex;

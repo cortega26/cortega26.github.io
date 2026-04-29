@@ -154,11 +154,24 @@ Status: [ ] = todo  [x] = done  [~] = partial / needs review
 
 ## Verification Steps
 
-- [x] Run `node tests/run.js` — all source checks pass (81/81)
+- [x] Run `node tests/run.js` — all source checks pass (80/80)
 - [x] Run `npm run build` — zero errors
-- [x] Run `node tests/run.js --built` — all built-output checks pass (81/81)
-- [ ] Manual check: mobile layout looks correct (hero photo visible)
-- [ ] Manual check: no spinning ring visible on profile photo
-- [ ] Manual check: portfolio section appears before services section
-- [ ] Manual check: 7 projects in portfolio grid
-- [ ] Manual check: og-card.png exists and has correct content
+- [x] Run `node tests/run.js --built` — all built-output checks pass (90/90)
+- [x] Manual check: hero CTA visibility and no overflow validated at `360`, `390`, `414`, and `768`
+- [x] Manual check: mobile nav overlay, scroll lock, and `Escape` close verified in Playwright
+- [x] Manual check: keyboard focus ring visible on hero CTA and mobile nav link
+- [x] Manual check: Wave 2 screenshots captured under `output/playwright/`
+
+---
+
+## WAVE 2 — Mobile Navigation and Hero Credibility
+
+- [x] TT-006 · Remove the portrait-led hero aside and replace it with a more professional credibility panel
+- [x] TT-007 · Simplify the hero support content so it feels less templated and easier to scan
+- [x] TT-008 · Add mobile nav backdrop, scroll lock, escape close, and controlled overlay behavior
+- [x] TT-014 · Add shared `:focus-visible` styles for key interactive elements
+- [x] Tests · Extend `tests/run.js` for Wave 2 behavior checks
+- [x] Verify · Run `node tests/run.js`
+- [x] Verify · Run `npm run build`
+- [x] Verify · Run `node tests/run.js --built`
+- [x] Verify · Review `360`, `390/414`, and `768` breakpoints with the mobile nav open and closed

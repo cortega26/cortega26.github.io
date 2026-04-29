@@ -97,20 +97,92 @@ const {
 
     // Mobile nav toggle
     const toggle = document.querySelector('.navbar__toggle') as HTMLButtonElement | null;
-    const links  = document.querySelector('.navbar__links') as HTMLElement | null;
+    const links = document.querySelector('.navbar__links') as HTMLElement | null;
+    const overlay = document.querySelector('[data-nav-close]') as HTMLButtonElement | null;
+    const mobileNav = window.matchMedia('(max-width: 768px)');
+    const focusableSelector = [
+      'a[href]',
+      'button:not([disabled])',
+      'input:not([disabled])',
+      'textarea:not([disabled])',
+      'select:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(', ');
+    let returnFocus: HTMLElement | null = null;
+
+    function navFocusables() {
+      if (!links) return [];
+      return Array.from(links.querySelectorAll<HTMLElement>(focusableSelector))
+        .filter(el => !el.hasAttribute('disabled'));
+    }
+
+    function setNavOpen(open: boolean) {
+      if (!toggle || !links || !overlay) return;
+
+      const isOpen = open && mobileNav.matches;
+      toggle.classList.toggle('open', isOpen);
+      links.classList.toggle('open', isOpen);
+      overlay.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      document.documentElement.classList.toggle('nav-open', isOpen);
+      document.body.classList.toggle('nav-open', isOpen);
+
+      if (isOpen) {
+        returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : toggle;
+        window.requestAnimationFrame(() => navFocusables()[0]?.focus());
+      } else if (returnFocus) {
+        const nextFocus = returnFocus;
+        returnFocus = null;
+        window.requestAnimationFrame(() => nextFocus.focus());
+      }
+    }
+
+    function closeNav() {
+      setNavOpen(false);
+    }
+
+    function trapNavFocus(event: KeyboardEvent) {
+      if (!mobileNav.matches || !links?.classList.contains('open') || event.key !== 'Tab') return;
+
+      const focusables = navFocusables();
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
     toggle?.addEventListener('click', () => {
-      const open = toggle.classList.toggle('open');
-      links?.classList.toggle('open', open);
-      toggle.setAttribute('aria-expanded', String(open));
+      const open = !links?.classList.contains('open');
+      setNavOpen(open);
     });
 
-    // Close mobile nav on link click
+    overlay?.addEventListener('click', closeNav);
+
     links?.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        toggle?.classList.remove('open');
-        links.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
-      });
+      a.addEventListener('click', closeNav);
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && links?.classList.contains('open')) {
+        closeNav();
+        return;
+      }
+      trapNavFocus(event);
+    });
+
+    mobileNav.addEventListener('change', event => {
+      if (!event.matches) {
+        setNavOpen(false);
+      }
     });
 
     // Reveal on scroll

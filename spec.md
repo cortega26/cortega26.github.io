@@ -11,6 +11,46 @@ Implement all improvements identified in the portfolio audit to make tooltician.
 - All changes must be bilingual (EN + ES) unless a change is purely structural/CSS.
 - Tests run against source files by default; pass `--built` to also check `dist/`.
 
+## Current Phase
+Wave 2 — Mobile Navigation and Hero Credibility
+
+### Goals
+- Remove the portrait-led hero treatment so the page opens with a more sober, consultative tone.
+- Simplify the hero aside into clearer credibility content that supports the service-first positioning from Wave 1.
+- Upgrade the mobile navigation from a basic dropdown into a controlled overlay with backdrop, close behavior, and scroll lock.
+- Add consistent `:focus-visible` states across major interactive elements so keyboard navigation remains obvious after the nav changes.
+
+### Implementation Notes
+- `src/components/HeroSection.astro`
+  - Remove the hero portrait image block.
+  - Replace the photo/cards aside with a concise engagement snapshot panel and a smaller delivery note.
+  - Keep the existing copy-first hierarchy and bilingual support intact.
+- `src/components/Navbar.astro`
+  - Add a dedicated mobile nav backdrop element that can close the menu.
+- `src/layouts/BaseLayout.astro`
+  - Replace the current nav toggle logic with open/close helpers that manage backdrop state, `aria-expanded`, escape-to-close, link-click close, scroll lock, and basic focus containment on mobile.
+- `src/styles/global.css`
+  - Style the mobile menu as a fixed overlay panel instead of an inline dropdown.
+  - Add shared `:focus-visible` rules and nav-specific focus treatments.
+  - Add body/html scroll lock behavior while the menu is open.
+
+### Verification
+- Automated:
+  - `node tests/run.js`
+  - `npm run build`
+  - `node tests/run.js --built`
+- Manual breakpoint review:
+  - `360x800`
+  - `390x844`
+  - `414x896`
+  - `768x1024`
+- Manual interaction checks:
+  - Mobile nav opens as a layered overlay with visible backdrop.
+  - Background page does not scroll while the mobile nav is open.
+  - `Escape` closes the menu.
+  - At least one CTA remains above the fold in the hero on mobile.
+  - Keyboard focus is clearly visible on nav links, CTAs, form controls, and filter buttons.
+
 ---
 
 ## Change Catalogue

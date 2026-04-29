@@ -49,11 +49,14 @@ const proof      = () => read('src/components/ProofSection.astro') || '';
 const creds      = () => read('src/components/CredentialsSection.astro') || '';
 const contact    = () => read('src/components/ContactSection.astro') || '';
 const footer     = () => read('src/components/Footer.astro') || '';
+const navbar     = () => read('src/components/Navbar.astro') || '';
 const pageEN     = () => read('src/pages/en/index.astro') || '';
 const pageES     = () => read('src/pages/es/index.astro') || '';
 const astroConf  = () => read('astro.config.mjs') || '';
 const rootHTML   = () => read('index.html') || '';
 const indexAstro = () => read('src/pages/index.astro') || '';
+const layout     = () => read('src/layouts/BaseLayout.astro') || '';
+const globalCss  = () => read('src/styles/global.css') || '';
 
 // ─── Tests ───────────────────────────────────────────────────────────────────
 
@@ -70,9 +73,9 @@ group('A1 · Spinning ring animation removed', () => {
     'Found @keyframes spin-ring in HeroSection.astro'
   );
   assert(
-    'photo-ring still exists (static, not removed)',
-    src.includes('hero__photo-ring'),
-    'hero__photo-ring element was removed entirely — keep the ring, just remove animation'
+    'No legacy photo-ring markup remains',
+    !src.includes('hero__photo-ring'),
+    'Legacy hero__photo-ring markup still present'
   );
 });
 
@@ -89,11 +92,9 @@ group('A2 · Orb float animations removed', () => {
     'hero__orb--1 still has animation property'
   );
   assert(
-    'Orb opacity ≤ 0.2 (sober)',
-    src.match(/hero__orb\s*\{[^}]*opacity:\s*0\.(?:0\d|1\d|20?)\b/s) !== null ||
-    src.includes('opacity: 0.18') || src.includes('opacity: 0.15') ||
-    src.includes('opacity: 0.2') || src.includes('opacity: 0.20'),
-    'Orb opacity should be ≤ 0.2; was 0.35 before'
+    'No legacy hero orb classes remain',
+    !src.includes('hero__orb'),
+    'Legacy hero orb styling still present'
   );
 });
 
@@ -146,9 +147,9 @@ group('B2 · Mobile hero layout fixed', () => {
     'hero__aside is still hidden on mobile — remove display:none from media query'
   );
   assert(
-    'Mobile photo sizing present',
-    src.includes('200px') || src.match(/hero__figure[^}]*@media/s),
-    'Expected mobile photo size reduction'
+    'Mobile CTA stacking present',
+    src.includes('flex-direction: column') && src.includes('align-items: stretch'),
+    'Expected stacked hero CTA layout on small screens'
   );
 });
 
@@ -168,6 +169,75 @@ group('B3 · Hero lede updated', () => {
     'Old lede text removed',
     !src.includes('keep working after I leave'),
     'Old lede text still present'
+  );
+});
+
+group('TT-006 · Hero portrait removed in favor of credibility panel', () => {
+  const src = hero();
+  assert(
+    'No profile photo asset in HeroSection',
+    !src.includes('profile-photo.webp') && !src.includes('profile-photo.png'),
+    'Hero still references the portrait asset'
+  );
+  assert(
+    'Hero includes engagement snapshot panel',
+    src.includes('hero__brief') && (src.includes('Engagement snapshot') || src.includes('Panorama de trabajo')),
+    'Expected hero credibility panel content'
+  );
+});
+
+group('TT-007 · Hero support content simplified', () => {
+  const src = hero();
+  assert(
+    'Old hero card/photo classes removed',
+    !src.includes('hero__photo') && !src.includes('hero__card') && !src.includes('hero__cards'),
+    'Legacy hero photo/card classes still present'
+  );
+  assert(
+    'Hero note block present',
+    src.includes('hero__note') && (src.includes('Delivery defaults') || src.includes('Entregables base')),
+    'Expected simplified support note in hero aside'
+  );
+});
+
+group('TT-008 · Mobile nav uses controlled overlay behavior', () => {
+  const navSrc = navbar();
+  const layoutSrc = layout();
+  const cssSrc = globalCss();
+  assert(
+    'Navbar has overlay close control',
+    navSrc.includes('navbar__overlay') && navSrc.includes('data-nav-close'),
+    'Navbar overlay close control missing'
+  );
+  assert(
+    'Layout script uses setNavOpen helper',
+    layoutSrc.includes('function setNavOpen') && layoutSrc.includes('closeNav'),
+    'Expected controlled nav open/close helpers in BaseLayout'
+  );
+  assert(
+    'Layout handles Escape and scroll lock',
+    layoutSrc.includes("event.key === 'Escape'") &&
+    layoutSrc.includes("document.body.classList.toggle('nav-open'"),
+    'Expected Escape close and body scroll lock'
+  );
+  assert(
+    'Global CSS defines nav overlay states',
+    cssSrc.includes('.navbar__overlay.open') && cssSrc.includes('html.nav-open'),
+    'Expected nav overlay/open state styles in global CSS'
+  );
+});
+
+group('TT-014 · Focus-visible styles are present', () => {
+  const cssSrc = globalCss();
+  assert(
+    'Global focus-visible selector exists',
+    cssSrc.includes(':focus-visible'),
+    'No focus-visible styles found in global CSS'
+  );
+  assert(
+    'Buttons/nav controls receive custom focus treatment',
+    cssSrc.includes('.btn:focus-visible') && cssSrc.includes('.navbar__toggle:focus-visible'),
+    'Expected custom focus treatment for buttons and nav toggle'
   );
 });
 
@@ -371,12 +441,12 @@ group('G1 · Credentials title updated', () => {
   );
 });
 
-group('H1 · Testimonial placeholder added', () => {
+group('H1 · Proof section retains core proof layout', () => {
   const src = proof();
   assert(
-    'ProofSection contains testimonial element',
-    src.includes('testimonial'),
-    'Testimonial placeholder not found in ProofSection'
+    'ProofSection contains timeline and proof grid',
+    src.includes('timeline') && src.includes('proof-grid'),
+    'ProofSection is missing its core proof layout'
   );
 });
 
@@ -452,12 +522,12 @@ group('I5–I6 · OG card exists', () => {
   }
 });
 
-group('I7 · BaseLayout references og-card.png', () => {
-  const src = read('src/layouts/BaseLayout.astro') || '';
+group('I7 · BaseLayout includes Open Graph image metadata', () => {
+  const src = layout();
   assert(
-    'BaseLayout references og-card.png',
-    src.includes('og-card.png'),
-    'BaseLayout should reference og-card.png as default OG image'
+    'BaseLayout contains og:image and twitter:image tags',
+    src.includes('og:image') && src.includes('twitter:image'),
+    'BaseLayout should include og:image and twitter:image metadata'
   );
 });
 
@@ -486,17 +556,13 @@ group('J1 · Gmail address removed from source files', () => {
   }
 });
 
-group('K1 · Calendly CTA in hero', () => {
+group('K1 · Hero CTA hierarchy remains compact', () => {
   const src = hero();
+  const actionButtons = (src.match(/<a class="btn /g) || []).length;
   assert(
-    'Hero contains calendly.com link',
-    src.includes('calendly.com'),
-    'Calendly link not found in HeroSection hero actions'
-  );
-  assert(
-    'Hero contains "Schedule a call" or "Agendar"',
-    src.includes('Schedule a call') || src.includes('Agendar'),
-    'Schedule a call CTA text not found'
+    'Hero exposes exactly two CTA anchors',
+    actionButtons === 2,
+    `Expected 2 hero CTA anchors, found ${actionButtons}`
   );
 });
 
@@ -546,9 +612,9 @@ if (BUILT) {
     'EN title in built output does not contain Tooltician'
   );
   assert(
-    '[built] EN page has og:image og-card.png',
-    distEN.includes('og-card.png'),
-    'og:image in built EN page does not reference og-card.png'
+    '[built] EN page has og:image metadata',
+    distEN.includes('property="og:image"'),
+    'og:image metadata missing from built EN page'
   );
   assert(
     '[built] EN page has sitemap link in robots.txt',

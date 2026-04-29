@@ -36,12 +36,21 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
 
       <button
         class="navbar__toggle"
+        type="button"
         aria-controls="nav-links"
         aria-expanded="false"
         aria-label={lang === 'en' ? 'Toggle menu' : 'Abrir menú'}
       >
         <span></span><span></span><span></span>
       </button>
+
+      <button
+        class="navbar__overlay"
+        type="button"
+        tabindex="-1"
+        aria-label={lang === 'en' ? 'Close menu' : 'Cerrar menú'}
+        data-nav-close
+      ></button>
 
       <ul class="navbar__links" id="nav-links" role="list">
         {items.map(item => (

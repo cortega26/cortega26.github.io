@@ -19,11 +19,24 @@ const en = {
   ctaSecondary: 'See selected work',
   ctaPrimaryHref: 'mailto:carlos@tooltician.com?subject=Project%20Inquiry',
   ctaSecondaryHref: '#portfolio',
-  photoAlt: 'Professional portrait of Carlos Ortega Gonzalez',
-  card1Title: 'Best-fit engagements',
-  card1Body: 'Short, scoped consulting for reporting automation, ETL reliability, scraping workflows, and internal data tools.',
-  card2Title: 'What clients get',
-  card2Body: 'Implementation, documentation, and a system your team can keep operating without vendor lock-in.',
+  panelTitle: 'Engagement snapshot',
+  panelIntro: 'Best fit when a team needs a fragile workflow stabilized without turning the project into a long, open-ended build.',
+  panelItems: [
+    {
+      label: 'Typical scope',
+      value: 'Reporting automation, ETL reliability, scraping workflows, and internal data tools.',
+    },
+    {
+      label: 'Delivery style',
+      value: 'Scoped implementation, direct stakeholder communication, and documentation built for handoff.',
+    },
+    {
+      label: 'Timezone fit',
+      value: 'Santiago-based, working in English and Spanish across LATAM and U.S.-friendly hours.',
+    },
+  ],
+  noteTitle: 'Delivery defaults',
+  noteBody: 'CI, tests, and operating notes are included when the workflow needs a reliable handoff.',
 };
 
 const es = {
@@ -41,11 +54,24 @@ const es = {
   ctaSecondary: 'Ver trabajo seleccionado',
   ctaPrimaryHref: 'mailto:carlos@tooltician.com?subject=Consulta%20de%20Proyecto',
   ctaSecondaryHref: '#portfolio',
-  photoAlt: 'Retrato profesional de Carlos Ortega González',
-  card1Title: 'Proyectos ideales',
-  card1Body: 'Consultoría breve y acotada para automatización de reportes, confiabilidad ETL, scraping y herramientas internas de datos.',
-  card2Title: 'Qué recibe tu equipo',
-  card2Body: 'Implementación, documentación y un sistema que tu equipo pueda seguir operando sin dependencia del proveedor.',
+  panelTitle: 'Panorama de trabajo',
+  panelIntro: 'Encaja mejor cuando un equipo necesita estabilizar un flujo frágil sin convertir el proyecto en un desarrollo largo y abierto.',
+  panelItems: [
+    {
+      label: 'Alcance típico',
+      value: 'Automatización de reportes, confiabilidad ETL, scraping y herramientas internas de datos.',
+    },
+    {
+      label: 'Forma de entrega',
+      value: 'Implementación acotada, comunicación directa con stakeholders y documentación pensada para traspaso.',
+    },
+    {
+      label: 'Cobertura horaria',
+      value: 'Trabajo desde Santiago, en español e inglés, con equipos de LATAM y horarios compatibles con EE.UU.',
+    },
+  ],
+  noteTitle: 'Entregables base',
+  noteBody: 'CI, pruebas y notas operativas se incluyen cuando el flujo necesita un traspaso confiable.',
 };
 
 const c = lang === 'en' ? en : es;
@@ -79,27 +105,22 @@ const c = lang === 'en' ? en : es;
       </div>
 
       <div class="hero__aside reveal reveal-delay-2">
-        <figure class="hero__figure">
-          <img
-            class="hero__photo"
-            src="/assets/images/profile-photo.webp"
-            alt={c.photoAlt}
-            width="380" height="380"
-            loading="eager"
-            decoding="async"
-            onerror="this.src='/assets/images/profile-photo.png'"
-          />
-        </figure>
-        <div class="hero__cards">
-          <article class="hero__card">
-            <h3>{c.card1Title}</h3>
-            <p>{c.card1Body}</p>
-          </article>
-          <article class="hero__card">
-            <h3>{c.card2Title}</h3>
-            <p>{c.card2Body}</p>
-          </article>
-        </div>
+        <section class="hero__brief" aria-label={c.panelTitle}>
+          <p class="hero__brief-kicker">{c.panelTitle}</p>
+          <p class="hero__brief-intro">{c.panelIntro}</p>
+          <dl class="hero__brief-list">
+            {c.panelItems.map(item => (
+              <div class="hero__brief-row">
+                <dt>{item.label}</dt>
+                <dd>{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+        <aside class="hero__note" aria-label={c.noteTitle}>
+          <p class="hero__note-title">{c.noteTitle}</p>
+          <p>{c.noteBody}</p>
+        </aside>
       </div>
     </div>
   </div>
@@ -200,45 +221,74 @@ const c = lang === 'en' ? en : es;
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 0.9rem;
+  gap: 1rem;
+  align-content: start;
 }
-.hero__figure {
-  width: min(340px, 100%);
-  margin: 0 0 0 auto;
-  padding: 0.75rem;
-  border: 1px solid var(--clr-border);
-  border-radius: 14px;
-  background: rgba(15, 23, 41, 0.82);
+.hero__brief {
+  width: min(380px, 100%);
+  margin-left: auto;
+  padding: 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
+    rgba(15, 23, 41, 0.86);
+  box-shadow: var(--shadow-card);
 }
-.hero__photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 10px;
-  object-fit: cover;
-  background: var(--clr-surface);
+.hero__brief-kicker {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-accent-2);
+  margin-bottom: 0.75rem;
 }
-.hero__cards {
+.hero__brief-intro {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--clr-text);
+  margin-bottom: 1rem;
+}
+.hero__brief-list {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
-.hero__card h3 {
-  font-family: var(--ff-heading);
-  font-size: 0.92rem;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
+.hero__brief-row {
+  display: grid;
+  gap: 0.28rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.hero__brief-row dt {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   color: var(--clr-text);
 }
-.hero__card p {
-  font-size: 0.86rem;
+.hero__brief-row dd {
+  font-size: 0.88rem;
+  line-height: 1.6;
   color: var(--clr-text-muted);
-  line-height: 1.55;
 }
-.hero__card {
+.hero__note {
+  width: min(380px, 100%);
+  margin-left: auto;
   padding: 1rem 1.15rem;
-  border: 1px solid var(--clr-border);
-  border-radius: 12px;
-  background: rgba(15, 23, 41, 0.72);
+  border: 1px solid rgba(0, 212, 170, 0.18);
+  border-radius: 14px;
+  background: rgba(8, 18, 34, 0.78);
+}
+.hero__note-title {
+  font-family: var(--ff-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  margin-bottom: 0.35rem;
+}
+.hero__note p:last-child {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--clr-text-muted);
 }
 
 @media (max-width: 1024px) {
@@ -255,9 +305,10 @@ const c = lang === 'en' ? en : es;
   .hero__aside {
     order: 2;
   }
-  .hero__figure {
-    width: min(300px, 100%);
-    margin: 0 auto;
+  .hero__brief,
+  .hero__note {
+    width: 100%;
+    margin-left: 0;
   }
 }
 
@@ -272,6 +323,9 @@ const c = lang === 'en' ? en : es;
   .hero__summary,
   .hero__support {
     max-width: none;
+  }
+  .hero__layout {
+    gap: 2rem;
   }
 }
 
@@ -289,6 +343,11 @@ const c = lang === 'en' ? en : es;
   }
   .hero__highlights li {
     font-size: 0.88rem;
+  }
+  .hero__brief,
+  .hero__note {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 </style>

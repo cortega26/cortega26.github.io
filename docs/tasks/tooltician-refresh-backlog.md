@@ -173,9 +173,9 @@ Wave scoreboard:
 
 | Metric | Baseline | Target | Current status |
 |---|---:|---:|---|
-| Mobile menu quality | weak overlay | robust overlay | `Pending` |
-| Hero visual credibility | mixed | sober/professional | `Pending` |
-| Hero clutter | high | reduced | `Pending` |
+| Mobile menu quality | weak overlay | robust overlay | `Done` |
+| Hero visual credibility | mixed | sober/professional | `Done` |
+| Hero clutter | high | reduced | `Done` |
 
 Tasks:
 
@@ -289,15 +289,15 @@ This is the single flattened backlog for ticket creation.
 | `TT-004` | Interaction UX | Fix portfolio filter layout reflow | `P1` | high | `S` | `Wave 3` | `Pending` |
 | `TT-005` | Performance | Replace oversized navbar logo asset | `P1` | high | `S` | `Wave 1` | `Done` |
 | `TT-005A` | Performance | Replace oversized favicon strategy | `P1` | high | `S` | `Wave 1` | `Done` |
-| `TT-006` | Brand trust | Replace or remove hero photo | `P1` | high | `M` | `Wave 2` | `Pending` |
-| `TT-007` | Visual polish | Simplify hero cards and reduce template feel | `P2` | medium | `M` | `Wave 2` | `Pending` |
-| `TT-008` | Mobile nav | Convert mobile menu into robust overlay | `P2` | medium | `M` | `Wave 2` | `Pending` |
+| `TT-006` | Brand trust | Replace or remove hero photo | `P1` | high | `M` | `Wave 2` | `Done` |
+| `TT-007` | Visual polish | Simplify hero cards and reduce template feel | `P2` | medium | `M` | `Wave 2` | `Done` |
+| `TT-008` | Mobile nav | Convert mobile menu into robust overlay | `P2` | medium | `M` | `Wave 2` | `Done` |
 | `TT-009` | Affordance | Clarify clickable badges and small links | `P2` | medium | `S` | `Wave 3` | `Pending` |
 | `TT-010` | Performance | Remove duplicate Google Fonts loading | `P2` | medium | `S` | `Wave 4` | `Pending` |
 | `TT-011` | Performance | Improve hero image LCP handling | `P2` | medium | `S` | `Wave 4` | `Pending` |
 | `TT-012` | Assets | Compress or replace photo fallback strategy | `P2` | medium | `S` | `Wave 4` | `Pending` |
 | `TT-013` | Governance | Review third-party frontend scripts | `P3` | low | `S` | `Wave 4` | `Pending` |
-| `TT-014` | Accessibility | Add consistent `:focus-visible` states | `P2` | medium | `S` | `Wave 2` | `Pending` |
+| `TT-014` | Accessibility | Add consistent `:focus-visible` states | `P2` | medium | `S` | `Wave 2` | `Done` |
 | `TT-015` | Portfolio copy | Rewrite project cards for scanability and proof | `P1` | high | `M` | `Wave 3` | `Pending` |
 | `TT-016` | Information architecture | Reorder and emphasize anchor projects | `P2` | medium | `S` | `Wave 3` | `Pending` |
 | `TT-017` | Content structure | Reduce redundancy across About, Proof, Credentials | `P2` | medium | `M` | `Wave 5` | `Pending` |
@@ -350,6 +350,7 @@ Use this after each implementation session.
 | Session date | Active wave | Tasks touched | Build status | Breakpoint status | Lighthouse delta | Blockers | Next action |
 |---|---|---|---|---|---|---|---|
 | `2026-04-29` | `Wave 1` | `TT-001, TT-002, TT-003, TT-005, TT-005A` | `Pass` | `OK` | `Not yet re-run` | `None` | `Start Wave 2 with TT-006 or TT-008` |
+| `2026-04-29` | `Wave 2` | `TT-006, TT-007, TT-008, TT-014` | `Pass` | `OK` | `Not yet re-run` | `None` | `Start Wave 3 with TT-004` |
 | `YYYY-MM-DD` | `Wave X` | `TT-000, TT-000` | `Pass/Fail` | `OK/Issue` | `N/A or summary` | `None or note` | `single next move` |
 
 ## 9. Release Scoreboard Template

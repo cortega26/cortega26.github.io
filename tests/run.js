@@ -386,6 +386,105 @@ group('D10 · Portfolio title updated', () => {
   );
 });
 
+group('TT-004 · Portfolio filtering removes cards from layout', () => {
+  const src = portfolio();
+  assert(
+    'Projects define explicit filter categories',
+    src.includes('filters: [') && src.includes('data-categories={proj.filters.join'),
+    'Expected per-project filter categories in PortfolioSection'
+  );
+  assert(
+    'Filter script uses hidden property',
+    src.includes('card.hidden = !match'),
+    'Expected filtering to use hidden property so cards leave layout'
+  );
+  assert(
+    'Old hidden-class filter behavior removed',
+    !src.includes("classList.toggle('hidden'") && !src.includes('project-card.hidden'),
+    'Legacy opacity-only hidden class still present'
+  );
+});
+
+group('TT-015 · Portfolio cards are structured for scanability', () => {
+  const src = portfolio();
+  assert(
+    'Project data includes problem / solution / proof fields',
+    src.includes('problem:') && src.includes('solution:') && src.includes('proof:'),
+    'Expected problem/solution/proof fields in project data'
+  );
+  assert(
+    'Card markup renders structured project points',
+    src.includes('project-points') && src.includes('project-point'),
+    'Expected structured project points in card markup'
+  );
+  assert(
+    'Bilingual point labels exist',
+    src.includes("problem: 'Problem'") && src.includes("solution: 'Built'") && src.includes("proof: 'Proof'") &&
+    src.includes("problem: 'Problema'") && src.includes("solution: 'Construido'") && src.includes("proof: 'Prueba'"),
+    'Expected EN and ES labels for the portfolio scan sections'
+  );
+});
+
+group('TT-016 · Anchor projects are visually prioritized', () => {
+  const src = portfolio();
+  const featuredCount = (src.match(/featured:\s*true/g) || []).length;
+  assert(
+    'At least two projects are marked featured',
+    featuredCount >= 2,
+    `Expected at least 2 featured projects, found ${featuredCount}`
+  );
+  assert(
+    'Featured card styling exists',
+    src.includes('project-card--featured') && src.includes('grid-column: span 6'),
+    'Expected featured project card styling in PortfolioSection'
+  );
+});
+
+group('TT-009 · Small external links read as actions', () => {
+  const portfolioSrc = portfolio();
+  const proofSrc = proof();
+  assert(
+    'Portfolio uses explicit action labels',
+    portfolioSrc.includes('View repository') || portfolioSrc.includes('Ver repositorio'),
+    'Expected explicit repository action labels in portfolio links'
+  );
+  assert(
+    'Legacy generic Repo/Docs labels removed from portfolio',
+    !portfolioSrc.includes("label: 'Repo'") && !portfolioSrc.includes("label: 'Docs'") &&
+    !portfolioSrc.includes('label: "Repo"') && !portfolioSrc.includes('label: "Docs"'),
+    'Generic Repo/Docs labels still present in portfolio project links'
+  );
+  assert(
+    'Proof links use dedicated proof-link class',
+    proofSrc.includes('class="proof-link"') && !proofSrc.includes('class="badge badge-teal"'),
+    'Proof links still read like badges instead of actions'
+  );
+});
+
+group('TT-018 · Contact labels match action behavior', () => {
+  const src = contact();
+  assert(
+    'Primary contact path is explicit email',
+    src.includes('Email me directly') || src.includes('Escribirme por correo'),
+    'Expected explicit email CTA in ContactSection'
+  );
+  assert(
+    'Copy action is labeled as copy',
+    src.includes('Copy address') || src.includes('Copiar dirección'),
+    'Expected copy action label in ContactSection'
+  );
+  assert(
+    'Submit button has localized sending label',
+    src.includes('data-sending={c.submitSending}'),
+    'Expected localized submit-pending label via data-sending'
+  );
+  assert(
+    'Legacy misleading ES copy button label removed',
+    !src.includes('Enviar correo'),
+    'Found legacy misleading "Enviar correo" label in ContactSection'
+  );
+});
+
 group('E1 · Services title updated', () => {
   const src = services();
   assert(
@@ -644,6 +743,16 @@ if (BUILT) {
     '[built] No 580M in built EN HTML',
     !distEN.includes('580M'),
     '580M claim still in built EN output'
+  );
+  assert(
+    '[built] Portfolio cards render Problem / Built / Proof structure',
+    distEN.includes('Problem') && distEN.includes('Built') && distEN.includes('Proof'),
+    'Built EN portfolio markup missing structured project scan labels'
+  );
+  assert(
+    '[built] Contact section exposes primary email CTA',
+    distEN.includes('Email me directly'),
+    'Built EN contact section missing primary email CTA'
   );
   assert(
     '[built] ES page title contains Tooltician',

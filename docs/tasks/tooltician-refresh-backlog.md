@@ -114,9 +114,9 @@ Use this table as the top-level control panel.
 | Lighthouse desktop | `87` | `90+` | `Pending` | `TBD` | should improve with low risk |
 | Payload size | `~1.86 MB` | `meaningfully reduced` | `In progress` | `Codex` | oversized navbar logo and favicon requests removed from critical UI paths |
 | Hero CTA visibility mobile | `0` | `>=1 visible` | `Done` | `Codex` | validated on `360`, `390`, `414`, `768` |
-| Portfolio filter UX | `Broken` | `Clean reflow` | `Pending` | `TBD` | no empty slots after filtering |
+| Portfolio filter UX | `Broken` | `Clean reflow` | `Done` | `Codex` | hidden cards now leave layout and projects can appear in multiple relevant filters |
 | Social preview quality | `Weak` | `Professional OG card` | `Pending` | `TBD` | use existing OG asset |
-| Contact clarity | `Mixed` | `Single clear path` | `Pending` | `TBD` | especially on hero and contact section |
+| Contact clarity | `Mixed` | `Single clear path` | `Done` | `Codex` | email is now the clearest primary path and labels match behavior in `EN` and `ES` |
 
 ## 5. Wave Scoreboards
 
@@ -200,19 +200,19 @@ Wave scoreboard:
 
 | Metric | Baseline | Target | Current status |
 |---|---:|---:|---|
-| Portfolio filter polish | broken | correct reflow | `Pending` |
-| Project scanability | medium | high | `Pending` |
-| Contact action clarity | mixed | clear | `Pending` |
+| Portfolio filter polish | broken | correct reflow | `Done` |
+| Project scanability | medium | high | `Done` |
+| Contact action clarity | mixed | clear | `Done` |
 
 Tasks:
 
 | ID | Task | Priority | Effort | Dependency | Done when |
 |---|---|---|---|---|---|
-| `TT-004` | Fix portfolio filtering so hidden cards leave the layout | `P1` | `S` | none | no empty slots remain |
-| `TT-015` | Rewrite project cards around problem, solution, proof | `P1` | `M` | `TT-001` | key projects are faster to understand |
-| `TT-016` | Prioritize anchor projects in the portfolio order | `P2` | `S` | `TT-015` | strongest work appears first |
-| `TT-009` | Clarify clickable badges and secondary links | `P2` | `S` | `TT-004` | links read as actions, not labels |
-| `TT-018` | Fix contact microcopy and action consistency | `P2` | `S` | none | labels match actual behavior |
+| `TT-004` | Fix portfolio filtering so hidden cards leave the layout | `P1` | `S` | none | `Done` |
+| `TT-015` | Rewrite project cards around problem, solution, proof | `P1` | `M` | `TT-001` | `Done` |
+| `TT-016` | Prioritize anchor projects in the portfolio order | `P2` | `S` | `TT-015` | `Done` |
+| `TT-009` | Clarify clickable badges and secondary links | `P2` | `S` | `TT-004` | `Done` |
+| `TT-018` | Fix contact microcopy and action consistency | `P2` | `S` | none | `Done` |
 
 Wave gate:
 
@@ -286,22 +286,22 @@ This is the single flattened backlog for ticket creation.
 | `TT-001` | Positioning | Rewrite hero H1 and subheadline around service | `P1` | high | `M` | `Wave 1` | `Done` |
 | `TT-002` | Responsive UX | Reorder hero on mobile/tablet | `P1` | high | `M` | `Wave 1` | `Done` |
 | `TT-003` | Conversion UX | Reduce hero CTAs and clarify hierarchy | `P1` | high | `S` | `Wave 1` | `Done` |
-| `TT-004` | Interaction UX | Fix portfolio filter layout reflow | `P1` | high | `S` | `Wave 3` | `Pending` |
+| `TT-004` | Interaction UX | Fix portfolio filter layout reflow | `P1` | high | `S` | `Wave 3` | `Done` |
 | `TT-005` | Performance | Replace oversized navbar logo asset | `P1` | high | `S` | `Wave 1` | `Done` |
 | `TT-005A` | Performance | Replace oversized favicon strategy | `P1` | high | `S` | `Wave 1` | `Done` |
 | `TT-006` | Brand trust | Replace or remove hero photo | `P1` | high | `M` | `Wave 2` | `Done` |
 | `TT-007` | Visual polish | Simplify hero cards and reduce template feel | `P2` | medium | `M` | `Wave 2` | `Done` |
 | `TT-008` | Mobile nav | Convert mobile menu into robust overlay | `P2` | medium | `M` | `Wave 2` | `Done` |
-| `TT-009` | Affordance | Clarify clickable badges and small links | `P2` | medium | `S` | `Wave 3` | `Pending` |
+| `TT-009` | Affordance | Clarify clickable badges and small links | `P2` | medium | `S` | `Wave 3` | `Done` |
 | `TT-010` | Performance | Remove duplicate Google Fonts loading | `P2` | medium | `S` | `Wave 4` | `Pending` |
 | `TT-011` | Performance | Improve hero image LCP handling | `P2` | medium | `S` | `Wave 4` | `Pending` |
 | `TT-012` | Assets | Compress or replace photo fallback strategy | `P2` | medium | `S` | `Wave 4` | `Pending` |
 | `TT-013` | Governance | Review third-party frontend scripts | `P3` | low | `S` | `Wave 4` | `Pending` |
 | `TT-014` | Accessibility | Add consistent `:focus-visible` states | `P2` | medium | `S` | `Wave 2` | `Done` |
-| `TT-015` | Portfolio copy | Rewrite project cards for scanability and proof | `P1` | high | `M` | `Wave 3` | `Pending` |
-| `TT-016` | Information architecture | Reorder and emphasize anchor projects | `P2` | medium | `S` | `Wave 3` | `Pending` |
+| `TT-015` | Portfolio copy | Rewrite project cards for scanability and proof | `P1` | high | `M` | `Wave 3` | `Done` |
+| `TT-016` | Information architecture | Reorder and emphasize anchor projects | `P2` | medium | `S` | `Wave 3` | `Done` |
 | `TT-017` | Content structure | Reduce redundancy across About, Proof, Credentials | `P2` | medium | `M` | `Wave 5` | `Pending` |
-| `TT-018` | Contact UX | Fix form/contact microcopy and state clarity | `P2` | medium | `S` | `Wave 3` | `Pending` |
+| `TT-018` | Contact UX | Fix form/contact microcopy and state clarity | `P2` | medium | `S` | `Wave 3` | `Done` |
 | `TT-019` | SEO/social | Use OG card asset in metadata | `P2` | medium | `S` | `Wave 5` | `Pending` |
 | `TT-020` | SEO architecture | Decide root URL and sitemap strategy | `P2` | medium | `M` | `Wave 5` | `Pending` |
 | `TT-021` | Trust QA | Revalidate credential links | `P2` | medium | `S` | `Wave 5` | `Pending` |
@@ -351,6 +351,7 @@ Use this after each implementation session.
 |---|---|---|---|---|---|---|---|
 | `2026-04-29` | `Wave 1` | `TT-001, TT-002, TT-003, TT-005, TT-005A` | `Pass` | `OK` | `Not yet re-run` | `None` | `Start Wave 2 with TT-006 or TT-008` |
 | `2026-04-29` | `Wave 2` | `TT-006, TT-007, TT-008, TT-014` | `Pass` | `OK` | `Not yet re-run` | `None` | `Start Wave 3 with TT-004` |
+| `2026-04-29` | `Wave 3` | `TT-004, TT-015, TT-016, TT-009, TT-018` | `Pass` | `OK` | `Not yet re-run` | `None` | `Start Wave 4 with TT-010` |
 | `YYYY-MM-DD` | `Wave X` | `TT-000, TT-000` | `Pass/Fail` | `OK/Issue` | `N/A or summary` | `None or note` | `single next move` |
 
 ## 9. Release Scoreboard Template

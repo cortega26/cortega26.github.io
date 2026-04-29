@@ -12,27 +12,27 @@ Implement all improvements identified in the portfolio audit to make tooltician.
 - Tests run against source files by default; pass `--built` to also check `dist/`.
 
 ## Current Phase
-Wave 2 — Mobile Navigation and Hero Credibility
+Wave 3 — Portfolio, Proof, and Contact Clarity (`completed 2026-04-29`; next up: `Wave 4`)
 
 ### Goals
-- Remove the portrait-led hero treatment so the page opens with a more sober, consultative tone.
-- Simplify the hero aside into clearer credibility content that supports the service-first positioning from Wave 1.
-- Upgrade the mobile navigation from a basic dropdown into a controlled overlay with backdrop, close behavior, and scroll lock.
-- Add consistent `:focus-visible` states across major interactive elements so keyboard navigation remains obvious after the nav changes.
+- Make portfolio filtering behave like a real layout change instead of a visual hide/show trick.
+- Rewrite project cards so a visitor can scan problem, build scope, and proof quickly.
+- Emphasize the strongest anchor projects first without forcing a full redesign of the section.
+- Make small external links read like actions, not decorative labels.
+- Align contact labels and calls to action with what each control actually does in both languages.
 
 ### Implementation Notes
-- `src/components/HeroSection.astro`
-  - Remove the hero portrait image block.
-  - Replace the photo/cards aside with a concise engagement snapshot panel and a smaller delivery note.
-  - Keep the existing copy-first hierarchy and bilingual support intact.
-- `src/components/Navbar.astro`
-  - Add a dedicated mobile nav backdrop element that can close the menu.
-- `src/layouts/BaseLayout.astro`
-  - Replace the current nav toggle logic with open/close helpers that manage backdrop state, `aria-expanded`, escape-to-close, link-click close, scroll lock, and basic focus containment on mobile.
-- `src/styles/global.css`
-  - Style the mobile menu as a fixed overlay panel instead of an inline dropdown.
-  - Add shared `:focus-visible` rules and nav-specific focus treatments.
-  - Add body/html scroll lock behavior while the menu is open.
+- `src/components/PortfolioSection.astro`
+  - Replace the single-paragraph project body with a tighter structure: summary plus `Problem / Built / Proof`.
+  - Store explicit filter categories per project so one project can participate in multiple filters where appropriate.
+  - Use `hidden`-based filtering so non-matching cards leave the grid entirely.
+  - Promote anchor projects with stronger placement in the desktop grid while preserving a single-column mobile layout.
+- `src/components/ProofSection.astro`
+  - Replace badge-like proof links with clearer text links plus an external-link affordance.
+- `src/components/ContactSection.astro`
+  - Make email the clear primary path.
+  - Keep copy-to-clipboard as a secondary action with accurate labeling.
+  - Add proper form labels, localized sending state, and clearer explanatory copy.
 
 ### Verification
 - Automated:
@@ -44,12 +44,12 @@ Wave 2 — Mobile Navigation and Hero Credibility
   - `390x844`
   - `414x896`
   - `768x1024`
+  - `1366x900`
 - Manual interaction checks:
-  - Mobile nav opens as a layered overlay with visible backdrop.
-  - Background page does not scroll while the mobile nav is open.
-  - `Escape` closes the menu.
-  - At least one CTA remains above the fold in the hero on mobile.
-  - Keyboard focus is clearly visible on nav links, CTAs, form controls, and filter buttons.
+  - Portfolio filters remove non-matching cards from layout with no empty slots.
+  - Anchor projects remain first and visually prominent on desktop while collapsing cleanly on mobile.
+  - Proof and portfolio external links read clearly as actions.
+  - Contact actions match their behavior: email opens email, copy copies, schedule opens Calendly.
 
 ---
 

@@ -175,3 +175,22 @@ Status: [ ] = todo  [x] = done  [~] = partial / needs review
 - [x] Verify · Run `npm run build`
 - [x] Verify · Run `node tests/run.js --built`
 - [x] Verify · Review `360`, `390/414`, and `768` breakpoints with the mobile nav open and closed
+
+---
+
+## WAVE 3 — Portfolio, Proof, and Contact Clarity
+
+- [x] TT-004 · Replace visual-only portfolio filtering with layout-safe filtering
+- [x] TT-004 · Allow projects to appear in multiple relevant filter categories
+- [x] TT-015 · Rewrite EN portfolio cards around summary, problem, build scope, and proof
+- [x] TT-015 · Rewrite ES portfolio cards around summary, problem, build scope, and proof
+- [x] TT-016 · Promote anchor projects with stronger placement in the desktop portfolio grid
+- [x] TT-009 · Replace badge-like proof links with explicit external-link actions
+- [x] TT-009 · Replace generic portfolio link labels (`Repo`, `Docs`) with explicit action labels
+- [x] TT-018 · Make email the primary contact path and keep copy as a secondary action
+- [x] TT-018 · Add proper form labels and localized submit-pending text
+- [x] Tests · Extend `tests/run.js` for Wave 3 behavior checks
+- [x] Verify · Run `node tests/run.js`
+- [x] Verify · Run `npm run build`
+- [x] Verify · Run `node tests/run.js --built`
+- [x] Verify · Review `360`, `390/414`, `768`, and `1366` breakpoints for portfolio filtering and contact clarity

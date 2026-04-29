@@ -3,11 +3,15 @@ interface Project {
   id: string;
   title: string;
   impact: string;
-  desc: string;
+  summary: string;
+  problem: string;
+  solution: string;
+  proof: string;
   tags: string[];
+  filters: string[];
   tagType: 'accent' | 'teal' | 'warm' | 'neutral';
   links: { label: string; href: string }[];
-  isNew?: boolean;
+  featured?: boolean;
 }
 
 interface Props { lang: 'en' | 'es'; }
@@ -18,64 +22,114 @@ const projectsEN: Project[] = [
     id: 'ebano',
     title: 'El Rincón de Ébano',
     impact: 'Live at elrincondeebano.com · Private residential marketplace',
-    desc: 'E-commerce storefront for a private residential community — designed, built, and actively operated as a live business. 100+ SKUs, real-time cart, bundle promotions, product filtering, and WhatsApp-integrated checkout. This is not a demo: it runs daily transactions and I maintain it.',
+    summary: 'Private-community storefront built and operated as a live business.',
+    problem: 'Residents needed a private ordering flow that felt simpler than informal chat-based purchasing.',
+    solution: 'Designed and run an Astro storefront with product filtering, bundle promotions, a real-time cart, and WhatsApp checkout.',
+    proof: '100+ SKUs, daily transactions, and ongoing operator maintenance in production. This is not a demo.',
     tags: ['Astro', 'E-commerce', 'Vite'],
+    filters: ['web'],
     tagType: 'teal',
-    links: [{ label: 'Live site', href: 'https://elrincondeebano.com' }, { label: 'Repo', href: 'https://github.com/cortega26/elrincondeebano' }],
+    featured: true,
+    links: [
+      { label: 'Visit live site', href: 'https://elrincondeebano.com' },
+      { label: 'View repository', href: 'https://github.com/cortega26/elrincondeebano' },
+    ],
   },
   {
     id: 'monedario',
     title: 'Monedario',
     impact: 'Live at monedario.cl · Chilean personal finance platform',
-    desc: 'Personal finance platform for Chilean users — built, launched, and maintained as a live product without advertising or paywalls. Nine guide categories, interactive calculators, and real-time economic indicators (UF, UTM, exchange rates). Updated 2026. This exists because the information should be free and in plain language.',
+    summary: 'Chilean personal finance platform published as a free public product.',
+    problem: 'Reliable finance guidance in Chile is often fragmented, paywalled, or too technical for normal users.',
+    solution: 'Built a public Astro platform with calculators, nine guide categories, and live economic indicators.',
+    proof: 'Live product, updated in 2026, with no ads or paywalls.',
     tags: ['Astro', 'TypeScript', 'Finance'],
+    filters: ['web', 'data'],
     tagType: 'teal',
-    links: [{ label: 'Live site', href: 'https://monedario.cl' }, { label: 'Repo', href: 'https://github.com/cortega26/tuplatainforma' }],
+    featured: true,
+    links: [
+      { label: 'Visit live site', href: 'https://monedario.cl' },
+      { label: 'View repository', href: 'https://github.com/cortega26/tuplatainforma' },
+    ],
   },
   {
     id: 'rutificador',
     title: 'Rutificador',
-    impact: '⭐ 12 stars · 3 forks · Published on PyPI',
-    desc: 'Reusable Python library for validating and normalizing Chilean national ID (RUT) numbers — used in data ingestion pipelines, form validation, and batch processing. Published on PyPI with CI, CodeQL scanning, and a CLI for scripted workflows.',
+    impact: '12 stars · 3 forks · Published on PyPI',
+    summary: 'Reusable RUT validation package for forms, ETL, and batch workflows.',
+    problem: 'Teams processing Chilean IDs need consistent validation and normalization instead of re-implementing edge cases.',
+    solution: 'Published a Python library and CLI with clean install paths, CI, and CodeQL-backed maintenance.',
+    proof: 'Installable on PyPI and usable inside scripted and pipeline-oriented workflows.',
     tags: ['Python', 'PyPI', 'CLI'],
+    filters: ['python', 'cli'],
     tagType: 'accent',
-    links: [{ label: 'GitHub', href: 'https://github.com/cortega26/rutificador' }, { label: 'PyPI', href: 'https://pypi.org/project/rutificador/' }],
+    links: [
+      { label: 'View GitHub', href: 'https://github.com/cortega26/rutificador' },
+      { label: 'View package', href: 'https://pypi.org/project/rutificador/' },
+    ],
   },
   {
     id: 'conciliador',
     title: 'Conciliador Bancario',
     impact: 'Published on PyPI · Fail-closed audit automation',
-    desc: 'Bank reconciliation tool built for audit-grade environments — not just accounting convenience. Fail-closed by design: if the data does not reconcile, the tool halts and reports why, rather than silently producing a wrong result. Append-only audit logs, deterministic outputs, and a traceable record of every run. Distributed via PyPI for reproducible installation.',
+    summary: 'Audit-grade reconciliation tooling designed to fail closed.',
+    problem: 'Reconciliation tools often optimize for convenience even when the underlying data does not actually match.',
+    solution: 'Built a Python tool that stops on mismatches, produces deterministic outputs, and keeps append-only audit logs rather than silently producing a wrong result.',
+    proof: 'Published on PyPI with reproducible installation and a traceable record of every run.',
     tags: ['Python', 'CLI', 'Audit'],
+    filters: ['python', 'cli'],
     tagType: 'accent',
-    links: [{ label: 'GitHub', href: 'https://github.com/cortega26/conciliador_bancario' }, { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/' }],
+    links: [
+      { label: 'View GitHub', href: 'https://github.com/cortega26/conciliador_bancario' },
+      { label: 'View package', href: 'https://pypi.org/project/bankrecon/' },
+    ],
   },
   {
     id: 'noticiencias',
     title: 'Noticiencias',
     impact: 'Live at noticiencias.com · Spanish-language science media, 8 disciplines',
-    desc: 'Spanish-language science media site covering astronomy, health, physics, biology, chemistry, and more. Built for readability and SEO over content overload. Category-level editorial governance, source tracking, methodology documentation, and an RSS feed.',
+    summary: 'Spanish-language science media site built for readability and SEO.',
+    problem: 'Science content sites often trade clarity for volume and lose structure as categories grow.',
+    solution: 'Built an Astro editorial platform with category governance, source tracking, and methodology documentation.',
+    proof: 'Live publication covering 8 disciplines with SEO-focused content architecture and RSS.',
     tags: ['Astro', 'SEO', 'Accessibility'],
+    filters: ['web'],
     tagType: 'teal',
-    links: [{ label: 'Live site', href: 'https://www.noticiencias.com' }, { label: 'Repo', href: 'https://github.com/cortega26/noticiencias' }],
+    links: [
+      { label: 'Visit live site', href: 'https://www.noticiencias.com' },
+      { label: 'View repository', href: 'https://github.com/cortega26/noticiencias' },
+    ],
   },
   {
     id: 'dnspect',
     title: 'DNSpect',
     impact: 'DNS benchmarking with statistical rigor',
-    desc: 'Statistically defensible DNS benchmarking framework — because p50 lies. Measures resolver performance using proper statistical methods (percentiles, outlier detection) rather than single-sample averages. TypeScript CLI, FastAPI backend, and React dashboard.',
+    summary: 'Benchmarking framework for DNS performance that avoids misleading averages.',
+    problem: 'Resolver comparisons often rely on single averages that hide distribution and outlier behavior.',
+    solution: 'Built a TypeScript CLI, FastAPI backend, and React dashboard around percentile-based benchmarking.',
+    proof: 'Technical framing centers statistical rigor instead of demo-friendly averages.',
     tags: ['TypeScript', 'FastAPI', 'React'],
+    filters: ['python', 'web'],
     tagType: 'warm',
-    links: [{ label: 'Repo', href: 'https://github.com/cortega26/DNSpect' }],
+    links: [
+      { label: 'View repository', href: 'https://github.com/cortega26/DNSpect' },
+    ],
   },
   {
     id: 'polla',
     title: 'Jackpot Data Pipeline',
-    impact: '⭐ 5 stars · 1 fork · Recurring production pipeline',
-    desc: 'Automated data ingestion pipeline for Chilean lottery results. Scrapes structured jackpot data from a volatile source, normalizes it, and publishes to Google Sheets on a recurring schedule. Designed to survive source changes without manual intervention.',
+    impact: '5 stars · 1 fork · Recurring production pipeline',
+    summary: 'Recurring lottery-data pipeline built to survive source changes.',
+    problem: 'Lottery result sources are volatile, making manual updates brittle and time-consuming.',
+    solution: 'Automated scraping, normalization, and Google Sheets publishing on a recurring schedule.',
+    proof: 'Production pipeline with GitHub visibility and outputs designed for repeat use.',
     tags: ['Python', 'Scraping', 'Google Sheets'],
+    filters: ['python', 'data'],
     tagType: 'accent',
-    links: [{ label: 'Repo', href: 'https://github.com/cortega26/polla' }, { label: 'Docs', href: 'https://github.com/cortega26/polla#readme' }],
+    links: [
+      { label: 'View repository', href: 'https://github.com/cortega26/polla' },
+      { label: 'Read docs', href: 'https://github.com/cortega26/polla#readme' },
+    ],
   },
 ];
 
@@ -84,70 +138,140 @@ const projectsES: Project[] = [
     id: 'ebano',
     title: 'El Rincón de Ébano',
     impact: 'Activo en elrincondeebano.com · Minimarket residencial privado',
-    desc: 'Tienda e-commerce para una comunidad residencial privada — diseñada, desarrollada y operada activamente como un negocio real. Más de 100 SKUs, carrito en tiempo real, promociones por combo, filtrado de productos y checkout integrado con WhatsApp. Esto no es una demo: procesa transacciones diarias y lo mantengo.',
+    summary: 'Tienda privada para comunidad residencial operada como negocio real.',
+    problem: 'La comunidad necesitaba un flujo de compra privado más claro y ordenado que coordinar todo por chat.',
+    solution: 'Diseñé y opero una tienda Astro con filtrado de productos, promociones por combo, carrito en tiempo real y checkout por WhatsApp.',
+    proof: 'Más de 100 SKUs, transacciones diarias y mantención activa en producción. Esto no es una demo.',
     tags: ['Astro', 'E-commerce', 'Vite'],
+    filters: ['web'],
     tagType: 'teal',
-    links: [{ label: 'Sitio', href: 'https://elrincondeebano.com' }, { label: 'Repo', href: 'https://github.com/cortega26/elrincondeebano' }],
+    featured: true,
+    links: [
+      { label: 'Ver sitio', href: 'https://elrincondeebano.com' },
+      { label: 'Ver repositorio', href: 'https://github.com/cortega26/elrincondeebano' },
+    ],
   },
   {
     id: 'monedario',
     title: 'Monedario',
     impact: 'Activo en monedario.cl · Plataforma de finanzas personales para Chile',
-    desc: 'Plataforma de finanzas personales para usuarios chilenos — construida, lanzada y mantenida como producto activo sin publicidad ni paywalls. Nueve categorías de guías, calculadoras interactivas e indicadores económicos en tiempo real (UF, UTM, tipo de cambio). Actualizado 2026. Existe porque esta información debería ser gratuita y en lenguaje claro.',
+    summary: 'Plataforma chilena de finanzas personales publicada como producto gratuito.',
+    problem: 'La orientación financiera confiable en Chile suele estar fragmentada, detrás de paywalls o escrita para especialistas.',
+    solution: 'Construí una plataforma pública en Astro con calculadoras, nueve categorías de guías e indicadores económicos en tiempo real.',
+    proof: 'Producto activo, actualizado en 2026, sin publicidad ni paywalls.',
     tags: ['Astro', 'TypeScript', 'Finanzas'],
+    filters: ['web', 'data'],
     tagType: 'teal',
-    links: [{ label: 'Sitio', href: 'https://monedario.cl' }, { label: 'Repo', href: 'https://github.com/cortega26/tuplatainforma' }],
+    featured: true,
+    links: [
+      { label: 'Ver sitio', href: 'https://monedario.cl' },
+      { label: 'Ver repositorio', href: 'https://github.com/cortega26/tuplatainforma' },
+    ],
   },
   {
     id: 'rutificador',
     title: 'Rutificador',
-    impact: '⭐ 12 estrellas · 3 forks · Publicado en PyPI',
-    desc: 'Librería Python reutilizable para validar y normalizar RUTs chilenos — usada en pipelines de ingestión de datos, validación de formularios y procesamiento en lote. Publicada en PyPI con CI, escaneo CodeQL y CLI para flujos automatizados.',
+    impact: '12 estrellas · 3 forks · Publicado en PyPI',
+    summary: 'Paquete reutilizable para validar RUTs en formularios, ETL y procesos batch.',
+    problem: 'Los equipos que procesan RUTs chilenos necesitan validación y normalización consistentes, no reimplementar edge cases.',
+    solution: 'Publiqué una librería Python y CLI con instalación limpia, CI y mantenimiento respaldado por CodeQL.',
+    proof: 'Disponible en PyPI y usable dentro de flujos automatizados y pipelines.',
     tags: ['Python', 'PyPI', 'CLI'],
+    filters: ['python', 'cli'],
     tagType: 'accent',
-    links: [{ label: 'GitHub', href: 'https://github.com/cortega26/rutificador' }, { label: 'PyPI', href: 'https://pypi.org/project/rutificador/' }],
+    links: [
+      { label: 'Ver GitHub', href: 'https://github.com/cortega26/rutificador' },
+      { label: 'Ver paquete', href: 'https://pypi.org/project/rutificador/' },
+    ],
   },
   {
     id: 'conciliador',
     title: 'Conciliador Bancario',
     impact: 'Publicado en PyPI · Automatización de auditoría fail-closed',
-    desc: 'Herramienta de conciliación bancaria construida para entornos de auditoría — no solo comodidad contable. Diseñada fail-closed: si los datos no coinciden, el sistema se detiene e informa el motivo, en lugar de producir silenciosamente un resultado incorrecto. Logs de auditoría append-only, salidas deterministas y registro trazable de cada ejecución. Distribuido vía PyPI.',
+    summary: 'Herramienta de conciliación pensada para auditoría y diseñada para fallar de forma segura.',
+    problem: 'Muchas herramientas de conciliación priorizan la comodidad incluso cuando los datos base no cuadran realmente.',
+    solution: 'Construí una herramienta Python que se detiene ante diferencias, genera salidas deterministas y conserva logs append-only en lugar de producir silenciosamente un resultado incorrecto.',
+    proof: 'Publicado en PyPI con instalación reproducible y trazabilidad por ejecución.',
     tags: ['Python', 'CLI', 'Auditoría'],
+    filters: ['python', 'cli'],
     tagType: 'accent',
-    links: [{ label: 'GitHub', href: 'https://github.com/cortega26/conciliador_bancario' }, { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/' }],
+    links: [
+      { label: 'Ver GitHub', href: 'https://github.com/cortega26/conciliador_bancario' },
+      { label: 'Ver paquete', href: 'https://pypi.org/project/bankrecon/' },
+    ],
   },
   {
     id: 'noticiencias',
     title: 'Noticiencias',
     impact: 'Activo en noticiencias.com · Divulgación científica en español, 8 disciplinas',
-    desc: 'Sitio de divulgación científica en español que cubre astronomía, salud, física, biología, química y más. Construido para legibilidad y SEO por encima del volumen de contenido. Gobernanza editorial por categoría, rastreo de fuentes, documentación metodológica y feed RSS.',
+    summary: 'Medio de ciencia en español construido para legibilidad y SEO.',
+    problem: 'Los sitios de divulgación suelen perder claridad y estructura cuando las categorías crecen.',
+    solution: 'Construí una plataforma editorial en Astro con gobernanza por categoría, rastreo de fuentes y documentación metodológica.',
+    proof: 'Publicación activa en 8 disciplinas con arquitectura de contenido orientada a SEO y RSS.',
     tags: ['Astro', 'SEO', 'Accesibilidad'],
+    filters: ['web'],
     tagType: 'teal',
-    links: [{ label: 'Sitio', href: 'https://www.noticiencias.com' }, { label: 'Repo', href: 'https://github.com/cortega26/noticiencias' }],
+    links: [
+      { label: 'Ver sitio', href: 'https://www.noticiencias.com' },
+      { label: 'Ver repositorio', href: 'https://github.com/cortega26/noticiencias' },
+    ],
   },
   {
     id: 'dnspect',
     title: 'DNSpect',
     impact: 'Benchmarking DNS con rigor estadístico',
-    desc: 'Framework de benchmarking DNS estadísticamente defendible — porque el p50 miente. Mide el rendimiento de resolvers usando métodos estadísticos correctos (percentiles, detección de outliers) en lugar de promedios de una sola muestra. CLI TypeScript, backend FastAPI y dashboard React.',
+    summary: 'Framework de benchmarking DNS que evita promedios engañosos.',
+    problem: 'Las comparaciones entre resolvers suelen apoyarse en promedios simples que esconden distribución y outliers.',
+    solution: 'Construí un CLI TypeScript, backend FastAPI y dashboard React alrededor de benchmarking basado en percentiles.',
+    proof: 'El enfoque técnico prioriza rigor estadístico por encima de resultados fáciles de vender.',
     tags: ['TypeScript', 'FastAPI', 'React'],
+    filters: ['python', 'web'],
     tagType: 'warm',
-    links: [{ label: 'Repo', href: 'https://github.com/cortega26/DNSpect' }],
+    links: [
+      { label: 'Ver repositorio', href: 'https://github.com/cortega26/DNSpect' },
+    ],
   },
   {
     id: 'polla',
     title: 'Pipeline de Datos de Lotería',
-    impact: '⭐ 5 estrellas · 1 fork · Pipeline de producción recurrente',
-    desc: 'Pipeline automatizado de ingestión de datos para resultados de lotería chilena. Extrae datos estructurados de una fuente volátil, los normaliza y publica en Google Sheets de forma recurrente. Diseñado para sobrevivir cambios en la fuente sin intervención manual.',
+    impact: '5 estrellas · 1 fork · Pipeline de producción recurrente',
+    summary: 'Pipeline recurrente para resultados de lotería diseñado para resistir cambios de fuente.',
+    problem: 'Las fuentes de resultados de lotería cambian con facilidad y vuelven frágiles las actualizaciones manuales.',
+    solution: 'Automaticé scraping, normalización y publicación en Google Sheets con ejecución recurrente.',
+    proof: 'Pipeline de producción con visibilidad en GitHub y salidas pensadas para uso repetido.',
     tags: ['Python', 'Scraping', 'Google Sheets'],
+    filters: ['python', 'data'],
     tagType: 'accent',
-    links: [{ label: 'Repo', href: 'https://github.com/cortega26/polla' }, { label: 'Docs', href: 'https://github.com/cortega26/polla#readme' }],
+    links: [
+      { label: 'Ver repositorio', href: 'https://github.com/cortega26/polla' },
+      { label: 'Leer docs', href: 'https://github.com/cortega26/polla#readme' },
+    ],
   },
 ];
 
 const filterLabels = {
-  en: { all: 'All', python: 'Python', web: 'Web / Astro', cli: 'CLI / Tools', data: 'Data', label: 'Filter:' },
-  es: { all: 'Todos', python: 'Python', web: 'Web / Astro', cli: 'CLI / Herramientas', data: 'Datos', label: 'Filtrar:' },
+  en: {
+    all: 'All',
+    python: 'Python',
+    web: 'Web / Astro',
+    cli: 'CLI / Tools',
+    data: 'Data',
+    label: 'Filter',
+    problem: 'Problem',
+    solution: 'Built',
+    proof: 'Proof',
+  },
+  es: {
+    all: 'Todos',
+    python: 'Python',
+    web: 'Web / Astro',
+    cli: 'CLI / Herramientas',
+    data: 'Datos',
+    label: 'Filtrar',
+    problem: 'Problema',
+    solution: 'Construido',
+    proof: 'Prueba',
+  },
 };
 
 const c = {
@@ -159,22 +283,6 @@ const c = {
     : 'Sitios activos con usuarios reales, paquetes publicados con CI y CodeQL, y automatización que corre en producción — no solo repositorios que demuestran esfuerzo.',
   fl: filterLabels[lang],
 };
-
-const tagCategories: Record<string, string> = {
-  'Python': 'python', 'PyPI': 'python', 'CLI': 'cli', 'Audit': 'cli', 'Auditoría': 'cli',
-  'Astro': 'web', 'SEO': 'web', 'Accessibility': 'web', 'Accesibilidad': 'web',
-  'TypeScript': 'web', 'Finance': 'web', 'Finanzas': 'web', 'E-commerce': 'web', 'Vite': 'web',
-  'Scraping': 'data', 'PDF': 'data', 'Extraction': 'data', 'Extracción': 'data', 'Google Sheets': 'data',
-  'WebSocket': 'python', 'Alerts': 'python', 'Alertas': 'python', 'FastAPI': 'python', 'React': 'web',
-};
-
-function getCategory(tags: string[]): string {
-  for (const tag of tags) {
-    const cat = tagCategories[tag];
-    if (cat) return cat;
-  }
-  return 'python';
-}
 ---
 <section class="section" id="portfolio">
   <div class="container">
@@ -187,32 +295,58 @@ function getCategory(tags: string[]): string {
 
     <div class="filter-bar reveal" role="group" aria-label={c.fl.label}>
       <span class="filter-label">{c.fl.label}</span>
-      <button class="filter-btn active" data-filter="all">{c.fl.all}</button>
-      <button class="filter-btn" data-filter="python">{c.fl.python}</button>
-      <button class="filter-btn" data-filter="web">{c.fl.web}</button>
-      <button class="filter-btn" data-filter="cli">{c.fl.cli}</button>
-      <button class="filter-btn" data-filter="data">{c.fl.data}</button>
+      <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">{c.fl.all}</button>
+      <button class="filter-btn" type="button" data-filter="python" aria-pressed="false">{c.fl.python}</button>
+      <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">{c.fl.web}</button>
+      <button class="filter-btn" type="button" data-filter="cli" aria-pressed="false">{c.fl.cli}</button>
+      <button class="filter-btn" type="button" data-filter="data" aria-pressed="false">{c.fl.data}</button>
     </div>
 
     <div class="portfolio-grid" id="portfolio-grid">
       {c.projects.map((proj, i) => (
         <article
-          class={`card-glass project-card reveal reveal-delay-${(i % 3) + 1}`}
+          class={`card-glass project-card ${proj.featured ? 'project-card--featured' : ''} reveal reveal-delay-${(i % 3) + 1}`}
           id={`project-${proj.id}`}
-          data-category={getCategory(proj.tags)}
+          data-categories={proj.filters.join(' ')}
         >
-          {proj.isNew && <span class="new-badge">{lang === 'en' ? 'New' : 'Nuevo'}</span>}
-          <div class="project-tags">
-            {proj.tags.map(tag => (
-              <span class={`badge badge-${proj.tagType}`}>{tag}</span>
-            ))}
+          <div class="project-topline">
+            <div class="project-tags">
+              {proj.tags.map(tag => (
+                <span class={`badge badge-${proj.tagType}`}>{tag}</span>
+              ))}
+            </div>
+            <p class="project-impact">{proj.impact}</p>
           </div>
-          <h3 class="project-title">{proj.title}</h3>
-          <p class="project-impact">{proj.impact}</p>
-          <p class="project-desc">{proj.desc}</p>
+
+          <div class="project-heading">
+            <h3 class="project-title">{proj.title}</h3>
+            <p class="project-summary">{proj.summary}</p>
+          </div>
+
+          <dl class="project-points">
+            <div class="project-point">
+              <dt>{c.fl.problem}</dt>
+              <dd>{proj.problem}</dd>
+            </div>
+            <div class="project-point">
+              <dt>{c.fl.solution}</dt>
+              <dd>{proj.solution}</dd>
+            </div>
+            <div class="project-point">
+              <dt>{c.fl.proof}</dt>
+              <dd>{proj.proof}</dd>
+            </div>
+          </dl>
+
           <div class="project-links">
             {proj.links.map(l => (
-              <a class="btn btn-ghost btn-sm" href={l.href} target="_blank" rel="noopener noreferrer">{l.label} →</a>
+              <a class="project-link" href={l.href} target="_blank" rel="noopener noreferrer">
+                <span>{l.label}</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M7 17 17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </a>
             ))}
           </div>
         </article>
@@ -223,65 +357,198 @@ function getCategory(tags: string[]): string {
 
 <style>
 .filter-bar {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
-  margin-bottom: 2.5rem; justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
+
 .filter-label {
-  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--clr-text-faint); margin-right: 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--clr-text-faint);
+  margin-right: 0.25rem;
 }
+
 .filter-btn {
-  padding: 6px 16px; border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600;
-  border: 1px solid var(--clr-border); background: transparent; color: var(--clr-text-muted);
-  cursor: pointer; transition: all 150ms;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid var(--clr-border);
+  background: transparent;
+  color: var(--clr-text-muted);
+  cursor: pointer;
+  transition: border-color 150ms, background 150ms, color 150ms;
 }
-.filter-btn:hover { border-color: var(--clr-border-glow); color: var(--clr-text); }
+
+.filter-btn:hover {
+  border-color: var(--clr-border-glow);
+  color: var(--clr-text);
+}
+
 .filter-btn.active {
-  background: var(--clr-accent); border-color: var(--clr-accent); color: #fff;
+  background: rgba(108, 99, 255, 0.18);
+  border-color: rgba(108, 99, 255, 0.42);
+  color: var(--clr-text);
 }
 
 .portfolio-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.25rem;
 }
-.project-card {
-  position: relative; display: flex; flex-direction: column; gap: 0.75rem;
-  transition: background 300ms, border-color 300ms, transform 300ms, box-shadow 300ms, opacity 300ms;
-}
-.project-card.hidden { opacity: 0; pointer-events: none; transform: scale(0.95); }
-.new-badge {
-  position: absolute; top: 1rem; right: 1rem;
-  background: var(--clr-accent-warm); color: #fff;
-  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 3px 8px; border-radius: var(--radius-full);
-}
-.project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.project-title {
-  font-family: var(--ff-heading); font-size: 1.05rem; font-weight: 700; color: var(--clr-text);
-}
-.project-impact {
-  font-size: 0.75rem; font-weight: 600; color: var(--clr-accent-2);
-  text-transform: uppercase; letter-spacing: 0.06em;
-}
-.project-desc { font-size: 0.87rem; color: var(--clr-text-muted); line-height: 1.55; flex: 1; }
-.project-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; }
 
-@media (max-width: 1024px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 640px)  { .portfolio-grid { grid-template-columns: 1fr; } }
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  grid-column: span 4;
+  min-height: 100%;
+}
+
+.project-card--featured {
+  grid-column: span 6;
+}
+
+.project-topline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.project-impact {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--clr-accent-2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.project-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.project-title {
+  font-family: var(--ff-heading);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--clr-text);
+}
+
+.project-summary {
+  font-size: 0.95rem;
+  color: var(--clr-text);
+  line-height: 1.65;
+}
+
+.project-points {
+  display: grid;
+  gap: 0.85rem;
+  flex: 1;
+}
+
+.project-point {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.project-point dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--clr-text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.project-point dd {
+  font-size: 0.88rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.1rem;
+  margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  transition: color 150ms;
+}
+
+.project-link:hover {
+  color: var(--clr-accent-2);
+}
+
+.project-link svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .project-card,
+  .project-card--featured {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card,
+  .project-card--featured {
+    grid-column: auto;
+  }
+
+  .project-links {
+    gap: 0.75rem 1rem;
+  }
+}
 </style>
 
 <script>
 const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
 const cards = document.querySelectorAll<HTMLElement>('.project-card');
 
-btns.forEach(btn => {
+function setFilter(filter: string) {
+  btns.forEach((btn) => {
+    const active = btn.dataset.filter === filter;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-pressed', String(active));
+  });
+
+  cards.forEach((card) => {
+    const categories = (card.dataset.categories ?? '').split(' ').filter(Boolean);
+    const match = filter === 'all' || categories.includes(filter);
+    card.hidden = !match;
+    card.setAttribute('aria-hidden', String(!match));
+  });
+}
+
+btns.forEach((btn) => {
   btn.addEventListener('click', () => {
-    btns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter!;
-    cards.forEach(card => {
-      const match = f === 'all' || card.dataset.category === f;
-      card.classList.toggle('hidden', !match);
-    });
+    setFilter(btn.dataset.filter ?? 'all');
   });
 });
 </script>

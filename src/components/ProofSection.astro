@@ -14,8 +14,8 @@ const en = {
   proof: [
     { name: 'Rutificador', body: 'Published package, CI workflows, CodeQL, and batch-friendly CLI documentation.', links: [{ label: 'GitHub', href: 'https://github.com/cortega26/rutificador' }, { label: 'PyPI', href: 'https://pypi.org/project/rutificador/' }] },
     { name: 'Conciliador Bancario', body: 'Fail-closed behavior, append-only audit logs, architecture diagrams, and installable distribution.', links: [{ label: 'GitHub', href: 'https://github.com/cortega26/conciliador_bancario' }, { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/' }] },
-    { name: 'Noticiencias', body: 'Public front end with documented repo boundary and content validation workflow.', links: [{ label: 'Live site', href: 'https://www.noticiencias.com' }, { label: 'Repo', href: 'https://github.com/cortega26/noticiencias' }] },
-    { name: 'Monedario', body: 'Live site with finance calculators, editorial governance docs, and deterministic economic-data fallback.', links: [{ label: 'Live site', href: 'https://monedario.cl' }, { label: 'Repo', href: 'https://github.com/cortega26/tuplatainforma' }] },
+    { name: 'Noticiencias', body: 'Public front end with documented repo boundary and content validation workflow.', links: [{ label: 'Visit live site', href: 'https://www.noticiencias.com' }, { label: 'View repository', href: 'https://github.com/cortega26/noticiencias' }] },
+    { name: 'Monedario', body: 'Live site with finance calculators, editorial governance docs, and deterministic economic-data fallback.', links: [{ label: 'Visit live site', href: 'https://monedario.cl' }, { label: 'View repository', href: 'https://github.com/cortega26/tuplatainforma' }] },
   ],
   resumeLabel: 'Download Resume (PDF)',
   resumeHref: '/assets/docs/carlos-ortega-resume.pdf',
@@ -33,8 +33,8 @@ const es = {
   proof: [
     { name: 'Rutificador', body: 'Paquete publicado, flujos CI, CodeQL y documentación CLI batch-friendly.', links: [{ label: 'GitHub', href: 'https://github.com/cortega26/rutificador' }, { label: 'PyPI', href: 'https://pypi.org/project/rutificador/' }] },
     { name: 'Conciliador Bancario', body: 'Comportamiento fail-closed, logs de auditoría append-only, diagramas de arquitectura y distribución instalable.', links: [{ label: 'GitHub', href: 'https://github.com/cortega26/conciliador_bancario' }, { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/' }] },
-    { name: 'Noticiencias', body: 'Frontend público con límites de repositorio documentados y flujo de validación de contenido.', links: [{ label: 'Sitio', href: 'https://www.noticiencias.com' }, { label: 'Repo', href: 'https://github.com/cortega26/noticiencias' }] },
-    { name: 'Monedario', body: 'Sitio activo con calculadoras financieras, docs de gobernanza editorial y manejo de parámetros económicos.', links: [{ label: 'Sitio', href: 'https://monedario.cl' }, { label: 'Repo', href: 'https://github.com/cortega26/tuplatainforma' }] },
+    { name: 'Noticiencias', body: 'Frontend público con límites de repositorio documentados y flujo de validación de contenido.', links: [{ label: 'Ver sitio', href: 'https://www.noticiencias.com' }, { label: 'Ver repositorio', href: 'https://github.com/cortega26/noticiencias' }] },
+    { name: 'Monedario', body: 'Sitio activo con calculadoras financieras, docs de gobernanza editorial y manejo de parámetros económicos.', links: [{ label: 'Ver sitio', href: 'https://monedario.cl' }, { label: 'Ver repositorio', href: 'https://github.com/cortega26/tuplatainforma' }] },
   ],
   resumeLabel: 'Descargar CV (PDF)',
   resumeHref: '/assets/docs/carlos-ortega-resume.pdf',
@@ -73,7 +73,13 @@ const c = lang === 'en' ? en : es;
           <p class="proof-body">{p.body}</p>
           <div class="proof-links">
             {p.links.map(l => (
-              <a class="badge badge-teal" href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+              <a class="proof-link" href={l.href} target="_blank" rel="noopener noreferrer">
+                <span>{l.label}</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M7 17 17 7" />
+                  <path d="M7 7h10v10" />
+                </svg>
+              </a>
             ))}
           </div>
         </article>
@@ -129,7 +135,13 @@ const c = lang === 'en' ? en : es;
   color: var(--clr-text); margin-bottom: 0.4rem;
 }
 .proof-body { font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 0.75rem; line-height: 1.5; }
-.proof-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.proof-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; }
+.proof-link {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.82rem; font-weight: 600; color: var(--clr-text);
+  transition: color 150ms;
+}
+.proof-link:hover { color: var(--clr-accent-2); }
 .proof-resume { text-align: center; margin-top: 1rem; }
 
 @media (max-width: 640px) {

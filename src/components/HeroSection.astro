@@ -5,81 +5,68 @@ interface Props {
 const { lang } = Astro.props;
 
 const en = {
-  availability: 'Open to new projects',
-  eyebrow: 'Freelance Consultant · LATAM & US',
-  name: 'Carlos Ortega Gonzalez',
-  role: 'Python automation consultant — LATAM & US time zones',
-  location: 'Santiago, Chile · LATAM & US-friendly time zones',
-  lede: 'If your team is spending hours on reports that could run themselves — or maintaining data workflows nobody fully understands — I can fix that. I build Python automation systems: scoped, documented, and designed to keep running after I hand them off.',
-  lockup: 'I work in English and Spanish with teams across LATAM and U.S.-friendly time zones.',
+  availability: 'Available for scoped automation projects',
+  meta: 'Tooltician · Carlos Ortega Gonzalez',
+  title: 'Python automation for reporting, ETL, and internal tools.',
+  summary: 'I help teams replace fragile manual workflows with production-ready Python systems that are clear to operate, easy to hand off, and built to keep running.',
+  support: 'Based in Santiago, Chile. I work in English and Spanish with teams across LATAM and U.S.-friendly time zones.',
   highlights: [
-    'ETL pipelines, scrapers, and internal APIs delivered with CI, tests, and handoff documentation.',
-    'Bilingual (EN/ES) — clear communication with both technical and non-technical stakeholders.',
-    'Production-minded: structured logging, deterministic outputs, and systems your team can operate without me.',
+    'Reporting automation, ETL pipelines, and data collection workflows built for repeatable operation.',
+    'Internal APIs and tooling delivered with CI, tests, and handoff documentation.',
+    'Direct communication with technical and non-technical stakeholders in English or Spanish.',
   ],
-  cta1: 'See my work',
-  cta2: 'Start a project',
-  cta3: 'GitHub',
-  cta4: 'Schedule a call',
-  card1Title: 'Best-fit work',
-  card1Body: 'Reporting automation, ETL pipelines, scraping workflows, and internal tools that need to be reliable and maintainable — not just working.',
-  card2Title: 'How I deliver',
-  card2Body: 'Scoped project work with clear assumptions, hands-on implementation, and documentation your team can actually use after handoff.',
-  card3Title: 'What you can verify',
-  card3Body: 'Published PyPI packages, CI workflows, CodeQL scanning, and open repositories with production-grade README docs.',
+  ctaPrimary: 'Start a project',
+  ctaSecondary: 'See selected work',
+  ctaPrimaryHref: 'mailto:carlos@tooltician.com?subject=Project%20Inquiry',
+  ctaSecondaryHref: '#portfolio',
+  photoAlt: 'Professional portrait of Carlos Ortega Gonzalez',
+  card1Title: 'Best-fit engagements',
+  card1Body: 'Short, scoped consulting for reporting automation, ETL reliability, scraping workflows, and internal data tools.',
+  card2Title: 'What clients get',
+  card2Body: 'Implementation, documentation, and a system your team can keep operating without vendor lock-in.',
 };
 
 const es = {
-  availability: 'Disponible para proyectos',
-  eyebrow: 'Consultor Independiente · LATAM y EE.UU.',
-  name: 'Carlos Ortega González',
-  role: 'Consultor de automatización Python — LATAM y EE.UU.',
-  location: 'Santiago, Chile · Zonas horarias LATAM y compatibles con EE.UU.',
-  lede: 'Si tu equipo pierde horas en reportes que podrían ejecutarse solos — o mantiene flujos de datos que nadie entiende del todo — puedo resolver eso. Construyo sistemas de automatización Python: acotados, documentados y diseñados para seguir funcionando cuando los traspaso.',
-  lockup: 'Trabajo en español e inglés con equipos de LATAM y zonas horarias compatibles con EE.UU.',
+  availability: 'Disponible para proyectos de automatización acotados',
+  meta: 'Tooltician · Carlos Ortega González',
+  title: 'Automatización Python para reportes, ETL y herramientas internas.',
+  summary: 'Ayudo a los equipos a reemplazar flujos manuales frágiles por sistemas Python listos para producción: claros de operar, fáciles de traspasar y pensados para seguir funcionando.',
+  support: 'Trabajo desde Santiago de Chile, en español e inglés, con equipos de LATAM y zonas horarias compatibles con EE.UU.',
   highlights: [
-    'Pipelines ETL, scrapers y APIs internas entregados con CI, pruebas y documentación de traspaso.',
-    'Bilingüe (ES/EN) — comunicación clara con stakeholders técnicos y no técnicos.',
-    'Orientado a producción: logging estructurado, salidas deterministas y sistemas que tu equipo puede operar sin mí.',
+    'Automatización de reportes, pipelines ETL y flujos de captura de datos pensados para operación repetible.',
+    'APIs internas y tooling entregados con CI, pruebas y documentación de traspaso.',
+    'Comunicación directa con stakeholders técnicos y no técnicos en español o inglés.',
   ],
-  cta1: 'Ver mi trabajo',
-  cta2: 'Iniciar proyecto',
-  cta3: 'GitHub',
-  cta4: 'Agendar llamada',
-  card1Title: 'Trabajo ideal',
-  card1Body: 'Automatización de reportes, pipelines ETL, flujos de scraping y herramientas internas que necesitan ser confiables y mantenibles — no solo funcionales.',
-  card2Title: 'Cómo entrego',
-  card2Body: 'Proyecto acotado con supuestos claros, implementación directa y documentación que tu equipo puede usar después del traspaso.',
-  card3Title: 'Qué puedes verificar',
-  card3Body: 'Paquetes publicados en PyPI, flujos CI, escaneo CodeQL y repositorios abiertos con documentación orientada a producción.',
+  ctaPrimary: 'Iniciar proyecto',
+  ctaSecondary: 'Ver trabajo seleccionado',
+  ctaPrimaryHref: 'mailto:carlos@tooltician.com?subject=Consulta%20de%20Proyecto',
+  ctaSecondaryHref: '#portfolio',
+  photoAlt: 'Retrato profesional de Carlos Ortega González',
+  card1Title: 'Proyectos ideales',
+  card1Body: 'Consultoría breve y acotada para automatización de reportes, confiabilidad ETL, scraping y herramientas internas de datos.',
+  card2Title: 'Qué recibe tu equipo',
+  card2Body: 'Implementación, documentación y un sistema que tu equipo pueda seguir operando sin dependencia del proveedor.',
 };
 
 const c = lang === 'en' ? en : es;
 ---
 <header class="hero" id="overview">
-  <div class="hero__bg" aria-hidden="true">
-    <div class="hero__orb hero__orb--1"></div>
-    <div class="hero__orb hero__orb--2"></div>
-    <div class="hero__mesh"></div>
-  </div>
+  <div class="hero__bg" aria-hidden="true"></div>
   <div class="container">
     <div class="hero__layout">
       <div class="hero__copy">
-        <div class="avail-badge reveal">
-          <span class="avail-badge__dot"></span>
-          {c.availability}
+        <div class="hero__meta reveal">
+          <span>{c.meta}</span>
+          <span>{c.availability}</span>
         </div>
-        <p class="hero__eyebrow reveal reveal-delay-1">{c.eyebrow}</p>
-        <h1 class="hero__name reveal reveal-delay-1">{c.name}</h1>
-        <h2 class="hero__role reveal reveal-delay-2">{c.role}</h2>
-        <p class="hero__location reveal reveal-delay-2">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M20 10c0 6-8 13-8 13s-8-7-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
-          </svg>
-          {c.location}
-        </p>
-        <p class="hero__lede reveal reveal-delay-2">{c.lede}</p>
-        <ul class="hero__highlights reveal reveal-delay-3">
+        <h1 class="hero__title reveal reveal-delay-1">{c.title}</h1>
+        <p class="hero__summary reveal reveal-delay-2">{c.summary}</p>
+        <p class="hero__support reveal reveal-delay-3">{c.support}</p>
+        <div class="hero__actions reveal reveal-delay-3">
+          <a class="btn btn-primary" href={c.ctaPrimaryHref}>{c.ctaPrimary}</a>
+          <a class="btn btn-ghost" href={c.ctaSecondaryHref}>{c.ctaSecondary}</a>
+        </div>
+        <ul class="hero__highlights reveal reveal-delay-4">
           {c.highlights.map(h => (
             <li>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
@@ -89,21 +76,14 @@ const c = lang === 'en' ? en : es;
             </li>
           ))}
         </ul>
-        <div class="hero__actions reveal reveal-delay-4">
-          <a class="btn btn-primary" href="#portfolio">{c.cta1}</a>
-          <a class="btn btn-ghost" href="mailto:carlos@tooltician.com?subject=Project%20Inquiry">{c.cta2}</a>
-          <a class="btn btn-ghost" href="https://github.com/cortega26" target="_blank" rel="noopener noreferrer">{c.cta3}</a>
-          <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">{c.cta4}</a>
-        </div>
       </div>
 
       <div class="hero__aside reveal reveal-delay-2">
         <figure class="hero__figure">
-          <div class="hero__photo-ring" aria-hidden="true"></div>
           <img
             class="hero__photo"
             src="/assets/images/profile-photo.webp"
-            alt="Professional portrait of Carlos Ortega"
+            alt={c.photoAlt}
             width="380" height="380"
             loading="eager"
             decoding="async"
@@ -111,17 +91,13 @@ const c = lang === 'en' ? en : es;
           />
         </figure>
         <div class="hero__cards">
-          <article class="hero__card card-glass">
+          <article class="hero__card">
             <h3>{c.card1Title}</h3>
             <p>{c.card1Body}</p>
           </article>
-          <article class="hero__card card-glass">
+          <article class="hero__card">
             <h3>{c.card2Title}</h3>
             <p>{c.card2Body}</p>
-          </article>
-          <article class="hero__card card-glass">
-            <h3>{c.card3Title}</h3>
-            <p>{c.card3Body}</p>
           </article>
         </div>
       </div>
@@ -131,120 +107,188 @@ const c = lang === 'en' ? en : es;
 
 <style>
 .hero {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   padding-top: calc(var(--nav-height) + 3rem);
   padding-bottom: 4rem;
   position: relative;
   overflow: hidden;
+  border-bottom: 1px solid var(--clr-border);
 }
-.hero__bg { position: absolute; inset: 0; pointer-events: none; }
-.hero__mesh {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(108,99,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(108,99,255,0.05) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-}
-.hero__orb {
-  position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.18;
-}
-.hero__orb--1 {
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, #6c63ff, transparent 70%);
-  top: -200px; left: -200px;
-}
-.hero__orb--2 {
-  width: 450px; height: 450px;
-  background: radial-gradient(circle, #00d4aa, transparent 70%);
-  bottom: -100px; right: -100px;
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(15, 23, 41, 0.72) 0%, rgba(15, 23, 41, 0.32) 40%, rgba(7, 13, 26, 0) 100%);
 }
 
 .hero__layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 3rem;
+  align-items: start;
 }
-.hero__copy { position: relative; z-index: 1; }
-
-.hero__eyebrow {
-  font-size: 0.75rem; font-weight: 600;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--clr-accent); margin-bottom: 0.5rem;
+.hero__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
-.hero__name {
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.84rem;
+  color: var(--clr-text-muted);
+}
+.hero__title {
   font-family: var(--ff-heading);
-  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-  font-weight: 700; line-height: 1.1;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #fff 50%, var(--clr-accent));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: clamp(2.4rem, 5vw, 4.15rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  max-width: 11ch;
 }
-.hero__role {
-  font-family: var(--ff-heading);
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  font-weight: 500; color: var(--clr-text-muted); margin-bottom: 0.5rem;
+.hero__summary {
+  font-size: clamp(1.02rem, 1.8vw, 1.16rem);
+  color: var(--clr-text);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  max-width: 60ch;
 }
-.hero__location {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 0.875rem; color: var(--clr-text-faint); margin-bottom: 1.25rem;
+.hero__support {
+  font-size: 0.96rem;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  max-width: 58ch;
 }
-.hero__lede {
-  font-size: clamp(1rem, 1.5vw, 1.05rem);
-  color: var(--clr-text-muted); line-height: 1.7; margin-bottom: 1.25rem;
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.hero__actions .btn {
+  border-radius: 10px;
+  padding: 0.85rem 1.15rem;
+}
+.hero__actions .btn-ghost {
+  background: rgba(255, 255, 255, 0.02);
 }
 .hero__highlights {
-  display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
 .hero__highlights li {
-  display: flex; align-items: flex-start; gap: 0.6rem;
-  font-size: 0.9rem; color: var(--clr-text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.92rem;
+  color: var(--clr-text-muted);
 }
 .hero__highlights li svg {
-  flex-shrink: 0; margin-top: 2px; color: var(--clr-accent-2);
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--clr-accent-2);
 }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
-.hero__aside { position: relative; z-index: 1; }
-.hero__figure {
-  position: relative; width: 300px; height: 300px;
-  margin: 0 auto 2rem;
+.hero__aside {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.9rem;
 }
-.hero__photo-ring {
-  position: absolute; inset: -8px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--clr-accent), var(--clr-accent-2), var(--clr-accent));
-  opacity: 0.55;
+.hero__figure {
+  width: min(340px, 100%);
+  margin: 0 0 0 auto;
+  padding: 0.75rem;
+  border: 1px solid var(--clr-border);
+  border-radius: 14px;
+  background: rgba(15, 23, 41, 0.82);
 }
 .hero__photo {
-  position: absolute; inset: 4px;
-  width: calc(100% - 8px); height: calc(100% - 8px);
-  border-radius: 50%; object-fit: cover;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  object-fit: cover;
   background: var(--clr-surface);
 }
 .hero__cards {
-  display: flex; flex-direction: column; gap: 0.75rem;
+  display: grid;
+  gap: 0.75rem;
 }
 .hero__card h3 {
-  font-family: var(--ff-heading); font-size: 0.9rem; font-weight: 600;
-  margin-bottom: 0.3rem; color: var(--clr-text);
+  font-family: var(--ff-heading);
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: var(--clr-text);
 }
-.hero__card p { font-size: 0.82rem; color: var(--clr-text-muted); line-height: 1.5; }
-.hero__card { padding: 1rem 1.25rem; }
+.hero__card p {
+  font-size: 0.86rem;
+  color: var(--clr-text-muted);
+  line-height: 1.55;
+}
+.hero__card {
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  background: rgba(15, 23, 41, 0.72);
+}
 
-@media (max-width: 900px) {
-  .hero__layout { grid-template-columns: 1fr; gap: 2rem; }
-  .hero__copy { order: 2; }
-  .hero__aside { order: 1; display: flex; flex-direction: column; align-items: center; }
-  .hero__figure { width: 200px; height: 200px; }
-  .hero__cards { width: 100%; }
-  .hero { min-height: auto; padding-top: calc(var(--nav-height) + 2rem); }
+@media (max-width: 1024px) {
+  .hero {
+    padding-top: calc(var(--nav-height) + 2rem);
+  }
+  .hero__layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .hero__copy {
+    order: 1;
+  }
+  .hero__aside {
+    order: 2;
+  }
+  .hero__figure {
+    width: min(300px, 100%);
+    margin: 0 auto;
+  }
 }
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: calc(var(--nav-height) + 1.5rem);
+    padding-bottom: 3rem;
+  }
+  .hero__title {
+    max-width: none;
+  }
+  .hero__summary,
+  .hero__support {
+    max-width: none;
+  }
+}
+
 @media (max-width: 640px) {
-  .hero__card:nth-child(3) { display: none; }
+  .hero__meta {
+    gap: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero__actions .btn {
+    justify-content: center;
+  }
+  .hero__highlights li {
+    font-size: 0.88rem;
+  }
 }
 </style>

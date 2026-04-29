@@ -202,23 +202,19 @@ ul { list-style: none; }
 .navbar__brand {
   display: inline-flex;
   align-items: center;
-  gap: var(--sp-2);
+  gap: 0.375rem;
   font-family: var(--ff-heading);
-  font-size: var(--fs-xl);
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--clr-text);
 }
 .navbar__brand span {
-  background: linear-gradient(135deg, #fff 30%, var(--clr-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--clr-text);
 }
 .navbar__brand-logo {
-  width: 36px;
-  height: 36px;
-  flex: 0 0 36px;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
   object-fit: contain;
 }
 .navbar__links {
@@ -246,15 +242,13 @@ ul { list-style: none; }
   padding: var(--sp-2) var(--sp-4);
   background: var(--clr-accent);
   color: #fff;
-  border-radius: var(--radius-full);
+  border-radius: 10px;
   font-size: var(--fs-sm);
   font-weight: 600;
-  transition: transform var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+  transition: background var(--dur-fast), border-color var(--dur-fast);
 }
 .navbar__cta:hover {
   background: #7b74ff;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-glow);
 }
 
 /* Mobile nav toggle */

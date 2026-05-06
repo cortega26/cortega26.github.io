@@ -51,16 +51,16 @@
   --sp-32: 8rem;
 
   /* Borders */
-  --radius-sm:  8px;
-  --radius-md:  14px;
-  --radius-lg:  22px;
-  --radius-xl:  30px;
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  18px;
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-card: 0 1px 0 rgba(255,255,255,0.68), 0 18px 42px rgba(31, 26, 21, 0.08);
-  --shadow-glow: 0 14px 30px rgba(154, 77, 42, 0.14);
-  --shadow-teal: 0 14px 30px rgba(41, 87, 78, 0.14);
+  --shadow-card: 0 1px 0 rgba(255,255,255,0.68), 0 10px 24px rgba(31, 26, 21, 0.06);
+  --shadow-glow: 0 8px 20px rgba(154, 77, 42, 0.1);
+  --shadow-teal: 0 8px 20px rgba(41, 87, 78, 0.1);
 
   /* Transitions */
   --dur-fast:   150ms;
@@ -97,11 +97,7 @@ body {
   line-height: 1.6;
   color: var(--clr-text);
   background-color: var(--clr-bg);
-  background-image:
-    radial-gradient(circle at top left, rgba(154, 77, 42, 0.12), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 22%),
-    repeating-linear-gradient(90deg, transparent 0 94px, rgba(31, 26, 21, 0.035) 94px 95px),
-    linear-gradient(180deg, #f8f2e8 0%, #f0e5d7 52%, #eadfce 100%);
+  background-image: linear-gradient(180deg, #f8f2e8 0%, #f0e5d7 52%, #eadfce 100%);
   overflow-x: hidden;
 }
 
@@ -154,7 +150,7 @@ ul { list-style: none; }
   padding-block: var(--sp-24);
 }
 .section--alt {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.12));
+  background: rgba(255, 255, 255, 0.18);
   border-block: 1px solid var(--clr-border);
 }
 .section-eyebrow {
@@ -209,10 +205,10 @@ ul { list-style: none; }
   transition: background var(--dur-med), border-color var(--dur-med), backdrop-filter var(--dur-med), box-shadow var(--dur-med);
 }
 .navbar.scrolled {
-  background: rgba(248, 242, 232, 0.82);
-  backdrop-filter: blur(14px);
+  background: rgba(248, 242, 232, 0.92);
+  backdrop-filter: blur(8px);
   border-bottom-color: var(--clr-border);
-  box-shadow: 0 12px 28px rgba(31, 26, 21, 0.07);
+  box-shadow: 0 8px 18px rgba(31, 26, 21, 0.05);
 }
 .navbar__inner {
   display: flex;
@@ -276,7 +272,7 @@ ul { list-style: none; }
   background: var(--clr-accent);
   color: #fff8f0;
   border: 1px solid rgba(154, 77, 42, 0.2);
-  border-radius: 12px;
+  border-radius: 8px;
   font-family: var(--ff-label);
   font-size: 0.72rem;
   font-weight: 600;
@@ -319,7 +315,7 @@ ul { list-style: none; }
 
 /* ---- Glassmorphism Card ---- */
 .card-glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(249,245,237,0.76));
+  background: rgba(255,255,255,0.74);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   padding: var(--sp-6);
@@ -329,8 +325,8 @@ ul { list-style: none; }
 .card-glass:hover {
   background: var(--clr-bg-card-hover);
   border-color: var(--clr-border-glow);
-  transform: translateY(-3px);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.72), 0 24px 42px rgba(31, 26, 21, 0.1);
+  transform: none;
+  box-shadow: var(--shadow-card);
 }
 
 /* ---- Buttons ---- */
@@ -339,7 +335,7 @@ ul { list-style: none; }
   align-items: center;
   gap: var(--sp-2);
   padding: var(--sp-3) var(--sp-6);
-  border-radius: 12px;
+  border-radius: 8px;
   font-family: var(--ff-label);
   font-size: 0.76rem;
   font-weight: 600;
@@ -349,7 +345,7 @@ ul { list-style: none; }
   border: 1px solid transparent;
   transition: transform var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast), color var(--dur-fast);
 }
-.btn:hover { transform: translateY(-1px); }
+.btn:hover { transform: none; }
 
 .btn-primary {
   background: var(--clr-text);
@@ -370,12 +366,12 @@ ul { list-style: none; }
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.54);
+  background: rgba(255, 255, 255, 0.36);
   color: var(--clr-text);
   border: 1px solid var(--clr-border);
 }
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.62);
   border-color: var(--clr-border-glow);
 }
 .btn-sm {
@@ -448,9 +444,9 @@ ul { list-style: none; }
 
 /* ---- Divider Gradient ---- */
 .divider {
-  width: 84px;
+  width: 56px;
   height: 2px;
-  background: linear-gradient(90deg, var(--clr-accent), rgba(154, 77, 42, 0.08));
+  background: var(--clr-accent);
   border-radius: 2px;
   margin-bottom: var(--sp-4);
 }
@@ -508,7 +504,7 @@ ul { list-style: none; }
 
 /* ---- Footer ---- */
 .footer {
-  background: rgba(255, 255, 255, 0.36);
+  background: rgba(255, 255, 255, 0.22);
   border-top: 1px solid var(--clr-border);
   padding: var(--sp-12) 0 var(--sp-8);
 }

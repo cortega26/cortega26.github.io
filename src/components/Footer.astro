@@ -54,7 +54,7 @@ const c = copy[lang];
     <div class="footer__bottom">
       <span>{c.rights}</span>
       <div style="display:flex;gap:1rem;">
-        <a href={c.langHref}>{c.lang}</a>
+        <a href={c.langHref} data-language-preference={lang === 'en' ? 'es' : 'en'}>{c.lang}</a>
         <a href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">{c.source}</a>
       </div>
     </div>

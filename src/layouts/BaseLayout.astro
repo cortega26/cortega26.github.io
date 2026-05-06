@@ -72,6 +72,23 @@ const {
   </button>
 
   <script>
+    const languagePreferenceKey = 'tooltician-language';
+    const firstVisitRedirectKey = 'tooltician-language-autoredirect';
+
+    document.querySelectorAll('[data-language-preference]').forEach(link => {
+      link.addEventListener('click', () => {
+        const preference = link.getAttribute('data-language-preference');
+        if (!preference) return;
+
+        try {
+          window.localStorage.setItem(languagePreferenceKey, preference);
+          window.localStorage.setItem(firstVisitRedirectKey, '1');
+        } catch {
+          // Ignore storage failures and keep normal navigation.
+        }
+      });
+    });
+
     // Scroll progress
     const bar = document.getElementById('scroll-progress');
     const btt = document.getElementById('back-to-top');

@@ -25,17 +25,23 @@
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #070d1a;
-      --surface: #0f1729;
-      --surface-2: rgba(255, 255, 255, 0.04);
-      --border: rgba(255, 255, 255, 0.09);
-      --text: #e8eaf6;
-      --muted: #98a3b8;
-      --accent: #6c63ff;
-      --accent-2: #00d4aa;
+      color-scheme: light;
+      --bg: #f3ecdf;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-2: rgba(255, 255, 255, 0.48);
+      --border: rgba(32, 26, 21, 0.12);
+      --text: #201a15;
+      --muted: #5d554a;
+      --accent: #9a4d2a;
+      --accent-2: #29574e;
+      --ff-body: 'IBM Plex Sans', system-ui, sans-serif;
+      --ff-heading: 'Newsreader', Georgia, serif;
+      --ff-label: 'IBM Plex Mono', monospace;
     }
 
     * { box-sizing: border-box; }
@@ -43,11 +49,13 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: "Inter", system-ui, sans-serif;
+      font-family: var(--ff-body);
       color: var(--text);
       background:
-        radial-gradient(circle at top, rgba(108, 99, 255, 0.18), transparent 40%),
-        linear-gradient(180deg, #0c1426 0%, var(--bg) 100%);
+        radial-gradient(circle at top left, rgba(154, 77, 42, 0.14), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 18%),
+        repeating-linear-gradient(90deg, transparent 0 94px, rgba(32, 26, 21, 0.035) 94px 95px),
+        linear-gradient(180deg, #f8f2e8 0%, #f0e5d7 54%, #eadfce 100%);
       display: grid;
       place-items: center;
       padding: 1.5rem;
@@ -55,13 +63,13 @@
 
     .gateway {
       width: min(100%, 920px);
-      padding: 2rem;
+      padding: 2.25rem;
       border: 1px solid var(--border);
       border-radius: 28px;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(248, 242, 232, 0.92)),
         var(--surface);
-      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.38);
+      box-shadow: 0 24px 64px rgba(32, 26, 21, 0.08);
       text-align: center;
     }
 
@@ -74,25 +82,26 @@
     .gateway__eyebrow {
       margin: 0 0 0.75rem;
       color: var(--accent-2);
-      font-size: 0.8rem;
-      font-weight: 700;
+      font-family: var(--ff-label);
+      font-size: 0.72rem;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
     .gateway__title {
       margin: 0 0 0.75rem;
-      font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
-      font-size: clamp(2rem, 6vw, 3.4rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+      font-family: var(--ff-heading);
+      font-size: clamp(2.35rem, 6vw, 4rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
     }
 
     .gateway__copy {
       margin: 0 auto 1.5rem;
-      max-width: 44rem;
+      max-width: 42rem;
       color: var(--muted);
-      font-size: 1rem;
+      font-size: 1.02rem;
       line-height: 1.7;
     }
 
@@ -105,27 +114,30 @@
 
     .gateway__card {
       display: block;
-      padding: 1.25rem;
+      padding: 1.3rem;
       border: 1px solid var(--border);
       border-radius: 20px;
       background: var(--surface-2);
       color: inherit;
       text-decoration: none;
-      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
     }
 
     .gateway__card:hover,
     .gateway__card:focus-visible {
       transform: translateY(-2px);
-      border-color: rgba(108, 99, 255, 0.45);
-      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(154, 77, 42, 0.24);
+      background: rgba(255, 255, 255, 0.84);
+      box-shadow: 0 18px 28px rgba(32, 26, 21, 0.06);
       outline: none;
     }
 
     .gateway__card strong {
       display: block;
       margin-bottom: 0.45rem;
-      font-size: 1.15rem;
+      font-family: var(--ff-heading);
+      font-size: 1.45rem;
+      font-weight: 700;
     }
 
     .gateway__card span {
@@ -170,7 +182,7 @@
       </a>
     </div>
 
-    <p class="gateway__note">Both versions are maintained and link to the same public work, packages, and contact paths.</p>
+    <p class="gateway__note">Both versions are maintained and point to the same public work, packages, and contact paths.</p>
   </main>
 </body>
 </html>

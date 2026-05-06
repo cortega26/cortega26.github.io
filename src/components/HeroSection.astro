@@ -7,8 +7,8 @@ const { lang } = Astro.props;
 const en = {
   availability: 'Available for scoped automation projects',
   meta: 'Tooltician · Carlos Ortega Gonzalez',
-  title: 'Python automation for reporting, ETL, and internal tools.',
-  summary: 'I help teams replace fragile manual workflows with production-ready Python systems that are clear to operate, easy to hand off, and built to keep running.',
+  title: 'Python automation for workflows that need to keep working after handoff.',
+  summary: 'I build reporting, ETL, and internal tools that replace fragile manual work with systems a team can operate, audit, and trust.',
   support: 'Based in Santiago, Chile. I work in English and Spanish with teams across LATAM and U.S.-friendly time zones.',
   highlights: [
     'Reporting automation, ETL pipelines, and data collection workflows built for repeatable operation.',
@@ -26,8 +26,8 @@ const en = {
     { value: 'CI + CodeQL', label: 'visible in public repos' },
     { value: 'EN / ES', label: 'client-ready delivery' },
   ],
-  panelTitle: 'Engagement snapshot',
-  panelIntro: 'Best fit when a team needs a fragile workflow stabilized without turning the project into a long, open-ended build.',
+  panelTitle: 'How I work',
+  panelIntro: 'Best fit when a team needs a brittle workflow stabilized quickly, with a clear scope and no appetite for a long custom-software saga.',
   panelItems: [
     {
       label: 'Typical scope',
@@ -42,15 +42,15 @@ const en = {
       value: 'Santiago-based, working in English and Spanish across LATAM and U.S.-friendly hours.',
     },
   ],
-  noteTitle: 'Delivery defaults',
-  noteBody: 'CI, tests, and operating notes are included when the workflow needs a reliable handoff.',
+  noteTitle: 'Standard handoff',
+  noteBody: 'CI, tests, and operator notes are part of the default delivery whenever the workflow needs to outlive the build.',
 };
 
 const es = {
   availability: 'Disponible para proyectos de automatización acotados',
   meta: 'Tooltician · Carlos Ortega González',
-  title: 'Automatización Python para reportes, ETL y herramientas internas.',
-  summary: 'Ayudo a los equipos a reemplazar flujos manuales frágiles por sistemas Python listos para producción: claros de operar, fáciles de traspasar y pensados para seguir funcionando.',
+  title: 'Automatización Python para flujos que deben seguir funcionando después del traspaso.',
+  summary: 'Construyo sistemas para reportes, ETL y herramientas internas que reemplazan trabajo manual frágil por flujos que un equipo puede operar, auditar y confiar.',
   support: 'Trabajo desde Santiago de Chile, en español e inglés, con equipos de LATAM y zonas horarias compatibles con EE.UU.',
   highlights: [
     'Automatización de reportes, pipelines ETL y flujos de captura de datos pensados para operación repetible.',
@@ -68,8 +68,8 @@ const es = {
     { value: 'CI + CodeQL', label: 'visible en repos públicos' },
     { value: 'ES / EN', label: 'entrega lista para clientes' },
   ],
-  panelTitle: 'Panorama de trabajo',
-  panelIntro: 'Encaja mejor cuando un equipo necesita estabilizar un flujo frágil sin convertir el proyecto en un desarrollo largo y abierto.',
+  panelTitle: 'Cómo trabajo',
+  panelIntro: 'Encaja mejor cuando un equipo necesita estabilizar un flujo frágil con alcance claro y sin convertirlo en una saga larga de software a medida.',
   panelItems: [
     {
       label: 'Alcance típico',
@@ -84,8 +84,8 @@ const es = {
       value: 'Trabajo desde Santiago, en español e inglés, con equipos de LATAM y horarios compatibles con EE.UU.',
     },
   ],
-  noteTitle: 'Entregables base',
-  noteBody: 'CI, pruebas y notas operativas se incluyen cuando el flujo necesita un traspaso confiable.',
+  noteTitle: 'Traspaso estándar',
+  noteBody: 'CI, pruebas y notas para operadores forman parte de la entrega base cuando el flujo debe seguir funcionando después del build.',
 };
 
 const c = lang === 'en' ? en : es;
@@ -152,8 +152,8 @@ const c = lang === 'en' ? en : es;
 .hero {
   display: flex;
   align-items: center;
-  padding-top: calc(var(--nav-height) + 3rem);
-  padding-bottom: 4rem;
+  padding-top: calc(var(--nav-height) + 4rem);
+  padding-bottom: 5rem;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--clr-border);
@@ -162,13 +162,16 @@ const c = lang === 'en' ? en : es;
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(15, 23, 41, 0.72) 0%, rgba(15, 23, 41, 0.32) 40%, rgba(7, 13, 26, 0) 100%);
+  background:
+    radial-gradient(circle at top right, rgba(41, 87, 78, 0.14), transparent 34%),
+    linear-gradient(120deg, rgba(154, 77, 42, 0.15), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0) 62%);
 }
 
 .hero__layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-  gap: 3rem;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: 3.5rem;
   align-items: start;
 }
 .hero__copy {
@@ -181,88 +184,97 @@ const c = lang === 'en' ? en : es;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
-  margin-bottom: 1rem;
-  font-size: 0.84rem;
+  margin-bottom: 1.15rem;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--clr-text-muted);
 }
 .hero__title {
   font-family: var(--ff-heading);
-  font-size: clamp(2.4rem, 5vw, 4.15rem);
+  font-size: clamp(3rem, 5.8vw, 5.25rem);
   font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: -0.03em;
-  margin-bottom: 1rem;
-  max-width: 11ch;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  margin-bottom: 1.2rem;
+  max-width: 11.5ch;
+  text-wrap: balance;
 }
 .hero__summary {
-  font-size: clamp(1.02rem, 1.8vw, 1.16rem);
+  font-size: clamp(1.03rem, 1.8vw, 1.18rem);
   color: var(--clr-text);
-  line-height: 1.7;
-  margin-bottom: 1rem;
-  max-width: 60ch;
+  line-height: 1.72;
+  margin-bottom: 1.1rem;
+  max-width: 58ch;
 }
 .hero__support {
   font-size: 0.96rem;
   color: var(--clr-text-muted);
   line-height: 1.65;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.7rem;
   max-width: 58ch;
 }
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 }
 .hero__actions .btn {
-  border-radius: 10px;
-  padding: 0.85rem 1.15rem;
+  padding: 0.95rem 1.2rem;
 }
 .hero__actions .btn-ghost {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.56);
 }
 .hero__proofbar {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.7rem;
 }
 .hero__proofitem {
-  padding: 0.85rem 0.95rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-width: 150px;
+  flex: 1 1 170px;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--clr-border);
+  border-top: 3px solid var(--clr-accent);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 16px 28px rgba(31, 26, 21, 0.05);
 }
 .hero__proofvalue {
   display: block;
-  font-family: var(--ff-heading);
-  font-size: 1rem;
+  font-family: var(--ff-label);
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--clr-text);
-  margin-bottom: 0.2rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.28rem;
+  text-transform: uppercase;
 }
 .hero__prooflabel {
   display: block;
-  font-size: 0.77rem;
+  font-size: 0.8rem;
   line-height: 1.45;
   color: var(--clr-text-muted);
 }
 .hero__highlights {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.85rem;
 }
 .hero__highlights li {
   display: flex;
   align-items: flex-start;
   gap: 0.65rem;
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   color: var(--clr-text-muted);
 }
 .hero__highlights li svg {
   flex-shrink: 0;
   margin-top: 2px;
-  color: var(--clr-accent-2);
+  color: var(--clr-accent);
 }
 
 .hero__aside {
@@ -275,24 +287,25 @@ const c = lang === 'en' ? en : es;
 .hero__brief {
   width: min(380px, 100%);
   margin-left: auto;
-  padding: 1.35rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.45rem;
+  border: 1px solid var(--clr-border);
   border-radius: 18px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015)),
-    rgba(15, 23, 41, 0.86);
-  box-shadow: var(--shadow-card);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(247, 242, 233, 0.9)),
+    rgba(255, 255, 255, 0.85);
+  box-shadow: 0 22px 44px rgba(31, 26, 21, 0.08);
 }
 .hero__brief-kicker {
-  font-size: 0.76rem;
-  font-weight: 700;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--clr-accent-2);
+  color: var(--clr-accent);
   margin-bottom: 0.75rem;
 }
 .hero__brief-intro {
-  font-size: 0.93rem;
+  font-size: 0.95rem;
   line-height: 1.65;
   color: var(--clr-text);
   margin-bottom: 1rem;
@@ -305,36 +318,41 @@ const c = lang === 'en' ? en : es;
   display: grid;
   gap: 0.28rem;
   padding-top: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(31, 26, 21, 0.09);
 }
 .hero__brief-row dt {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--clr-text);
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
 }
 .hero__brief-row dd {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   line-height: 1.6;
-  color: var(--clr-text-muted);
+  color: var(--clr-text);
 }
 .hero__note {
   width: min(380px, 100%);
   margin-left: auto;
   padding: 1rem 1.15rem;
-  border: 1px solid rgba(0, 212, 170, 0.18);
+  border: 1px solid rgba(41, 87, 78, 0.18);
+  border-left-width: 4px;
   border-radius: 14px;
-  background: rgba(8, 18, 34, 0.78);
+  background: rgba(255, 255, 255, 0.55);
 }
 .hero__note-title {
-  font-family: var(--ff-heading);
-  font-size: 0.9rem;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--clr-text);
-  margin-bottom: 0.35rem;
+  color: var(--clr-accent-2);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
 }
 .hero__note p:last-child {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   line-height: 1.6;
   color: var(--clr-text-muted);
 }

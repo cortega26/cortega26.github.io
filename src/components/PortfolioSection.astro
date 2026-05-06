@@ -366,9 +366,11 @@ const c = {
 }
 
 .filter-label {
-  font-size: 0.78rem;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--clr-text-faint);
   margin-right: 0.25rem;
 }
@@ -376,10 +378,13 @@ const c = {
 .filter-btn {
   padding: 0.45rem 0.85rem;
   border-radius: var(--radius-sm);
-  font-size: 0.82rem;
+  font-family: var(--ff-label);
+  font-size: 0.74rem;
   font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   border: 1px solid var(--clr-border);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.52);
   color: var(--clr-text-muted);
   cursor: pointer;
   transition: border-color 150ms, background 150ms, color 150ms;
@@ -391,8 +396,8 @@ const c = {
 }
 
 .filter-btn.active {
-  background: rgba(108, 99, 255, 0.18);
-  border-color: rgba(108, 99, 255, 0.42);
+  background: rgba(154, 77, 42, 0.12);
+  border-color: rgba(154, 77, 42, 0.28);
   color: var(--clr-text);
 }
 
@@ -427,9 +432,10 @@ const c = {
 }
 
 .project-impact {
-  font-size: 0.76rem;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--clr-accent-2);
+  color: var(--clr-accent);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -465,8 +471,9 @@ const c = {
 }
 
 .project-point dt {
+  font-family: var(--ff-label);
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--clr-text-faint);
   text-transform: uppercase;
   letter-spacing: 0.08em;

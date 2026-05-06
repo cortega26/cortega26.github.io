@@ -12,6 +12,7 @@ interface Props {
 const { lang, items } = Astro.props;
 const ctaLabel = lang === 'en' ? 'Start a project' : 'Iniciar proyecto';
 const ctaHref = '#contact-form';
+const brandTag = lang === 'en' ? 'Python automation' : 'Automatizacion Python';
 
 const switchLabel = lang === 'en' ? 'ES' : 'EN';
 const switchHref  = lang === 'en' ? '/es/' : '/en/';
@@ -30,7 +31,10 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
           fetchpriority="high"
           decoding="async"
         />
-        <span>Tooltician</span>
+        <span class="navbar__brand-lockup">
+          <span class="navbar__brand-name">Tooltician</span>
+          <span class="navbar__brand-tag">{brandTag}</span>
+        </span>
       </a>
 
       <button
@@ -80,9 +84,11 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
   display: inline-flex;
   align-items: center;
   padding: var(--sp-2) var(--sp-3);
-  font-size: var(--fs-xs);
-  font-weight: 700;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--clr-text-muted);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-full);
@@ -92,5 +98,25 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
   color: var(--clr-text);
   border-color: var(--clr-border-glow);
   background: var(--clr-bg-card);
+}
+
+.navbar__brand-lockup {
+  display: grid;
+  gap: 0.08rem;
+}
+
+.navbar__brand-name {
+  font-family: var(--ff-heading);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.navbar__brand-tag {
+  font-family: var(--ff-label);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
 }
 </style>

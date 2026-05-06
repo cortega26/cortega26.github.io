@@ -3,9 +3,6 @@
    Dark mode portfolio. Tokens → base → utilities → animations
    ============================================================ */
 
-/* ---- Google Fonts ---- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 /* ---- Design Tokens ---- */
 :root {
   /* Colors */
@@ -511,7 +508,7 @@ ul { list-style: none; }
 .footer__tagline {
   font-size: var(--fs-sm);
   font-style: italic;
-  color: var(--clr-text-faint);
+  color: var(--clr-text-muted);
   margin-bottom: var(--sp-1);
 }
 .footer__desc {
@@ -548,7 +545,7 @@ ul { list-style: none; }
   justify-content: space-between;
   align-items: center;
   font-size: var(--fs-xs);
-  color: var(--clr-text-faint);
+  color: var(--clr-text-muted);
 }
 .footer__bottom a {
   color: var(--clr-text-muted);

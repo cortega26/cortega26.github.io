@@ -8,8 +8,8 @@ const en = {
   eyebrow: "Contact",
   title: "Start a Project",
   subtitle:
-    "Email is the fastest path. If the scope is already clear, a short note is enough to start.",
-  copy: "The cleanest first step is a brief message with the workflow, the bottleneck, and the outcome you want. If it helps, you can use the form as that project brief.",
+    "Start with a short brief or a 20-minute intro call.",
+  copy: "The cleanest first step is the form below. Three useful lines are enough: the workflow, the bottleneck, and the outcome you want.",
   preferred:
     "Best fit: scoped builds, workflow automation, internal tooling, and cleanup passes that make existing systems easier to trust.",
   primaryLabel: "Primary contact",
@@ -18,18 +18,17 @@ const en = {
   emailHref: "mailto:carlos@tooltician.com?subject=Project%20Inquiry",
   copyEmail: "Copy address",
   copied: "Address copied.",
-  schedule: "Schedule intro call",
+  schedule: "Book intro call",
   scheduleAria: "Schedule an intro call on Calendly",
   linkedinLabel: "LinkedIn profile",
   linkedinCta: "View LinkedIn",
-  formTitle: "Prefer a structured brief?",
-  formIntro: "Use the form if you want to outline scope before we talk.",
+  formTitle: "Project brief",
+  formIntro: "If the scope is clearer in writing, leave it here and I’ll reply by email.",
+  defaultSubject: "Project brief from tooltician.com",
   nameLabel: "Name",
   namePh: "Your name",
   emailLabel: "Email",
   emailPh: "your@email.com",
-  subjectLabel: "Project scope",
-  subjectPh: "One-line summary of the work",
   messageLabel: "Project brief",
   messagePh:
     "Describe the workflow, the bottleneck, and the outcome you want...",
@@ -44,8 +43,8 @@ const es = {
   eyebrow: "Contacto",
   title: "Inicia un proyecto",
   subtitle:
-    "El correo es la vía más rápida. Si el alcance ya está claro, un mensaje corto basta para partir.",
-  copy: "La mejor primera aproximación es un resumen breve con el flujo, el cuello de botella y el resultado que quieres. Si te sirve, el formulario puede ser ese brief inicial.",
+    "Parte con un brief corto o una llamada inicial de 20 minutos.",
+  copy: "La mejor primera aproximación es el formulario de abajo. Tres líneas útiles bastan: el flujo, el cuello de botella y el resultado que quieres.",
   preferred:
     "Mejor encaje: builds acotados, automatización de flujos, herramientas internas y revisiones que hagan los sistemas más confiables.",
   primaryLabel: "Correo principal",
@@ -58,14 +57,13 @@ const es = {
   scheduleAria: "Agendar una llamada inicial en Calendly",
   linkedinLabel: "Perfil de LinkedIn",
   linkedinCta: "Ver LinkedIn",
-  formTitle: "¿Prefieres dejar un brief estructurado?",
-  formIntro: "Usa el formulario si quieres dejar el alcance por escrito antes de hablar.",
+  formTitle: "Brief del proyecto",
+  formIntro: "Si el alcance se explica mejor por escrito, déjalo aquí y te respondo por correo.",
+  defaultSubject: "Brief de proyecto desde tooltician.com",
   nameLabel: "Nombre",
   namePh: "Tu nombre",
   emailLabel: "Correo",
   emailPh: "tu@correo.com",
-  subjectLabel: "Alcance del proyecto",
-  subjectPh: "Resumen del trabajo en una línea",
   messageLabel: "Brief del proyecto",
   messagePh: "Describe el flujo, el problema y el resultado que quieres...",
   submit: "Enviar brief",
@@ -98,7 +96,14 @@ const c = lang === "en" ? en : es;
         </div>
 
         <div class="contact-actions">
-          <a class="btn btn-primary" href={c.emailHref}>
+          <a
+            class="btn btn-primary"
+            href="https://calendly.com/ciortega26"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={c.scheduleAria}>{c.schedule}</a
+          >
+          <a class="btn btn-ghost" href={c.emailHref}>
             <svg
               width="16"
               height="16"
@@ -138,13 +143,6 @@ const c = lang === "en" ? en : es;
             </svg>
             {c.copyEmail}
           </button>
-          <a
-            class="btn btn-secondary"
-            href="https://calendly.com/ciortega26"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={c.scheduleAria}>{c.schedule}</a
-          >
         </div>
 
         <p class="copy-confirm" id="copy-confirm" aria-live="polite">
@@ -172,6 +170,7 @@ const c = lang === "en" ? en : es;
           <h3>{c.formTitle}</h3>
           <p>{c.formIntro}</p>
         </div>
+        <input type="hidden" name="subject" value={c.defaultSubject} />
 
         <div class="form-group">
           <label for="cf-name">{c.nameLabel}</label>
@@ -193,16 +192,6 @@ const c = lang === "en" ? en : es;
             placeholder={c.emailPh}
             required
             autocomplete="email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="cf-subject">{c.subjectLabel}</label>
-          <input
-            type="text"
-            id="cf-subject"
-            name="subject"
-            placeholder={c.subjectPh}
-            required
           />
         </div>
         <div class="form-group">

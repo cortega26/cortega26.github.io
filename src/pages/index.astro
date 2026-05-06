@@ -1,46 +1,176 @@
----
-// Static GitHub Pages — use meta refresh for language redirect.
-// JS-based redirect handles modern browsers; noscript meta handles the rest.
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tooltician — Python Automation Consultant | Carlos Ortega</title>
-  <meta name="description" content="Bilingual Python automation consultant (EN/ES) based in Santiago, Chile. ETL pipelines, scraping workflows, internal APIs, and reporting automation — scoped delivery with CI, documentation, and handoff-ready systems." />
-  <link rel="canonical" href="https://tooltician.com/en/" />
+  <title>Tooltician — English / Español</title>
+  <meta name="description" content="Choose the English or Spanish version of Tooltician, Carlos Ortega's Python automation consulting site." />
+  <link rel="canonical" href="https://tooltician.com/" />
   <link rel="alternate" hreflang="es" href="https://tooltician.com/es/" />
   <link rel="alternate" hreflang="en" href="https://tooltician.com/en/" />
-  <meta http-equiv="refresh" content="0;url=/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://tooltician.com/" />
+  <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Tooltician — Python Automation Consultant | Carlos Ortega" />
-  <meta property="og:description" content="Bilingual Python automation consultant (EN/ES). ETL pipelines, scraping, internal APIs, and reporting automation. Santiago, Chile." />
+  <meta property="og:title" content="Tooltician — English / Español" />
+  <meta property="og:description" content="Choose the English or Spanish version of Tooltician, Carlos Ortega's Python automation consulting site." />
   <meta property="og:url" content="https://tooltician.com/" />
-  <meta property="og:image" content="https://tooltician.com/assets/images/tooltician-logo.png" />
-  <meta property="og:image:alt" content="Tooltician logo" />
+  <meta property="og:image" content="https://tooltician.com/assets/images/og-card.png" />
+  <meta property="og:image:alt" content="Tooltician preview card" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Tooltician — Python Automation Consultant | Carlos Ortega" />
-  <meta name="twitter:description" content="Bilingual Python automation consultant (EN/ES). ETL pipelines, scraping, internal APIs, and reporting automation." />
-  <meta name="twitter:image" content="https://tooltician.com/assets/images/tooltician-logo.png" />
-  <meta name="twitter:image:alt" content="Tooltician logo" />
+  <meta name="twitter:title" content="Tooltician — English / Español" />
+  <meta name="twitter:description" content="Choose the English or Spanish version of Tooltician, Carlos Ortega's Python automation consulting site." />
+  <meta name="twitter:image" content="https://tooltician.com/assets/images/og-card.png" />
+  <meta name="twitter:image:alt" content="Tooltician preview card" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
   <style>
-    body { background-color: #070d1a; margin: 0; padding: 0; }
-  </style>
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="uU7HA5yyjlR9jxjk2RvjzA" async></script>
-  <script>
-    const userLang = navigator.language;
-    if (userLang && userLang.toLowerCase().startsWith('es')) {
-      window.location.replace('/es/');
-    } else {
-      window.location.replace('/en/');
+    :root {
+      color-scheme: dark;
+      --bg: #070d1a;
+      --surface: #0f1729;
+      --surface-2: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #e8eaf6;
+      --muted: #98a3b8;
+      --accent: #6c63ff;
+      --accent-2: #00d4aa;
     }
-  </script>
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(108, 99, 255, 0.18), transparent 40%),
+        linear-gradient(180deg, #0c1426 0%, var(--bg) 100%);
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+    }
+
+    .gateway {
+      width: min(100%, 920px);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        var(--surface);
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.38);
+      text-align: center;
+    }
+
+    .gateway__logo {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1rem;
+    }
+
+    .gateway__eyebrow {
+      margin: 0 0 0.75rem;
+      color: var(--accent-2);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .gateway__title {
+      margin: 0 0 0.75rem;
+      font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .gateway__copy {
+      margin: 0 auto 1.5rem;
+      max-width: 44rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .gateway__options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .gateway__card {
+      display: block;
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface-2);
+      color: inherit;
+      text-decoration: none;
+      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+    }
+
+    .gateway__card:hover,
+    .gateway__card:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(108, 99, 255, 0.45);
+      background: rgba(255, 255, 255, 0.07);
+      outline: none;
+    }
+
+    .gateway__card strong {
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 1.15rem;
+    }
+
+    .gateway__card span {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
+    .gateway__note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 700px) {
+      .gateway {
+        padding: 1.5rem;
+        border-radius: 24px;
+      }
+
+      .gateway__options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
+  <main class="gateway">
+    <img class="gateway__logo" src="/assets/images/tooltician-logo-128.webp" alt="" width="64" height="64" decoding="async">
+    <p class="gateway__eyebrow">Tooltician · Carlos Ortega Gonzalez</p>
+    <h1 class="gateway__title">Choose your language</h1>
+    <p class="gateway__copy">Python automation consulting for reporting, ETL, internal tools, and workflows that need to keep working after handoff.</p>
+
+    <div class="gateway__options">
+      <a class="gateway__card" href="/en/">
+        <strong>English</strong>
+        <span>Production-focused portfolio, public proof, and a direct project brief.</span>
+      </a>
+      <a class="gateway__card" href="/es/">
+        <strong>Español</strong>
+        <span>Portafolio orientado a producción, evidencia pública y brief de proyecto directo.</span>
+      </a>
+    </div>
+
+    <p class="gateway__note">Both versions are maintained and link to the same public work, packages, and contact paths.</p>
+  </main>
 </body>
 </html>

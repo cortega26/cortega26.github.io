@@ -17,8 +17,15 @@ const en = {
   ],
   ctaPrimary: 'Start a project',
   ctaSecondary: 'See selected work',
-  ctaPrimaryHref: 'mailto:carlos@tooltician.com?subject=Project%20Inquiry',
+  ctaPrimaryHref: '#contact-form',
   ctaSecondaryHref: '#portfolio',
+  proofTitle: 'Public proof',
+  proofItems: [
+    { value: '3 live sites', label: 'publicly viewable today' },
+    { value: '2 PyPI packages', label: 'installable now' },
+    { value: 'CI + CodeQL', label: 'visible in public repos' },
+    { value: 'EN / ES', label: 'client-ready delivery' },
+  ],
   panelTitle: 'Engagement snapshot',
   panelIntro: 'Best fit when a team needs a fragile workflow stabilized without turning the project into a long, open-ended build.',
   panelItems: [
@@ -52,8 +59,15 @@ const es = {
   ],
   ctaPrimary: 'Iniciar proyecto',
   ctaSecondary: 'Ver trabajo seleccionado',
-  ctaPrimaryHref: 'mailto:carlos@tooltician.com?subject=Consulta%20de%20Proyecto',
+  ctaPrimaryHref: '#contact-form',
   ctaSecondaryHref: '#portfolio',
+  proofTitle: 'Prueba pública',
+  proofItems: [
+    { value: '3 sitios activos', label: 'visibles hoy' },
+    { value: '2 paquetes PyPI', label: 'instalables ahora' },
+    { value: 'CI + CodeQL', label: 'visible en repos públicos' },
+    { value: 'ES / EN', label: 'entrega lista para clientes' },
+  ],
   panelTitle: 'Panorama de trabajo',
   panelIntro: 'Encaja mejor cuando un equipo necesita estabilizar un flujo frágil sin convertir el proyecto en un desarrollo largo y abierto.',
   panelItems: [
@@ -91,6 +105,14 @@ const c = lang === 'en' ? en : es;
         <div class="hero__actions reveal reveal-delay-3">
           <a class="btn btn-primary" href={c.ctaPrimaryHref}>{c.ctaPrimary}</a>
           <a class="btn btn-ghost" href={c.ctaSecondaryHref}>{c.ctaSecondary}</a>
+        </div>
+        <div class="hero__proofbar reveal reveal-delay-4" aria-label={c.proofTitle}>
+          {c.proofItems.map(item => (
+            <div class="hero__proofitem">
+              <span class="hero__proofvalue">{item.value}</span>
+              <span class="hero__prooflabel">{item.label}</span>
+            </div>
+          ))}
         </div>
         <ul class="hero__highlights reveal reveal-delay-4">
           {c.highlights.map(h => (
@@ -198,6 +220,32 @@ const c = lang === 'en' ? en : es;
 }
 .hero__actions .btn-ghost {
   background: rgba(255, 255, 255, 0.02);
+}
+.hero__proofbar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.hero__proofitem {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.hero__proofvalue {
+  display: block;
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 0.2rem;
+}
+.hero__prooflabel {
+  display: block;
+  font-size: 0.77rem;
+  line-height: 1.45;
+  color: var(--clr-text-muted);
 }
 .hero__highlights {
   display: flex;
@@ -310,6 +358,9 @@ const c = lang === 'en' ? en : es;
     width: 100%;
     margin-left: 0;
   }
+  .hero__proofbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
@@ -343,6 +394,9 @@ const c = lang === 'en' ? en : es;
   }
   .hero__highlights li {
     font-size: 0.88rem;
+  }
+  .hero__proofbar {
+    grid-template-columns: 1fr;
   }
   .hero__brief,
   .hero__note {

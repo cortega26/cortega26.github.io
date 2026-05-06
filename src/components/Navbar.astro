@@ -11,7 +11,7 @@ interface Props {
 
 const { lang, items } = Astro.props;
 const ctaLabel = lang === 'en' ? 'Start a project' : 'Iniciar proyecto';
-const ctaHref = '#contact';
+const ctaHref = '#contact-form';
 
 const switchLabel = lang === 'en' ? 'ES' : 'EN';
 const switchHref  = lang === 'en' ? '/es/' : '/en/';
@@ -20,17 +20,16 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
   <div class="container">
     <div class="navbar__inner">
       <a class="navbar__brand" href={lang === 'en' ? '/en/' : '/es/'} aria-label="Tooltician">
-        <picture>
-          <source srcset="/assets/images/tooltician-logo-128.webp" type="image/webp" />
-          <img
-            class="navbar__brand-logo"
-            src="/assets/images/tooltician-logo-128.png"
-            alt=""
-            width="32"
-            height="32"
-            decoding="async"
-          />
-        </picture>
+        <img
+          class="navbar__brand-logo"
+          src="/assets/images/tooltician-logo-128.webp"
+          alt=""
+          width="32"
+          height="32"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
         <span>Tooltician</span>
       </a>
 

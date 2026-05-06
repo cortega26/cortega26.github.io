@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <script>
     (() => {
       const preferenceKey = 'tooltician-language';
@@ -64,17 +64,17 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #f3ecdf;
-      --surface: rgba(255, 255, 255, 0.72);
-      --surface-2: rgba(255, 255, 255, 0.48);
-      --border: rgba(32, 26, 21, 0.12);
-      --text: #201a15;
-      --muted: #5d554a;
-      --accent: #9a4d2a;
-      --accent-2: #29574e;
-      --ff-body: 'IBM Plex Sans', system-ui, sans-serif;
-      --ff-heading: 'Newsreader', Georgia, serif;
-      --ff-label: 'IBM Plex Mono', monospace;
+      --bg: #f8fafc;
+      --surface: rgba(255, 255, 255, 0.9);
+      --surface-2: rgba(255, 255, 255, 0.72);
+      --border: rgba(148, 163, 184, 0.3);
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #d97706;
+      --accent-2: #2563eb;
+      --ff-body: 'Geist', system-ui, sans-serif;
+      --ff-heading: 'Geist', system-ui, sans-serif;
+      --ff-label: 'Geist Mono', monospace;
     }
 
     * { box-sizing: border-box; }
@@ -84,20 +84,23 @@
       min-height: 100vh;
       font-family: var(--ff-body);
       color: var(--text);
-      background: linear-gradient(180deg, #f8f2e8 0%, #f0e5d7 54%, #eadfce 100%);
+      background:
+        radial-gradient(circle at top left, rgba(217, 119, 6, 0.06), transparent 28%),
+        linear-gradient(180deg, #fbfdff 0%, #f8fafc 58%, #f1f5f9 100%);
       display: grid;
       place-items: center;
       padding: 1.5rem;
     }
 
     .gateway {
-      width: min(100%, 920px);
-      padding: 2.25rem;
+      width: min(100%, 760px);
+      padding: 2rem 1.5rem;
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-top-width: 2px;
+      border-top-color: var(--text);
+      border-radius: 10px;
       background: var(--surface);
-      box-shadow: 0 12px 28px rgba(32, 26, 21, 0.06);
-      text-align: center;
+      text-align: left;
     }
 
     .gateway__logo {
@@ -108,7 +111,7 @@
 
     .gateway__eyebrow {
       margin: 0 0 0.75rem;
-      color: var(--accent-2);
+      color: var(--muted);
       font-family: var(--ff-label);
       font-size: 0.72rem;
       font-weight: 600;
@@ -119,43 +122,39 @@
     .gateway__title {
       margin: 0 0 0.75rem;
       font-family: var(--ff-heading);
-      font-size: clamp(2.35rem, 6vw, 4rem);
-      line-height: 0.96;
-      letter-spacing: -0.04em;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 0.92;
+      letter-spacing: -0.06em;
     }
 
     .gateway__copy {
-      margin: 0 auto 1.5rem;
+      margin: 0 0 1.5rem;
       max-width: 42rem;
       color: var(--muted);
-      font-size: 1.02rem;
+      font-size: 0.98rem;
       line-height: 1.7;
     }
 
     .gateway__options {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
+      gap: 1.5rem;
       margin-bottom: 1rem;
     }
 
     .gateway__card {
       display: block;
-      padding: 1.3rem;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--surface-2);
+      padding: 1rem 0;
+      border-top: 1px solid var(--border);
       color: inherit;
       text-decoration: none;
-      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+      transition: color 150ms ease, border-color 150ms ease;
     }
 
     .gateway__card:hover,
     .gateway__card:focus-visible {
-      transform: none;
-      border-color: rgba(154, 77, 42, 0.24);
-      background: rgba(255, 255, 255, 0.72);
-      box-shadow: 0 8px 18px rgba(32, 26, 21, 0.04);
+      color: var(--accent-2);
+      border-color: rgba(37, 99, 235, 0.26);
       outline: none;
     }
 
@@ -163,7 +162,7 @@
       display: block;
       margin-bottom: 0.45rem;
       font-family: var(--ff-heading);
-      font-size: 1.45rem;
+      font-size: 1.2rem;
       font-weight: 700;
     }
 
@@ -176,13 +175,12 @@
     .gateway__note {
       margin: 0;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
     @media (max-width: 700px) {
       .gateway {
-        padding: 1.5rem;
-        border-radius: 24px;
+        padding: 1.5rem 1rem;
       }
 
       .gateway__options {
@@ -195,21 +193,21 @@
   <main class="gateway">
     <img class="gateway__logo" src="/assets/images/tooltician-logo-128.webp" alt="" width="64" height="64" decoding="async">
     <p class="gateway__eyebrow">Tooltician · Carlos Ortega Gonzalez</p>
-    <h1 class="gateway__title">Choose your language</h1>
-    <p class="gateway__copy">Python automation consulting for reporting, ETL, internal tools, and workflows that need to keep working after handoff.</p>
+    <h1 class="gateway__title">English / Español</h1>
+    <p class="gateway__copy">First visits are auto-routed from browser language. If that first guess was wrong, choose once below and the site will remember it.</p>
 
     <div class="gateway__options">
       <a class="gateway__card" href="/en/" data-language-preference="en">
         <strong>English</strong>
-        <span>Production-focused portfolio, public proof, and a direct project brief.</span>
+        <span>Proof, production work, and a direct project brief.</span>
       </a>
       <a class="gateway__card" href="/es/" data-language-preference="es">
         <strong>Español</strong>
-        <span>Portafolio orientado a producción, evidencia pública y brief de proyecto directo.</span>
+        <span>Evidencia pública, trabajo en producción y brief directo.</span>
       </a>
     </div>
 
-    <p class="gateway__note">If the first automatic guess was wrong, choose once and the site will remember it.</p>
+    <p class="gateway__note">The remembered choice applies to future visits and manual language switches.</p>
   </main>
   <script>
     (() => {

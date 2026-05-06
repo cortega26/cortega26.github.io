@@ -10,9 +10,9 @@ interface Props {
 }
 
 const { lang, items } = Astro.props;
-const ctaLabel = lang === 'en' ? 'Start a project' : 'Iniciar proyecto';
+const ctaLabel = lang === 'en' ? 'Project brief' : 'Brief del proyecto';
 const ctaHref = '#contact-form';
-const brandTag = lang === 'en' ? 'Python automation' : 'Automatizacion Python';
+const brandTag = lang === 'en' ? 'automation systems' : 'sistemas de automatizacion';
 
 const switchLabel = lang === 'en' ? 'ES' : 'EN';
 const switchHref  = lang === 'en' ? '/es/' : '/en/';
@@ -92,13 +92,13 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
   text-transform: uppercase;
   color: var(--clr-text-muted);
   border: 1px solid var(--clr-border);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
 }
 .navbar__lang-switch:hover {
   color: var(--clr-text);
-  border-color: var(--clr-border-glow);
-  background: var(--clr-bg-card);
+  border-color: var(--clr-border-strong);
+  background: var(--clr-surface-muted);
 }
 
 .navbar__brand-lockup {
@@ -108,15 +108,16 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
 
 .navbar__brand-name {
   font-family: var(--ff-heading);
-  font-size: 1.15rem;
+  font-size: 1.02rem;
   line-height: 1;
+  letter-spacing: -0.04em;
 }
 
 .navbar__brand-tag {
   font-family: var(--ff-label);
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--clr-text-faint);
 }

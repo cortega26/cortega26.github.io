@@ -3,8 +3,8 @@ interface Props { lang: 'en' | 'es'; }
 const { lang } = Astro.props;
 
 const en = {
-  eyebrow: 'Proof', title: 'What You Can Verify',
-  subtitle: 'Public signals that help prospective clients and collaborators quickly assess packaging discipline, quality systems, and real delivery.',
+  eyebrow: 'Proof', title: 'Public Proof and Delivery Signals',
+  subtitle: 'Public signals for packaging discipline, quality systems, communication style, and work that already exists outside a demo environment.',
   steps: [
     { label: 'Packaging', title: 'Reusable libraries & CLIs', body: 'Projects like rutificador, bankrecon, and Monedario show the same packaging instinct across code and content: reliable structure, clear docs, and outputs people can actually use.' },
     { label: 'Quality', title: 'CI, scans & auditability', body: 'I bias toward test coverage, code scanning, deterministic outputs, and logs that make incidents easier to understand rather than harder to trace.' },
@@ -22,8 +22,8 @@ const en = {
 };
 
 const es = {
-  eyebrow: 'Evidencia', title: 'Lo que puedes verificar',
-  subtitle: 'Señales públicas que ayudan a clientes y colaboradores potenciales a evaluar rápidamente la disciplina de empaquetado, los sistemas de calidad y la entrega real.',
+  eyebrow: 'Evidencia', title: 'Evidencia Pública y Señales de Entrega',
+  subtitle: 'Señales públicas sobre disciplina de empaquetado, sistemas de calidad, estilo de comunicación y trabajo que ya existe fuera de una demo.',
   steps: [
     { label: 'Empaquetado', title: 'Librerías y CLIs reutilizables', body: 'Proyectos como rutificador, bankrecon y Monedario muestran el mismo instinto de empaquetado en código y contenido: estructura confiable, docs claros y salidas que la gente puede usar.' },
     { label: 'Calidad', title: 'CI, escaneo y auditabilidad', body: 'Priorizo cobertura de pruebas, escaneo de código, salidas deterministas y logs que facilitan entender incidentes en lugar de complicarlos.' },
@@ -51,39 +51,43 @@ const c = lang === 'en' ? en : es;
       <p class="section-subtitle reveal">{c.subtitle}</p>
     </div>
 
-    <div class="timeline">
-      {c.steps.map((step, i) => (
-        <article class={`timeline-item reveal reveal-delay-${(i % 3) + 1}`}>
-          <div class="timeline-marker" aria-hidden="true">
-            <div class="timeline-dot"></div>
-          </div>
-          <div class="timeline-body">
-            <span class="timeline-label">{step.label}</span>
-            <h3 class="timeline-title">{step.title}</h3>
-            <p class="timeline-text">{step.body}</p>
-          </div>
-        </article>
-      ))}
-    </div>
+    <div class="proof-layout">
+      <div class="proof-track">
+        {c.steps.map((step, i) => (
+          <article class={`proof-step reveal reveal-delay-${(i % 3) + 1}`}>
+            <div class="proof-step__meta">
+              <span class="proof-step__index">{String(i + 1).padStart(2, '0')}</span>
+              <span class="proof-step__label">{step.label}</span>
+            </div>
+            <div class="proof-step__body">
+              <h3 class="proof-step__title">{step.title}</h3>
+              <p class="proof-step__text">{step.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
 
-    <div class="proof-grid">
-      {c.proof.map((p, i) => (
-        <article class={`card-glass reveal reveal-delay-${(i % 2) + 1}`}>
-          <h4 class="proof-name">{p.name}</h4>
-          <p class="proof-body">{p.body}</p>
-          <div class="proof-links">
-            {p.links.map(l => (
-              <a class="proof-link" href={l.href} target="_blank" rel="noopener noreferrer">
-                <span>{l.label}</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M7 17 17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
-              </a>
-            ))}
-          </div>
-        </article>
-      ))}
+      <div class="proof-catalog">
+        {c.proof.map((p, i) => (
+          <article class={`proof-entry reveal reveal-delay-${(i % 2) + 1}`}>
+            <div class="proof-entry__heading">
+              <h4 class="proof-name">{p.name}</h4>
+              <p class="proof-body">{p.body}</p>
+            </div>
+            <div class="proof-links">
+              {p.links.map(l => (
+                <a class="proof-link" href={l.href} target="_blank" rel="noopener noreferrer">
+                  <span>{l.label}</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M7 17 17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
 
     <div class="proof-resume reveal">
@@ -98,53 +102,107 @@ const c = lang === 'en' ? en : es;
 </section>
 
 <style>
-.timeline {
-  display: flex; flex-direction: column; gap: 0;
-  position: relative; margin-bottom: 3rem;
-  padding-left: 2rem;
+.proof-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
-.timeline::before {
-  content: ''; position: absolute; left: 0.6rem; top: 0.6rem; bottom: 0.6rem;
-  width: 2px; background: linear-gradient(to bottom, var(--clr-accent), var(--clr-accent-2));
-  border-radius: 2px;
-}
-.timeline-item {
-  display: grid; grid-template-columns: auto 1fr; gap: 1.5rem;
-  margin-left: -2rem; padding-left: 2rem; padding-bottom: 2rem; position: relative;
-}
-.timeline-marker { display: flex; flex-direction: column; align-items: center; }
-.timeline-dot {
-  width: 14px; height: 14px; border-radius: 50%; margin-top: 2px;
-  background: var(--clr-accent);
-  box-shadow: 0 0 0 4px rgba(154, 77, 42, 0.14), 0 10px 20px rgba(154, 77, 42, 0.12);
-  flex-shrink: 0;
-}
-.timeline-label {
-  font-family: var(--ff-label); font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.12em; color: var(--clr-accent); display: block; margin-bottom: 0.25rem;
-}
-.timeline-title {
-  font-family: var(--ff-heading); font-size: 1rem; font-weight: 700;
-  color: var(--clr-text); margin-bottom: 0.4rem;
-}
-.timeline-text { font-size: 0.87rem; color: var(--clr-text-muted); line-height: 1.6; }
 
-.proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
-.proof-name {
-  font-family: var(--ff-heading); font-size: 0.95rem; font-weight: 700;
-  color: var(--clr-text); margin-bottom: 0.4rem;
+.proof-track,
+.proof-catalog {
+  border-top: 1px solid var(--clr-border);
 }
-.proof-body { font-size: 0.85rem; color: var(--clr-text-muted); margin-bottom: 0.75rem; line-height: 1.5; }
-.proof-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; }
+
+.proof-step,
+.proof-entry {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem 0 1.1rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.proof-step__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+}
+
+.proof-step__index {
+  color: var(--clr-accent);
+  min-width: 2.3rem;
+}
+
+.proof-step__label {
+  color: var(--clr-text);
+}
+
+.proof-step__title {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--clr-text);
+  margin-bottom: 0.3rem;
+}
+
+.proof-step__text {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--clr-text-muted);
+}
+
+.proof-entry__heading {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.proof-name {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-text);
+}
+.proof-body {
+  font-size: 0.88rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+.proof-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+}
+
 .proof-link {
-  display: inline-flex; align-items: center; gap: 0.35rem;
-  font-size: 0.82rem; font-weight: 600; color: var(--clr-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-accent-2);
   transition: color 150ms;
 }
-.proof-link:hover { color: var(--clr-accent-2); }
-.proof-resume { text-align: center; margin-top: 1rem; }
 
-@media (max-width: 640px) {
-  .proof-grid { grid-template-columns: 1fr; }
+.proof-link:hover {
+  color: #1d4ed8;
+}
+
+.proof-resume {
+  text-align: left;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .proof-layout {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

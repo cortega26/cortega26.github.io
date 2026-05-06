@@ -6,15 +6,15 @@ const { lang } = Astro.props;
 
 const en = {
   eyebrow: "Contact",
-  title: "Start a Project",
+  title: "Project Brief",
   subtitle:
-    "Start with a short brief or a 20-minute intro call.",
-  copy: "The cleanest first step is the form below. Three useful lines are enough: the workflow, the bottleneck, and the outcome you want.",
+    "Send the workflow, the bottleneck, and the outcome you want.",
+  copy: "The cleanest starting point is the form. A short message is enough if it includes what is breaking, what should happen instead, and who operates the workflow today.",
   preferred:
-    "Best fit: scoped builds, workflow automation, internal tooling, and cleanup passes that make existing systems easier to trust.",
+    "Best fit: scoped automation, reporting pipelines, data cleanup, internal tools, and stabilization work that needs a clear handoff.",
   primaryLabel: "Primary contact",
   emailAddress: "carlos@tooltician.com",
-  emailDirect: "Email me directly",
+  emailDirect: "Email instead",
   emailHref: "mailto:carlos@tooltician.com?subject=Project%20Inquiry",
   copyEmail: "Copy address",
   copied: "Address copied.",
@@ -22,8 +22,8 @@ const en = {
   scheduleAria: "Schedule an intro call on Calendly",
   linkedinLabel: "LinkedIn profile",
   linkedinCta: "View LinkedIn",
-  formTitle: "Project brief",
-  formIntro: "If the scope is clearer in writing, leave it here and I’ll reply by email.",
+  formTitle: "Brief form",
+  formIntro: "If the scope is already clear in writing, leave it here and I’ll reply by email.",
   defaultSubject: "Project brief from tooltician.com",
   nameLabel: "Name",
   namePh: "Your name",
@@ -41,15 +41,15 @@ const en = {
 
 const es = {
   eyebrow: "Contacto",
-  title: "Inicia un proyecto",
+  title: "Brief del proyecto",
   subtitle:
-    "Parte con un brief corto o una llamada inicial de 20 minutos.",
-  copy: "La mejor primera aproximación es el formulario de abajo. Tres líneas útiles bastan: el flujo, el cuello de botella y el resultado que quieres.",
+    "Envía el flujo, el cuello de botella y el resultado que quieres.",
+  copy: "La forma más limpia de partir es el formulario. Un mensaje corto basta si incluye qué está fallando, qué debería pasar y quién opera hoy el flujo.",
   preferred:
-    "Mejor encaje: builds acotados, automatización de flujos, herramientas internas y revisiones que hagan los sistemas más confiables.",
+    "Mejor encaje: automatización acotada, pipelines de reportes, limpieza de datos, herramientas internas y trabajo de estabilización con traspaso claro.",
   primaryLabel: "Correo principal",
   emailAddress: "carlos@tooltician.com",
-  emailDirect: "Escribirme por correo",
+  emailDirect: "Correo directo",
   emailHref: "mailto:carlos@tooltician.com?subject=Consulta%20de%20Proyecto",
   copyEmail: "Copiar dirección",
   copied: "Dirección copiada.",
@@ -57,8 +57,8 @@ const es = {
   scheduleAria: "Agendar una llamada inicial en Calendly",
   linkedinLabel: "Perfil de LinkedIn",
   linkedinCta: "Ver LinkedIn",
-  formTitle: "Brief del proyecto",
-  formIntro: "Si el alcance se explica mejor por escrito, déjalo aquí y te respondo por correo.",
+  formTitle: "Formulario de brief",
+  formIntro: "Si el alcance ya está claro por escrito, déjalo aquí y te respondo por correo.",
   defaultSubject: "Brief de proyecto desde tooltician.com",
   nameLabel: "Nombre",
   namePh: "Tu nombre",
@@ -160,7 +160,7 @@ const c = lang === "en" ? en : es;
       </div>
 
       <form
-        class="contact-form card-glass reveal reveal-delay-1"
+        class="contact-form reveal reveal-delay-1"
         id="contact-form"
         action="https://formspree.io/f/mgorrygb"
         method="POST"
@@ -228,15 +228,20 @@ const c = lang === "en" ? en : es;
 <style>
   .contact-layout {
     display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 2rem;
     align-items: start;
+  }
+
+  .contact-info {
+    border-top: 2px solid var(--clr-text);
+    padding-top: 1rem;
   }
 
   .contact-copy {
     font-size: 0.95rem;
-    color: var(--clr-text-muted);
-    line-height: 1.7;
+    color: var(--clr-text);
+    line-height: 1.75;
     margin-bottom: 1rem;
   }
 
@@ -248,12 +253,9 @@ const c = lang === "en" ? en : es;
   }
 
   .contact-primary {
+    padding-top: 1rem;
     margin-bottom: 1rem;
-    padding: 0.95rem 1rem;
-    border: 1px solid var(--clr-border);
-    border-left-width: 4px;
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.62);
+    border-top: 1px solid var(--clr-border);
   }
 
   .contact-primary__label {
@@ -276,7 +278,7 @@ const c = lang === "en" ? en : es;
   .contact-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.65rem;
     margin-bottom: 0.75rem;
   }
 
@@ -305,24 +307,34 @@ const c = lang === "en" ? en : es;
   }
 
   .contact-inline-link a {
-    color: var(--clr-text);
+    color: var(--clr-accent-2);
     font-weight: 600;
   }
 
   .contact-inline-link a:hover {
-    color: var(--clr-accent);
+    color: #1d4ed8;
   }
 
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    background: var(--clr-surface);
+  }
+
+  .form-heading {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--clr-border);
   }
 
   .form-heading h3 {
     font-family: var(--ff-heading);
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 700;
+    letter-spacing: -0.02em;
     margin-bottom: 0.35rem;
     color: var(--clr-text);
   }
@@ -350,7 +362,7 @@ const c = lang === "en" ? en : es;
 
   .form-group input,
   .form-group textarea {
-    background: rgba(255, 255, 255, 0.82);
+    background: #ffffff;
     border: 1px solid var(--clr-border);
     border-radius: var(--radius-sm);
     padding: 0.8rem 0.95rem;
@@ -385,15 +397,15 @@ const c = lang === "en" ? en : es;
   }
 
   .form-success {
-    color: var(--clr-accent-2);
-    background: rgba(41, 87, 78, 0.08);
-    border: 1px solid rgba(41, 87, 78, 0.18);
+    color: #1d4ed8;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.18);
   }
 
   .form-error {
-    color: #8f2f1f;
-    background: rgba(154, 77, 42, 0.08);
-    border: 1px solid rgba(154, 77, 42, 0.18);
+    color: #9a3412;
+    background: rgba(217, 119, 6, 0.08);
+    border: 1px solid rgba(217, 119, 6, 0.18);
   }
 
   .form-success.show,

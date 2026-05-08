@@ -398,8 +398,8 @@ const c = {
 }
 
 .filter-btn.active {
-  background: rgba(217, 119, 6, 0.12);
-  border-color: rgba(217, 119, 6, 0.26);
+  background: rgba(255, 183, 3, 0.1);
+  border-color: rgba(255, 183, 3, 0.2);
   color: var(--clr-text);
 }
 
@@ -414,7 +414,14 @@ const c = {
   display: grid;
   gap: 1rem;
   padding: 1.3rem 0 1.45rem;
+  padding-left: 0;
   border-bottom: 1px solid var(--clr-border);
+  transition: padding-left var(--dur-med);
+}
+
+.project-card--featured {
+  padding-left: 1rem;
+  border-left: 2px solid var(--clr-accent);
 }
 
 .project-topline {
@@ -501,12 +508,12 @@ const c = {
   gap: 0.4rem;
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--clr-accent-2);
+  color: var(--clr-accent);
   transition: color 150ms;
 }
 
 .project-link:hover {
-  color: #1d4ed8;
+  color: #e07c00;
 }
 
 .project-link svg {
@@ -547,6 +554,14 @@ function setFilter(filter: string) {
     card.hidden = !match;
     card.setAttribute('aria-hidden', String(!match));
   });
+
+  const focused = document.activeElement as HTMLElement | null;
+  if (focused && 'hidden' in focused && (focused as HTMLElement).hidden) {
+    const firstLink = document.querySelector<HTMLAnchorElement>(
+      '.project-card:not([hidden]) .project-link'
+    );
+    if (firstLink) firstLink.focus();
+  }
 }
 
 btns.forEach((btn) => {

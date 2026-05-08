@@ -42,6 +42,17 @@ const jsonLd = {
     { '@type': 'Offer', name: 'Financial & Audit Tooling', description: 'Fail-closed reconciliation workflows with deterministic audit artifacts.' },
     { '@type': 'Offer', name: 'Reporting & Data Delivery', description: 'Structured outputs and dashboards that eliminate manual copy-paste.' },
   ],
+  knowsAbout: [
+    'Python Automation', 'ETL Pipelines', 'Data Engineering',
+    'Web Scraping', 'Internal APIs', 'Reporting Automation',
+    'Static Sites', 'Financial Tooling',
+  ],
+  hasOccupation: {
+    '@type': 'Occupation',
+    name: 'Python Automation Consultant',
+    description: 'Scoped implementation of ETL pipelines, scrapers, internal APIs, and reporting workflows with CI, documentation, and handoff-ready systems.',
+    skills: 'Python, SQL, FastAPI, Selenium, BeautifulSoup, Pandas, Astro, GitHub Actions, CI/CD',
+  },
   itemListElement: [
     { '@type': 'ListItem', position: 1, item: { '@type': 'SoftwareApplication', name: 'El Rincón de Ébano', url: 'https://elrincondeebano.com', description: 'Live e-commerce storefront for a private residential community, actively operated.' } },
     { '@type': 'ListItem', position: 2, item: { '@type': 'SoftwareApplication', name: 'Monedario', url: 'https://monedario.cl', description: 'Personal finance platform for Chile with real-time economic indicators and interactive calculators.' } },
@@ -50,15 +61,25 @@ const jsonLd = {
     { '@type': 'ListItem', position: 5, item: { '@type': 'WebSite', name: 'Noticiencias', url: 'https://noticiencias.com', description: 'Spanish-language science media site covering 8 disciplines.' } },
   ],
 };
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/' },
+    { '@type': 'ListItem', position: 2, name: 'English', item: 'https://tooltician.com/en/' },
+  ],
+};
 ---
 <BaseLayout
   title="Carlos Ortega — Python Automation Consultant | Tooltician"
-  description="Bilingual Python automation consultant (EN/ES) based in Santiago, Chile. ETL pipelines, scraping workflows, internal APIs, and reporting automation — scoped delivery with CI, documentation, and handoff-ready systems."
+  description="Bilingual Python automation consultant (EN/ES) in Santiago, Chile. ETL, scraping, APIs, and reporting automation — scoped delivery with handoff-ready systems."
   lang="en"
   canonical="https://tooltician.com/en/"
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
   </Fragment>
 
   <Navbar lang="en" items={navItems} />

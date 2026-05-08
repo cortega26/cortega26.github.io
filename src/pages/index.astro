@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tooltician — English / Español</title>
-  <meta name="description" content="Choose the English or Spanish version of Tooltician, Carlos Ortega's Python automation consulting site." />
+  <title>Tooltician — Python Automation Consultant | English / Español</title>
+  <meta name="description" content="Tooltician automates reporting, ETL, and internal workflows that survive handoff. Select English or Spanish to view live production work and open a project brief." />
   <link rel="canonical" href="https://tooltician.com/" />
   <link rel="alternate" hreflang="es" href="https://tooltician.com/es/" />
   <link rel="alternate" hreflang="en" href="https://tooltician.com/en/" />
   <link rel="alternate" hreflang="x-default" href="https://tooltician.com/" />
   <meta name="robots" content="index, follow" />
+  <noscript><meta http-equiv="refresh" content="0; url=/en/" /></noscript>
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Tooltician — English / Español" />
-  <meta property="og:description" content="Choose the English or Spanish version of Tooltician, Carlos Ortega's Python automation consulting site." />
+  <meta property="og:title" content="Tooltician — Python Automation Consultant | English / Español" />
+  <meta property="og:description" content="Tooltician automates reporting, ETL, and internal workflows that survive handoff. Select English or Spanish." />
   <meta property="og:url" content="https://tooltician.com/" />
   <meta property="og:image" content="https://tooltician.com/assets/images/og-card.png" />
   <meta property="og:image:alt" content="Tooltician preview card" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Tooltician — English / Español" />
-  <meta name="twitter:description" content="Choose the English or Spanish version of Tooltician, Carlos Ortega's Python automation consulting site." />
+  <meta name="twitter:title" content="Tooltician — Python Automation Consultant | English / Español" />
+  <meta name="twitter:description" content="Tooltician automates reporting, ETL, and internal workflows that survive handoff. Select English or Spanish." />
   <meta name="twitter:image" content="https://tooltician.com/assets/images/og-card.png" />
   <meta name="twitter:image:alt" content="Tooltician preview card" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -27,7 +28,8 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
   <script>
     (() => {
       const preferenceKey = 'tooltician-language';
@@ -63,18 +65,19 @@
   </script>
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f8fafc;
-      --surface: rgba(255, 255, 255, 0.9);
-      --surface-2: rgba(255, 255, 255, 0.72);
-      --border: rgba(148, 163, 184, 0.3);
-      --text: #0f172a;
-      --muted: #475569;
-      --accent: #d97706;
-      --accent-2: #2563eb;
-      --ff-body: 'Geist', system-ui, sans-serif;
-      --ff-heading: 'Geist', system-ui, sans-serif;
-      --ff-label: 'Geist Mono', monospace;
+      color-scheme: dark;
+      --bg: #0b1121;
+      --surface: rgba(255, 255, 255, 0.03);
+      --surface-2: rgba(255, 255, 255, 0.06);
+      --border: rgba(148, 163, 184, 0.12);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --faint: #64748b;
+      --accent: #ffb703;
+      --accent-2: #fb8500;
+      --ff-body: 'Archivo', system-ui, sans-serif;
+      --ff-heading: 'Archivo', system-ui, sans-serif;
+      --ff-label: 'JetBrains Mono', ui-monospace, monospace;
     }
 
     * { box-sizing: border-box; }
@@ -84,131 +87,290 @@
       min-height: 100vh;
       font-family: var(--ff-body);
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(217, 119, 6, 0.06), transparent 28%),
-        linear-gradient(180deg, #fbfdff 0%, #f8fafc 58%, #f1f5f9 100%);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% -20%, rgba(255, 183, 3, 0.04), transparent),
+        radial-gradient(ellipse 60% 50% at 80% 40%, rgba(251, 133, 0, 0.03), transparent);
       display: grid;
       place-items: center;
       padding: 1.5rem;
+      position: relative;
     }
 
-    .gateway {
-      width: min(100%, 760px);
-      padding: 2rem 1.5rem;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      pointer-events: none;
+    }
+
+    ::selection {
+      background: rgba(255, 183, 3, 0.25);
+      color: var(--text);
+    }
+
+    .gateway-panel {
+      width: min(100%, 640px);
       border: 1px solid var(--border);
-      border-top-width: 2px;
-      border-top-color: var(--text);
-      border-radius: 10px;
+      border-radius: 6px;
       background: var(--surface);
-      text-align: left;
+      overflow: hidden;
     }
 
-    .gateway__logo {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 1rem;
+    /* Panel header — like a equipment display header */
+    .gateway-panel__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
     }
 
-    .gateway__eyebrow {
-      margin: 0 0 0.75rem;
-      color: var(--muted);
+    .gateway-panel__header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .gateway-panel__led {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    .gateway-panel__header-label {
       font-family: var(--ff-label);
-      font-size: 0.72rem;
-      font-weight: 600;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .gateway-panel__status {
+      font-family: var(--ff-label);
+      font-size: 0.6rem;
+      color: var(--accent);
+      opacity: 0.6;
+      letter-spacing: 0.04em;
+    }
+
+    .gateway-panel__body {
+      padding: 2rem 1.5rem 1.5rem;
+    }
+
+    .gateway-panel__logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .gateway-panel__logo {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .gateway-panel__brand {
+      display: grid;
+      gap: 0.1rem;
+    }
+
+    .gateway-panel__brand-name {
+      font-family: var(--ff-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .gateway-panel__brand-tag {
+      font-family: var(--ff-label);
+      font-size: 0.6rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.6;
     }
 
-    .gateway__title {
+    .gateway-panel__title {
       margin: 0 0 0.75rem;
       font-family: var(--ff-heading);
-      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
       line-height: 0.92;
-      letter-spacing: -0.06em;
+      letter-spacing: -0.03em;
     }
 
-    .gateway__copy {
-      margin: 0 0 1.5rem;
+    .gateway-panel__copy {
+      margin: 0 0 2rem;
       max-width: 42rem;
       color: var(--muted);
-      font-size: 0.98rem;
+      font-size: 0.92rem;
       line-height: 1.7;
     }
 
-    .gateway__options {
+    .gateway-panel__options {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 1rem;
+      gap: 1rem;
     }
 
-    .gateway__card {
+    .gateway-panel__card {
       display: block;
-      padding: 1rem 0;
-      border-top: 1px solid var(--border);
+      padding: 1.25rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
       color: inherit;
       text-decoration: none;
-      transition: color 150ms ease, border-color 150ms ease;
+      transition: border-color 200ms, background 200ms;
+      position: relative;
     }
 
-    .gateway__card:hover,
-    .gateway__card:focus-visible {
-      color: var(--accent-2);
-      border-color: rgba(37, 99, 235, 0.26);
+    .gateway-panel__card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--faint);
+      transition: background 200ms;
+    }
+
+    .gateway-panel__card:hover,
+    .gateway-panel__card:focus-visible {
+      border-color: rgba(255, 183, 3, 0.2);
+      background: rgba(255, 183, 3, 0.04);
       outline: none;
     }
 
-    .gateway__card strong {
+    .gateway-panel__card:hover::before,
+    .gateway-panel__card:focus-visible::before {
+      background: var(--accent);
+    }
+
+    .gateway-panel__card strong {
       display: block;
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.4rem;
       font-family: var(--ff-heading);
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
     }
 
-    .gateway__card span {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 0.95rem;
+    .gateway-panel__card strong::after {
+      content: ' →';
+      opacity: 0;
+      transition: opacity 200ms, margin-left 200ms;
     }
 
-    .gateway__note {
-      margin: 0;
+    .gateway-panel__card:hover strong::after,
+    .gateway-panel__card:focus-visible strong::after {
+      opacity: 1;
+      margin-left: 0.25rem;
+    }
+
+    .gateway-panel__card span {
       color: var(--muted);
-      font-size: 0.9rem;
+      line-height: 1.55;
+      font-size: 0.88rem;
+      display: block;
+    }
+
+    .gateway-panel__footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .gateway-panel__footer-note {
+      margin: 0;
+      color: var(--faint);
+      font-family: var(--ff-label);
+      font-size: 0.6rem;
+      letter-spacing: 0.04em;
+    }
+
+    .gateway-panel__cursor {
+      display: inline-block;
+      width: 6px;
+      height: 12px;
+      background: var(--accent);
+      opacity: 0.5;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0; }
     }
 
     @media (max-width: 700px) {
-      .gateway {
+      .gateway-panel__body {
         padding: 1.5rem 1rem;
       }
 
-      .gateway__options {
+      .gateway-panel__options {
         grid-template-columns: 1fr;
+      }
+
+      .gateway-panel__footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 <body>
-  <main class="gateway">
-    <img class="gateway__logo" src="/assets/images/tooltician-logo-128.webp" alt="" width="64" height="64" decoding="async">
-    <p class="gateway__eyebrow">Tooltician · Carlos Ortega Gonzalez</p>
-    <h1 class="gateway__title">English / Español</h1>
-    <p class="gateway__copy">First visits are auto-routed from browser language. If that first guess was wrong, choose once below and the site will remember it.</p>
-
-    <div class="gateway__options">
-      <a class="gateway__card" href="/en/" data-language-preference="en">
-        <strong>English</strong>
-        <span>Proof, production work, and a direct project brief.</span>
-      </a>
-      <a class="gateway__card" href="/es/" data-language-preference="es">
-        <strong>Español</strong>
-        <span>Evidencia pública, trabajo en producción y brief directo.</span>
-      </a>
+  <div class="gateway-panel">
+    <div class="gateway-panel__header">
+      <div class="gateway-panel__header-left">
+        <span class="gateway-panel__led"></span>
+        <span class="gateway-panel__header-label">Language Selection</span>
+      </div>
+      <span class="gateway-panel__status">SYSTEM_READY</span>
     </div>
 
-    <p class="gateway__note">The remembered choice applies to future visits and manual language switches.</p>
-  </main>
+    <div class="gateway-panel__body">
+      <div class="gateway-panel__logo-area">
+        <img class="gateway-panel__logo" src="/assets/images/tooltician-logo-128.webp" alt="" width="44" height="44" decoding="async">
+        <div class="gateway-panel__brand">
+          <span class="gateway-panel__brand-name">Tooltician</span>
+          <span class="gateway-panel__brand-tag">Automation systems</span>
+        </div>
+      </div>
+
+      <h1 class="gateway-panel__title">English / Español</h1>
+      <p class="gateway-panel__copy">First visits are auto-routed from browser language. If that first guess was wrong, choose once below and the site will remember it.</p>
+
+      <div class="gateway-panel__options">
+        <a class="gateway-panel__card" href="/en/" data-language-preference="en">
+          <strong>English</strong>
+          <span>Proof, production work, and a direct project brief.</span>
+        </a>
+        <a class="gateway-panel__card" href="/es/" data-language-preference="es">
+          <strong>Español</strong>
+          <span>Evidencia pública, trabajo en producción y brief directo.</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="gateway-panel__footer">
+      <p class="gateway-panel__footer-note">The remembered choice applies to future visits and manual language switches.</p>
+      <span class="gateway-panel__cursor"></span>
+    </div>
+  </div>
   <script>
     (() => {
       const preferenceKey = 'tooltician-language';

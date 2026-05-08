@@ -156,9 +156,9 @@ group('B2 · Mobile hero layout fixed', () => {
 group('B3 · Hero lede updated', () => {
   const src = hero();
   assert(
-    'New lede contains "scoped"',
-    src.includes('scoped'),
-    'Updated lede should contain "scoped"'
+    'New lede mentions "survive handoff" or "sobrevivir al traspaso"',
+    src.includes('survive handoff') || src.includes('sobrevivir al traspaso'),
+    'Updated lede should reference handoff survival'
   );
   assert(
     'New lede contains "hand them off" or "traspaso"',
@@ -181,7 +181,7 @@ group('TT-006 · Hero portrait removed in favor of credibility panel', () => {
   );
   assert(
     'Hero includes engagement snapshot panel',
-    src.includes('hero__brief') && (src.includes('Engagement snapshot') || src.includes('Panorama de trabajo')),
+    src.includes('hero__brief') && (src.includes('Operating notes') || src.includes('Notas operativas')),
     'Expected hero credibility panel content'
   );
 });
@@ -195,7 +195,7 @@ group('TT-007 · Hero support content simplified', () => {
   );
   assert(
     'Hero note block present',
-    src.includes('hero__note') && (src.includes('Delivery defaults') || src.includes('Entregables base')),
+    src.includes('hero__note') && (src.includes('Default delivery') || src.includes('Entrega base')),
     'Expected simplified support note in hero aside'
   );
 });
@@ -372,7 +372,7 @@ group('D9 · Portfolio subtitle updated', () => {
   const src = portfolio();
   assert(
     'Portfolio subtitle contains "not just repositories"',
-    src.includes('not just repositories') || src.includes('no solo repositorios'),
+    src.includes('already operates outside a demo environment') || src.includes('ya opera fuera de un entorno de demo'),
     'Portfolio subtitle still uses old "Nine public projects" text'
   );
 });
@@ -380,9 +380,9 @@ group('D9 · Portfolio subtitle updated', () => {
 group('D10 · Portfolio title updated', () => {
   const src = portfolio();
   assert(
-    "EN title is 'Work in Production'",
-    src.includes("'Work in Production'") || src.includes('"Work in Production"'),
-    "Portfolio title should be 'Work in Production'"
+    "EN title is 'Production Work Index'",
+    src.includes("'Production Work Index'") || src.includes('"Production Work Index"'),
+    "Portfolio title should be 'Production Work Index'"
   );
 });
 
@@ -419,8 +419,8 @@ group('TT-015 · Portfolio cards are structured for scanability', () => {
   );
   assert(
     'Bilingual point labels exist',
-    src.includes("problem: 'Problem'") && src.includes("solution: 'Built'") && src.includes("proof: 'Proof'") &&
-    src.includes("problem: 'Problema'") && src.includes("solution: 'Construido'") && src.includes("proof: 'Prueba'"),
+    src.includes("problem: 'Why it mattered'") && src.includes("solution: 'Built'") && src.includes("proof: 'Verified result'") &&
+    src.includes("problem: 'Por qué importó'") && src.includes("solution: 'Construido'") && src.includes("proof: 'Resultado verificable'"),
     'Expected EN and ES labels for the portfolio scan sections'
   );
 });
@@ -435,7 +435,7 @@ group('TT-016 · Anchor projects are visually prioritized', () => {
   );
   assert(
     'Featured card styling exists',
-    src.includes('project-card--featured') && src.includes('grid-column: span 6'),
+    src.includes('project-card--featured') && src.includes('border-left: 2px solid var(--clr-accent)'),
     'Expected featured project card styling in PortfolioSection'
   );
 });
@@ -465,7 +465,7 @@ group('TT-018 · Contact labels match action behavior', () => {
   const src = contact();
   assert(
     'Primary contact path is explicit email',
-    src.includes('Email me directly') || src.includes('Escribirme por correo'),
+    src.includes('Email instead') || src.includes('Correo directo'),
     'Expected explicit email CTA in ContactSection'
   );
   assert(
@@ -544,7 +544,7 @@ group('H1 · Proof section retains core proof layout', () => {
   const src = proof();
   assert(
     'ProofSection contains timeline and proof grid',
-    src.includes('timeline') && src.includes('proof-grid'),
+    src.includes('proof-track') && src.includes('proof-catalog'),
     'ProofSection is missing its core proof layout'
   );
 });
@@ -745,13 +745,13 @@ if (BUILT) {
     '580M claim still in built EN output'
   );
   assert(
-    '[built] Portfolio cards render Problem / Built / Proof structure',
-    distEN.includes('Problem') && distEN.includes('Built') && distEN.includes('Proof'),
+    '[built] Portfolio cards render Why it mattered / Built / Verified result',
+    distEN.includes('Why it mattered') && distEN.includes('Built') && distEN.includes('Verified result'),
     'Built EN portfolio markup missing structured project scan labels'
   );
   assert(
     '[built] Contact section exposes primary email CTA',
-    distEN.includes('Email me directly'),
+    distEN.includes('Email instead'),
     'Built EN contact section missing primary email CTA'
   );
   assert(

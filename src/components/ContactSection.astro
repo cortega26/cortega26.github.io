@@ -284,7 +284,7 @@ const c = lang === "en" ? en : es;
 
   .copy-confirm {
     font-size: 0.8rem;
-    color: var(--clr-accent-2);
+    color: var(--clr-accent);
     opacity: 0;
     transition: opacity 300ms;
     font-weight: 600;
@@ -307,12 +307,12 @@ const c = lang === "en" ? en : es;
   }
 
   .contact-inline-link a {
-    color: var(--clr-accent-2);
+    color: var(--clr-accent);
     font-weight: 600;
   }
 
   .contact-inline-link a:hover {
-    color: #1d4ed8;
+    color: #e07c00;
   }
 
   .contact-form {
@@ -362,7 +362,7 @@ const c = lang === "en" ? en : es;
 
   .form-group input,
   .form-group textarea {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--clr-border);
     border-radius: var(--radius-sm);
     padding: 0.8rem 0.95rem;
@@ -378,8 +378,8 @@ const c = lang === "en" ? en : es;
   .form-group input:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: var(--clr-accent-2);
-    box-shadow: 0 0 0 3px rgba(41, 87, 78, 0.12);
+    border-color: var(--clr-accent);
+    box-shadow: 0 0 0 3px rgba(255, 183, 3, 0.1);
   }
 
   .form-group input::placeholder,
@@ -397,15 +397,15 @@ const c = lang === "en" ? en : es;
   }
 
   .form-success {
-    color: #1d4ed8;
-    background: rgba(37, 99, 235, 0.08);
-    border: 1px solid rgba(37, 99, 235, 0.18);
+    color: var(--clr-accent);
+    background: rgba(255, 183, 3, 0.08);
+    border: 1px solid rgba(255, 183, 3, 0.15);
   }
 
   .form-error {
-    color: #9a3412;
-    background: rgba(217, 119, 6, 0.08);
-    border: 1px solid rgba(217, 119, 6, 0.18);
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.15);
   }
 
   .form-success.show,

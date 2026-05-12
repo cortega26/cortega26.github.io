@@ -65,6 +65,7 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
           <a
             class="navbar__lang-switch"
             href={switchHref}
+            hreflang={lang === 'en' ? 'es' : 'en'}
             data-language-preference={lang === 'en' ? 'es' : 'en'}
             aria-label={lang === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés'}
             title={lang === 'en' ? 'Ver en español' : 'View in English'}

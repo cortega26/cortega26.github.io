@@ -17,8 +17,6 @@ const en = {
     { name: 'Noticiencias', body: 'Public front end with documented repo boundary and content validation workflow.', links: [{ label: 'Visit live site', href: 'https://noticiencias.com' }, { label: 'View repository', href: 'https://github.com/cortega26/noticiencias' }] },
     { name: 'Monedario', body: 'Live site with finance calculators, editorial governance docs, and deterministic economic-data fallback.', links: [{ label: 'Visit live site', href: 'https://monedario.cl' }] },
   ],
-  resumeLabel: 'Download Resume (PDF)',
-  resumeHref: '/assets/docs/carlos-ortega-resume.pdf',
 };
 
 const es = {
@@ -36,8 +34,6 @@ const es = {
     { name: 'Noticiencias', body: 'Frontend público con límites de repositorio documentados y flujo de validación de contenido.', links: [{ label: 'Ver sitio', href: 'https://noticiencias.com' }, { label: 'Ver repositorio', href: 'https://github.com/cortega26/noticiencias' }] },
     { name: 'Monedario', body: 'Sitio activo con calculadoras financieras, docs de gobernanza editorial y manejo de parámetros económicos.', links: [{ label: 'Ver sitio', href: 'https://monedario.cl' }] },
   ],
-  resumeLabel: 'Descargar CV (PDF)',
-  resumeHref: '/assets/docs/carlos-ortega-resume.pdf',
 };
 
 const c = lang === 'en' ? en : es;
@@ -90,14 +86,6 @@ const c = lang === 'en' ? en : es;
       </div>
     </div>
 
-    <div class="proof-resume reveal">
-      <a class="btn btn-ghost" href={c.resumeHref} target="_blank" rel="noopener noreferrer">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        {c.resumeLabel}
-      </a>
-    </div>
   </div>
 </section>
 

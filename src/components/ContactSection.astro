@@ -12,6 +12,7 @@ const en = {
   copy: "The cleanest starting point is the form. A short message is enough if it includes what is breaking, what should happen instead, and who operates the workflow today.",
   preferred:
     "Best fit: scoped automation, reporting pipelines, data cleanup, internal tools, and stabilization work that needs a clear handoff.",
+  availability: "Currently open for new engagements.",
   primaryLabel: "Primary contact",
   emailAddress: "carlos@tooltician.com",
   emailDirect: "Email instead",
@@ -47,6 +48,7 @@ const es = {
   copy: "La forma más limpia de partir es el formulario. Un mensaje corto basta si incluye qué está fallando, qué debería pasar y quién opera hoy el flujo.",
   preferred:
     "Mejor encaje: automatización acotada, pipelines de reportes, limpieza de datos, herramientas internas y trabajo de estabilización con traspaso claro.",
+  availability: "Actualmente disponible para nuevos proyectos.",
   primaryLabel: "Correo principal",
   emailAddress: "carlos@tooltician.com",
   emailDirect: "Correo directo",
@@ -89,6 +91,7 @@ const c = lang === "en" ? en : es;
       <div class="contact-info reveal">
         <p class="contact-copy">{c.copy}</p>
         <p class="contact-preferred">{c.preferred}</p>
+        <p class="contact-availability">{c.availability}</p>
 
         <div class="contact-primary">
           <p class="contact-primary__label">{c.primaryLabel}</p>
@@ -249,7 +252,15 @@ const c = lang === "en" ? en : es;
     font-size: 0.85rem;
     color: var(--clr-text-faint);
     line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-availability {
+    font-size: 0.85rem;
+    color: var(--clr-accent);
+    line-height: 1.6;
     margin-bottom: 1.5rem;
+    font-weight: 600;
   }
 
   .contact-primary {

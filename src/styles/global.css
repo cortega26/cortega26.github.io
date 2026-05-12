@@ -467,7 +467,7 @@ ul { list-style: none; }
 .divider {
   width: 48px;
   height: 1px;
-  background: rgba(255, 183, 3, 0.4);
+  background: rgba(196, 160, 74, 0.4);
   margin-bottom: var(--sp-4);
 }
 
@@ -577,8 +577,8 @@ ul { list-style: none; }
 }
 .footer__social a:hover {
   color: var(--clr-accent);
-  background: rgba(255, 183, 3, 0.08);
-  border-color: rgba(255, 183, 3, 0.2);
+  background: rgba(196, 160, 74, 0.08);
+  border-color: rgba(196, 160, 74, 0.2);
 }
 .footer__social a:active {
   transform: scale(0.92);

@@ -13,7 +13,6 @@ export default defineConfig({
           es: 'es',
         },
       },
-      filter: (page) => page !== 'https://tooltician.com/',
     }),
   ],
 });

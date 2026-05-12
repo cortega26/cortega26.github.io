@@ -553,6 +553,7 @@ function setFilter(filter: string) {
     const match = filter === 'all' || categories.includes(filter);
     card.hidden = !match;
     card.setAttribute('aria-hidden', String(!match));
+    if (match) card.classList.add('visible');
   });
 
   const focused = document.activeElement as HTMLElement | null;

@@ -5,7 +5,7 @@ const { lang } = Astro.props;
 const en = {
   eyebrow: 'Proof', title: 'Public Proof and Delivery Signals',
   subtitle: 'Public signals for packaging discipline, quality systems, communication style, and work that already exists outside a demo environment.',
-  steps: [
+  dimensions: [
     { label: 'Packaging', title: 'Reusable libraries & CLIs', body: 'Projects like rutificador, bankrecon, and Monedario show the same packaging instinct across code and content: reliable structure, clear docs, and outputs people can actually use.' },
     { label: 'Quality', title: 'CI, scans & auditability', body: 'I bias toward test coverage, code scanning, deterministic outputs, and logs that make incidents easier to understand rather than harder to trace.' },
     { label: 'Communication', title: 'English-first, bilingual delivery', body: 'I write public project docs in a way that works for international readers while still supporting Spanish-speaking collaborators and clients.' },
@@ -22,7 +22,7 @@ const en = {
 const es = {
   eyebrow: 'Evidencia', title: 'Evidencia Pública y Señales de Entrega',
   subtitle: 'Señales públicas sobre disciplina de empaquetado, sistemas de calidad, estilo de comunicación y trabajo que ya existe fuera de una demo.',
-  steps: [
+  dimensions: [
     { label: 'Empaquetado', title: 'Librerías y CLIs reutilizables', body: 'Proyectos como rutificador, bankrecon y Monedario muestran el mismo instinto de empaquetado en código y contenido: estructura confiable, docs claros y salidas que la gente puede usar.' },
     { label: 'Calidad', title: 'CI, escaneo y auditabilidad', body: 'Priorizo cobertura de pruebas, escaneo de código, salidas deterministas y logs que facilitan entender incidentes en lugar de complicarlos.' },
     { label: 'Comunicación', title: 'English-first, entrega bilingüe', body: 'Escribo docs públicos de proyectos de forma que funcionen para lectores internacionales sin dejar de apoyar colaboradores y clientes hispanohablantes.' },
@@ -49,15 +49,14 @@ const c = lang === 'en' ? en : es;
 
     <div class="proof-layout">
       <div class="proof-track">
-        {c.steps.map((step, i) => (
+        {c.dimensions.map((dim, i) => (
           <article class={`proof-step reveal reveal-delay-${(i % 3) + 1}`}>
             <div class="proof-step__meta">
-              <span class="proof-step__index">{String(i + 1).padStart(2, '0')}</span>
-              <span class="proof-step__label">{step.label}</span>
+              <span class="proof-step__label">{dim.label}</span>
             </div>
             <div class="proof-step__body">
-              <h3 class="proof-step__title">{step.title}</h3>
-              <p class="proof-step__text">{step.body}</p>
+              <h3 class="proof-step__title">{dim.title}</h3>
+              <p class="proof-step__text">{dim.body}</p>
             </div>
           </article>
         ))}
@@ -122,11 +121,6 @@ const c = lang === 'en' ? en : es;
   color: var(--clr-text-faint);
 }
 
-.proof-step__index {
-  color: var(--clr-accent);
-  min-width: 2.3rem;
-}
-
 .proof-step__label {
   color: var(--clr-text);
 }
@@ -185,11 +179,6 @@ const c = lang === 'en' ? en : es;
 
 .proof-link:active {
   opacity: 0.7;
-}
-
-.proof-resume {
-  text-align: left;
-  margin-top: 1rem;
 }
 
 @media (max-width: 900px) {

@@ -1,6 +1,9 @@
 # Build output
 dist/
 .astro/
+.agents/
+.claude/
+.continue/
 
 # Dependencies
 node_modules/

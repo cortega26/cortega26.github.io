@@ -6,33 +6,21 @@ const { lang } = Astro.props;
 
 const en = {
   availability: 'Scoped engagements · EN / ES',
-  meta: 'Tooltician · Carlos Ortega Gonzalez',
+  meta: 'Tooltician — Carlos Ortega Gonzalez',
   title: 'Automation systems for reporting, ETL, and internal workflows that have to survive handoff.',
   summary: 'I build Python automation and delivery systems that remove brittle manual steps, expose the right checks, and leave teams with something they can actually operate.',
   support: 'The fastest way to use this site is to inspect proof, browse real work, and then open a short brief.',
-  routeTitle: 'Start here',
+  routeTitle: 'Quick navigation',
   routes: [
-    {
-      label: 'Check public proof',
-      description: 'Packages, CI signals, and live systems you can inspect now.',
-      href: '#proof',
-    },
-    {
-      label: 'Browse production work',
-      description: 'Selected builds with visible outcomes and operating context.',
-      href: '#portfolio',
-    },
-    {
-      label: 'Open a project brief',
-      description: 'Send the workflow, the bottleneck, and the expected outcome.',
-      href: '#contact-form',
-    },
+    { label: 'Public proof', description: 'Packages, CI signals, and live systems.', href: '#proof', },
+    { label: 'Production work', description: 'Selected builds with visible outcomes.', href: '#portfolio', },
+    { label: 'Project brief', description: 'Send the workflow and the expected outcome.', href: '#contact-form', },
   ],
   highlightsTitle: 'Core work',
   highlights: [
     'Reporting automation and structured data delivery.',
     'ETL reliability, scraping, and repeatable data collection.',
-    'Internal tooling and small front ends that improve operator comprehension.',
+    'Internal tooling that improves operator comprehension.',
   ],
   ctaPrimary: 'Open brief',
   ctaSecondary: 'View work',
@@ -40,59 +28,36 @@ const en = {
   ctaSecondaryHref: '#portfolio',
   proofTitle: 'Delivery signals',
   proofItems: [
-    { value: '3 live sites', label: 'publicly viewable today' },
+    { value: '3 live sites', label: 'publicly viewable' },
     { value: '2 PyPI packages', label: 'installable now' },
     { value: 'CI + CodeQL', label: 'visible in public repos' },
     { value: 'EN / ES', label: 'delivery-ready communication' },
   ],
   panelTitle: 'Operating notes',
   panelItems: [
-    {
-      label: 'Typical scope',
-      value: 'Reporting automation, ETL reliability, scraping workflows, and internal data tools.',
-    },
-    {
-      label: 'Delivery style',
-      value: 'Scoped implementation, direct stakeholder communication, and handoff-ready documentation.',
-    },
-    {
-      label: 'Location',
-      value: 'Santiago-based, working in English and Spanish across LATAM and U.S.-friendly hours.',
-    },
+    { label: 'Scope', value: 'Reporting automation, ETL, scraping, and internal data tools.' },
+    { label: 'Delivery', value: 'Scoped implementation, direct communication, handoff-ready docs.' },
+    { label: 'Location', value: 'Santiago, working EN/ES across LATAM and U.S.-friendly hours.' },
   ],
-  noteTitle: 'Default delivery',
-  noteBody: 'CI, tests, and operator notes are part of the baseline whenever the workflow needs to keep running after the build.',
 };
 
 const es = {
   availability: 'Proyectos acotados · ES / EN',
-  meta: 'Tooltician · Carlos Ortega González',
+  meta: 'Tooltician — Carlos Ortega González',
   title: 'Sistemas de automatización para reportes, ETL y flujos internos que deben sobrevivir al traspaso.',
   summary: 'Construyo sistemas Python y flujos de entrega que reemplazan pasos manuales frágiles, exponen los controles correctos y dejan algo que el equipo puede operar.',
   support: 'La forma más rápida de usar este sitio es revisar evidencia pública, ver trabajo real y luego enviar un brief corto.',
-  routeTitle: 'Partir aquí',
+  routeTitle: 'Navegación rápida',
   routes: [
-    {
-      label: 'Revisar evidencia pública',
-      description: 'Paquetes, señales de CI y sistemas activos que puedes inspeccionar hoy.',
-      href: '#proof',
-    },
-    {
-      label: 'Ver trabajo en producción',
-      description: 'Builds seleccionados con resultados visibles y contexto operativo.',
-      href: '#portfolio',
-    },
-    {
-      label: 'Abrir brief del proyecto',
-      description: 'Enviar el flujo, el cuello de botella y el resultado esperado.',
-      href: '#contact-form',
-    },
+    { label: 'Evidencia pública', description: 'Paquetes, CI y sistemas activos.', href: '#proof', },
+    { label: 'Trabajo en producción', description: 'Builds con resultados visibles.', href: '#portfolio', },
+    { label: 'Brief del proyecto', description: 'Envía el flujo y el resultado esperado.', href: '#contact-form', },
   ],
   highlightsTitle: 'Trabajo base',
   highlights: [
     'Automatización de reportes y entrega estructurada de datos.',
     'Confiabilidad ETL, scraping y recolección de datos repetible.',
-    'Herramientas internas y frontends pequeños que mejoran la comprensión del operador.',
+    'Herramientas internas que mejoran la comprensión del operador.',
   ],
   ctaPrimary: 'Abrir brief',
   ctaSecondary: 'Ver trabajo',
@@ -103,37 +68,25 @@ const es = {
     { value: '3 sitios activos', label: 'visibles hoy' },
     { value: '2 paquetes PyPI', label: 'instalables ahora' },
     { value: 'CI + CodeQL', label: 'visible en repos públicos' },
-    { value: 'ES / EN', label: 'comunicación lista para entrega' },
+    { value: 'ES / EN', label: 'comunicación bilingüe' },
   ],
   panelTitle: 'Notas operativas',
   panelItems: [
-    {
-      label: 'Alcance típico',
-      value: 'Automatización de reportes, confiabilidad ETL, scraping y herramientas internas de datos.',
-    },
-    {
-      label: 'Forma de entrega',
-      value: 'Implementación acotada, comunicación directa con stakeholders y documentación pensada para traspaso.',
-    },
-    {
-      label: 'Ubicación',
-      value: 'Trabajo desde Santiago, en español e inglés, con equipos de LATAM y horarios compatibles con EE.UU.',
-    },
+    { label: 'Alcance', value: 'Automación de reportes, ETL, scraping y herramientas internas de datos.' },
+    { label: 'Entrega', value: 'Implementación acotada, comunicación directa, docs para traspaso.' },
+    { label: 'Ubicación', value: 'Santiago, trabajo ES/EN con LATAM y horarios compatibles con EE.UU.' },
   ],
-  noteTitle: 'Entrega base',
-  noteBody: 'CI, pruebas y notas para operadores forman parte de la base cuando el flujo debe seguir funcionando después del build.',
 };
 
 const c = lang === 'en' ? en : es;
 ---
 <header class="hero" id="overview">
   <div class="container">
-    <div class="hero__layout">
-      <div class="hero__copy">
+    <div class="hero__content">
+      <div class="hero__main">
         <div class="hero__meta reveal">
-          <span class="hero__meta-prefix">$</span>
           <span>{c.meta}</span>
-          <span class="hero__meta-divider">|</span>
+          <span class="hero__meta-divider" aria-hidden="true">·</span>
           <span>{c.availability}</span>
         </div>
         <h1 class="hero__title reveal reveal-delay-1">{c.title}</h1>
@@ -145,42 +98,33 @@ const c = lang === 'en' ? en : es;
         </div>
       </div>
 
-      <aside class="hero__routes reveal reveal-delay-2" aria-label={c.routeTitle}>
-        <div class="hero__routes-header">
-          <span class="hero__routes-dot"></span>
-          <span class="hero__panel-label">{c.routeTitle}</span>
-        </div>
-        <ul class="hero__route-list">
+      <aside class="hero__summary-panel reveal reveal-delay-2" aria-label={c.routeTitle}>
+        <div class="hero__routes">
           {c.routes.map((route, i) => (
-            <li class="hero__route-item">
-              <a class="hero__route-link" href={route.href}>
-                <span class="hero__route-index">{String(i + 1).padStart(2, '0')}</span>
-                <span class="hero__route-body">
-                  <span class="hero__route-name">{route.label}</span>
-                  <span class="hero__route-copy">{route.description}</span>
-                </span>
-                <span class="hero__route-arrow">→</span>
-              </a>
-            </li>
+            <a class="hero__route-link" href={route.href}>
+              <span class="hero__route-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="hero__route-body">
+                <span class="hero__route-label">{route.label}</span>
+                <span class="hero__route-desc">{route.description}</span>
+              </span>
+              <span class="hero__route-arrow" aria-hidden="true">→</span>
+            </a>
           ))}
-        </ul>
+        </div>
       </aside>
     </div>
 
     <div class="hero__board reveal reveal-delay-4">
-      <section class="hero__module" aria-label={c.highlightsTitle}>
-        <span class="hero__module-led"></span>
-        <p class="hero__panel-label">{c.highlightsTitle}</p>
+      <div class="hero__board-col">
+        <p class="hero__board-heading">{c.highlightsTitle}</p>
         <ul class="hero__highlights">
           {c.highlights.map(h => (
             <li>{h}</li>
           ))}
         </ul>
-      </section>
-
-      <section class="hero__module" aria-label={c.panelTitle}>
-        <span class="hero__module-led"></span>
-        <p class="hero__panel-label">{c.panelTitle}</p>
+      </div>
+      <div class="hero__board-col">
+        <p class="hero__board-heading">{c.panelTitle}</p>
         <dl class="hero__brief-list">
           {c.panelItems.map(item => (
             <div class="hero__brief-row">
@@ -189,194 +133,136 @@ const c = lang === 'en' ? en : es;
             </div>
           ))}
         </dl>
-      </section>
-
-      <section class="hero__module hero__module--signals" aria-label={c.proofTitle}>
-        <span class="hero__module-led"></span>
-        <p class="hero__panel-label">{c.proofTitle}</p>
-        <div class="hero__proofbar">
+      </div>
+      <div class="hero__board-col">
+        <p class="hero__board-heading">{c.proofTitle}</p>
+        <div class="hero__proof-list">
           {c.proofItems.map(item => (
-            <div class="hero__proofitem">
-              <span class="hero__proofvalue">{item.value}</span>
-              <span class="hero__prooflabel">{item.label}</span>
+            <div class="hero__proof-item">
+              <span class="hero__proof-value">{item.value}</span>
+              <span class="hero__proof-label">{item.label}</span>
             </div>
           ))}
         </div>
-
-        <div class="hero__note">
-          <p class="hero__note-label">{c.noteTitle}</p>
-          <p>{c.noteBody}</p>
-        </div>
-      </section>
+      </div>
     </div>
   </div>
 </header>
 
 <style>
 .hero {
-  padding-top: calc(var(--nav-height) + 3.5rem);
-  padding-bottom: 3.75rem;
-  position: relative;
+  padding-top: calc(var(--nav-height) + 5rem);
+  padding-bottom: 4rem;
   border-bottom: 1px solid var(--clr-border);
-  overflow: hidden;
+  position: relative;
 }
 
-/* Grid background */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero__layout {
+.hero__content {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
   gap: 2.5rem;
   align-items: start;
-  position: relative;
-  z-index: 1;
 }
-.hero__copy {
-  max-width: 50rem;
-}
+
 .hero__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 0.6rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   font-family: var(--ff-label);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   letter-spacing: 0.04em;
   color: var(--clr-text-faint);
   align-items: center;
 }
-.hero__meta-prefix {
-  color: var(--clr-accent);
-  opacity: 0.6;
-}
+
 .hero__meta-divider {
-  opacity: 0.3;
+  opacity: 0.35;
 }
+
 .hero__title {
   font-family: var(--ff-heading);
-  font-size: clamp(2.9rem, 5.5vw, 5rem);
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
   font-weight: 700;
   line-height: 0.92;
   letter-spacing: -0.04em;
-  margin-bottom: 1rem;
-  max-width: 14ch;
+  margin-bottom: 1.25rem;
   text-wrap: balance;
 }
+
 .hero__summary {
-  font-size: clamp(1.02rem, 1.5vw, 1.16rem);
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
   color: var(--clr-text);
-  line-height: 1.75;
-  margin-bottom: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
   max-width: 60ch;
 }
+
 .hero__support {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--clr-text-muted);
   line-height: 1.65;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   max-width: 52ch;
 }
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
-.hero__panel-label {
-  font-family: var(--ff-label);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--clr-text-faint);
-  margin-bottom: 0.85rem;
-}
 
-/* Routes panel — CLI-inspired */
-.hero__routes {
+/* Routes sidebar */
+.hero__summary-panel {
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.02);
   overflow: hidden;
 }
 
-.hero__routes-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--clr-border);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.hero__routes-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--clr-accent);
-  opacity: 0.8;
-}
-
-.hero__route-item {
-  border-bottom: 1px solid var(--clr-border);
-}
-
-.hero__route-item:last-child {
-  border-bottom: none;
-}
-
 .hero__route-link {
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 0.75rem;
-  align-items: start;
-  padding: 0.85rem 1rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--clr-border);
   transition: background var(--dur-fast);
 }
 
-.hero__route-link:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
-.hero__route-link:active {
-  background: rgba(255, 255, 255, 0.06);
+.hero__route-link:last-child {
+  border-bottom: none;
 }
 
-.hero__route-index {
+.hero__route-link:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hero__route-num {
   font-family: var(--ff-label);
   font-size: 0.65rem;
-  color: var(--clr-text-faint);
-  padding-top: 0.15rem;
-  opacity: 0.5;
+  color: var(--clr-accent);
+  opacity: 0.6;
 }
 
 .hero__route-body {
   display: grid;
-  gap: 0.15rem;
+  gap: 0.1rem;
 }
 
-.hero__route-name {
-  font-size: 0.92rem;
+.hero__route-label {
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--clr-text);
   transition: color var(--dur-fast);
 }
 
-.hero__route-link:hover .hero__route-name {
+.hero__route-link:hover .hero__route-label {
   color: var(--clr-accent);
 }
 
-.hero__route-copy {
-  font-size: 0.82rem;
+.hero__route-desc {
+  font-size: 0.8rem;
   line-height: 1.5;
   color: var(--clr-text-muted);
 }
@@ -396,36 +282,33 @@ const c = lang === 'en' ? en : es;
   color: var(--clr-accent);
 }
 
+/* Board */
 .hero__board {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.02);
   overflow: hidden;
-  position: relative;
-  z-index: 1;
 }
 
-.hero__module {
-  min-height: 100%;
-  padding: 1.1rem 1rem 1.3rem;
-  position: relative;
+.hero__board-col {
+  padding: 1.25rem 1rem 1.5rem;
 }
 
-.hero__module:not(:last-child) {
+.hero__board-col:not(:last-child) {
   border-right: 1px solid var(--clr-border);
 }
 
-.hero__module-led {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--clr-accent);
-  opacity: 0.4;
-  margin-bottom: 0.5rem;
+.hero__board-heading {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  margin-bottom: 1rem;
 }
 
 .hero__highlights {
@@ -436,7 +319,7 @@ const c = lang === 'en' ? en : es;
 .hero__highlights li {
   position: relative;
   padding-left: 0.85rem;
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   line-height: 1.6;
   color: var(--clr-text-muted);
 }
@@ -454,13 +337,13 @@ const c = lang === 'en' ? en : es;
 
 .hero__brief-list {
   display: grid;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .hero__brief-row {
   display: grid;
-  gap: 0.2rem;
-  padding-top: 0.75rem;
+  gap: 0.15rem;
+  padding-top: 0.65rem;
   border-top: 1px solid var(--clr-border);
 }
 
@@ -471,104 +354,75 @@ const c = lang === 'en' ? en : es;
 
 .hero__brief-row dt {
   font-family: var(--ff-label);
-  font-size: 0.68rem;
-  font-weight: 500;
+  font-size: 0.65rem;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--clr-text-faint);
+  color: var(--clr-accent);
+  opacity: 0.8;
 }
 
 .hero__brief-row dd {
   font-size: 0.85rem;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--clr-text-muted);
 }
 
-.hero__proofbar {
+.hero__proof-list {
   display: grid;
-  gap: 0.7rem;
+  gap: 0.65rem;
 }
 
-.hero__proofitem {
+.hero__proof-item {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   gap: 1rem;
-  padding-bottom: 0.7rem;
+  padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--clr-border);
 }
 
-.hero__proofvalue {
+.hero__proof-value {
   font-family: var(--ff-label);
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.72rem;
+  font-weight: 600;
   color: var(--clr-text);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-.hero__prooflabel {
-  font-size: 0.8rem;
+.hero__proof-label {
+  font-size: 0.82rem;
   line-height: 1.5;
   color: var(--clr-text-muted);
   text-align: right;
 }
 
-.hero__note {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--clr-border);
-}
-
-.hero__note-label {
-  font-family: var(--ff-label);
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: var(--clr-accent);
-  letter-spacing: 0.06em;
-  margin-bottom: 0.35rem;
-  text-transform: uppercase;
-}
-
-.hero__note p:last-child {
-  font-size: 0.84rem;
-  line-height: 1.6;
-  color: var(--clr-text-muted);
-}
-
 @media (max-width: 1024px) {
   .hero {
-    padding-top: calc(var(--nav-height) + 2rem);
+    padding-top: calc(var(--nav-height) + 3rem);
   }
-  .hero__layout {
+  .hero__content {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  .hero__title {
-    max-width: none;
-  }
-  .hero__routes {
-    max-width: 38rem;
-  }
   .hero__board {
     grid-template-columns: 1fr;
+  }
+  .hero__board-col:not(:last-child) {
+    border-right: 0;
+    border-bottom: 1px solid var(--clr-border);
   }
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding-top: calc(var(--nav-height) + 1.5rem);
+    padding-top: calc(var(--nav-height) + 2rem);
     padding-bottom: 3rem;
   }
-  .hero__board {
-    background: transparent;
-  }
-  .hero__module {
+  .hero__board-col {
     padding-inline: 0;
-  }
-  .hero__module:not(:last-child) {
-    border-right: 0;
-    border-bottom: 1px solid var(--clr-border);
   }
 }
 
@@ -580,11 +434,11 @@ const c = lang === 'en' ? en : es;
   .hero__actions .btn {
     justify-content: center;
   }
-  .hero__proofitem {
+  .hero__proof-item {
     flex-direction: column;
     align-items: flex-start;
   }
-  .hero__prooflabel {
+  .hero__proof-label {
     text-align: left;
   }
 }

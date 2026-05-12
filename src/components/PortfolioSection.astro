@@ -49,7 +49,6 @@ const projectsEN: Project[] = [
     featured: true,
     links: [
       { label: 'Visit live site', href: 'https://monedario.cl' },
-      { label: 'View repository', href: 'https://github.com/cortega26/tuplatainforma' },
     ],
   },
   {
@@ -165,7 +164,6 @@ const projectsES: Project[] = [
     featured: true,
     links: [
       { label: 'Ver sitio', href: 'https://monedario.cl' },
-      { label: 'Ver repositorio', href: 'https://github.com/cortega26/tuplatainforma' },
     ],
   },
   {
@@ -421,6 +419,9 @@ const c = {
   padding-left: 0;
   border-bottom: 1px solid var(--clr-border);
   transition: padding-left var(--dur-med);
+}
+.project-card[hidden] {
+  display: none !important;
 }
 
 .project-card--featured {

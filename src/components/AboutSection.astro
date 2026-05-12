@@ -9,6 +9,7 @@ const SVG_GEAR    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"
 const en = {
   eyebrow: 'About', title: 'Who I Help and What They Get',
   intro: 'Operations teams accumulate the same category of pain: data that arrives late, reports that break unpredictably, and workflows nobody truly owns. I solve that — starting with the workflow, then packaging the result so it is testable, documented, and easier to keep running.',
+  workStyle: 'Short discovery upfront so implementation scope is clear before code starts. Visible progress through GitHub, documented assumptions, and delivery notes. Pragmatic systems that can be run by humans without reading my mind.',
   cards: [
     { title: 'Who I help', icon: SVG_USERS,   items: ['Operations-heavy teams still relying on spreadsheets, manual checks, or brittle scripts.', 'Founders and managers who need reliable internal tools without overbuilding a full product team.', 'Organizations that benefit from bilingual technical communication.'] },
     { title: 'What clients get', icon: SVG_PACKAGE, items: ['Clear scope, documented assumptions, and honest tradeoffs before implementation starts.', 'Python-first delivery with CI, structured logging, deterministic outputs, and readable README docs.', 'Practical handoff materials so the workflow survives after the initial delivery.'] },
@@ -19,6 +20,7 @@ const en = {
 const es = {
   eyebrow: 'Perfil', title: 'A quién ayudo y qué obtienen',
   intro: 'Los equipos operativos acumulan la misma categoría de problemas: datos que llegan tarde, reportes que se rompen impredeciblemente y flujos que nadie realmente posee. Eso es lo que resuelvo — empezando por el flujo, luego empaquetando el resultado para que sea testeable, documentado y más fácil de mantener.',
+  workStyle: 'Discovery corto al inicio para que el alcance esté claro antes de empezar el código. Progreso visible a través de GitHub, supuestos documentados y notas de entrega. Sistemas pragmáticos que cualquier operador puede ejecutar sin leer mi mente.',
   cards: [
     { title: 'A quién ayudo', icon: SVG_USERS,   items: ['Equipos con operaciones intensas que todavía dependen de hojas de cálculo, revisiones manuales o scripts frágiles.', 'Fundadores y gerentes que necesitan herramientas internas confiables sin armar un equipo de producto completo.', 'Organizaciones que se benefician de comunicación técnica bilingüe.'] },
     { title: 'Qué reciben los clientes', icon: SVG_PACKAGE, items: ['Alcance claro, supuestos documentados y tradeoffs honestos antes de comenzar la implementación.', 'Entrega Python-first con CI, logging estructurado, salidas deterministas y READMEs legibles.', 'Materiales de traspaso prácticos para que el flujo sobreviva después de la entrega inicial.'] },
@@ -35,6 +37,7 @@ const c = lang === 'en' ? en : es;
       <h2 class="section-title reveal">{c.title}</h2>
       <div class="divider reveal"></div>
       <p class="section-subtitle reveal">{c.intro}</p>
+      <p class="about-workstyle reveal reveal-delay-1">{c.workStyle}</p>
     </div>
     <div class="grid-3">
       {c.cards.map((card, i) => (
@@ -65,5 +68,17 @@ const c = lang === 'en' ? en : es;
 .about-list li::before {
   content: '›'; position: absolute; left: 0;
   color: var(--clr-accent); font-weight: 700;
+}
+.about-workstyle {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  max-width: 60ch;
+  margin-top: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--clr-accent);
 }
 </style>

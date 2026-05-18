@@ -41,7 +41,7 @@ const c = lang === 'en' ? en : es;
     </div>
     <div class="grid-3">
       {c.cards.map((card, i) => (
-        <article class={`card-glass reveal reveal-delay-${i + 1}`}>
+        <article class={`card-glass reveal reveal-delay-${(i % 2) + 1}`}>
           <div class="component-icon" set:html={card.icon}></div>
           <h3 class="card-title">{card.title}</h3>
           <ul class="about-list">

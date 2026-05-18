@@ -79,7 +79,7 @@ const navItems = lang === 'en'
 
         <div class="policy-page__sections">
           {content.sections.map((section, index) => (
-            <section class={`policy-block card-glass reveal reveal-delay-${(index % 3) + 1}`}>
+            <section class={`policy-block card-glass reveal reveal-delay-${(index % 2) + 1}`}>
               <h2 class="policy-block__title">{section.heading}</h2>
               {section.paragraphs.map((paragraph) => (
                 <p class="policy-block__copy">{paragraph}</p>

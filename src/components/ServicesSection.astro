@@ -51,7 +51,7 @@ const c = lang === 'en' ? en : es;
     </div>
     <div class="grid-3">
       {c.services.map((svc, i) => (
-        <article class={`card-glass svc-card reveal reveal-delay-${(i % 3) + 1}`}>
+        <article class={`card-glass svc-card reveal reveal-delay-${(i % 2) + 1}`}>
           <div class="component-icon" set:html={svc.icon}></div>
           <h3 class="card-title">{svc.title}</h3>
           <p class="svc-desc">{svc.desc}</p>

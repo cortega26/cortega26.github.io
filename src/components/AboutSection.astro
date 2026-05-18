@@ -8,7 +8,7 @@ const SVG_GEAR    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"
 
 const en = {
   eyebrow: 'About', title: 'Who I Help and How Delivery Works',
-  intro: 'Operations teams accumulate the same category of pain: data that arrives late, reports that break unpredictably, and workflows nobody truly owns. I solve that by starting with the workflow, then packaging the result so it is testable, documented, and easier to keep running after handoff.',
+  intro: 'My approach starts with the workflow, not the code. Before implementation begins, every engagement goes through a scope pass — inputs, outputs, owner, failure modes, and handoff target. What gets built is a system the next person can run, diagnose, and improve without reverse-engineering it.',
   workStyle: 'Every engagement starts with a short scope pass: workflow, inputs, outputs, owner, and handoff target. I prefer explicit tradeoffs, visible progress in GitHub, and delivery notes that let someone else run the system without reverse-engineering it.',
   cards: [
     { title: 'Best fit', icon: SVG_USERS, items: ['Operations-heavy teams with a real reporting, ETL, scraping, or internal-tool bottleneck already affecting work.', 'Founders and managers who need a scoped build, not a permanent embedded product team.', 'Teams that value bilingual communication and a written handoff.'] },
@@ -19,7 +19,7 @@ const en = {
 
 const es = {
   eyebrow: 'Perfil', title: 'A quién ayudo y cómo funciona la entrega',
-  intro: 'Los equipos operativos acumulan la misma categoría de problemas: datos que llegan tarde, reportes que se rompen impredeciblemente y flujos que nadie realmente posee. Eso es lo que resuelvo, empezando por el flujo y luego empaquetando el resultado para que sea testeable, documentado y más fácil de sostener después del traspaso.',
+  intro: 'Mi enfoque parte del flujo de trabajo, no del código. Antes de implementar, cada proyecto pasa por una revisión de alcance — inputs, outputs, responsable, modos de falla y objetivo de traspaso. Lo que se construye es un sistema que la siguiente persona puede operar, diagnosticar y mejorar sin tener que descifrarlo.',
   workStyle: 'Cada proyecto parte con una pasada corta de alcance: flujo, inputs, outputs, responsable y objetivo de traspaso. Prefiero tradeoffs explícitos, progreso visible en GitHub y notas de entrega que permitan a otra persona operar el sistema sin tener que descifrarlo.',
   cards: [
     { title: 'Mejor encaje', icon: SVG_USERS, items: ['Equipos operativos con un cuello de botella real en reportes, ETL, scraping o herramientas internas que ya afecta el trabajo.', 'Fundadores y gerentes que necesitan una entrega acotada, no un equipo de producto embebido de forma permanente.', 'Equipos que valoran comunicación bilingüe y traspaso por escrito.'] },
@@ -42,8 +42,8 @@ const c = lang === 'en' ? en : es;
     <div class="grid-3">
       {c.cards.map((card, i) => (
         <article class={`card-glass reveal reveal-delay-${i + 1}`}>
-          <div class="about-icon" set:html={card.icon}></div>
-          <h3 class="about-card-title">{card.title}</h3>
+          <div class="component-icon" set:html={card.icon}></div>
+          <h3 class="card-title">{card.title}</h3>
           <ul class="about-list">
             {card.items.map(item => <li>{item}</li>)}
           </ul>
@@ -54,15 +54,10 @@ const c = lang === 'en' ? en : es;
 </section>
 
 <style>
-.about-icon { margin-bottom: 0.75rem; display: flex; }
-.about-icon svg { color: var(--clr-accent); }
-.about-card-title {
-  font-family: var(--ff-heading); font-size: 1rem; font-weight: 700;
-  color: var(--clr-text); margin-bottom: 0.75rem;
-}
 .about-list { display: flex; flex-direction: column; gap: 0.6rem; }
 .about-list li {
-  font-size: 0.88rem; color: var(--clr-text-muted); line-height: 1.55;
+  font-size: var(--fs-sm);
+  color: var(--clr-text-muted); line-height: 1.55;
   padding-left: 1rem; position: relative;
 }
 .about-list li::before {
@@ -70,7 +65,7 @@ const c = lang === 'en' ? en : es;
   color: var(--clr-accent); font-weight: 700;
 }
 .about-workstyle {
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   color: var(--clr-text-muted);
   line-height: 1.7;
   max-width: 60ch;

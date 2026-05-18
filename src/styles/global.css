@@ -3,6 +3,23 @@
   Dark theme · Precision · Survives handoff
   ============================================================ */
 
+/* ---- Self-hosted variable fonts ---- */
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono-variable.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---- Design Tokens ---- */
 :root {
   /* Colors — refined dark */
@@ -31,6 +48,8 @@
   --ff-label:   'JetBrains Mono', ui-monospace, monospace;
 
   --fs-xs:   0.75rem;
+  --fs-label:    0.7rem;
+  --fs-label-sm: 0.65rem;
   --fs-sm:   0.875rem;
   --fs-base: 1rem;
   --fs-lg:   1.125rem;
@@ -471,6 +490,23 @@ ul { list-style: none; }
   margin-bottom: var(--sp-4);
 }
 
+/* ---- Shared Component Utilities ---- */
+/* Icon container used identically in AboutSection and ServicesSection */
+.component-icon {
+  margin-bottom: 0.75rem;
+  display: flex;
+}
+.component-icon svg { color: var(--clr-accent); }
+
+/* Card heading used identically in About, Services, and Proof cards */
+.card-title {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 0.75rem;
+}
+
 /* ---- Grid Helpers ---- */
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
@@ -605,6 +641,11 @@ ul { list-style: none; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* Reveal elements must be immediately visible — they start at opacity:0 */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

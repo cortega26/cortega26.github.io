@@ -367,6 +367,7 @@ const c = {
       <button class="filter-btn" type="button" data-filter="cli" aria-pressed="false">{c.fl.cli}</button>
       <button class="filter-btn" type="button" data-filter="data" aria-pressed="false">{c.fl.data}</button>
     </div>
+    <noscript><style>#portfolio-grid .project-card { display: flex !important; } .filter-bar { display: none; }</style></noscript>
 
     <div class="portfolio-grid" id="portfolio-grid">
       {c.projects.map((proj, i) => (

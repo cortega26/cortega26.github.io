@@ -11,7 +11,7 @@ const SVG_CHART    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none
 
 const en = {
   eyebrow: 'Services', title: 'How I Can Help',
-  subtitle: 'The recurring problem I solve: workflows that depend on copy-paste, tribal knowledge, or brittle scripts when they should be automated, observable, and handoff-ready.',
+  subtitle: 'Six specific services. Each maps to a recurring workflow failure that keeps operations teams stuck in manual work.',
   fitLabel: 'Best when:',
   services: [
     { icon: SVG_REFRESH, title: 'Reporting Automation', desc: 'Replace recurring report assembly and back-office steps with scheduled or reproducible runs that emit the same answer every time.', fit: 'Inputs, outputs, and workflow ownership are already known.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
@@ -26,7 +26,7 @@ const en = {
 
 const es = {
   eyebrow: 'Servicios', title: 'Cómo Puedo Ayudar',
-  subtitle: 'El problema recurrente que resuelvo: flujos que dependen de copia-pega, conocimiento tribal o scripts frágiles cuando deberían estar automatizados, observables y listos para traspaso.',
+  subtitle: 'Seis servicios específicos. Cada uno responde a una falla recurrente de flujo que mantiene a los equipos operativos atrapados en trabajo manual.',
   fitLabel: 'Encaja cuando:',
   services: [
     { icon: SVG_REFRESH, title: 'Automatización de Reportes', desc: 'Reemplazo armado recurrente de reportes y pasos de back-office por ejecuciones programadas o reproducibles que entregan la misma respuesta cada vez.', fit: 'Ya se conocen inputs, outputs y dueño del flujo.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }] },
@@ -52,8 +52,8 @@ const c = lang === 'en' ? en : es;
     <div class="grid-3">
       {c.services.map((svc, i) => (
         <article class={`card-glass svc-card reveal reveal-delay-${(i % 3) + 1}`}>
-          <div class="svc-icon" set:html={svc.icon}></div>
-          <h3 class="svc-title">{svc.title}</h3>
+          <div class="component-icon" set:html={svc.icon}></div>
+          <h3 class="card-title">{svc.title}</h3>
           <p class="svc-desc">{svc.desc}</p>
           <p class="svc-fit"><span>{c.fitLabel}</span> {svc.fit}</p>
           <p class="svc-examples-label">{c.examplesLabel}</p>
@@ -69,12 +69,6 @@ const c = lang === 'en' ? en : es;
 </section>
 
 <style>
-.svc-icon { margin-bottom: 1rem; display: flex; }
-.svc-icon svg { color: var(--clr-accent); }
-.svc-title {
-  font-family: var(--ff-heading); font-size: 1rem; font-weight: 700;
-  color: var(--clr-text); margin-bottom: 0.6rem;
-}
 .svc-desc { font-size: 0.87rem; color: var(--clr-text-muted); line-height: 1.55; margin-bottom: 1rem; flex: 1; }
 .svc-fit {
   font-size: 0.78rem;

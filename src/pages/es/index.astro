@@ -21,13 +21,14 @@ const navItems = [
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Carlos Ortega González',
+  '@type': ['Person', 'ProfessionalService'],
+  name: 'Carlos Ortega Gonzalez',
   alternateName: 'Tooltician',
-  url: 'https://tooltician.com/',
+  url: 'https://tooltician.com/es/',
   sameAs: ['https://github.com/cortega26', 'https://www.linkedin.com/in/cortega26'],
   jobTitle: 'Consultor de Automatización Python y Sistemas de Datos',
-  description: 'Construyo sistemas de automatización Python — pipelines ETL, scrapers, APIs internas y flujos de reportes — acotados, documentados y diseñados para seguir funcionando después del traspaso.',
+  description: 'Construyo sistemas de automatización Python — pipelines ETL, scrapers, APIs internas y flujos de reportes — con alcance definido, documentados y diseñados para seguir funcionando después del traspaso.',
+  areaServed: ['CL', 'Worldwide'],
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Santiago',

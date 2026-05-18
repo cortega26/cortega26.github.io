@@ -38,18 +38,23 @@ const {
     <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
   ))}
 
-  <!-- Fonts (early to start connection ASAP) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+  <!-- Mobile browser chrome -->
+  <meta name="theme-color" content="#0b1121" />
+
+  <!-- Self-hosted fonts — preload critical files first (Archivo 700 = H1/LCP element) -->
+  <link rel="preload" href="/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tooltician" />
+  <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_CL'} />
+  <meta property="og:locale:alternate" content={lang === 'en' ? 'es_CL' : 'en_US'} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogImage} />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Tooltician preview card" />
@@ -67,10 +72,12 @@ const {
   <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 
-  <!-- Preconnect for third-party origins -->
-  <link rel="preconnect" href="https://analytics.ahrefs.com" />
+  <!-- Identity verification -->
+  <link rel="me" href="https://github.com/cortega26" />
+  <link rel="me" href="https://www.linkedin.com/in/cortega26" />
+
+  <!-- Third-party preconnects -->
   <link rel="preconnect" href="https://formspree.io" />
-  <script src="https://analytics.ahrefs.com/analytics.js" data-key="uU7HA5yyjlR9jxjk2RvjzA" async></script>
 
   <slot name="head" />
 </head>
@@ -234,5 +241,8 @@ const {
     }, { threshold: 0.1 });
     reveals.forEach(el => obs.observe(el));
   </script>
+
+  <!-- Analytics (after main content — async, non-blocking) -->
+  <script src="https://analytics.ahrefs.com/analytics.js" data-key="uU7HA5yyjlR9jxjk2RvjzA" async></script>
 </body>
 </html>

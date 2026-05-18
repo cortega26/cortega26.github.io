@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+
+const links = [
+  {
+    href: '/en/',
+    label: 'English home',
+    detail: 'Portfolio, proof, and contact in English.',
+  },
+  {
+    href: '/es/',
+    label: 'Inicio en español',
+    detail: 'Portafolio, evidencia y contacto en español.',
+  },
+  {
+    href: '/en/privacy/',
+    label: 'Privacy and site terms',
+    detail: 'Public policies and browser-storage details.',
+  },
+];
+---
+<BaseLayout
+  title="404 — Page Not Found | Tooltician"
+  description="Bilingual fallback page for missing Tooltician routes."
+  lang="en"
+  canonical="https://tooltician.com/404/"
+  robots="noindex, follow"
+  alternates={[]}
+>
+  <main id="main">
+    <section class="section missing-page">
+      <div class="container">
+        <div class="missing-page__panel card-glass">
+          <span class="section-eyebrow">404</span>
+          <h1 class="section-title">Page not found / Página no encontrada</h1>
+          <div class="divider"></div>
+          <p class="section-subtitle">
+            This address does not match a published route. Use one of the verified public paths below.
+          </p>
+          <div class="missing-page__links">
+            {links.map((link) => (
+              <a class="missing-page__link" href={link.href}>
+                <strong>{link.label}</strong>
+                <span>{link.detail}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+.missing-page {
+  padding-top: calc(var(--nav-height) + 4rem);
+}
+
+.missing-page__panel {
+  max-width: 52rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.missing-page__links {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.missing-page__link {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+
+.missing-page__link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--clr-border-strong);
+}
+
+.missing-page__link strong {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.missing-page__link span {
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+</style>

@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import {
+  siteDocuments,
+  type SiteDocumentContent,
+  type SiteDocumentKey,
+  type SiteLocale,
+} from '../../data/siteDocuments';
+
+export function getStaticPaths() {
+  const locales: SiteLocale[] = ['en', 'es'];
+  const documentKeys = Object.keys(siteDocuments) as SiteDocumentKey[];
+
+  return documentKeys.flatMap((documentKey) =>
+    locales.map((lang) => ({
+      params: { lang, document: documentKey },
+      props: {
+        lang,
+        documentKey,
+        content: siteDocuments[documentKey][lang],
+      },
+    })),
+  );
+}
+
+interface Props {
+  lang: SiteLocale;
+  documentKey: SiteDocumentKey;
+  content: SiteDocumentContent;
+}
+
+const { lang, documentKey, content } = Astro.props as Props;
+const switchLang = lang === 'en' ? 'es' : 'en';
+const switchHref = `/${switchLang}/${documentKey}/`;
+const contactHref = `/${lang}/#contact-form`;
+const canonical = `https://tooltician.com/${lang}/${documentKey}/`;
+const alternates = [
+  { hreflang: 'en', href: `https://tooltician.com/en/${documentKey}/` },
+  { hreflang: 'es', href: `https://tooltician.com/es/${documentKey}/` },
+  { hreflang: 'x-default', href: `https://tooltician.com/en/${documentKey}/` },
+];
+
+const navItems = lang === 'en'
+  ? [
+      { href: '/en/#overview', label: 'Overview' },
+      { href: '/en/#proof', label: 'Proof' },
+      { href: '/en/#portfolio', label: 'Work' },
+      { href: '/en/#contact', label: 'Contact' },
+    ]
+  : [
+      { href: '/es/#overview', label: 'Resumen' },
+      { href: '/es/#proof', label: 'Evidencia' },
+      { href: '/es/#portfolio', label: 'Trabajo' },
+      { href: '/es/#contact', label: 'Contacto' },
+    ];
+---
+<BaseLayout
+  title={`${content.title} | Tooltician`}
+  description={content.description}
+  lang={lang}
+  canonical={canonical}
+  alternates={alternates}
+>
+  <Navbar lang={lang} items={navItems} ctaHref={contactHref} switchHref={switchHref} />
+
+  <main id="main">
+    <section class="section policy-page">
+      <div class="container policy-page__container">
+        <div class="policy-page__header reveal">
+          <span class="section-eyebrow">{content.eyebrow}</span>
+          <h1 class="section-title">{content.title}</h1>
+          <div class="divider"></div>
+          <p class="section-subtitle">{content.intro}</p>
+          <p class="policy-page__updated">{content.updatedLabel}: {content.updatedAt}</p>
+        </div>
+
+        <div class="policy-page__sections">
+          {content.sections.map((section, index) => (
+            <section class={`policy-block card-glass reveal reveal-delay-${(index % 3) + 1}`}>
+              <h2 class="policy-block__title">{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p class="policy-block__copy">{paragraph}</p>
+              ))}
+              {section.items && (
+                <ul class="policy-block__list">
+                  {section.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+        </div>
+
+        <div class="policy-page__cta card-glass reveal">
+          <p class="policy-page__closing">{content.closing}</p>
+          <a class="btn btn-primary" href={content.ctaHref}>{content.ctaLabel}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} langHref={switchHref} />
+</BaseLayout>
+
+<style>
+.policy-page {
+  padding-top: calc(var(--nav-height) + 4rem);
+}
+
+.policy-page__container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.policy-page__header {
+  max-width: 54rem;
+}
+
+.policy-page__updated {
+  margin-top: 1rem;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+}
+
+.policy-page__sections {
+  display: grid;
+  gap: 1rem;
+}
+
+.policy-block {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.policy-block__title {
+  font-family: var(--ff-heading);
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.policy-block__copy,
+.policy-block__list {
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+.policy-block__list {
+  list-style: disc;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.policy-page__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.policy-page__closing {
+  max-width: 42rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 720px) {
+  .policy-page__cta {
+    align-items: flex-start;
+  }
+}
+</style>

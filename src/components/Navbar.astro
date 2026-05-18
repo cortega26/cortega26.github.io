@@ -7,15 +7,17 @@ interface NavItem {
 interface Props {
   lang: 'en' | 'es';
   items: NavItem[];
+  ctaHref?: string;
+  switchHref?: string;
 }
 
-const { lang, items } = Astro.props;
+const { lang, items, ctaHref, switchHref } = Astro.props;
 const ctaLabel = lang === 'en' ? 'Project brief' : 'Brief del proyecto';
-const ctaHref = '#contact-form';
+const resolvedCtaHref = ctaHref ?? '#contact-form';
 const brandTag = lang === 'en' ? 'automation systems' : 'sistemas de automatización';
 
 const switchLabel = lang === 'en' ? 'ES' : 'EN';
-const switchHref  = lang === 'en' ? '/es/' : '/en/';
+const resolvedSwitchHref = switchHref ?? (lang === 'en' ? '/es/' : '/en/');
 ---
 <nav class="navbar" aria-label={lang === 'en' ? 'Primary navigation' : 'Navegación principal'}>
   <div class="container">
@@ -64,7 +66,7 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
         <li>
           <a
             class="navbar__lang-switch"
-            href={switchHref}
+            href={resolvedSwitchHref}
             hreflang={lang === 'en' ? 'es' : 'en'}
             data-language-preference={lang === 'en' ? 'es' : 'en'}
             aria-label={lang === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés'}
@@ -72,7 +74,7 @@ const switchHref  = lang === 'en' ? '/es/' : '/en/';
           >{switchLabel}</a>
         </li>
         <li>
-          <a class="navbar__cta" href={ctaHref}>
+          <a class="navbar__cta" href={resolvedCtaHref}>
             {ctaLabel}
           </a>
         </li>

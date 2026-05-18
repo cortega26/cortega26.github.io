@@ -1,8 +1,9 @@
 ---
 interface Props {
   lang: 'en' | 'es';
+  langHref?: string;
 }
-const { lang } = Astro.props;
+const { lang, langHref } = Astro.props;
 const year = new Date().getFullYear();
 
 const copy = {
@@ -13,6 +14,9 @@ const copy = {
     source: 'Source on GitHub',
     lang: 'Español',
     langHref: '/es/',
+    privacy: 'Privacy',
+    cookies: 'Cookies',
+    terms: 'Terms',
   },
   es: {
     tagline: 'Automatización que sobrevive al traspaso.',
@@ -21,9 +25,19 @@ const copy = {
     source: 'Código en GitHub',
     lang: 'English',
     langHref: '/en/',
+    privacy: 'Privacidad',
+    cookies: 'Cookies',
+    terms: 'Términos',
   },
 };
 const c = copy[lang];
+const switchHref = langHref ?? c.langHref;
+const policyPrefix = lang === 'en' ? '/en' : '/es';
+const legalLinks = [
+  { href: `${policyPrefix}/privacy/`, label: c.privacy },
+  { href: `${policyPrefix}/cookies/`, label: c.cookies },
+  { href: `${policyPrefix}/terms/`, label: c.terms },
+];
 ---
 <footer class="footer" role="contentinfo">
   <div class="container">
@@ -53,10 +67,43 @@ const c = copy[lang];
     </div>
     <div class="footer__bottom">
       <span>{c.rights}</span>
-      <div style="display:flex;gap:1rem;">
-        <a href={c.langHref} hreflang={lang === 'en' ? 'es' : 'en'} data-language-preference={lang === 'en' ? 'es' : 'en'}>{c.lang}</a>
-        <a href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">{c.source}</a>
+      <div class="footer__bottom-links">
+        <div class="footer__meta-links">
+          <a href={switchHref} hreflang={lang === 'en' ? 'es' : 'en'} data-language-preference={lang === 'en' ? 'es' : 'en'}>{c.lang}</a>
+          <a href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">{c.source}</a>
+        </div>
+        <div class="footer__legal-links">
+          {legalLinks.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </div>
       </div>
     </div>
   </div>
 </footer>
+
+<style>
+.footer__bottom-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
+}
+
+.footer__meta-links,
+.footer__legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.9rem;
+}
+
+@media (max-width: 720px) {
+  .footer__bottom-links,
+  .footer__meta-links,
+  .footer__legal-links {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}
+</style>

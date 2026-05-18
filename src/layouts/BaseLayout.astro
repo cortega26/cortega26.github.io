@@ -5,7 +5,15 @@ interface Props {
   lang: 'en' | 'es';
   canonical: string;
   ogImage?: string;
+  robots?: string;
+  alternates?: { hreflang: string; href: string }[];
 }
+
+const defaultAlternates = [
+  { hreflang: 'en', href: 'https://tooltician.com/en/' },
+  { hreflang: 'es', href: 'https://tooltician.com/es/' },
+  { hreflang: 'x-default', href: 'https://tooltician.com/' },
+];
 
 const {
   title,
@@ -13,6 +21,8 @@ const {
   lang,
   canonical,
   ogImage = 'https://tooltician.com/assets/images/og-card.png',
+  robots = 'index, follow',
+  alternates = defaultAlternates,
 } = Astro.props;
 ---
 <!doctype html>
@@ -23,10 +33,10 @@ const {
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
-  <meta name="robots" content="index, follow" />
-  <link rel="alternate" hreflang="en" href="https://tooltician.com/en/" />
-  <link rel="alternate" hreflang="es" href="https://tooltician.com/es/" />
-  <link rel="alternate" hreflang="x-default" href="https://tooltician.com/" />
+  <meta name="robots" content={robots} />
+  {alternates.map((alternate) => (
+    <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+  ))}
 
   <!-- Fonts (early to start connection ASAP) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />

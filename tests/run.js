@@ -194,9 +194,9 @@ group('TT-007 · Hero support content simplified', () => {
     'Legacy hero photo/card classes still present'
   );
   assert(
-    'Hero note block present',
-    src.includes('hero__note') && (src.includes('Default delivery') || src.includes('Entrega base')),
-    'Expected simplified support note in hero aside'
+    'Hero support panel present',
+    src.includes('hero__summary-panel') && src.includes('hero__brief-list') && (src.includes('Operating notes') || src.includes('Notas operativas')),
+    'Expected current hero support panel with operating notes'
   );
 });
 
@@ -526,17 +526,17 @@ group('F2 · About intro rewritten', () => {
   );
 });
 
-group('G1 · Credentials title updated', () => {
+group('G1 · Credentials section retired from homepage', () => {
   const src = creds();
   assert(
-    "Credentials title is 'Process & Background'",
-    src.includes('Process & Background') || src.includes('Proceso y formación'),
-    "Credentials H2 should be 'Process & Background'"
+    'Credentials component removed from current Astro homepage',
+    src === '',
+    'Expected CredentialsSection.astro to be absent from the current component set'
   );
   assert(
-    "Old title 'How I Work' is gone",
-    !src.includes("'How I Work'") && !src.includes('"How I Work"'),
-    "Old title 'How I Work' still present"
+    'Credentials section not referenced by EN or ES homepage',
+    !pageEN().includes('<CredentialsSection') && !pageES().includes('<CredentialsSection'),
+    'Credentials section should not be part of current EN/ES homepage composition'
   );
 });
 
@@ -655,6 +655,22 @@ group('J1 · Gmail address removed from source files', () => {
   }
 });
 
+group('L1 · Public trust surfaces linked from source', () => {
+  const footerSrc = footer();
+  const contactSrc = contact();
+
+  assert(
+    'Footer links to privacy, cookies, and terms pages',
+    footerSrc.includes('/privacy/') && footerSrc.includes('/cookies/') && footerSrc.includes('/terms/'),
+    'Footer is missing one or more public policy links'
+  );
+  assert(
+    'Contact section references privacy expectations',
+    contactSrc.includes('/privacy/') && contactSrc.includes('/cookies/') && contactSrc.includes('Formspree') && contactSrc.includes('Calendly'),
+    'Contact section is missing its privacy/cookies disclosure note'
+  );
+});
+
 group('K1 · Hero CTA hierarchy remains compact', () => {
   const src = hero();
   const actionButtons = (src.match(/<a class="btn /g) || []).length;
@@ -694,6 +710,13 @@ if (BUILT) {
 
   const distEN = read('dist/en/index.html') || '';
   const distES = read('dist/es/index.html') || '';
+  const dist404 = read('dist/404.html') || '';
+  const distPrivacyEN = read('dist/en/privacy/index.html') || '';
+  const distPrivacyES = read('dist/es/privacy/index.html') || '';
+  const distCookiesEN = read('dist/en/cookies/index.html') || '';
+  const distCookiesES = read('dist/es/cookies/index.html') || '';
+  const distTermsEN = read('dist/en/terms/index.html') || '';
+  const distTermsES = read('dist/es/terms/index.html') || '';
 
   assert(
     '[built] dist/en/index.html exists',
@@ -705,6 +728,21 @@ if (BUILT) {
     distES.length > 0,
     'dist/es/index.html not found'
   );
+  for (const [path, html] of [
+    ['dist/404.html', dist404],
+    ['dist/en/privacy/index.html', distPrivacyEN],
+    ['dist/es/privacy/index.html', distPrivacyES],
+    ['dist/en/cookies/index.html', distCookiesEN],
+    ['dist/es/cookies/index.html', distCookiesES],
+    ['dist/en/terms/index.html', distTermsEN],
+    ['dist/es/terms/index.html', distTermsES],
+  ]) {
+    assert(
+      `[built] ${path} exists`,
+      html.length > 0,
+      `${path} not found in built output`
+    );
+  }
   assert(
     '[built] EN page title contains Tooltician',
     distEN.includes('Tooltician'),
@@ -755,9 +793,24 @@ if (BUILT) {
     'Built EN contact section missing primary email CTA'
   );
   assert(
+    '[built] EN homepage exposes policy links and disclosure note',
+    distEN.includes('/en/privacy/') && distEN.includes('/en/cookies/') && distEN.includes('/en/terms/') && distEN.includes('Formspree') && distEN.includes('Calendly'),
+    'Built EN homepage is missing policy links or the contact disclosure note'
+  );
+  assert(
     '[built] ES page title contains Tooltician',
     distES.includes('Tooltician'),
     'ES title in built output does not contain Tooltician'
+  );
+  assert(
+    '[built] EN privacy page references core data services',
+    distPrivacyEN.includes('Formspree') && distPrivacyEN.includes('Calendly') && distPrivacyEN.includes('Ahrefs'),
+    'Built EN privacy page is missing one or more core service references'
+  );
+  assert(
+    '[built] ES cookies page references local storage and Calendly',
+    distCookiesES.includes('almacenamiento local') && distCookiesES.includes('Calendly'),
+    'Built ES cookies page is missing expected browser-storage disclosures'
   );
 }
 

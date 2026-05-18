@@ -30,7 +30,6 @@ Each section component receives a `lang: 'en' | 'es'` prop and defines inline `e
 - `PortfolioSection.astro` — Project cards with client-side filter buttons (Python/Web/CLI/Data)
 - `ServicesSection.astro` — 6 service cards with SVG icons
 - `AboutSection.astro` — Who, what, preferred stack
-- `CredentialsSection.astro` — Working style + certifications
 - `ContactSection.astro` — Form (Formspree), copy email, Calendly, LinkedIn
 - `Footer.astro` — Brand, social, copyright, lang switch
 

@@ -7,7 +7,7 @@ const SVG_PACKAGE = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"
 const SVG_GEAR    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>';
 
 const en = {
-  eyebrow: 'About', title: 'Who I Help and How Delivery Works',
+  eyebrow: 'About', title: 'Fit and Delivery',
   intro: 'My approach starts with the workflow, not the code. Before implementation begins, every engagement goes through a scope pass — inputs, outputs, owner, failure modes, and handoff target. What gets built is a system the next person can run, diagnose, and improve without reverse-engineering it.',
   workStyle: 'Explicit tradeoffs documented before decisions are made. Progress visible in GitHub commits, not status updates. Delivery notes written so the next person can run, debug, and extend the system without the original author on a call.',
   cards: [
@@ -18,7 +18,7 @@ const en = {
 };
 
 const es = {
-  eyebrow: 'Perfil', title: 'A quién ayudo y cómo funciona la entrega',
+  eyebrow: 'Perfil', title: 'Encaje y entrega',
   intro: 'Mi enfoque parte del flujo de trabajo, no del código. Antes de implementar, cada proyecto pasa por una revisión de alcance — inputs, outputs, responsable, modos de falla y objetivo de traspaso. Lo que se construye es un sistema que la siguiente persona puede operar, diagnosticar y mejorar sin tener que descifrarlo.',
   workStyle: 'Tradeoffs explícitos documentados antes de tomar decisiones. Progreso visible en commits de GitHub, no en reportes de estado. Notas de entrega escritas para que la siguiente persona pueda operar, depurar y extender el sistema sin necesitar al autor original en una llamada.',
   cards: [
@@ -70,10 +70,5 @@ const c = lang === 'en' ? en : es;
   line-height: 1.7;
   max-width: 60ch;
   margin-top: 0.5rem;
-  padding: 1rem 1.25rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-md);
-  border-left: 3px solid var(--clr-accent);
 }
 </style>

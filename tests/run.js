@@ -302,31 +302,43 @@ group('D3 · PDF Text Analyzer removed', () => {
 group('D4 · Portfolio project order', () => {
   const src = portfolio();
   const positions = {
-    ebano:       src.indexOf("id: 'ebano'"),
-    monedario:   src.indexOf("id: 'monedario'"),
-    rutificador: src.indexOf("id: 'rutificador'"),
+    ebano: src.indexOf("id: 'ebano'"),
+    portfolioManager: src.indexOf("id: 'portfolio-manager-unified'"),
+    monedario: src.indexOf("id: 'monedario'"),
+    stopSpam: src.indexOf("id: 'stop-spam-linkedin'"),
     conciliador: src.indexOf("id: 'conciliador'"),
-    noticiencias:src.indexOf("id: 'noticiencias'"),
-    dnspect:     src.indexOf("id: 'dnspect'"),
-    polla:       src.indexOf("id: 'polla'"),
+    rutificador: src.indexOf("id: 'rutificador'"),
+    dnspect: src.indexOf("id: 'dnspect'"),
+    polla: src.indexOf("id: 'polla'"),
+    noticiencias: src.indexOf("id: 'noticiencias'"),
   };
   assert(
-    'ebano before monedario',
-    positions.ebano < positions.monedario && positions.ebano > -1,
-    `ebano:${positions.ebano}, monedario:${positions.monedario}`
+    'ebano before portfolio manager',
+    positions.ebano < positions.portfolioManager && positions.ebano > -1,
+    `ebano:${positions.ebano}, portfolioManager:${positions.portfolioManager}`
   );
   assert(
-    'monedario before rutificador',
-    positions.monedario < positions.rutificador,
-    `monedario:${positions.monedario}, rutificador:${positions.rutificador}`
+    'portfolio manager before monedario',
+    positions.portfolioManager < positions.monedario,
+    `portfolioManager:${positions.portfolioManager}, monedario:${positions.monedario}`
   );
   assert(
-    'rutificador before conciliador',
-    positions.rutificador < positions.conciliador,
-    `rutificador:${positions.rutificador}, conciliador:${positions.conciliador}`
+    'monedario before LinkedIn extension',
+    positions.monedario < positions.stopSpam,
+    `monedario:${positions.monedario}, stopSpam:${positions.stopSpam}`
   );
   assert(
-    'All 7 required projects present',
+    'LinkedIn extension before conciliador',
+    positions.stopSpam < positions.conciliador,
+    `stopSpam:${positions.stopSpam}, conciliador:${positions.conciliador}`
+  );
+  assert(
+    'conciliador before rutificador',
+    positions.conciliador < positions.rutificador,
+    `conciliador:${positions.conciliador}, rutificador:${positions.rutificador}`
+  );
+  assert(
+    'All 9 required projects present',
     Object.values(positions).every(p => p > -1),
     'One or more required projects missing: ' + Object.entries(positions).filter(([,v]) => v === -1).map(([k]) => k).join(', ')
   );
@@ -546,6 +558,32 @@ group('H1 · Proof section retains core proof layout', () => {
     'ProofSection contains timeline and proof grid',
     src.includes('proof-track') && src.includes('proof-catalog'),
     'ProofSection is missing its core proof layout'
+  );
+});
+
+group('H2 · Portfolio Manager and LinkedIn extension are included in public work surfaces', () => {
+  const portfolioSrc = portfolio();
+  const proofSrc = proof();
+
+  assert(
+    'Portfolio includes Portfolio Manager Unified project',
+    portfolioSrc.includes('Portfolio Manager Unified') && portfolioSrc.includes('portfolio-manager-server'),
+    'PortfolioSection is missing the Portfolio Manager Unified entry'
+  );
+  assert(
+    'Portfolio includes LinkedIn Spam Blocker project',
+    portfolioSrc.includes('LinkedIn Spam Blocker') && portfolioSrc.includes('stop-spam-linkedin'),
+    'PortfolioSection is missing the LinkedIn Spam Blocker entry'
+  );
+  assert(
+    'Proof includes Portfolio Manager Unified evidence entry',
+    proofSrc.includes('Portfolio Manager Unified') && proofSrc.includes('portfolio-manager-server'),
+    'ProofSection is missing the Portfolio Manager Unified evidence entry'
+  );
+  assert(
+    'Proof includes extension distribution links',
+    proofSrc.includes('Chrome Web Store') && proofSrc.includes('Firefox Add-ons') && proofSrc.includes('stop-spam-linkedin'),
+    'ProofSection is missing the LinkedIn Spam Blocker evidence entry'
   );
 });
 
@@ -801,6 +839,16 @@ if (BUILT) {
     '[built] ES page title contains Tooltician',
     distES.includes('Tooltician'),
     'ES title in built output does not contain Tooltician'
+  );
+  assert(
+    '[built] Portfolio Manager Unified renders in EN and ES output',
+    distEN.includes('Portfolio Manager Unified') && distES.includes('Portfolio Manager Unified'),
+    'Built localized pages are missing the Portfolio Manager Unified content'
+  );
+  assert(
+    '[built] LinkedIn Spam Blocker renders in EN and ES output',
+    distEN.includes('LinkedIn Spam Blocker') && distES.includes('LinkedIn Spam Blocker'),
+    'Built localized pages are missing the LinkedIn Spam Blocker content'
   );
   assert(
     '[built] EN privacy page references core data services',

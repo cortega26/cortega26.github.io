@@ -8,11 +8,18 @@ const en = {
   eyebrow: "Contact",
   title: "Project Brief",
   subtitle:
-    "Send the workflow, the bottleneck, and the outcome you want.",
-  copy: "The cleanest starting point is the form. A short message is enough if it includes what is breaking, what should happen instead, and who operates the workflow today.",
+    "Send the workflow, the bottleneck, the current owner, and the outcome you want.",
+  copy: "The cleanest starting point is the form. A short message is enough if it includes what is breaking, what should happen instead, who operates the workflow today, and what a good handoff looks like.",
   preferred:
-    "Best fit: scoped automation, reporting pipelines, data cleanup, internal tools, and stabilization work that needs a clear handoff.",
-  availability: "Currently open for new engagements.",
+    "Best fit: scoped automation, reporting pipelines, data cleanup, internal tools, and stabilization work with a clear owner on your side. Less useful: open-ended discovery without a concrete workflow.",
+  availability: "Currently open for new scoped engagements.",
+  briefChecklistTitle: "Useful in the first note",
+  briefChecklist: [
+    "Current workflow and tools involved.",
+    "Main bottleneck, failure, or review risk.",
+    "Desired output and who will operate it.",
+    "Deadline, cadence, or handoff constraint.",
+  ],
   primaryLabel: "Primary contact",
   emailAddress: "carlos@tooltician.com",
   emailDirect: "Email instead",
@@ -24,7 +31,7 @@ const en = {
   linkedinLabel: "LinkedIn profile",
   linkedinCta: "View LinkedIn",
   formTitle: "Brief form",
-  formIntro: "If the scope is already clear in writing, leave it here and I’ll reply by email.",
+  formIntro: "If the scope is already clear in writing, leave it here and I’ll reply by email with fit, next questions, or a direct no if it sits outside scope.",
   policyLead:
     "By sending this form, you agree to a reply by email. Delivery uses Formspree, scheduling uses Calendly, and language preference is stored locally in your browser. See",
   policyJoin: "and",
@@ -37,7 +44,7 @@ const en = {
   emailPh: "your@email.com",
   messageLabel: "Project brief",
   messagePh:
-    "Describe the workflow, the bottleneck, and the outcome you want...",
+    "Describe the current workflow, the bottleneck, who operates it, and the outcome you want...",
   submit: "Send brief",
   submitSending: "Sending…",
   successMsg: "Message sent. I’ll reply within two business days.",
@@ -49,11 +56,18 @@ const es = {
   eyebrow: "Contacto",
   title: "Brief del proyecto",
   subtitle:
-    "Envía el flujo, el cuello de botella y el resultado que quieres.",
-  copy: "La forma más limpia de partir es el formulario. Un mensaje corto basta si incluye qué está fallando, qué debería pasar y quién opera hoy el flujo.",
+    "Envía el flujo, el cuello de botella, el responsable actual y el resultado que quieres.",
+  copy: "La forma más limpia de partir es el formulario. Un mensaje corto basta si incluye qué está fallando, qué debería pasar, quién opera hoy el flujo y cómo se vería un buen traspaso.",
   preferred:
-    "Mejor encaje: automatización acotada, pipelines de reportes, limpieza de datos, herramientas internas y trabajo de estabilización con traspaso claro.",
-  availability: "Actualmente disponible para nuevos proyectos.",
+    "Mejor encaje: automatización acotada, pipelines de reportes, limpieza de datos, herramientas internas y trabajo de estabilización con un owner claro de tu lado. Menos útil: discovery abierto sin flujo concreto.",
+  availability: "Actualmente disponible para nuevos proyectos acotados.",
+  briefChecklistTitle: "Útil en el primer mensaje",
+  briefChecklist: [
+    "Flujo actual y herramientas involucradas.",
+    "Principal cuello de botella, falla o riesgo de revisión.",
+    "Salida esperada y quién la va a operar.",
+    "Deadline, cadencia o restricción de traspaso.",
+  ],
   primaryLabel: "Correo principal",
   emailAddress: "carlos@tooltician.com",
   emailDirect: "Correo directo",
@@ -65,7 +79,7 @@ const es = {
   linkedinLabel: "Perfil de LinkedIn",
   linkedinCta: "Ver LinkedIn",
   formTitle: "Formulario de brief",
-  formIntro: "Si el alcance ya está claro por escrito, déjalo aquí y te respondo por correo.",
+  formIntro: "Si el alcance ya está claro por escrito, déjalo aquí y te respondo por correo con encaje, preguntas siguientes o un no directo si queda fuera de alcance.",
   policyLead:
     "Al enviar este formulario, aceptas que la respuesta llegue por correo. El envío usa Formspree, la agenda usa Calendly y la preferencia de idioma se guarda localmente en tu navegador. Revisa",
   policyJoin: "y",
@@ -77,7 +91,7 @@ const es = {
   emailLabel: "Correo",
   emailPh: "tu@correo.com",
   messageLabel: "Brief del proyecto",
-  messagePh: "Describe el flujo, el problema y el resultado que quieres...",
+  messagePh: "Describe el flujo actual, el problema, quién lo opera y el resultado que quieres...",
   submit: "Enviar brief",
   submitSending: "Enviando…",
   successMsg: "Mensaje enviado. Respondo en dos días hábiles.",
@@ -102,6 +116,12 @@ const c = lang === "en" ? en : es;
         <p class="contact-copy">{c.copy}</p>
         <p class="contact-preferred">{c.preferred}</p>
         <p class="contact-availability">{c.availability}</p>
+        <p class="contact-checklist-title">{c.briefChecklistTitle}</p>
+        <ul class="contact-checklist">
+          {c.briefChecklist.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
 
         <div class="contact-primary">
           <p class="contact-primary__label">{c.primaryLabel}</p>
@@ -275,8 +295,40 @@ const c = lang === "en" ? en : es;
     font-size: 0.85rem;
     color: var(--clr-accent);
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.85rem;
     font-weight: 600;
+  }
+
+  .contact-checklist-title {
+    font-family: var(--ff-label);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--clr-text-faint);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-checklist {
+    display: grid;
+    gap: 0.45rem;
+    margin-bottom: 1.5rem;
+    color: var(--clr-text-muted);
+  }
+
+  .contact-checklist li {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .contact-checklist li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--clr-accent);
+    font-weight: 700;
   }
 
   .contact-primary {

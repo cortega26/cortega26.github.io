@@ -49,6 +49,7 @@ npx serve .
 
 ## Notes
 
-- GitHub Pages publishes from the `master` branch root.
+- The production target should be Cloudflare Pages, not GitHub Pages, because the site now relies on edge response headers defined in [`public/_headers`](/home/carlos/VS_Code_Projects/cortega26.github.io/public/_headers:1).
+- The deployment workflow expects `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repository secrets.
 - The custom domain is `tooltician.com`.
 - The GitHub profile README in `cortega26/cortega26` is intended to route visitors here.

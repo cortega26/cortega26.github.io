@@ -1,7 +1,7 @@
 # Program Backlog: Higiene Técnica Web — Service Page Audit & Funnel Improvement
 
 Version: `2026-05-26`
-Status: `Active — Session D complete`
+Status: `Active — Session A complete`
 Scope: `/es/servicios/higiene-tecnica-web/` landing page + integration points across `tooltician.com`
 Primary goal: maximize conversion funnel from awareness through contact, across all dimensions of the service page and its integration with the main portfolio.
 
@@ -288,13 +288,13 @@ Exit gate:
 | `HTW-D05` | D | Integration | Create EN landing page (full or stub) | `P1` | `L` | `Done` |
 | `HTW-D06` | D | Commercial | Add USD pricing reference | `P2` | `S` | `Done` |
 | `HTW-D07` | D | Brand | Audit brand voice consistency | `P2` | `M` | `Done` |
-| `HTW-A01` | A | UX/UI | Merge #comparacion + #casos | `P1` | `M` | `Pending` |
-| `HTW-A02` | A | UX/UI | Redesign pricing as comparison table | `P2` | `M` | `Pending` |
-| `HTW-A03` | A | UX/UI | Fix mobile pricing scroll length | `P2` | `M` | `Pending` |
-| `HTW-A04` | A | UX/UI | Visual upgrade for process section | `P3` | `M` | `Pending` |
-| `HTW-A05` | A | UX/UI | Verify design system token usage | `P2` | `S` | `Pending` |
-| `HTW-A06` | A | UX/UI | Section alternation rhythm audit | `P3` | `S` | `Pending` |
-| `HTW-A07` | A | UX/UI | Evaluate sticky CTA | `P3` | `M` | `Pending` |
+| `HTW-A01` | A | UX/UI | Merge #comparacion + #casos | `P1` | `M` | `Done` |
+| `HTW-A02` | A | UX/UI | Redesign pricing as comparison table | `P2` | `M` | `Done` |
+| `HTW-A03` | A | UX/UI | Fix mobile pricing scroll length | `P2` | `M` | `Done` |
+| `HTW-A04` | A | UX/UI | Visual upgrade for process section | `P3` | `M` | `Done` |
+| `HTW-A05` | A | UX/UI | Verify design system token usage | `P2` | `S` | `Done` |
+| `HTW-A06` | A | UX/UI | Section alternation rhythm audit | `P3` | `S` | `Done` |
+| `HTW-A07` | A | UX/UI | Evaluate sticky CTA | `P3` | `M` | `Done` |
 | `HTW-C01` | C | SEO | Keyword decision: mantención vs mantenimiento | `P1` | `S` | `Pending` |
 | `HTW-C02` | C | SEO | Internal links from portfolio to service | `P2` | `S` | `Pending` |
 | `HTW-C03` | C | SEO | Add FAQPage JSON-LD schema | `P2` | `S` | `Pending` |
@@ -312,7 +312,7 @@ Exit gate:
 | `2026-05-26` | `0 — Baseline & Pricing` | `HTW-001 through HTW-013` | `Pass` | `None` | `Start Session B — Conversión y Captación` |
 | `2026-05-26` | `B — Conversión` | `HTW-B01, HTW-B02, HTW-B03, HTW-B04, HTW-B05, HTW-B06, HTW-B07` | `Pass` | `None` | `Start Session D — Propuesta Comercial` |
 | `2026-05-26` | `D — Comercial` | `HTW-D01, HTW-D02, HTW-D03, HTW-D04, HTW-D05, HTW-D06, HTW-D07` | `Pass` | `None` | `Start Session A — UX/UI y Presentación` |
-| `YYYY-MM-DD` | `A — UX/UI` | `HTW-A0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
+| `2026-05-26` | `A — UX/UI` | `HTW-A01, HTW-A02, HTW-A03, HTW-A04, HTW-A05, HTW-A06, HTW-A07` | `Pass` | `None` | `Start Session C — SEO y Visibilidad Orgánica` |
 | `YYYY-MM-DD` | `C — SEO` | `HTW-C0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
 
 ---

@@ -1,7 +1,7 @@
 # Scorecard: Higiene Técnica Web — Service Page
 
-Last updated: `2026-05-26` · After: `Session D — Propuesta Comercial y Coherencia`
-Next session: `Session A — UX/UI y Presentación`
+Last updated: `2026-05-26` · After: `Session A — UX/UI y Presentación`
+Next session: `Session C — SEO y Visibilidad Orgánica`
 Source of truth for session targets: `docs/tasks/higiene-tecnica-web-backlog.md`
 
 ---
@@ -29,8 +29,8 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 7 | Conversion path quality | `2` | `4` | `5` | — | `2026-05-26` |
 | 8 | Social proof | `0` | `3` | `4` | — | `2026-05-26` |
 | 9 | Urgency & availability signals | `0` | `3` | `3` | — | `2026-05-26` |
-| 10 | UX/UI — section rhythm & length | `2` | `2` | `4` | A (HTW-A01) | — |
-| 11 | UX/UI — mobile experience | `2` | `2` | `4` | A (HTW-A03) | — |
+| 10 | UX/UI — section rhythm & length | `2` | `4` | `4` | — | `2026-05-26` |
+| 11 | UX/UI — mobile experience | `2` | `4` | `4` | — | `2026-05-26` |
 | 12 | SEO — keyword alignment | `3` | `3` | `4` | C (HTW-C01) | — |
 | 13 | SEO — internal linking | `1` | `1` | `4` | C (HTW-C02) | — |
 | 14 | SEO — schema markup | `2` | `2` | `4` | C (HTW-C03) | — |
@@ -38,7 +38,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 16 | Buyer risk mitigation | `1` | `4` | `4` | — | `2026-05-26` |
 | 17 | Brand voice coherence | `3` | `5` | `5` | — | `2026-05-26` |
 
-**Composite score (mean):** `2.0 → 2.9 → 3.3 → 3.9` after Session D. Target: `4.4`
+**Composite score (mean):** `2.0 → 2.9 → 3.3 → 3.9 → 4.1` after Session A. Target: `4.4`
 
 ---
 
@@ -49,7 +49,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 0 — Baseline & Pricing | 1, 2, 3, 4, 5, 6, 7, 17 | `2.0` | `2.9` | `+0.9` |
 | B — Conversión | 7, 8, 9 | `2.9` | `3.3` | `+0.4` |
 | D — Comercial | 6, 15, 16, 17 | `3.3` | `3.9` | `+0.6` |
-| A — UX/UI | 10, 11 | — | — | — |
+| A — UX/UI | 10, 11 | `3.9` | `4.1` | `+0.2` |
 | C — SEO | 12, 13, 14 | — | — | — |
 
 ---
@@ -88,10 +88,10 @@ Update each dimension here with a one-line note when its score changes.
 - `2026-05-26 · Session B`: 0 → 3. Availability signal added to hero sidebar: "Acepto 2–3 diagnósticos nuevos por mes. Respuesta en 24–48 horas hábiles."
 
 ### 10 · UX/UI — section rhythm & length
-- No changes. Pending Session A / HTW-A01.
+- `2026-05-26 · Session A`: 2 → 4. #comparacion + #casos merged into one section (9 → 8 sections). Section alternation rhythm corrected (two consecutive --alt fixed). Section subheader pattern added for internal hierarchy. A07: sticky CTA not implemented — nav CTA already covers the function without adding clutter.
 
 ### 11 · UX/UI — mobile experience
-- No changes. Pending Session A / HTW-A03.
+- `2026-05-26 · Session A`: 2 → 4. Pricing section redesigned: desktop shows 5-column feature comparison table (with Recomendado badge top-right); mobile shows scroll-snap card carousel (85vw per card, snap-to-start). Process step numbers upgraded to large accent numerals (2rem, 0.35 opacity) for visual hierarchy. Plan card badge repositioned to absolute top-right so all cards align at price level.
 
 ### 12 · SEO — keyword alignment
 - No changes. Pending Session C / HTW-C01.

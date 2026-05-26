@@ -46,11 +46,6 @@ const processSteps = [
   ['05', 'Close or monthly support', 'I recommend closing, implementing a second phase, or moving to monthly review based on what the site actually needs.'],
 ];
 
-const sampleRows = [
-  ['Incomplete security headers', 'Visible signal of pending basic hardening.', 'Configure initial CSP, Permissions-Policy, and X-Content-Type-Options per hosting.', 'Proposed'],
-  ['Form without recent delivery test', 'Possible silent lead loss.', 'Send controlled test, check destination, response, and delivery log.', 'Pending access'],
-  ['Sitemap published, not reviewed in Search Console', 'Coverage errors can go unnoticed for weeks.', 'Validate sitemap, review excluded pages, document findings.', 'Reviewed'],
-];
 
 const plans = [
   {
@@ -725,10 +720,14 @@ const breadcrumbJsonLd = {
 }
 
 .process-item__num {
-  font-family: var(--ff-label);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-family: var(--ff-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   color: var(--clr-accent);
+  opacity: 0.35;
+  line-height: 1;
+  padding-top: 0.1rem;
 }
 
 .process-item h3 {
@@ -774,7 +773,9 @@ const breadcrumbJsonLd = {
 }
 
 .plan-card__flag {
-  justify-self: start;
+  position: absolute;
+  top: var(--sp-6);
+  right: var(--sp-6);
   padding: 0.25rem 0.55rem;
   border: 1px solid rgba(196, 160, 74, 0.26);
   border-radius: var(--radius-sm);
@@ -900,11 +901,26 @@ const breadcrumbJsonLd = {
   .service-hero__grid,
   .service-review-grid,
   .service-review-grid--cases,
-  .plans-grid,
   .faq-list,
   .intent-grid,
   .diff-grid {
     grid-template-columns: 1fr;
+  }
+
+  .plans-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--sp-4);
+    padding-bottom: var(--sp-3);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .plans-grid .plan-card {
+    flex: 0 0 85vw;
+    max-width: 340px;
+    scroll-snap-align: start;
   }
 }
 

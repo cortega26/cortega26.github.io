@@ -142,6 +142,17 @@ const useCases = [
   ['E-commerce pequeño', 'Necesita revisar HTTPS, formularios, errores, DNS/email y señales técnicas básicas sin sumar una contratación completa.'],
 ];
 
+const tableFeatures = [
+  ['Diagnóstico externo inicial', true, true, true, true, false],
+  ['Hardening de headers + HTTPS canónico', false, true, true, true, false],
+  ['Revisión de formularios, DNS y email auth', false, false, true, true, false],
+  ['Reporte / notas técnicas para el administrador', true, true, true, true, true],
+  ['Evidencia antes/después con capturas', false, false, false, true, false],
+  ['Reporte ejecutivo en lenguaje de negocio', false, false, false, true, false],
+  ['Hoja de ruta de monitoreo mensual', false, false, false, true, true],
+  ['Monitoreo mensual + correcciones periódicas', false, false, false, false, true],
+];
+
 const faqs = [
   ['¿Esto es ciberseguridad?', 'Es una capa de higiene técnica y hardening web básico. No reemplaza pentesting, compliance ni una auditoría profunda.'],
   ['¿Qué significa una mala nota en SecurityHeaders.com?', 'Significa que faltan algunos headers de seguridad esperados por navegadores modernos. No significa automáticamente que el sitio esté comprometido.'],
@@ -497,6 +508,37 @@ const breadcrumbJsonLd = {
             El punto de entrada natural es el Diagnóstico (1 UF, descontable). La mayoría de sitios simples escala a Hardening Básico. Cuando el sitio sostiene leads, reputación o ventas, la Revisión Integral cierra mejor por una diferencia de 2 UF sobre el plan operativo — y entrega el reporte ejecutivo y la hoja de ruta que abren el camino al soporte mensual.
           </p>
         </div>
+        <div class="pricing-compare-wrapper">
+          <div class="pricing-compare">
+            <table class="pricing-compare__table">
+              <thead>
+                <tr>
+                  <th class="pricing-compare__feature-col"></th>
+                  {plans.map((plan) => (
+                    <th class={plan.recommended ? 'pricing-compare__plan pricing-compare__plan--recommended' : 'pricing-compare__plan'}>
+                      <span class="pricing-compare__plan-price">{plan.priceLabel}</span>
+                      <span class="pricing-compare__plan-name">{plan.name}</span>
+                      {plan.recommended && <span class="pricing-compare__recommended-badge">Recomendado</span>}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {tableFeatures.map(([feature, ...checks]) => (
+                  <tr>
+                    <td class="pricing-compare__feature">{feature}</td>
+                    {checks.map((has) => (
+                      <td class={has ? 'pricing-compare__check pricing-compare__check--yes' : 'pricing-compare__check pricing-compare__check--no'}>
+                        {has ? '✓' : '—'}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div class="plans-grid">
           {plans.map((plan, index) => (
             <article class={`card-glass plan-card ${plan.recommended ? 'plan-card--accent' : ''} reveal reveal-delay-${(index % 2) + 1}`}>
@@ -518,7 +560,7 @@ const breadcrumbJsonLd = {
       </div>
     </section>
 
-    <section class="section section--alt" id="comparacion">
+    <section class="section" id="comparacion">
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Por qué Tooltician</span>
@@ -548,24 +590,10 @@ const breadcrumbJsonLd = {
             </ul>
           </article>
         </div>
-        <div class="tools-note reveal">
-          <p class="tools-note__label">La diferencia real</p>
-          <p>
-            Tooltician ya construye automatizaciones, APIs, ETL y sitios productivos con documentación handoff-ready. Esta línea aplica la misma lógica a la operación técnica cotidiana de sitios publicados: criterio, evidencia y continuidad, no solo ejecución de encargos.
-          </p>
-        </div>
-      </div>
-    </section>
 
-    <section class="section" id="casos">
-      <div class="container section-stack">
-        <div class="section-header">
-          <span class="section-eyebrow reveal">Casos de uso</span>
-          <h2 class="section-title reveal">Dónde esta línea comercial encaja mejor</h2>
-          <div class="divider reveal"></div>
-          <p class="section-subtitle reveal">
-            La oferta está pensada para sitios en producción que importan comercialmente, pero quedaron sin owner técnico después del lanzamiento inicial.
-          </p>
+        <div class="section-subheader reveal">
+          <h3 class="section-subheader__title">Dónde encaja mejor</h3>
+          <p class="section-subtitle">Sitios en producción que importan comercialmente pero quedaron sin owner técnico después del lanzamiento.</p>
         </div>
         <div class="service-review-grid service-review-grid--cases">
           {useCases.map(([title, body], index) => (
@@ -595,6 +623,13 @@ const breadcrumbJsonLd = {
             <a class="badge badge-accent" href="https://elrincondeebano.com" target="_blank" rel="noopener noreferrer">El Rincón de Ébano</a>
             <a class="badge badge-neutral" href="/es/#portfolio">Portafolio</a>
           </div>
+        </div>
+
+        <div class="tools-note reveal">
+          <p class="tools-note__label">La diferencia real</p>
+          <p>
+            Tooltician ya construye automatizaciones, APIs, ETL y sitios productivos con documentación handoff-ready. Esta línea aplica la misma lógica a la operación técnica cotidiana de sitios publicados: criterio, evidencia y continuidad, no solo ejecución de encargos.
+          </p>
         </div>
       </div>
     </section>
@@ -869,10 +904,14 @@ const breadcrumbJsonLd = {
 }
 
 .process-item__num {
-  font-family: var(--ff-label);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-family: var(--ff-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   color: var(--clr-accent);
+  opacity: 0.35;
+  line-height: 1;
+  padding-top: 0.1rem;
 }
 
 .process-item h3 {
@@ -901,8 +940,12 @@ const breadcrumbJsonLd = {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.plans-grid,
+.plans-grid {
+  display: none;
+}
+
 .faq-list {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -918,7 +961,9 @@ const breadcrumbJsonLd = {
 }
 
 .plan-card__flag {
-  justify-self: start;
+  position: absolute;
+  top: var(--sp-6);
+  right: var(--sp-6);
   padding: 0.25rem 0.55rem;
   border: 1px solid rgba(196, 160, 74, 0.26);
   border-radius: var(--radius-sm);
@@ -962,6 +1007,19 @@ const breadcrumbJsonLd = {
   gap: 0.85rem;
 }
 
+.section-subheader {
+  display: grid;
+  gap: 0.4rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--clr-border);
+}
+
+.section-subheader__title {
+  font-family: var(--ff-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
 .diff-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -983,6 +1041,99 @@ const breadcrumbJsonLd = {
 
 .diff-grid__label--accent {
   color: var(--clr-accent);
+}
+
+.pricing-compare-wrapper {
+  display: block;
+  overflow-x: auto;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+}
+
+.pricing-compare__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.pricing-compare__feature-col {
+  width: 28%;
+}
+
+.pricing-compare__plan {
+  text-align: center;
+  padding: var(--sp-4) var(--sp-3);
+  border-bottom: 1px solid var(--clr-border);
+  border-left: 1px solid var(--clr-border);
+  vertical-align: top;
+}
+
+.pricing-compare__plan--recommended {
+  background: rgba(196, 160, 74, 0.05);
+  border-top: 2px solid var(--clr-accent);
+}
+
+.pricing-compare__plan-price {
+  display: block;
+  font-family: var(--ff-label);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  margin-bottom: 0.3rem;
+}
+
+.pricing-compare__plan-name {
+  display: block;
+  font-family: var(--ff-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  line-height: 1.35;
+}
+
+.pricing-compare__recommended-badge {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid rgba(196, 160, 74, 0.26);
+  border-radius: var(--radius-sm);
+  background: rgba(196, 160, 74, 0.08);
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.6rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.pricing-compare__feature {
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px solid var(--clr-border);
+  color: var(--clr-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.pricing-compare__check {
+  text-align: center;
+  padding: var(--sp-3);
+  border-top: 1px solid var(--clr-border);
+  border-left: 1px solid var(--clr-border);
+  font-size: 0.88rem;
+}
+
+.pricing-compare__check--yes {
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+
+.pricing-compare__check--no {
+  color: var(--clr-text-faint);
+}
+
+.pricing-compare__plan--recommended ~ .pricing-compare__check,
+td.pricing-compare__check:nth-child(5) {
+  background: rgba(196, 160, 74, 0.03);
 }
 
 .pricing-footnote {
@@ -1275,11 +1426,30 @@ const breadcrumbJsonLd = {
   .service-hero__grid,
   .service-review-grid,
   .service-review-grid--cases,
-  .plans-grid,
   .faq-list,
   .intent-grid,
   .diff-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pricing-compare-wrapper {
+    display: none;
+  }
+
+  .plans-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--sp-4);
+    padding-bottom: var(--sp-3);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .plans-grid .plan-card {
+    flex: 0 0 85vw;
+    max-width: 340px;
+    scroll-snap-align: start;
   }
 
   .sample-report__row {

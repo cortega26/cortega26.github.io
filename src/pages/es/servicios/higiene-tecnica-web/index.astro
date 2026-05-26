@@ -151,6 +151,9 @@ const faqs = [
   ['¿Necesitas acceso al sitio?', 'Para diagnóstico externo, no necesariamente. Para corregir, sí se requiere acceso controlado al hosting, CMS, repositorio, DNS o proveedor correspondiente.'],
   ['¿Qué pasa si detectas algo grave?', 'Lo informo con prioridad, propongo un curso de acción y, si excede el alcance, recomiendo derivar a un especialista o a una auditoría más profunda.'],
   ['¿Por qué los precios están en UF?', 'Porque esta versión está orientada primero al mercado chileno y la UF mantiene mejor el valor de referencia. Para clientes fuera de Chile, la propuesta se cotiza en USD o moneda acordada.'],
+  ['¿Qué pasa si el diagnóstico no encuentra nada relevante?', 'Puede ocurrir, especialmente en sitios bien mantenidos. En ese caso el reporte lo confirma con evidencia: saber que lo básico está bien también tiene valor, especialmente antes de cambiar hosting, proveedor o lanzar una campaña. El valor del diagnóstico aplica igual.'],
+  ['¿El alcance puede crecer durante la revisión?', 'No. El alcance está definido por el plan contratado. Si durante la revisión aparece algo que excede ese alcance, queda documentado en el reporte con una recomendación de siguiente paso, pero no se ejecuta sin acuerdo previo.'],
+  ['¿El precio es negociable?', 'Los valores están fijados en UF para mantener una referencia estable. Para agencias con varios sitios o proyectos de mayor volumen, es posible acordar condiciones distintas en la propuesta — escríbeme con el contexto y lo vemos.'],
 ];
 
 const jsonLd = {
@@ -229,7 +232,7 @@ const breadcrumbJsonLd = {
             Higiene Técnica Web y Confianza Digital es una extensión natural de Tooltician: sistemas productivos, superficies web sobrias y criterio técnico externo para que lo publicado no quede a la deriva.
           </p>
           <div class="service-hero__actions reveal reveal-delay-2">
-            <a class="btn btn-primary" href="#brief">Solicitar diagnóstico técnico</a>
+            <a class="btn btn-primary" href="#brief">Revisar mi sitio — desde 1 UF</a>
             <a class="btn btn-ghost" href="#alcance">Ver qué incluye</a>
           </div>
           <p class="service-hero__microcopy reveal reveal-delay-2">
@@ -257,6 +260,10 @@ const breadcrumbJsonLd = {
             <p class="service-summary__eyebrow">Entrada</p>
             <p class="service-summary__price">1 UF</p>
             <p class="service-summary__muted">aprox. CLP $41.000 por diagnóstico inicial para Chile.</p>
+          </div>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">Disponibilidad</p>
+            <p class="service-summary__muted">Acepto 2–3 diagnósticos nuevos por mes. Respuesta en 24–48 horas hábiles.</p>
           </div>
         </aside>
       </div>
@@ -310,6 +317,13 @@ const breadcrumbJsonLd = {
           <p class="tools-note__label">Herramientas como evidencia, no como diagnóstico completo</p>
           <p>
             Uso SecurityHeaders.com, Mozilla Observatory, Search Console, revisión DNS, pruebas de formularios y señales del hosting como puntos de partida. La lectura final considera contexto, acceso disponible, criticidad del sitio y costo razonable de corrección.
+          </p>
+        </div>
+
+        <div class="tools-note reveal">
+          <p class="tools-note__label">¿Quieres una primera señal ahora?</p>
+          <p>
+            Ingresa tu dominio en <a href="https://securityheaders.com" target="_blank" rel="noopener noreferrer">SecurityHeaders.com</a> y en <a href="https://observatory.mozilla.org" target="_blank" rel="noopener noreferrer">Mozilla Observatory</a>. Una nota de C o menos generalmente indica configuraciones básicas pendientes. El diagnóstico técnico toma esos datos como punto de partida, los contextualiza con el resto del sitio y separa lo urgente del ruido automático.
           </p>
         </div>
 
@@ -546,13 +560,23 @@ const breadcrumbJsonLd = {
           ))}
         </div>
 
+        <article class="card-glass reveal own-credential">
+          <p class="evidence-links__eyebrow">Prueba técnica propia</p>
+          <p class="body-copy">
+            Tooltician aplica estas mismas prácticas en su propio sitio: HTTPS canónico, autenticación de correo configurada (SPF, DKIM, DMARC), headers de seguridad activos y sin dependencias externas no controladas. El código es público y auditable.
+          </p>
+          <div class="evidence-links__items">
+            <a class="badge badge-accent" href="https://securityheaders.com/?q=tooltician.com&followRedirects=on" target="_blank" rel="noopener noreferrer">Verificar en SecurityHeaders.com</a>
+            <a class="badge badge-neutral" href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">Código público</a>
+          </div>
+        </article>
+
         <div class="card-glass evidence-links reveal">
-          <p class="evidence-links__eyebrow">Pruebas y señales relacionadas</p>
+          <p class="evidence-links__eyebrow">Proyectos relacionados</p>
           <div class="evidence-links__items">
             <a class="badge badge-accent" href="https://github.com/cortega26/DNSpect" target="_blank" rel="noopener noreferrer">DNSpect</a>
             <a class="badge badge-accent" href="https://monedario.cl" target="_blank" rel="noopener noreferrer">Monedario</a>
             <a class="badge badge-accent" href="https://elrincondeebano.com" target="_blank" rel="noopener noreferrer">El Rincón de Ébano</a>
-            <a class="badge badge-accent" href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">Código del sitio</a>
             <a class="badge badge-neutral" href="/es/#portfolio">Portafolio</a>
           </div>
         </div>
@@ -594,7 +618,7 @@ const breadcrumbJsonLd = {
               Revisión externa inicial con reporte de prioridades y siguiente paso claro. El costo se descuenta si luego contratas la implementación. Punto de entrada sin compromiso.
             </p>
             <div class="landing-cta-group">
-              <a class="btn btn-primary" href="/es/#contact-form">Solicitar diagnóstico</a>
+              <a class="btn btn-primary" href="mailto:carlos@tooltician.com?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20Web%20%E2%80%94%20Solicitud&body=Dominio%3A%0A%0A%C2%BFHay%20algo%20espec%C3%ADfico%20que%20quieres%20revisar%3F%0A">Solicitar diagnóstico</a>
               <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">Agendar revisión</a>
             </div>
           </article>
@@ -611,15 +635,15 @@ const breadcrumbJsonLd = {
         </div>
 
         <div class="intent-grid">
-          <a class="intent-link reveal" href="/es/#contact-form">
+          <a class="intent-link reveal" href="mailto:carlos@tooltician.com?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20Web&body=Dominio%3A%0A%0A%C2%BFHay%20algo%20espec%C3%ADfico%20que%20quieres%20revisar%3F%0A">
             <span>Quiero revisar un sitio publicado</span>
             <strong>Diagnóstico inicial desde 1 UF para Chile, con reporte breve y prioridades claras.</strong>
           </a>
-          <a class="intent-link reveal reveal-delay-1" href="/es/#contact-form">
+          <a class="intent-link reveal reveal-delay-1" href="mailto:carlos@tooltician.com?subject=Soporte%20Externo%20para%20Agencia&body=Agencia%20%2F%20sitios%20a%20mantener%3A%0A%0AContexto%3A%0A">
             <span>Tengo una agencia y necesito soporte externo</span>
             <strong>Revisión técnica recurrente sin cargar al equipo de diseño o desarrollo con tareas de bajo margen.</strong>
           </a>
-          <a class="intent-link reveal reveal-delay-2" href="/es/#contact-form">
+          <a class="intent-link reveal reveal-delay-2" href="mailto:carlos@tooltician.com?subject=Soporte%20T%C3%A9cnico%20Web%20Mensual&body=Dominio%3A%0AContexto%20de%20la%20revisi%C3%B3n%20inicial%3A%0A">
             <span>Quiero soporte mensual</span>
             <strong>Monitoreo liviano, pequeñas correcciones y documentación operativa sin contratación interna.</strong>
           </a>
@@ -887,7 +911,8 @@ const breadcrumbJsonLd = {
   color: var(--clr-text-faint);
 }
 
-.evidence-links {
+.evidence-links,
+.own-credential {
   display: grid;
   gap: 0.85rem;
 }

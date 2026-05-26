@@ -1,7 +1,7 @@
 # Scorecard: Higiene Técnica Web — Service Page
 
-Last updated: `2026-05-26` · After: `Session 0 — Baseline & Pricing`
-Next session: `Session B — Conversión y Captación`
+Last updated: `2026-05-26` · After: `Session B — Conversión y Captación`
+Next session: `Session D — Propuesta Comercial y Coherencia`
 Source of truth for session targets: `docs/tasks/higiene-tecnica-web-backlog.md`
 
 ---
@@ -26,9 +26,9 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 4 | Visual proof & credibility | `2` | `4` | `5` | — | `2026-05-26` |
 | 5 | ES home integration | `2` | `4` | `5` | — | `2026-05-26` |
 | 6 | EN integration | `0` | `2` | `4` | D (HTW-D05) | `2026-05-26` |
-| 7 | Conversion path quality | `2` | `3` | `5` | B (HTW-B03) | `2026-05-26` |
-| 8 | Social proof | `0` | `0` | `4` | B (HTW-B04) | — |
-| 9 | Urgency & availability signals | `0` | `0` | `3` | B (HTW-B01) | — |
+| 7 | Conversion path quality | `2` | `4` | `5` | — | `2026-05-26` |
+| 8 | Social proof | `0` | `3` | `4` | — | `2026-05-26` |
+| 9 | Urgency & availability signals | `0` | `3` | `3` | — | `2026-05-26` |
 | 10 | UX/UI — section rhythm & length | `2` | `2` | `4` | A (HTW-A01) | — |
 | 11 | UX/UI — mobile experience | `2` | `2` | `4` | A (HTW-A03) | — |
 | 12 | SEO — keyword alignment | `3` | `3` | `4` | C (HTW-C01) | — |
@@ -38,7 +38,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 16 | Buyer risk mitigation | `1` | `1` | `4` | D (HTW-D04) | — |
 | 17 | Brand voice coherence | `3` | `4` | `5` | — | `2026-05-26` |
 
-**Composite score (mean):** `2.0 → 2.9` after Session 0. Target: `4.4`
+**Composite score (mean):** `2.0 → 2.9 → 3.3` after Session B. Target: `4.4`
 
 ---
 
@@ -47,7 +47,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | Session | Dimensions addressed | Mean before | Mean after | Delta |
 |---|---|---:|---:|---:|
 | 0 — Baseline & Pricing | 1, 2, 3, 4, 5, 6, 7, 17 | `2.0` | `2.9` | `+0.9` |
-| B — Conversión | 7, 8, 9 | — | — | — |
+| B — Conversión | 7, 8, 9 | `2.9` | `3.3` | `+0.4` |
 | D — Comercial | 6, 15, 16, 17 | — | — | — |
 | A — UX/UI | 10, 11 | — | — | — |
 | C — SEO | 12, 13, 14 | — | — | — |
@@ -78,12 +78,13 @@ Update each dimension here with a one-line note when its score changes.
 
 ### 7 · Conversion path quality
 - `2026-05-26 · Session 0`: 2 → 3. Mailto CTA prefilled with subject + body template. Brief section H3 now shows price and value. Still going to generic portfolio form — blocked on HTW-B03.
+- `2026-05-26 · Session B`: 3 → 4. Primary CTA in #brief and all 3 intent-links now point to service-specific prefilled mailtos (subject + body tailored per intent). Generic form remains as secondary option in "Brief directo" card.
 
 ### 8 · Social proof
-- No changes. Pending Session B / HTW-B04.
+- `2026-05-26 · Session B`: 0 → 3. "Prueba técnica propia" card added to #casos: Tooltician's own site as verifiable reference (HTTPS, SPF/DKIM/DMARC, security headers, public code). Links to SecurityHeaders.com lookup and public GitHub repo.
 
 ### 9 · Urgency & availability signals
-- No changes. Pending Session B / HTW-B01.
+- `2026-05-26 · Session B`: 0 → 3. Availability signal added to hero sidebar: "Acepto 2–3 diagnósticos nuevos por mes. Respuesta en 24–48 horas hábiles."
 
 ### 10 · UX/UI — section rhythm & length
 - No changes. Pending Session A / HTW-A01.

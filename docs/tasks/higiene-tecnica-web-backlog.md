@@ -1,7 +1,7 @@
 # Program Backlog: Higiene Técnica Web — Service Page Audit & Funnel Improvement
 
 Version: `2026-05-26`
-Status: `Active — Session 0 complete`
+Status: `Active — Session B complete`
 Scope: `/es/servicios/higiene-tecnica-web/` landing page + integration points across `tooltician.com`
 Primary goal: maximize conversion funnel from awareness through contact, across all dimensions of the service page and its integration with the main portfolio.
 
@@ -274,13 +274,13 @@ Exit gate:
 | `HTW-011` | 0 | Pricing | Connect tier 4 monitoring map to tier 5 | `P2` | `S` | `Done` |
 | `HTW-012` | 0 | Pricing | Update pricing subtitle with journey narrative | `P2` | `S` | `Done` |
 | `HTW-013` | 0 | Proof | Add executive report mock with C→A scores | `P1` | `M` | `Done` |
-| `HTW-B01` | B | Conversion | Add availability / capacity signal | `P1` | `S` | `Pending` |
-| `HTW-B02` | B | Conversion | Rewrite hero CTA to intent-specific | `P2` | `S` | `Pending` |
-| `HTW-B03` | B | Conversion | Create service-specific contact path | `P1` | `M` | `Pending` |
-| `HTW-B04` | B | Proof | Add social proof signal | `P1` | `L` | `Pending` |
-| `HTW-B05` | B | Conversion | Audit above-the-fold for cold prospect | `P2` | `S` | `Pending` |
-| `HTW-B06` | B | Content | Audit FAQ for missing objections | `P2` | `M` | `Pending` |
-| `HTW-B07` | B | Conversion | Add self-diagnosis hook (SecurityHeaders.com) | `P3` | `S` | `Pending` |
+| `HTW-B01` | B | Conversion | Add availability / capacity signal | `P1` | `S` | `Done` |
+| `HTW-B02` | B | Conversion | Rewrite hero CTA to intent-specific | `P2` | `S` | `Done` |
+| `HTW-B03` | B | Conversion | Create service-specific contact path | `P1` | `M` | `Done` |
+| `HTW-B04` | B | Proof | Add social proof signal | `P1` | `L` | `Done` |
+| `HTW-B05` | B | Conversion | Audit above-the-fold for cold prospect | `P2` | `S` | `Done` |
+| `HTW-B06` | B | Content | Audit FAQ for missing objections | `P2` | `M` | `Done` |
+| `HTW-B07` | B | Conversion | Add self-diagnosis hook (SecurityHeaders.com) | `P3` | `S` | `Done` |
 | `HTW-D01` | D | Commercial | Explicit freelancer differentiation | `P1` | `M` | `Pending` |
 | `HTW-D02` | D | Commercial | Use Tooltician credentials as live proof | `P2` | `S` | `Pending` |
 | `HTW-D03` | D | Commercial | Elevate "sin alarmismo" to value prop | `P2` | `S` | `Pending` |
@@ -310,7 +310,7 @@ Exit gate:
 | Date | Session | Tasks completed | Build | Blockers | Next action |
 |---|---|---|---|---|---|
 | `2026-05-26` | `0 — Baseline & Pricing` | `HTW-001 through HTW-013` | `Pass` | `None` | `Start Session B — Conversión y Captación` |
-| `YYYY-MM-DD` | `B — Conversión` | `HTW-B0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
+| `2026-05-26` | `B — Conversión` | `HTW-B01, HTW-B02, HTW-B03, HTW-B04, HTW-B05, HTW-B06, HTW-B07` | `Pass` | `None` | `Start Session D — Propuesta Comercial` |
 | `YYYY-MM-DD` | `D — Comercial` | `HTW-D0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
 | `YYYY-MM-DD` | `A — UX/UI` | `HTW-A0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
 | `YYYY-MM-DD` | `C — SEO` | `HTW-C0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |

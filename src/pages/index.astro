@@ -29,39 +29,7 @@
   <meta name="theme-color" content="#0b1121" />
   <link rel="preload" href="/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin />
-  <script>
-    (() => {
-      const preferenceKey = 'tooltician-language';
-      const firstVisitKey = 'tooltician-language-autoredirect';
-      const normalizeLanguage = (value: string | null) => {
-        if (typeof value !== 'string') return null;
-
-        const lower = value.toLowerCase();
-        if (lower.startsWith('es')) return 'es';
-        if (lower.startsWith('en')) return 'en';
-        return null;
-      };
-
-      try {
-        const storedPreference = normalizeLanguage(window.localStorage.getItem(preferenceKey));
-        const autoRedirected = window.localStorage.getItem(firstVisitKey) === '1';
-        const browserPreference = [...(navigator.languages ?? []), navigator.language ?? '']
-          .map(normalizeLanguage)
-          .find(Boolean) ?? 'en';
-        const target = storedPreference ?? (autoRedirected ? null : browserPreference);
-
-        if (!storedPreference && !autoRedirected) {
-          window.localStorage.setItem(firstVisitKey, '1');
-        }
-
-        if (target) {
-          window.location.replace(`/${target}/`);
-        }
-      } catch {
-        // Fall back to showing the language gateway.
-      }
-    })();
-  </script>
+  <script is:inline src="/assets/js/root-language-redirect.js"></script>
   <style>
     :root {
       color-scheme: dark;
@@ -300,25 +268,6 @@
       <span class="gateway-panel__cursor"></span>
     </div>
   </div>
-  <script>
-    (() => {
-      const preferenceKey = 'tooltician-language';
-      const firstVisitKey = 'tooltician-language-autoredirect';
-
-      document.querySelectorAll('[data-language-preference]').forEach(link => {
-        link.addEventListener('click', () => {
-          const preference = link.getAttribute('data-language-preference');
-          if (!preference) return;
-
-          try {
-            window.localStorage.setItem(preferenceKey, preference);
-            window.localStorage.setItem(firstVisitKey, '1');
-          } catch {
-            // Ignore storage failures and keep normal navigation.
-          }
-        });
-      });
-    })();
-  </script>
+  <script is:inline src="/assets/js/root-language-picker.js" defer></script>
 </body>
 </html>

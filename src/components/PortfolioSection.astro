@@ -613,37 +613,4 @@ const c = {
 }
 </style>
 
-<script>
-const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-const cards = document.querySelectorAll<HTMLElement>('.project-card');
-
-function setFilter(filter: string) {
-  btns.forEach((btn) => {
-    const active = btn.dataset.filter === filter;
-    btn.classList.toggle('active', active);
-    btn.setAttribute('aria-pressed', String(active));
-  });
-
-  cards.forEach((card) => {
-    const categories = (card.dataset.categories ?? '').split(' ').filter(Boolean);
-    const match = filter === 'all' || categories.includes(filter);
-    card.hidden = !match;
-    card.setAttribute('aria-hidden', String(!match));
-    if (match) card.classList.add('visible');
-  });
-
-  const focused = document.activeElement as HTMLElement | null;
-  if (focused && 'hidden' in focused && (focused as HTMLElement).hidden) {
-    const firstLink = document.querySelector<HTMLAnchorElement>(
-      '.project-card:not([hidden]) .project-link'
-    );
-    if (firstLink) firstLink.focus();
-  }
-}
-
-btns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    setFilter(btn.dataset.filter ?? 'all');
-  });
-});
-</script>
+<script is:inline src="/assets/js/portfolio-filters.js" defer></script>

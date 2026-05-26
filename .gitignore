@@ -23,6 +23,7 @@ Thumbs.db
 # Editor
 .vscode/*
 !.vscode/extensions.json
+!.vscode/mcp.json
 
 
 #Ignore vscode AI rules
@@ -32,3 +33,5 @@ Thumbs.db
 .playwright-cli/
 output/
 
+# Local AI indexing
+.codegraph/

@@ -78,6 +78,9 @@ const es = {
   scheduleAria: "Agendar una llamada inicial en Calendly",
   linkedinLabel: "Perfil de LinkedIn",
   linkedinCta: "Ver LinkedIn",
+  serviceLead: "Si tu problema no es un flujo interno nuevo sino un sitio ya publicado que necesita revisión técnica periódica, parte por",
+  serviceCta: "Diagnóstico Técnico Web",
+  serviceHref: "/es/servicios/higiene-tecnica-web/",
   formTitle: "Formulario de brief",
   formIntro: "Si el alcance ya está claro por escrito, déjalo aquí y te respondo por correo con encaje, preguntas siguientes o un no directo si queda fuera de alcance.",
   policyLead:
@@ -190,6 +193,12 @@ const c = lang === "en" ? en : es;
             rel="noopener noreferrer">{c.linkedinCta}</a
           >
         </p>
+        {c.serviceLead && (
+          <p class="contact-service-link">
+            <span>{c.serviceLead}</span>
+            <a href={c.serviceHref}>{c.serviceCta}</a>.
+          </p>
+        )}
       </div>
 
       <form
@@ -392,6 +401,28 @@ const c = lang === "en" ? en : es;
 
   .contact-inline-link a:hover {
     color: var(--clr-accent-hover);
+  }
+
+  .contact-service-link {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--clr-border);
+    color: var(--clr-text-muted);
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  .contact-service-link a {
+    color: var(--clr-accent);
+    font-family: var(--ff-label);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-left: 0.2rem;
+  }
+
+  .contact-service-link a:hover {
+    color: var(--clr-text);
   }
 
   .contact-form {

@@ -49,6 +49,20 @@ Single `src/styles/global.css` with CSS custom properties for the dark theme des
 ## Testing
 Playwright scripts in `./test-*.mjs` are ad-hoc browser smoke tests run directly with `node`. Start a preview server first (`npm run preview` or `npx serve dist`), then run the test script. The tests check filter functionality, page load errors, and card reveal behavior.
 
+## CodeGraph
+
+When `.codegraph/` exists in this repository, prefer the CodeGraph MCP server for structural exploration before broad text search.
+
+Use CodeGraph first to:
+- find symbols and relevant files
+- inspect callers, callees, and impact radius
+- confirm index freshness or missing coverage with status/files views
+
+Fall back to manual reads and `rg` when:
+- the graph does not contain the needed detail yet
+- the task depends on exact copy, HTML, CSS, or generated output
+- you need line-level confirmation after narrowing the target with CodeGraph
+
 ## Deployment
 Published from `master` branch root via GitHub Pages. Custom domain: `tooltician.com`. The static HTML in `en/index.html`, `es/index.html`, and root `index.html` are legacy fallback pages — the Astro build output in `dist/` is what gets published. Check `dist/` structure after build if routing issues appear.
 

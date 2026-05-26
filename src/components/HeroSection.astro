@@ -48,6 +48,9 @@ const es = {
   title: 'Sistemas de automatización para reportes, ETL y flujos internos — construidos para sobrevivir al traspaso.',
   summary: 'Ayudo a equipos operativos a reemplazar hojas de cálculo pegadas con cinta, reportes frágiles y ciclos manuales de revisión por sistemas Python más fáciles de operar, auditar y traspasar.',
   support: 'Mejor encaje: pipelines de reportes, limpieza ETL, scraping, herramientas internas y trabajo de estabilización donde el flujo ya importa. Parte por la evidencia y luego abre un brief corto.',
+  serviceLine: 'También cubro mantención técnica web para sitios ya publicados: headers, HTTPS, DNS, formularios y monitoreo liviano sin necesidad de sumar un perfil interno.',
+  serviceHref: '/es/servicios/higiene-tecnica-web/',
+  serviceCta: 'Ver higiene técnica web',
   routeTitle: 'Navegación rápida',
   routes: [
     { label: 'Evidencia pública', description: 'Señales antes que promesas: paquetes, CI, stores y sistemas activos.', href: '#proof', },
@@ -94,6 +97,12 @@ const c = lang === 'en' ? en : es;
         <h1 class="hero__title reveal reveal-delay-1">{c.title}</h1>
         <p class="hero__summary reveal reveal-delay-2">{c.summary}</p>
         <p class="hero__support reveal reveal-delay-2">{c.support}</p>
+        {c.serviceLine && (
+          <p class="hero__service-note reveal reveal-delay-2">
+            <span>{c.serviceLine}</span>
+            <a href={c.serviceHref}>{c.serviceCta}</a>
+          </p>
+        )}
         <div class="hero__actions reveal reveal-delay-2">
           <a class="btn btn-primary" href={c.ctaPrimaryHref}>{c.ctaPrimary}</a>
           <a class="btn btn-ghost" href={c.ctaSecondaryHref}>{c.ctaSecondary}</a>
@@ -206,6 +215,34 @@ const c = lang === 'en' ? en : es;
   line-height: 1.65;
   margin-bottom: 1.75rem;
   max-width: 52ch;
+}
+
+.hero__service-note {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.8rem;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  max-width: 56ch;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid rgba(196, 160, 74, 0.18);
+  border-radius: var(--radius-sm);
+  background: rgba(196, 160, 74, 0.05);
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--clr-text-muted);
+}
+
+.hero__service-note a {
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero__service-note a:hover {
+  color: var(--clr-text);
 }
 
 .hero__actions {

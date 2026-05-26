@@ -1,0 +1,627 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Navbar from '../../../../components/Navbar.astro';
+import Footer from '../../../../components/Footer.astro';
+import '../../../../styles/global.css';
+
+const canonical = 'https://tooltician.com/es/servicios/higiene-tecnica-web/';
+const alternates = [
+  { hreflang: 'es', href: canonical },
+  { hreflang: 'x-default', href: canonical },
+];
+
+const navItems = [
+  { href: '#problema', label: 'Problema' },
+  { href: '#alcance', label: 'Qué reviso' },
+  { href: '#planes', label: 'Planes' },
+  { href: '#comparacion', label: 'Comparación' },
+  { href: '#faq', label: 'FAQ' },
+  { href: '#brief', label: 'Brief' },
+];
+
+const reviewItems = [
+  ['Headers de seguridad', 'Ayudan a que el navegador aplique restricciones razonables frente a cargas externas, iframes, permisos y exposición innecesaria de información.'],
+  ['HTTPS y redirecciones', 'Evita rutas duplicadas, inconsistencias entre dominios y señales técnicas que erosionan confianza o complican indexación.'],
+  ['HSTS cuando corresponde', 'Refuerza el uso consistente de HTTPS cuando la configuración y el contexto del sitio lo permiten sin introducir fricción operativa.'],
+  ['DNS básico', 'Reviso delegación, registros críticos y puntos donde un error pequeño puede dejar correo o sitio en una zona gris.'],
+  ['SPF, DKIM y DMARC básico', 'No sustituyen una estrategia completa de correo, pero ayudan a reducir desorden técnico y señales evitables de mala configuración.'],
+  ['Formularios críticos', 'Un sitio puede verse perfecto y estar perdiendo oportunidades si el formulario de contacto falla en silencio o entrega tarde.'],
+  ['Search Console, sitemap y robots.txt', 'Sirven para detectar errores de indexación, cobertura y señalización técnica que nadie suele mirar después del lanzamiento.'],
+  ['Errores 404 relevantes', 'Corrijo o priorizo enlaces rotos y rutas visibles que afectan experiencia, confianza y captura de demanda existente.'],
+  ['Plugins y mantenimiento en WordPress', 'Si el sitio corre en WordPress, reviso dependencias visibles, puntos básicos de actualización y señales de abandono técnico.'],
+  ['Exposición de headers y rendimiento básico', 'Identifico respuestas del servidor que añaden ruido, exponen más de la cuenta o vuelven el sitio menos predecible.'],
+  ['Backups y puntos de recuperación', 'Verifico si existe una base mínima de reversibilidad antes de tocar algo importante o delegar soporte a terceros.'],
+  ['Documentación operativa mínima', 'El objetivo no es solo corregir, sino dejar claro qué se hizo, qué queda pendiente y dónde mirar la próxima vez.'],
+];
+
+const deliverables = [
+  'Diagnóstico inicial con hallazgos visibles y priorización.',
+  'Correcciones aplicadas cuando entran en alcance y acceso disponible.',
+  'Evidencia antes/después con capturas y notas verificables.',
+  'Reporte ejecutivo entendible para perfiles no técnicos.',
+  'Notas técnicas y checklist operativo para el siguiente ciclo.',
+  'Recomendaciones futuras cuando algo excede el alcance razonable.',
+];
+
+const plans = [
+  {
+    name: 'Diagnóstico Técnico Web',
+    priceLabel: 'CLP $49.000',
+    priceValue: '49000',
+    note: 'Descontable si luego se contrata implementación.',
+    intro: 'Ideal si quieres saber si el sitio está técnicamente descuidado antes de pagar por correcciones.',
+    items: [
+      'Revisión inicial con SecurityHeaders.com y Mozilla Observatory.',
+      'Chequeo de HTTPS, redirecciones, DNS básico y email auth básico.',
+      'Revisión rápida de sitemap, robots.txt y señales visibles.',
+      'Mini reporte con prioridades y siguiente paso recomendado.',
+    ],
+  },
+  {
+    name: 'Hardening Web Básico',
+    priceLabel: 'Desde CLP $290.000',
+    priceValue: '290000',
+    note: 'Pensado para sitios simples o corporativos.',
+    intro: 'Para sitios que necesitan corregir lo evidente y dejar evidencia verificable de mejora.',
+    items: [
+      'Corrección de headers básicos y política de navegador razonable.',
+      'HTTPS canónico, redirecciones limpias y HSTS cuando corresponde.',
+      'Revisión de exposición de headers innecesarios.',
+      'Reporte antes/después con recomendaciones siguientes.',
+    ],
+  },
+  {
+    name: 'Web Trust Pack',
+    priceLabel: 'Desde CLP $590.000',
+    priceValue: '590000',
+    note: 'Para sitios que influyen en leads, reputación o ventas.',
+    intro: 'Para empresas donde el sitio genera confianza y no debería quedar abandonado después de publicado.',
+    items: [
+      'Incluye todo lo anterior.',
+      'Revisión técnica SEO básica y Search Console.',
+      'Formularios, errores visibles, DNS/email y backups.',
+      'Checklist operativo y reporte ejecutivo para continuidad.',
+    ],
+  },
+  {
+    name: 'Soporte Técnico Web Mensual',
+    priceLabel: 'Desde CLP $150.000/mes',
+    priceValue: '150000',
+    note: 'Modelo recurrente sin contratación interna.',
+    intro: 'Para empresas que quieren revisión periódica, pequeñas correcciones y alguien mirando lo básico con regularidad.',
+    items: [
+      'Revisión mensual y reporte breve.',
+      'Monitoreo liviano y alertas razonables.',
+      'Pequeñas correcciones dentro de un bloque de horas.',
+      'Escalado gradual a planes Básico, Profesional u Operativo según carga.',
+    ],
+  },
+];
+
+const useCases = [
+  ['Sitio WordPress de pyme', 'El sitio funciona, pero nadie revisa plugins, formularios, headers, backups ni Search Console con periodicidad.'],
+  ['Agencia web', 'La agencia diseña y publica sitios, pero no quiere cargar a su equipo con mantenimiento técnico recurrente de bajo margen.'],
+  ['Empresa B2B', 'El sitio recibe leads. Si el formulario falla o la señal técnica se degrada, la pérdida llega antes de que alguien la note.'],
+  ['Profesional o consultora', 'La presencia web es parte de la reputación y un descuido técnico visible reduce confianza sin necesidad de un incidente mayor.'],
+  ['E-commerce pequeño', 'Necesita revisar HTTPS, formularios, errores, DNS/email y señales técnicas básicas sin sumar una contratación completa.'],
+];
+
+const faqs = [
+  ['¿Esto es ciberseguridad?', 'Es una capa de higiene técnica y hardening web básico. No reemplaza pentesting, compliance ni una auditoría profunda.'],
+  ['¿Qué significa una mala nota en SecurityHeaders.com?', 'Significa que faltan algunos headers de seguridad esperados por navegadores modernos. No significa automáticamente que el sitio esté comprometido.'],
+  ['¿Puedes garantizar que el sitio será seguro?', 'No. Nadie serio debería prometer seguridad total. Sí puedo corregir configuraciones visibles, documentar mejoras y reducir descuidos razonables.'],
+  ['¿Trabajas con WordPress?', 'Sí, pero el alcance depende del hosting, plugins, permisos disponibles y del estado general del sitio.'],
+  ['¿Trabajas con sitios estáticos, Astro, Next o similares?', 'Sí. En muchos casos el hardening se resuelve en hosting, CDN, reglas del servidor o headers del framework.'],
+  ['¿Necesitas acceso al sitio?', 'Para diagnóstico externo, no necesariamente. Para corregir, sí se requiere acceso controlado al hosting, CMS, repositorio, DNS o proveedor correspondiente.'],
+  ['¿Qué pasa si detectas algo grave?', 'Lo informo con prioridad, propongo un curso de acción y, si excede el alcance, recomiendo derivar a un especialista o a una auditoría más profunda.'],
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Higiene Técnica Web y Confianza Digital',
+  url: canonical,
+  description:
+    'Mantención técnica web, hardening básico, monitoreo liviano y documentación para sitios publicados que no tienen equipo técnico interno.',
+  serviceType: [
+    'Mantención técnica web',
+    'Hardening web básico',
+    'Revisión técnica de sitio web',
+    'Monitoreo web mensual',
+  ],
+  areaServed: ['CL', 'LATAM', 'US'],
+  provider: {
+    '@type': 'ProfessionalService',
+    name: 'Tooltician',
+    url: 'https://tooltician.com/es/',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Santiago',
+      addressCountry: 'CL',
+    },
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Planes de higiene técnica web',
+    itemListElement: plans.map((plan) => ({
+      '@type': 'Offer',
+      name: plan.name,
+      priceCurrency: 'CLP',
+      price: plan.priceValue,
+      description: plan.intro,
+      availability: 'https://schema.org/InStock',
+      url: canonical,
+    })),
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/es/' },
+    { '@type': 'ListItem', position: 2, name: 'Servicios', item: 'https://tooltician.com/es/#services' },
+    { '@type': 'ListItem', position: 3, name: 'Higiene Técnica Web', item: canonical },
+  ],
+};
+---
+<BaseLayout
+  title="Mantención Técnica Web para Empresas sin Equipo Interno | Tooltician"
+  description="Revisión, hardening, monitoreo y documentación para sitios web publicados: headers de seguridad, HTTPS, DNS, formularios, Search Console y soporte técnico mensual."
+  lang="es"
+  canonical={canonical}
+  alternates={alternates}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
+  <Navbar lang="es" items={navItems} ctaHref="#brief" switchHref="/en/" />
+
+  <main id="main">
+    <section class="service-hero" id="hero">
+      <div class="container service-hero__grid">
+        <div class="service-hero__main">
+          <span class="section-eyebrow reveal">Nueva línea de servicio</span>
+          <h1 class="section-title reveal reveal-delay-1">Mantención técnica web para empresas que no necesitan contratar a alguien in-house</h1>
+          <p class="service-hero__lede reveal reveal-delay-2">
+            Reviso, corrijo, documento y monitoreo los puntos técnicos básicos que suelen quedar abandonados después de publicar un sitio: headers de seguridad, HTTPS, DNS, formularios, Search Console, errores visibles y pequeñas mejoras operativas.
+          </p>
+          <p class="service-hero__subcopy reveal reveal-delay-2">
+            Higiene Técnica Web y Confianza Digital es una extensión natural de Tooltician: sistemas productivos, superficies web sobrias y criterio técnico externo para que lo publicado no quede a la deriva.
+          </p>
+          <div class="service-hero__actions reveal reveal-delay-2">
+            <a class="btn btn-primary" href="#brief">Solicitar diagnóstico técnico</a>
+            <a class="btn btn-ghost" href="#alcance">Ver qué incluye</a>
+          </div>
+          <p class="service-hero__microcopy reveal reveal-delay-2">
+            Sin alarmismo. Sin promesas de seguridad total. Solo revisión técnica clara, correcciones verificables y reporte antes/después.
+          </p>
+        </div>
+
+        <aside class="service-summary card-glass reveal reveal-delay-2" aria-label="Resumen del servicio">
+          <p class="service-summary__eyebrow">Encaje típico</p>
+          <ul class="service-summary__list">
+            <li>Empresas con sitio publicado y sin responsable técnico interno.</li>
+            <li>Agencias que quieren apoyo externo para mantención recurrente.</li>
+            <li>Equipos que necesitan criterio técnico sin contratar un perfil full time.</li>
+          </ul>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">Señales iniciales</p>
+            <div class="service-summary__badges">
+              <span class="badge badge-accent">SecurityHeaders.com</span>
+              <span class="badge badge-accent">Mozilla Observatory</span>
+              <span class="badge badge-neutral">Antes / después</span>
+              <span class="badge badge-neutral">Reporte ejecutivo</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="problema">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Problema</span>
+          <h2 class="section-title reveal">Tu sitio puede estar online y aun así estar técnicamente abandonado</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            Muchas empresas tienen sitio web, correo corporativo, formularios, hosting, DNS, Analytics, Search Console, plugins y landing pages. Una vez publicado el sitio, muchas veces nadie queda revisando si todo eso sigue funcionando bien.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="card-glass reveal">
+            <h3 class="card-title">Lo que suele pasar</h3>
+            <p class="body-copy">
+              El certificado vence, un formulario deja de enviar correos, aparecen errores de indexación, los headers de seguridad quedan sin configurar y el sitio empieza a mostrar señales de descuido técnico. No siempre se justifica contratar a alguien interno para mirarlo, pero tampoco conviene dejarlo completamente abandonado.
+            </p>
+          </article>
+          <article class="card-glass reveal reveal-delay-1">
+            <h3 class="card-title">La asimetría real</h3>
+            <p class="body-copy">
+              Ignorar el mantenimiento técnico cuesta poco hasta que algo falla. Revisarlo periódicamente cuesta mucho menos que improvisar bajo presión, perder formularios por semanas o descubrir tarde que una configuración crítica estaba rota desde hace tiempo.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="alcance">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Propuesta</span>
+          <h2 class="section-title reveal">Criterio técnico externo, sin el costo de incorporar un perfil interno</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            Tooltician ofrece una capa liviana de revisión, hardening, documentación y monitoreo para empresas que necesitan mantener su sitio técnicamente sano, pero no tienen volumen suficiente para contratar a un desarrollador, administrador web o especialista interno.
+          </p>
+        </div>
+
+        <div class="card-glass service-principle reveal">
+          <p>
+            La idea es simple: revisar lo básico, corregir lo razonable, documentar lo hecho y avisar cuando algo importante requiere atención. SecurityHeaders.com y Mozilla Observatory sirven como gancho visible, pero el servicio no se reduce a una nota: se apoya en evidencia, contexto y pequeñas correcciones útiles.
+          </p>
+        </div>
+
+        <div class="service-review-grid">
+          {reviewItems.map(([title, body], index) => (
+            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
+              <h3 class="card-title">{title}</h3>
+              <p class="body-copy">{body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="entregables">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Entregables</span>
+          <h2 class="section-title reveal">Entregables claros, no humo técnico</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            El resultado no es una llamada llena de jerga ni un documento imposible de leer. La entrega debe permitir que una persona no técnica entienda qué estaba descuidado, qué se corrigió, qué queda pendiente y qué conviene revisar más adelante.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="card-glass reveal">
+            <ul class="checklist">
+              {deliverables.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+          <article class="card-glass reveal reveal-delay-1">
+            <h3 class="card-title">Lo que este servicio no promete</h3>
+            <p class="body-copy">
+              Este servicio no reemplaza un pentest, una auditoría de seguridad profunda, un proceso formal de compliance, una revisión forense ni respuesta a incidentes. Tampoco promete seguridad total, porque esa promesa sería irresponsable.
+            </p>
+            <p class="body-copy">
+              Lo que sí ofrece es una revisión práctica de higiene técnica web: configuraciones visibles, controles básicos, fallas operativas comunes, documentación y monitoreo liviano.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="planes">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Planes y precios</span>
+          <h2 class="section-title reveal">Una puerta de entrada simple y un camino claro hacia soporte mensual</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            Los montos se presentan como referencia de partida. El objetivo es dejar una oferta concreta, consultiva y proporcional al tamaño del problema, no vender un paquete genérico.
+          </p>
+        </div>
+        <div class="plans-grid">
+          {plans.map((plan, index) => (
+            <article class={`card-glass plan-card ${index === 2 ? 'plan-card--accent' : ''} reveal reveal-delay-${(index % 2) + 1}`}>
+              <p class="plan-card__price">{plan.priceLabel}</p>
+              <h3 class="card-title">{plan.name}</h3>
+              <p class="plan-card__intro">{plan.intro}</p>
+              <p class="plan-card__note">{plan.note}</p>
+              <ul class="checklist checklist--compact">
+                {plan.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="comparacion">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Comparación</span>
+          <h2 class="section-title reveal">Cuando necesitas criterio técnico, pero no una contratación interna</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            No toda empresa necesita un equipo técnico interno. Pero casi toda empresa con presencia web necesita que alguien mire lo básico con cierta regularidad.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="card-glass reveal">
+            <h3 class="card-title">Lo que cubre esta zona intermedia</h3>
+            <p class="body-copy">
+              Más serio que llamar al diseñador cuando algo se rompe, pero mucho más liviano que incorporar un cargo full time. La meta es revisar, corregir, documentar y estar disponible cuando aparecen problemas técnicos recurrentes.
+            </p>
+          </article>
+          <article class="card-glass reveal reveal-delay-1">
+            <h3 class="card-title">Qué hace coherente la oferta</h3>
+            <p class="body-copy">
+              Tooltician ya construye automatizaciones, APIs internas, ETL, reporting y sitios productivos con documentación handoff-ready. Esta línea extiende la misma lógica hacia la operación técnica cotidiana de sitios ya publicados.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="casos">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Casos de uso</span>
+          <h2 class="section-title reveal">Dónde esta línea comercial encaja mejor</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            La oferta está pensada para sitios en producción que importan comercialmente, pero quedaron sin owner técnico después del lanzamiento inicial.
+          </p>
+        </div>
+        <div class="service-review-grid service-review-grid--cases">
+          {useCases.map(([title, body], index) => (
+            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
+              <h3 class="card-title">{title}</h3>
+              <p class="body-copy">{body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="card-glass evidence-links reveal">
+          <p class="evidence-links__eyebrow">Pruebas y señales relacionadas</p>
+          <div class="evidence-links__items">
+            <a class="badge badge-accent" href="https://github.com/cortega26/DNSpect" target="_blank" rel="noopener noreferrer">DNSpect</a>
+            <a class="badge badge-accent" href="https://monedario.cl" target="_blank" rel="noopener noreferrer">Monedario</a>
+            <a class="badge badge-accent" href="https://elrincondeebano.com" target="_blank" rel="noopener noreferrer">El Rincón de Ébano</a>
+            <a class="badge badge-accent" href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">Código del sitio</a>
+            <a class="badge badge-neutral" href="/es/#portfolio">Portafolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="faq">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">FAQ</span>
+          <h2 class="section-title reveal">Preguntas que conviene responder con precisión</h2>
+          <div class="divider reveal"></div>
+        </div>
+        <div class="faq-list">
+          {faqs.map(([question, answer], index) => (
+            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
+              <h3 class="card-title">{question}</h3>
+              <p class="body-copy">{answer}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="brief">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Siguiente paso</span>
+          <h2 class="section-title reveal">Parte por un diagnóstico razonable, no por una promesa inflada</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            Si el sitio ya está publicado y quieres saber qué está técnicamente descuidado, el punto de entrada correcto es un diagnóstico breve y verificable. Si además hay un flujo más amplio detrás, el brief general sigue disponible.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="card-glass reveal">
+            <h3 class="card-title">CTA principal</h3>
+            <p class="body-copy">
+              El diagnóstico técnico web es la oferta de entrada recomendada para cold email, follow-ups y primeras conversaciones con empresas que no tienen equipo técnico interno.
+            </p>
+            <div class="landing-cta-group">
+              <a class="btn btn-primary" href="/es/#contact-form">Solicitar diagnóstico técnico</a>
+              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">Agendar revisión</a>
+            </div>
+          </article>
+          <article class="card-glass reveal reveal-delay-1">
+            <h3 class="card-title">Si ya tienes el contexto claro</h3>
+            <p class="body-copy">
+              También puedes abrir el brief general de Tooltician y describir el sitio, el proveedor actual, el problema visible, los accesos disponibles y el resultado que esperas.
+            </p>
+            <div class="landing-cta-group">
+              <a class="btn btn-ghost" href="/es/#contact-form">Enviar brief</a>
+              <a class="btn btn-ghost" href="mailto:carlos@tooltician.com?subject=Diagnostico%20Tecnico%20Web">Correo directo</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="es" langHref="/en/" />
+</BaseLayout>
+
+<style>
+.service-hero {
+  padding-top: calc(var(--nav-height) + 5rem);
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.service-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.service-hero__lede,
+.service-hero__subcopy,
+.body-copy {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+
+.service-hero__lede {
+  font-size: 1.05rem;
+  max-width: 60ch;
+  margin-bottom: 1rem;
+}
+
+.service-hero__subcopy {
+  max-width: 58ch;
+  margin-bottom: 1.5rem;
+}
+
+.service-hero__actions,
+.landing-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.service-hero__actions {
+  margin-bottom: 1rem;
+}
+
+.service-hero__microcopy {
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  max-width: 58ch;
+}
+
+.service-summary {
+  display: grid;
+  gap: 1rem;
+}
+
+.service-summary__eyebrow,
+.evidence-links__eyebrow {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+}
+
+.service-summary__list,
+.checklist {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.service-summary__list li,
+.checklist li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+}
+
+.service-summary__list li::before,
+.checklist li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: 700;
+}
+
+.service-summary__badges,
+.evidence-links__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.section-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.service-principle p {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+
+.service-review-grid,
+.plans-grid,
+.faq-list {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.service-review-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.service-review-grid--cases {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.plans-grid,
+.faq-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.plan-card {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.plan-card--accent {
+  border-color: rgba(196, 160, 74, 0.24);
+  background: linear-gradient(180deg, rgba(196, 160, 74, 0.06), rgba(255, 255, 255, 0.03));
+}
+
+.plan-card__price {
+  font-family: var(--ff-label);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.plan-card__intro,
+.plan-card__note {
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+.plan-card__note {
+  font-size: 0.82rem;
+  color: var(--clr-text-faint);
+}
+
+.evidence-links {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (max-width: 980px) {
+  .service-hero__grid,
+  .service-review-grid,
+  .service-review-grid--cases,
+  .plans-grid,
+  .faq-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .service-hero {
+    padding-top: calc(var(--nav-height) + 4rem);
+  }
+}
+</style>

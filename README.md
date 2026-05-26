@@ -49,7 +49,8 @@ npx serve .
 
 ## Notes
 
-- The production target should be Cloudflare Pages, not GitHub Pages, because the site now relies on edge response headers defined in [`public/_headers`](/home/carlos/VS_Code_Projects/cortega26.github.io/public/_headers:1).
-- The deployment workflow expects `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repository secrets.
+- Production is published from GitHub Pages and proxied by Cloudflare.
+- Security headers for an `A+` score must be injected at the Cloudflare edge, because GitHub Pages does not let this repo define response headers directly.
+- Use the Cloudflare header set documented in [`docs/cloudflare-security-headers.md`](/home/carlos/VS_Code_Projects/cortega26.github.io/docs/cloudflare-security-headers.md:1).
 - The custom domain is `tooltician.com`.
 - The GitHub profile README in `cortega26/cortega26` is intended to route visitors here.

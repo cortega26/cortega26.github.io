@@ -13,11 +13,14 @@ const alternates = [
 const navItems = [
   { href: '#problema', label: 'Problema' },
   { href: '#alcance', label: 'Qué reviso' },
+  { href: '#proceso', label: 'Proceso' },
   { href: '#planes', label: 'Planes' },
-  { href: '#comparacion', label: 'Comparación' },
   { href: '#faq', label: 'FAQ' },
   { href: '#brief', label: 'Brief' },
 ];
+
+const pricingNote =
+  'Valores referenciales para Chile, expresados en UF y aproximados en CLP. La cotización final se emite en CLP según el valor de la UF del día de propuesta; proyectos fuera de Chile se cotizan en USD o moneda acordada según alcance, zona horaria y nivel de soporte requerido.';
 
 const reviewItems = [
   ['Headers de seguridad', 'Ayudan a que el navegador aplique restricciones razonables frente a cargas externas, iframes, permisos y exposición innecesaria de información.'],
@@ -43,11 +46,26 @@ const deliverables = [
   'Recomendaciones futuras cuando algo excede el alcance razonable.',
 ];
 
+const processSteps = [
+  ['01', 'Revisión externa inicial', 'Levanto señales visibles sin pedir acceso: headers, HTTPS, redirecciones, DNS, sitemap, robots.txt, formularios visibles y herramientas públicas.'],
+  ['02', 'Hallazgos priorizados', 'Ordeno lo encontrado por impacto operativo, dificultad de corrección y urgencia razonable, evitando dramatizar notas automáticas.'],
+  ['03', 'Corrección con acceso controlado', 'Cuando hay permisos disponibles, aplico los ajustes acordados en hosting, CMS, CDN, DNS, repositorio o proveedor correspondiente.'],
+  ['04', 'Evidencia antes/después', 'Dejo capturas, fecha de revisión, checklist y notas técnicas para que el cambio sea verificable y transferible.'],
+  ['05', 'Cierre o soporte mensual', 'Recomiendo cerrar, implementar una segunda fase o pasar a revisión mensual según lo que realmente necesita el sitio.'],
+];
+
+const sampleRows = [
+  ['Headers de seguridad incompletos', 'Señal visible de hardening básico pendiente.', 'Configurar CSP inicial, Permissions-Policy y X-Content-Type-Options según hosting.', 'Propuesto'],
+  ['Formulario sin prueba reciente', 'Posible pérdida silenciosa de leads.', 'Enviar prueba controlada, revisar destino, respuesta y registro de entrega.', 'Pendiente de acceso'],
+  ['Sitemap publicado sin revisión en Search Console', 'Errores de cobertura pueden pasar semanas sin atención.', 'Validar sitemap, revisar páginas excluidas y documentar hallazgos.', 'Revisado'],
+];
+
 const plans = [
   {
     name: 'Diagnóstico Técnico Web',
-    priceLabel: 'CLP $49.000',
-    priceValue: '49000',
+    priceLabel: '1 UF',
+    priceApprox: 'aprox. CLP $41.000',
+    priceValue: '41000',
     note: 'Descontable si luego se contrata implementación.',
     intro: 'Ideal si quieres saber si el sitio está técnicamente descuidado antes de pagar por correcciones.',
     items: [
@@ -59,8 +77,9 @@ const plans = [
   },
   {
     name: 'Hardening Web Básico',
-    priceLabel: 'Desde CLP $290.000',
-    priceValue: '290000',
+    priceLabel: 'Desde 7 UF',
+    priceApprox: 'aprox. CLP $284.000',
+    priceValue: '284000',
     note: 'Pensado para sitios simples o corporativos.',
     intro: 'Para sitios que necesitan corregir lo evidente y dejar evidencia verificable de mejora.',
     items: [
@@ -71,22 +90,39 @@ const plans = [
     ],
   },
   {
-    name: 'Web Trust Pack',
-    priceLabel: 'Desde CLP $590.000',
-    priceValue: '590000',
-    note: 'Para sitios que influyen en leads, reputación o ventas.',
-    intro: 'Para empresas donde el sitio genera confianza y no debería quedar abandonado después de publicado.',
+    name: 'Hardening + Operación Inicial',
+    priceLabel: 'Desde 13 UF',
+    priceApprox: 'aprox. CLP $527.000',
+    priceValue: '527000',
+    note: 'Para ordenar lo visible antes de decidir soporte recurrente.',
+    intro: 'Para sitios que además del hardening necesitan revisar formularios, señales SEO técnicas y puntos operativos básicos.',
     items: [
       'Incluye todo lo anterior.',
-      'Revisión técnica SEO básica y Search Console.',
-      'Formularios, errores visibles, DNS/email y backups.',
-      'Checklist operativo y reporte ejecutivo para continuidad.',
+      'Revisión de formularios, Search Console, DNS/email y errores visibles.',
+      'Checklist operativo inicial para continuidad.',
+      'Notas técnicas con pendientes priorizados.',
+    ],
+  },
+  {
+    name: 'Web Trust Pack',
+    priceLabel: 'Desde 15 UF',
+    priceApprox: 'aprox. CLP $608.000',
+    priceValue: '608000',
+    note: 'Mejor valor para sitios que influyen en leads, reputación o ventas.',
+    intro: 'Para empresas donde el sitio genera confianza y conviene cerrar la revisión con evidencia completa y camino de monitoreo.',
+    recommended: true,
+    items: [
+      'Incluye todo lo anterior.',
+      'Evidencia antes/después completa.',
+      'Reporte ejecutivo para perfiles no técnicos.',
+      'Mapa de monitoreo mensual y recomendaciones futuras.',
     ],
   },
   {
     name: 'Soporte Técnico Web Mensual',
-    priceLabel: 'Desde CLP $150.000/mes',
-    priceValue: '150000',
+    priceLabel: 'Desde 4 UF/mes',
+    priceApprox: 'aprox. CLP $162.000/mes',
+    priceValue: '162000',
     note: 'Modelo recurrente sin contratación interna.',
     intro: 'Para empresas que quieren revisión periódica, pequeñas correcciones y alguien mirando lo básico con regularidad.',
     items: [
@@ -114,6 +150,7 @@ const faqs = [
   ['¿Trabajas con sitios estáticos, Astro, Next o similares?', 'Sí. En muchos casos el hardening se resuelve en hosting, CDN, reglas del servidor o headers del framework.'],
   ['¿Necesitas acceso al sitio?', 'Para diagnóstico externo, no necesariamente. Para corregir, sí se requiere acceso controlado al hosting, CMS, repositorio, DNS o proveedor correspondiente.'],
   ['¿Qué pasa si detectas algo grave?', 'Lo informo con prioridad, propongo un curso de acción y, si excede el alcance, recomiendo derivar a un especialista o a una auditoría más profunda.'],
+  ['¿Por qué los precios están en UF?', 'Porque esta versión está orientada primero al mercado chileno y la UF mantiene mejor el valor de referencia. Para clientes fuera de Chile, la propuesta se cotiza en USD o moneda acordada.'],
 ];
 
 const jsonLd = {
@@ -148,7 +185,7 @@ const jsonLd = {
       name: plan.name,
       priceCurrency: 'CLP',
       price: plan.priceValue,
-      description: plan.intro,
+      description: `${plan.priceLabel} (${plan.priceApprox}). ${plan.intro}`,
       availability: 'https://schema.org/InStock',
       url: canonical,
     })),
@@ -216,6 +253,11 @@ const breadcrumbJsonLd = {
               <span class="badge badge-neutral">Reporte ejecutivo</span>
             </div>
           </div>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">Entrada</p>
+            <p class="service-summary__price">1 UF</p>
+            <p class="service-summary__muted">aprox. CLP $41.000 por diagnóstico inicial para Chile.</p>
+          </div>
         </aside>
       </div>
     </section>
@@ -264,6 +306,13 @@ const breadcrumbJsonLd = {
           </p>
         </div>
 
+        <div class="tools-note reveal">
+          <p class="tools-note__label">Herramientas como evidencia, no como diagnóstico completo</p>
+          <p>
+            Uso SecurityHeaders.com, Mozilla Observatory, Search Console, revisión DNS, pruebas de formularios y señales del hosting como puntos de partida. La lectura final considera contexto, acceso disponible, criticidad del sitio y costo razonable de corrección.
+          </p>
+        </div>
+
         <div class="service-review-grid">
           {reviewItems.map(([title, body], index) => (
             <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
@@ -275,7 +324,31 @@ const breadcrumbJsonLd = {
       </div>
     </section>
 
-    <section class="section section--alt" id="entregables">
+    <section class="section section--alt" id="proceso">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Proceso</span>
+          <h2 class="section-title reveal">Cómo funciona el diagnóstico técnico</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            El primer paso está diseñado para ser liviano y concreto: mirar lo visible, separar señales útiles de ruido automático y dejar un camino de corrección entendible.
+          </p>
+        </div>
+        <div class="process-list">
+          {processSteps.map(([step, title, body], index) => (
+            <article class={`process-item reveal reveal-delay-${(index % 2) + 1}`}>
+              <span class="process-item__num">{step}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="entregables">
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Entregables</span>
@@ -303,23 +376,58 @@ const breadcrumbJsonLd = {
             </p>
           </article>
         </div>
+
+        <div class="sample-report reveal">
+          <div class="sample-report__header">
+            <div>
+              <p class="sample-report__eyebrow">Muestra de entregable</p>
+              <h3>Registro ejecutivo de hallazgos</h3>
+            </div>
+            <span class="badge badge-neutral">Ejemplo</span>
+          </div>
+          <div class="sample-report__table" role="table" aria-label="Muestra de registro de hallazgos">
+            <div class="sample-report__row sample-report__row--head" role="row">
+              <span role="columnheader">Hallazgo</span>
+              <span role="columnheader">Impacto</span>
+              <span role="columnheader">Acción recomendada</span>
+              <span role="columnheader">Estado</span>
+            </div>
+            {sampleRows.map(([finding, impact, action, status]) => (
+              <div class="sample-report__row" role="row">
+                <span role="cell">{finding}</span>
+                <span role="cell">{impact}</span>
+                <span role="cell">{action}</span>
+                <span role="cell">{status}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="access-note reveal">
+          <h3>Accesos y límites operativos</h3>
+          <p>
+            El diagnóstico externo no requiere acceso al sitio. Las correcciones sí requieren permisos controlados sobre hosting, DNS, CMS, repositorio, CDN o proveedor correspondiente. Si algo excede una mantención técnica razonable, queda documentado y se recomienda una ruta de especialización.
+          </p>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="planes">
+    <section class="section section--alt" id="planes">
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Planes y precios</span>
           <h2 class="section-title reveal">Una puerta de entrada simple y un camino claro hacia soporte mensual</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            Los montos se presentan como referencia de partida. El objetivo es dejar una oferta concreta, consultiva y proporcional al tamaño del problema, no vender un paquete genérico.
+            Los montos se presentan como referencia de partida. La mayoría de sitios simples parte por diagnóstico o hardening; cuando el sitio sostiene leads, reputación o ventas, el Web Trust Pack suele cerrar mejor la revisión por una diferencia acotada frente al paquete operativo.
           </p>
         </div>
         <div class="plans-grid">
           {plans.map((plan, index) => (
-            <article class={`card-glass plan-card ${index === 2 ? 'plan-card--accent' : ''} reveal reveal-delay-${(index % 2) + 1}`}>
+            <article class={`card-glass plan-card ${plan.recommended ? 'plan-card--accent' : ''} reveal reveal-delay-${(index % 2) + 1}`}>
+              {plan.recommended && <span class="plan-card__flag">Mejor valor</span>}
               <p class="plan-card__price">{plan.priceLabel}</p>
+              <p class="plan-card__approx">{plan.priceApprox}</p>
               <h3 class="card-title">{plan.name}</h3>
               <p class="plan-card__intro">{plan.intro}</p>
               <p class="plan-card__note">{plan.note}</p>
@@ -331,6 +439,7 @@ const breadcrumbJsonLd = {
             </article>
           ))}
         </div>
+        <p class="pricing-footnote reveal">{pricingNote}</p>
       </div>
     </section>
 
@@ -443,6 +552,27 @@ const breadcrumbJsonLd = {
             </div>
           </article>
         </div>
+
+        <div class="intent-grid">
+          <a class="intent-link reveal" href="/es/#contact-form">
+            <span>Quiero revisar un sitio publicado</span>
+            <strong>Diagnóstico inicial desde 1 UF para Chile, con reporte breve y prioridades claras.</strong>
+          </a>
+          <a class="intent-link reveal reveal-delay-1" href="/es/#contact-form">
+            <span>Tengo una agencia y necesito soporte externo</span>
+            <strong>Revisión técnica recurrente sin cargar al equipo de diseño o desarrollo con tareas de bajo margen.</strong>
+          </a>
+          <a class="intent-link reveal reveal-delay-2" href="/es/#contact-form">
+            <span>Quiero soporte mensual</span>
+            <strong>Monitoreo liviano, pequeñas correcciones y documentación operativa sin contratación interna.</strong>
+          </a>
+        </div>
+
+        <div class="outreach-note reveal">
+          <p>
+            Si llegaste por una observación sobre headers, formularios, DNS, Search Console o señales visibles de mantención incompleta, el alcance es este: revisar, corregir lo razonable y dejar evidencia clara. No es una auditoría de seguridad profunda ni una promesa de seguridad total.
+          </p>
+        </div>
       </div>
     </section>
   </main>
@@ -506,13 +636,30 @@ const breadcrumbJsonLd = {
 }
 
 .service-summary__eyebrow,
-.evidence-links__eyebrow {
+.evidence-links__eyebrow,
+.sample-report__eyebrow,
+.tools-note__label {
   font-family: var(--ff-label);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--clr-text-faint);
+}
+
+.service-summary__price {
+  font-family: var(--ff-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--clr-accent);
+  letter-spacing: -0.03em;
+}
+
+.service-summary__muted {
+  color: var(--clr-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
 }
 
 .service-summary__list,
@@ -555,6 +702,64 @@ const breadcrumbJsonLd = {
   line-height: 1.75;
 }
 
+.tools-note,
+.access-note,
+.outreach-note {
+  border: 1px solid rgba(196, 160, 74, 0.16);
+  border-radius: var(--radius-md);
+  background: rgba(196, 160, 74, 0.04);
+  padding: var(--sp-6);
+}
+
+.tools-note {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.tools-note p,
+.access-note p,
+.outreach-note p {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+
+.access-note h3 {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.process-list {
+  display: grid;
+  border-top: 1px solid var(--clr-border);
+}
+
+.process-item {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.process-item__num {
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--clr-accent);
+}
+
+.process-item h3 {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.process-item p {
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
 .service-review-grid,
 .plans-grid,
 .faq-list {
@@ -578,6 +783,7 @@ const breadcrumbJsonLd = {
 .plan-card {
   display: grid;
   gap: 0.85rem;
+  position: relative;
 }
 
 .plan-card--accent {
@@ -585,12 +791,32 @@ const breadcrumbJsonLd = {
   background: linear-gradient(180deg, rgba(196, 160, 74, 0.06), rgba(255, 255, 255, 0.03));
 }
 
+.plan-card__flag {
+  justify-self: start;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid rgba(196, 160, 74, 0.26);
+  border-radius: var(--radius-sm);
+  background: rgba(196, 160, 74, 0.08);
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .plan-card__price {
   font-family: var(--ff-label);
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--clr-accent);
+}
+
+.plan-card__approx {
+  margin-top: -0.55rem;
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 .plan-card__intro,
@@ -609,19 +835,133 @@ const breadcrumbJsonLd = {
   gap: 0.85rem;
 }
 
+.pricing-footnote {
+  max-width: 68rem;
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.sample-report {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.sample-report__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  padding: var(--sp-6);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.sample-report__header h3 {
+  font-family: var(--ff-heading);
+  font-size: 1.1rem;
+  margin-top: 0.25rem;
+}
+
+.sample-report__table {
+  display: grid;
+}
+
+.sample-report__row {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1.35fr 0.7fr;
+  gap: 1rem;
+  padding: 0.95rem var(--sp-6);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.sample-report__row:last-child {
+  border-bottom: none;
+}
+
+.sample-report__row span {
+  min-width: 0;
+  color: var(--clr-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.sample-report__row--head span {
+  color: var(--clr-text-faint);
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.intent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+.intent-link {
+  display: grid;
+  gap: 0.5rem;
+  padding: var(--sp-6);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+
+.intent-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(196, 160, 74, 0.24);
+}
+
+.intent-link span {
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.intent-link strong {
+  color: var(--clr-text);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
 @media (max-width: 980px) {
   .service-hero__grid,
   .service-review-grid,
   .service-review-grid--cases,
   .plans-grid,
-  .faq-list {
+  .faq-list,
+  .intent-grid {
     grid-template-columns: 1fr;
+  }
+
+  .sample-report__row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .sample-report__row--head {
+    display: none;
   }
 }
 
 @media (max-width: 720px) {
   .service-hero {
     padding-top: calc(var(--nav-height) + 4rem);
+  }
+
+  .process-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .sample-report__header {
+    flex-direction: column;
   }
 }
 </style>

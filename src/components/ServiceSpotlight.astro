@@ -1,0 +1,207 @@
+---
+const serviceHref = '/es/servicios/higiene-tecnica-web/';
+const briefHref = '/es/servicios/higiene-tecnica-web/#brief';
+
+const fits = [
+  'Empresas con sitio publicado y sin responsable técnico interno.',
+  'Agencias que necesitan apoyo externo para mantención recurrente de bajo margen.',
+  'Profesionales y consultoras donde el sitio genera leads o reputación.',
+];
+---
+<section class="section svc-spotlight" id="svc-spotlight">
+  <div class="container">
+    <div class="svc-spotlight__inner card-glass reveal">
+      <div class="svc-spotlight__grid">
+        <div class="svc-spotlight__main">
+          <span class="section-eyebrow">Servicio con página propia</span>
+          <h2 class="svc-spotlight__title">¿Tu sitio está online, pero técnicamente abandonado?</h2>
+          <p class="svc-spotlight__body">
+            Higiene Técnica Web: revisión, hardening básico y monitoreo liviano para sitios publicados que no tienen equipo técnico interno. Headers de seguridad, HTTPS, DNS, formularios, Search Console y pequeñas correcciones verificables — con reporte antes/después.
+          </p>
+          <ul class="svc-spotlight__fits">
+            {fits.map(fit => <li>{fit}</li>)}
+          </ul>
+          <div class="svc-spotlight__actions">
+            <a class="btn btn-primary" href={serviceHref}>Ver el servicio completo</a>
+            <a class="btn btn-ghost" href={briefHref}>Solicitar diagnóstico</a>
+          </div>
+          <p class="svc-spotlight__disclaimer">Sin alarmismo. Sin promesas de seguridad total. Solo revisión técnica clara, correcciones verificables y evidencia antes/después.</p>
+        </div>
+
+        <aside class="svc-spotlight__aside" aria-label="Precios de referencia">
+          <div class="svc-spotlight__price-block">
+            <p class="svc-spotlight__price-eyebrow">Entrada</p>
+            <p class="svc-spotlight__price">1 UF</p>
+            <p class="svc-spotlight__price-sub">aprox. CLP $41.000</p>
+            <p class="svc-spotlight__price-note">Diagnóstico inicial descontable si contratas implementación.</p>
+          </div>
+          <div class="svc-spotlight__divider" aria-hidden="true"></div>
+          <div class="svc-spotlight__price-block">
+            <p class="svc-spotlight__price-eyebrow">Soporte mensual</p>
+            <p class="svc-spotlight__price">desde 4 UF/mes</p>
+            <p class="svc-spotlight__price-sub">aprox. CLP $162.000/mes</p>
+            <p class="svc-spotlight__price-note">Monitoreo liviano, revisiones periódicas y pequeñas correcciones sin incorporar un perfil interno.</p>
+          </div>
+          <a class="svc-spotlight__aside-cta" href={serviceHref}>
+            Ver todos los planes →
+          </a>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.svc-spotlight__inner {
+  padding: var(--sp-8, 2rem);
+}
+
+.svc-spotlight__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, 0.5fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.svc-spotlight__title {
+  font-family: var(--ff-heading);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0.6rem 0 1rem;
+  text-wrap: balance;
+}
+
+.svc-spotlight__body {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+  max-width: 60ch;
+  margin-bottom: 1.25rem;
+}
+
+.svc-spotlight__fits {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 1.5rem;
+}
+
+.svc-spotlight__fits li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+.svc-spotlight__fits li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: 700;
+}
+
+.svc-spotlight__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.svc-spotlight__disclaimer {
+  color: var(--clr-text-faint);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  max-width: 52ch;
+}
+
+.svc-spotlight__aside {
+  display: grid;
+  gap: 1.25rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.svc-spotlight__price-eyebrow {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  margin-bottom: 0.3rem;
+}
+
+.svc-spotlight__price {
+  font-family: var(--ff-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--clr-accent);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.svc-spotlight__price-sub {
+  color: var(--clr-text-faint);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 0.4rem;
+}
+
+.svc-spotlight__price-note {
+  color: var(--clr-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.svc-spotlight__divider {
+  height: 1px;
+  background: var(--clr-border);
+}
+
+.svc-spotlight__aside-cta {
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  transition: color var(--dur-fast);
+}
+
+.svc-spotlight__aside-cta:hover {
+  color: var(--clr-text);
+}
+
+@media (max-width: 860px) {
+  .svc-spotlight__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-spotlight__aside {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .svc-spotlight__divider {
+    display: none;
+  }
+
+  .svc-spotlight__aside-cta {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 540px) {
+  .svc-spotlight__aside {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-spotlight__divider {
+    display: block;
+  }
+}
+</style>

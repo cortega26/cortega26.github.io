@@ -7,6 +7,7 @@ import '../../../../styles/global.css';
 const canonical = 'https://tooltician.com/es/servicios/higiene-tecnica-web/';
 const alternates = [
   { hreflang: 'es', href: canonical },
+  { hreflang: 'en', href: 'https://tooltician.com/en/services/web-technical-hygiene/' },
   { hreflang: 'x-default', href: canonical },
 ];
 
@@ -206,6 +207,16 @@ const jsonLd = {
   },
 };
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+
 const breadcrumbJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -218,13 +229,14 @@ const breadcrumbJsonLd = {
 ---
 <BaseLayout
   title="Mantención Técnica Web para Empresas sin Equipo Interno | Tooltician"
-  description="Revisión, hardening, monitoreo y documentación para sitios web publicados: headers de seguridad, HTTPS, DNS, formularios, Search Console y soporte técnico mensual."
+  description="Mantención técnica web para sitios publicados sin equipo interno: revisión de headers de seguridad, HTTPS, DNS, formularios, Search Console, hardening y soporte mensual."
   lang="es"
   canonical={canonical}
   alternates={alternates}
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
   </Fragment>
 

@@ -1,7 +1,7 @@
 # Scorecard: Higiene Técnica Web — Service Page
 
-Last updated: `2026-05-26` · After: `Session A — UX/UI y Presentación`
-Next session: `Session C — SEO y Visibilidad Orgánica`
+Last updated: `2026-05-26` · After: `Session C — SEO y Visibilidad Orgánica`
+Next session: `Program complete`
 Source of truth for session targets: `docs/tasks/higiene-tecnica-web-backlog.md`
 
 ---
@@ -31,14 +31,14 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 9 | Urgency & availability signals | `0` | `3` | `3` | — | `2026-05-26` |
 | 10 | UX/UI — section rhythm & length | `2` | `4` | `4` | — | `2026-05-26` |
 | 11 | UX/UI — mobile experience | `2` | `4` | `4` | — | `2026-05-26` |
-| 12 | SEO — keyword alignment | `3` | `3` | `4` | C (HTW-C01) | — |
-| 13 | SEO — internal linking | `1` | `1` | `4` | C (HTW-C02) | — |
-| 14 | SEO — schema markup | `2` | `2` | `4` | C (HTW-C03) | — |
+| 12 | SEO — keyword alignment | `3` | `4` | `4` | — | `2026-05-26` |
+| 13 | SEO — internal linking | `1` | `4` | `4` | — | `2026-05-26` |
+| 14 | SEO — schema markup | `2` | `4` | `4` | — | `2026-05-26` |
 | 15 | Commercial differentiation | `2` | `4` | `5` | — | `2026-05-26` |
 | 16 | Buyer risk mitigation | `1` | `4` | `4` | — | `2026-05-26` |
 | 17 | Brand voice coherence | `3` | `5` | `5` | — | `2026-05-26` |
 
-**Composite score (mean):** `2.0 → 2.9 → 3.3 → 3.9 → 4.1` after Session A. Target: `4.4`
+**Composite score (mean):** `2.0 → 2.9 → 3.3 → 3.9 → 4.1 → 4.4` after Session C. Target: `4.4` ✓
 
 ---
 
@@ -50,7 +50,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | B — Conversión | 7, 8, 9 | `2.9` | `3.3` | `+0.4` |
 | D — Comercial | 6, 15, 16, 17 | `3.3` | `3.9` | `+0.6` |
 | A — UX/UI | 10, 11 | `3.9` | `4.1` | `+0.2` |
-| C — SEO | 12, 13, 14 | — | — | — |
+| C — SEO | 12, 13, 14 | `4.1` | `4.4` | `+0.3` |
 
 ---
 
@@ -94,13 +94,13 @@ Update each dimension here with a one-line note when its score changes.
 - `2026-05-26 · Session A`: 2 → 4. Pricing section redesigned: desktop shows 5-column feature comparison table (with Recomendado badge top-right); mobile shows scroll-snap card carousel (85vw per card, snap-to-start). Process step numbers upgraded to large accent numerals (2rem, 0.35 opacity) for visual hierarchy. Plan card badge repositioned to absolute top-right so all cards align at price level.
 
 ### 12 · SEO — keyword alignment
-- No changes. Pending Session C / HTW-C01.
+- `2026-05-26 · Session C`: 3 → 4. "Mantención" chosen as primary term (Chilean usage, more specific). Applied consistently across H1, meta description, JSON-LD serviceType, and all copy on both ES and EN pages.
 
 ### 13 · SEO — internal linking
-- No changes. Pending Session C / HTW-C02.
+- `2026-05-26 · Session C`: 1 → 4. Internal links added from PortfolioSection cards for El Rincón de Ébano and Monedario — both ES (→ /es/servicios/higiene-tecnica-web/) and EN (→ /en/services/web-technical-hygiene/) versions. 4 new inbound links from high-signal portfolio context.
 
 ### 14 · SEO — schema markup
-- No changes. Pending Session C / HTW-C03.
+- `2026-05-26 · Session C`: 2 → 4. FAQPage JSON-LD added to ES page (11 Q&A entries) and EN page (11 Q&A entries). Canonical and hreflang verified. HowTo schema evaluated and rejected — process section describes provider steps, not user-executable instructions.
 
 ### 15 · Commercial differentiation
 - `2026-05-26 · Session D`: 2 → 4. Explicit freelancer comparison grid added to #comparacion (Freelancer genérico vs. Tooltician, 4 concrete points each). "Sin alarmismo" elevated to named headline in the service principle card. Same treatment replicated on EN landing.

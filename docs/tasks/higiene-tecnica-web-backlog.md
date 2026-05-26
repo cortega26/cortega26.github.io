@@ -1,7 +1,7 @@
 # Program Backlog: Higiene Técnica Web — Service Page Audit & Funnel Improvement
 
 Version: `2026-05-26`
-Status: `Active — Session A complete`
+Status: `Complete — all sessions done`
 Scope: `/es/servicios/higiene-tecnica-web/` landing page + integration points across `tooltician.com`
 Primary goal: maximize conversion funnel from awareness through contact, across all dimensions of the service page and its integration with the main portfolio.
 
@@ -231,11 +231,11 @@ Objective: align keyword strategy with actual search behavior and improve discov
 
 | Metric | Baseline | Target | Current status |
 |---|---:|---:|---|
-| "Mantención" vs "Mantenimiento" decision | `Unresolved` | `Decided and applied` | `Pending` |
-| Internal links from portfolio to service | `0` | `≥2` | `Pending` |
-| FAQPage schema | `Missing` | `Present` | `Pending` |
-| HowTo schema | `Missing` | `Evaluated` | `Pending` |
-| Service page in sitemap | `Unverified` | `Verified` | `Pending` |
+| "Mantención" vs "Mantenimiento" decision | `Unresolved` | `Decided and applied` | `Done — "mantención" applied throughout` |
+| Internal links from portfolio to service | `0` | `≥2` | `Done — Ébano + Monedario (ES + EN)` |
+| FAQPage schema | `Missing` | `Present` | `Done — 11 Q&A entries, ES and EN pages` |
+| HowTo schema | `Missing` | `Evaluated` | `Done — decided not to implement (process describes provider, not user steps)` |
+| Service page in sitemap | `Unverified` | `Verified` | `Done — both ES and EN appear in sitemap-0.xml` |
 
 Tasks:
 
@@ -295,13 +295,13 @@ Exit gate:
 | `HTW-A05` | A | UX/UI | Verify design system token usage | `P2` | `S` | `Done` |
 | `HTW-A06` | A | UX/UI | Section alternation rhythm audit | `P3` | `S` | `Done` |
 | `HTW-A07` | A | UX/UI | Evaluate sticky CTA | `P3` | `M` | `Done` |
-| `HTW-C01` | C | SEO | Keyword decision: mantención vs mantenimiento | `P1` | `S` | `Pending` |
-| `HTW-C02` | C | SEO | Internal links from portfolio to service | `P2` | `S` | `Pending` |
-| `HTW-C03` | C | SEO | Add FAQPage JSON-LD schema | `P2` | `S` | `Pending` |
-| `HTW-C04` | C | SEO | Evaluate HowTo schema for process section | `P3` | `S` | `Pending` |
-| `HTW-C05` | C | SEO | Content gap analysis — 3 informational topics | `P2` | `M` | `Pending` |
-| `HTW-C06` | C | SEO | Verify sitemap and canonical | `P2` | `S` | `Pending` |
-| `HTW-C07` | C | SEO | Add hreflang pair once EN page exists | `P2` | `S` | `Pending (blocks on HTW-D05)` |
+| `HTW-C01` | C | SEO | Keyword decision: mantención vs mantenimiento | `P1` | `S` | `Done` |
+| `HTW-C02` | C | SEO | Internal links from portfolio to service | `P2` | `S` | `Done` |
+| `HTW-C03` | C | SEO | Add FAQPage JSON-LD schema | `P2` | `S` | `Done` |
+| `HTW-C04` | C | SEO | Evaluate HowTo schema for process section | `P3` | `S` | `Done` |
+| `HTW-C05` | C | SEO | Content gap analysis — 3 informational topics | `P2` | `M` | `Done` |
+| `HTW-C06` | C | SEO | Verify sitemap and canonical | `P2` | `S` | `Done` |
+| `HTW-C07` | C | SEO | Add hreflang pair once EN page exists | `P2` | `S` | `Done` |
 
 ---
 
@@ -313,7 +313,7 @@ Exit gate:
 | `2026-05-26` | `B — Conversión` | `HTW-B01, HTW-B02, HTW-B03, HTW-B04, HTW-B05, HTW-B06, HTW-B07` | `Pass` | `None` | `Start Session D — Propuesta Comercial` |
 | `2026-05-26` | `D — Comercial` | `HTW-D01, HTW-D02, HTW-D03, HTW-D04, HTW-D05, HTW-D06, HTW-D07` | `Pass` | `None` | `Start Session A — UX/UI y Presentación` |
 | `2026-05-26` | `A — UX/UI` | `HTW-A01, HTW-A02, HTW-A03, HTW-A04, HTW-A05, HTW-A06, HTW-A07` | `Pass` | `None` | `Start Session C — SEO y Visibilidad Orgánica` |
-| `YYYY-MM-DD` | `C — SEO` | `HTW-C0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
+| `2026-05-26` | `C — SEO` | `HTW-C01, HTW-C02, HTW-C03, HTW-C04, HTW-C05, HTW-C06, HTW-C07` | `Pass` | `None` | `Program complete — all 5 sessions done` |
 
 ---
 

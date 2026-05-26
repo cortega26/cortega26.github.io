@@ -403,6 +403,63 @@ const breadcrumbJsonLd = {
           </div>
         </div>
 
+        <div class="exec-report reveal">
+          <div class="exec-report__header">
+            <div>
+              <p class="exec-report__eyebrow">Muestra de reporte ejecutivo</p>
+              <h3 class="exec-report__title">Resumen para dirección</h3>
+            </div>
+            <div class="exec-report__header-right">
+              <span class="exec-report__date">Tooltician · Mayo 2026</span>
+              <span class="badge badge-neutral">Ejemplo</span>
+            </div>
+          </div>
+
+          <div class="exec-report__scores">
+            <div class="exec-report__score-item">
+              <span class="exec-report__score exec-report__score--before">C</span>
+              <span class="exec-report__score-label">Nota antes de revisión</span>
+            </div>
+            <span class="exec-report__arrow" aria-hidden="true">→</span>
+            <div class="exec-report__score-item">
+              <span class="exec-report__score exec-report__score--after">A</span>
+              <span class="exec-report__score-label">Nota tras correcciones</span>
+            </div>
+            <div class="exec-report__score-item exec-report__score-item--stat">
+              <span class="exec-report__stat">3 de 3</span>
+              <span class="exec-report__score-label">hallazgos críticos resueltos</span>
+            </div>
+          </div>
+
+          <div class="exec-report__findings">
+            <div class="exec-report__finding">
+              <span class="exec-report__status exec-report__status--resolved">Resuelto</span>
+              <div class="exec-report__finding-body">
+                <p class="exec-report__finding-title">Formulario de contacto sin confirmación verificable</p>
+                <p class="exec-report__finding-impact">Las solicitudes llegaban pero no quedaban registradas ni confirmadas. Una falla silenciosa en el formulario puede acumular semanas de leads perdidos antes de que alguien lo note.</p>
+              </div>
+            </div>
+            <div class="exec-report__finding">
+              <span class="exec-report__status exec-report__status--resolved">Resuelto</span>
+              <div class="exec-report__finding-body">
+                <p class="exec-report__finding-title">Correo corporativo sin firma digital configurada</p>
+                <p class="exec-report__finding-impact">Sin SPF y DKIM activos, los correos de la empresa tienen mayor probabilidad de llegar a spam. Afecta respuesta a propuestas, seguimiento comercial y credibilidad del dominio.</p>
+              </div>
+            </div>
+            <div class="exec-report__finding exec-report__finding--pending">
+              <span class="exec-report__status exec-report__status--pending">Próximo ciclo</span>
+              <div class="exec-report__finding-body">
+                <p class="exec-report__finding-title">Sin monitoreo activo del sitio</p>
+                <p class="exec-report__finding-impact">Si el sitio cae o el certificado vence, no hay alerta configurada. Primer ítem recomendado en el soporte mensual — sin intervención adicional del equipo interno.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="exec-report__footer">
+            <p>Este reporte está redactado en lenguaje de negocio para ser entregado directamente a gerencia o dirección, sin necesidad de intermediario técnico. El detalle técnico completo queda en documento separado para el administrador del sitio.</p>
+          </div>
+        </div>
+
         <div class="access-note reveal">
           <h3>Accesos y límites operativos</h3>
           <p>
@@ -930,6 +987,197 @@ const breadcrumbJsonLd = {
   line-height: 1.55;
 }
 
+/* Executive report mock */
+.exec-report {
+  border: 1px solid var(--clr-border);
+  border-top: 3px solid var(--clr-accent);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+}
+
+.exec-report__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: var(--sp-6);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.exec-report__eyebrow {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  margin-bottom: 0.3rem;
+}
+
+.exec-report__title {
+  font-family: var(--ff-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.exec-report__header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.exec-report__date {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--clr-text-faint);
+}
+
+.exec-report__scores {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: var(--sp-6);
+  border-bottom: 1px solid var(--clr-border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.exec-report__score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.exec-report__score-item--stat {
+  margin-left: auto;
+  align-items: flex-end;
+}
+
+.exec-report__score {
+  font-family: var(--ff-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.exec-report__score--before {
+  background: rgba(200, 80, 60, 0.12);
+  color: rgba(220, 100, 80, 0.9);
+  border: 1px solid rgba(200, 80, 60, 0.2);
+}
+
+.exec-report__score--after {
+  background: rgba(196, 160, 74, 0.1);
+  color: var(--clr-accent);
+  border: 1px solid rgba(196, 160, 74, 0.22);
+}
+
+.exec-report__score-label {
+  font-size: 0.72rem;
+  color: var(--clr-text-faint);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.exec-report__arrow {
+  font-size: 1.2rem;
+  color: var(--clr-text-faint);
+  opacity: 0.5;
+}
+
+.exec-report__stat {
+  font-family: var(--ff-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--clr-accent);
+  line-height: 1;
+}
+
+.exec-report__findings {
+  display: grid;
+}
+
+.exec-report__finding {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem var(--sp-6);
+  border-bottom: 1px solid var(--clr-border);
+  align-items: start;
+}
+
+.exec-report__finding:last-child {
+  border-bottom: none;
+}
+
+.exec-report__finding--pending {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.exec-report__status {
+  font-family: var(--ff-label);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  justify-self: start;
+  margin-top: 0.15rem;
+  white-space: nowrap;
+}
+
+.exec-report__status--resolved {
+  background: rgba(196, 160, 74, 0.1);
+  color: var(--clr-accent);
+  border: 1px solid rgba(196, 160, 74, 0.2);
+}
+
+.exec-report__status--pending {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--clr-text-muted);
+  border: 1px solid var(--clr-border);
+}
+
+.exec-report__finding-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  margin-bottom: 0.35rem;
+  line-height: 1.4;
+}
+
+.exec-report__finding-impact {
+  font-size: 0.84rem;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+}
+
+.exec-report__footer {
+  padding: var(--sp-6);
+  border-top: 1px solid var(--clr-border);
+  background: rgba(196, 160, 74, 0.03);
+}
+
+.exec-report__footer p {
+  font-size: 0.82rem;
+  color: var(--clr-text-faint);
+  line-height: 1.65;
+  font-style: italic;
+}
+
 @media (max-width: 980px) {
   .service-hero__grid,
   .service-review-grid,
@@ -962,6 +1210,31 @@ const breadcrumbJsonLd = {
 
   .sample-report__header {
     flex-direction: column;
+  }
+
+  .exec-report__header {
+    flex-direction: column;
+  }
+
+  .exec-report__header-right {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .exec-report__scores {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .exec-report__score-item--stat {
+    margin-left: 0;
+    align-items: flex-start;
+  }
+
+  .exec-report__finding {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 }
 </style>

@@ -1,0 +1,921 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Navbar from '../../../../components/Navbar.astro';
+import Footer from '../../../../components/Footer.astro';
+import '../../../../styles/global.css';
+
+const canonical = 'https://tooltician.com/en/services/web-technical-hygiene/';
+const alternates = [
+  { hreflang: 'en', href: canonical },
+  { hreflang: 'es', href: 'https://tooltician.com/es/servicios/higiene-tecnica-web/' },
+  { hreflang: 'x-default', href: canonical },
+];
+
+const navItems = [
+  { href: '#problem', label: 'Problem' },
+  { href: '#scope', label: 'What I review' },
+  { href: '#process', label: 'Process' },
+  { href: '#plans', label: 'Plans' },
+  { href: '#faq', label: 'FAQ' },
+  { href: '#contact', label: 'Get started' },
+];
+
+const pricingNote =
+  'Prices shown in USD. For clients in Chile and Latin America, this service is priced in UF/CLP — see the Spanish version for local rates.';
+
+const reviewItems = [
+  ['Security headers', 'Help browsers apply reasonable restrictions on external loads, iframes, permissions, and unnecessary information exposure.'],
+  ['HTTPS and redirects', 'Avoids duplicate paths, domain inconsistencies, and technical signals that erode trust or complicate indexing.'],
+  ['HSTS where applicable', 'Enforces consistent HTTPS use when the site configuration and context allow it without introducing operational friction.'],
+  ['Basic DNS', 'Delegation, critical records, and points where a small error can leave email or the site in a gray zone.'],
+  ['SPF, DKIM, and basic DMARC', "Doesn't replace a full email strategy, but helps reduce technical noise and avoidable misconfiguration signals."],
+  ['Critical forms', 'A site can look perfect while silently losing opportunities if the contact form fails quietly or delivers late.'],
+  ['Search Console, sitemap, and robots.txt', 'Detects indexing errors, coverage issues, and technical signals that no one usually checks after launch.'],
+  ['Relevant 404 errors', 'I fix or prioritize broken links and visible paths that affect experience, trust, and capture of existing demand.'],
+  ['WordPress plugins and maintenance', "If the site runs on WordPress, I review visible dependencies, basic update points, and signs of technical neglect."],
+  ['Header exposure and basic performance', 'I identify server responses that add noise, expose more than needed, or make the site less predictable.'],
+  ['Backups and recovery points', 'I verify whether a minimum reversibility baseline exists before touching anything important or delegating support to third parties.'],
+  ['Minimal operational documentation', 'The goal is not just to fix — but to leave it clear what was done, what remains pending, and where to look next time.'],
+];
+
+const processSteps = [
+  ['01', 'Initial external review', 'I surface visible signals without requesting access: headers, HTTPS, redirects, DNS, sitemap, robots.txt, visible forms, and public tools.'],
+  ['02', 'Prioritized findings', 'I sort findings by operational impact, correction difficulty, and reasonable urgency — avoiding dramatizing automated scores.'],
+  ['03', 'Correction with controlled access', 'When permissions are available, I apply agreed fixes in hosting, CMS, CDN, DNS, repository, or the relevant provider.'],
+  ['04', 'Before/after evidence', 'I leave screenshots, review date, checklist, and technical notes so the change is verifiable and transferable.'],
+  ['05', 'Close or monthly support', 'I recommend closing, implementing a second phase, or moving to monthly review based on what the site actually needs.'],
+];
+
+const sampleRows = [
+  ['Incomplete security headers', 'Visible signal of pending basic hardening.', 'Configure initial CSP, Permissions-Policy, and X-Content-Type-Options per hosting.', 'Proposed'],
+  ['Form without recent delivery test', 'Possible silent lead loss.', 'Send controlled test, check destination, response, and delivery log.', 'Pending access'],
+  ['Sitemap published, not reviewed in Search Console', 'Coverage errors can go unnoticed for weeks.', 'Validate sitemap, review excluded pages, document findings.', 'Reviewed'],
+];
+
+const plans = [
+  {
+    name: 'Web Technical Diagnostic',
+    priceLabel: '$69',
+    priceApprox: 'one-time',
+    priceValue: '69',
+    note: 'Applied as a credit toward any implementation plan.',
+    intro: 'To know exactly what is technically neglected before paying for fixes.',
+    items: [
+      'External review with SecurityHeaders.com and Mozilla Observatory.',
+      'HTTPS, redirects, basic DNS, and email authentication check.',
+      'Sitemap, robots.txt, and visible form review.',
+      'Mini report with prioritized findings and a clear next step.',
+    ],
+  },
+  {
+    name: 'Basic Web Hardening',
+    priceLabel: 'From $499',
+    priceApprox: 'one-time',
+    priceValue: '499',
+    note: 'For simple or corporate sites with no executive deliverable requirement.',
+    intro: 'To fix the obvious and leave the site technically cleaner, with a verifiable record for the administrator.',
+    items: [
+      'Security header corrections and a reasonable browser policy.',
+      'Canonical HTTPS, clean redirects, and HSTS where applicable.',
+      'Review and cleanup of unnecessary response headers.',
+      'Technical before/after report for the site administrator.',
+    ],
+  },
+  {
+    name: 'Operational Review & Hardening',
+    priceLabel: 'From $899',
+    priceApprox: 'one-time',
+    priceValue: '899',
+    note: 'Covers the technical. No executive report or follow-up roadmap.',
+    intro: 'For sites that need full hardening and operational review, with no deliverable required for management.',
+    items: [
+      'Full web hardening: headers, canonical HTTPS, and HSTS.',
+      'Forms, Search Console, DNS, email auth, and visible error review.',
+      'Operational checklist for the next maintenance cycle.',
+      'Technical notes with prioritized pending items for the administrator.',
+    ],
+  },
+  {
+    name: 'Full Review with Executive Report',
+    priceLabel: 'From $999',
+    priceApprox: 'one-time',
+    priceValue: '999',
+    note: 'Recommended for sites that drive leads, reputation, or sales.',
+    intro: 'When the result needs to be presentable to non-technical stakeholders without translation, with full evidence and a roadmap for the next month.',
+    recommended: true,
+    items: [
+      'Executive report in business language, presentable to management without a technical intermediary.',
+      'Full operational review and hardening: headers, HTTPS, DNS, forms, Search Console.',
+      'Before/after evidence with screenshots, dates, and verifiable notes.',
+      'Monthly monitoring roadmap: defines exactly what would be covered in recurring support.',
+    ],
+  },
+  {
+    name: 'Monthly Technical Web Support',
+    priceLabel: 'From $279/mo',
+    priceApprox: 'per month',
+    priceValue: '279',
+    note: 'Natural continuation of the Full Review. No in-house hiring needed.',
+    intro: 'To maintain what was fixed and have external technical judgment reviewing the basics regularly.',
+    items: [
+      'Monthly review based on the roadmap delivered in the initial review.',
+      'Light monitoring and reasonable alerts.',
+      'Small fixes within an agreed block of hours.',
+      'Monthly brief report with status, applied changes, and next steps.',
+    ],
+  },
+];
+
+const useCases = [
+  ['WordPress SMB site', 'The site works, but no one is regularly checking plugins, forms, headers, backups, or Search Console.'],
+  ['Web agency', 'The agency designs and publishes sites but does not want to burden its team with low-margin recurring technical maintenance.'],
+  ['B2B company', 'The site receives leads. If the form fails or the technical signal degrades, the loss arrives before anyone notices.'],
+  ['Consultant or professional', 'The web presence is part of the reputation — a visible technical lapse reduces trust without needing a major incident.'],
+  ['Small e-commerce', 'Needs to check HTTPS, forms, errors, DNS/email, and basic technical signals without adding a full hire.'],
+];
+
+const faqs = [
+  ['Is this cybersecurity?', "It's a layer of web hygiene and basic hardening. It does not replace pentesting, compliance, or a deep security audit."],
+  ['What does a bad SecurityHeaders.com score mean?', 'It means some security headers expected by modern browsers are missing. It does not automatically mean the site is compromised.'],
+  ['Can you guarantee the site will be secure?', 'No. Anyone serious should not promise total security. I can fix visible configurations, document improvements, and reduce reasonable oversights.'],
+  ['Do you work with WordPress?', 'Yes, but the scope depends on hosting, plugins, available permissions, and the general state of the site.'],
+  ['Do you work with static sites, Astro, Next, or similar?', 'Yes. In many cases hardening is resolved in hosting, CDN, server rules, or framework headers.'],
+  ['Do you need access to the site?', 'For external diagnostic, not necessarily. For corrections, controlled access to hosting, CMS, repository, DNS, or the relevant provider is required.'],
+  ['What if you find something serious?', 'I report it with priority, propose a course of action, and if it exceeds the scope, I recommend escalating to a specialist or a deeper audit.'],
+  ['What if the diagnostic finds nothing relevant?', 'It can happen, especially with well-maintained sites. In that case the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The diagnostic fee applies regardless, but there are no surprises or additional charges.'],
+  ['Can the scope grow during the review?', 'No. The scope is defined by the contracted plan. If something beyond that scope appears during the review, it is documented in the report with a recommended next step — but not executed without prior agreement.'],
+  ['Why are you less expensive than a local consultant?', 'A US or EU technical consultant typically bills $100–150/hour. The Full Review at $999 is the equivalent of 7–10 hours — with an executive-ready report delivered, not just a call. All deliverables are in English.'],
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Web Technical Hygiene & Digital Trust',
+  url: canonical,
+  description:
+    'Web technical maintenance, basic hardening, light monitoring, and documentation for published sites without an internal technical team. Delivered in English.',
+  serviceType: [
+    'Web technical maintenance',
+    'Web hardening',
+    'Website technical review',
+    'Monthly web monitoring',
+  ],
+  areaServed: ['US', 'GB', 'EU', 'LATAM'],
+  provider: {
+    '@type': 'ProfessionalService',
+    name: 'Tooltician',
+    url: 'https://tooltician.com/en/',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Santiago',
+      addressCountry: 'CL',
+    },
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Web technical hygiene and maintenance plans',
+    itemListElement: plans.map((plan) => ({
+      '@type': 'Offer',
+      name: plan.name,
+      priceCurrency: 'USD',
+      price: plan.priceValue,
+      description: `${plan.priceLabel} (${plan.priceApprox}). ${plan.intro}`,
+      availability: 'https://schema.org/InStock',
+      url: canonical,
+    })),
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/en/' },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://tooltician.com/en/#services' },
+    { '@type': 'ListItem', position: 3, name: 'Web Technical Hygiene', item: canonical },
+  ],
+};
+---
+<BaseLayout
+  title="Web Technical Maintenance for Companies Without an Internal Team | Tooltician"
+  description="Review, hardening, monitoring, and documentation for published websites: security headers, HTTPS, DNS, forms, Search Console, and monthly technical support. Delivered in English."
+  lang="en"
+  canonical={canonical}
+  alternates={alternates}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
+  <Navbar lang="en" items={navItems} ctaHref="#contact" switchHref="/es/servicios/higiene-tecnica-web/" />
+
+  <main id="main">
+    <section class="service-hero" id="hero">
+      <div class="container service-hero__grid">
+        <div class="service-hero__main">
+          <span class="section-eyebrow reveal">Web Technical Hygiene · Tooltician</span>
+          <h1 class="section-title reveal reveal-delay-1">Web technical maintenance for companies that don't need to hire in-house</h1>
+          <p class="service-hero__lede reveal reveal-delay-2">
+            I review, fix, document, and monitor the basic technical points that are usually left unattended after a site goes live: security headers, HTTPS, DNS, forms, Search Console, visible errors, and small operational improvements.
+          </p>
+          <p class="service-hero__subcopy reveal reveal-delay-2">
+            All deliverables are in English. You get the technical depth of a seasoned developer at a fraction of the cost of a local consultant.
+          </p>
+          <div class="service-hero__actions reveal reveal-delay-2">
+            <a class="btn btn-primary" href="#contact">Review my site — from $69</a>
+            <a class="btn btn-ghost" href="#scope">See what's included</a>
+          </div>
+          <p class="service-hero__microcopy reveal reveal-delay-2">
+            No scaremongering. No promises of total security. Just clear technical review, verifiable fixes, and a before/after report.
+          </p>
+        </div>
+
+        <aside class="service-summary card-glass reveal reveal-delay-2" aria-label="Service summary">
+          <p class="service-summary__eyebrow">Typical fit</p>
+          <ul class="service-summary__list">
+            <li>Companies with a live site and no internal technical owner.</li>
+            <li>Agencies that want external support for recurring maintenance.</li>
+            <li>Teams that need technical judgment without hiring a full-time role.</li>
+          </ul>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">Initial signals</p>
+            <div class="service-summary__badges">
+              <span class="badge badge-accent">SecurityHeaders.com</span>
+              <span class="badge badge-accent">Mozilla Observatory</span>
+              <span class="badge badge-neutral">Before / after</span>
+              <span class="badge badge-neutral">Executive report</span>
+            </div>
+          </div>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">Entry point</p>
+            <p class="service-summary__price">$69</p>
+            <p class="service-summary__muted">Diagnostic. Applied as credit toward any implementation plan.</p>
+          </div>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">Availability</p>
+            <p class="service-summary__muted">2–3 new diagnostics per month. Response within 24–48 business hours.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="problem">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Problem</span>
+          <h2 class="section-title reveal">Your site can be online and still be technically abandoned</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            Many companies have a website, corporate email, forms, hosting, DNS, Analytics, Search Console, plugins, and landing pages. Once the site is published, no one is usually left checking whether any of that still works properly.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="card-glass reveal">
+            <h3 class="card-title">What typically happens</h3>
+            <p class="body-copy">
+              The certificate expires, a form stops sending emails, indexing errors appear, security headers go unconfigured, and the site starts showing signs of technical neglect. It doesn't always justify hiring someone internally to watch it — but leaving it completely unattended isn't a good option either.
+            </p>
+          </article>
+          <article class="card-glass reveal reveal-delay-1">
+            <h3 class="card-title">The real asymmetry</h3>
+            <p class="body-copy">
+              Ignoring technical maintenance costs little until something fails. Reviewing it periodically costs far less than improvising under pressure, losing form submissions for weeks, or discovering late that a critical configuration was broken all along.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scope">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Approach</span>
+          <h2 class="section-title reveal">External technical judgment, without the cost of an internal hire</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            Tooltician offers a lightweight layer of review, hardening, documentation, and monitoring for companies that need to keep their site technically sound — but don't have enough volume to justify hiring a developer, web administrator, or internal specialist.
+          </p>
+        </div>
+
+        <div class="card-glass service-principle reveal">
+          <p class="service-principle__headline">No scaremongering. No promises of total security.</p>
+          <p>
+            Many automated tools generate low scores for reasonable configurations or deliberate trade-offs. Tooltician doesn't sell manufactured urgency: I review the basics, separate urgent issues from noise, fix what's reasonable, and document what was done with verifiable evidence.
+          </p>
+          <p>
+            SecurityHeaders.com and Mozilla Observatory serve as a visible starting point, not a final verdict. The reading considers context, available access, site criticality, and the real cost of correction.
+          </p>
+        </div>
+
+        <div class="tools-note reveal">
+          <p class="tools-note__label">Tools as evidence, not as a complete diagnosis</p>
+          <p>
+            I use SecurityHeaders.com, Mozilla Observatory, Search Console, DNS review, form testing, and hosting signals as starting points. The final reading accounts for context, available access, site criticality, and reasonable correction cost.
+          </p>
+        </div>
+
+        <div class="tools-note reveal">
+          <p class="tools-note__label">Want a quick first signal?</p>
+          <p>
+            Enter your domain at <a href="https://securityheaders.com" target="_blank" rel="noopener noreferrer">SecurityHeaders.com</a> and <a href="https://observatory.mozilla.org" target="_blank" rel="noopener noreferrer">Mozilla Observatory</a>. A score of C or below generally indicates pending basic configurations. The technical diagnostic uses those results as a starting point, contextualizes them with the rest of the site, and separates what's urgent from automated noise.
+          </p>
+        </div>
+
+        <div class="service-review-grid">
+          {reviewItems.map(([title, body], index) => (
+            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
+              <h3 class="card-title">{title}</h3>
+              <p class="body-copy">{body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="process">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Process</span>
+          <h2 class="section-title reveal">How the technical diagnostic works</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            The first step is designed to be lightweight and concrete: look at what's visible, separate useful signals from automated noise, and leave an understandable path to correction.
+          </p>
+        </div>
+        <div class="process-list">
+          {processSteps.map(([step, title, body], index) => (
+            <article class={`process-item reveal reveal-delay-${(index % 2) + 1}`}>
+              <span class="process-item__num">{step}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="plans">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Plans & pricing</span>
+          <h2 class="section-title reveal">A simple entry point and a clear path to monthly support</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            The natural entry point is the Diagnostic ($69, credited toward implementation). Most simple sites scale to Basic Hardening. When the site drives leads, reputation, or sales, the Full Review closes better at just $100 more than the operational plan — and delivers the executive report and roadmap that open the path to monthly support.
+          </p>
+        </div>
+        <div class="plans-grid">
+          {plans.map((plan, index) => (
+            <article class={`card-glass plan-card ${plan.recommended ? 'plan-card--accent' : ''} reveal reveal-delay-${(index % 2) + 1}`}>
+              {plan.recommended && <span class="plan-card__flag">Recommended</span>}
+              <p class="plan-card__price">{plan.priceLabel}</p>
+              <p class="plan-card__approx">{plan.priceApprox}</p>
+              <h3 class="card-title">{plan.name}</h3>
+              <p class="plan-card__intro">{plan.intro}</p>
+              <p class="plan-card__note">{plan.note}</p>
+              <ul class="checklist checklist--compact">
+                {plan.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <p class="pricing-footnote reveal">{pricingNote}</p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="why-tooltician">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Why Tooltician</span>
+          <h2 class="section-title reveal">Not the same as hiring someone on Upwork or Fiverr</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            A platform freelancer can fix what you ask for. Tooltician reviews what you didn't know to ask about.
+          </p>
+        </div>
+        <div class="diff-grid">
+          <article class="card-glass reveal">
+            <p class="diff-grid__label diff-grid__label--alt">Generic freelancer</p>
+            <ul class="checklist checklist--compact">
+              <li>Executes the task you describe. If you don't describe it well, the result is incomplete.</li>
+              <li>Delivers what was promised. The broader technical context stays out of scope.</li>
+              <li>No operational documentation by default. No report of what was done or why.</li>
+              <li>No continuity. Each intervention is a new project with no history of the site.</li>
+            </ul>
+          </article>
+          <article class="card-glass reveal reveal-delay-1">
+            <p class="diff-grid__label diff-grid__label--accent">Tooltician</p>
+            <ul class="checklist checklist--compact">
+              <li>Reviews the full site, not just the symptom you reported.</li>
+              <li>Prioritizes findings by operational impact, not by what's easiest to fix.</li>
+              <li>Delivers verifiable before/after evidence and an executive report for management.</li>
+              <li>Builds a technical history of the site — each cycle starts where the previous one left off.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="tools-note reveal">
+          <p class="tools-note__label">The real difference</p>
+          <p>
+            Tooltician already builds automations, internal APIs, ETL pipelines, and production sites with handoff-ready documentation. This service applies the same logic to the day-to-day technical operation of published sites: judgment, evidence, and continuity — not just task execution.
+          </p>
+        </div>
+
+        <article class="card-glass reveal own-credential">
+          <p class="evidence-links__eyebrow">Own technical proof</p>
+          <p class="body-copy">
+            Tooltician applies these same practices to its own site: canonical HTTPS, fully configured email authentication (SPF, DKIM, DMARC), active security headers, and no uncontrolled external dependencies. The code is public and auditable.
+          </p>
+          <div class="evidence-links__items">
+            <a class="badge badge-accent" href="https://securityheaders.com/?q=tooltician.com&followRedirects=on" target="_blank" rel="noopener noreferrer">Verify on SecurityHeaders.com</a>
+            <a class="badge badge-neutral" href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">Public code</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="use-cases">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Use cases</span>
+          <h2 class="section-title reveal">Where this service fits best</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            Built for production sites that matter commercially but were left without a technical owner after the initial launch.
+          </p>
+        </div>
+        <div class="service-review-grid service-review-grid--cases">
+          {useCases.map(([title, body], index) => (
+            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
+              <h3 class="card-title">{title}</h3>
+              <p class="body-copy">{body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="card-glass evidence-links reveal">
+          <p class="evidence-links__eyebrow">Related projects</p>
+          <div class="evidence-links__items">
+            <a class="badge badge-accent" href="https://github.com/cortega26/DNSpect" target="_blank" rel="noopener noreferrer">DNSpect</a>
+            <a class="badge badge-accent" href="https://monedario.cl" target="_blank" rel="noopener noreferrer">Monedario</a>
+            <a class="badge badge-accent" href="https://elrincondeebano.com" target="_blank" rel="noopener noreferrer">El Rincón de Ébano</a>
+            <a class="badge badge-neutral" href="/en/#portfolio">Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="faq">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">FAQ</span>
+          <h2 class="section-title reveal">Questions worth answering precisely</h2>
+          <div class="divider reveal"></div>
+        </div>
+        <div class="faq-list">
+          {faqs.map(([question, answer], index) => (
+            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
+              <h3 class="card-title">{question}</h3>
+              <p class="body-copy">{answer}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Next step</span>
+          <h2 class="section-title reveal">Start with a reasonable diagnostic, not an inflated promise</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            If your site is already live and you want to know what's technically neglected, the right entry point is a brief, verifiable diagnostic.
+          </p>
+        </div>
+        <div class="grid-2">
+          <article class="card-glass reveal">
+            <h3 class="card-title">Web technical diagnostic — $69</h3>
+            <p class="body-copy">
+              Initial external review with a prioritized findings report and a clear next step. The cost is credited toward any implementation plan. No-commitment entry point.
+            </p>
+            <div class="risk-note">
+              <p>If the diagnostic finds nothing actionable, the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The fee applies regardless, but there are no surprises or additional charges.</p>
+            </div>
+            <div class="landing-cta-group">
+              <a class="btn btn-primary" href="mailto:carlos@tooltician.com?subject=Web%20Technical%20Diagnostic%20%E2%80%94%20Request&body=Domain%3A%0A%0AAnything%20specific%20you%20want%20reviewed%3F%0A">Request diagnostic</a>
+              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">Schedule a call</a>
+            </div>
+          </article>
+          <article class="card-glass reveal reveal-delay-1">
+            <h3 class="card-title">Direct brief</h3>
+            <p class="body-copy">
+              If you already know what you need, describe the site, current provider, visible problem, available access, and expected outcome. A complete brief gets a more precise proposal.
+            </p>
+            <div class="landing-cta-group">
+              <a class="btn btn-ghost" href="mailto:carlos@tooltician.com?subject=Web%20Technical%20Hygiene%20%E2%80%94%20Brief&body=Site%3A%0AHosting%20%2F%20CDN%20provider%3A%0AVisible%20problem%3A%0AAvailable%20access%3A%0AExpected%20outcome%3A">Send brief by email</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="intent-grid">
+          <a class="intent-link reveal" href="mailto:carlos@tooltician.com?subject=Web%20Technical%20Diagnostic&body=Domain%3A%0A%0AAnything%20specific%20you%20want%20reviewed%3F%0A">
+            <span>I want to review a live site</span>
+            <strong>Diagnostic from $69, with a brief report and clear priorities.</strong>
+          </a>
+          <a class="intent-link reveal reveal-delay-1" href="mailto:carlos@tooltician.com?subject=External%20Support%20for%20Agency&body=Agency%20%2F%20sites%20to%20maintain%3A%0A%0AContext%3A%0A">
+            <span>I run an agency and need external support</span>
+            <strong>Recurring technical review without burdening the design or dev team with low-margin tasks.</strong>
+          </a>
+          <a class="intent-link reveal reveal-delay-2" href="mailto:carlos@tooltician.com?subject=Monthly%20Web%20Technical%20Support&body=Domain%3A%0AContext%20of%20initial%20review%3A%0A">
+            <span>I want monthly support</span>
+            <strong>Light monitoring, small fixes, and operational documentation without an in-house hire.</strong>
+          </a>
+        </div>
+
+        <div class="outreach-note reveal">
+          <p>
+            If you arrived here from an observation about headers, forms, DNS, Search Console, or visible signs of incomplete maintenance — the scope is this: review, fix what's reasonable, and leave clear evidence. This is not a deep security audit or a promise of total security.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="en" langHref="/es/servicios/higiene-tecnica-web/" />
+</BaseLayout>
+
+<style>
+.service-hero {
+  padding-top: calc(var(--nav-height) + 5rem);
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.service-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.service-hero__lede,
+.service-hero__subcopy,
+.body-copy {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+
+.service-hero__lede {
+  font-size: 1.05rem;
+  max-width: 60ch;
+  margin-bottom: 1rem;
+}
+
+.service-hero__subcopy {
+  max-width: 58ch;
+  margin-bottom: 1.5rem;
+}
+
+.service-hero__actions,
+.landing-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.service-hero__actions {
+  margin-bottom: 1rem;
+}
+
+.service-hero__microcopy {
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  max-width: 58ch;
+}
+
+.service-summary {
+  display: grid;
+  gap: 1rem;
+}
+
+.service-summary__eyebrow,
+.evidence-links__eyebrow,
+.sample-report__eyebrow,
+.tools-note__label {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+}
+
+.service-summary__price {
+  font-family: var(--ff-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--clr-accent);
+  letter-spacing: -0.03em;
+}
+
+.service-summary__muted {
+  color: var(--clr-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.service-summary__list,
+.checklist {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.service-summary__list li,
+.checklist li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+}
+
+.service-summary__list li::before,
+.checklist li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: 700;
+}
+
+.service-summary__badges,
+.evidence-links__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.section-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.service-principle {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.service-principle p {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+
+.service-principle__headline {
+  font-family: var(--ff-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--clr-accent);
+  line-height: 1.3;
+}
+
+.tools-note,
+.access-note,
+.outreach-note {
+  border: 1px solid rgba(196, 160, 74, 0.16);
+  border-radius: var(--radius-md);
+  background: rgba(196, 160, 74, 0.04);
+  padding: var(--sp-6);
+}
+
+.tools-note {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.tools-note p,
+.access-note p,
+.outreach-note p {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+
+.tools-note a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.process-list {
+  display: grid;
+  border-top: 1px solid var(--clr-border);
+}
+
+.process-item {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.process-item__num {
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--clr-accent);
+}
+
+.process-item h3 {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.process-item p {
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+.service-review-grid,
+.plans-grid,
+.faq-list {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.service-review-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.service-review-grid--cases {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.plans-grid,
+.faq-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.plan-card {
+  display: grid;
+  gap: 0.85rem;
+  position: relative;
+}
+
+.plan-card--accent {
+  border-color: rgba(196, 160, 74, 0.24);
+  background: linear-gradient(180deg, rgba(196, 160, 74, 0.06), rgba(255, 255, 255, 0.03));
+}
+
+.plan-card__flag {
+  justify-self: start;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid rgba(196, 160, 74, 0.26);
+  border-radius: var(--radius-sm);
+  background: rgba(196, 160, 74, 0.08);
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plan-card__price {
+  font-family: var(--ff-label);
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.plan-card__approx {
+  margin-top: -0.55rem;
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.plan-card__intro,
+.plan-card__note {
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+.plan-card__note {
+  font-size: 0.82rem;
+  color: var(--clr-text-faint);
+}
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+.diff-grid__label {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.diff-grid__label--alt {
+  color: var(--clr-text-faint);
+}
+
+.diff-grid__label--accent {
+  color: var(--clr-accent);
+}
+
+.evidence-links,
+.own-credential {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.risk-note {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+}
+
+.risk-note p {
+  color: var(--clr-text-faint);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.pricing-footnote {
+  max-width: 68rem;
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.intent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+.intent-link {
+  display: grid;
+  gap: 0.5rem;
+  padding: var(--sp-6);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+
+.intent-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(196, 160, 74, 0.24);
+}
+
+.intent-link span {
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.intent-link strong {
+  color: var(--clr-text);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 980px) {
+  .service-hero__grid,
+  .service-review-grid,
+  .service-review-grid--cases,
+  .plans-grid,
+  .faq-list,
+  .intent-grid,
+  .diff-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .service-hero {
+    padding-top: calc(var(--nav-height) + 4rem);
+  }
+
+  .process-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+</style>

@@ -20,7 +20,7 @@ const navItems = [
 ];
 
 const pricingNote =
-  'Valores referenciales para Chile, expresados en UF y aproximados en CLP. La cotización final se emite en CLP según el valor de la UF del día de propuesta; proyectos fuera de Chile se cotizan en USD o moneda acordada según alcance, zona horaria y nivel de soporte requerido.';
+  'Valores referenciales para Chile, expresados en UF y aproximados en CLP. La cotización final se emite en CLP según el valor de la UF del día de propuesta. Para clientes fuera de Chile: diagnóstico desde USD $69, planes de implementación desde USD $499 y soporte mensual desde USD $279 — cotización en USD o moneda acordada según alcance, zona horaria y nivel de soporte requerido.';
 
 const reviewItems = [
   ['Headers de seguridad', 'Ayudan a que el navegador aplique restricciones razonables frente a cargas externas, iframes, permisos y exposición innecesaria de información.'],
@@ -308,8 +308,12 @@ const breadcrumbJsonLd = {
         </div>
 
         <div class="card-glass service-principle reveal">
+          <p class="service-principle__headline">Sin alarmismo. Sin promesas de seguridad total.</p>
           <p>
-            La idea es simple: revisar lo básico, corregir lo razonable, documentar lo hecho y avisar cuando algo importante requiere atención. SecurityHeaders.com y Mozilla Observatory sirven como gancho visible, pero el servicio no se reduce a una nota: se apoya en evidencia, contexto y pequeñas correcciones útiles.
+            Muchas herramientas automáticas generan notas bajas por configuraciones razonables o por trade-offs deliberados. Tooltician no vende urgencia fabricada: revisa lo básico, separa lo urgente del ruido, corrige lo razonable y documenta lo hecho con evidencia verificable.
+          </p>
+          <p>
+            SecurityHeaders.com y Mozilla Observatory sirven como punto de partida visible, no como veredicto final. La lectura considera contexto, acceso disponible, criticidad del sitio y costo real de corrección.
           </p>
         </div>
 
@@ -517,26 +521,38 @@ const breadcrumbJsonLd = {
     <section class="section section--alt" id="comparacion">
       <div class="container section-stack">
         <div class="section-header">
-          <span class="section-eyebrow reveal">Comparación</span>
-          <h2 class="section-title reveal">Cuando necesitas criterio técnico, pero no una contratación interna</h2>
+          <span class="section-eyebrow reveal">Por qué Tooltician</span>
+          <h2 class="section-title reveal">No es lo mismo que contratar a alguien en Workana o Fiverr</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            No toda empresa necesita un equipo técnico interno. Pero casi toda empresa con presencia web necesita que alguien mire lo básico con cierta regularidad.
+            Un freelancer de plataforma puede corregir lo que le pidas. Tooltician revisa lo que no sabías que tenías que pedir.
           </p>
         </div>
-        <div class="grid-2">
+        <div class="diff-grid">
           <article class="card-glass reveal">
-            <h3 class="card-title">Lo que cubre esta zona intermedia</h3>
-            <p class="body-copy">
-              Más serio que llamar al diseñador cuando algo se rompe, pero mucho más liviano que incorporar un cargo full time. La meta es revisar, corregir, documentar y estar disponible cuando aparecen problemas técnicos recurrentes.
-            </p>
+            <p class="diff-grid__label diff-grid__label--alt">Freelancer genérico</p>
+            <ul class="checklist checklist--compact">
+              <li>Ejecuta la tarea que describes. Si no la describes bien, el resultado es incompleto.</li>
+              <li>Entrega lo que prometió. El contexto técnico más amplio queda fuera de scope.</li>
+              <li>Sin documentación operativa por defecto. No hay reporte de qué se hizo ni por qué.</li>
+              <li>Sin continuidad. Cada intervención es un proyecto nuevo sin historia del sitio.</li>
+            </ul>
           </article>
           <article class="card-glass reveal reveal-delay-1">
-            <h3 class="card-title">Qué hace coherente la oferta</h3>
-            <p class="body-copy">
-              Tooltician ya construye automatizaciones, APIs internas, ETL, reporting y sitios productivos con documentación handoff-ready. Esta línea extiende la misma lógica hacia la operación técnica cotidiana de sitios ya publicados.
-            </p>
+            <p class="diff-grid__label diff-grid__label--accent">Tooltician</p>
+            <ul class="checklist checklist--compact">
+              <li>Revisa el sitio completo, no solo el síntoma que reportaste.</li>
+              <li>Prioriza hallazgos por impacto operativo, no por lo que es más fácil de corregir.</li>
+              <li>Entrega evidencia antes/después verificable y reporte ejecutivo para dirección.</li>
+              <li>Construye historia técnica del sitio — cada ciclo parte de donde quedó el anterior.</li>
+            </ul>
           </article>
+        </div>
+        <div class="tools-note reveal">
+          <p class="tools-note__label">La diferencia real</p>
+          <p>
+            Tooltician ya construye automatizaciones, APIs, ETL y sitios productivos con documentación handoff-ready. Esta línea aplica la misma lógica a la operación técnica cotidiana de sitios publicados: criterio, evidencia y continuidad, no solo ejecución de encargos.
+          </p>
         </div>
       </div>
     </section>
@@ -617,6 +633,9 @@ const breadcrumbJsonLd = {
             <p class="body-copy">
               Revisión externa inicial con reporte de prioridades y siguiente paso claro. El costo se descuenta si luego contratas la implementación. Punto de entrada sin compromiso.
             </p>
+            <div class="risk-note reveal">
+              <p>Si el diagnóstico no encuentra nada accionable, el reporte lo confirma con evidencia — y eso también tiene valor antes de cambiar hosting, lanzar una campaña o delegar el sitio a un tercero. El costo aplica igual, pero no hay sorpresas ni cobros adicionales.</p>
+            </div>
             <div class="landing-cta-group">
               <a class="btn btn-primary" href="mailto:carlos@tooltician.com?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20Web%20%E2%80%94%20Solicitud&body=Dominio%3A%0A%0A%C2%BFHay%20algo%20espec%C3%ADfico%20que%20quieres%20revisar%3F%0A">Solicitar diagnóstico</a>
               <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">Agendar revisión</a>
@@ -778,9 +797,35 @@ const breadcrumbJsonLd = {
   gap: 1.5rem;
 }
 
+.service-principle {
+  display: grid;
+  gap: 0.75rem;
+}
+
 .service-principle p {
   color: var(--clr-text-muted);
   line-height: 1.75;
+}
+
+.service-principle__headline {
+  font-family: var(--ff-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--clr-accent) !important;
+  line-height: 1.3 !important;
+}
+
+.risk-note {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  padding: var(--sp-4, 1rem);
+}
+
+.risk-note p {
+  color: var(--clr-text-faint);
+  font-size: 0.84rem;
+  line-height: 1.65;
 }
 
 .tools-note,
@@ -915,6 +960,29 @@ const breadcrumbJsonLd = {
 .own-credential {
   display: grid;
   gap: 0.85rem;
+}
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+.diff-grid__label {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.diff-grid__label--alt {
+  color: var(--clr-text-faint);
+}
+
+.diff-grid__label--accent {
+  color: var(--clr-accent);
 }
 
 .pricing-footnote {
@@ -1209,7 +1277,8 @@ const breadcrumbJsonLd = {
   .service-review-grid--cases,
   .plans-grid,
   .faq-list,
-  .intent-grid {
+  .intent-grid,
+  .diff-grid {
     grid-template-columns: 1fr;
   }
 

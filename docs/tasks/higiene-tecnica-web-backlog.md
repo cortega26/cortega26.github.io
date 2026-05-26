@@ -1,7 +1,7 @@
 # Program Backlog: Higiene Técnica Web — Service Page Audit & Funnel Improvement
 
 Version: `2026-05-26`
-Status: `Active — Session B complete`
+Status: `Active — Session D complete`
 Scope: `/es/servicios/higiene-tecnica-web/` landing page + integration points across `tooltician.com`
 Primary goal: maximize conversion funnel from awareness through contact, across all dimensions of the service page and its integration with the main portfolio.
 
@@ -281,13 +281,13 @@ Exit gate:
 | `HTW-B05` | B | Conversion | Audit above-the-fold for cold prospect | `P2` | `S` | `Done` |
 | `HTW-B06` | B | Content | Audit FAQ for missing objections | `P2` | `M` | `Done` |
 | `HTW-B07` | B | Conversion | Add self-diagnosis hook (SecurityHeaders.com) | `P3` | `S` | `Done` |
-| `HTW-D01` | D | Commercial | Explicit freelancer differentiation | `P1` | `M` | `Pending` |
-| `HTW-D02` | D | Commercial | Use Tooltician credentials as live proof | `P2` | `S` | `Pending` |
-| `HTW-D03` | D | Commercial | Elevate "sin alarmismo" to value prop | `P2` | `S` | `Pending` |
-| `HTW-D04` | D | Commercial | Add buyer risk mitigation for diagnostic | `P2` | `M` | `Pending` |
-| `HTW-D05` | D | Integration | Create EN landing page (full or stub) | `P1` | `L` | `Pending` |
-| `HTW-D06` | D | Commercial | Add USD pricing reference | `P2` | `S` | `Pending` |
-| `HTW-D07` | D | Brand | Audit brand voice consistency | `P2` | `M` | `Pending` |
+| `HTW-D01` | D | Commercial | Explicit freelancer differentiation | `P1` | `M` | `Done` |
+| `HTW-D02` | D | Commercial | Use Tooltician credentials as live proof | `P2` | `S` | `Done` |
+| `HTW-D03` | D | Commercial | Elevate "sin alarmismo" to value prop | `P2` | `S` | `Done` |
+| `HTW-D04` | D | Commercial | Add buyer risk mitigation for diagnostic | `P2` | `M` | `Done` |
+| `HTW-D05` | D | Integration | Create EN landing page (full or stub) | `P1` | `L` | `Done` |
+| `HTW-D06` | D | Commercial | Add USD pricing reference | `P2` | `S` | `Done` |
+| `HTW-D07` | D | Brand | Audit brand voice consistency | `P2` | `M` | `Done` |
 | `HTW-A01` | A | UX/UI | Merge #comparacion + #casos | `P1` | `M` | `Pending` |
 | `HTW-A02` | A | UX/UI | Redesign pricing as comparison table | `P2` | `M` | `Pending` |
 | `HTW-A03` | A | UX/UI | Fix mobile pricing scroll length | `P2` | `M` | `Pending` |
@@ -311,7 +311,7 @@ Exit gate:
 |---|---|---|---|---|---|
 | `2026-05-26` | `0 — Baseline & Pricing` | `HTW-001 through HTW-013` | `Pass` | `None` | `Start Session B — Conversión y Captación` |
 | `2026-05-26` | `B — Conversión` | `HTW-B01, HTW-B02, HTW-B03, HTW-B04, HTW-B05, HTW-B06, HTW-B07` | `Pass` | `None` | `Start Session D — Propuesta Comercial` |
-| `YYYY-MM-DD` | `D — Comercial` | `HTW-D0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
+| `2026-05-26` | `D — Comercial` | `HTW-D01, HTW-D02, HTW-D03, HTW-D04, HTW-D05, HTW-D06, HTW-D07` | `Pass` | `None` | `Start Session A — UX/UI y Presentación` |
 | `YYYY-MM-DD` | `A — UX/UI` | `HTW-A0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
 | `YYYY-MM-DD` | `C — SEO` | `HTW-C0X, ...` | `Pass/Fail` | `None or note` | `Single next move` |
 

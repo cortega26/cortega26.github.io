@@ -1,7 +1,7 @@
 # Scorecard: Higiene Técnica Web — Service Page
 
-Last updated: `2026-05-26` · After: `Session B — Conversión y Captación`
-Next session: `Session D — Propuesta Comercial y Coherencia`
+Last updated: `2026-05-26` · After: `Session D — Propuesta Comercial y Coherencia`
+Next session: `Session A — UX/UI y Presentación`
 Source of truth for session targets: `docs/tasks/higiene-tecnica-web-backlog.md`
 
 ---
@@ -25,7 +25,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 3 | Copy quality — page (hero, sections, CTAs) | `3` | `4` | `5` | — | `2026-05-26` |
 | 4 | Visual proof & credibility | `2` | `4` | `5` | — | `2026-05-26` |
 | 5 | ES home integration | `2` | `4` | `5` | — | `2026-05-26` |
-| 6 | EN integration | `0` | `2` | `4` | D (HTW-D05) | `2026-05-26` |
+| 6 | EN integration | `0` | `4` | `4` | — | `2026-05-26` |
 | 7 | Conversion path quality | `2` | `4` | `5` | — | `2026-05-26` |
 | 8 | Social proof | `0` | `3` | `4` | — | `2026-05-26` |
 | 9 | Urgency & availability signals | `0` | `3` | `3` | — | `2026-05-26` |
@@ -34,11 +34,11 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 12 | SEO — keyword alignment | `3` | `3` | `4` | C (HTW-C01) | — |
 | 13 | SEO — internal linking | `1` | `1` | `4` | C (HTW-C02) | — |
 | 14 | SEO — schema markup | `2` | `2` | `4` | C (HTW-C03) | — |
-| 15 | Commercial differentiation | `2` | `2` | `5` | D (HTW-D01) | — |
-| 16 | Buyer risk mitigation | `1` | `1` | `4` | D (HTW-D04) | — |
-| 17 | Brand voice coherence | `3` | `4` | `5` | — | `2026-05-26` |
+| 15 | Commercial differentiation | `2` | `4` | `5` | — | `2026-05-26` |
+| 16 | Buyer risk mitigation | `1` | `4` | `4` | — | `2026-05-26` |
+| 17 | Brand voice coherence | `3` | `5` | `5` | — | `2026-05-26` |
 
-**Composite score (mean):** `2.0 → 2.9 → 3.3` after Session B. Target: `4.4`
+**Composite score (mean):** `2.0 → 2.9 → 3.3 → 3.9` after Session D. Target: `4.4`
 
 ---
 
@@ -48,7 +48,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 |---|---|---:|---:|---:|
 | 0 — Baseline & Pricing | 1, 2, 3, 4, 5, 6, 7, 17 | `2.0` | `2.9` | `+0.9` |
 | B — Conversión | 7, 8, 9 | `2.9` | `3.3` | `+0.4` |
-| D — Comercial | 6, 15, 16, 17 | — | — | — |
+| D — Comercial | 6, 15, 16, 17 | `3.3` | `3.9` | `+0.6` |
 | A — UX/UI | 10, 11 | — | — | — |
 | C — SEO | 12, 13, 14 | — | — | — |
 
@@ -75,6 +75,7 @@ Update each dimension here with a one-line note when its score changes.
 
 ### 6 · EN integration
 - `2026-05-26 · Session 0`: 0 → 2. Service card added to EN ServicesSection (card #7, links to ES landing). No EN landing page yet — blocked on HTW-D05.
+- `2026-05-26 · Session D`: 2 → 4. Full EN landing page created at /en/services/web-technical-hygiene/ with USD pricing ($69/$499/$899/$999/$279mo), English copy, own proof section, freelancer differentiation, and bidirectional hreflang. EN services card updated to point to the new landing.
 
 ### 7 · Conversion path quality
 - `2026-05-26 · Session 0`: 2 → 3. Mailto CTA prefilled with subject + body template. Brief section H3 now shows price and value. Still going to generic portfolio form — blocked on HTW-B03.
@@ -102,10 +103,11 @@ Update each dimension here with a one-line note when its score changes.
 - No changes. Pending Session C / HTW-C03.
 
 ### 15 · Commercial differentiation
-- No changes. Pending Session D / HTW-D01.
+- `2026-05-26 · Session D`: 2 → 4. Explicit freelancer comparison grid added to #comparacion (Freelancer genérico vs. Tooltician, 4 concrete points each). "Sin alarmismo" elevated to named headline in the service principle card. Same treatment replicated on EN landing.
 
 ### 16 · Buyer risk mitigation
-- No changes. Pending Session D / HTW-D04.
+- `2026-05-26 · Session D`: 1 → 4. Risk note added to #brief diagnostic card: if nothing actionable is found, the report confirms with evidence; no additional charges; scope cannot expand without prior agreement. Also addressed in FAQ (Session B).
 
 ### 17 · Brand voice coherence
 - `2026-05-26 · Session 0`: 3 → 4. Service page eyebrow and H3 no longer expose implementation language. Tier naming language aligned with service tone.
+- `2026-05-26 · Session D`: 4 → 5. D07 audit confirmed: service page and portfolio use the same operator register — direct, outcome-first, no inflated promises, explicit scope limits. No changes required.

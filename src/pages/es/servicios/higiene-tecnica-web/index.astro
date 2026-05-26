@@ -66,13 +66,13 @@ const plans = [
     priceLabel: '1 UF',
     priceApprox: 'aprox. CLP $41.000',
     priceValue: '41000',
-    note: 'Descontable si luego se contrata implementación.',
-    intro: 'Ideal si quieres saber si el sitio está técnicamente descuidado antes de pagar por correcciones.',
+    note: 'El valor se aplica como crédito al contratar cualquier plan de implementación.',
+    intro: 'Para saber con certeza qué está técnicamente descuidado antes de pagar por correcciones.',
     items: [
-      'Revisión inicial con SecurityHeaders.com y Mozilla Observatory.',
-      'Chequeo de HTTPS, redirecciones, DNS básico y email auth básico.',
-      'Revisión rápida de sitemap, robots.txt y señales visibles.',
-      'Mini reporte con prioridades y siguiente paso recomendado.',
+      'Revisión externa con SecurityHeaders.com y Mozilla Observatory.',
+      'Chequeo de HTTPS, redirecciones, DNS básico y autenticación de correo.',
+      'Revisión de sitemap, robots.txt y formularios visibles.',
+      'Mini reporte con hallazgos priorizados y siguiente paso claro.',
     ],
   },
   {
@@ -80,13 +80,13 @@ const plans = [
     priceLabel: 'Desde 7 UF',
     priceApprox: 'aprox. CLP $284.000',
     priceValue: '284000',
-    note: 'Pensado para sitios simples o corporativos.',
-    intro: 'Para sitios que necesitan corregir lo evidente y dejar evidencia verificable de mejora.',
+    note: 'Para sitios simples o corporativos sin requerimiento de entregable ejecutivo.',
+    intro: 'Para corregir lo evidente y dejar el sitio técnicamente más sobrio, con registro verificable para el administrador.',
     items: [
-      'Corrección de headers básicos y política de navegador razonable.',
+      'Corrección de headers de seguridad y política de navegador razonable.',
       'HTTPS canónico, redirecciones limpias y HSTS cuando corresponde.',
-      'Revisión de exposición de headers innecesarios.',
-      'Reporte antes/después con recomendaciones siguientes.',
+      'Revisión y limpieza de headers de respuesta innecesarios.',
+      'Informe técnico antes/después para el administrador del sitio.',
     ],
   },
   {
@@ -94,28 +94,28 @@ const plans = [
     priceLabel: 'Desde 13 UF',
     priceApprox: 'aprox. CLP $527.000',
     priceValue: '527000',
-    note: 'Cubre lo técnico. Sin reporte ejecutivo ni mapa de seguimiento.',
-    intro: 'Para sitios que necesitan hardening y revisión operativa completa, sin requerimiento de entregable ejecutivo.',
+    note: 'Cubre lo técnico. Sin reporte ejecutivo ni hoja de ruta de seguimiento.',
+    intro: 'Para sitios que necesitan hardening y revisión operativa completa, sin requerimiento de entregable para dirección.',
     items: [
-      'Incluye todo lo anterior.',
-      'Revisión de formularios, Search Console, DNS/email y errores visibles.',
-      'Checklist operativo inicial para continuidad.',
-      'Notas técnicas con pendientes priorizados.',
+      'Hardening web completo: headers, HTTPS canónico y HSTS.',
+      'Revisión de formularios, Search Console, DNS, email auth y errores visibles.',
+      'Checklist operativo para el próximo ciclo de mantención.',
+      'Notas técnicas con pendientes priorizados para el administrador.',
     ],
   },
   {
-    name: 'Web Trust Pack',
+    name: 'Revisión Integral con Reporte Ejecutivo',
     priceLabel: 'Desde 15 UF',
     priceApprox: 'aprox. CLP $608.000',
     priceValue: '608000',
-    note: 'Mejor valor para sitios que influyen en leads, reputación o ventas.',
-    intro: 'Para empresas donde el resultado debe poder mostrarse a perfiles no técnicos sin traducción — con evidencia completa y camino de monitoreo.',
+    note: 'Recomendado para sitios que influyen en leads, reputación o ventas.',
+    intro: 'Para cuando el resultado debe poder mostrarse a perfiles no técnicos sin traducción, con evidencia completa y hoja de ruta para el mes siguiente.',
     recommended: true,
     items: [
-      'Incluye todo lo anterior.',
-      'Reporte ejecutivo para perfiles no técnicos.',
-      'Evidencia antes/después completa.',
-      'Mapa de monitoreo mensual y recomendaciones futuras.',
+      'Reporte ejecutivo en lenguaje de negocio, presentable a dirección sin intermediario técnico.',
+      'Revisión y hardening operativo completo: headers, HTTPS, DNS, formularios, Search Console.',
+      'Evidencia antes/después con capturas, fechas y notas verificables.',
+      'Hoja de ruta de monitoreo mensual: define exactamente qué entraría en el soporte recurrente.',
     ],
   },
   {
@@ -123,13 +123,13 @@ const plans = [
     priceLabel: 'Desde 4 UF/mes',
     priceApprox: 'aprox. CLP $162.000/mes',
     priceValue: '162000',
-    note: 'Modelo recurrente sin contratación interna.',
-    intro: 'Para empresas que quieren revisión periódica, pequeñas correcciones y alguien mirando lo básico con regularidad.',
+    note: 'Continuación natural de la Revisión Integral. Sin contratación interna.',
+    intro: 'Para mantener lo corregido y tener criterio técnico externo mirando lo básico con regularidad.',
     items: [
-      'Revisión mensual y reporte breve.',
+      'Revisión mensual basada en la hoja de ruta entregada en la revisión inicial.',
       'Monitoreo liviano y alertas razonables.',
-      'Pequeñas correcciones dentro de un bloque de horas.',
-      'Escalado gradual a planes Básico, Profesional u Operativo según carga.',
+      'Pequeñas correcciones dentro de un bloque de horas acordado.',
+      'Reporte breve mensual con estado, cambios aplicados y próximos pasos.',
     ],
   },
 ];
@@ -179,7 +179,7 @@ const jsonLd = {
   },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Planes de higiene técnica web',
+    name: 'Planes de higiene técnica y mantención web',
     itemListElement: plans.map((plan) => ({
       '@type': 'Offer',
       name: plan.name,
@@ -419,13 +419,13 @@ const breadcrumbJsonLd = {
           <h2 class="section-title reveal">Una puerta de entrada simple y un camino claro hacia soporte mensual</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            Los montos se presentan como referencia de partida. La mayoría de sitios simples parte por diagnóstico o hardening; cuando el sitio sostiene leads, reputación o ventas, el Web Trust Pack suele cerrar mejor la revisión por una diferencia acotada frente al paquete operativo.
+            El punto de entrada natural es el Diagnóstico (1 UF, descontable). La mayoría de sitios simples escala a Hardening Básico. Cuando el sitio sostiene leads, reputación o ventas, la Revisión Integral cierra mejor por una diferencia de 2 UF sobre el plan operativo — y entrega el reporte ejecutivo y la hoja de ruta que abren el camino al soporte mensual.
           </p>
         </div>
         <div class="plans-grid">
           {plans.map((plan, index) => (
             <article class={`card-glass plan-card ${plan.recommended ? 'plan-card--accent' : ''} reveal reveal-delay-${(index % 2) + 1}`}>
-              {plan.recommended && <span class="plan-card__flag">Mejor valor</span>}
+              {plan.recommended && <span class="plan-card__flag">Recomendado</span>}
               <p class="plan-card__price">{plan.priceLabel}</p>
               <p class="plan-card__approx">{plan.priceApprox}</p>
               <h3 class="card-title">{plan.name}</h3>

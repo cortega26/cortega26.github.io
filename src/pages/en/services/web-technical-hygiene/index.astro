@@ -304,13 +304,13 @@ const breadcrumbJsonLd = {
           </p>
         </div>
         <div class="grid-2">
-          <article class="card-glass reveal">
+          <article class="card-glass brief-card reveal">
             <h3 class="card-title">What typically happens</h3>
             <p class="body-copy">
               The certificate expires, a form stops sending emails, indexing errors appear, security headers go unconfigured, and the site starts showing signs of technical neglect. It doesn't always justify hiring someone internally to watch it — but leaving it completely unattended isn't a good option either.
             </p>
           </article>
-          <article class="card-glass reveal reveal-delay-1">
+          <article class="card-glass brief-card reveal reveal-delay-1">
             <h3 class="card-title">The real asymmetry</h3>
             <p class="body-copy">
               Ignoring technical maintenance costs little until something fails. Reviewing it periodically costs far less than improvising under pressure, losing form submissions for weeks, or discovering late that a critical configuration was broken all along.
@@ -739,6 +739,20 @@ const breadcrumbJsonLd = {
   gap: 0.75rem;
 }
 
+.brief-card {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.brief-card > :where(.card-title, .body-copy, .risk-note, .landing-cta-group) {
+  margin: 0;
+}
+
+.brief-card .landing-cta-group {
+  padding-top: 0.35rem;
+}
+
 .service-principle p {
   color: var(--clr-text-muted);
   line-height: 1.75;
@@ -1104,6 +1118,7 @@ td.pricing-compare__check:nth-child(5) {
 }
 
 .risk-note p {
+  margin: 0;
   color: var(--clr-text-faint);
   font-size: 0.84rem;
   line-height: 1.65;

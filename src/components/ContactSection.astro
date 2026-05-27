@@ -44,12 +44,17 @@ const en = {
   emailPh: "your@email.com",
   messageLabel: "Project brief",
   messagePh:
-    "Describe the current workflow, the bottleneck, who operates it, and the outcome you want...",
+    "Workflow and tools · Main bottleneck or failure · Who will operate it · Deadline or handoff constraint",
+  callAlt: "If you’d rather not type, book a 20-min call.",
+  replyNote: "Reply within 2 business days · Direct yes/no on fit · Free 30-min scoping call if it’s a fit · No sales sequence.",
   submit: "Send brief",
   submitSending: "Sending…",
   successMsg: "Message sent. I’ll reply within two business days.",
   errorMsg:
     "Something went wrong. Please email me directly at carlos@tooltician.com.",
+  serviceLead: undefined as string | undefined,
+  serviceCta: undefined as string | undefined,
+  serviceHref: undefined as string | undefined,
 };
 
 const es = {
@@ -94,7 +99,9 @@ const es = {
   emailLabel: "Correo",
   emailPh: "tu@correo.com",
   messageLabel: "Brief del proyecto",
-  messagePh: "Describe el flujo actual, el problema, quién lo opera y el resultado que quieres...",
+  messagePh: "Flujo y herramientas · Cuello de botella principal · Quién lo va a operar · Deadline o restricción de traspaso",
+  callAlt: "Si preferís no escribir, agenda una llamada de 20 min.",
+  replyNote: "Respuesta en 2 días hábiles · Sí o no directo según encaje · Llamada de scoping de 30 min si hay encaje · Sin secuencia de ventas.",
   submit: "Enviar brief",
   submitSending: "Enviando…",
   successMsg: "Mensaje enviado. Respondo en dos días hábiles.",
@@ -211,6 +218,12 @@ const c = lang === "en" ? en : es;
         <div class="form-heading">
           <h3>{c.formTitle}</h3>
           <p>{c.formIntro}</p>
+          <p class="form-call-alt">
+            {c.callAlt}{" "}
+            <a href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">
+              {lang === "en" ? "Book here →" : "Agendar aquí →"}
+            </a>
+          </p>
           <p class="form-policy-note">
             {c.policyLead}{' '}
             <a href={lang === "en" ? "/en/privacy/" : "/es/privacy/"}>{c.privacyLink}</a>{' '}
@@ -251,12 +264,15 @@ const c = lang === "en" ? en : es;
             placeholder={c.messagePh}
             required></textarea>
         </div>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          id="cf-submit"
-          data-sending={c.submitSending}>{c.submit}</button
-        >
+        <div class="form-submit-group">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="cf-submit"
+            data-sending={c.submitSending}>{c.submit}</button
+          >
+          <p class="form-reply-note">{c.replyNote}</p>
+        </div>
         <p
           class="form-success"
           id="form-success"
@@ -511,6 +527,33 @@ const c = lang === "en" ? en : es;
   .form-group input::placeholder,
   .form-group textarea::placeholder {
     color: var(--clr-text-faint);
+  }
+
+  .form-call-alt {
+    font-size: 0.85rem;
+    color: var(--clr-text-muted);
+    margin-top: 0.5rem;
+  }
+
+  .form-call-alt a {
+    color: var(--clr-accent);
+    font-weight: 600;
+  }
+
+  .form-call-alt a:hover {
+    color: var(--clr-accent-hover);
+  }
+
+  .form-submit-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .form-reply-note {
+    font-size: 0.78rem;
+    color: var(--clr-text-faint);
+    line-height: 1.55;
   }
 
   .form-success,

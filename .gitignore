@@ -35,3 +35,6 @@ output/
 
 # Local AI indexing
 .codegraph/
+
+#Internal
+Tooltician-audit.html

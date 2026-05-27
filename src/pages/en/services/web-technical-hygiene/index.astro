@@ -23,19 +23,34 @@ const navItems = [
 const pricingNote =
   'Prices in USD for clients in the United States, Canada, the United Kingdom, Europe, and other international markets. All deliverables — reports, checklists, and documentation — are produced in English and structured for direct handoff to non-technical stakeholders. For clients in Chile and Latin America, this service is available in Spanish at local rates (UF/CLP) — see the Spanish version.';
 
-const reviewItems = [
-  ['Security headers', 'Help browsers apply reasonable restrictions on external loads, iframes, permissions, and unnecessary information exposure.'],
-  ['HTTPS and redirects', 'Avoids duplicate paths, domain inconsistencies, and technical signals that erode trust or complicate indexing.'],
-  ['HSTS where applicable', 'Enforces consistent HTTPS use when the site configuration and context allow it without introducing operational friction.'],
-  ['Basic DNS', 'Delegation, critical records, and points where a small error can leave email or the site in a gray zone.'],
-  ['SPF, DKIM, and basic DMARC', "Doesn't replace a full email strategy, but helps reduce technical noise and avoidable misconfiguration signals."],
-  ['Critical forms', 'A site can look perfect while silently losing opportunities if the contact form fails quietly or delivers late.'],
-  ['Search Console, sitemap, and robots.txt', 'Detects indexing errors, coverage issues, and technical signals that no one usually checks after launch.'],
-  ['Relevant 404 errors', 'I fix or prioritize broken links and visible paths that affect experience, trust, and capture of existing demand.'],
-  ['WordPress plugins and maintenance', "If the site runs on WordPress, I review visible dependencies, basic update points, and signs of technical neglect."],
-  ['Header exposure and basic performance', 'I identify server responses that add noise, expose more than needed, or make the site less predictable.'],
-  ['Backups and recovery points', 'I verify whether a minimum reversibility baseline exists before touching anything important or delegating support to third parties.'],
-  ['Minimal operational documentation', 'The goal is not just to fix — but to leave it clear what was done, what remains pending, and where to look next time.'],
+const reviewGroups = [
+  {
+    title: 'Browser and transport security',
+    items: [
+      'Security headers — help browsers apply reasonable restrictions on external loads, iframes, permissions, and unnecessary information exposure.',
+      'HTTPS and redirects — avoid duplicate paths, domain inconsistencies, and technical signals that erode trust.',
+      'HSTS where applicable — enforces consistent HTTPS when the site configuration allows it without operational friction.',
+      'Header exposure and basic performance — identify server responses that add noise, expose more than needed, or make the site less predictable.',
+    ],
+  },
+  {
+    title: 'Email, DNS, and infrastructure',
+    items: [
+      'SPF, DKIM, and basic DMARC — reduces technical noise and avoidable misconfiguration signals, without replacing a full email strategy.',
+      'Basic DNS — delegation, critical records, and points where a small error can leave email or the site in a gray zone.',
+      'Backups and recovery points — verify whether a minimum reversibility baseline exists before touching anything important.',
+    ],
+  },
+  {
+    title: 'Content, forms, and ongoing operations',
+    items: [
+      'Critical forms — a site can look perfect while losing opportunities if the contact form fails quietly.',
+      'Search Console, sitemap, and robots.txt — detect indexing errors, coverage issues, and signals no one checks after launch.',
+      'Relevant 404 errors — fix or prioritize broken links that affect experience, trust, and capture of existing demand.',
+      'WordPress plugins and maintenance — review visible dependencies, update points, and signs of technical neglect.',
+      'Minimal operational documentation — leave it clear what was done, what remains pending, and where to look next time.',
+    ],
+  },
 ];
 
 const processSteps = [
@@ -136,8 +151,7 @@ const useCases = [
   ['WordPress SMB site', 'The site works, but no one is regularly checking plugins, forms, headers, backups, or Search Console.'],
   ['Web agency', 'The agency designs and publishes sites but does not want to burden its team with low-margin recurring technical maintenance.'],
   ['B2B company', 'The site receives leads. If the form fails or the technical signal degrades, the loss arrives before anyone notices.'],
-  ['Consultant or professional', 'The web presence is part of the reputation — a visible technical lapse reduces trust without needing a major incident.'],
-  ['Small e-commerce', 'Needs to check HTTPS, forms, errors, DNS/email, and basic technical signals without adding a full hire.'],
+  ['Consultant, professional, or small e-commerce', 'The web presence is part of the reputation or sales channel — a visible technical lapse reduces trust without needing a major incident. Needs HTTPS, forms, errors, DNS, and basic signals checked without adding a full hire.'],
 ];
 
 const faqs = [
@@ -341,11 +355,15 @@ const breadcrumbJsonLd = {
           </p>
         </div>
 
-        <div class="service-review-grid">
-          {reviewItems.map(([title, body], index) => (
-            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
-              <h3 class="card-title">{title}</h3>
-              <p class="body-copy">{body}</p>
+        <div class="review-groups">
+          {reviewGroups.map((group, i) => (
+            <article class={`card-glass reveal reveal-delay-${(i % 2) + 1}`}>
+              <h3 class="card-title">{group.title}</h3>
+              <ul class="review-group-list">
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>
@@ -526,12 +544,12 @@ const breadcrumbJsonLd = {
           <h2 class="section-title reveal">Questions worth answering precisely</h2>
           <div class="divider reveal"></div>
         </div>
-        <div class="faq-list">
+        <div class="faq-accordion">
           {faqs.map(([question, answer], index) => (
-            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
-              <h3 class="card-title">{question}</h3>
-              <p class="body-copy">{answer}</p>
-            </article>
+            <details class={`faq-item reveal reveal-delay-${(index % 2) + 1}`}>
+              <summary class="faq-question">{question}</summary>
+              <p class="faq-answer body-copy">{answer}</p>
+            </details>
           ))}
         </div>
       </div>
@@ -796,6 +814,34 @@ const breadcrumbJsonLd = {
   line-height: 1.7;
 }
 
+.review-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+.review-group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.review-group-list li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+  font-size: 0.88rem;
+}
+
+.review-group-list li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: 700;
+}
+
 .service-review-grid,
 .plans-grid,
 .faq-list {
@@ -811,8 +857,65 @@ const breadcrumbJsonLd = {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.faq-list {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.faq-accordion {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--clr-border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.faq-item[open] {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.faq-question {
+  padding: 1rem 0;
+  font-family: var(--ff-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  letter-spacing: -0.02em;
+  transition: color 150ms;
+}
+
+.faq-question:hover {
+  color: var(--clr-accent);
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: '+';
+  font-family: var(--ff-label);
+  font-size: 1rem;
+  color: var(--clr-accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: transform 200ms, opacity 150ms;
+}
+
+.faq-item[open] .faq-question::after {
+  content: '−';
+  opacity: 0.7;
+}
+
+.faq-answer {
+  padding: 0 0 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--clr-text-muted);
+  max-width: 68ch;
 }
 
 .plans-grid {
@@ -1050,9 +1153,9 @@ td.pricing-compare__check:nth-child(5) {
 
 @media (max-width: 980px) {
   .service-hero__grid,
+  .review-groups,
   .service-review-grid,
   .service-review-grid--cases,
-  .faq-list,
   .intent-grid,
   .diff-grid {
     grid-template-columns: 1fr;

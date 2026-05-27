@@ -41,6 +41,19 @@ const diagnosticPromise = [
   ['Crédito', 'Descontable', 'si luego contratas implementación'],
 ];
 
+const decisionTriggers = [
+  ['Solo quiero saber si hay algo mal', 'Parte con diagnóstico. Evitas pagar correcciones antes de saber cuáles importan.'],
+  ['El sitio genera consultas o ventas', 'La Revisión Integral suele ser la opción prudente: evidencia, reporte ejecutivo y hoja de ruta.'],
+  ['Nadie lo va a mirar después', 'El soporte mensual convierte la revisión en hábito operativo, no en evento aislado.'],
+  ['Vengo de una alerta automática', 'No todo puntaje bajo es urgente. Primero conviene separar señal real de ruido.'],
+];
+
+const judgmentExamples = [
+  ['No todo C es crisis', 'Una nota baja en una herramienta puede ser un pendiente real, una decisión razonable o una restricción del hosting. El diagnóstico explica cuál es cuál.'],
+  ['No todo hallazgo se corrige hoy', 'Si algo no afecta leads, reputación, correo o operación, puede quedar documentado para el siguiente ciclo en vez de inflar el alcance.'],
+  ['No todo acceso se pide de entrada', 'Primero miro lo visible. Solo pido hosting, DNS, CMS o Search Console cuando la corrección lo justifica.'],
+];
+
 const reviewGroups = [
   {
     title: 'Seguridad de navegador y transporte',
@@ -128,7 +141,7 @@ const plans = [
     priceLabel: 'Desde 13 UF',
     priceApprox: 'aprox. CLP $527.000',
     priceValue: '527000',
-    note: 'Cubre lo técnico. Sin reporte ejecutivo ni hoja de ruta de seguimiento.',
+    note: 'Opción útil si hay administrador técnico. Si debes mostrar resultados a gerencia, la Integral suele cerrar mejor por 2 UF más.',
     intro: 'Para sitios que necesitan hardening y revisión operativa completa, sin requerimiento de entregable para dirección.',
     items: [
       'Hardening web completo: headers, HTTPS canónico y HSTS.',
@@ -188,23 +201,23 @@ const tableFeatures = [
 
 const commercialPaths = [
   {
-    label: 'Solo saber qué pasa',
+    label: 'Antes de corregir, entiende',
     title: 'Diagnóstico Técnico Web',
     price: '1 UF',
-    body: 'Para dueños o administradores que quieren saber si el sitio tiene descuidos visibles antes de pagar correcciones.',
+    body: 'Para saber si el sitio tiene descuidos visibles antes de pagar por correcciones. Reduce el arrepentimiento: primero criterio, después implementación.',
     cta: 'Solicitar diagnóstico de 1 UF',
     href: diagnosticMailto,
   },
   {
-    label: 'Corregir lo básico',
+    label: 'Corregir sin sobreactuar',
     title: 'Hardening o Revisión Operativa',
     price: 'desde 7 UF',
-    body: 'Para corregir headers, HTTPS, DNS, formularios, Search Console y dejar evidencia técnica antes/después.',
+    body: 'Para corregir lo que sí vale la pena tocar: headers, HTTPS, DNS, formularios, Search Console y evidencia antes/después.',
     cta: 'Ver planes de corrección',
     href: '#planes-detalle',
   },
   {
-    label: 'Delegar revisión continua',
+    label: 'Dejar de acordarse tarde',
     title: 'Soporte Técnico Web Mensual',
     price: 'desde 4 UF/mes',
     body: 'Para que alguien revise lo básico con regularidad sin contratar un perfil técnico interno.',
@@ -311,10 +324,10 @@ const breadcrumbJsonLd = {
           <span class="section-eyebrow reveal">Higiene Técnica Web · Tooltician</span>
           <h1 class="section-title reveal reveal-delay-1">Tu sitio funciona, pero nadie está cuidando lo técnico</h1>
           <p class="service-hero__lede reveal reveal-delay-2">
-            Lo publicado también se deteriora: formularios que dejan de avisar, correos que caen en spam, errores SEO invisibles, redirecciones raras y señales técnicas que reducen confianza sin hacer ruido.
+            El riesgo no es que el sitio explote. Es que falle en silencio: formularios que no avisan, correos que caen en spam, errores SEO invisibles y señales técnicas que reducen confianza justo cuando alguien quiere contactarte.
           </p>
           <p class="service-hero__subcopy reveal reveal-delay-2">
-            Reviso lo básico, separo señales reales de ruido automático y te dejo una lista priorizada, evidencia y una recomendación clara de siguiente paso. No necesitas contratar a alguien full-time para que alguien mire lo básico.
+            Antes de pagar por correcciones, confirma qué vale la pena corregir. Reviso lo básico, separo señales reales de ruido automático y te dejo evidencia con una recomendación clara de siguiente paso.
           </p>
           <div class="service-hero__actions reveal reveal-delay-2">
             <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
@@ -337,7 +350,7 @@ const breadcrumbJsonLd = {
             ))}
           </div>
           <a class="btn btn-primary service-summary__cta" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
-          <p class="service-summary__muted">Ideal para pymes con sitio publicado, leads o reputación en juego, pero sin responsable técnico interno.</p>
+          <p class="service-summary__muted">Ideal para pymes con sitio publicado, leads o reputación en juego, pero sin responsable técnico interno. Es una compra prudente: saber antes de gastar.</p>
         </aside>
       </div>
     </section>
@@ -346,7 +359,7 @@ const breadcrumbJsonLd = {
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Problema</span>
-          <h2 class="section-title reveal">Lo publicado también se deteriora</h2>
+          <h2 class="section-title reveal">Lo que no se mira, se vuelve invisible hasta que cuesta</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
             Muchas pymes tienen sitio web, correo corporativo, formularios, hosting, DNS, Analytics, Search Console, plugins y landing pages. Una vez publicado el sitio, nadie queda mirando si todo eso sigue funcionando bien.
@@ -376,17 +389,39 @@ const breadcrumbJsonLd = {
           </article>
         </div>
         <div class="inline-cta reveal">
-          <p>Si quieres saber qué está pasando sin partir por una implementación grande, empieza por el diagnóstico de 1 UF.</p>
+          <p>Antes de pagar por correcciones, confirma cuáles valen la pena. El diagnóstico existe para evitar sobregasto, no para inflar alcance.</p>
           <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="diagnostico">
+    <section class="section" id="decision">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Autodiagnóstico</span>
+          <h2 class="section-title reveal">Elige según tu situación, no según una tabla</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            La mejor propuesta no es la más grande: es la que calza con el riesgo real del sitio. Si una de estas frases te suena conocida, ya tienes un punto de partida.
+          </p>
+        </div>
+        <div class="decision-grid">
+          {decisionTriggers.map(([trigger, response], index) => (
+            <article class={`decision-card reveal reveal-delay-${(index % 2) + 1}`}>
+              <p class="decision-card__prompt">Si estás pensando:</p>
+              <h3>{trigger}</h3>
+              <p>{response}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="diagnostico">
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Diagnóstico 1 UF</span>
-          <h2 class="section-title reveal">Una entrada simple antes de pagar por correcciones</h2>
+          <h2 class="section-title reveal">Compra tranquilidad antes de comprar implementación</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
             El diagnóstico separa señales reales de ruido automático. Sales con una lista priorizada, evidencia y una recomendación de siguiente paso: cerrar, corregir lo básico o pasar a soporte mensual.
@@ -395,8 +430,8 @@ const breadcrumbJsonLd = {
         <div class="diagnostic-band reveal">
           <div class="diagnostic-band__copy">
             <p class="diagnostic-band__eyebrow">Diagnóstico técnico web</p>
-            <h3>1 UF, descontable si contratas implementación</h3>
-            <p>Revisión externa inicial de dominio, HTTPS, formularios visibles, DNS básico, correo, sitemap, robots.txt, señales públicas y herramientas de referencia.</p>
+            <h3>1 UF para saber qué corregir, qué ignorar y qué revisar después</h3>
+            <p>Revisión externa inicial de dominio, HTTPS, formularios visibles, DNS básico, correo, sitemap, robots.txt, señales públicas y herramientas de referencia. Si luego implementamos, se descuenta.</p>
           </div>
           <div class="diagnostic-strip">
             {diagnosticPromise.map(([label, value, detail]) => (
@@ -431,6 +466,16 @@ const breadcrumbJsonLd = {
           <p>
             SecurityHeaders.com y Mozilla Observatory sirven como punto de partida visible, no como veredicto final. La lectura considera contexto, acceso disponible, criticidad del sitio y costo real de corrección.
           </p>
+        </div>
+
+        <div class="judgment-grid">
+          {judgmentExamples.map(([title, body], index) => (
+            <article class={`judgment-card reveal reveal-delay-${(index % 2) + 1}`}>
+              <p class="judgment-card__label">Prueba de criterio</p>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
         </div>
 
         <div class="tools-note reveal">
@@ -616,7 +661,7 @@ const breadcrumbJsonLd = {
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Planes y precios</span>
-          <h2 class="section-title reveal">Tres caminos: saber, corregir o delegar</h2>
+          <h2 class="section-title reveal">Tres decisiones, no cinco precios compitiendo</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
             Para una pyme, la decisión no debería partir con una tabla enorme. Primero elige el nivel de tranquilidad que necesitas: entender qué pasa, corregir lo evidente o delegar una revisión periódica.
@@ -632,6 +677,15 @@ const breadcrumbJsonLd = {
               <a class={index === 0 ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm'} href={path.href}>{path.cta}</a>
             </article>
           ))}
+        </div>
+        <div class="decoy-note reveal">
+          <div>
+            <p class="decoy-note__label">Recomendación honesta</p>
+            <h3>Si el sitio influye en leads o reputación, la Integral suele ser la opción racional.</h3>
+          </div>
+          <p>
+            La Revisión Operativa cubre lo técnico desde 13 UF. Por 2 UF más, la Integral agrega reporte ejecutivo, evidencia completa y hoja de ruta para seguimiento. No es “más caro porque sí”: reduce traducción interna y deja una decisión presentable para dirección.
+          </p>
         </div>
         <div class="pricing-detail" id="planes-detalle">
           <div class="section-subheader reveal">
@@ -689,7 +743,7 @@ const breadcrumbJsonLd = {
         </div>
         <p class="pricing-footnote reveal">{pricingNote}</p>
         <div class="inline-cta reveal">
-          <p>Si todavía no sabes qué plan corresponde, no elijas plan: parte con el diagnóstico.</p>
+          <p>Si todavía no sabes qué plan corresponde, esa duda ya es información: parte con el diagnóstico y evita comprar de más.</p>
           <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
         </div>
       </div>
@@ -766,6 +820,10 @@ const breadcrumbJsonLd = {
             Tooltician ya construye automatizaciones, APIs, ETL y sitios productivos con documentación handoff-ready. Esta línea aplica la misma lógica a la operación técnica cotidiana de sitios publicados: criterio, evidencia y continuidad, no solo ejecución de encargos.
           </p>
         </div>
+        <div class="inline-cta reveal">
+          <p>La mejor señal de confianza es poder decir “esto no hace falta tocarlo todavía”. Ese es el tipo de criterio que compras con el diagnóstico.</p>
+          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+        </div>
       </div>
     </section>
 
@@ -801,7 +859,7 @@ const breadcrumbJsonLd = {
           <article class="card-glass brief-card reveal">
             <h3 class="card-title">Diagnóstico técnico web — 1 UF</h3>
             <p class="body-copy">
-              Revisión externa inicial con reporte de prioridades, evidencia y siguiente paso claro. El costo se descuenta si luego contratas implementación.
+              Revisión externa inicial con reporte de prioridades, evidencia y siguiente paso claro. Es una forma barata de evitar dos errores caros: ignorar algo importante o pagar por algo que no importaba.
             </p>
             <div class="risk-note">
               <p>Si el diagnóstico no encuentra nada accionable, el reporte lo confirma con evidencia — y eso también tiene valor antes de cambiar hosting, lanzar una campaña o delegar el sitio a un tercero. El costo aplica igual, pero no hay sorpresas ni cobros adicionales.</p>
@@ -1019,34 +1077,47 @@ const breadcrumbJsonLd = {
 }
 
 .symptom-grid,
-.commercial-paths {
+.decision-grid,
+.commercial-paths,
+.judgment-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--sp-4);
 }
 
 .symptom-card,
-.commercial-path {
+.decision-card,
+.commercial-path,
+.judgment-card {
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.03);
   padding: var(--sp-5, 1.25rem);
 }
 
-.symptom-card {
+.symptom-card,
+.decision-card,
+.judgment-card {
   display: grid;
   gap: 0.55rem;
 }
 
-.symptom-card__num {
+.symptom-card__num,
+.decision-card__prompt,
+.judgment-card__label,
+.decoy-note__label {
   font-family: var(--ff-label);
   font-size: 0.68rem;
   color: var(--clr-accent);
   letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .symptom-card h3,
-.commercial-path h3 {
+.decision-card h3,
+.commercial-path h3,
+.judgment-card h3,
+.decoy-note h3 {
   font-family: var(--ff-heading);
   font-size: 1rem;
   line-height: 1.2;
@@ -1054,10 +1125,50 @@ const breadcrumbJsonLd = {
 }
 
 .symptom-card p,
-.commercial-path p {
+.decision-card p,
+.commercial-path p,
+.judgment-card p,
+.decoy-note p {
   color: var(--clr-text-muted);
   font-size: 0.86rem;
   line-height: 1.6;
+}
+
+.decision-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.decision-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 11rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at 100% 0%, rgba(196, 160, 74, 0.1), transparent 34%);
+}
+
+.decision-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 1rem 1rem auto;
+  width: 3rem;
+  height: 1px;
+  background: var(--clr-accent);
+  opacity: 0.28;
+}
+
+.decision-card h3 {
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  max-width: 18ch;
+}
+
+.judgment-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.judgment-card {
+  border-color: rgba(196, 160, 74, 0.16);
+  background: rgba(196, 160, 74, 0.035);
 }
 
 .inline-cta {
@@ -1294,6 +1405,23 @@ const breadcrumbJsonLd = {
 
 .pricing-detail {
   padding-top: 0.5rem;
+}
+
+.decoy-note {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--sp-6);
+  align-items: start;
+  border: 1px solid rgba(196, 160, 74, 0.22);
+  border-left: 3px solid var(--clr-accent);
+  border-radius: var(--radius-md);
+  background: rgba(196, 160, 74, 0.045);
+  padding: var(--sp-6);
+}
+
+.decoy-note h3 {
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  margin-top: 0.35rem;
 }
 
 .faq-accordion {
@@ -1834,7 +1962,10 @@ td.pricing-compare__check:nth-child(5) {
   .service-hero__grid,
   .diagnostic-band,
   .symptom-grid,
+  .decision-grid,
   .commercial-paths,
+  .judgment-grid,
+  .decoy-note,
   .review-groups,
   .service-review-grid,
   .service-review-grid--cases,

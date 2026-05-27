@@ -1,0 +1,4 @@
+Contact: mailto:carlos@tooltician.com
+Preferred-Languages: en, es
+Expires: 2027-05-27T00:00:00.000Z
+Canonical: https://tooltician.com/.well-known/security.txt

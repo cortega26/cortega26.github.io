@@ -93,14 +93,6 @@ const deliverables = [
   'Recomendaciones futuras cuando algo excede el alcance razonable.',
 ];
 
-const processSteps = [
-  ['01', 'Revisión externa inicial', 'Levanto señales visibles sin pedir acceso: headers, HTTPS, redirecciones, DNS, sitemap, robots.txt, formularios visibles y herramientas públicas.'],
-  ['02', 'Hallazgos priorizados', 'Ordeno lo encontrado por impacto operativo, dificultad de corrección y urgencia razonable, evitando dramatizar notas automáticas.'],
-  ['03', 'Corrección con acceso controlado', 'Cuando hay permisos disponibles, aplico los ajustes acordados en hosting, CMS, CDN, DNS, repositorio o proveedor correspondiente.'],
-  ['04', 'Evidencia antes/después', 'Dejo capturas, fecha de revisión, checklist y notas técnicas para que el cambio sea verificable y transferible.'],
-  ['05', 'Cierre o soporte mensual', 'Recomiendo cerrar, implementar una segunda fase o pasar a revisión mensual según lo que realmente necesita el sitio.'],
-];
-
 const sampleRows = [
   ['Formulario sin prueba reciente', 'Posible pérdida silenciosa de leads.', 'Enviar prueba controlada, revisar destino, respuesta y registro de entrega.', 'Prioridad alta'],
   ['Correo corporativo sin DKIM activo', 'Mayor probabilidad de spam y menor confianza al responder cotizaciones.', 'Configurar firma digital y verificar propagación DNS.', 'Prioridad alta'],
@@ -349,7 +341,6 @@ const breadcrumbJsonLd = {
               </div>
             ))}
           </div>
-          <a class="btn btn-primary service-summary__cta" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
           <p class="service-summary__muted">Ideal para pymes con sitio publicado, leads o reputación en juego, pero sin responsable técnico interno. Es una compra prudente: saber antes de gastar.</p>
         </aside>
       </div>
@@ -387,10 +378,6 @@ const breadcrumbJsonLd = {
               Ignorar el mantenimiento técnico cuesta poco hasta que algo falla. Revisarlo periódicamente cuesta mucho menos que improvisar bajo presión, perder formularios por semanas o descubrir tarde que una configuración crítica estaba rota desde hace tiempo.
             </p>
           </article>
-        </div>
-        <div class="inline-cta reveal">
-          <p>Antes de pagar por correcciones, confirma cuáles valen la pena. El diagnóstico existe para evitar sobregasto, no para inflar alcance.</p>
-          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
         </div>
       </div>
     </section>
@@ -487,13 +474,6 @@ const breadcrumbJsonLd = {
           </p>
         </div>
 
-        <div class="tools-note reveal">
-          <p class="tools-note__label">¿Quieres una primera señal ahora?</p>
-          <p>
-            Ingresa tu dominio en <a href="https://securityheaders.com" target="_blank" rel="noopener noreferrer">SecurityHeaders.com</a> y en <a href="https://observatory.mozilla.org" target="_blank" rel="noopener noreferrer">Mozilla Observatory</a>. Una nota de C o menos generalmente indica configuraciones básicas pendientes. El diagnóstico técnico toma esos datos como punto de partida, los contextualiza con el resto del sitio y separa lo urgente del ruido automático.
-          </p>
-        </div>
-
         <div class="review-groups">
           {reviewGroups.map((group, i) => (
             <article class={`card-glass reveal reveal-delay-${(i % 2) + 1}`}>
@@ -503,30 +483,6 @@ const breadcrumbJsonLd = {
                   <li>{item}</li>
                 ))}
               </ul>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--alt" id="proceso">
-      <div class="container section-stack">
-        <div class="section-header">
-          <span class="section-eyebrow reveal">Proceso</span>
-          <h2 class="section-title reveal">Cómo funciona el diagnóstico técnico</h2>
-          <div class="divider reveal"></div>
-          <p class="section-subtitle reveal">
-            El primer paso está diseñado para ser liviano y concreto: mirar lo visible, separar señales útiles de ruido automático y dejar un camino de corrección entendible.
-          </p>
-        </div>
-        <div class="process-list">
-          {processSteps.map(([step, title, body], index) => (
-            <article class={`process-item reveal reveal-delay-${(index % 2) + 1}`}>
-              <span class="process-item__num">{step}</span>
-              <div>
-                <h3>{title}</h3>
-                <p>{body}</p>
-              </div>
             </article>
           ))}
         </div>
@@ -643,11 +599,6 @@ const breadcrumbJsonLd = {
           <div class="exec-report__footer">
             <p>Este reporte está redactado en lenguaje de negocio para ser entregado directamente a gerencia o dirección, sin necesidad de intermediario técnico. El detalle técnico completo queda en documento separado para el administrador del sitio.</p>
           </div>
-        </div>
-
-        <div class="inline-cta reveal">
-          <p>Si este tipo de evidencia te serviría para tomar una decisión, el primer paso es el diagnóstico de 1 UF.</p>
-          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
         </div>
 
         <div class="access-note reveal">
@@ -822,10 +773,6 @@ const breadcrumbJsonLd = {
             Tooltician ya construye automatizaciones, APIs, ETL y sitios productivos con documentación handoff-ready. Esta línea aplica la misma lógica a la operación técnica cotidiana de sitios publicados: criterio, evidencia y continuidad, no solo ejecución de encargos.
           </p>
         </div>
-        <div class="inline-cta reveal">
-          <p>La mejor señal de confianza es poder decir “esto no hace falta tocarlo todavía”. Ese es el tipo de criterio que compras con el diagnóstico.</p>
-          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
-        </div>
       </div>
     </section>
 
@@ -857,8 +804,8 @@ const breadcrumbJsonLd = {
             Si el sitio ya está publicado y quieres saber qué está técnicamente descuidado, el punto de entrada correcto es un diagnóstico breve y verificable. Después puedes cerrar, corregir lo básico o delegar revisión mensual.
           </p>
         </div>
-        <div class="grid-2">
-          <article class="card-glass brief-card reveal">
+        <div class="final-action card-glass reveal">
+          <article class="brief-card">
             <h3 class="card-title">Diagnóstico técnico web — 1 UF</h3>
             <p class="body-copy">
               Revisión externa inicial con reporte de prioridades, evidencia y siguiente paso claro. Es una forma barata de evitar dos errores caros: ignorar algo importante o pagar por algo que no importaba.
@@ -871,31 +818,6 @@ const breadcrumbJsonLd = {
               <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">Agendar revisión</a>
             </div>
           </article>
-          <article class="card-glass brief-card reveal reveal-delay-1">
-            <h3 class="card-title">Brief directo</h3>
-            <p class="body-copy">
-              Si ya sabes lo que necesitas, describe el sitio, el proveedor actual, el problema visible, los accesos disponibles y el resultado esperado. El brief completo recibe más contexto y genera una propuesta más precisa.
-            </p>
-            <div class="landing-cta-group">
-              <a class="btn btn-ghost" href="/es/#contact-form">Abrir brief</a>
-              <a class="btn btn-ghost" href="mailto:carlos@tooltician.com?subject=Higiene%20T%C3%A9cnica%20Web%20%E2%80%94%20Brief&body=Sitio%3A%0AProveedor%20de%20hosting%2FCDN%3A%0AProblema%20visible%3A%0AAccesos%20disponibles%3A%0AResultado%20esperado%3A">Correo directo</a>
-            </div>
-          </article>
-        </div>
-
-        <div class="intent-grid">
-          <a class="intent-link reveal" href={diagnosticMailto}>
-            <span>Quiero revisar un sitio publicado</span>
-            <strong>Diagnóstico inicial desde 1 UF para Chile, con reporte breve y prioridades claras.</strong>
-          </a>
-          <a class="intent-link reveal reveal-delay-1" href="mailto:carlos@tooltician.com?subject=Soporte%20Externo%20para%20Agencia&body=Agencia%20%2F%20sitios%20a%20mantener%3A%0A%0AContexto%3A%0A">
-            <span>Tengo una agencia y necesito soporte externo</span>
-            <strong>Revisión técnica recurrente sin cargar al equipo de diseño o desarrollo con tareas de bajo margen.</strong>
-          </a>
-          <a class="intent-link reveal reveal-delay-2" href="mailto:carlos@tooltician.com?subject=Soporte%20T%C3%A9cnico%20Web%20Mensual&body=Dominio%3A%0AContexto%20de%20la%20revisi%C3%B3n%20inicial%3A%0A">
-            <span>Quiero soporte mensual</span>
-            <strong>Monitoreo liviano, pequeñas correcciones y documentación operativa sin contratación interna.</strong>
-          </a>
         </div>
 
         <div class="outreach-note reveal">
@@ -990,10 +912,6 @@ const breadcrumbJsonLd = {
   color: var(--clr-text-muted);
   font-size: 0.84rem;
   line-height: 1.55;
-}
-
-.service-summary__cta {
-  justify-self: start;
 }
 
 .diagnostic-band {
@@ -1312,41 +1230,6 @@ const breadcrumbJsonLd = {
   font-family: var(--ff-heading);
   font-size: 1rem;
   margin-bottom: 0.5rem;
-}
-
-.process-list {
-  display: grid;
-  border-top: 1px solid var(--clr-border);
-}
-
-.process-item {
-  display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
-  gap: 1rem;
-  padding: 1.25rem 0;
-  border-bottom: 1px solid var(--clr-border);
-}
-
-.process-item__num {
-  font-family: var(--ff-heading);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--clr-accent);
-  opacity: 0.35;
-  line-height: 1;
-  padding-top: 0.1rem;
-}
-
-.process-item h3 {
-  font-family: var(--ff-heading);
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
-}
-
-.process-item p {
-  color: var(--clr-text-muted);
-  line-height: 1.7;
 }
 
 .review-groups {
@@ -1695,6 +1578,13 @@ td.pricing-compare__check:nth-child(5) {
   line-height: 1.7;
 }
 
+.final-action {
+  max-width: 48rem;
+  border-color: rgba(196, 160, 74, 0.24);
+  background:
+    linear-gradient(180deg, rgba(196, 160, 74, 0.07), rgba(255, 255, 255, 0.03));
+}
+
 .sample-report {
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
@@ -1746,41 +1636,6 @@ td.pricing-compare__check:nth-child(5) {
   font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.intent-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--sp-6);
-}
-
-.intent-link {
-  display: grid;
-  gap: 0.5rem;
-  padding: var(--sp-6);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
-  transition: background var(--dur-fast), border-color var(--dur-fast);
-}
-
-.intent-link:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(196, 160, 74, 0.24);
-}
-
-.intent-link span {
-  color: var(--clr-accent);
-  font-family: var(--ff-label);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.intent-link strong {
-  color: var(--clr-text);
-  font-size: 0.92rem;
-  line-height: 1.55;
 }
 
 /* Executive report mock */
@@ -1985,7 +1840,6 @@ td.pricing-compare__check:nth-child(5) {
   .review-groups,
   .service-review-grid,
   .service-review-grid--cases,
-  .intent-grid,
   .diff-grid {
     grid-template-columns: 1fr;
   }
@@ -1994,7 +1848,7 @@ td.pricing-compare__check:nth-child(5) {
     align-items: stretch;
   }
 
-  .diagnostic-band > .btn {
+  .diagnostic-band__cta {
     justify-self: start;
   }
 
@@ -2043,11 +1897,6 @@ td.pricing-compare__check:nth-child(5) {
   .inline-cta {
     align-items: flex-start;
     padding: var(--sp-4);
-  }
-
-  .process-item {
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
   }
 
   .sample-report__header {

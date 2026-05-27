@@ -24,6 +24,13 @@ const en = {
     { icon: SVG_SHIELD,  title: 'Web Technical Hygiene', desc: 'Review security headers, HTTPS, DNS, forms, Search Console, and basic monitoring for live sites that have no internal technical owner.', fit: 'The site is live, commercially matters, and nobody is reviewing the basics regularly.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/en/services/web-technical-hygiene/' },
   ],
   examplesLabel: 'Evidence:',
+  shapesLabel: 'Engagement shapes',
+  shapes: [
+    { name: 'Scoped automation', range: 'from 30 UF', note: '~USD $1,200', href: '#contact-form' },
+    { name: 'Stabilization retainer', range: 'from 6 UF / month', note: '~USD $240/mo', href: '#contact-form' },
+    { name: 'Web hygiene', range: 'from 1 UF diagnostic', note: 'already priced', href: '/en/services/web-technical-hygiene/' },
+    { name: 'Diagnostic call', range: 'free', note: '20 min', href: 'https://calendly.com/ciortega26' },
+  ],
 };
 
 const es = {
@@ -41,6 +48,13 @@ const es = {
     { icon: SVG_SHIELD,  title: 'Higiene Técnica Web', desc: 'Reviso headers, HTTPS, DNS, formularios, Search Console y monitoreo liviano para sitios publicados que no tienen responsable técnico interno.', fit: 'El sitio ya está online, importa comercialmente y nadie está revisando lo básico con regularidad.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/es/servicios/higiene-tecnica-web/' },
   ],
   examplesLabel: 'Evidencia:',
+  shapesLabel: 'Formas de engagement',
+  shapes: [
+    { name: 'Automatización acotada', range: 'desde 30 UF', note: '~USD $1.200', href: '#contact-form' },
+    { name: 'Retainer de estabilización', range: 'desde 6 UF / mes', note: '~USD $240/mes', href: '#contact-form' },
+    { name: 'Higiene técnica web', range: 'desde 1 UF diagnóstico', note: 'ya con precio', href: '/es/servicios/higiene-tecnica-web/' },
+    { name: 'Llamada de diagnóstico', range: 'gratis', note: '20 min', href: 'https://calendly.com/ciortega26' },
+  ],
 };
 
 const c = lang === 'en' ? en : es;
@@ -72,6 +86,19 @@ const c = lang === 'en' ? en : es;
         </article>
       ))}
     </div>
+
+    <div class="shapes-strip reveal">
+      <span class="shapes-label">{c.shapesLabel}</span>
+      <div class="shapes-list">
+        {c.shapes.map(s => (
+          <a class="shape-chip" href={s.href}>
+            <span class="shape-name">{s.name}</span>
+            <span class="shape-range">{s.range}</span>
+            <span class="shape-note">{s.note}</span>
+          </a>
+        ))}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -102,6 +129,71 @@ const c = lang === 'en' ? en : es;
 .svc-inline-cta {
   align-self: flex-start;
   margin-bottom: 1rem;
+}
+
+.shapes-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.shapes-label {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  white-space: nowrap;
+}
+
+.shapes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.shape-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-surface);
+  transition: border-color 150ms, background 150ms;
+  text-decoration: none;
+}
+
+.shape-chip:hover {
+  border-color: rgba(196, 160, 74, 0.3);
+  background: rgba(196, 160, 74, 0.05);
+}
+
+.shape-name {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--clr-text);
+}
+
+.shape-range {
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--clr-accent);
+  letter-spacing: 0.02em;
+}
+
+.shape-note {
+  font-size: 0.72rem;
+  color: var(--clr-text-faint);
 }
 
 @media (max-width: 980px) {

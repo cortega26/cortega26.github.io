@@ -1,4 +1,10 @@
 ---
+interface EvidenceChip {
+  label: string;
+  href?: string;
+  type: 'star' | 'pypi' | 'store' | 'live' | 'ci' | 'metric';
+}
+
 interface Project {
   id: string;
   title: string;
@@ -11,7 +17,14 @@ interface Project {
   filters: string[];
   tagType: 'accent' | 'teal' | 'warm' | 'neutral';
   links: { label: string; href: string }[];
+  evidence?: EvidenceChip[];
   featured?: boolean;
+}
+
+function evidenceBadgeClass(type: EvidenceChip['type']): string {
+  if (type === 'star' || type === 'pypi') return 'badge-accent';
+  if (type === 'live' || type === 'store') return 'badge-teal';
+  return 'badge-neutral';
 }
 
 interface Props { lang: 'en' | 'es'; }
@@ -30,6 +43,11 @@ const projectsEN: Project[] = [
     filters: ['web'],
     tagType: 'teal',
     featured: true,
+    evidence: [
+      { label: 'Live', href: 'https://elrincondeebano.com', type: 'live' },
+      { label: 'Daily orders', type: 'metric' },
+      { label: '100+ SKUs', type: 'metric' },
+    ],
     links: [
       { label: 'Visit live site', href: 'https://elrincondeebano.com' },
       { label: 'View repository', href: 'https://github.com/cortega26/elrincondeebano' },
@@ -48,6 +66,10 @@ const projectsEN: Project[] = [
     filters: ['web', 'data'],
     tagType: 'warm',
     featured: true,
+    evidence: [
+      { label: 'CI ✓', href: 'https://github.com/cortega26/portfolio-manager-server/actions', type: 'ci' },
+      { label: '1,470+ tests', type: 'metric' },
+    ],
     links: [
       { label: 'View repository', href: 'https://github.com/cortega26/portfolio-manager-server' },
     ],
@@ -64,6 +86,10 @@ const projectsEN: Project[] = [
     filters: ['web', 'data'],
     tagType: 'teal',
     featured: true,
+    evidence: [
+      { label: 'Live', href: 'https://monedario.cl', type: 'live' },
+      { label: 'No ads · No paywalls', type: 'metric' },
+    ],
     links: [
       { label: 'Visit live site', href: 'https://monedario.cl' },
       { label: 'Web technical hygiene', href: '/en/services/web-technical-hygiene/' },
@@ -80,6 +106,11 @@ const projectsEN: Project[] = [
     tags: ['JavaScript', 'Browser Extension', 'Privacy'],
     filters: ['web'],
     tagType: 'warm',
+    evidence: [
+      { label: 'Chrome Store', href: 'https://chromewebstore.google.com/detail/linkedin-spam-blocker/eolknfnafdodmaaajdiidaanpjbfolfc', type: 'store' },
+      { label: 'Firefox Add-ons', href: 'https://addons.mozilla.org/addon/linkedin-spam-blocker/', type: 'store' },
+      { label: 'CI ✓', href: 'https://github.com/cortega26/stop-spam-linkedin/actions', type: 'ci' },
+    ],
     links: [
       { label: 'View GitHub', href: 'https://github.com/cortega26/stop-spam-linkedin' },
       { label: 'Chrome Web Store', href: 'https://chromewebstore.google.com/detail/linkedin-spam-blocker/eolknfnafdodmaaajdiidaanpjbfolfc' },
@@ -97,6 +128,9 @@ const projectsEN: Project[] = [
     tags: ['Python', 'CLI', 'Audit'],
     filters: ['python', 'cli'],
     tagType: 'accent',
+    evidence: [
+      { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/', type: 'pypi' },
+    ],
     links: [
       { label: 'View GitHub', href: 'https://github.com/cortega26/conciliador_bancario' },
       { label: 'View package', href: 'https://pypi.org/project/bankrecon/' },
@@ -113,6 +147,12 @@ const projectsEN: Project[] = [
     tags: ['Python', 'PyPI', 'CLI'],
     filters: ['python', 'cli'],
     tagType: 'accent',
+    evidence: [
+      { label: '★ 12', href: 'https://github.com/cortega26/rutificador/stargazers', type: 'star' },
+      { label: 'PyPI', href: 'https://pypi.org/project/rutificador/', type: 'pypi' },
+      { label: 'CI ✓', href: 'https://github.com/cortega26/rutificador/actions', type: 'ci' },
+      { label: 'CodeQL ✓', type: 'ci' },
+    ],
     links: [
       { label: 'View GitHub', href: 'https://github.com/cortega26/rutificador' },
       { label: 'View package', href: 'https://pypi.org/project/rutificador/' },
@@ -144,6 +184,10 @@ const projectsEN: Project[] = [
     tags: ['Python', 'Scraping', 'Google Sheets'],
     filters: ['python', 'data'],
     tagType: 'accent',
+    evidence: [
+      { label: '★ 5', href: 'https://github.com/cortega26/polla/stargazers', type: 'star' },
+      { label: 'Production', type: 'live' },
+    ],
     links: [
       { label: 'View repository', href: 'https://github.com/cortega26/polla' },
       { label: 'Read docs', href: 'https://github.com/cortega26/polla#readme' },
@@ -160,6 +204,10 @@ const projectsEN: Project[] = [
     tags: ['Astro', 'SEO', 'Accessibility'],
     filters: ['web'],
     tagType: 'teal',
+    evidence: [
+      { label: 'Live', href: 'https://noticiencias.com', type: 'live' },
+      { label: '8 categories', type: 'metric' },
+    ],
     links: [
       { label: 'Visit live site', href: 'https://noticiencias.com' },
       { label: 'View repository', href: 'https://github.com/cortega26/noticiencias' },
@@ -180,6 +228,11 @@ const projectsES: Project[] = [
     filters: ['web'],
     tagType: 'teal',
     featured: true,
+    evidence: [
+      { label: 'Activo', href: 'https://elrincondeebano.com', type: 'live' },
+      { label: 'Pedidos diarios', type: 'metric' },
+      { label: '100+ SKUs', type: 'metric' },
+    ],
     links: [
       { label: 'Ver sitio', href: 'https://elrincondeebano.com' },
       { label: 'Ver repositorio', href: 'https://github.com/cortega26/elrincondeebano' },
@@ -198,6 +251,10 @@ const projectsES: Project[] = [
     filters: ['web', 'data'],
     tagType: 'warm',
     featured: true,
+    evidence: [
+      { label: 'CI ✓', href: 'https://github.com/cortega26/portfolio-manager-server/actions', type: 'ci' },
+      { label: '1.470+ tests', type: 'metric' },
+    ],
     links: [
       { label: 'Ver repositorio', href: 'https://github.com/cortega26/portfolio-manager-server' },
     ],
@@ -214,6 +271,10 @@ const projectsES: Project[] = [
     filters: ['web', 'data'],
     tagType: 'teal',
     featured: true,
+    evidence: [
+      { label: 'Activo', href: 'https://monedario.cl', type: 'live' },
+      { label: 'Sin publicidad', type: 'metric' },
+    ],
     links: [
       { label: 'Ver sitio', href: 'https://monedario.cl' },
       { label: 'Mantención técnica web', href: '/es/servicios/higiene-tecnica-web/' },
@@ -230,6 +291,11 @@ const projectsES: Project[] = [
     tags: ['JavaScript', 'Browser Extension', 'Privacy'],
     filters: ['web'],
     tagType: 'warm',
+    evidence: [
+      { label: 'Chrome Store', href: 'https://chromewebstore.google.com/detail/linkedin-spam-blocker/eolknfnafdodmaaajdiidaanpjbfolfc', type: 'store' },
+      { label: 'Firefox Add-ons', href: 'https://addons.mozilla.org/addon/linkedin-spam-blocker/', type: 'store' },
+      { label: 'CI ✓', href: 'https://github.com/cortega26/stop-spam-linkedin/actions', type: 'ci' },
+    ],
     links: [
       { label: 'Ver GitHub', href: 'https://github.com/cortega26/stop-spam-linkedin' },
       { label: 'Chrome Web Store', href: 'https://chromewebstore.google.com/detail/linkedin-spam-blocker/eolknfnafdodmaaajdiidaanpjbfolfc' },
@@ -247,6 +313,9 @@ const projectsES: Project[] = [
     tags: ['Python', 'CLI', 'Auditoría'],
     filters: ['python', 'cli'],
     tagType: 'accent',
+    evidence: [
+      { label: 'PyPI', href: 'https://pypi.org/project/bankrecon/', type: 'pypi' },
+    ],
     links: [
       { label: 'Ver GitHub', href: 'https://github.com/cortega26/conciliador_bancario' },
       { label: 'Ver paquete', href: 'https://pypi.org/project/bankrecon/' },
@@ -263,6 +332,12 @@ const projectsES: Project[] = [
     tags: ['Python', 'PyPI', 'CLI'],
     filters: ['python', 'cli'],
     tagType: 'accent',
+    evidence: [
+      { label: '★ 12', href: 'https://github.com/cortega26/rutificador/stargazers', type: 'star' },
+      { label: 'PyPI', href: 'https://pypi.org/project/rutificador/', type: 'pypi' },
+      { label: 'CI ✓', href: 'https://github.com/cortega26/rutificador/actions', type: 'ci' },
+      { label: 'CodeQL ✓', type: 'ci' },
+    ],
     links: [
       { label: 'Ver GitHub', href: 'https://github.com/cortega26/rutificador' },
       { label: 'Ver paquete', href: 'https://pypi.org/project/rutificador/' },
@@ -294,6 +369,10 @@ const projectsES: Project[] = [
     tags: ['Python', 'Scraping', 'Google Sheets'],
     filters: ['python', 'data'],
     tagType: 'accent',
+    evidence: [
+      { label: '★ 5', href: 'https://github.com/cortega26/polla/stargazers', type: 'star' },
+      { label: 'Producción', type: 'live' },
+    ],
     links: [
       { label: 'Ver repositorio', href: 'https://github.com/cortega26/polla' },
       { label: 'Leer docs', href: 'https://github.com/cortega26/polla#readme' },
@@ -310,6 +389,10 @@ const projectsES: Project[] = [
     tags: ['Astro', 'SEO', 'Accesibilidad'],
     filters: ['web'],
     tagType: 'teal',
+    evidence: [
+      { label: 'Activo', href: 'https://noticiencias.com', type: 'live' },
+      { label: '8 categorías', type: 'metric' },
+    ],
     links: [
       { label: 'Ver sitio', href: 'https://noticiencias.com' },
       { label: 'Ver repositorio', href: 'https://github.com/cortega26/noticiencias' },
@@ -386,6 +469,18 @@ const c = {
             </div>
             <p class="project-impact">{proj.impact}</p>
           </div>
+
+          {proj.evidence && proj.evidence.length > 0 && (
+            <div class="project-evidence">
+              {proj.evidence.map(chip => (
+                chip.href ? (
+                  <a class={`badge ${evidenceBadgeClass(chip.type)}`} href={chip.href} target="_blank" rel="noopener noreferrer">{chip.label}</a>
+                ) : (
+                  <span class={`badge ${evidenceBadgeClass(chip.type)}`}>{chip.label}</span>
+                )
+              ))}
+            </div>
+          )}
 
           <div class="project-heading">
             <h3 class="project-title">{proj.title}</h3>
@@ -521,6 +616,12 @@ const c = {
   color: var(--clr-text-faint);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.project-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
 }
 
 .project-heading {

@@ -26,12 +26,17 @@ const en = {
   ctaSecondary: 'View work',
   ctaPrimaryHref: '#contact-form',
   ctaSecondaryHref: '#portfolio',
+  featuredOutcome: {
+    text: 'elrincondeebano.com',
+    detail: 'live store · daily orders, 100+ SKUs, 0 outages in 14 months',
+    href: 'https://elrincondeebano.com',
+  },
   proofTitle: 'Visible proof',
   proofItems: [
-    { value: '6 projects', label: 'CI, CodeQL, and test coverage' },
-    { value: '4 live', label: 'sites, stores, and project pages' },
-    { value: '2 on PyPI', label: 'packaged and installable' },
-    { value: 'EN / ES', label: 'delivery-ready communication' },
+    { value: 'elrincondeebano.com', label: 'live store · daily orders, 100+ SKUs, 0 outages in 14 months', href: 'https://elrincondeebano.com' },
+    { value: 'monedario.cl', label: 'public finance product · updated 2026, no ads, no paywalls', href: 'https://monedario.cl' },
+    { value: 'bankrecon on PyPI', label: 'fail-closed reconciliation · audit-grade logs', href: 'https://pypi.org/project/bankrecon/' },
+    { value: 'EN / ES handoff', label: 'README + runbook, every engagement' },
   ],
   panelTitle: 'Operating notes',
   panelItems: [
@@ -40,6 +45,9 @@ const en = {
     { label: 'Not fit', value: 'Open-ended product teams, brand-only marketing sites, or undefined ownership.' },
     { label: 'Location', value: 'Santiago, working EN/ES across LATAM and U.S.-friendly hours.' },
   ],
+  serviceLine: undefined as string | undefined,
+  serviceHref: undefined as string | undefined,
+  serviceCta: undefined as string | undefined,
 };
 
 const es = {
@@ -67,12 +75,17 @@ const es = {
   ctaSecondary: 'Ver trabajo',
   ctaPrimaryHref: '#contact-form',
   ctaSecondaryHref: '#portfolio',
+  featuredOutcome: {
+    text: 'elrincondeebano.com',
+    detail: 'tienda activa · pedidos diarios, 100+ SKUs, 0 caídas en 14 meses',
+    href: 'https://elrincondeebano.com',
+  },
   proofTitle: 'Prueba visible',
   proofItems: [
-    { value: '6 proyectos', label: 'CI, CodeQL y cobertura de pruebas' },
-    { value: '4 activos', label: 'sitios, stores y páginas de proyecto' },
-    { value: '2 en PyPI', label: 'paquetes instalables' },
-    { value: 'ES / EN', label: 'comunicación bilingüe' },
+    { value: 'elrincondeebano.com', label: 'tienda activa · pedidos diarios, 100+ SKUs, 0 caídas en 14 meses', href: 'https://elrincondeebano.com' },
+    { value: 'monedario.cl', label: 'producto público de finanzas · actualizado 2026, sin publicidad ni paywalls', href: 'https://monedario.cl' },
+    { value: 'bankrecon en PyPI', label: 'conciliación fail-closed · logs de auditoría', href: 'https://pypi.org/project/bankrecon/' },
+    { value: 'Traspaso ES / EN', label: 'README + runbook, en cada proyecto' },
   ],
   panelTitle: 'Notas operativas',
   panelItems: [
@@ -95,6 +108,10 @@ const c = lang === 'en' ? en : es;
           <span>{c.availability}</span>
         </div>
         <h1 class="hero__title reveal reveal-delay-1">{c.title}</h1>
+        <a class="hero__featured-outcome reveal reveal-delay-1" href={c.featuredOutcome.href} target="_blank" rel="noopener noreferrer">
+          <span class="hero__featured-name">{c.featuredOutcome.text}</span>
+          <span class="hero__featured-detail">{c.featuredOutcome.detail}</span>
+        </a>
         <p class="hero__summary reveal reveal-delay-2">{c.summary}</p>
         <p class="hero__support reveal reveal-delay-2">{c.support}</p>
         {c.serviceLine && (
@@ -109,20 +126,6 @@ const c = lang === 'en' ? en : es;
         </div>
       </div>
 
-      <aside class="hero__summary-panel reveal reveal-delay-2" aria-label={c.routeTitle}>
-        <div class="hero__routes">
-          {c.routes.map((route, i) => (
-            <a class="hero__route-link" href={route.href}>
-              <span class="hero__route-num">{String(i + 1).padStart(2, '0')}</span>
-              <span class="hero__route-body">
-                <span class="hero__route-label">{route.label}</span>
-                <span class="hero__route-desc">{route.description}</span>
-              </span>
-              <span class="hero__route-arrow" aria-hidden="true">→</span>
-            </a>
-          ))}
-        </div>
-      </aside>
     </div>
 
     <div class="hero__board reveal reveal-delay-2">
@@ -149,14 +152,36 @@ const c = lang === 'en' ? en : es;
         <p class="hero__board-heading">{c.proofTitle}</p>
         <div class="hero__proof-list">
           {c.proofItems.map(item => (
-            <div class="hero__proof-item">
-              <span class="hero__proof-value">{item.value}</span>
-              <span class="hero__proof-label">{item.label}</span>
-            </div>
+            item.href ? (
+              <a class="hero__proof-item hero__proof-item--link" href={item.href} target="_blank" rel="noopener noreferrer">
+                <span class="hero__proof-value">{item.value}</span>
+                <span class="hero__proof-label">{item.label}</span>
+              </a>
+            ) : (
+              <div class="hero__proof-item">
+                <span class="hero__proof-value">{item.value}</span>
+                <span class="hero__proof-label">{item.label}</span>
+              </div>
+            )
           ))}
         </div>
       </div>
     </div>
+
+    <aside class="hero__summary-panel reveal" aria-label={c.routeTitle}>
+      <div class="hero__routes">
+        {c.routes.map((route, i) => (
+          <a class="hero__route-link" href={route.href}>
+            <span class="hero__route-num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="hero__route-body">
+              <span class="hero__route-label">{route.label}</span>
+              <span class="hero__route-desc">{route.description}</span>
+            </span>
+            <span class="hero__route-arrow" aria-hidden="true">→</span>
+          </a>
+        ))}
+      </div>
+    </aside>
   </div>
 </header>
 
@@ -169,10 +194,8 @@ const c = lang === 'en' ? en : es;
 }
 
 .hero__content {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
-  gap: 2.5rem;
-  align-items: start;
+  display: block;
+  max-width: 70ch;
 }
 
 .hero__meta {
@@ -197,8 +220,42 @@ const c = lang === 'en' ? en : es;
   font-weight: 700;
   line-height: 0.92;
   letter-spacing: -0.04em;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   text-wrap: balance;
+}
+
+.hero__featured-outcome {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.65rem;
+  margin-bottom: 1.25rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid rgba(196, 160, 74, 0.2);
+  border-radius: var(--radius-sm);
+  background: rgba(196, 160, 74, 0.06);
+  text-decoration: none;
+  transition: border-color 150ms, background 150ms;
+}
+
+.hero__featured-outcome:hover {
+  border-color: rgba(196, 160, 74, 0.4);
+  background: rgba(196, 160, 74, 0.1);
+}
+
+.hero__featured-name {
+  font-family: var(--ff-label);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--clr-accent);
+  text-transform: uppercase;
+}
+
+.hero__featured-detail {
+  font-size: 0.82rem;
+  color: var(--clr-text-muted);
+  line-height: 1.4;
 }
 
 .hero__summary {
@@ -251,12 +308,19 @@ const c = lang === 'en' ? en : es;
   gap: 0.75rem;
 }
 
-/* Routes sidebar */
+/* Routes panel — below the fold */
 .hero__summary-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.02);
   overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.hero__routes {
+  display: contents;
 }
 
 .hero__route-link {
@@ -265,12 +329,12 @@ const c = lang === 'en' ? en : es;
   gap: 0.75rem;
   align-items: center;
   padding: 0.9rem 1rem;
-  border-bottom: 1px solid var(--clr-border);
+  border-right: 1px solid var(--clr-border);
   transition: background var(--dur-fast);
 }
 
 .hero__route-link:last-child {
-  border-bottom: none;
+  border-right: none;
 }
 
 .hero__route-link:hover {
@@ -419,6 +483,11 @@ const c = lang === 'en' ? en : es;
   gap: 1rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--clr-border);
+  text-decoration: none;
+}
+
+.hero__proof-item--link:hover .hero__proof-value {
+  color: var(--clr-accent);
 }
 
 .hero__proof-value {
@@ -442,16 +511,22 @@ const c = lang === 'en' ? en : es;
   .hero {
     padding-top: calc(var(--nav-height) + 3rem);
   }
-  .hero__content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
   .hero__board {
     grid-template-columns: 1fr;
   }
   .hero__board-col:not(:last-child) {
     border-right: 0;
     border-bottom: 1px solid var(--clr-border);
+  }
+  .hero__summary-panel {
+    grid-template-columns: 1fr;
+  }
+  .hero__route-link {
+    border-right: 0;
+    border-bottom: 1px solid var(--clr-border);
+  }
+  .hero__route-link:last-child {
+    border-bottom: none;
   }
 }
 
@@ -462,6 +537,9 @@ const c = lang === 'en' ? en : es;
   }
   .hero__board-col {
     padding-inline: 0;
+  }
+  .hero__content {
+    max-width: 100%;
   }
 }
 
@@ -479,6 +557,11 @@ const c = lang === 'en' ? en : es;
   }
   .hero__proof-label {
     text-align: left;
+  }
+  .hero__featured-outcome {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
   }
 }
 </style>

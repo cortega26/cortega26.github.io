@@ -13,15 +13,33 @@ const alternates = [
 
 const navItems = [
   { href: '#problema', label: 'Problema' },
-  { href: '#alcance', label: 'Qué reviso' },
-  { href: '#proceso', label: 'Proceso' },
+  { href: '#diagnostico', label: 'Diagnóstico' },
+  { href: '#entregables', label: 'Entregables' },
   { href: '#planes', label: 'Planes' },
+  { href: '#evidencia', label: 'Evidencia' },
   { href: '#faq', label: 'FAQ' },
-  { href: '#brief', label: 'Brief' },
+  { href: '#brief', label: 'Solicitar' },
 ];
 
 const pricingNote =
   'Valores referenciales para Chile, expresados en UF y aproximados en CLP. La cotización final se emite en CLP según el valor de la UF del día de propuesta. Para clientes fuera de Chile: el servicio se puede cotizar en USD con ajuste de alcance según idioma de entrega, zona horaria y nivel de documentación requerido — diagnóstico desde USD $69, planes de implementación desde USD $499, soporte mensual desde USD $279.';
+
+const diagnosticMailto =
+  'mailto:carlos@tooltician.com?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20Web%20%E2%80%94%201%20UF&body=Dominio%3A%0A%0A%C2%BFQu%C3%A9%20te%20preocupa%20del%20sitio%3F%0A%0A%C2%BFTienes%20acceso%20a%20hosting%2C%20DNS%2C%20CMS%20o%20Search%20Console%3F%0A';
+
+const symptoms = [
+  ['Formulario que no avisa', 'El sitio recibe visitas, pero nadie confirma si las consultas llegan, quedan registradas o se pierden en silencio.'],
+  ['Correos que caen en spam', 'SPF, DKIM o DMARC mal configurados pueden afectar cotizaciones, seguimiento comercial y confianza del dominio.'],
+  ['Certificado o redirecciones descuidadas', 'HTTPS, www/no-www y rutas duplicadas pueden verse menores hasta que rompen campañas, SEO o confianza.'],
+  ['Nadie mirando Search Console', 'Errores de cobertura, páginas excluidas o señales de indexación pueden pasar semanas sin que alguien los vea.'],
+];
+
+const diagnosticPromise = [
+  ['Precio', '1 UF', 'aprox. CLP $41.000 para Chile'],
+  ['Respuesta', '24–48 h', 'hábiles para confirmar contexto y disponibilidad'],
+  ['Entrega', 'Reporte breve', 'hallazgos priorizados, evidencia y siguiente paso'],
+  ['Crédito', 'Descontable', 'si luego contratas implementación'],
+];
 
 const reviewGroups = [
   {
@@ -54,7 +72,7 @@ const reviewGroups = [
 ];
 
 const deliverables = [
-  'Diagnóstico inicial con hallazgos visibles y priorización.',
+  'Lista priorizada de hallazgos: qué importa ahora, qué puede esperar y qué es ruido automático.',
   'Correcciones aplicadas cuando entran en alcance y acceso disponible.',
   'Evidencia antes/después con capturas y notas verificables.',
   'Reporte ejecutivo entendible para perfiles no técnicos.',
@@ -71,9 +89,9 @@ const processSteps = [
 ];
 
 const sampleRows = [
-  ['Headers de seguridad incompletos', 'Señal visible de hardening básico pendiente.', 'Configurar CSP inicial, Permissions-Policy y X-Content-Type-Options según hosting.', 'Propuesto'],
-  ['Formulario sin prueba reciente', 'Posible pérdida silenciosa de leads.', 'Enviar prueba controlada, revisar destino, respuesta y registro de entrega.', 'Pendiente de acceso'],
-  ['Sitemap publicado sin revisión en Search Console', 'Errores de cobertura pueden pasar semanas sin atención.', 'Validar sitemap, revisar páginas excluidas y documentar hallazgos.', 'Revisado'],
+  ['Formulario sin prueba reciente', 'Posible pérdida silenciosa de leads.', 'Enviar prueba controlada, revisar destino, respuesta y registro de entrega.', 'Prioridad alta'],
+  ['Correo corporativo sin DKIM activo', 'Mayor probabilidad de spam y menor confianza al responder cotizaciones.', 'Configurar firma digital y verificar propagación DNS.', 'Prioridad alta'],
+  ['Sitemap sin revisión en Search Console', 'Errores de cobertura pueden pasar semanas sin atención.', 'Validar sitemap, revisar páginas excluidas y documentar hallazgos.', 'Siguiente ciclo'],
 ];
 
 const plans = [
@@ -166,6 +184,33 @@ const tableFeatures = [
   ['Reporte ejecutivo en lenguaje de negocio', false, false, false, true, false],
   ['Hoja de ruta de monitoreo mensual', false, false, false, true, true],
   ['Monitoreo mensual + correcciones periódicas', false, false, false, false, true],
+];
+
+const commercialPaths = [
+  {
+    label: 'Solo saber qué pasa',
+    title: 'Diagnóstico Técnico Web',
+    price: '1 UF',
+    body: 'Para dueños o administradores que quieren saber si el sitio tiene descuidos visibles antes de pagar correcciones.',
+    cta: 'Solicitar diagnóstico de 1 UF',
+    href: diagnosticMailto,
+  },
+  {
+    label: 'Corregir lo básico',
+    title: 'Hardening o Revisión Operativa',
+    price: 'desde 7 UF',
+    body: 'Para corregir headers, HTTPS, DNS, formularios, Search Console y dejar evidencia técnica antes/después.',
+    cta: 'Ver planes de corrección',
+    href: '#planes-detalle',
+  },
+  {
+    label: 'Delegar revisión continua',
+    title: 'Soporte Técnico Web Mensual',
+    price: 'desde 4 UF/mes',
+    body: 'Para que alguien revise lo básico con regularidad sin contratar un perfil técnico interno.',
+    cta: 'Consultar soporte mensual',
+    href: 'mailto:carlos@tooltician.com?subject=Soporte%20T%C3%A9cnico%20Web%20Mensual&body=Dominio%3A%0AContexto%20de%20la%20revisi%C3%B3n%20inicial%3A%0A',
+  },
 ];
 
 const faqs = [
@@ -264,47 +309,35 @@ const breadcrumbJsonLd = {
       <div class="container service-hero__grid">
         <div class="service-hero__main">
           <span class="section-eyebrow reveal">Higiene Técnica Web · Tooltician</span>
-          <h1 class="section-title reveal reveal-delay-1">Mantención técnica web para empresas que no necesitan contratar a alguien in-house</h1>
+          <h1 class="section-title reveal reveal-delay-1">Tu sitio funciona, pero nadie está cuidando lo técnico</h1>
           <p class="service-hero__lede reveal reveal-delay-2">
-            Reviso, corrijo, documento y monitoreo los puntos técnicos básicos que suelen quedar abandonados después de publicar un sitio: headers de seguridad, HTTPS, DNS, formularios, Search Console, errores visibles y pequeñas mejoras operativas.
+            Lo publicado también se deteriora: formularios que dejan de avisar, correos que caen en spam, errores SEO invisibles, redirecciones raras y señales técnicas que reducen confianza sin hacer ruido.
           </p>
           <p class="service-hero__subcopy reveal reveal-delay-2">
-            Higiene Técnica Web y Confianza Digital es una extensión natural de Tooltician: sistemas productivos, superficies web sobrias y criterio técnico externo para que lo publicado no quede a la deriva.
+            Reviso lo básico, separo señales reales de ruido automático y te dejo una lista priorizada, evidencia y una recomendación clara de siguiente paso. No necesitas contratar a alguien full-time para que alguien mire lo básico.
           </p>
           <div class="service-hero__actions reveal reveal-delay-2">
-            <a class="btn btn-primary" href="#brief">Revisar mi sitio — desde 1 UF</a>
-            <a class="btn btn-ghost" href="#alcance">Ver qué incluye</a>
+            <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+            <a class="btn btn-ghost" href="#diagnostico">Ver cómo funciona</a>
           </div>
           <p class="service-hero__microcopy reveal reveal-delay-2">
-            Sin alarmismo. Sin promesas de seguridad total. Solo revisión técnica clara, correcciones verificables y reporte antes/después.
+            Sin alarmismo. Sin promesas de seguridad total. Solo revisión técnica clara, correcciones verificables y reporte breve antes/después.
           </p>
         </div>
 
         <aside class="service-summary card-glass reveal reveal-delay-2" aria-label="Resumen del servicio">
-          <p class="service-summary__eyebrow">Encaje típico</p>
-          <ul class="service-summary__list">
-            <li>Empresas con sitio publicado y sin responsable técnico interno.</li>
-            <li>Agencias que quieren apoyo externo para mantención recurrente.</li>
-            <li>Equipos que necesitan criterio técnico sin contratar un perfil full time.</li>
-          </ul>
-          <div class="service-summary__proof">
-            <p class="service-summary__eyebrow">Señales iniciales</p>
-            <div class="service-summary__badges">
-              <span class="badge badge-accent">SecurityHeaders.com</span>
-              <span class="badge badge-accent">Mozilla Observatory</span>
-              <span class="badge badge-neutral">Antes / después</span>
-              <span class="badge badge-neutral">Reporte ejecutivo</span>
-            </div>
+          <p class="service-summary__eyebrow">Diagnóstico express</p>
+          <div class="diagnostic-strip diagnostic-strip--stacked">
+            {diagnosticPromise.map(([label, value, detail]) => (
+              <div class="diagnostic-strip__item">
+                <span>{label}</span>
+                <strong>{value}</strong>
+                <small>{detail}</small>
+              </div>
+            ))}
           </div>
-          <div class="service-summary__proof">
-            <p class="service-summary__eyebrow">Entrada</p>
-            <p class="service-summary__price">1 UF</p>
-            <p class="service-summary__muted">aprox. CLP $41.000 por diagnóstico inicial para Chile.</p>
-          </div>
-          <div class="service-summary__proof">
-            <p class="service-summary__eyebrow">Disponibilidad</p>
-            <p class="service-summary__muted">Acepto 2–3 diagnósticos nuevos por mes. Respuesta en 24–48 horas hábiles.</p>
-          </div>
+          <a class="btn btn-primary service-summary__cta" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+          <p class="service-summary__muted">Ideal para pymes con sitio publicado, leads o reputación en juego, pero sin responsable técnico interno.</p>
         </aside>
       </div>
     </section>
@@ -313,17 +346,26 @@ const breadcrumbJsonLd = {
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Problema</span>
-          <h2 class="section-title reveal">Tu sitio puede estar online y aun así estar técnicamente abandonado</h2>
+          <h2 class="section-title reveal">Lo publicado también se deteriora</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            Muchas empresas tienen sitio web, correo corporativo, formularios, hosting, DNS, Analytics, Search Console, plugins y landing pages. Una vez publicado el sitio, muchas veces nadie queda revisando si todo eso sigue funcionando bien.
+            Muchas pymes tienen sitio web, correo corporativo, formularios, hosting, DNS, Analytics, Search Console, plugins y landing pages. Una vez publicado el sitio, nadie queda mirando si todo eso sigue funcionando bien.
           </p>
+        </div>
+        <div class="symptom-grid">
+          {symptoms.map(([title, body], index) => (
+            <article class={`symptom-card reveal reveal-delay-${(index % 2) + 1}`}>
+              <span class="symptom-card__num">0{index + 1}</span>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
         </div>
         <div class="grid-2">
           <article class="card-glass brief-card reveal">
             <h3 class="card-title">Lo que suele pasar</h3>
             <p class="body-copy">
-              El certificado vence, un formulario deja de enviar correos, aparecen errores de indexación, los headers de seguridad quedan sin configurar y el sitio empieza a mostrar señales de descuido técnico. No siempre se justifica contratar a alguien interno para mirarlo, pero tampoco conviene dejarlo completamente abandonado.
+              El certificado vence, un formulario deja de enviar correos, aparecen errores de indexación, los headers quedan sin configurar y el sitio empieza a mostrar señales de descuido. No siempre se justifica contratar a alguien interno, pero dejarlo a la deriva también tiene costo.
             </p>
           </article>
           <article class="card-glass brief-card reveal reveal-delay-1">
@@ -333,17 +375,51 @@ const breadcrumbJsonLd = {
             </p>
           </article>
         </div>
+        <div class="inline-cta reveal">
+          <p>Si quieres saber qué está pasando sin partir por una implementación grande, empieza por el diagnóstico de 1 UF.</p>
+          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diagnostico">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">Diagnóstico 1 UF</span>
+          <h2 class="section-title reveal">Una entrada simple antes de pagar por correcciones</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">
+            El diagnóstico separa señales reales de ruido automático. Sales con una lista priorizada, evidencia y una recomendación de siguiente paso: cerrar, corregir lo básico o pasar a soporte mensual.
+          </p>
+        </div>
+        <div class="diagnostic-band reveal">
+          <div class="diagnostic-band__copy">
+            <p class="diagnostic-band__eyebrow">Diagnóstico técnico web</p>
+            <h3>1 UF, descontable si contratas implementación</h3>
+            <p>Revisión externa inicial de dominio, HTTPS, formularios visibles, DNS básico, correo, sitemap, robots.txt, señales públicas y herramientas de referencia.</p>
+          </div>
+          <div class="diagnostic-strip">
+            {diagnosticPromise.map(([label, value, detail]) => (
+              <div class="diagnostic-strip__item">
+                <span>{label}</span>
+                <strong>{value}</strong>
+                <small>{detail}</small>
+              </div>
+            ))}
+          </div>
+          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+        </div>
       </div>
     </section>
 
     <section class="section" id="alcance">
       <div class="container section-stack">
         <div class="section-header">
-          <span class="section-eyebrow reveal">Propuesta</span>
-          <h2 class="section-title reveal">Criterio técnico externo, sin el costo de incorporar un perfil interno</h2>
+          <span class="section-eyebrow reveal">Detalle técnico</span>
+          <h2 class="section-title reveal">Qué reviso cuando alguien tiene que mirar lo básico</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            Tooltician ofrece una capa liviana de revisión, hardening, documentación y monitoreo para empresas que necesitan mantener su sitio técnicamente sano, pero no tienen volumen suficiente para contratar a un desarrollador, administrador web o especialista interno.
+            Esta es la capa técnica para quien quiera profundizar. La propuesta comercial es simple: revisar, priorizar, corregir lo razonable y documentar lo hecho sin convertir cada hallazgo en una emergencia.
           </p>
         </div>
 
@@ -414,10 +490,10 @@ const breadcrumbJsonLd = {
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Entregables</span>
-          <h2 class="section-title reveal">Entregables claros, no humo técnico</h2>
+          <h2 class="section-title reveal">Sales con una decisión, no con una lista infinita</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            El resultado no es una llamada llena de jerga ni un documento imposible de leer. La entrega debe permitir que una persona no técnica entienda qué estaba descuidado, qué se corrigió, qué queda pendiente y qué conviene revisar más adelante.
+            El resultado no es una llamada llena de jerga ni un documento imposible de leer. La entrega debe permitir que una persona no técnica entienda qué estaba descuidado, qué se corrigió, qué queda pendiente y qué conviene hacer después.
           </p>
         </div>
         <div class="grid-2">
@@ -522,6 +598,11 @@ const breadcrumbJsonLd = {
           </div>
         </div>
 
+        <div class="inline-cta reveal">
+          <p>Si este tipo de evidencia te serviría para tomar una decisión, el primer paso es el diagnóstico de 1 UF.</p>
+          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+        </div>
+
         <div class="access-note reveal">
           <h3>Accesos y límites operativos</h3>
           <p>
@@ -535,11 +616,28 @@ const breadcrumbJsonLd = {
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Planes y precios</span>
-          <h2 class="section-title reveal">Una puerta de entrada simple y un camino claro hacia soporte mensual</h2>
+          <h2 class="section-title reveal">Tres caminos: saber, corregir o delegar</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            El punto de entrada natural es el Diagnóstico (1 UF, descontable). La mayoría de sitios simples escala a Hardening Básico. Cuando el sitio sostiene leads, reputación o ventas, la Revisión Integral cierra mejor por una diferencia de 2 UF sobre el plan operativo — y entrega el reporte ejecutivo y la hoja de ruta que abren el camino al soporte mensual.
+            Para una pyme, la decisión no debería partir con una tabla enorme. Primero elige el nivel de tranquilidad que necesitas: entender qué pasa, corregir lo evidente o delegar una revisión periódica.
           </p>
+        </div>
+        <div class="commercial-paths">
+          {commercialPaths.map((path, index) => (
+            <article class={`commercial-path reveal reveal-delay-${(index % 2) + 1}`}>
+              <p class="commercial-path__label">{path.label}</p>
+              <h3>{path.title}</h3>
+              <p class="commercial-path__price">{path.price}</p>
+              <p>{path.body}</p>
+              <a class={index === 0 ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm'} href={path.href}>{path.cta}</a>
+            </article>
+          ))}
+        </div>
+        <div class="pricing-detail" id="planes-detalle">
+          <div class="section-subheader reveal">
+            <h3 class="section-subheader__title">Detalle comparativo</h3>
+            <p class="section-subtitle">La tabla queda como apoyo para comparar alcance, no como primer obstáculo de lectura.</p>
+          </div>
         </div>
         <div class="pricing-compare-wrapper">
           <div class="pricing-compare">
@@ -590,10 +688,14 @@ const breadcrumbJsonLd = {
           ))}
         </div>
         <p class="pricing-footnote reveal">{pricingNote}</p>
+        <div class="inline-cta reveal">
+          <p>Si todavía no sabes qué plan corresponde, no elijas plan: parte con el diagnóstico.</p>
+          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="comparacion">
+    <section class="section" id="evidencia">
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Por qué Tooltician</span>
@@ -689,23 +791,23 @@ const breadcrumbJsonLd = {
       <div class="container section-stack">
         <div class="section-header">
           <span class="section-eyebrow reveal">Siguiente paso</span>
-          <h2 class="section-title reveal">Parte por un diagnóstico razonable, no por una promesa inflada</h2>
+          <h2 class="section-title reveal">Parte por saber qué pasa</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            Si el sitio ya está publicado y quieres saber qué está técnicamente descuidado, el punto de entrada correcto es un diagnóstico breve y verificable. Si además hay un flujo más amplio detrás, el brief general sigue disponible.
+            Si el sitio ya está publicado y quieres saber qué está técnicamente descuidado, el punto de entrada correcto es un diagnóstico breve y verificable. Después puedes cerrar, corregir lo básico o delegar revisión mensual.
           </p>
         </div>
         <div class="grid-2">
           <article class="card-glass brief-card reveal">
             <h3 class="card-title">Diagnóstico técnico web — 1 UF</h3>
             <p class="body-copy">
-              Revisión externa inicial con reporte de prioridades y siguiente paso claro. El costo se descuenta si luego contratas la implementación. Punto de entrada sin compromiso.
+              Revisión externa inicial con reporte de prioridades, evidencia y siguiente paso claro. El costo se descuenta si luego contratas implementación.
             </p>
             <div class="risk-note">
               <p>Si el diagnóstico no encuentra nada accionable, el reporte lo confirma con evidencia — y eso también tiene valor antes de cambiar hosting, lanzar una campaña o delegar el sitio a un tercero. El costo aplica igual, pero no hay sorpresas ni cobros adicionales.</p>
             </div>
             <div class="landing-cta-group">
-              <a class="btn btn-primary" href="mailto:carlos@tooltician.com?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20Web%20%E2%80%94%20Solicitud&body=Dominio%3A%0A%0A%C2%BFHay%20algo%20espec%C3%ADfico%20que%20quieres%20revisar%3F%0A">Solicitar diagnóstico</a>
+              <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
               <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">Agendar revisión</a>
             </div>
           </article>
@@ -722,7 +824,7 @@ const breadcrumbJsonLd = {
         </div>
 
         <div class="intent-grid">
-          <a class="intent-link reveal" href="mailto:carlos@tooltician.com?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20Web&body=Dominio%3A%0A%0A%C2%BFHay%20algo%20espec%C3%ADfico%20que%20quieres%20revisar%3F%0A">
+          <a class="intent-link reveal" href={diagnosticMailto}>
             <span>Quiero revisar un sitio publicado</span>
             <strong>Diagnóstico inicial desde 1 UF para Chile, con reporte breve y prioridades claras.</strong>
           </a>
@@ -828,6 +930,153 @@ const breadcrumbJsonLd = {
   color: var(--clr-text-muted);
   font-size: 0.84rem;
   line-height: 1.55;
+}
+
+.service-summary__cta {
+  justify-self: start;
+}
+
+.diagnostic-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr) auto;
+  gap: var(--sp-6);
+  align-items: center;
+  border: 1px solid rgba(196, 160, 74, 0.28);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, rgba(196, 160, 74, 0.12), rgba(255, 255, 255, 0.035) 42%, rgba(11, 17, 33, 0.8)),
+    radial-gradient(circle at 12% 0%, rgba(196, 160, 74, 0.14), transparent 34%);
+  padding: var(--sp-6);
+}
+
+.diagnostic-band__eyebrow,
+.commercial-path__label {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.diagnostic-band__copy {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.diagnostic-band__copy h3 {
+  font-family: var(--ff-heading);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.diagnostic-band__copy p:last-child {
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+}
+
+.diagnostic-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.diagnostic-strip--stacked {
+  grid-template-columns: 1fr;
+}
+
+.diagnostic-strip__item {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.diagnostic-strip__item span {
+  font-family: var(--ff-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+}
+
+.diagnostic-strip__item strong {
+  font-family: var(--ff-heading);
+  font-size: 1.12rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--clr-text);
+}
+
+.diagnostic-strip__item small {
+  color: var(--clr-text-muted);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.symptom-grid,
+.commercial-paths {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+.symptom-card,
+.commercial-path {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  padding: var(--sp-5, 1.25rem);
+}
+
+.symptom-card {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.symptom-card__num {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  color: var(--clr-accent);
+  letter-spacing: 0.08em;
+}
+
+.symptom-card h3,
+.commercial-path h3 {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.symptom-card p,
+.commercial-path p {
+  color: var(--clr-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.inline-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid rgba(196, 160, 74, 0.2);
+  border-radius: var(--radius-md);
+  background: rgba(196, 160, 74, 0.055);
+  padding: var(--sp-5, 1.25rem) var(--sp-6);
+}
+
+.inline-cta p {
+  color: var(--clr-text);
+  font-weight: 600;
+  line-height: 1.5;
+  max-width: 62ch;
 }
 
 .service-summary__list,
@@ -1017,6 +1266,34 @@ const breadcrumbJsonLd = {
 
 .plans-grid {
   display: none;
+}
+
+.commercial-paths {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.commercial-path {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+}
+
+.commercial-path:first-child {
+  border-color: rgba(196, 160, 74, 0.34);
+  background: linear-gradient(180deg, rgba(196, 160, 74, 0.09), rgba(255, 255, 255, 0.03));
+}
+
+.commercial-path__price {
+  font-family: var(--ff-heading);
+  font-size: 1.55rem !important;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--clr-accent) !important;
+}
+
+.pricing-detail {
+  padding-top: 0.5rem;
 }
 
 .faq-accordion {
@@ -1555,12 +1832,23 @@ td.pricing-compare__check:nth-child(5) {
 
 @media (max-width: 980px) {
   .service-hero__grid,
+  .diagnostic-band,
+  .symptom-grid,
+  .commercial-paths,
   .review-groups,
   .service-review-grid,
   .service-review-grid--cases,
   .intent-grid,
   .diff-grid {
     grid-template-columns: 1fr;
+  }
+
+  .diagnostic-band {
+    align-items: stretch;
+  }
+
+  .diagnostic-band > .btn {
+    justify-self: start;
   }
 
   .pricing-compare-wrapper {
@@ -1597,6 +1885,19 @@ td.pricing-compare__check:nth-child(5) {
     padding-top: calc(var(--nav-height) + 4rem);
   }
 
+  .diagnostic-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .diagnostic-strip--stacked {
+    grid-template-columns: 1fr;
+  }
+
+  .inline-cta {
+    align-items: flex-start;
+    padding: var(--sp-4);
+  }
+
   .process-item {
     grid-template-columns: 1fr;
     gap: 0.4rem;
@@ -1629,6 +1930,12 @@ td.pricing-compare__check:nth-child(5) {
   .exec-report__finding {
     grid-template-columns: 1fr;
     gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .diagnostic-strip {
+    grid-template-columns: 1fr;
   }
 }
 </style>

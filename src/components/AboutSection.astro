@@ -36,16 +36,6 @@ const c = lang === 'en' ? en : es;
       <span class="section-eyebrow reveal">{c.eyebrow}</span>
       <h2 class="section-title reveal">{c.title}</h2>
       <div class="divider reveal"></div>
-      <div class="about-photo-wrap reveal">
-        <img
-          class="about-photo"
-          src="/assets/images/carlos-ortega.jpg"
-          alt="Carlos Ortega"
-          width="160"
-          height="160"
-          loading="lazy"
-        />
-      </div>
       <p class="section-subtitle reveal">{c.intro}</p>
       <p class="about-workstyle reveal reveal-delay-1">{c.workStyle}</p>
     </div>
@@ -64,17 +54,6 @@ const c = lang === 'en' ? en : es;
 </section>
 
 <style>
-.about-photo-wrap {
-  margin-bottom: 1.25rem;
-}
-.about-photo {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(196, 160, 74, 0.25);
-  background: var(--clr-surface);
-}
 .about-list { display: flex; flex-direction: column; gap: 0.6rem; }
 .about-list li {
   font-size: var(--fs-sm);

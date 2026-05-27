@@ -304,7 +304,7 @@ These are not scheduled tasks. The page already meets its targets. These represe
 | 8 · Social proof | `3` | HTW-B04 unblocked: real testimonial or named case reference |
 | 7 · Conversion path | `4` | Lightweight intake form (name, URL, goal) replacing mailto prefill |
 | 15 · Commercial differentiation | `4` | Before/after comparison once first delivery exists |
-| 1 · Pricing psychology | `4` | Explicit feature comparison at the 13 UF vs 15 UF boundary |
+| 1 · Pricing psychology | `4` | Explicit feature comparison at the 13 UF vs 15 UF boundary — UF/USD split is deliberate strategy, not a gap |
 
 None of these are actionable until the first delivery is complete. HTW-B04 is the unlock condition for all of them.
 

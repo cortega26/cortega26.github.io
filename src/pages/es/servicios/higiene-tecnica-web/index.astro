@@ -433,16 +433,18 @@ const breadcrumbJsonLd = {
             <h3>1 UF para saber qué corregir, qué ignorar y qué revisar después</h3>
             <p>Revisión externa inicial de dominio, HTTPS, formularios visibles, DNS básico, correo, sitemap, robots.txt, señales públicas y herramientas de referencia. Si luego implementamos, se descuenta.</p>
           </div>
-          <div class="diagnostic-strip">
-            {diagnosticPromise.map(([label, value, detail]) => (
-              <div class="diagnostic-strip__item">
-                <span>{label}</span>
-                <strong>{value}</strong>
-                <small>{detail}</small>
-              </div>
-            ))}
+          <div class="diagnostic-band__panel">
+            <div class="diagnostic-strip">
+              {diagnosticPromise.map(([label, value, detail]) => (
+                <div class="diagnostic-strip__item">
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                  <small>{detail}</small>
+                </div>
+              ))}
+            </div>
+            <a class="btn btn-primary diagnostic-band__cta" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
           </div>
-          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
         </div>
       </div>
     </section>
@@ -996,9 +998,9 @@ const breadcrumbJsonLd = {
 
 .diagnostic-band {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
   gap: var(--sp-6);
-  align-items: center;
+  align-items: stretch;
   border: 1px solid rgba(196, 160, 74, 0.28);
   border-radius: var(--radius-lg);
   background:
@@ -1020,6 +1022,7 @@ const breadcrumbJsonLd = {
 .diagnostic-band__copy {
   display: grid;
   gap: 0.45rem;
+  align-content: center;
 }
 
 .diagnostic-band__copy h3 {
@@ -1034,9 +1037,20 @@ const breadcrumbJsonLd = {
   line-height: 1.65;
 }
 
+.diagnostic-band__panel {
+  display: grid;
+  gap: 0.85rem;
+  align-content: stretch;
+}
+
+.diagnostic-band__cta {
+  justify-content: center;
+  width: 100%;
+}
+
 .diagnostic-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.65rem;
 }
 
@@ -1047,6 +1061,7 @@ const breadcrumbJsonLd = {
 .diagnostic-strip__item {
   display: grid;
   gap: 0.2rem;
+  align-content: start;
   min-width: 0;
   padding: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1064,10 +1079,11 @@ const breadcrumbJsonLd = {
 
 .diagnostic-strip__item strong {
   font-family: var(--ff-heading);
-  font-size: 1.12rem;
-  line-height: 1;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  line-height: 1.08;
   letter-spacing: -0.03em;
   color: var(--clr-text);
+  overflow-wrap: anywhere;
 }
 
 .diagnostic-strip__item small {

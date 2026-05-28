@@ -1,49 +1,97 @@
 ---
-const serviceHref = '/es/servicios/higiene-tecnica-web/';
-const briefHref = '/es/servicios/higiene-tecnica-web/#brief';
+interface Props {
+  lang: 'en' | 'es';
+}
+const { lang } = Astro.props;
 
-const fits = [
-  'Empresas con sitio publicado y sin responsable técnico interno.',
-  'Agencias que necesitan apoyo externo para mantención recurrente de bajo margen.',
-  'Profesionales y consultoras donde el sitio genera leads o reputación.',
-];
+const en = {
+  serviceHref: '/en/services/web-technical-hygiene/',
+  briefHref: '/en/services/web-technical-hygiene/#contact',
+  eyebrow: 'Service with dedicated page',
+  title: 'Is your site live but technically abandoned?',
+  body: 'Web Technical Hygiene: review, basic hardening, and lightweight monitoring for live sites with no internal technical owner. Security headers, HTTPS, DNS, forms, Search Console, and small verifiable fixes — with a before/after report.',
+  fits: [
+    'SMBs with a live site and no internal technical team.',
+    'Agencies needing external support for recurring low-margin maintenance.',
+    'Professionals and consultants where the site generates leads or reputation.',
+  ],
+  disclaimer: 'No alarmism. No promises of total security. Just clear technical review, verifiable fixes, and a before/after report.',
+  priceEyebrow: 'Diagnostic',
+  price: '$69',
+  priceSub: 'one-time',
+  priceNote: 'Applied as a credit toward any implementation plan.',
+  monthlyEyebrow: 'Monthly support',
+  monthlyPrice: 'from $279/mo',
+  monthlySub: '',
+  monthlyNote: 'Lightweight monitoring, periodic reviews, and small fixes — no internal hire needed.',
+  ctaFull: 'View the full service',
+  ctaBrief: 'Request a diagnostic',
+  ctaPlans: 'View all plans →',
+};
+
+const es = {
+  serviceHref: '/es/servicios/higiene-tecnica-web/',
+  briefHref: '/es/servicios/higiene-tecnica-web/#brief',
+  eyebrow: 'Servicio con página propia',
+  title: '¿Tu sitio está online, pero técnicamente abandonado?',
+  body: 'Higiene Técnica Web: revisión, hardening básico y monitoreo liviano para sitios publicados que no tienen equipo técnico interno. Headers de seguridad, HTTPS, DNS, formularios, Search Console y pequeñas correcciones verificables — con reporte antes/después.',
+  fits: [
+    'Empresas con sitio publicado y sin responsable técnico interno.',
+    'Agencias que necesitan apoyo externo para mantención recurrente de bajo margen.',
+    'Profesionales y consultoras donde el sitio genera leads o reputación.',
+  ],
+  disclaimer: 'Sin alarmismo. Sin promesas de seguridad total. Solo revisión técnica clara, correcciones verificables y evidencia antes/después.',
+  priceEyebrow: 'Entrada',
+  price: '1 UF',
+  priceSub: 'aprox. CLP $41.000',
+  priceNote: 'Diagnóstico inicial descontable si contratas implementación.',
+  monthlyEyebrow: 'Soporte mensual',
+  monthlyPrice: 'desde 4 UF/mes',
+  monthlySub: 'aprox. CLP $162.000/mes',
+  monthlyNote: 'Monitoreo liviano, revisiones periódicas y pequeñas correcciones sin incorporar un perfil interno.',
+  ctaFull: 'Ver el servicio completo',
+  ctaBrief: 'Solicitar diagnóstico',
+  ctaPlans: 'Ver todos los planes →',
+};
+
+const c = lang === 'en' ? en : es;
 ---
 <section class="section svc-spotlight" id="svc-spotlight">
   <div class="container">
     <div class="svc-spotlight__inner card-glass reveal">
       <div class="svc-spotlight__grid">
         <div class="svc-spotlight__main">
-          <span class="section-eyebrow">Servicio con página propia</span>
-          <h2 class="svc-spotlight__title">¿Tu sitio está online, pero técnicamente abandonado?</h2>
+          <span class="section-eyebrow">{c.eyebrow}</span>
+          <h2 class="svc-spotlight__title">{c.title}</h2>
           <p class="svc-spotlight__body">
-            Higiene Técnica Web: revisión, hardening básico y monitoreo liviano para sitios publicados que no tienen equipo técnico interno. Headers de seguridad, HTTPS, DNS, formularios, Search Console y pequeñas correcciones verificables — con reporte antes/después.
+            {c.body}
           </p>
           <ul class="svc-spotlight__fits">
-            {fits.map(fit => <li>{fit}</li>)}
+            {c.fits.map(fit => <li>{fit}</li>)}
           </ul>
           <div class="svc-spotlight__actions">
-            <a class="btn btn-primary" href={serviceHref}>Ver el servicio completo</a>
-            <a class="btn btn-ghost" href={briefHref}>Solicitar diagnóstico</a>
+            <a class="btn btn-primary" href={c.serviceHref}>{c.ctaFull}</a>
+            <a class="btn btn-ghost" href={c.briefHref}>{c.ctaBrief}</a>
           </div>
-          <p class="svc-spotlight__disclaimer">Sin alarmismo. Sin promesas de seguridad total. Solo revisión técnica clara, correcciones verificables y evidencia antes/después.</p>
+          <p class="svc-spotlight__disclaimer">{c.disclaimer}</p>
         </div>
 
-        <aside class="svc-spotlight__aside" aria-label="Precios de referencia">
+        <aside class="svc-spotlight__aside" aria-label={lang === 'en' ? 'Reference pricing' : 'Precios de referencia'}>
           <div class="svc-spotlight__price-block">
-            <p class="svc-spotlight__price-eyebrow">Entrada</p>
-            <p class="svc-spotlight__price">1 UF</p>
-            <p class="svc-spotlight__price-sub">aprox. CLP $41.000</p>
-            <p class="svc-spotlight__price-note">Diagnóstico inicial descontable si contratas implementación.</p>
+            <p class="svc-spotlight__price-eyebrow">{c.priceEyebrow}</p>
+            <p class="svc-spotlight__price">{c.price}</p>
+            <p class="svc-spotlight__price-sub">{c.priceSub}</p>
+            <p class="svc-spotlight__price-note">{c.priceNote}</p>
           </div>
           <div class="svc-spotlight__divider" aria-hidden="true"></div>
           <div class="svc-spotlight__price-block">
-            <p class="svc-spotlight__price-eyebrow">Soporte mensual</p>
-            <p class="svc-spotlight__price">desde 4 UF/mes</p>
-            <p class="svc-spotlight__price-sub">aprox. CLP $162.000/mes</p>
-            <p class="svc-spotlight__price-note">Monitoreo liviano, revisiones periódicas y pequeñas correcciones sin incorporar un perfil interno.</p>
+            <p class="svc-spotlight__price-eyebrow">{c.monthlyEyebrow}</p>
+            <p class="svc-spotlight__price">{c.monthlyPrice}</p>
+            {c.monthlySub && <p class="svc-spotlight__price-sub">{c.monthlySub}</p>}
+            <p class="svc-spotlight__price-note">{c.monthlyNote}</p>
           </div>
-          <a class="svc-spotlight__aside-cta" href={serviceHref}>
-            Ver todos los planes →
+          <a class="svc-spotlight__aside-cta" href={c.serviceHref}>
+            {c.ctaPlans}
           </a>
         </aside>
       </div>

@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import HeroSection from '../../components/HeroSection.astro';
 import ServicesSection from '../../components/ServicesSection.astro';
+import ServiceSpotlight from '../../components/ServiceSpotlight.astro';
 import PortfolioSection from '../../components/PortfolioSection.astro';
 import AboutSection from '../../components/AboutSection.astro';
 import ProofSection from '../../components/ProofSection.astro';
@@ -26,8 +27,8 @@ const jsonLd = {
   alternateName: 'Tooltician',
   url: 'https://tooltician.com/',
   sameAs: ['https://github.com/cortega26', 'https://www.linkedin.com/in/cortega26'],
-  jobTitle: 'Python Automation and Data Systems Consultant',
-  description: 'I build Python automation systems — ETL pipelines, scrapers, internal APIs, and reporting workflows — scoped, documented, and designed to keep running after handoff.',
+  jobTitle: 'Python Automation & Web Technical Hygiene Consultant',
+  description: 'I build Python automation systems and cover web technical hygiene for live sites — ETL pipelines, scrapers, internal tools, reporting workflows, and security/SEO reviews — scoped, documented, and designed to keep running after handoff.',
   areaServed: ['CL', 'Worldwide'],
   address: {
     '@type': 'PostalAddress',
@@ -41,11 +42,13 @@ const jsonLd = {
     { '@type': 'Offer', name: 'Static Sites & Front Ends', description: 'Production-ready Astro sites with SEO and performance baked in.' },
     { '@type': 'Offer', name: 'Financial & Audit Tooling', description: 'Fail-closed reconciliation workflows with deterministic audit artifacts.' },
     { '@type': 'Offer', name: 'Reporting & Data Delivery', description: 'Structured outputs and dashboards that eliminate manual copy-paste.' },
+    { '@type': 'Offer', name: 'Web Technical Hygiene', description: 'Security headers, HTTPS, DNS, forms, Search Console, and lightweight monitoring for live sites with no internal technical owner. Diagnostic from $69.', url: 'https://tooltician.com/en/services/web-technical-hygiene/' },
   ],
   knowsAbout: [
     'Python Automation', 'ETL Pipelines', 'Data Engineering',
     'Web Scraping', 'Internal APIs', 'Reporting Automation',
-    'Static Sites', 'Financial Tooling',
+    'Static Sites', 'Financial Tooling', 'Web Technical Hygiene',
+    'Security Headers', 'DNS Configuration', 'Search Console',
   ],
   hasOccupation: {
     '@type': 'Occupation',
@@ -74,8 +77,8 @@ const breadcrumbJsonLd = {
 };
 ---
 <BaseLayout
-  title="Carlos Ortega — Python Automation Consultant | Tooltician"
-  description="Bilingual Python automation consultant (EN/ES) in Santiago, Chile. ETL, scraping, APIs, and reporting automation — scoped delivery with handoff-ready systems."
+  title="Python Automation & Web Technical Hygiene | Tooltician"
+  description="Tooltician: Python automation (ETL, scraping, internal tools, reporting) and web technical hygiene for live sites — security headers, HTTPS, DNS, Search Console. Scoped delivery, public evidence, published pricing."
   lang="en"
   canonical="https://tooltician.com/en/"
 >
@@ -90,6 +93,7 @@ const breadcrumbJsonLd = {
     <HeroSection lang="en" />
     <PortfolioSection lang="en" />
     <ServicesSection lang="en" />
+    <ServiceSpotlight lang="en" />
     <ProofSection lang="en" />
     <AboutSection lang="en" />
     <ContactSection lang="en" />

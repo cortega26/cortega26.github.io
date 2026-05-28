@@ -1284,9 +1284,13 @@ const breadcrumbJsonLd = {
 }
 
 .commercial-path {
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
+}
+
+.commercial-path .btn {
+  margin-top: auto;
 }
 
 .commercial-path:first-child {

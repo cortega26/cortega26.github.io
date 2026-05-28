@@ -364,11 +364,6 @@ ul { list-style: none; }
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
   padding: var(--sp-6);
-  transition: background var(--dur-med), border-color var(--dur-med);
-}
-.card-glass:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--clr-border-strong);
 }
 
 /* ---- Buttons ---- */

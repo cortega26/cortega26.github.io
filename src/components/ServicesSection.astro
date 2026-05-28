@@ -10,8 +10,8 @@ const SVG_SHIELD   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none
 const SVG_CHART    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>';
 
 const en = {
-  eyebrow: 'Services', title: 'Seven Scoped Services',
-  subtitle: 'Seven specific services. Each maps to a recurring workflow failure that keeps operations teams stuck in manual work or without ongoing technical oversight.',
+  eyebrow: 'Services', title: 'Two service lines, seven delivery modes',
+  subtitle: 'Python automation for operations-heavy workflows — plus web technical hygiene for live sites that commercially matter but have no internal technical owner. Each service addresses a concrete problem with defined deliverables.',
   fitLabel: 'Best when:',
   ctaLabel: 'View service',
   ctaContactLabel: 'Discuss this service',
@@ -19,12 +19,12 @@ const en = {
   termsHref: '/en/engagement/',
   services: [
     { icon: SVG_REFRESH, title: 'Reporting Automation', desc: 'Replace recurring report assembly and back-office steps with scheduled or reproducible runs that emit the same answer every time.', fit: 'Inputs, outputs, and workflow ownership are already known.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }], href: '#contact-form' },
+    { icon: SVG_SHIELD,  title: 'Web Technical Hygiene', desc: 'Review security headers, HTTPS, DNS, forms, Search Console, and basic monitoring for live sites that have no internal technical owner.', fit: 'The site is live, commercially matters, and nobody is reviewing the basics regularly.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/en/services/web-technical-hygiene/' },
     { icon: SVG_SEARCH,  title: 'Recurring Data Collection', desc: 'Build scraping and acquisition flows that can be rerun safely, logged properly, and repaired without starting from zero.', fit: 'The team needs dependable collection, not a one-off demo scrape.', examples: [{ name: 'Jackpot Pipeline', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '#contact-form' },
     { icon: SVG_LAYERS,  title: 'Operator-Ready Internal Tools', desc: 'Package scripts behind internal APIs or guided interfaces so the workflow stays usable after the original builder steps away.', fit: 'Several people touch the same workflow and handoff risk is real.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }], href: '#contact-form' },
     { icon: SVG_GLOBE,   title: 'Public Technical Surfaces', desc: 'Build lean Astro and web app surfaces that explain the system clearly, convert the right leads, and stay maintainable.', fit: 'The site needs evidence and clarity more than decorative marketing.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }], href: '#contact-form' },
     { icon: SVG_SHIELD,  title: 'Fail-Closed Financial Controls', desc: 'Implement reconciliation and finance workflows that stop on mismatches, preserve audit traces, and make review easier.', fit: 'A wrong answer is more expensive than a slower explicit check.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '#contact-form' },
     { icon: SVG_CHART,   title: 'Structured Data Delivery', desc: 'Produce outputs, dashboards, or publishing flows that remove manual copy-paste and make downstream use more predictable.', fit: 'The pain sits in recurring delivery, not a single isolated analysis.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '#contact-form' },
-    { icon: SVG_SHIELD,  title: 'Web Technical Hygiene', desc: 'Review security headers, HTTPS, DNS, forms, Search Console, and basic monitoring for live sites that have no internal technical owner.', fit: 'The site is live, commercially matters, and nobody is reviewing the basics regularly.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/en/services/web-technical-hygiene/' },
   ],
   examplesLabel: 'Evidence:',
   notFitTitle: 'Not the right fit',
@@ -44,19 +44,19 @@ const en = {
 };
 
 const es = {
-  eyebrow: 'Servicios', title: 'Siete servicios acotados',
-  subtitle: 'Siete servicios específicos. Cada uno responde a una falla recurrente de flujo que mantiene a los equipos operativos atrapados en trabajo manual o sin criterio técnico continuo.',
+  eyebrow: 'Servicios', title: 'Dos líneas de servicio, siete modalidades de entrega',
+  subtitle: 'Automatización Python para flujos operativos — más higiene técnica web para sitios publicados que importan comercialmente pero no tienen responsable técnico interno. Cada servicio responde a un problema concreto con entregables definidos.',
   fitLabel: 'Encaja cuando:',
   ctaLabel: 'Ver servicio',
   ctaContactLabel: 'Hablar de este servicio',
   services: [
     { icon: SVG_REFRESH, title: 'Automatización de Reportes', desc: 'Reemplazo el armado recurrente de reportes y pasos de back-office por ejecuciones programadas o reproducibles que entregan la misma respuesta cada vez.', fit: 'Ya se conocen inputs, outputs y dueño del flujo.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }], href: '#contact-form' },
+    { icon: SVG_SHIELD,  title: 'Higiene Técnica Web', desc: 'Reviso headers, HTTPS, DNS, formularios, Search Console y monitoreo liviano para sitios publicados que no tienen responsable técnico interno.', fit: 'El sitio ya está online, importa comercialmente y nadie está revisando lo básico con regularidad.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/es/servicios/higiene-tecnica-web/' },
     { icon: SVG_SEARCH,  title: 'Recolección de Datos Recurrente', desc: 'Construyo flujos de scraping y adquisición que pueden reejecutarse con seguridad, quedar bien logueados y repararse sin partir de cero.', fit: 'El equipo necesita recolección confiable, no un scrape de demostración.', examples: [{ name: 'Pipeline de Lotería', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '#contact-form' },
     { icon: SVG_LAYERS,  title: 'Herramientas Internas Operables', desc: 'Empaqueto scripts detrás de APIs internas o interfaces guiadas para que el flujo siga siendo usable cuando el autor ya no está encima.', fit: 'Varias personas tocan el mismo flujo y el riesgo de traspaso es real.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }], href: '#contact-form' },
     { icon: SVG_GLOBE,   title: 'Superficies Técnicas Públicas', desc: 'Construyo sitios Astro y superficies web sobrias que explican el sistema con claridad, convierten al lead correcto y siguen siendo mantenibles.', fit: 'El sitio necesita evidencia y claridad más que marketing decorativo.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }], href: '#contact-form' },
     { icon: SVG_SHIELD,  title: 'Controles Financieros Fail-Closed', desc: 'Implemento flujos financieros y de conciliación que se detienen ante diferencias, preservan trazas de auditoría y facilitan la revisión.', fit: 'Una respuesta equivocada cuesta más que una verificación explícita un poco más lenta.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '#contact-form' },
     { icon: SVG_CHART,   title: 'Entrega Estructurada de Datos', desc: 'Genero salidas, dashboards o flujos de publicación que eliminan el copia-pega manual y vuelven más predecible el consumo aguas abajo.', fit: 'El dolor está en la entrega recurrente, no en un análisis aislado.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '#contact-form' },
-    { icon: SVG_SHIELD,  title: 'Higiene Técnica Web', desc: 'Reviso headers, HTTPS, DNS, formularios, Search Console y monitoreo liviano para sitios publicados que no tienen responsable técnico interno.', fit: 'El sitio ya está online, importa comercialmente y nadie está revisando lo básico con regularidad.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/es/servicios/higiene-tecnica-web/' },
   ],
   examplesLabel: 'Evidencia:',
   notFitTitle: 'No es el encaje correcto',

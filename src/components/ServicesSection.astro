@@ -40,7 +40,10 @@ const en = {
     'Scope additions: quoted separately; nothing is absorbed silently.',
     'Late delivery due to my fault: timeline adjusts with written notice, no extra cost.',
     'Scope not deliverable as defined: I flag it early and offer a revised scope or refund of any unused deposit.',
+    'Early termination by client: work completed to date is billed at the agreed rate; the unused deposit balance is refunded within 5 business days.',
+    'Early termination by me: all completed work is delivered in full; the entire unused deposit is refunded within 5 business days.',
   ],
+  termsNote: 'These engagement terms are governed by the laws of Chile.',
   termsIPTitle: 'Intellectual property',
   termsIPItems: [
     'Deliverables created for the engagement transfer to the client upon full payment, under Chilean Law 17.336 on Intellectual Property (Art. 8).',
@@ -134,7 +137,10 @@ const es = {
     'Solicitudes fuera de alcance: se cotizan por separado, nada se absorbe en silencio.',
     'Retraso por causa mía: el plazo se ajusta con aviso escrito, sin costo adicional.',
     'Alcance no entregable como fue definido: lo señalo temprano y ofrezco un alcance revisado o la devolución del anticipo no utilizado.',
+    'Terminación anticipada por el cliente: el trabajo completado hasta esa fecha se factura según la tarifa acordada; el saldo del anticipo no utilizado se devuelve en un máximo de 5 días hábiles.',
+    'Terminación anticipada de mi parte: entrego todo el trabajo completado hasta esa fecha; el anticipo no utilizado se devuelve íntegramente en un máximo de 5 días hábiles.',
   ],
+  termsNote: 'Estas condiciones de trabajo se rigen por la legislación chilena.',
   termsIPTitle: 'Propiedad intelectual',
   termsIPItems: [
     'Los entregables creados para el proyecto se ceden al cliente tras el pago íntegro, conforme a la Ley N° 17.336 de Propiedad Intelectual (Art. 8).',
@@ -238,6 +244,7 @@ const c = lang === 'en' ? en : es;
           </ul>
         </div>
       </div>
+      <p class="terms-governing">{c.termsNote}</p>
     </div>
   </div>
 </section>
@@ -480,6 +487,19 @@ const c = lang === 'en' ? en : es;
   border: none;
   border-top: 1px solid var(--clr-border);
   margin: 1.25rem 0;
+}
+
+.terms-governing {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--clr-border);
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--clr-text-faint);
+  text-transform: uppercase;
+  opacity: 0.6;
 }
 
 .terms-grid--two {

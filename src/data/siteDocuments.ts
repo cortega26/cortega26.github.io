@@ -54,7 +54,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         {
           heading: 'Meeting recordings',
           paragraphs: [
-            'When a project engagement begins, meetings may be recorded for documentation and requirements-scoping purposes. This practice is disclosed in the engagement terms and requires the explicit consent of all participants at the start of each session, consistent with Articles 161-A and 161-C of the Chilean Penal Code and Law 19.628 on the Protection of Personal Data.',
+            'When a project engagement begins, meetings may be recorded for documentation and requirements-scoping purposes. This practice is disclosed in the engagement terms published on the Services section of this site (tooltician.com/#services) and requires the explicit consent of all participants at the start of each session, consistent with Articles 161-A and 161-C of the Chilean Penal Code and Law 19.628 on the Protection of Personal Data.',
             'Recordings are shared only with the participants in that meeting and are used solely to document scope agreements, technical decisions, and commitments. They are not sold, shared with third parties, or used for any other purpose.',
             'Recordings are retained for the duration of the engagement and archived or deleted at its close. If you are a project participant and wish to request deletion of a specific recording, contact me by email from the address used in the engagement.',
           ],
@@ -110,7 +110,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         {
           heading: 'Grabaciones de reuniones',
           paragraphs: [
-            'Una vez iniciado un proyecto, las reuniones pueden ser grabadas con fines de documentación y levantamiento de requerimientos. Esta práctica queda indicada en las condiciones de trabajo y requiere el consentimiento explícito de todos los participantes al inicio de cada sesión, en conformidad con los artículos 161-A y 161-C del Código Penal chileno y la Ley N° 19.628 sobre Protección de la Vida Privada.',
+            'Una vez iniciado un proyecto, las reuniones pueden ser grabadas con fines de documentación y levantamiento de requerimientos. Esta práctica queda indicada en las condiciones de trabajo publicadas en la sección Servicios de este sitio (tooltician.com/#services) y requiere el consentimiento explícito de todos los participantes al inicio de cada sesión, en conformidad con los artículos 161-A y 161-C del Código Penal chileno y la Ley N° 19.628 sobre Protección de la Vida Privada.',
             'Las grabaciones se comparten exclusivamente con los participantes de esa reunión y se usan únicamente para documentar acuerdos de alcance, decisiones técnicas y compromisos. No se venden, no se comparten con terceros ni se usan para ningún otro fin.',
             'Las grabaciones se conservan durante el proyecto y se archivan o eliminan al cierre del mismo. Si eres participante de un proyecto y deseas solicitar la eliminación de una grabación específica, escríbeme desde el correo usado en el proyecto.',
           ],

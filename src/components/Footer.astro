@@ -11,23 +11,23 @@ const copy = {
     tagline: 'Automation that survives handoff.',
     desc: 'Python systems for reporting, ETL, and internal workflows.',
     rights: `© ${year} Carlos Ortega Gonzalez · All rights reserved.`,
-    source: 'Source on GitHub',
     lang: 'Español',
     langHref: '/es/',
     privacy: 'Privacy',
     cookies: 'Cookies',
     terms: 'Terms',
+    conditions: 'Conditions',
   },
   es: {
     tagline: 'Automatización que sobrevive al traspaso.',
     desc: 'Sistemas Python para reportes, ETL y flujos internos.',
     rights: `© ${year} Carlos Ortega Gonzalez · Todos los derechos reservados.`,
-    source: 'Código en GitHub',
     lang: 'English',
     langHref: '/en/',
     privacy: 'Privacidad',
     cookies: 'Cookies',
     terms: 'Términos',
+    conditions: 'Condiciones',
   },
 };
 const c = copy[lang];
@@ -37,6 +37,7 @@ const legalLinks = [
   { href: `${policyPrefix}/privacy/`, label: c.privacy },
   { href: `${policyPrefix}/cookies/`, label: c.cookies },
   { href: `${policyPrefix}/terms/`, label: c.terms },
+  { href: `${policyPrefix}/#engagement-terms`, label: c.conditions },
 ];
 ---
 <footer class="footer" role="contentinfo">
@@ -70,7 +71,6 @@ const legalLinks = [
       <div class="footer__bottom-links">
         <div class="footer__meta-links">
           <a href={switchHref} hreflang={lang === 'en' ? 'es' : 'en'} data-language-preference={lang === 'en' ? 'es' : 'en'}>{c.lang}</a>
-          <a href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">{c.source}</a>
         </div>
         <div class="footer__legal-links">
           {legalLinks.map((link) => (

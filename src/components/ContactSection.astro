@@ -28,8 +28,6 @@ const en = {
   copied: "Address copied.",
   schedule: "Book intro call",
   scheduleAria: "Schedule an intro call on Calendly",
-  linkedinLabel: "LinkedIn profile",
-  linkedinCta: "View LinkedIn",
   formTitle: "Brief form",
   formIntro: "If the scope is already clear in writing, leave it here and I’ll reply by email with fit, next questions, or a direct no if it sits outside scope.",
   policyLead:
@@ -87,8 +85,6 @@ const es = {
   copied: "Dirección copiada.",
   schedule: "Agendar llamada inicial",
   scheduleAria: "Agendar una llamada inicial en Calendly",
-  linkedinLabel: "Perfil de LinkedIn",
-  linkedinCta: "Ver LinkedIn",
   serviceLead: "Si tu problema no es un flujo interno nuevo sino un sitio ya publicado que necesita revisión técnica periódica, parte por",
   serviceCta: "Diagnóstico Técnico Web",
   serviceHref: "/es/servicios/higiene-tecnica-web/",
@@ -219,14 +215,6 @@ const c = lang === "en" ? en : es;
           {c.copied}
         </p>
 
-        <p class="contact-inline-link">
-          <span>{c.linkedinLabel}:</span>
-          <a
-            href="https://www.linkedin.com/in/cortega26"
-            target="_blank"
-            rel="noopener noreferrer">{c.linkedinCta}</a
-          >
-        </p>
         {c.serviceLead && (
           <p class="contact-service-link">
             <span>{c.serviceLead}</span>

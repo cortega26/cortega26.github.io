@@ -344,7 +344,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
           ],
           items: [
             'Deliverables — source code, configuration, documentation, and assets created specifically for the engagement — transfer to the client upon full payment (Art. 8).',
-            'Generic components, utilities, and patterns that predate the engagement or were developed independently are retained by me and may be reused across projects. Any such components will be identified in the project proposal before work begins.',
+            'Generic components, utilities, and patterns that predate the engagement or were developed independently are retained by me and may be reused across projects.',
             'Client brand assets — logos, trademarks, domain names, and exclusive brand identifiers — remain the client\'s sole property and are only referenced in case studies or testimonials with explicit written permission.',
           ],
         },
@@ -412,7 +412,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
           ],
           items: [
             'Los entregables — código fuente, configuración, documentación y activos creados específicamente para el proyecto — se ceden al cliente tras el pago íntegro (Art. 8).',
-            'Los componentes genéricos, utilidades y patrones anteriores al proyecto o desarrollados de forma independiente quedan bajo mi titularidad y pueden reutilizarse en otros proyectos. Cualquier componente de este tipo se identificará en la propuesta de proyecto antes de comenzar.',
+            'Los componentes genéricos, utilidades y patrones anteriores al proyecto o desarrollados de forma independiente quedan bajo mi titularidad y pueden reutilizarse en otros proyectos.',
             'Los activos de marca del cliente — logos, marcas registradas, nombres de dominio e identificadores exclusivos — son propiedad exclusiva del cliente y solo se referencian en estudios de caso o testimonios con autorización escrita explícita.',
           ],
         },

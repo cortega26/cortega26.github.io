@@ -41,6 +41,18 @@ const en = {
     'Late delivery due to my fault: timeline adjusts with written notice, no extra cost.',
     'Scope not deliverable as defined: I flag it early and offer a revised scope or refund of any unused deposit.',
   ],
+  termsIPTitle: 'Intellectual property',
+  termsIPItems: [
+    'Deliverables created for the engagement transfer to the client upon full payment, under Chilean Law 17.336 on Intellectual Property (Art. 8).',
+    'Generic components, utilities, and patterns developed independently or predating the engagement are retained by me and may be reused in other projects.',
+    'Client brand assets — logos, trademarks, domain names, and exclusive brand identifiers — remain the sole property of the client and may only be referenced in case studies or testimonials with explicit written permission.',
+  ],
+  termsConfTitle: 'Confidentiality',
+  termsConfItems: [
+    'Information shared during an engagement — workflows, internal processes, credentials, data, and business logic — is treated as confidential.',
+    'It is used solely to deliver the agreed scope and is not disclosed, shared, or repurposed outside the engagement.',
+    'This obligation applies during the engagement and for a reasonable period after its close, regardless of whether a formal NDA is in place.',
+  ],
   services: [
     { icon: SVG_REFRESH, title: 'Reporting Automation', desc: 'Replace recurring report assembly and back-office steps with scheduled or reproducible runs that emit the same answer every time.', fit: 'Inputs, outputs, and workflow ownership are already known.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }], href: '#contact-form' },
     { icon: SVG_SEARCH,  title: 'Recurring Data Collection', desc: 'Build scraping and acquisition flows that can be rerun safely, logged properly, and repaired without starting from zero.', fit: 'The team needs dependable collection, not a one-off demo scrape.', examples: [{ name: 'Jackpot Pipeline', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '#contact-form' },
@@ -123,6 +135,18 @@ const es = {
     'Retraso por causa mía: el plazo se ajusta con aviso escrito, sin costo adicional.',
     'Alcance no entregable como fue definido: lo señalo temprano y ofrezco un alcance revisado o la devolución del anticipo no utilizado.',
   ],
+  termsIPTitle: 'Propiedad intelectual',
+  termsIPItems: [
+    'Los entregables creados para el proyecto se ceden al cliente tras el pago íntegro, conforme a la Ley N° 17.336 de Propiedad Intelectual (Art. 8).',
+    'Los componentes genéricos, utilidades y patrones desarrollados de forma independiente o anteriores al proyecto quedan bajo mi titularidad y pueden reutilizarse en otros proyectos.',
+    'Los activos de marca del cliente — logos, marcas registradas, nombres de dominio e identificadores exclusivos — son propiedad exclusiva del cliente y solo podrán referenciarse en estudios de caso o testimonios con autorización escrita explícita.',
+  ],
+  termsConfTitle: 'Confidencialidad',
+  termsConfItems: [
+    'La información compartida durante un proyecto — flujos, procesos internos, credenciales, datos y lógica de negocio — se trata como confidencial.',
+    'Se usa exclusivamente para entregar el alcance acordado y no se divulga, comparte ni reutiliza fuera del proyecto.',
+    'Esta obligación aplica durante el proyecto y por un período razonable posterior a su cierre, con o sin NDA formal vigente.',
+  ],
 };
 
 const c = lang === 'en' ? en : es;
@@ -196,6 +220,21 @@ const c = lang === 'en' ? en : es;
           <p class="terms-col__title">{c.termsConsequencesTitle}</p>
           <ul class="terms-list terms-list--consequences">
             {c.termsConsequencesItems.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="terms-divider"></div>
+      <div class="terms-grid terms-grid--two">
+        <div class="terms-col">
+          <p class="terms-col__title">{c.termsIPTitle}</p>
+          <ul class="terms-list terms-list--ip">
+            {c.termsIPItems.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="terms-col">
+          <p class="terms-col__title">{c.termsConfTitle}</p>
+          <ul class="terms-list terms-list--conf">
+            {c.termsConfItems.map(item => <li>{item}</li>)}
           </ul>
         </div>
       </div>
@@ -426,6 +465,27 @@ const c = lang === 'en' ? en : es;
   top: 0.15em;
 }
 
+.terms-list--ip li::before,
+.terms-list--conf li::before {
+  content: '§';
+  position: absolute;
+  left: 0;
+  color: var(--clr-text-faint);
+  font-size: 0.68rem;
+  top: 0.1em;
+  opacity: 0.6;
+}
+
+.terms-divider {
+  border: none;
+  border-top: 1px solid var(--clr-border);
+  margin: 1.25rem 0;
+}
+
+.terms-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 @media (max-width: 980px) {
   .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -442,7 +502,8 @@ const c = lang === 'en' ? en : es;
   .services-grid {
     grid-template-columns: 1fr;
   }
-  .terms-grid {
+  .terms-grid,
+  .terms-grid--two {
     grid-template-columns: 1fr;
   }
   .terms-col--consequences {

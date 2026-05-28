@@ -29,7 +29,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       intro:
         'This page explains what this site collects, why it is collected, and which third-party services are involved when you contact me or schedule a call.',
       updatedLabel: 'Last updated',
-      updatedAt: '17 May 2026',
+      updatedAt: '27 May 2026',
       sections: [
         {
           heading: 'What this site collects',
@@ -49,6 +49,14 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
           paragraphs: [
             'Submitted information is used to review project fit, reply by email, and schedule or continue an initial conversation.',
             'I do not use this site to sell contact lists or to run ad-targeting workflows from form submissions.',
+          ],
+        },
+        {
+          heading: 'Meeting recordings',
+          paragraphs: [
+            'When a project engagement begins, meetings may be recorded for documentation and requirements-scoping purposes. This practice is disclosed in the engagement terms and requires the explicit consent of all participants at the start of each session, consistent with Articles 161-A and 161-C of the Chilean Penal Code and Law 19.628 on the Protection of Personal Data.',
+            'Recordings are shared only with the participants in that meeting and are used solely to document scope agreements, technical decisions, and commitments. They are not sold, shared with third parties, or used for any other purpose.',
+            'Recordings are retained for the duration of the engagement and archived or deleted at its close. If you are a project participant and wish to request deletion of a specific recording, contact me by email from the address used in the engagement.',
           ],
         },
         {
@@ -77,7 +85,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       intro:
         'Esta página explica qué recopila este sitio, por qué se recopila y qué servicios de terceros intervienen cuando contactas o agendas una llamada.',
       updatedLabel: 'Última actualización',
-      updatedAt: '17 de mayo de 2026',
+      updatedAt: '27 de mayo de 2026',
       sections: [
         {
           heading: 'Qué recopila este sitio',
@@ -97,6 +105,14 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
           paragraphs: [
             'La información enviada se usa para revisar el encaje del proyecto, responder por correo y agendar o continuar una conversación inicial.',
             'No uso este sitio para vender listas de contacto ni para ejecutar segmentación publicitaria a partir de formularios enviados.',
+          ],
+        },
+        {
+          heading: 'Grabaciones de reuniones',
+          paragraphs: [
+            'Una vez iniciado un proyecto, las reuniones pueden ser grabadas con fines de documentación y levantamiento de requerimientos. Esta práctica queda indicada en las condiciones de trabajo y requiere el consentimiento explícito de todos los participantes al inicio de cada sesión, en conformidad con los artículos 161-A y 161-C del Código Penal chileno y la Ley N° 19.628 sobre Protección de la Vida Privada.',
+            'Las grabaciones se comparten exclusivamente con los participantes de esa reunión y se usan únicamente para documentar acuerdos de alcance, decisiones técnicas y compromisos. No se venden, no se comparten con terceros ni se usan para ningún otro fin.',
+            'Las grabaciones se conservan durante el proyecto y se archivan o eliminan al cierre del mismo. Si eres participante de un proyecto y deseas solicitar la eliminación de una grabación específica, escríbeme desde el correo usado en el proyecto.',
           ],
         },
         {

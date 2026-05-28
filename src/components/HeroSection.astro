@@ -22,10 +22,13 @@ const en = {
     'Make ETL, scraping, and reporting failures easier to detect before they hurt operations.',
     'Ship internal tools with docs and defaults that survive a real handoff.',
   ],
-  ctaPrimary: 'Start a project',
-  ctaSecondary: 'View work',
-  ctaPrimaryHref: '#contact-form',
-  ctaSecondaryHref: '#portfolio',
+  ctaPrimary: 'Book free diagnostic call',
+  ctaSecondary: 'Send a written brief',
+  ctaPrimaryHref: 'https://calendly.com/ciortega26',
+  ctaSecondaryHref: '#contact-form',
+  ctaNote: '2–3 slots open this month',
+  ctaNoteLink: 'view work first',
+  ctaNoteLinkHref: '#portfolio',
   featuredOutcome: {
     text: 'elrincondeebano.com',
     detail: 'live store · daily orders, 100+ SKUs, 0 outages in 14 months',
@@ -42,7 +45,7 @@ const en = {
   panelItems: [
     { label: 'Scope', value: 'Reporting automation, ETL reliability, scraping, internal data tools, and workflow stabilization.' },
     { label: 'Delivery', value: 'Scoped implementation, direct communication, explicit assumptions, and handoff-ready docs.' },
-    { label: 'Availability', value: 'Accepting 2–3 new scoped engagements per month. Reply within 48 hours. Free 20-min diagnostic call.' },
+    { label: 'Availability', value: '2–3 slots open this month. Reply in 48 h with a direct fit or no. Free 20-min diagnostic call — you leave with a clear scope direction, not a sales pitch.' },
     { label: 'Location', value: 'Santiago, working EN/ES across LATAM and U.S.-friendly hours.' },
   ],
   serviceLine: undefined as string | undefined,
@@ -71,10 +74,13 @@ const es = {
     'Vuelvo más visibles las fallas de ETL, scraping y reporting antes de que golpeen la operación.',
     'Entrego herramientas internas con docs y defaults que sobreviven a un traspaso real.',
   ],
-  ctaPrimary: 'Inicia un proyecto',
-  ctaSecondary: 'Ver trabajo',
-  ctaPrimaryHref: '#contact-form',
-  ctaSecondaryHref: '#portfolio',
+  ctaPrimary: 'Agendar llamada de diagnóstico gratis',
+  ctaSecondary: 'Enviar un brief escrito',
+  ctaPrimaryHref: 'https://calendly.com/ciortega26',
+  ctaSecondaryHref: '#contact-form',
+  ctaNote: '2–3 cupos este mes',
+  ctaNoteLink: 'ver el trabajo primero',
+  ctaNoteLinkHref: '#portfolio',
   featuredOutcome: {
     text: 'elrincondeebano.com',
     detail: 'tienda activa · pedidos diarios, 100+ SKUs, 0 caídas en 14 meses',
@@ -91,7 +97,7 @@ const es = {
   panelItems: [
     { label: 'Alcance', value: 'Automatización de reportes, confiabilidad ETL, scraping, herramientas internas de datos y estabilización de flujos.' },
     { label: 'Entrega', value: 'Implementación acotada, comunicación directa, supuestos explícitos y docs para traspaso.' },
-    { label: 'Disponibilidad', value: 'Acepto 2–3 proyectos acotados nuevos por mes. Respuesta en 48 horas. Llamada de diagnóstico gratis de 20 min.' },
+    { label: 'Disponibilidad', value: '2–3 cupos este mes. Respuesta en 48 h con encaje directo o no. Llamada de diagnóstico gratis de 20 min — salís con dirección de alcance clara, no con un pitch de ventas.' },
     { label: 'Ubicación', value: 'Santiago, trabajo ES/EN con LATAM y horarios compatibles con EE.UU.' },
   ],
 };
@@ -121,9 +127,12 @@ const c = lang === 'en' ? en : es;
           </p>
         )}
         <div class="hero__actions reveal reveal-delay-2">
-          <a class="btn btn-primary" href={c.ctaPrimaryHref}>{c.ctaPrimary}</a>
+          <a class="btn btn-primary" href={c.ctaPrimaryHref} target="_blank" rel="noopener noreferrer">{c.ctaPrimary}</a>
           <a class="btn btn-ghost" href={c.ctaSecondaryHref}>{c.ctaSecondary}</a>
         </div>
+        <p class="hero__cta-note reveal reveal-delay-2">
+          {c.ctaNote} · <a href={c.ctaNoteLinkHref}>{c.ctaNoteLink}</a> →
+        </p>
       </div>
 
     </div>
@@ -270,7 +279,7 @@ const c = lang === 'en' ? en : es;
   font-size: 0.92rem;
   color: var(--clr-text-muted);
   line-height: 1.65;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1rem;
   max-width: 52ch;
 }
 
@@ -306,6 +315,22 @@ const c = lang === 'en' ? en : es;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.hero__cta-note {
+  font-size: 0.78rem;
+  color: var(--clr-text-faint);
+  margin-bottom: 1.75rem;
+}
+
+.hero__cta-note a {
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+
+.hero__cta-note a:hover {
+  color: var(--clr-accent-hover);
 }
 
 /* Routes panel — below the fold */

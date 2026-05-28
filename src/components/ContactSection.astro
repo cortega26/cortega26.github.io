@@ -47,6 +47,12 @@ const en = {
     "Workflow and tools · Main bottleneck or failure · Who will operate it · Deadline or handoff constraint",
   callAlt: "If you’d rather not type, book a 20-min call.",
   replyNote: "Reply within 2 business days · Direct yes/no on fit · Free 30-min scoping call if it’s a fit · No sales sequence.",
+  howItWorksTitle: "How it works",
+  howItWorks: [
+    { step: "01", label: "Send a brief or book a call", body: "Describe the workflow, the bottleneck, and what working looks like. A short note is enough — no deck required." },
+    { step: "02", label: "Fit response within 48 h", body: "Direct yes or no on fit. If it is close, one clarifying question. No follow-up sequence if it is a no." },
+    { step: "03", label: "Scoped proposal on a match", body: "Concrete deliverables, timeline, and handoff plan. No ambiguous retainers or open-ended commitments." },
+  ],
   submit: "Send brief",
   submitSending: "Sending…",
   successMsg: "Message sent. I’ll reply within two business days.",
@@ -102,6 +108,12 @@ const es = {
   messagePh: "Flujo y herramientas · Cuello de botella principal · Quién lo va a operar · Deadline o restricción de traspaso",
   callAlt: "Si preferís no escribir, agenda una llamada de 20 min.",
   replyNote: "Respuesta en 2 días hábiles · Sí o no directo según encaje · Llamada de scoping de 30 min si hay encaje · Sin secuencia de ventas.",
+  howItWorksTitle: "Cómo funciona",
+  howItWorks: [
+    { step: "01", label: "Enviás un brief o agendás una llamada", body: "Describís el flujo, el cuello de botella y cómo se ve un resultado bueno. Una nota corta basta — sin deck." },
+    { step: "02", label: "Respuesta de encaje en 48 h", body: "Sí o no directo según encaje. Si está cerca, una pregunta de clarificación. Sin seguimiento si es un no." },
+    { step: "03", label: "Propuesta acotada si hay encaje", body: "Entregables concretos, timeline y plan de traspaso. Sin retainers ambiguos ni compromisos abiertos." },
+  ],
   submit: "Enviar brief",
   submitSending: "Enviando…",
   successMsg: "Mensaje enviado. Respondo en dos días hábiles.",
@@ -119,6 +131,21 @@ const c = lang === "en" ? en : es;
       <h2 class="section-title reveal">{c.title}</h2>
       <div class="divider reveal"></div>
       <p class="section-subtitle reveal">{c.subtitle}</p>
+    </div>
+
+    <div class="how-it-works reveal">
+      <p class="how-it-works__label">{c.howItWorksTitle}</p>
+      <ol class="how-it-works__steps">
+        {c.howItWorks.map(step => (
+          <li class="how-it-works__step">
+            <span class="how-it-works__num">{step.step}</span>
+            <div class="how-it-works__body">
+              <strong class="how-it-works__name">{step.label}</strong>
+              <p class="how-it-works__desc">{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
 
     <div class="contact-layout">
@@ -290,6 +317,72 @@ const c = lang === "en" ? en : es;
 </section>
 
 <style>
+  .how-it-works {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 1rem 2rem;
+    margin-bottom: 2.5rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .how-it-works__label {
+    font-family: var(--ff-label);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--clr-text-faint);
+    white-space: nowrap;
+    padding-top: 0.1rem;
+  }
+
+  .how-it-works__steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2.5rem;
+    flex: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .how-it-works__step {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .how-it-works__num {
+    font-family: var(--ff-label);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--clr-accent);
+    opacity: 0.7;
+    letter-spacing: 0.06em;
+    padding-top: 0.2rem;
+    white-space: nowrap;
+  }
+
+  .how-it-works__name {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--clr-text);
+    margin-bottom: 0.2rem;
+  }
+
+  .how-it-works__desc {
+    font-size: 0.82rem;
+    color: var(--clr-text-muted);
+    line-height: 1.55;
+  }
+
   .contact-layout {
     display: grid;
     grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);

@@ -25,6 +25,13 @@ const en = {
     { icon: SVG_SHIELD,  title: 'Web Technical Hygiene', desc: 'Review security headers, HTTPS, DNS, forms, Search Console, and basic monitoring for live sites that have no internal technical owner.', fit: 'The site is live, commercially matters, and nobody is reviewing the basics regularly.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/en/services/web-technical-hygiene/' },
   ],
   examplesLabel: 'Evidence:',
+  notFitTitle: 'Not the right fit',
+  notFitItems: [
+    'Open-ended discovery with no concrete workflow already in use.',
+    'One-off analysis with no repeating delivery or operational need.',
+    'Engagements where the workflow owner has not been identified internally.',
+    'Cases where a full-time junior hire is a better economic fit than a scoped contractor.',
+  ],
   shapesLabel: 'Engagement shapes',
   shapes: [
     { name: 'Scoped automation', range: 'from 30 UF', note: '~USD $1,200', href: '#contact-form' },
@@ -50,6 +57,13 @@ const es = {
     { icon: SVG_SHIELD,  title: 'Higiene Técnica Web', desc: 'Reviso headers, HTTPS, DNS, formularios, Search Console y monitoreo liviano para sitios publicados que no tienen responsable técnico interno.', fit: 'El sitio ya está online, importa comercialmente y nadie está revisando lo básico con regularidad.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/es/servicios/higiene-tecnica-web/' },
   ],
   examplesLabel: 'Evidencia:',
+  notFitTitle: 'No es el encaje correcto',
+  notFitItems: [
+    'Discovery abierto sin un flujo concreto ya en uso.',
+    'Análisis aislado sin necesidad de entrega recurrente u operacional.',
+    'Proyectos donde el dueño del flujo no está identificado internamente.',
+    'Casos donde contratar un junior de planta es mejor opción económica que un contratista acotado.',
+  ],
   shapesLabel: 'Modalidades de trabajo',
   shapes: [
     { name: 'Automatización acotada', range: 'desde 30 UF', note: '~USD $1.200', href: '#contact-form' },
@@ -87,6 +101,15 @@ const c = lang === 'en' ? en : es;
           </div>
         </article>
       ))}
+    </div>
+
+    <div class="not-fit-strip reveal">
+      <p class="not-fit-title">{c.notFitTitle}</p>
+      <ul class="not-fit-list">
+        {c.notFitItems.map(item => (
+          <li>{item}</li>
+        ))}
+      </ul>
     </div>
 
     <div class="shapes-strip reveal">
@@ -131,6 +154,56 @@ const c = lang === 'en' ? en : es;
 .svc-inline-cta {
   align-self: flex-start;
   margin-bottom: 1rem;
+}
+
+.not-fit-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.5rem;
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.not-fit-title {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  white-space: nowrap;
+}
+
+.not-fit-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.5rem;
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.not-fit-list li {
+  position: relative;
+  padding-left: 0.85rem;
+  font-size: 0.83rem;
+  color: var(--clr-text-faint);
+  line-height: 1.55;
+}
+
+.not-fit-list li::before {
+  content: '×';
+  position: absolute;
+  left: 0;
+  color: var(--clr-text-faint);
+  opacity: 0.5;
+  font-weight: 700;
+  font-size: 0.72rem;
 }
 
 .shapes-strip {

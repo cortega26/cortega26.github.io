@@ -357,15 +357,6 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
             'This obligation applies during the engagement and for two years after its close, whether or not a formal NDA is in place.',
           ],
         },
-        {
-          heading: 'Dispute resolution',
-          paragraphs: ['Both parties commit to resolving any dispute arising from this agreement through the following steps, in order.'],
-          items: [
-            'Direct negotiation: either party may raise a dispute in writing. Both sides have 15 business days to reach a resolution directly.',
-            'Arbitration: if negotiation does not resolve the dispute within that period, either party may submit it to binding arbitration before the Centro de Arbitraje y Mediación de Santiago (CAM Santiago), or before a single arbitrator agreed upon in writing by both parties.',
-            'Courts: if an arbitration agreement cannot be reached or the arbitration clause is found unenforceable, disputes are subject to the courts of Santiago.',
-          ],
-        },
       ],
       closing: 'These terms are governed by Chilean law. Questions about fit, scope, or timeline? A call is the fastest way to get clarity.',
       ctaLabel: 'Schedule a call',
@@ -432,15 +423,6 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
             'La información compartida — flujos, procesos internos, credenciales, datos y lógica de negocio — se trata como confidencial.',
             'Se usa exclusivamente para entregar el alcance acordado y no se divulga, comparte ni reutiliza fuera del proyecto.',
             'Esta obligación aplica durante el proyecto y por dos años después de su cierre, con o sin NDA formal vigente.',
-          ],
-        },
-        {
-          heading: 'Resolución de controversias',
-          paragraphs: ['Ambas partes se comprometen a resolver cualquier controversia derivada de estas condiciones mediante los siguientes pasos, en ese orden.'],
-          items: [
-            'Negociación directa: cualquiera de las partes puede plantear una controversia por escrito. Ambas partes tienen 15 días hábiles para alcanzar una resolución de forma directa.',
-            'Arbitraje: si la negociación no resuelve la controversia dentro de ese plazo, cualquiera de las partes puede someter el asunto a arbitraje vinculante ante el Centro de Arbitraje y Mediación de Santiago (CAM Santiago), o ante un árbitro único acordado por escrito entre las partes.',
-            'Tribunales: si no es posible alcanzar un acuerdo de arbitraje o si la cláusula arbitral resultara inaplicable, las controversias quedan sujetas a los tribunales ordinarios de justicia de Santiago.',
           ],
         },
       ],

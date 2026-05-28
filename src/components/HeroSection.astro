@@ -26,8 +26,7 @@ const en = {
   ctaSecondary: 'Send a written brief',
   ctaPrimaryHref: 'https://calendly.com/ciortega26',
   ctaSecondaryHref: '#contact-form',
-  ctaNote: '2–3 slots open this month',
-  ctaNoteLink: 'view work first',
+  ctaNoteLink: 'View work first',
   ctaNoteLinkHref: '#portfolio',
   featuredOutcome: {
     text: 'elrincondeebano.com',
@@ -45,7 +44,7 @@ const en = {
   panelItems: [
     { label: 'Scope', value: 'Reporting automation, ETL reliability, scraping, internal data tools, and workflow stabilization.' },
     { label: 'Delivery', value: 'Scoped implementation, direct communication, explicit assumptions, and handoff-ready docs.' },
-    { label: 'Availability', value: '2–3 slots open this month. Reply in 48 h with a direct fit or no. Free 20-min diagnostic call — you leave with a clear scope direction, not a sales pitch.' },
+    { label: 'Availability', value: 'Open to new scoped engagements. Reply within 48 h with a direct fit or no. Free 20-min diagnostic call — you leave with clear scope direction, not a sales pitch.' },
     { label: 'Location', value: 'Santiago, working EN/ES across LATAM and U.S.-friendly hours.' },
   ],
   serviceLine: undefined as string | undefined,
@@ -78,8 +77,7 @@ const es = {
   ctaSecondary: 'Enviar un brief escrito',
   ctaPrimaryHref: 'https://calendly.com/ciortega26',
   ctaSecondaryHref: '#contact-form',
-  ctaNote: '2–3 cupos este mes',
-  ctaNoteLink: 'ver el trabajo primero',
+  ctaNoteLink: 'Ver el trabajo primero',
   ctaNoteLinkHref: '#portfolio',
   featuredOutcome: {
     text: 'elrincondeebano.com',
@@ -97,7 +95,7 @@ const es = {
   panelItems: [
     { label: 'Alcance', value: 'Automatización de reportes, confiabilidad ETL, scraping, herramientas internas de datos y estabilización de flujos.' },
     { label: 'Entrega', value: 'Implementación acotada, comunicación directa, supuestos explícitos y docs para traspaso.' },
-    { label: 'Disponibilidad', value: '2–3 cupos este mes. Respuesta en 48 h con encaje directo o no. Llamada de diagnóstico gratis de 20 min — salís con dirección de alcance clara, no con un pitch de ventas.' },
+    { label: 'Disponibilidad', value: 'Disponible para nuevos proyectos acotados. Respuesta en 48 h con encaje directo o no. Llamada de diagnóstico gratis de 20 min — terminas la llamada con dirección de alcance clara, sin pitch de ventas.' },
     { label: 'Ubicación', value: 'Santiago, trabajo ES/EN con LATAM y horarios compatibles con EE.UU.' },
   ],
 };
@@ -131,7 +129,7 @@ const c = lang === 'en' ? en : es;
           <a class="btn btn-ghost" href={c.ctaSecondaryHref}>{c.ctaSecondary}</a>
         </div>
         <p class="hero__cta-note reveal reveal-delay-2">
-          {c.ctaNote} · <a href={c.ctaNoteLinkHref}>{c.ctaNoteLink}</a> →
+          <a href={c.ctaNoteLinkHref}>{c.ctaNoteLink} →</a>
         </p>
       </div>
 

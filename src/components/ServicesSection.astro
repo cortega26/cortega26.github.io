@@ -15,6 +15,32 @@ const en = {
   fitLabel: 'Best when:',
   ctaLabel: 'View service',
   ctaContactLabel: 'Discuss this service',
+  termsTitle: 'Engagement terms',
+  termsMyTitle: 'My commitments',
+  termsMyItems: [
+    'Deliver the agreed scope within the estimated timeline.',
+    'Notify you before a scope change affects delivery or cost.',
+    'Hand off documented, runnable work — not just code.',
+    'Respond within 2 business days on active engagements.',
+    'Give a direct no if a request is outside scope.',
+    'Record meetings for documentation and requirements scoping — recordings are shared with all participants and not used for any other purpose.',
+  ],
+  termsClientTitle: 'Client responsibilities',
+  termsClientItems: [
+    'Define the workflow, the bottleneck, and the internal owner before kick-off.',
+    'Pay the agreed deposit before work begins.',
+    'Provide access to systems and data within 3 business days of request.',
+    'Give feedback on deliverables within 5 business days.',
+    'Designate one decision-making contact.',
+  ],
+  termsConsequencesTitle: 'If either side doesn\'t hold up',
+  termsConsequencesItems: [
+    'Non-payment: work pauses and deliverables are withheld until the balance is settled.',
+    'Delayed access or feedback: timeline extends by the same amount — no penalty on my end.',
+    'Scope additions: quoted separately; nothing is absorbed silently.',
+    'Late delivery due to my fault: timeline adjusts with written notice, no extra cost.',
+    'Scope not deliverable as defined: I flag it early and offer a revised scope or refund of any unused deposit.',
+  ],
   services: [
     { icon: SVG_REFRESH, title: 'Reporting Automation', desc: 'Replace recurring report assembly and back-office steps with scheduled or reproducible runs that emit the same answer every time.', fit: 'Inputs, outputs, and workflow ownership are already known.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }], href: '#contact-form' },
     { icon: SVG_SEARCH,  title: 'Recurring Data Collection', desc: 'Build scraping and acquisition flows that can be rerun safely, logged properly, and repaired without starting from zero.', fit: 'The team needs dependable collection, not a one-off demo scrape.', examples: [{ name: 'Jackpot Pipeline', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '#contact-form' },
@@ -37,7 +63,7 @@ const en = {
     { name: 'Scoped automation', range: 'from 30 UF', note: '~USD $1,200', href: '#contact-form' },
     { name: 'Stabilization retainer', range: 'from 6 UF / month', note: '~USD $240/mo', href: '#contact-form' },
     { name: 'Web hygiene', range: 'from $69 diagnostic', note: 'already priced', href: '/en/services/web-technical-hygiene/' },
-    { name: 'Diagnostic call', range: 'free', note: '20 min', href: 'https://calendly.com/ciortega26' },
+    { name: 'Diagnostic call', range: 'free', note: '15 min', href: 'https://calendly.com/ciortega26' },
   ],
 };
 
@@ -69,7 +95,33 @@ const es = {
     { name: 'Automatización acotada', range: 'desde 30 UF', note: '~USD $1.200', href: '#contact-form' },
     { name: 'Retainer de estabilización', range: 'desde 6 UF / mes', note: '~USD $240/mes', href: '#contact-form' },
     { name: 'Higiene técnica web', range: 'desde 1 UF diagnóstico', note: 'ya con precio', href: '/es/servicios/higiene-tecnica-web/' },
-    { name: 'Llamada de diagnóstico', range: 'gratis', note: '20 min', href: 'https://calendly.com/ciortega26' },
+    { name: 'Llamada de diagnóstico', range: 'gratis', note: '15 min', href: 'https://calendly.com/ciortega26' },
+  ],
+  termsTitle: 'Condiciones de trabajo',
+  termsMyTitle: 'Mis compromisos',
+  termsMyItems: [
+    'Entregar el alcance acordado dentro del plazo estimado.',
+    'Avisarte antes de que un cambio afecte la entrega o el costo.',
+    'Traspasar trabajo documentado y ejecutable, no solo código.',
+    'Responder en 2 días hábiles en proyectos activos.',
+    'Decir no directamente si una solicitud queda fuera del alcance.',
+    'Grabar las reuniones con fines de documentación y levantamiento de requerimientos — las grabaciones se comparten con todos los participantes y no se usan para ningún otro propósito.',
+  ],
+  termsClientTitle: 'Responsabilidades del cliente',
+  termsClientItems: [
+    'Definir el flujo, el cuello de botella y el responsable interno antes del inicio.',
+    'Pagar el anticipo acordado antes de comenzar el trabajo.',
+    'Entregar accesos y datos necesarios en un máximo de 3 días hábiles desde la solicitud.',
+    'Dar feedback sobre entregables en un máximo de 5 días hábiles.',
+    'Designar un único punto de contacto para decisiones.',
+  ],
+  termsConsequencesTitle: 'Si alguna de las partes no cumple',
+  termsConsequencesItems: [
+    'Impago: el trabajo se pausa y los entregables quedan retenidos hasta saldar el saldo.',
+    'Demora en accesos o feedback: el plazo se extiende en la misma proporción, sin penalización de mi parte.',
+    'Solicitudes fuera de alcance: se cotizan por separado, nada se absorbe en silencio.',
+    'Retraso por causa mía: el plazo se ajusta con aviso escrito, sin costo adicional.',
+    'Alcance no entregable como fue definido: lo señalo temprano y ofrezco un alcance revisado o la devolución del anticipo no utilizado.',
   ],
 };
 
@@ -122,6 +174,30 @@ const c = lang === 'en' ? en : es;
             <span class="shape-note">{s.note}</span>
           </a>
         ))}
+      </div>
+    </div>
+
+    <div class="terms-strip reveal">
+      <p class="terms-label">{c.termsTitle}</p>
+      <div class="terms-grid">
+        <div class="terms-col">
+          <p class="terms-col__title">{c.termsMyTitle}</p>
+          <ul class="terms-list terms-list--mine">
+            {c.termsMyItems.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="terms-col">
+          <p class="terms-col__title">{c.termsClientTitle}</p>
+          <ul class="terms-list terms-list--client">
+            {c.termsClientItems.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="terms-col terms-col--consequences">
+          <p class="terms-col__title">{c.termsConsequencesTitle}</p>
+          <ul class="terms-list terms-list--consequences">
+            {c.termsConsequencesItems.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -271,15 +347,106 @@ const c = lang === 'en' ? en : es;
   color: var(--clr-text-faint);
 }
 
+.terms-strip {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.terms-label {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  margin-bottom: 1rem;
+}
+
+.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+}
+
+.terms-col__title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+.terms-col--consequences .terms-col__title {
+  color: var(--clr-text-muted);
+}
+
+.terms-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.terms-list li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.82rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+.terms-list--mine li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  top: 0.1em;
+}
+
+.terms-list--client li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--clr-text-faint);
+  font-weight: 700;
+}
+
+.terms-list--consequences li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--clr-text-faint);
+  font-size: 0.72rem;
+  top: 0.15em;
+}
+
 @media (max-width: 980px) {
   .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .terms-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .terms-col--consequences {
+    grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 720px) {
   .services-grid {
     grid-template-columns: 1fr;
+  }
+  .terms-grid {
+    grid-template-columns: 1fr;
+  }
+  .terms-col--consequences {
+    grid-column: unset;
   }
 }
 </style>

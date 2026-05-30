@@ -1,0 +1,129 @@
+---
+interface Props { lang: 'en' | 'es'; }
+const { lang } = Astro.props;
+
+const en = {
+  eyebrow: 'FAQ',
+  title: 'Common questions before we start',
+  faqs: [
+    ['What exactly do you do?', 'Two things: Python automation systems (ETL pipelines, scrapers, internal tools, and reporting workflows) and web technical hygiene for live sites (security headers, HTTPS, DNS, forms, Search Console, and lightweight monitoring). Both are scoped, documented, and built to keep running after handoff.'],
+    ['How much does it cost?', 'Scoped automation starts from 30 UF (~USD $1,200). An optional stabilization retainer is from 6 UF/month (~USD $240/mo). Web technical hygiene starts at a $69 diagnostic. Every engagement begins with a free 15-minute diagnostic call to confirm fit before any quote.'],
+    ['How does a project start?', 'With a free 15-minute call to confirm the problem is a fit. If it is, the next step is a short discovery to lock scope, inputs, outputs, owner, and success criteria — agreed in writing before implementation begins.'],
+    ['Do you work in English or Spanish?', 'Both. Delivery, documentation, and communication are bilingual. The Spanish-language services are calibrated for the Chilean and Latin American market; the English-language services are priced and delivered for US, UK, and European clients.'],
+    ['Where are you based, and do you work remotely?', "I'm based in Santiago, Chile, and work remotely with clients worldwide. Engagements run async with visible progress in GitHub commits instead of status meetings."],
+    ['What happens after the project is delivered?', 'You get handoff materials — README, operating notes, setup steps, and the failure points worth watching — so the next person can run, debug, and extend the system without me on a call. An optional retainer is available if you want ongoing stabilization.'],
+    ['Is this a one-off build or an ongoing service?', 'Either. Most work is a scoped, fixed-outcome build. If the system needs continued upkeep, a monthly stabilization retainer is available — but it is optional, not a lock-in.'],
+    ['Can I see real examples of your work?', 'Yes. Live systems include El Rincón de Ébano (e-commerce) and Monedario (personal finance for Chile), plus published PyPI packages (bankrecon, rutificador) and open-source tools on GitHub. The work section links each one.'],
+  ],
+};
+
+const es = {
+  eyebrow: 'FAQ',
+  title: 'Preguntas frecuentes antes de empezar',
+  faqs: [
+    ['¿Qué haces exactamente?', 'Dos cosas: sistemas de automatización en Python (pipelines ETL, scrapers, herramientas internas y flujos de reportes) e higiene técnica web para sitios publicados (security headers, HTTPS, DNS, formularios, Search Console y monitoreo liviano). Todo acotado, documentado y construido para seguir funcionando después del traspaso.'],
+    ['¿Cuánto cuesta?', 'La automatización acotada parte desde 30 UF (~USD $1.200). Hay un retainer de estabilización opcional desde 6 UF al mes (~USD $240/mes). La higiene técnica web parte con un diagnóstico desde 1 UF. Cada proyecto empieza con una llamada de diagnóstico gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.'],
+    ['¿Cómo empieza un proyecto?', 'Con una llamada gratuita de 15 minutos para confirmar que el problema encaja. Si encaja, el siguiente paso es un discovery corto para fijar alcance, inputs, outputs, responsable y criterios de éxito — acordados por escrito antes de implementar.'],
+    ['¿Trabajas en español o en inglés?', 'En ambos. La entrega, la documentación y la comunicación son bilingües. Los servicios en español están calibrados para el mercado chileno y latinoamericano; los servicios en inglés están cotizados y entregados para clientes de EE. UU., Reino Unido y Europa.'],
+    ['¿Dónde estás y trabajas de forma remota?', 'Estoy en Santiago de Chile y trabajo de forma remota con clientes de todo el mundo. Los proyectos se llevan de forma asíncrona, con progreso visible en commits de GitHub en lugar de reuniones de estado.'],
+    ['¿Qué pasa después de entregar el proyecto?', 'Recibes materiales de traspaso — README, notas operativas, pasos de setup y los puntos de falla que conviene vigilar — para que la siguiente persona pueda operar, depurar y extender el sistema sin necesitarme en una llamada. Si quieres mantención continua, hay un retainer opcional.'],
+    ['¿Es un trabajo puntual o un servicio continuo?', 'Cualquiera de los dos. La mayoría es una entrega acotada de resultado fijo. Si el sistema necesita mantención, hay un retainer mensual de estabilización disponible — pero es opcional, no un amarre.'],
+    ['¿Puedo ver ejemplos reales de tu trabajo?', 'Sí. Entre los sistemas en producción están El Rincón de Ébano (e-commerce) y Monedario (finanzas personales para Chile), además de paquetes publicados en PyPI (bankrecon, rutificador) y herramientas open source en GitHub. La sección de trabajo enlaza cada uno.'],
+  ],
+};
+
+const c = lang === 'en' ? en : es;
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: c.faqs.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+---
+<section class="section" id="faq">
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+  <div class="container section-stack">
+    <div class="section-header section-header--center">
+      <span class="section-eyebrow reveal">{c.eyebrow}</span>
+      <h2 class="section-title reveal">{c.title}</h2>
+      <div class="divider reveal"></div>
+    </div>
+    <div class="faq-accordion">
+      {c.faqs.map(([question, answer], index) => (
+        <details class={`faq-item reveal reveal-delay-${(index % 2) + 1}`}>
+          <summary class="faq-question">{question}</summary>
+          <p class="faq-answer body-copy">{answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.faq-accordion {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--clr-border);
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.faq-item[open] {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.faq-question {
+  padding: 1rem var(--sp-4);
+  font-family: var(--ff-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  letter-spacing: -0.02em;
+  transition: color 150ms;
+}
+
+.faq-question:hover {
+  color: var(--clr-accent);
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: '+';
+  font-family: var(--ff-label);
+  font-size: 1rem;
+  color: var(--clr-accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: transform 200ms, opacity 150ms;
+}
+
+.faq-item[open] .faq-question::after {
+  content: '−';
+  opacity: 0.7;
+}
+
+.faq-answer {
+  padding: 0 var(--sp-4) 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--clr-text-muted);
+  max-width: 68ch;
+}
+</style>

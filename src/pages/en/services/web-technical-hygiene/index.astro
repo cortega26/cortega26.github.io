@@ -2,6 +2,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Navbar from '../../../../components/Navbar.astro';
 import Footer from '../../../../components/Footer.astro';
+import IntakeForm from '../../../../components/IntakeForm.astro';
 import '../../../../styles/global.css';
 
 const canonical = 'https://tooltician.com/en/services/web-technical-hygiene/';
@@ -576,31 +577,22 @@ const breadcrumbJsonLd = {
               <p>If the diagnostic finds nothing actionable, the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The fee applies regardless, but there are no surprises or additional charges.</p>
             </div>
             <div class="landing-cta-group">
-              <a class="btn btn-primary" href="mailto:carlos@tooltician.com?subject=Web%20Technical%20Diagnostic%20%E2%80%94%20Request&body=Domain%3A%0A%0AAnything%20specific%20you%20want%20reviewed%3F%0A">Request diagnostic</a>
-              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">Schedule a call</a>
+              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="htw_brief">Schedule a call instead</a>
             </div>
           </article>
-          <article class="card-glass brief-card reveal reveal-delay-1">
-            <h3 class="card-title">Direct brief</h3>
-            <p class="body-copy">
-              If you already know what you need, describe the site, current provider, visible problem, available access, and expected outcome. A complete brief gets a more precise proposal.
-            </p>
-            <div class="landing-cta-group">
-              <a class="btn btn-ghost" href="mailto:carlos@tooltician.com?subject=Web%20Technical%20Hygiene%20%E2%80%94%20Brief&body=Site%3A%0AHosting%20%2F%20CDN%20provider%3A%0AVisible%20problem%3A%0AAvailable%20access%3A%0AExpected%20outcome%3A">Send brief by email</a>
-            </div>
-          </article>
+          <IntakeForm lang="en" service="htw" formId="htw-brief" heading="Request your diagnostic" />
         </div>
 
         <div class="intent-grid">
-          <a class="intent-link reveal" href="mailto:carlos@tooltician.com?subject=Web%20Technical%20Diagnostic&body=Domain%3A%0A%0AAnything%20specific%20you%20want%20reviewed%3F%0A">
+          <a class="intent-link reveal" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_diagnostic">
             <span>I want to review a live site</span>
             <strong>Diagnostic from $69, with a brief report and clear priorities.</strong>
           </a>
-          <a class="intent-link reveal reveal-delay-1" href="mailto:carlos@tooltician.com?subject=External%20Support%20for%20Agency&body=Agency%20%2F%20sites%20to%20maintain%3A%0A%0AContext%3A%0A">
+          <a class="intent-link reveal reveal-delay-1" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_agency">
             <span>I run an agency and need external support</span>
             <strong>Recurring technical review without burdening the design or dev team with low-margin tasks.</strong>
           </a>
-          <a class="intent-link reveal reveal-delay-2" href="mailto:carlos@tooltician.com?subject=Monthly%20Web%20Technical%20Support&body=Domain%3A%0AContext%20of%20initial%20review%3A%0A">
+          <a class="intent-link reveal reveal-delay-2" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_monthly">
             <span>I want monthly support</span>
             <strong>Light monitoring, small fixes, and operational documentation without an in-house hire.</strong>
           </a>
@@ -616,6 +608,7 @@ const breadcrumbJsonLd = {
   </main>
 
   <Footer lang="en" langHref="/es/servicios/higiene-tecnica-web/" />
+  <script is:inline src="/assets/js/intake-form.js" defer></script>
 </BaseLayout>
 
 <style>

@@ -301,12 +301,25 @@ These are not scheduled tasks. The page already meets its targets. These represe
 
 | Dimension | Current | What would push to 5 |
 |---|---:|---|
-| 8 · Social proof | `3` | HTW-B04 unblocked: real testimonial or named case reference |
-| 7 · Conversion path | `4` | Lightweight intake form (name, URL, goal) replacing mailto prefill |
+| 8 · Social proof | `3` | HTW-B04 unblocked: real testimonial or named case reference. (`ResultsBand.astro` now consolidates verifiable quantified proof on the home as an interim stand-in.) |
+| 7 · Conversion path | `5` | ✓ Done 2026-05-29 — lightweight qualifying intake form (name, URL, goal, budget, timeline) replaced the mailto prefill on both landings. |
 | 15 · Commercial differentiation | `4` | Before/after comparison once first delivery exists |
 | 1 · Pricing psychology | `4` | Explicit feature comparison at the 13 UF vs 15 UF boundary — UF/USD split is deliberate strategy, not a gap |
 
-None of these are actionable until the first delivery is complete. HTW-B04 is the unlock condition for all of them.
+HTW-B04 (real testimonial) is the remaining unlock for dimensions 8 and 15. Dimension 7 is now closed.
+
+### Funnel integration session (2026-05-29)
+
+Cross-cutting conversion + UX/UI pass beyond the per-session scope, spanning home and both landings:
+
+| Change | Files | Effect |
+|---|---|---|
+| Unified qualifying intake form (Formspree) | `IntakeForm.astro`, `ContactSection.astro`, both landings | Removed mailto friction; qualifies leads; consistent EN/ES |
+| Verifiable results band | `ResultsBand.astro`, both home pages | Consolidated quantified proof as testimonial stand-in |
+| Conversion instrumentation | `track.js`, `intake-form.js`, hero/contact/landing CTAs | `[data-track]` clicks + `form_*` events, vendor-agnostic |
+| Per-service deliverable line | `ServicesSection.astro` | Anchors perceived value to a tangible outcome |
+
+Note: events forward to `window.plausible` / `dataLayer` when present. To *see* CTA-level funnel data, add a custom-event analytics tool (Plausible is the cookieless fit); Ahrefs Analytics, already installed, only reports page views.
 
 ---
 

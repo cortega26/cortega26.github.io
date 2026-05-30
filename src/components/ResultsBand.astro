@@ -1,0 +1,167 @@
+---
+// Consolidated, verifiable proof band. Concentrates quantified evidence
+// scattered across the page into one high-contrast unit — the honest
+// substitute for testimonials until the first named client case exists.
+interface Props {
+  lang: 'en' | 'es';
+}
+const { lang } = Astro.props;
+
+const en = {
+  label: 'Verifiable results',
+  caption: 'Not testimonials yet — measurable facts you can check right now.',
+  stats: [
+    { value: '0', unit: 'outages', detail: 'live store, 14 months in production', href: 'https://elrincondeebano.com' },
+    { value: '100+', unit: 'SKUs', detail: 'daily orders handled without an internal team' },
+    { value: 'A+', unit: 'headers', detail: 'own site security grade, independently checkable', href: 'https://securityheaders.com/?q=tooltician.com&followRedirects=on' },
+    { value: '2', unit: 'on PyPI', detail: 'published packages with audit-grade logs', href: 'https://pypi.org/project/bankrecon/' },
+  ],
+  verify: 'Check it yourself →',
+};
+
+const es = {
+  label: 'Resultados verificables',
+  caption: 'Aún no hay testimonios — hechos medibles que puedes comprobar ahora mismo.',
+  stats: [
+    { value: '0', unit: 'caídas', detail: 'tienda en producción, 14 meses activos', href: 'https://elrincondeebano.com' },
+    { value: '100+', unit: 'SKUs', detail: 'pedidos diarios gestionados sin equipo interno' },
+    { value: 'A+', unit: 'headers', detail: 'nota de seguridad del propio sitio, comprobable', href: 'https://securityheaders.com/?q=tooltician.com&followRedirects=on' },
+    { value: '2', unit: 'en PyPI', detail: 'paquetes publicados con logs de auditoría', href: 'https://pypi.org/project/bankrecon/' },
+  ],
+  verify: 'Compruébalo →',
+};
+
+const c = lang === 'en' ? en : es;
+---
+<section class="results-band" aria-label={c.label}>
+  <div class="container">
+    <div class="results-band__inner reveal">
+      <p class="results-band__label">{c.label}</p>
+      <div class="results-band__grid">
+        {c.stats.map(stat => (
+          <div class="results-band__stat">
+            <p class="results-band__value">{stat.value}<span class="results-band__unit">{stat.unit}</span></p>
+            <p class="results-band__detail">{stat.detail}</p>
+            {stat.href && (
+              <a class="results-band__verify" href={stat.href} target="_blank" rel="noopener noreferrer" data-track="proof_verify" data-track-loc="results_band">{c.verify}</a>
+            )}
+          </div>
+        ))}
+      </div>
+      <p class="results-band__caption">{c.caption}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .results-band {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--clr-border);
+    border-bottom: 1px solid var(--clr-border);
+    background:
+      linear-gradient(180deg, rgba(196, 160, 74, 0.05), rgba(255, 255, 255, 0.015));
+  }
+
+  .results-band__label {
+    font-family: var(--ff-label);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--clr-accent);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .results-band__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .results-band__stat {
+    text-align: center;
+    padding: 0 0.5rem;
+    border-left: 1px solid var(--clr-border);
+  }
+
+  .results-band__stat:first-child {
+    border-left: none;
+  }
+
+  .results-band__value {
+    font-family: var(--ff-heading);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--clr-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .results-band__unit {
+    display: block;
+    font-family: var(--ff-label);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--clr-accent);
+    margin-top: 0.35rem;
+  }
+
+  .results-band__detail {
+    font-size: 0.8rem;
+    color: var(--clr-text-muted);
+    line-height: 1.5;
+    max-width: 22ch;
+    margin: 0 auto 0.4rem;
+  }
+
+  .results-band__verify {
+    font-family: var(--ff-label);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--clr-text-faint);
+    transition: color var(--dur-fast);
+  }
+
+  .results-band__verify:hover {
+    color: var(--clr-accent);
+  }
+
+  .results-band__caption {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--clr-text-faint);
+    line-height: 1.6;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 760px) {
+    .results-band__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem 1rem;
+    }
+    .results-band__stat:nth-child(odd) {
+      border-left: none;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .results-band__grid {
+      grid-template-columns: 1fr;
+    }
+    .results-band__stat {
+      border-left: none;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .results-band__stat:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+</style>

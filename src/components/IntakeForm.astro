@@ -1,0 +1,363 @@
+---
+// Reusable qualifying intake form (Formspree backend).
+// Replaces the previous mailto / generic-form split with one low-friction,
+// lead-qualifying form usable on the home page and on service landings.
+interface Props {
+  lang: 'en' | 'es';
+  /** Context preset. 'general' = portfolio brief, 'htw' = web technical hygiene. */
+  service?: 'general' | 'htw';
+  /** Unique suffix so multiple instances on one page keep valid label/id pairs. */
+  formId?: string;
+  /** Optional heading shown above the form. Pass null to hide. */
+  heading?: string | null;
+  /** Formspree endpoint. */
+  action?: string;
+}
+const {
+  lang,
+  service = 'general',
+  formId = 'intake',
+  heading,
+  action = 'https://formspree.io/f/mgorrygb',
+} = Astro.props;
+
+const id = (name: string) => `${formId}-${name}`;
+
+const en = {
+  heading: heading === undefined ? 'Project brief' : heading,
+  intro: {
+    general: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
+    htw: 'Tell me about the live site you want reviewed. No email client needed — fill this in and I reply by email within 24–48 business hours.',
+  },
+  nameLabel: 'Name',
+  namePh: 'Your name',
+  emailLabel: 'Email',
+  emailPh: 'your@email.com',
+  urlLabel: { general: 'Site or repository (optional)', htw: 'Site URL' },
+  urlPh: { general: 'https:// (if there is one)', htw: 'https://yoursite.com' },
+  goalLabel: 'What do you need?',
+  goalOptions: {
+    general: ['Automate a report or workflow', 'Data cleanup / ETL', 'Scraping / recurring collection', 'Internal tool', 'Web technical hygiene', 'Other'],
+    htw: ['Diagnose a live site', 'Monthly technical support', 'Agency / external support', 'Implement fixes', 'Other'],
+  },
+  budgetLabel: 'Budget band (optional)',
+  budgetOptions: {
+    general: ['Still defining', 'Under $1,000', '$1,000–$3,000', '$3,000–$8,000', '$8,000+'],
+    htw: ['Still defining', 'Diagnostic ($69)', 'Implementation (from $499)', 'Monthly support (from $279/mo)'],
+  },
+  timelineLabel: 'Timeline (optional)',
+  timelineOptions: ['As soon as possible', '2–4 weeks', '1–2 months', 'Exploring / no rush'],
+  messageLabel: 'Brief',
+  messagePh: {
+    general: 'Current workflow and tools · main bottleneck or failure · who will operate it · deadline or handoff constraint',
+    htw: 'Visible problem or trigger · hosting / CDN provider · available access (DNS, CMS, Search Console) · expected outcome',
+  },
+  submit: 'Send brief',
+  submitSending: 'Sending…',
+  success: 'Sent. I’ll reply by email within two business days.',
+  error: 'Something went wrong. Please email carlos@tooltician.com directly.',
+  altLabel: 'Prefer to talk first?',
+  altCta: 'Book a 15-min call →',
+  policyLead: 'Delivered via Formspree. See',
+  policyJoin: 'and',
+  privacy: 'Privacy',
+  cookies: 'Cookies',
+  privacyHref: '/en/privacy/',
+  cookiesHref: '/en/cookies/',
+  required: 'required',
+};
+
+const es = {
+  heading: heading === undefined ? 'Brief del proyecto' : heading,
+  intro: {
+    general: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
+    htw: 'Cuéntame del sitio publicado que quieres revisar. Sin abrir tu cliente de correo: completa esto y respondo por email en 24–48 horas hábiles.',
+  },
+  nameLabel: 'Nombre',
+  namePh: 'Tu nombre',
+  emailLabel: 'Correo',
+  emailPh: 'tu@correo.com',
+  urlLabel: { general: 'Sitio o repositorio (opcional)', htw: 'URL del sitio' },
+  urlPh: { general: 'https:// (si existe)', htw: 'https://tusitio.com' },
+  goalLabel: '¿Qué necesitas?',
+  goalOptions: {
+    general: ['Automatizar un reporte o flujo', 'Limpieza de datos / ETL', 'Scraping / recolección recurrente', 'Herramienta interna', 'Higiene técnica web', 'Otro'],
+    htw: ['Diagnosticar un sitio publicado', 'Soporte técnico mensual', 'Soy agencia / soporte externo', 'Implementar correcciones', 'Otro'],
+  },
+  budgetLabel: 'Banda de presupuesto (opcional)',
+  budgetOptions: {
+    general: ['Por definir', 'Menos de $1.000', '$1.000–$3.000', '$3.000–$8.000', '$8.000+'],
+    htw: ['Por definir', 'Diagnóstico (1 UF)', 'Implementación (desde 13 UF)', 'Soporte mensual (desde 4 UF/mes)'],
+  },
+  timelineLabel: 'Plazo (opcional)',
+  timelineOptions: ['Lo antes posible', '2–4 semanas', '1–2 meses', 'Explorando / sin apuro'],
+  messageLabel: 'Brief',
+  messagePh: {
+    general: 'Flujo actual y herramientas · cuello de botella o falla principal · quién lo va a operar · deadline o restricción de traspaso',
+    htw: 'Problema visible o motivo · proveedor de hosting / CDN · acceso disponible (DNS, CMS, Search Console) · resultado esperado',
+  },
+  submit: 'Enviar brief',
+  submitSending: 'Enviando…',
+  success: 'Enviado. Respondo por correo en dos días hábiles.',
+  error: 'Algo salió mal. Escríbeme directamente a carlos@tooltician.com.',
+  altLabel: '¿Prefieres hablar primero?',
+  altCta: 'Agendar llamada de 15 min →',
+  policyLead: 'Se entrega vía Formspree. Revisa',
+  policyJoin: 'y',
+  privacy: 'Privacidad',
+  cookies: 'Cookies',
+  privacyHref: '/es/privacy/',
+  cookiesHref: '/es/cookies/',
+  required: 'obligatorio',
+};
+
+const c = lang === 'en' ? en : es;
+const subjectMap = {
+  general: lang === 'en' ? 'Project brief from tooltician.com' : 'Brief de proyecto desde tooltician.com',
+  htw: lang === 'en' ? 'Web Technical Hygiene — intake' : 'Higiene Técnica Web — intake',
+};
+const goalOptions = c.goalOptions[service];
+const budgetOptions = c.budgetOptions[service];
+const urlLabel = c.urlLabel[service];
+const urlPh = c.urlPh[service];
+const messagePh = c.messagePh[service];
+const introCopy = c.intro[service];
+---
+
+<form
+  class="intake-form reveal"
+  id={id('form')}
+  action={action}
+  method="POST"
+  data-track-form={`intake_${service}`}
+  novalidate
+>
+  {c.heading && (
+    <div class="intake-form__heading">
+      <h3>{c.heading}</h3>
+      <p>{introCopy}</p>
+    </div>
+  )}
+
+  <input type="hidden" name="_subject" value={subjectMap[service]} />
+  <input type="hidden" name="service" value={service} />
+  <input type="hidden" name="page" value="" data-fill="page" />
+
+  <div class="intake-form__row">
+    <div class="form-group">
+      <label for={id('name')}>{c.nameLabel}</label>
+      <input type="text" id={id('name')} name="name" placeholder={c.namePh} required autocomplete="name" />
+    </div>
+    <div class="form-group">
+      <label for={id('email')}>{c.emailLabel}</label>
+      <input type="email" id={id('email')} name="email" placeholder={c.emailPh} required autocomplete="email" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for={id('url')}>{urlLabel}</label>
+    <input type="url" id={id('url')} name="site_url" placeholder={urlPh} inputmode="url" autocomplete="url" />
+  </div>
+
+  <div class="intake-form__row">
+    <div class="form-group">
+      <label for={id('goal')}>{c.goalLabel}</label>
+      <select id={id('goal')} name="goal" required>
+        <option value="" disabled selected>—</option>
+        {goalOptions.map(o => <option value={o}>{o}</option>)}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for={id('budget')}>{c.budgetLabel}</label>
+      <select id={id('budget')} name="budget">
+        <option value="" selected>—</option>
+        {budgetOptions.map(o => <option value={o}>{o}</option>)}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for={id('timeline')}>{c.timelineLabel}</label>
+    <select id={id('timeline')} name="timeline">
+      <option value="" selected>—</option>
+      {c.timelineOptions.map(o => <option value={o}>{o}</option>)}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for={id('message')}>{c.messageLabel}</label>
+    <textarea id={id('message')} name="message" rows={4} placeholder={messagePh} required></textarea>
+  </div>
+
+  <div class="intake-form__submit">
+    <button type="submit" class="btn btn-primary" data-sending={c.submitSending}>{c.submit}</button>
+    <p class="intake-form__alt">
+      {c.altLabel}{' '}
+      <a href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc={`intake_${service}`}>{c.altCta}</a>
+    </p>
+  </div>
+
+  <p class="intake-form__success" role="status" aria-live="polite">{c.success}</p>
+  <p class="intake-form__error" role="alert" aria-live="polite">{c.error}</p>
+
+  <p class="intake-form__policy">
+    {c.policyLead}{' '}
+    <a href={c.privacyHref}>{c.privacy}</a>{' '}{c.policyJoin}{' '}
+    <a href={c.cookiesHref}>{c.cookies}</a>.
+  </p>
+</form>
+
+<style>
+  .intake-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.25rem;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    background: var(--clr-surface);
+  }
+
+  .intake-form__heading {
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  .intake-form__heading h3 {
+    font-family: var(--ff-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+    color: var(--clr-text);
+  }
+
+  .intake-form__heading p {
+    font-size: 0.88rem;
+    color: var(--clr-text-muted);
+    line-height: 1.6;
+  }
+
+  .intake-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-family: var(--ff-label);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--clr-text-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 0.85rem;
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    color: var(--clr-text);
+    transition: border-color 150ms, box-shadow 150ms;
+    resize: vertical;
+    width: 100%;
+  }
+
+  .form-group select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    padding-right: 2rem;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--clr-accent);
+    box-shadow: 0 0 0 3px rgba(196, 160, 74, 0.1);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--clr-text-faint);
+  }
+
+  .intake-form__submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-top: 0.15rem;
+  }
+
+  .intake-form__alt {
+    font-size: 0.82rem;
+    color: var(--clr-text-muted);
+  }
+
+  .intake-form__alt a {
+    color: var(--clr-accent);
+    font-weight: 600;
+  }
+
+  .intake-form__alt a:hover {
+    color: var(--clr-accent-hover);
+  }
+
+  .intake-form__success,
+  .intake-form__error {
+    display: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.6rem 0.9rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .intake-form__success {
+    color: var(--clr-accent);
+    background: rgba(196, 160, 74, 0.08);
+    border: 1px solid rgba(196, 160, 74, 0.15);
+  }
+
+  .intake-form__error {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.15);
+  }
+
+  .intake-form__success.show,
+  .intake-form__error.show {
+    display: block;
+  }
+
+  .intake-form__policy {
+    font-size: 0.76rem;
+    line-height: 1.55;
+    color: var(--clr-text-faint);
+  }
+
+  .intake-form__policy a {
+    color: var(--clr-accent);
+    font-weight: 600;
+  }
+
+  @media (max-width: 540px) {
+    .intake-form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

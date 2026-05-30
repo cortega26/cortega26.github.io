@@ -2,6 +2,7 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Navbar from '../../../../components/Navbar.astro';
 import Footer from '../../../../components/Footer.astro';
+import IntakeForm from '../../../../components/IntakeForm.astro';
 import '../../../../styles/global.css';
 
 const canonical = 'https://tooltician.com/es/servicios/higiene-tecnica-web/';
@@ -24,8 +25,9 @@ const navItems = [
 const pricingNote =
   'Valores referenciales para Chile, expresados en UF y aproximados en CLP. La cotización final se emite en CLP según el valor de la UF del día de propuesta. Para clientes fuera de Chile: el servicio se puede cotizar en USD con ajuste de alcance según idioma de entrega, zona horaria y nivel de documentación requerido — diagnóstico desde USD $69, planes de implementación desde USD $499, soporte mensual desde USD $279.';
 
-const diagnosticMailto =
-  'mailto:carlos@tooltician.com?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20Web%20%E2%80%94%201%20UF&body=Dominio%3A%0A%0A%C2%BFQu%C3%A9%20te%20preocupa%20del%20sitio%3F%0A%0A%C2%BFTienes%20acceso%20a%20hosting%2C%20DNS%2C%20CMS%20o%20Search%20Console%3F%0A';
+// Primary CTAs now scroll to the in-page intake form (#brief) instead of
+// opening a mailto — lower friction, qualified capture, and tracked events.
+const diagnosticHref = '#brief';
 
 const symptoms = [
   ['Formulario que no avisa', 'El sitio recibe visitas, pero nadie confirma si las consultas llegan, quedan registradas o se pierden en silencio.'],
@@ -199,7 +201,7 @@ const commercialPaths = [
     price: '1 UF',
     body: 'Para saber si el sitio tiene descuidos visibles antes de pagar por correcciones. Reduce el arrepentimiento: primero criterio, después implementación.',
     cta: 'Solicitar diagnóstico de 1 UF',
-    href: diagnosticMailto,
+    href: diagnosticHref,
   },
   {
     label: 'Corregir sin sobreactuar',
@@ -215,7 +217,7 @@ const commercialPaths = [
     price: 'desde 4 UF/mes',
     body: 'Para que alguien revise lo básico con regularidad sin contratar un perfil técnico interno.',
     cta: 'Consultar soporte mensual',
-    href: 'mailto:carlos@tooltician.com?subject=Soporte%20T%C3%A9cnico%20Web%20Mensual&body=Dominio%3A%0AContexto%20de%20la%20revisi%C3%B3n%20inicial%3A%0A',
+    href: '#brief',
   },
 ];
 
@@ -323,7 +325,7 @@ const breadcrumbJsonLd = {
             Antes de pagar por correcciones, confirma qué vale la pena corregir. Reviso lo básico, separo señales reales de ruido automático y te dejo evidencia con una recomendación clara de siguiente paso.
           </p>
           <div class="service-hero__actions reveal reveal-delay-2">
-            <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+            <a class="btn btn-primary" href={diagnosticHref}>Solicitar diagnóstico de 1 UF</a>
             <a class="btn btn-ghost" href="#diagnostico">Ver cómo funciona</a>
           </div>
           <p class="service-hero__microcopy reveal reveal-delay-2">
@@ -431,7 +433,7 @@ const breadcrumbJsonLd = {
                 </div>
               ))}
             </div>
-            <a class="btn btn-primary diagnostic-band__cta" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+            <a class="btn btn-primary diagnostic-band__cta" href={diagnosticHref}>Solicitar diagnóstico de 1 UF</a>
           </div>
         </div>
       </div>
@@ -698,7 +700,7 @@ const breadcrumbJsonLd = {
         <p class="pricing-footnote reveal">{pricingNote}</p>
         <div class="inline-cta reveal">
           <p>Si todavía no sabes qué plan corresponde, esa duda ya es información: parte con el diagnóstico y evita comprar de más.</p>
-          <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
+          <a class="btn btn-primary" href={diagnosticHref}>Solicitar diagnóstico de 1 UF</a>
         </div>
       </div>
     </section>
@@ -805,20 +807,22 @@ const breadcrumbJsonLd = {
             Si el sitio ya está publicado y quieres saber qué está técnicamente descuidado, el punto de entrada correcto es un diagnóstico breve y verificable. Después puedes cerrar, corregir lo básico o delegar revisión mensual.
           </p>
         </div>
-        <div class="final-action card-glass reveal">
-          <article class="brief-card">
-            <h3 class="card-title">Diagnóstico técnico web — 1 UF</h3>
-            <p class="body-copy">
-              Revisión externa inicial con reporte de prioridades, evidencia y siguiente paso claro. Es una forma barata de evitar dos errores caros: ignorar algo importante o pagar por algo que no importaba.
-            </p>
-            <div class="risk-note">
-              <p>Si el diagnóstico no encuentra nada accionable, el reporte lo confirma con evidencia — y eso también tiene valor antes de cambiar hosting, lanzar una campaña o delegar el sitio a un tercero. El costo aplica igual, pero no hay sorpresas ni cobros adicionales.</p>
-            </div>
-            <div class="landing-cta-group">
-              <a class="btn btn-primary" href={diagnosticMailto}>Solicitar diagnóstico de 1 UF</a>
-              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">Agendar revisión</a>
-            </div>
-          </article>
+        <div class="final-action final-action--form card-glass reveal">
+          <div class="brief-grid">
+            <article class="brief-card">
+              <h3 class="card-title">Diagnóstico técnico web — 1 UF</h3>
+              <p class="body-copy">
+                Revisión externa inicial con reporte de prioridades, evidencia y siguiente paso claro. Es una forma barata de evitar dos errores caros: ignorar algo importante o pagar por algo que no importaba.
+              </p>
+              <div class="risk-note">
+                <p>Si el diagnóstico no encuentra nada accionable, el reporte lo confirma con evidencia — y eso también tiene valor antes de cambiar hosting, lanzar una campaña o delegar el sitio a un tercero. El costo aplica igual, pero no hay sorpresas ni cobros adicionales.</p>
+              </div>
+              <div class="landing-cta-group">
+                <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="htw_brief">Agendar revisión en su lugar</a>
+              </div>
+            </article>
+            <IntakeForm lang="es" service="htw" formId="htw-brief" heading="Solicita tu diagnóstico" />
+          </div>
         </div>
 
         <div class="outreach-note reveal">
@@ -831,6 +835,7 @@ const breadcrumbJsonLd = {
   </main>
 
   <Footer lang="es" langHref="/en/services/web-technical-hygiene/" />
+  <script is:inline src="/assets/js/intake-form.js" defer></script>
 </BaseLayout>
 
 <style>
@@ -1588,6 +1593,24 @@ td.pricing-compare__check:nth-child(5) {
   border-color: rgba(196, 160, 74, 0.24);
   background:
     linear-gradient(180deg, rgba(196, 160, 74, 0.07), rgba(255, 255, 255, 0.03));
+}
+
+.final-action--form {
+  max-width: 62rem;
+}
+
+.brief-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .brief-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .sample-report {

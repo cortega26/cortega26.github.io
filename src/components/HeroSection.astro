@@ -125,8 +125,8 @@ const c = lang === 'en' ? en : es;
           </p>
         )}
         <div class="hero__actions reveal reveal-delay-2">
-          <a class="btn btn-primary" href={c.ctaPrimaryHref} target="_blank" rel="noopener noreferrer">{c.ctaPrimary}</a>
-          <a class="btn btn-ghost" href={c.ctaSecondaryHref}>{c.ctaSecondary}</a>
+          <a class="btn btn-primary" href={c.ctaPrimaryHref} target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="hero">{c.ctaPrimary}</a>
+          <a class="btn btn-ghost" href={c.ctaSecondaryHref} data-track="cta_send_brief" data-track-loc="hero">{c.ctaSecondary}</a>
         </div>
         <p class="hero__cta-note reveal reveal-delay-2">
           <a href={c.ctaNoteLinkHref}>{c.ctaNoteLink} →</a>

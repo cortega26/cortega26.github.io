@@ -1,4 +1,5 @@
 ---
+import IntakeForm from "./IntakeForm.astro";
 interface Props {
   lang: "en" | "es";
 }
@@ -167,6 +168,8 @@ const c = lang === "en" ? en : es;
             href="https://calendly.com/ciortega26"
             target="_blank"
             rel="noopener noreferrer"
+            data-track="cta_book_call"
+            data-track-loc="contact"
             aria-label={c.scheduleAria}>{c.schedule}</a
           >
           <a class="btn btn-ghost" href={c.emailHref}>
@@ -223,83 +226,10 @@ const c = lang === "en" ? en : es;
         )}
       </div>
 
-      <form
-        class="contact-form reveal reveal-delay-1"
-        id="contact-form"
-        action="https://formspree.io/f/mgorrygb"
-        method="POST"
-        novalidate
-      >
-        <div class="form-heading">
-          <h3>{c.formTitle}</h3>
-          <p>{c.formIntro}</p>
-          <p class="form-call-alt">
-            {c.callAlt}{" "}
-            <a href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer">
-              {lang === "en" ? "Book here →" : "Agendar aquí →"}
-            </a>
-          </p>
-          <p class="form-policy-note">
-            {c.policyLead}{' '}
-            <a href={lang === "en" ? "/en/privacy/" : "/es/privacy/"}>{c.privacyLink}</a>{' '}
-            {c.policyJoin}{' '}
-            <a href={lang === "en" ? "/en/cookies/" : "/es/cookies/"}>{c.cookiesLink}</a>.
-          </p>
-        </div>
-        <input type="hidden" name="subject" value={c.defaultSubject} />
-
-        <div class="form-group">
-          <label for="cf-name">{c.nameLabel}</label>
-          <input
-            type="text"
-            id="cf-name"
-            name="name"
-            placeholder={c.namePh}
-            required
-            autocomplete="name"
-          />
-        </div>
-        <div class="form-group">
-          <label for="cf-email">{c.emailLabel}</label>
-          <input
-            type="email"
-            id="cf-email"
-            name="email"
-            placeholder={c.emailPh}
-            required
-            autocomplete="email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="cf-message">{c.messageLabel}</label>
-          <textarea
-            id="cf-message"
-            name="message"
-            rows={5}
-            placeholder={c.messagePh}
-            required></textarea>
-        </div>
-        <div class="form-submit-group">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            id="cf-submit"
-            data-sending={c.submitSending}>{c.submit}</button
-          >
-          <p class="form-reply-note">{c.replyNote}</p>
-        </div>
-        <p
-          class="form-success"
-          id="form-success"
-          aria-live="polite"
-          role="status"
-        >
-          {c.successMsg}
-        </p>
-        <p class="form-error" id="form-error" aria-live="polite" role="alert">
-          {c.errorMsg}
-        </p>
-      </form>
+      <div class="contact-form-wrap reveal reveal-delay-1">
+        <IntakeForm lang={lang} service="general" formId="contact" />
+        <p class="form-reply-note">{c.replyNote}</p>
+      </div>
     </div>
   </div>
 </section>
@@ -671,3 +601,4 @@ const c = lang === "en" ? en : es;
 </style>
 
 <script is:inline src="/assets/js/contact-section.js" defer></script>
+<script is:inline src="/assets/js/intake-form.js" defer></script>

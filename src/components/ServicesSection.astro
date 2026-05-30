@@ -78,6 +78,27 @@ const es = {
 };
 
 const c = lang === 'en' ? en : es;
+
+// Concrete deliverable per service — anchors perceived value to a tangible
+// outcome rather than an abstract capability. Keyed by service title.
+const serviceResults: Record<string, string> = lang === 'en' ? {
+  'Reporting Automation': 'A scheduled job plus a runbook that reproduces the same report on demand.',
+  'Web Technical Hygiene': 'A before/after report with verified fixes and clear priorities.',
+  'Recurring Data Collection': 'A re-runnable collector with proper logs and repair notes.',
+  'Operator-Ready Internal Tools': 'A documented internal API or interface the team can run without you.',
+  'Public Technical Surfaces': 'A lean, maintainable Astro surface that loads fast and converts the right lead.',
+  'Fail-Closed Financial Controls': 'Reconciliation that halts on mismatch and preserves audit-grade logs.',
+  'Structured Data Delivery': 'Structured outputs or dashboards with no manual copy-paste downstream.',
+} : {
+  'Automatización de Reportes': 'Un job programado más un runbook que reproduce el mismo reporte cuando lo necesitas.',
+  'Higiene Técnica Web': 'Un reporte antes/después con correcciones verificadas y prioridades claras.',
+  'Recolección de Datos Recurrente': 'Un colector reejecutable con logs adecuados y notas de reparación.',
+  'Herramientas Internas Operables': 'Una API o interfaz interna documentada que el equipo opera sin ti.',
+  'Superficies Técnicas Públicas': 'Una superficie Astro liviana y mantenible que carga rápido y convierte al lead correcto.',
+  'Controles Financieros Fail-Closed': 'Conciliación que se detiene ante diferencias y preserva logs de auditoría.',
+  'Entrega Estructurada de Datos': 'Salidas o dashboards estructurados, sin copia-pega manual aguas abajo.',
+};
+const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
 ---
 <section class="section" id="services">
   <div class="container">
@@ -94,6 +115,9 @@ const c = lang === 'en' ? en : es;
           <h3 class="card-title">{svc.title}</h3>
           <p class="svc-desc">{svc.desc}</p>
           <p class="svc-fit"><span>{c.fitLabel}</span> {svc.fit}</p>
+          {serviceResults[svc.title] && (
+            <p class="svc-result"><span>{resultLabel}</span> {serviceResults[svc.title]}</p>
+          )}
           {svc.href && (
             <a class="btn btn-ghost btn-sm svc-inline-cta" href={svc.href}>{svc.href === '#contact-form' ? c.ctaContactLabel : c.ctaLabel}</a>
           )}
@@ -151,6 +175,25 @@ const c = lang === 'en' ? en : es;
 .svc-fit span {
   color: var(--clr-text);
   font-weight: 600;
+}
+.svc-result {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--clr-text-muted);
+  margin-bottom: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border-left: 2px solid var(--clr-accent);
+  background: rgba(196, 160, 74, 0.05);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.svc-result span {
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  margin-right: 0.25rem;
 }
 .svc-examples-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--clr-text-faint); margin-bottom: 0.5rem; }
 .svc-examples { display: flex; flex-wrap: wrap; gap: 0.4rem; }

@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-05-29
+
+### Added
+- `IntakeForm.astro` — a reusable, lead-qualifying contact form (Formspree)
+  with name, email, site URL, goal, budget band, timeline, and brief. Replaces
+  the previous mailto / generic-form split across the home page and both Web
+  Technical Hygiene landings, in `EN` and `ES`.
+- `ResultsBand.astro` — a high-contrast band consolidating verifiable
+  quantified proof (0 outages / 14 months, 100+ SKUs, A+ security headers,
+  PyPI packages), inserted on both home pages after the hero. Honest stand-in
+  for testimonials until the first named client case exists (HTW-B04).
+- Vendor-agnostic conversion instrumentation (`track.js` + `intake-form.js`):
+  `[data-track]` clicks on primary CTAs and `form_start` /
+  `form_submit_success` / `form_submit_error` events. Forwards to
+  `window.plausible` and `dataLayer` when present; no-op otherwise.
+- Concrete per-service deliverable line ("Deliverable:" / "Entregable:") on
+  every card in `ServicesSection`, anchoring perceived value to a tangible
+  outcome.
+
+### Changed
+- Web Technical Hygiene landings (`ES`/`EN`): all prefilled-mailto brief CTAs
+  now scroll to the in-page intake form (lower friction, qualified capture,
+  tracked events). The generic footer email link is unchanged.
+
 ## 2025-10-16
 
 ### Changed

@@ -26,7 +26,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 4 | Visual proof & credibility | `2` | `4` | `5` | — | `2026-05-26` |
 | 5 | ES home integration | `2` | `4` | `5` | — | `2026-05-26` |
 | 6 | EN integration | `0` | `4` | `4` | — | `2026-05-26` |
-| 7 | Conversion path quality | `2` | `4` | `5` | — | `2026-05-26` |
+| 7 | Conversion path quality | `2` | `5` | `5` | — | `2026-05-29` |
 | 8 | Social proof | `0` | `3` | `4` | — | `2026-05-26` |
 | 9 | Urgency & availability signals | `0` | `3` | `3` | — | `2026-05-26` |
 | 10 | UX/UI — section rhythm & length | `2` | `4` | `4` | — | `2026-05-26` |
@@ -38,7 +38,7 @@ Scale: `1 = critical gap` · `2 = significant weakness` · `3 = functional but b
 | 16 | Buyer risk mitigation | `1` | `4` | `4` | — | `2026-05-26` |
 | 17 | Brand voice coherence | `3` | `5` | `5` | — | `2026-05-26` |
 
-**Composite score (mean):** `2.0 → 2.9 → 3.3 → 3.9 → 4.1 → 4.4` after Session C. Target: `4.4` ✓
+**Composite score (mean):** `2.0 → 2.9 → 3.3 → 3.9 → 4.1 → 4.4 → 4.5` after the funnel integration (2026-05-29). Target: `4.4` ✓
 
 ---
 
@@ -80,6 +80,7 @@ Update each dimension here with a one-line note when its score changes.
 ### 7 · Conversion path quality
 - `2026-05-26 · Session 0`: 2 → 3. Mailto CTA prefilled with subject + body template. Brief section H3 now shows price and value. Still going to generic portfolio form — blocked on HTW-B03.
 - `2026-05-26 · Session B`: 3 → 4. Primary CTA in #brief and all 3 intent-links now point to service-specific prefilled mailtos (subject + body tailored per intent). Generic form remains as secondary option in "Brief directo" card.
+- `2026-05-29 · Funnel integration`: 4 → 5. Prefilled-mailto CTAs replaced by an embedded, lead-qualifying intake form (`IntakeForm.astro`, Formspree) in the #brief / #contact section on both ES and EN landings — no email client required, qualifies the lead (site URL, goal, budget band, timeline), and emits `form_start` / `form_submit_success` conversion events. This is the named 4→5 trigger from the backlog ("lightweight intake form replacing mailto prefill").
 
 ### 8 · Social proof
 - `2026-05-26 · Session B`: 0 → 3. "Prueba técnica propia" card added to #casos: Tooltician's own site as verifiable reference (HTTPS, SPF/DKIM/DMARC, security headers, public code). Links to SecurityHeaders.com lookup and public GitHub repo.

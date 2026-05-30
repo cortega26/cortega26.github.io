@@ -291,6 +291,21 @@ const introCopy = c.intro[service];
     box-shadow: 0 0 0 3px rgba(196, 160, 74, 0.1);
   }
 
+  /* Native option list needs a solid background + readable text — the
+     translucent control background renders dark-on-dark when expanded. */
+  .form-group select option {
+    background-color: var(--clr-bg-card);
+    color: var(--clr-text);
+  }
+
+  .form-group select option:disabled {
+    color: var(--clr-text-faint);
+  }
+
+  .form-group select:invalid {
+    color: var(--clr-text-faint);
+  }
+
   .form-group input::placeholder,
   .form-group textarea::placeholder {
     color: var(--clr-text-faint);

@@ -1,0 +1,943 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+import IntakeForm from './IntakeForm.astro';
+import type { ServiceContent } from '../data/services';
+
+interface Props {
+  lang: 'en' | 'es';
+  content: ServiceContent;
+  slug: string;
+  canonical: string;
+  alternates: { hreflang: string; href: string }[];
+  crossLocaleHref: string;
+  areaServed: string[];
+}
+
+const { lang, content: c, slug, canonical, alternates, crossLocaleHref, areaServed } = Astro.props;
+
+const formId = `${slug}-brief`;
+const homeUrl = `https://tooltician.com/${lang}/`;
+const servicesUrl = `https://tooltician.com/${lang}/#services`;
+
+const navLabels =
+  lang === 'en'
+    ? { problem: 'Problem', scope: 'What I do', process: 'Process', plans: 'Plans', faq: 'FAQ', contact: 'Get started' }
+    : { problem: 'Problema', scope: 'Qué hago', process: 'Proceso', plans: 'Planes', faq: 'FAQ', contact: 'Empezar' };
+
+const navItems = [
+  { href: '#problem', label: navLabels.problem },
+  { href: '#scope', label: navLabels.scope },
+  { href: '#process', label: navLabels.process },
+  { href: '#plans', label: navLabels.plans },
+  { href: '#faq', label: navLabels.faq },
+  { href: '#contact', label: navLabels.contact },
+];
+
+const ui =
+  lang === 'en'
+    ? { recommended: 'Recommended', serviceLabel: 'Services', proofEyebrow: 'Own technical proof' }
+    : { recommended: 'Recomendado', serviceLabel: 'Servicios', proofEyebrow: 'Evidencia técnica propia' };
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: c.serviceName,
+  url: canonical,
+  description: c.description,
+  serviceType: c.serviceType,
+  areaServed,
+  provider: {
+    '@type': 'ProfessionalService',
+    name: 'Tooltician',
+    url: homeUrl,
+    address: { '@type': 'PostalAddress', addressLocality: 'Santiago', addressCountry: 'CL' },
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: c.serviceName,
+    itemListElement: c.plans.map((plan) => ({
+      '@type': 'Offer',
+      name: plan.name,
+      description: `${plan.priceLabel} (${plan.priceApprox}). ${plan.intro}`,
+      availability: 'https://schema.org/InStock',
+      url: canonical,
+    })),
+  },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: c.faqs.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: homeUrl },
+    { '@type': 'ListItem', position: 2, name: ui.serviceLabel, item: servicesUrl },
+    { '@type': 'ListItem', position: 3, name: c.serviceName, item: canonical },
+  ],
+};
+---
+<BaseLayout title={c.title} description={c.description} lang={lang} canonical={canonical} alternates={alternates}>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
+  <Navbar lang={lang} items={navItems} ctaHref="#contact" switchHref={crossLocaleHref} />
+
+  <main id="main">
+    <section class="service-hero" id="hero">
+      <div class="container service-hero__grid">
+        <div class="service-hero__main">
+          <span class="section-eyebrow reveal">{c.eyebrow}</span>
+          <h1 class="section-title reveal reveal-delay-1">{c.h1}</h1>
+          <p class="service-hero__lede reveal reveal-delay-2">{c.lede}</p>
+          {c.subcopy && <p class="service-hero__subcopy reveal reveal-delay-2">{c.subcopy}</p>}
+          <div class="service-hero__actions reveal reveal-delay-2">
+            <a class="btn btn-primary" href="#contact">{c.ctaPrimary}</a>
+            <a class="btn btn-ghost" href="#scope">{c.ctaSecondary}</a>
+          </div>
+          {c.microcopy && <p class="service-hero__microcopy reveal reveal-delay-2">{c.microcopy}</p>}
+        </div>
+
+        <aside class="service-summary card-glass reveal reveal-delay-2" aria-label="Service summary">
+          <p class="service-summary__eyebrow">{c.fitEyebrow}</p>
+          <ul class="service-summary__list">
+            {c.fitItems.map((item) => <li>{item}</li>)}
+          </ul>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">{c.signalsEyebrow}</p>
+            <div class="service-summary__badges">
+              {c.signals.map((s) => <span class={s.accent ? 'badge badge-accent' : 'badge badge-neutral'}>{s.label}</span>)}
+            </div>
+          </div>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">{c.entryEyebrow}</p>
+            <p class="service-summary__price">{c.entryPrice}</p>
+            <p class="service-summary__muted">{c.entryCaption}</p>
+          </div>
+          <div class="service-summary__proof">
+            <p class="service-summary__eyebrow">{c.availabilityEyebrow}</p>
+            <p class="service-summary__muted">{c.availability}</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="problem">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">{c.problemEyebrow}</span>
+          <h2 class="section-title reveal">{c.problemTitle}</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">{c.problemSubtitle}</p>
+        </div>
+        <div class="grid-2">
+          {c.problemCards.map((card, i) => (
+            <article class={`card-glass brief-card reveal reveal-delay-${(i % 2) + 1}`}>
+              <h3 class="card-title">{card.title}</h3>
+              <p class="body-copy">{card.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scope">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">{c.scopeEyebrow}</span>
+          <h2 class="section-title reveal">{c.scopeTitle}</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">{c.scopeSubtitle}</p>
+        </div>
+        {c.scopeNote && (
+          <div class="tools-note reveal">
+            <p class="tools-note__label">{c.scopeNote.label}</p>
+            <p>{c.scopeNote.body}</p>
+          </div>
+        )}
+        <div class="review-groups">
+          {c.reviewGroups.map((group, i) => (
+            <article class={`card-glass reveal reveal-delay-${(i % 2) + 1}`}>
+              <h3 class="card-title">{group.title}</h3>
+              <ul class="review-group-list">
+                {group.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="process">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">{c.processEyebrow}</span>
+          <h2 class="section-title reveal">{c.processTitle}</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">{c.processSubtitle}</p>
+        </div>
+        <div class="process-list">
+          {c.processSteps.map(([step, title, body], index) => (
+            <article class={`process-item reveal reveal-delay-${(index % 2) + 1}`}>
+              <span class="process-item__num">{step}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="plans">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">{c.plansEyebrow}</span>
+          <h2 class="section-title reveal">{c.plansTitle}</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">{c.plansSubtitle}</p>
+        </div>
+        <div class="pricing-compare-wrapper">
+          <div class="pricing-compare">
+            <table class="pricing-compare__table">
+              <thead>
+                <tr>
+                  <th class="pricing-compare__feature-col"></th>
+                  {c.plans.map((plan) => (
+                    <th class={plan.recommended ? 'pricing-compare__plan pricing-compare__plan--recommended' : 'pricing-compare__plan'}>
+                      <span class="pricing-compare__plan-price">{plan.priceLabel}</span>
+                      <span class="pricing-compare__plan-name">{plan.name}</span>
+                      {plan.recommended && <span class="pricing-compare__recommended-badge">{ui.recommended}</span>}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {c.tableFeatures.map(([feature, ...checks]) => (
+                  <tr>
+                    <td class="pricing-compare__feature">{feature}</td>
+                    {checks.map((has) => (
+                      <td class={has ? 'pricing-compare__check pricing-compare__check--yes' : 'pricing-compare__check pricing-compare__check--no'}>
+                        {has ? '✓' : '—'}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="plans-grid">
+          {c.plans.map((plan, index) => (
+            <article class={`card-glass plan-card ${plan.recommended ? 'plan-card--accent' : ''} reveal reveal-delay-${(index % 2) + 1}`}>
+              {plan.recommended && <span class="plan-card__flag">{ui.recommended}</span>}
+              <p class="plan-card__price">{plan.priceLabel}</p>
+              <p class="plan-card__approx">{plan.priceApprox}</p>
+              <h3 class="card-title">{plan.name}</h3>
+              <p class="plan-card__intro">{plan.intro}</p>
+              {plan.note && <p class="plan-card__note">{plan.note}</p>}
+              <ul class="checklist checklist--compact">
+                {plan.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <p class="pricing-footnote reveal">{c.pricingNote}</p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="why-tooltician">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">{c.whyEyebrow}</span>
+          <h2 class="section-title reveal">{c.whyTitle}</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">{c.whySubtitle}</p>
+        </div>
+        <div class="diff-grid">
+          <article class="card-glass brief-card reveal">
+            <p class="diff-grid__label diff-grid__label--alt">{c.whyAltLabel}</p>
+            <ul class="checklist checklist--compact">
+              {c.whyAltItems.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+          <article class="card-glass brief-card reveal reveal-delay-1">
+            <p class="diff-grid__label diff-grid__label--accent">{c.whyUsLabel}</p>
+            <ul class="checklist checklist--compact">
+              {c.whyUsItems.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        </div>
+        {c.whyNote && (
+          <div class="tools-note reveal">
+            <p class="tools-note__label">{c.whyNote.label}</p>
+            <p>{c.whyNote.body}</p>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <section class="section" id="use-cases">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">{c.casesEyebrow}</span>
+          <h2 class="section-title reveal">{c.casesTitle}</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">{c.casesSubtitle}</p>
+        </div>
+        <div class="service-review-grid service-review-grid--cases">
+          {c.cases.map(([title, body], index) => (
+            <article class={`card-glass reveal reveal-delay-${(index % 2) + 1}`}>
+              <h3 class="card-title">{title}</h3>
+              <p class="body-copy">{body}</p>
+            </article>
+          ))}
+        </div>
+        <div class="card-glass evidence-links reveal">
+          <p class="evidence-links__eyebrow">{c.relatedLabel}</p>
+          <div class="evidence-links__items">
+            {c.related.map((link) => (
+              <a class={link.accent ? 'badge badge-accent' : 'badge badge-neutral'} href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{link.label}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="faq">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">{c.faqEyebrow}</span>
+          <h2 class="section-title reveal">{c.faqTitle}</h2>
+          <div class="divider reveal"></div>
+        </div>
+        <div class="faq-accordion">
+          {c.faqs.map(([question, answer], index) => (
+            <details class={`faq-item reveal reveal-delay-${(index % 2) + 1}`}>
+              <summary class="faq-question">{question}</summary>
+              <p class="faq-answer body-copy">{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container section-stack">
+        <div class="section-header">
+          <span class="section-eyebrow reveal">{c.contactEyebrow}</span>
+          <h2 class="section-title reveal">{c.contactTitle}</h2>
+          <div class="divider reveal"></div>
+          <p class="section-subtitle reveal">{c.contactSubtitle}</p>
+        </div>
+        <div class="grid-2">
+          <article class="card-glass brief-card reveal">
+            <h3 class="card-title">{c.contactCardTitle}</h3>
+            <p class="body-copy">{c.contactCardBody}</p>
+            {c.contactRiskNote && (
+              <div class="risk-note">
+                <p>{c.contactRiskNote}</p>
+              </div>
+            )}
+            <div class="landing-cta-group">
+              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc={`${slug}_brief`}>{c.contactCallLabel}</a>
+            </div>
+          </article>
+          <IntakeForm lang={lang} service="general" formId={formId} heading={c.intakeHeading} />
+        </div>
+
+        <div class="intent-grid">
+          {c.intents.map((intent, index) => (
+            <a class={`intent-link reveal reveal-delay-${index}`} href={`#${formId}-form`} data-track="intent_select" data-track-loc={`${slug}_${index}`}>
+              <span>{intent.tag}</span>
+              <strong>{intent.body}</strong>
+            </a>
+          ))}
+        </div>
+
+        {c.outreach && (
+          <div class="outreach-note reveal">
+            <p>{c.outreach}</p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} langHref={crossLocaleHref} />
+  <script is:inline src="/assets/js/intake-form.js" defer></script>
+</BaseLayout>
+
+<style>
+.service-hero {
+  padding-top: calc(var(--nav-height) + 5rem);
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.service-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.service-hero__lede,
+.service-hero__subcopy,
+.body-copy {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+
+.service-hero__lede {
+  font-size: 1.05rem;
+  max-width: 60ch;
+  margin-bottom: 1rem;
+}
+
+.service-hero__subcopy {
+  max-width: 58ch;
+  margin-bottom: 1.5rem;
+}
+
+.service-hero__actions,
+.landing-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.service-hero__actions {
+  margin-bottom: 1rem;
+}
+
+.service-hero__microcopy {
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  max-width: 58ch;
+}
+
+.service-summary {
+  display: grid;
+  gap: 1rem;
+}
+
+.service-summary__eyebrow,
+.evidence-links__eyebrow,
+.tools-note__label {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+}
+
+.service-summary__price {
+  font-family: var(--ff-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--clr-accent);
+  letter-spacing: -0.03em;
+}
+
+.service-summary__muted {
+  color: var(--clr-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.service-summary__list,
+.checklist {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.service-summary__list li,
+.checklist li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+}
+
+.service-summary__list li::before,
+.checklist li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: 700;
+}
+
+.service-summary__badges,
+.evidence-links__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.section-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.brief-card {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.brief-card > :where(.card-title, .body-copy, .risk-note, .landing-cta-group) {
+  margin: 0;
+}
+
+.brief-card .landing-cta-group {
+  padding-top: 0.35rem;
+}
+
+.tools-note,
+.outreach-note {
+  border: 1px solid rgba(196, 160, 74, 0.16);
+  border-radius: var(--radius-md);
+  background: rgba(196, 160, 74, 0.04);
+  padding: var(--sp-6);
+}
+
+.tools-note {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.tools-note p,
+.outreach-note p {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+
+.tools-note a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.process-list {
+  display: grid;
+  border-top: 1px solid var(--clr-border);
+}
+
+.process-item {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.process-item__num {
+  font-family: var(--ff-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--clr-accent);
+  opacity: 0.35;
+  line-height: 1;
+  padding-top: 0.1rem;
+}
+
+.process-item h3 {
+  font-family: var(--ff-heading);
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.process-item p {
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+.review-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+.review-group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.review-group-list li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+  font-size: 0.88rem;
+}
+
+.review-group-list li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: 700;
+}
+
+.service-review-grid,
+.plans-grid {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.service-review-grid--cases {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.faq-accordion {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--clr-border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.faq-item[open] {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.faq-question {
+  padding: 1rem var(--sp-4);
+  font-family: var(--ff-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  letter-spacing: -0.02em;
+  transition: color 150ms;
+}
+
+.faq-question:hover {
+  color: var(--clr-accent);
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: '+';
+  font-family: var(--ff-label);
+  font-size: 1rem;
+  color: var(--clr-accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: transform 200ms, opacity 150ms;
+}
+
+.faq-item[open] .faq-question::after {
+  content: '−';
+  opacity: 0.7;
+}
+
+.faq-answer {
+  padding: 0 var(--sp-4) 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--clr-text-muted);
+  max-width: 68ch;
+}
+
+.plans-grid {
+  display: none;
+}
+
+.pricing-compare-wrapper {
+  display: block;
+  overflow-x: auto;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+}
+
+.pricing-compare__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.pricing-compare__feature-col {
+  width: 28%;
+}
+
+.pricing-compare__plan {
+  text-align: center;
+  padding: var(--sp-4) var(--sp-3);
+  border-bottom: 1px solid var(--clr-border);
+  border-left: 1px solid var(--clr-border);
+  vertical-align: top;
+}
+
+.pricing-compare__plan--recommended {
+  background: rgba(196, 160, 74, 0.05);
+  border-top: 2px solid var(--clr-accent);
+}
+
+.pricing-compare__plan-price {
+  display: block;
+  font-family: var(--ff-label);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  margin-bottom: 0.3rem;
+}
+
+.pricing-compare__plan-name {
+  display: block;
+  font-family: var(--ff-heading);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  line-height: 1.35;
+}
+
+.pricing-compare__recommended-badge {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid rgba(196, 160, 74, 0.26);
+  border-radius: var(--radius-sm);
+  background: rgba(196, 160, 74, 0.08);
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.6rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.pricing-compare__feature {
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px solid var(--clr-border);
+  color: var(--clr-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.pricing-compare__check {
+  text-align: center;
+  padding: var(--sp-3);
+  border-top: 1px solid var(--clr-border);
+  border-left: 1px solid var(--clr-border);
+  font-size: 0.88rem;
+}
+
+.pricing-compare__check--yes {
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+
+.pricing-compare__check--no {
+  color: var(--clr-text-faint);
+}
+
+.plan-card {
+  display: grid;
+  gap: 0.85rem;
+  position: relative;
+}
+
+.plan-card--accent {
+  border-color: rgba(196, 160, 74, 0.24);
+  background: linear-gradient(180deg, rgba(196, 160, 74, 0.06), rgba(255, 255, 255, 0.03));
+}
+
+.plan-card__flag {
+  position: absolute;
+  top: var(--sp-6);
+  right: var(--sp-6);
+  padding: 0.25rem 0.55rem;
+  border: 1px solid rgba(196, 160, 74, 0.26);
+  border-radius: var(--radius-sm);
+  background: rgba(196, 160, 74, 0.08);
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plan-card__price {
+  font-family: var(--ff-label);
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.plan-card__approx {
+  margin-top: -0.55rem;
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.plan-card__intro,
+.plan-card__note {
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+}
+
+.plan-card__note {
+  font-size: 0.82rem;
+  color: var(--clr-text-faint);
+}
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+.diff-grid__label {
+  font-family: var(--ff-label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.diff-grid__label--alt {
+  color: var(--clr-text-faint);
+}
+
+.diff-grid__label--accent {
+  color: var(--clr-accent);
+}
+
+.evidence-links {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.risk-note {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+}
+
+.risk-note p {
+  margin: 0;
+  color: var(--clr-text-faint);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.pricing-footnote {
+  max-width: 68rem;
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.intent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-6);
+}
+
+.intent-link {
+  display: grid;
+  gap: 0.5rem;
+  padding: var(--sp-6);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+
+.intent-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(196, 160, 74, 0.24);
+}
+
+.intent-link span {
+  color: var(--clr-accent);
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.intent-link strong {
+  color: var(--clr-text);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 980px) {
+  .service-hero__grid,
+  .review-groups,
+  .service-review-grid,
+  .service-review-grid--cases,
+  .intent-grid,
+  .diff-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-compare-wrapper {
+    display: none;
+  }
+
+  .plans-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--sp-4);
+    padding-bottom: var(--sp-3);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .plans-grid .plan-card {
+    flex: 0 0 85vw;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 720px) {
+  .service-hero {
+    padding-top: calc(var(--nav-height) + 4rem);
+  }
+
+  .process-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+</style>

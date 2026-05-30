@@ -1,0 +1,23 @@
+---
+import ServicePage from '../../../../components/ServicePage.astro';
+import { services } from '../../../../data/services';
+import '../../../../styles/global.css';
+
+const def = services['static-sites'];
+const canonical = 'https://tooltician.com/es/servicios/sitios-web/';
+const crossLocaleHref = '/en/services/static-sites/';
+const alternates = [
+  { hreflang: 'en', href: 'https://tooltician.com' + crossLocaleHref },
+  { hreflang: 'es', href: canonical },
+  { hreflang: 'x-default', href: 'https://tooltician.com' + crossLocaleHref },
+];
+---
+<ServicePage
+  lang="es"
+  content={def.es}
+  slug={def.slugEs}
+  canonical={canonical}
+  alternates={alternates}
+  crossLocaleHref={crossLocaleHref}
+  areaServed={def.areaServed}
+/>

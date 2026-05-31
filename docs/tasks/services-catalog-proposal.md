@@ -1,7 +1,7 @@
 # Services Catalog Proposal — Productized Scope & Pricing
 
 Version: `2026-05-30`
-Status: `Proposed — awaiting pricing sign-off before page build`
+Status: `Implemented — 2026-05-30. All 4 new services built (EN+ES), pricing approved (EN international USD confirmed), homepage cards wired.`
 Author: drafted by assistant, acting as domain expert; numbers are **proposed defaults, adjust freely**.
 Goal alignment: this serves the *monetization* half of the original objective (reach/traffic + monetization). Each productized service is simultaneously a **commercial-intent SEO landing** and a **conversion surface** with clear scope + price.
 

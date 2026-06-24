@@ -17,6 +17,7 @@ const copy = {
     cookies: 'Cookies',
     terms: 'Terms',
     conditions: 'Conditions',
+    llms: 'AI Context',
   },
   es: {
     tagline: 'Automatización que sobrevive al traspaso.',
@@ -28,6 +29,7 @@ const copy = {
     cookies: 'Cookies',
     terms: 'Términos',
     conditions: 'Condiciones',
+    llms: 'Contexto IA',
   },
 };
 const c = copy[lang];
@@ -71,6 +73,7 @@ const legalLinks = [
       <div class="footer__bottom-links">
         <div class="footer__meta-links">
           <a href={switchHref} hreflang={lang === 'en' ? 'es' : 'en'} data-language-preference={lang === 'en' ? 'es' : 'en'}>{c.lang}</a>
+          <a href="/llms.txt">{c.llms}</a>
         </div>
         <div class="footer__legal-links">
           {legalLinks.map((link) => (

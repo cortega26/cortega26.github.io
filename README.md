@@ -21,6 +21,7 @@ It is intentionally lightweight and focused on:
 
 ## Featured projects
 
+- [chile-hub](https://github.com/cortega26/chile-hub) — curated data registry for Chile with automated ETL, statistical schema validation, and multi-format outputs.
 - [rutificador](https://github.com/cortega26/rutificador) — Python library and CLI for Chilean RUT validation and formatting.
 - [conciliador_bancario](https://github.com/cortega26/conciliador_bancario) — fail-closed bank reconciliation CLI with deterministic audit artifacts.
 - [noticiencias](https://github.com/cortega26/noticiencias) — science-news frontend focused on readability, accessibility, and SEO.

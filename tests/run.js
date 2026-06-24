@@ -304,6 +304,7 @@ group('D4 · Portfolio project order', () => {
   const positions = {
     ebano: src.indexOf("id: 'ebano'"),
     portfolioManager: src.indexOf("id: 'portfolio-manager-unified'"),
+    chileHub: src.indexOf("id: 'chile-hub'"),
     monedario: src.indexOf("id: 'monedario'"),
     stopSpam: src.indexOf("id: 'stop-spam-linkedin'"),
     conciliador: src.indexOf("id: 'conciliador'"),
@@ -318,9 +319,14 @@ group('D4 · Portfolio project order', () => {
     `ebano:${positions.ebano}, portfolioManager:${positions.portfolioManager}`
   );
   assert(
-    'portfolio manager before monedario',
-    positions.portfolioManager < positions.monedario,
-    `portfolioManager:${positions.portfolioManager}, monedario:${positions.monedario}`
+    'portfolio manager before chile-hub',
+    positions.portfolioManager < positions.chileHub,
+    `portfolioManager:${positions.portfolioManager}, chileHub:${positions.chileHub}`
+  );
+  assert(
+    'chile-hub before monedario',
+    positions.chileHub < positions.monedario,
+    `chileHub:${positions.chileHub}, monedario:${positions.monedario}`
   );
   assert(
     'monedario before LinkedIn extension',
@@ -338,7 +344,7 @@ group('D4 · Portfolio project order', () => {
     `conciliador:${positions.conciliador}, rutificador:${positions.rutificador}`
   );
   assert(
-    'All 9 required projects present',
+    'All 10 required projects present',
     Object.values(positions).every(p => p > -1),
     'One or more required projects missing: ' + Object.entries(positions).filter(([,v]) => v === -1).map(([k]) => k).join(', ')
   );
@@ -566,9 +572,14 @@ group('H2 · Portfolio Manager and LinkedIn extension are included in public wor
   const proofSrc = proof();
 
   assert(
-    'Portfolio includes Portfolio Manager Unified project',
-    portfolioSrc.includes('Portfolio Manager Unified') && portfolioSrc.includes('portfolio-manager-server'),
-    'PortfolioSection is missing the Portfolio Manager Unified entry'
+    'Portfolio includes Portfolio Manager project',
+    portfolioSrc.includes('Portfolio Manager') && portfolioSrc.includes('portfolio-manager-server'),
+    'PortfolioSection is missing the Portfolio Manager entry'
+  );
+  assert(
+    'Portfolio includes chile-hub project',
+    portfolioSrc.includes('chile-hub') && portfolioSrc.includes('chile-hub'),
+    'PortfolioSection is missing the chile-hub entry'
   );
   assert(
     'Portfolio includes LinkedIn Spam Blocker project',
@@ -576,9 +587,14 @@ group('H2 · Portfolio Manager and LinkedIn extension are included in public wor
     'PortfolioSection is missing the LinkedIn Spam Blocker entry'
   );
   assert(
-    'Proof includes Portfolio Manager Unified evidence entry',
-    proofSrc.includes('Portfolio Manager Unified') && proofSrc.includes('portfolio-manager-server'),
-    'ProofSection is missing the Portfolio Manager Unified evidence entry'
+    'Proof includes Portfolio Manager evidence entry',
+    proofSrc.includes('Portfolio Manager') && proofSrc.includes('portfolio-manager-server'),
+    'ProofSection is missing the Portfolio Manager evidence entry'
+  );
+  assert(
+    'Proof includes chile-hub evidence entry',
+    proofSrc.includes('chile-hub') && proofSrc.includes('chile-hub'),
+    'ProofSection is missing the chile-hub evidence entry'
   );
   assert(
     'Proof includes extension distribution links',
@@ -841,9 +857,14 @@ if (BUILT) {
     'ES title in built output does not contain Tooltician'
   );
   assert(
-    '[built] Portfolio Manager Unified renders in EN and ES output',
-    distEN.includes('Portfolio Manager Unified') && distES.includes('Portfolio Manager Unified'),
-    'Built localized pages are missing the Portfolio Manager Unified content'
+    '[built] Portfolio Manager renders in EN and ES output',
+    distEN.includes('Portfolio Manager') && distES.includes('Portfolio Manager'),
+    'Built localized pages are missing the Portfolio Manager content'
+  );
+  assert(
+    '[built] chile-hub renders in EN and ES output',
+    distEN.includes('chile-hub') && distES.includes('chile-hub'),
+    'Built localized pages are missing the chile-hub content'
   );
   assert(
     '[built] LinkedIn Spam Blocker renders in EN and ES output',

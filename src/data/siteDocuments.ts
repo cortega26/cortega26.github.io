@@ -24,8 +24,8 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
   privacy: {
     en: {
       eyebrow: 'Policy',
-      title: 'Privacy Policy',
-      description: 'How Tooltician handles contact, scheduling, analytics, and language preference data on this site.',
+      title: 'Privacy Policy & Data Handling',
+      description: 'Privacy policy: How Tooltician handles contact form data, scheduling, web analytics, and local browser preferences on this site.',
       intro:
         'This page explains what this site collects, why it is collected, and which third-party services are involved when you contact me or schedule a call.',
       updatedLabel: 'Last updated',
@@ -81,7 +81,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
     es: {
       eyebrow: 'Política',
       title: 'Política de Privacidad',
-      description: 'Cómo maneja Tooltician los datos de contacto, agenda, analítica y preferencia de idioma en este sitio.',
+      description: 'Política de privacidad: Cómo maneja Tooltician tus datos de contacto, agenda, analítica web y preferencias de idioma del navegador.',
       intro:
         'Esta página explica qué recopila este sitio, por qué se recopila y qué servicios de terceros intervienen cuando contactas o agendas una llamada.',
       updatedLabel: 'Última actualización',
@@ -139,7 +139,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
     en: {
       eyebrow: 'Policy',
       title: 'Cookie and Browser Storage Notice',
-      description: 'A practical overview of cookies, local storage, and third-party browser storage used on Tooltician.com.',
+      description: 'Cookie notice: A practical overview of functional cookies, local browser storage, and third-party tools used to operate Tooltician.com.',
       intro:
         'This site keeps browser storage to a minimum, but some local preferences and third-party services still rely on technical storage to work correctly.',
       updatedLabel: 'Last updated',
@@ -174,7 +174,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
     es: {
       eyebrow: 'Política',
       title: 'Aviso de Cookies y Almacenamiento del Navegador',
-      description: 'Resumen práctico de cookies, almacenamiento local y almacenamiento de terceros usado en Tooltician.com.',
+      description: 'Aviso de cookies: Resumen práctico de cookies funcionales, almacenamiento local y herramientas de terceros usadas en Tooltician.com.',
       intro:
         'Este sitio mantiene el almacenamiento del navegador al mínimo, pero algunas preferencias locales y servicios de terceros dependen de almacenamiento técnico para funcionar bien.',
       updatedLabel: 'Última actualización',
@@ -210,8 +210,8 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
   terms: {
     en: {
       eyebrow: 'Policy',
-      title: 'Terms of Use',
-      description: 'Basic public-use terms for browsing Tooltician.com, following external links, and using the project brief form.',
+      title: 'Terms of Use & Site Conditions',
+      description: 'Terms of use: Basic terms governing public use, browsing, following external links, and submitting contact forms on Tooltician.com.',
       intro:
         'These terms set a practical baseline for using this public portfolio site and its contact routes. They are intentionally narrow and tied to how the site actually works today.',
       updatedLabel: 'Last updated',
@@ -252,8 +252,8 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
     },
     es: {
       eyebrow: 'Política',
-      title: 'Términos de Uso',
-      description: 'Términos básicos de uso público para navegar Tooltician.com, seguir enlaces externos y usar el formulario de brief.',
+      title: 'Términos de Uso y Condiciones',
+      description: 'Términos de uso: Condiciones básicas para navegar, seguir enlaces externos y usar el formulario de contacto en Tooltician.com.',
       intro:
         'Estos términos fijan una base práctica para usar este portafolio público y sus rutas de contacto. Son intencionalmente acotados y corresponden a cómo opera hoy el sitio.',
       updatedLabel: 'Última actualización',
@@ -296,8 +296,8 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
   engagement: {
     en: {
       eyebrow: 'Agreement',
-      title: 'Engagement Terms',
-      description: 'Responsibilities, intellectual property, and confidentiality rules that govern every project engagement with Tooltician.',
+      title: 'Engagement Terms & Agreements',
+      description: 'Engagement terms: Detailed client responsibilities, intellectual property transfers, and confidentiality rules governing project agreements with Tooltician.',
       intro: 'A good project runs on clear expectations, not assumptions. These terms set out what each side commits to, how ownership and confidentiality work, and what happens if circumstances change — so both parties can stay focused on the work itself. They apply to every scoped engagement unless a separately signed written agreement takes precedence.',
       updatedLabel: 'Last updated',
       updatedAt: '27 May 2026',
@@ -365,7 +365,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
     es: {
       eyebrow: 'Acuerdo',
       title: 'Condiciones de Trabajo',
-      description: 'Responsabilidades, propiedad intelectual y confidencialidad que rigen cada proyecto con Tooltician.',
+      description: 'Condiciones de trabajo: Responsabilidades del cliente, transferencia de propiedad intelectual y reglas de confidencialidad en proyectos con Tooltician.',
       intro: 'Un buen proyecto funciona con expectativas claras, no con suposiciones. Estas condiciones definen a qué se compromete cada parte, cómo funcionan la titularidad y la confidencialidad, y qué ocurre si las circunstancias cambian — para que ambas partes puedan enfocarse en el trabajo. Aplican a todo proyecto acotado salvo que un acuerdo escrito firmado por ambas partes las reemplace.',
       updatedLabel: 'Última actualización',
       updatedAt: '27 de mayo de 2026',

@@ -116,9 +116,9 @@ const pythonAutomation: ServiceDefinition = {
   serviceKey: 'automation',
   areaServed: ['US', 'GB', 'EU', 'LATAM'],
   en: {
-    title: 'Python Automation & Data Pipelines for Operations Teams | Tooltician',
+    title: 'Python Automation & Data Pipelines | Tooltician',
     description:
-      'Scheduled, reproducible Python automation: ETL pipelines, resilient scrapers, and reporting flows that emit the same answer every time. Scoped, documented, and built to keep running after handoff. Delivered in English.',
+      'Scheduled, reproducible Python automation: ETL pipelines, scrapers, and reporting flows built to keep running. Scoped, documented, and handoff-ready.',
     serviceName: 'Python Automation & Data Pipelines',
     serviceType: ['Python automation', 'ETL pipeline development', 'Web scraping', 'Reporting automation'],
     eyebrow: 'Python Automation · Tooltician',
@@ -279,7 +279,7 @@ const pythonAutomation: ServiceDefinition = {
     ],
     whyNote: {
       label: 'Proof, not promises',
-      body: 'Tooltician ships published Python packages (bankrecon, rutificador), reliability-minded automation (polla, Noticiencias collector), and production systems with handoff-ready docs. The same standards apply to your build.',
+      body: 'Tooltician ships open-source data layers (chile-hub), published Python packages (bankrecon, rutificador), and production systems with handoff-ready docs. The same standards apply to your build.',
     },
     casesEyebrow: 'Use cases',
     casesTitle: 'Where this service fits best',
@@ -292,7 +292,7 @@ const pythonAutomation: ServiceDefinition = {
     ],
     relatedLabel: 'Related projects',
     related: [
-      { label: 'polla', href: 'https://github.com/cortega26/polla', accent: true },
+      { label: 'chile-hub', href: 'https://github.com/cortega26/chile-hub', accent: true },
       { label: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario', accent: true },
       { label: 'rutificador', href: 'https://pypi.org/project/rutificador/', accent: true },
       { label: 'Portfolio', href: '/en/#portfolio' },
@@ -327,9 +327,9 @@ const pythonAutomation: ServiceDefinition = {
       'If you arrived here from a specific bottleneck — a manual report, a fragile scrape, copy-paste between systems — the scope is this: lock it down, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
   },
   es: {
-    title: 'Automatización en Python y Pipelines de Datos para Equipos de Operaciones | Tooltician',
+    title: 'Automatización Python y Pipelines | Tooltician',
     description:
-      'Automatización en Python programada y reproducible: pipelines ETL, scrapers resilientes y flujos de reportes que entregan la misma respuesta cada vez. Acotado, documentado y construido para seguir funcionando después del traspaso.',
+      'Automatización Python programada y reproducible: pipelines ETL, scrapers y reportes acotados, documentados y listos para seguir funcionando.',
     serviceName: 'Automatización en Python y Pipelines de Datos',
     serviceType: ['Automatización en Python', 'Desarrollo de pipelines ETL', 'Web scraping', 'Automatización de reportes'],
     eyebrow: 'Automatización en Python · Tooltician',
@@ -490,7 +490,7 @@ const pythonAutomation: ServiceDefinition = {
     ],
     whyNote: {
       label: 'Evidencia, no promesas',
-      body: 'Tooltician publica paquetes de Python (bankrecon, rutificador), automatización orientada a confiabilidad (polla, colector de Noticiencias) y sistemas en producción con docs listas para traspaso. Los mismos estándares aplican a tu proyecto.',
+      body: 'Tooltician publica capas de datos abiertas (chile-hub), paquetes en PyPI (bankrecon, rutificador) y sistemas en producción con docs listas para traspaso. Los mismos estándares aplican a tu proyecto.',
     },
     casesEyebrow: 'Casos de uso',
     casesTitle: 'Dónde encaja mejor este servicio',
@@ -503,7 +503,7 @@ const pythonAutomation: ServiceDefinition = {
     ],
     relatedLabel: 'Proyectos relacionados',
     related: [
-      { label: 'polla', href: 'https://github.com/cortega26/polla', accent: true },
+      { label: 'chile-hub', href: 'https://github.com/cortega26/chile-hub', accent: true },
       { label: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario', accent: true },
       { label: 'rutificador', href: 'https://pypi.org/project/rutificador/', accent: true },
       { label: 'Portafolio', href: '/es/#portfolio' },
@@ -545,9 +545,9 @@ const internalTools: ServiceDefinition = {
   serviceKey: 'internal-tools',
   areaServed: ['US', 'GB', 'EU', 'LATAM'],
   en: {
-    title: 'Internal Tools & APIs That Outlive the Person Who Built Them | Tooltician',
+    title: 'Internal Tools & APIs | Tooltician',
     description:
-      'Package scripts behind internal APIs or guided interfaces so a workflow stays usable after the original builder steps away. FastAPI, CLIs, auth, tests, and documentation. Delivered in English.',
+      'Package scripts behind internal APIs or interfaces so workflows stay usable. Maintainable tools with FastAPI, CLIs, auth, tests, and documentation.',
     serviceName: 'Internal Tools & APIs',
     serviceType: ['Internal tools development', 'FastAPI development', 'Internal API development', 'Workflow tooling'],
     eyebrow: 'Internal Tools & APIs · Tooltician',
@@ -756,9 +756,9 @@ const internalTools: ServiceDefinition = {
       'If you arrived here because a workflow depends too much on one person, the scope is this: define the contract, wrap it safely, and hand it off documented. Fixed price, no open-ended hours.',
   },
   es: {
-    title: 'Herramientas Internas y APIs que Sobreviven a Quien las Construyó | Tooltician',
+    title: 'Herramientas Internas y APIs | Tooltician',
     description:
-      'Empaqueto scripts detrás de APIs internas o interfaces guiadas para que un flujo siga siendo usable cuando el autor original ya no está. FastAPI, CLIs, autenticación, tests y documentación.',
+      'Empaqueto scripts detrás de APIs o interfaces para que sigan siendo usables. Herramientas mantenibles con FastAPI, autenticación y documentación.',
     serviceName: 'Herramientas Internas y APIs',
     serviceType: ['Desarrollo de herramientas internas', 'Desarrollo FastAPI', 'Desarrollo de APIs internas', 'Tooling de flujos'],
     eyebrow: 'Herramientas Internas y APIs · Tooltician',
@@ -974,9 +974,9 @@ const financialTooling: ServiceDefinition = {
   serviceKey: 'financial',
   areaServed: ['US', 'GB', 'EU', 'LATAM'],
   en: {
-    title: 'Financial & Audit Tooling — Fail-Closed Reconciliation | Tooltician',
+    title: 'Financial & Audit Tooling | Tooltician',
     description:
-      'Reconciliation and finance workflows that stop on mismatches, preserve audit traces, and make review easier. Fail-closed by design, with deterministic audit artifacts. Delivered in English.',
+      'Reconciliation and finance workflows that stop on mismatches and preserve audit traces. Fail-closed by design, with deterministic audit artifacts.',
     serviceName: 'Financial & Audit Tooling',
     serviceType: ['Bank reconciliation automation', 'Financial reconciliation software', 'Audit tooling', 'Fail-closed controls'],
     eyebrow: 'Financial & Audit Tooling · Tooltician',
@@ -1185,9 +1185,9 @@ const financialTooling: ServiceDefinition = {
       'If you arrived here because a number has to be right, the scope is this: define the controls, build them fail-closed, and leave audit-grade evidence. Fixed price, no open-ended hours.',
   },
   es: {
-    title: 'Herramientas Financieras y de Auditoría — Conciliación Fail-Closed | Tooltician',
+    title: 'Herramientas Financieras y Auditoría | Tooltician',
     description:
-      'Flujos financieros y de conciliación que se detienen ante diferencias, preservan trazas de auditoría y facilitan la revisión. Fail-closed por diseño, con artefactos de auditoría deterministas.',
+      'Conciliaciones y flujos financieros que se detienen ante diferencias y conservan trazas de auditoría. Diseñadas para auditorías y revisiones simples.',
     serviceName: 'Herramientas Financieras y de Auditoría',
     serviceType: ['Automatización de conciliación bancaria', 'Software de conciliación financiera', 'Tooling de auditoría', 'Controles fail-closed'],
     eyebrow: 'Herramientas Financieras y de Auditoría · Tooltician',
@@ -1403,9 +1403,9 @@ const staticSites: ServiceDefinition = {
   serviceKey: 'web',
   areaServed: ['US', 'GB', 'EU', 'LATAM'],
   en: {
-    title: 'Static Sites & Front Ends — Fast, Indexable, Maintainable | Tooltician',
+    title: 'Static Sites & Front Ends | Tooltician',
     description:
-      'Lean Astro and static web surfaces with SEO and performance baked in, bilingual support, and a clean deploy pipeline. Evidence over decoration, built to stay maintainable. Delivered in English.',
+      'Lean Astro and static web sites with SEO, speed, bilingual support, and clean deploy pipelines. Built to be readable and easily maintained.',
     serviceName: 'Static Sites & Front Ends',
     serviceType: ['Astro development', 'Static site development', 'Frontend development', 'Bilingual website development'],
     eyebrow: 'Static Sites & Front Ends · Tooltician',
@@ -1614,9 +1614,9 @@ const staticSites: ServiceDefinition = {
       'If you arrived here because your site is slow, invisible to search, or impossible to edit, the scope is this: agree the sitemap, build it lean and fast, and hand it off documented. Fixed price, no open-ended hours.',
   },
   es: {
-    title: 'Sitios Web y Frontends — Rápidos, Indexables, Mantenibles | Tooltician',
+    title: 'Sitios Web y Frontends | Tooltician',
     description:
-      'Superficies web sobrias en Astro y estáticas con SEO y rendimiento integrados, soporte bilingüe y un pipeline de despliegue limpio. Evidencia por sobre decoración, construido para mantenerse mantenible.',
+      'Sitios web y frontends en Astro y estáticos con SEO, velocidad y soporte bilingüe. Construidos para ser mantenibles y con código limpio.',
     serviceName: 'Sitios Web y Frontends',
     serviceType: ['Desarrollo Astro', 'Desarrollo de sitios estáticos', 'Desarrollo frontend', 'Desarrollo de sitios bilingües'],
     eyebrow: 'Sitios Web y Frontends · Tooltician',

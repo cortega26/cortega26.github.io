@@ -1,8 +1,10 @@
 ---
+import githubStats from '../data/github-stats.json';
+
 interface EvidenceChip {
   label: string;
   href?: string;
-  type: 'star' | 'pypi' | 'store' | 'live' | 'ci' | 'metric';
+  type: 'star' | 'fork' | 'pypi' | 'store' | 'live' | 'ci' | 'metric';
 }
 
 interface Project {
@@ -469,8 +471,82 @@ const filterLabels = {
   },
 };
 
+const repoMap: Record<string, string> = {
+  'ebano': 'elrincondeebano',
+  'portfolio-manager-unified': 'portfolio-manager-server',
+  'chile-hub': 'chile-hub',
+  'monedario': 'tuplatainforma',
+  'stop-spam-linkedin': 'stop-spam-linkedin',
+  'conciliador': 'conciliador_bancario',
+  'rutificador': 'rutificador',
+  'dnspect': 'DNSpect',
+  'polla': 'polla',
+  'noticiencias': 'noticiencias',
+};
+
+const enrichProjects = (projects: Project[], currentLang: 'en' | 'es'): Project[] => {
+  return projects.map(proj => {
+    const repoName = repoMap[proj.id];
+    if (!repoName) return proj;
+
+    const stats = (githubStats as any)[repoName] || { stars: 0, forks: 0 };
+    const { stars, forks } = stats;
+
+    // 1. Update impact string if it contains star counts (specifically for chile-hub)
+    let newImpact = proj.impact;
+    if (proj.id === 'chile-hub') {
+      newImpact = currentLang === 'en'
+        ? `★ ${stars} stars · Published data pipelines & CLI`
+        : `★ ${stars} estrellas · Pipelines de datos y CLI publicados`;
+    }
+
+    // 2. Process/update evidence chips
+    let newEvidence = proj.evidence ? [...proj.evidence] : [];
+
+    // Find and update star chip if it exists, otherwise prepend if stars > 0
+    const starIndex = newEvidence.findIndex(chip => chip.type === 'star');
+    if (starIndex !== -1) {
+      newEvidence[starIndex] = {
+        ...newEvidence[starIndex],
+        label: `★ ${stars}`
+      };
+    } else if (stars > 0) {
+      // Prepend star chip for this project
+      newEvidence.unshift({
+        label: `★ ${stars}`,
+        href: `https://github.com/cortega26/${repoName}/stargazers`,
+        type: 'star'
+      });
+    }
+
+    // Process forks chip: find if one exists, otherwise append if forks > 0
+    const forkIndex = newEvidence.findIndex(chip => chip.type === 'fork');
+    if (forkIndex !== -1) {
+      newEvidence[forkIndex] = {
+        ...newEvidence[forkIndex],
+        label: `${forks} fork${forks !== 1 ? 's' : ''}`
+      };
+    } else if (forks > 0) {
+      // Append forks chip
+      newEvidence.push({
+        label: `${forks} fork${forks !== 1 ? 's' : ''}`,
+        href: `https://github.com/cortega26/${repoName}/forks`,
+        type: 'fork'
+      });
+    }
+
+    return {
+      ...proj,
+      impact: newImpact,
+      evidence: newEvidence
+    };
+  });
+};
+
+const enrichedProjects = enrichProjects(lang === 'en' ? projectsEN : projectsES, lang);
+
 const c = {
-  projects: lang === 'en' ? projectsEN : projectsES,
+  projects: enrichedProjects,
   title: lang === 'en' ? 'Selected production work' : 'Trabajo de producción seleccionado',
   eyebrow: lang === 'en' ? 'Portfolio' : 'Portafolio',
   subtitle: lang === 'en'

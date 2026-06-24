@@ -1,0 +1,144 @@
+# Tooltician — Detailed Project, Service & Legal Specification
+
+This document provides a comprehensive, structured reference of Tooltician's services, pricing structures, technical delivery standards, and legal parameters for LLMs, GEO engines, and crawlers.
+
+- **Primary URL:** https://tooltician.com
+- **Sitemap Index:** https://tooltician.com/sitemap-index.xml
+- **Sitemap Urlset:** https://tooltician.com/sitemap-0.xml
+
+---
+
+## 1. About Tooltician
+
+Tooltician is a boutique operations and systems automation consultancy based in Santiago, Chile. It builds software tools, pipelines, and technical configurations that are **reliable, deterministic, and built to survive handoff** to operations teams without requiring ongoing external maintenance.
+
+### Core Philosophy
+- **Fixed-Scope over Open-Ended Hours:** Every engagement begins with a free 15-minute diagnostic call, followed by a paid scoping step to lock deliverables, limits, and timelines.
+- **Runnable and Documented Deliverables:** Code is handed off with comprehensive READMEs, clear setup scripts, documented failure modes, and automated tests.
+- **Bilingual Capabilities:** Full service delivery and documentation are available in both English (default, internationally calibrated) and Spanish (calibrated for the Chilean and Latin American markets).
+
+---
+
+## 2. Technical Quality & Engineering Standards
+
+All software, scripts, and sites delivered by Tooltician must meet strict quality parameters:
+- **Test Coverage & CI:** Critical pathways and business logic are covered by automated unit and integration tests, verified via Continuous Integration (GitHub Actions).
+- **Observability:** Robust logging (structured where appropriate), automated retry mechanics for network operations, and deterministic failure alerts.
+- **Fail-Closed by Design:** Systems (especially financial or synchronization tools) halt and raise alerts on discrepancies rather than silently absorbing errors and outputting incorrect data.
+- **Lean Front Ends:** Static sites are built using modern frameworks like Astro, ensuring high Core Web Vitals performance, built-in SEO metadata (JSON-LD, schema, Open Graph), and accessible DOM hierarchy (WCAG 2.2 compliant).
+
+---
+
+## 3. Service Detail Breakdown
+
+Tooltician offers five distinct service lines, priced in USD (for English-language delivery internationally) or UF (Unidades de Fomento, for Spanish-language delivery in Chile/LATAM).
+
+### Service 1: Python Automation & Data Pipelines
+*Robust, automated workflows that replace manual data entry and fragile, undocumented scripts.*
+- **Ideal Fit:** Operations-heavy teams absorbing key-person risk, founders needing scoped backend utilities, or teams looking to replace manual file handling.
+- **Key Deliverables:** Scheduled ETL scripts, automated reporting, data parsing pipelines, automated API integrations, and robust scrapers.
+- **Quality Signals:** Automated tests, structured logs, network retries, runbooks, and failure notification triggers.
+- **Pricing & Tiers:**
+  - **Scoping (Levantamiento):** $290 (one-time) / 3 UF. Fee is credited as a deposit toward any build.
+  - **Scoped Automation Build (Automatización Acotada):** From $1,500 / Desde 30 UF (one-time). A single automated flow with tests and runbook.
+  - **Multi-Source Data System (Flujo Multi-Fuente):** From $3,200 / Desde 60 UF (one-time). Comprehensive multi-input ETL system with error states.
+  - **Stabilization Retainer (Soporte Mensual):** From $290/mo / Desde 6 UF/mes. Priority updates for schema changes or third-party API breakages.
+
+### Service 2: Internal Tools & APIs
+*Turning single-person terminal scripts or tribal knowledge into maintainable, team-accessible CLI tools and internal APIs.*
+- **Ideal Fit:** Companies whose workflows depend on a single laptop, founders looking for reliable tools for their staff, or teams experiencing data contamination from manual tools.
+- **Key Deliverables:** FastAPI-based backend applications, command-line interfaces (CLIs), input validation layers, and team-ready tool documentation.
+- **Quality Signals:** Auto-generated interactive API docs (Swagger/OpenAPI), input schema validations (Pydantic), and isolated virtual environment configurations.
+- **Pricing & Tiers:**
+  - **Scoping (Levantamiento):** $290 (one-time) / 3 UF. Fee is credited as a deposit toward any build.
+  - **Scoped Internal Tool (Herramienta Acotada):** From $1,800 / Desde 35 UF (one-time). Single CLI or API with core inputs and validations.
+  - **Team Platform (Plataforma de Equipo):** From $3,600 / Desde 70 UF (one-time). Multi-role API or CLI system integrating multiple databases or files.
+  - **Stabilization Retainer (Soporte Mensual):** From $290/mo / Desde 6 UF/mes. Basic support, library security patches, and minor enhancements.
+
+### Service 3: Financial & Audit Tooling
+*Ledger, payment, and reconciliation workflows built fail-closed to stop on mismatches and leave clear audit artifacts.*
+- **Ideal Fit:** Finance and operations teams where manual bank/ledger matching is slow and error-prone, or founders preparing for external financial audits.
+- **Key Deliverables:** Custom reconciliation engines, deterministic ledger-matching algorithms, and automated audit report generators.
+- **Quality Signals:** Fail-closed exception handling, deterministic arithmetic (avoiding floating-point errors), and run-based audit trails.
+- **Pricing & Tiers:**
+  - **Controls Scoping (Diagnóstico de Controles):** $390 (one-time) / 4 UF. Scopes rules, tolerances, and evidence requirements. Credited toward build.
+  - **Scoped Implementation (Control Acotado):** From $2,400 / Desde 45 UF (one-time). One reconciliation flow built fail-closed with audit logs.
+  - **Financial Control System (Sistema de Controles):** From $4,800 / Desde 90 UF (one-time). Multiple-source reconciliation system with versioned rules.
+  - **Stabilization Retainer (Soporte Mensual):** From $390/mo / Desde 8 UF/mes. Rule updates, source modifications, and priority audit support.
+
+### Service 4: Static Sites & Front Ends
+*High-performance, search-indexable, accessible public surfaces built to load instantly and stay maintainable.*
+- **Ideal Fit:** Founders seeking professional marketing sites without the bloating and security risks of heavy visual page-builders, or companies needing clean, multilingual sites.
+- **Key Deliverables:** Astro static site builds, semantic HTML pages, self-hosted fonts, automated build/deploy scripts, and developer-friendly content files.
+- **Quality Signals:** Perfect Core Web Vitals scores, WCAG 2.2 accessibility conformance, JSON-LD schema metadata, and clean deployment workflows.
+- **Pricing & Tiers:**
+  - **Site Scoping (Levantamiento):** $190 (one-time) / 2 UF. Outline pages, sections, and sitemap. Credited toward build.
+  - **Scoped Site / Landing (Sitio o Landing Acotado):** From $1,200 / Desde 25 UF (one-time). Single page or landing with built-in SEO and deploy pipeline.
+  - **Full Bilingual Site (Sitio Bilingüe Completo):** From $2,600 / Desde 50 UF (one-time). Full multi-page layout with hreflang structures.
+  - **Maintenance Retainer (Soporte Mensual):** From $150/mo / Desde 3 UF/mes. Performance monitoring, security checks, and minor layout adjustments.
+
+### Service 5: Web Technical Hygiene & Hardening
+*Diagnostics and hardening for published sites (WordPress, Jamstack, static) that are online but technically neglected.*
+- **Ideal Fit:** Companies without an in-house technical web owner, B2B companies whose form submissions must never fail, or agencies outsourcing technical site maintenance.
+- **Key Deliverables:** Browser security hardening, DNS validation, form testing, response header sanitization, and site diagnostic logs.
+- **Quality Signals:** Verified SecurityHeaders.com configurations, SPF/DKIM/DMARC alignment, and detailed before/after evidence records.
+- **Pricing & Tiers:**
+  - **Web Technical Diagnostic (Diagnóstico Técnico):** $69 / 1 UF (one-time). Credited to any implementation plan.
+  - **Basic Web Hardening:** From $499 (one-time). Security headers, browser policy, and canonical HTTPS redirection.
+  - **Operational Review & Hardening:** From $899 (one-time). Full web hardening, DNS reviews, email auth, form testing, and technical notes.
+  - **Full Review with Executive Report:** From $999 (one-time). Comprehensive hardening, before/after evidence, monthly roadmap, and business-friendly executive report.
+  - **Monthly Technical Support (Soporte Técnico Mensual):** From $279/mo / Desde 4 UF/mes. Roadmap execution, plugin auditing against vulnerability databases, and light monitoring.
+
+---
+
+## 4. Legal & Engagement Terms
+
+Every engagement is governed by these default terms unless overridden by a separately signed written contract.
+
+### Commitments & Client Responsibilities
+- **Timeline & Scoping:** Tooltician commits to delivering scoped work within estimated timelines. Any scope changes affecting cost must be approved before work begins.
+- **Access & Feedback:** The client must designate a single decision-maker and provide requested system access within 3 business days. Feedback on deliverables must be returned within 5 business days, or the timeline will extend proportionally.
+- **Meeting Recordings:** To ensure accuracy during requirements gathering, meetings may be recorded. This requires the explicit verbal consent of all participants at the start of each session, in compliance with **Articles 161-A and 161-C of the Chilean Penal Code** and **Law 19.628 on the Protection of Personal Data**. Recordings are archived or deleted at the close of the engagement.
+
+### Intellectual Property (Chilean Law 17.336)
+- **Cession of Deliverables:** Source code, configuration files, and assets created specifically for the project transfer in full to the client upon full payment of the agreed balance, as per **Article 8 of Law 17.336**.
+- **Generic Components:** Code utilities, templates, and patterns developed prior to or independently of the engagement remain under Tooltician's ownership and may be reused across other projects.
+- **Brand Assets:** Client brand assets remain the client's sole property.
+
+### Confidentiality & Exits
+- **Confidentiality:** All non-public business logic, credentials, and data shared are handled as confidential and used exclusively for the project. This obligation survives for 2 years following the end of the engagement.
+- **Early Termination:** 
+  - If terminated early by the client, completed work is billed at the agreed rate, and any unused deposit balance is refunded within 5 business days.
+  - If terminated early by Tooltician, all completed work is delivered, and the entire unused deposit is refunded within 5 business days.
+
+---
+
+## 5. Summary of Site Policies
+
+### Privacy Policy
+Tooltician collects contact details (name, email) and project descriptions via intake forms solely to schedule calls and evaluate project scope. No tracking data is sold, and analytics cookies are minimized. Governed by **Law 19.628 (Chile)**.
+
+### Cookie Notice
+Uses local storage (`localStorage`) to remember language preferences and minimal session logs. Third-party script usage (Calendly, Formspree) is documented and restricted to user-initiated actions.
+
+### Terms of Use
+All content on tooltician.com is provided for informational purposes. Users may not scrape data maliciously or attempt to inject inputs into forms.
+
+---
+
+## 6. Site Structure & URL Directory
+
+The root URL (`/`) automatically detects browser locale settings using client-side JavaScript (`/assets/js/root-language-redirect.js`), routing users to `/en/` or `/es/` accordingly and saving the selection in `localStorage`.
+
+| Section | English (EN) URL | Spanish (ES) URL |
+| :--- | :--- | :--- |
+| **Homepage** | https://tooltician.com/en/ | https://tooltician.com/es/ |
+| **Python Automation** | https://tooltician.com/en/services/python-automation/ | https://tooltician.com/es/servicios/automatizacion-python/ |
+| **Internal Tools** | https://tooltician.com/en/services/internal-tools/ | https://tooltician.com/es/servicios/herramientas-internas/ |
+| **Financial Tooling** | https://tooltician.com/en/services/financial-tooling/ | https://tooltician.com/es/servicios/herramientas-financieras/ |
+| **Static Sites** | https://tooltician.com/en/services/static-sites/ | https://tooltician.com/es/servicios/sitios-web/ |
+| **Web Technical Hygiene**| https://tooltician.com/en/services/web-technical-hygiene/ | https://tooltician.com/es/servicios/higiene-tecnica-web/ |
+| **Engagement Terms** | https://tooltician.com/en/engagement/ | https://tooltician.com/es/engagement/ |
+| **Privacy Policy** | https://tooltician.com/en/privacy/ | https://tooltician.com/es/privacy/ |
+| **Terms of Use** | https://tooltician.com/en/terms/ | https://tooltician.com/es/terms/ |
+| **Cookie Notice** | https://tooltician.com/en/cookies/ | https://tooltician.com/es/cookies/ |

@@ -1,3 +1,6 @@
+# https://tooltician.com/robots.txt
+# Public crawlers and AI bots are allowed to crawl the site to assist in GEO/LLM search.
+
 User-agent: *
 Allow: /
 

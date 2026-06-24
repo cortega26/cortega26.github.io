@@ -1,0 +1,46 @@
+# Tooltician
+
+Tooltician provides operations teams, founders, and finance teams with high-reliability Python automation, custom ETL data pipelines, fail-closed financial/reconciliation tooling, and web technical hygiene consulting. Built to keep running after handoff.
+
+- **Primary URL:** https://tooltician.com
+- **Sitemap Index:** https://tooltician.com/sitemap-index.xml
+- **Full Content & Detail Spec:** https://tooltician.com/llms-full.txt
+- **Language Support:** English (default at `/en/`), Spanish (at `/es/`)
+
+## Primary Offerings & Pages
+
+- **English Home:** https://tooltician.com/en/
+  - Portfolio, track record, and intake brief for English-speaking clients.
+- **Spanish Home:** https://tooltician.com/es/
+  - Evidencia de trabajo en producción y brief para el mercado hispanohablante.
+- **Python Automation & ETL Pipelines**
+  - Robust, automated workflows that replace manual data entry and fragile scripts.
+  - EN: https://tooltician.com/en/services/python-automation/
+  - ES: https://tooltician.com/es/servicios/automatizacion-python/
+- **Internal Tools & APIs**
+  - Fast, maintainable internal interfaces (FastAPI, CLIs) that eliminate tribal knowledge.
+  - EN: https://tooltician.com/en/services/internal-tools/
+  - ES: https://tooltician.com/es/servicios/herramientas-internas/
+- **Web Technical Hygiene & Hardening**
+  - External security reviews, header injection (HSTS, CSP), DNS authentication (SPF, DKIM, DMARC), and form security.
+  - EN: https://tooltician.com/en/services/web-technical-hygiene/
+  - ES: https://tooltician.com/es/servicios/higiene-tecnica-web/
+- **Financial Tooling & Reconciliation**
+  - Deterministic audit trails and fail-closed ledger reconciliation matching correctness over convenience.
+  - EN: https://tooltician.com/en/services/financial-tooling/
+  - ES: https://tooltician.com/es/servicios/herramientas-financieras/
+- **Static Sites & Front Ends**
+  - High-performance, lightweight, SEO-friendly static layouts (Astro) that rank and load instantly.
+  - EN: https://tooltician.com/en/services/static-sites/
+  - ES: https://tooltician.com/es/servicios/sitios-web/
+
+## Legal & Operational Documents
+
+- **Engagement Terms:** https://tooltician.com/en/engagement/ (ES: https://tooltician.com/es/engagement/)
+  - Standard service level agreements, IP transfer (Chilean Law 17.336), and fixed-scope mechanics.
+- **Privacy Policy:** https://tooltician.com/en/privacy/ (ES: https://tooltician.com/es/privacy/)
+  - Simple, compliant data minimization policy covering intake forms and browser preferences.
+- **Terms of Use:** https://tooltician.com/en/terms/ (ES: https://tooltician.com/es/terms/)
+  - Rules governing the use of Tooltician's public web surfaces.
+- **Cookie Notice:** https://tooltician.com/en/cookies/ (ES: https://tooltician.com/es/cookies/)
+  - Use of local preference storage and third-party script integrations.

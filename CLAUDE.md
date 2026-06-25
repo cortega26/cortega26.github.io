@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-**Static Astro site** (v6, `output: 'static'`), deployed from `master` branch via GitHub Actions → GitHub Pages. Custom domain: `tooltician.com`. Requires `node >=24.0.0`.
+**Static Astro site** (v7, `output: 'static'`), deployed from `master` branch via GitHub Actions → GitHub Pages. Custom domain: `tooltician.com`. Requires `node >=24.0.0`.
 
 Astro config (`astro.config.mjs`) uses `@astrojs/sitemap` with i18n config — default locale `en`, locales `en` and `es`.
 

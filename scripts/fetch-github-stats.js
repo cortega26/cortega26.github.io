@@ -14,6 +14,8 @@ const REPOS = [
   'noticiencias'
 ];
 
+const PRIVATE_REPOS = ['tuplatainforma'];
+
 async function fetchStats() {
   const stats = {};
   const statsFilePath = join(process.cwd(), 'src/data/github-stats.json');
@@ -37,6 +39,11 @@ async function fetchStats() {
 
   console.log('Fetching GitHub repository stats...');
   for (const repo of REPOS) {
+    if (PRIVATE_REPOS.includes(repo) && !token) {
+      stats[repo] = fallback[repo] || { stars: 0, forks: 0 };
+      console.log(`ℹ Skipping fetch for private repo ${repo} (no GITHUB_TOKEN), using fallback`);
+      continue;
+    }
     try {
       const res = await fetch(`https://api.github.com/repos/cortega26/${repo}`, { headers });
       if (!res.ok) {

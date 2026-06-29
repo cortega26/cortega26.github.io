@@ -2,7 +2,7 @@
 
 *Hub central del [ecosistema Tooltician](https://tooltician.com) — portafolio bilingüe de Carlos Ortega Gonzalez.*
 
-[![Tooltician](https://tooltician.com/badge.svg)](https://tooltician.com)
+[![Parte de Tooltician](https://tooltician.com/badge.es.svg)](https://tooltician.com)
 
 Static bilingual portfolio for Carlos Ortega Gonzalez.
 

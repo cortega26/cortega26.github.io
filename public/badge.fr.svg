@@ -1,18 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20" role="img" aria-label="Partie de Tooltician">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="162" height="20" role="img" aria-label="Partie de Tooltician.com">
+  <title>Partie de Tooltician.com</title>
   <linearGradient id="s" x2="0" y2="100%">
     <stop offset="0" stop-color="#fff" stop-opacity=".1"/>
     <stop offset="1" stop-color="#fff" stop-opacity="0"/>
   </linearGradient>
   <clipPath id="r">
-    <rect width="200" height="20" rx="3" fill="#fff"/>
+    <rect width="162" height="20" rx="3" fill="#fff"/>
   </clipPath>
   <g clip-path="url(#r)">
-    <rect width="80" height="20" fill="#555"/>
-    <rect x="80" width="120" height="20" fill="#6C47FF"/>
-    <rect width="200" height="20" fill="url(#s)"/>
+    <rect width="65" height="20" fill="#555"/>
+    <rect x="65" width="97" height="20" fill="#6C47FF"/>
+    <rect width="162" height="20" fill="url(#s)"/>
   </g>
-  <g fill="#fff" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600">
-    <text x="40" y="14">Partie de</text>
-    <text x="140" y="14">Tooltician.com</text>
+  <g fill="#fff" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500">
+    <text x="32.5" y="14">Partie de</text>
+    <text x="113.5" y="14">Tooltician.com</text>
   </g>
 </svg>

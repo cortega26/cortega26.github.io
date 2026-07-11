@@ -58,6 +58,14 @@ const jsonLd = {
     description: 'Scoped implementation of ETL pipelines, scrapers, internal APIs, and reporting workflows with CI, documentation, and handoff-ready systems.',
     skills: 'Python, SQL, FastAPI, Selenium, BeautifulSoup, Pandas, Astro, GitHub Actions, CI/CD',
   },
+};
+
+const portfolioJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Tooltician portfolio',
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: 8,
   itemListElement: [
     { '@type': 'ListItem', position: 1, item: { '@type': 'SoftwareApplication', name: 'El Rincón de Ébano', url: 'https://elrincondeebano.com', description: 'Live e-commerce storefront for a private residential community, actively operated.' } },
     { '@type': 'ListItem', position: 2, item: { '@type': 'SoftwareApplication', name: 'Portfolio Manager', url: 'https://github.com/cortega26/portfolio-manager-server', description: 'Desktop-first Electron portfolio tracker with Fastify, SQLite, deterministic finance math, and local-only persistence.' } },
@@ -87,6 +95,7 @@ const breadcrumbJsonLd = {
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(portfolioJsonLd)} />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
   </Fragment>
 

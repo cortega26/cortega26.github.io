@@ -492,12 +492,25 @@ const enrichProjects = (projects: Project[], currentLang: 'en' | 'es'): Project[
     const stats = (githubStats as any)[repoName] || { stars: 0, forks: 0 };
     const { stars, forks } = stats;
 
-    // 1. Update impact string if it contains star counts (specifically for chile-hub)
+    // 1. Rebuild copy so any embedded star/fork counts track the live stats.
+    //    chile-hub carries bespoke impact/proof lines; other repos embed the
+    //    counts inline (e.g. "12 stars · 3 forks"), so swap the numbers by regex
+    //    to preserve the surrounding copy and per-locale wording.
     let newImpact = proj.impact;
+    let newProof = proj.proof;
     if (proj.id === 'chile-hub') {
       newImpact = currentLang === 'en'
         ? `★ ${stars} stars · Published data pipelines & CLI`
         : `★ ${stars} estrellas · Pipelines de datos y CLI publicados`;
+      newProof = currentLang === 'en'
+        ? `${stars} GitHub stars, fully automated CI/CD pipeline, CLI/API package, and a public static dashboard with verified datasets.`
+        : `${stars} estrellas en GitHub, pipeline de CI/CD automatizado, CLI/API en Python y un dashboard estático público con datasets verificados.`;
+    } else {
+      const starWord = currentLang === 'en' ? 'stars' : 'estrellas';
+      const forkLabel = `${forks} fork${forks !== 1 ? 's' : ''}`;
+      newImpact = newImpact
+        .replace(new RegExp(`\\d+\\s+${starWord}`), `${stars} ${starWord}`)
+        .replace(/\d+\s+forks?/, forkLabel);
     }
 
     // 2. Process/update evidence chips
@@ -538,6 +551,7 @@ const enrichProjects = (projects: Project[], currentLang: 'en' | 'es'): Project[
     return {
       ...proj,
       impact: newImpact,
+      proof: newProof,
       evidence: newEvidence
     };
   });

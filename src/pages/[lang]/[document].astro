@@ -43,6 +43,22 @@ const alternates = [
   { hreflang: 'x-default', href: `https://tooltician.com/en/${documentKey}/` },
 ];
 
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `${content.title} | Tooltician`,
+  description: content.description,
+  url: canonical,
+  inLanguage: lang,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Tooltician',
+    url: 'https://tooltician.com/',
+  },
+  datePublished: content.updatedAt,
+  dateModified: content.updatedAt,
+};
+
 const navItems = lang === 'en'
   ? [
       { href: '/en/#overview', label: 'Overview' },
@@ -64,6 +80,12 @@ const navItems = lang === 'en'
   canonical={canonical}
   alternates={alternates}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(pageJsonLd)} />
+    <meta property="article:published_time" content={content.updatedAt} />
+    <meta property="article:modified_time" content={content.updatedAt} />
+  </Fragment>
+
   <Navbar lang={lang} items={navItems} ctaHref={contactHref} switchHref={switchHref} />
 
   <main id="main">

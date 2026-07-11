@@ -19,7 +19,7 @@ max-age=31536000; includeSubDomains; preload
 ### `Content-Security-Policy`
 
 ```txt
-default-src 'self'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none'; object-src 'none'; script-src 'self' https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://analytics.ahrefs.com https://formspree.io; manifest-src 'self'; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests
+default-src 'self'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none'; object-src 'none'; script-src 'self' https://analytics.ahrefs.com https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://analytics.ahrefs.com https://plausible.io https://formspree.io; manifest-src 'self'; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests
 ```
 
 ### `X-Frame-Options`
@@ -63,6 +63,7 @@ same-origin
 - The root language selector now uses self-hosted fonts.
 - The site still uses Formspree for form submission.
 - The site still loads Ahrefs Analytics.
+- The site loads Plausible (cookieless event analytics, `https://plausible.io/js/script.js`) — see `TS-001` in `docs/tasks/tooltician-strategy-execution-plan.md`. This rule must be applied in Cloudflare manually before events will reach the Plausible panel; the script is otherwise blocked by CSP.
 - The site does not need framing by other sites.
 
 ## Before re-testing on SecurityHeaders.com

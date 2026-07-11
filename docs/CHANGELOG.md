@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-06-30
+
+### Added
+- Connected Plausible (cookieless event analytics) in `BaseLayout.astro`:
+  the `https://plausible.io/js/script.js` snippet with `data-domain="tooltician.com"`
+  plus a queue stub so `track.js`'s existing `window.plausible` forwarding
+  (no-op until now) starts reaching a real panel. `TS-001` in
+  `docs/tasks/tooltician-strategy-execution-plan.md`.
+
+### Pending (manual, outside the repo)
+- Create/verify the `tooltician.com` site at plausible.io.
+- Apply the updated Cloudflare CSP (`docs/cloudflare-security-headers.md`
+  now allows `https://plausible.io` in `script-src`/`connect-src`) — until
+  this is set in Cloudflare, the script is blocked in production.
+- `TS-002`: confirmed the sitemap (`astro.config.mjs`) needed no code
+  changes — `https://tooltician.com/sitemap-index.xml` already covers
+  `en`/`es` alternates correctly. Verifying domain ownership in Google
+  Search Console (DNS TXT record) and submitting the sitemap are manual
+  steps in the user's DNS/Google account, outside the repo.
+
 ## 2026-05-29
 
 ### Added

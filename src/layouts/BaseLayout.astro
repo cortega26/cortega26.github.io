@@ -100,5 +100,10 @@ const {
 
   <!-- Analytics (after main content — async, non-blocking) -->
   <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="uU7HA5yyjlR9jxjk2RvjzA" async integrity="sha384-W1wjYK8T9Gz7xq6XpVAitAMIbyk3r/jlMxGQAdL3M058ajAAUoV9TVg2+zPMr3jR" crossorigin="anonymous"></script>
+
+  <!-- Plausible (cookieless event analytics — track.js forwards data-track events to window.plausible) -->
+  <!-- TODO(TS-001): pending manual step — create/verify the tooltician.com site at plausible.io and allow https://plausible.io in the Cloudflare CSP (script-src, connect-src). See docs/cloudflare-security-headers.md. -->
+  <script is:inline>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+  <script is:inline defer data-domain="tooltician.com" src="https://plausible.io/js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,275 @@
+{
+  "title": "Web Technical Maintenance | Tooltician",
+  "canonical": "https://tooltician.com/en/services/web-technical-hygiene/",
+  "headings": [
+    "Web technical maintenance for companies that don't need to hire in-house",
+    "Your site can be online and still be technically abandoned",
+    "What typically happens",
+    "The real asymmetry",
+    "External technical judgment, without the cost of an internal hire",
+    "Browser and transport security",
+    "Email, DNS, and infrastructure",
+    "Content, forms, and ongoing operations",
+    "How the technical diagnostic works",
+    "Initial external review",
+    "Prioritized findings",
+    "Correction with controlled access",
+    "Before/after evidence",
+    "Close or monthly support",
+    "A simple entry point and a clear path to monthly support",
+    "Web Technical Diagnostic",
+    "Basic Web Hardening",
+    "Operational Review & Hardening",
+    "Full Review with Executive Report",
+    "Monthly Technical Web Support",
+    "Not the same as hiring someone on Upwork or Fiverr",
+    "Where this service fits best",
+    "WordPress SMB site",
+    "Web agency",
+    "B2B company",
+    "Consultant, professional, or small e-commerce",
+    "Questions worth answering precisely",
+    "Start with a reasonable diagnostic, not an inflated promise",
+    "Web technical diagnostic — $69",
+    "Request your diagnostic"
+  ],
+  "links": [
+    "#contact",
+    "#scope",
+    "https://securityheaders.com",
+    "https://observatory.mozilla.org",
+    "https://securityheaders.com/?q=tooltician.com&followRedirects=on",
+    "https://github.com/cortega26/cortega26.github.io",
+    "https://github.com/cortega26/DNSpect",
+    "https://monedario.cl",
+    "https://elrincondeebano.com",
+    "/en/#portfolio",
+    "https://calendly.com/ciortega26",
+    "https://calendly.com/ciortega26",
+    "/en/privacy/",
+    "/en/cookies/",
+    "#htw-brief-form",
+    "#htw-brief-form",
+    "#htw-brief-form"
+  ],
+  "formFields": [
+    "_subject",
+    "service",
+    "page",
+    "name",
+    "email",
+    "site_url",
+    "goal",
+    "budget",
+    "timeline",
+    "message"
+  ],
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Web Technical Hygiene & Digital Trust",
+      "url": "https://tooltician.com/en/services/web-technical-hygiene/",
+      "description": "Web technical maintenance, basic hardening, light monitoring, and documentation for published sites without an internal technical team. Delivered in English.",
+      "serviceType": [
+        "Web technical maintenance",
+        "Web hardening",
+        "Website technical review",
+        "Monthly web monitoring"
+      ],
+      "areaServed": [
+        "US",
+        "GB",
+        "EU",
+        "LATAM"
+      ],
+      "provider": {
+        "@type": "ProfessionalService",
+        "name": "Tooltician",
+        "url": "https://tooltician.com/en/",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressCountry": "CL"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Web technical hygiene and maintenance plans",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Web Technical Diagnostic",
+            "priceCurrency": "USD",
+            "price": "69",
+            "description": "$69 (one-time). To know exactly what is technically neglected before paying for fixes.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/en/services/web-technical-hygiene/"
+          },
+          {
+            "@type": "Offer",
+            "name": "Basic Web Hardening",
+            "priceCurrency": "USD",
+            "price": "499",
+            "description": "From $499 (one-time). To fix the obvious and leave the site technically cleaner, with a verifiable record for the administrator.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/en/services/web-technical-hygiene/"
+          },
+          {
+            "@type": "Offer",
+            "name": "Operational Review & Hardening",
+            "priceCurrency": "USD",
+            "price": "899",
+            "description": "From $899 (one-time). For sites that need full hardening and operational review, with no deliverable required for management.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/en/services/web-technical-hygiene/"
+          },
+          {
+            "@type": "Offer",
+            "name": "Full Review with Executive Report",
+            "priceCurrency": "USD",
+            "price": "999",
+            "description": "From $999 (one-time). When the result needs to be presentable to non-technical stakeholders without translation, with full evidence and a roadmap for the next month.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/en/services/web-technical-hygiene/"
+          },
+          {
+            "@type": "Offer",
+            "name": "Monthly Technical Web Support",
+            "priceCurrency": "USD",
+            "price": "279",
+            "description": "From $279/mo (per month). To maintain what was fixed and have external technical judgment reviewing the basics regularly.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/en/services/web-technical-hygiene/"
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this cybersecurity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It's a layer of web hygiene and basic hardening. It does not replace pentesting, compliance, or a deep security audit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a bad SecurityHeaders.com score mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It means some security headers expected by modern browsers are missing. It does not automatically mean the site is compromised."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you guarantee the site will be secure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Anyone serious should not promise total security. I can fix visible configurations, document improvements, and reduce reasonable oversights."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with WordPress?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, but the scope depends on hosting, plugins, available permissions, and the general state of the site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you work with static sites, Astro, Next, or similar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In many cases hardening is resolved in hosting, CDN, server rules, or framework headers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you need access to the site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For external diagnostic, not necessarily. For corrections, controlled access to hosting, CMS, repository, DNS, or the relevant provider is required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if you find something serious?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I report it with priority, propose a course of action, and if it exceeds the scope, I recommend escalating to a specialist or a deeper audit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the diagnostic finds nothing relevant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It can happen, especially with well-maintained sites. In that case the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The diagnostic fee applies regardless, but there are no surprises or additional charges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can the scope grow during the review?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The scope is defined by the contracted plan. If something beyond that scope appears during the review, it is documented in the report with a recommended next step — but not executed without prior agreement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are you less expensive than a local consultant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A US or EU technical consultant typically bills $100–150/hour. The Full Review at $999 is the equivalent of 7–10 hours — with an executive-ready report delivered, not just a call. All deliverables are in English."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are the prices different from the Spanish version?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Spanish-language version is calibrated for the Chilean and Latin American market: different currency, different purchasing power, and documentation delivered in Spanish. The international service is priced in USD, delivered entirely in English, and structured to meet the expectations of clients in the US, UK, and European markets — including executive-ready deliverables and formal documentation standards. The technical scope is equivalent; the context of delivery is not."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I hire you if I prefer to work in Spanish?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. If your site is in English and you need deliverables in English, the international rates apply regardless of your language preference. If you prefer Spanish documentation and local pricing, the Spanish version of this service is the right entry point — same technical scope, calibrated for that market."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tooltician",
+          "item": "https://tooltician.com/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://tooltician.com/en/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Web Technical Hygiene",
+          "item": "https://tooltician.com/en/services/web-technical-hygiene/"
+        }
+      ]
+    }
+  ]
+}

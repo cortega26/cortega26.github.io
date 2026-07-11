@@ -11,6 +11,7 @@
     "build": "node scripts/fetch-github-stats.js && astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "test:htw": "node test-htw-snapshot.mjs",
     "test:links": "node scripts/check-links-seo.js",
     "astro": "astro"
   },

@@ -1,0 +1,308 @@
+{
+  "title": "Mantención Técnica Web | Tooltician",
+  "canonical": "https://tooltician.com/es/servicios/higiene-tecnica-web/",
+  "headings": [
+    "Tu sitio funciona, pero nadie está cuidando lo técnico",
+    "Lo que no se mira, se vuelve invisible hasta que cuesta",
+    "Formulario que no avisa",
+    "Correos que caen en spam",
+    "Certificado o redirecciones descuidadas",
+    "Nadie mirando Search Console",
+    "Lo que suele pasar",
+    "La asimetría real",
+    "Elige según tu situación, no según una tabla",
+    "Solo quiero saber si hay algo mal",
+    "El sitio genera consultas o ventas",
+    "Nadie lo va a mirar después",
+    "Vengo de una alerta automática",
+    "Compra tranquilidad antes de comprar implementación",
+    "1 UF para saber qué corregir, qué ignorar y qué revisar después",
+    "Qué reviso cuando alguien tiene que mirar lo básico",
+    "No todo C es crisis",
+    "No todo hallazgo se corrige hoy",
+    "No todo acceso se pide de entrada",
+    "Seguridad de navegador y transporte",
+    "Correo, DNS e infraestructura",
+    "Contenido, formularios y operación continua",
+    "Sales con una decisión, no con una lista infinita",
+    "Lo que este servicio no promete",
+    "Registro ejecutivo de hallazgos",
+    "Resumen para dirección",
+    "Accesos y límites operativos",
+    "Tres decisiones, no cinco precios compitiendo",
+    "Diagnóstico Técnico Web",
+    "Hardening o Revisión Operativa",
+    "Soporte Técnico Web Mensual",
+    "Si el sitio influye en leads o reputación, la Integral suele ser la opción racional.",
+    "Detalle comparativo",
+    "Diagnóstico Técnico Web",
+    "Hardening Web Básico",
+    "Revisión y Hardening Operativo",
+    "Revisión Integral con Reporte Ejecutivo",
+    "Soporte Técnico Web Mensual",
+    "No es lo mismo que contratar a alguien en Workana o Fiverr",
+    "Dónde encaja mejor",
+    "Sitio WordPress de pyme",
+    "Agencia web",
+    "Empresa B2B",
+    "Profesional, consultora o e-commerce pequeño",
+    "Preguntas que conviene responder con precisión",
+    "Parte por saber qué pasa",
+    "Diagnóstico técnico web — 1 UF",
+    "Solicita tu diagnóstico"
+  ],
+  "links": [
+    "#brief",
+    "#diagnostico",
+    "#brief",
+    "#brief",
+    "#planes-detalle",
+    "#brief",
+    "#brief",
+    "https://securityheaders.com/?q=tooltician.com&followRedirects=on",
+    "https://github.com/cortega26/cortega26.github.io",
+    "https://github.com/cortega26/DNSpect",
+    "https://monedario.cl",
+    "https://elrincondeebano.com",
+    "/es/#portfolio",
+    "https://calendly.com/ciortega26",
+    "https://calendly.com/ciortega26",
+    "/es/privacy/",
+    "/es/cookies/"
+  ],
+  "formFields": [
+    "_subject",
+    "service",
+    "page",
+    "name",
+    "email",
+    "site_url",
+    "goal",
+    "budget",
+    "timeline",
+    "message"
+  ],
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Higiene Técnica Web y Confianza Digital",
+      "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/",
+      "description": "Mantención técnica web, hardening básico, monitoreo liviano y documentación para sitios publicados que no tienen equipo técnico interno.",
+      "serviceType": [
+        "Mantención técnica web",
+        "Hardening web básico",
+        "Revisión técnica de sitio web",
+        "Monitoreo web mensual"
+      ],
+      "areaServed": [
+        "CL",
+        "LATAM",
+        "US"
+      ],
+      "provider": {
+        "@type": "ProfessionalService",
+        "name": "Tooltician",
+        "url": "https://tooltician.com/es/",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressCountry": "CL"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Planes de higiene técnica y mantención web",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Diagnóstico Técnico Web",
+            "priceCurrency": "CLP",
+            "price": "41000",
+            "description": "1 UF (aprox. CLP $41.000). Para saber con certeza qué está técnicamente descuidado antes de pagar por correcciones.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
+          },
+          {
+            "@type": "Offer",
+            "name": "Hardening Web Básico",
+            "priceCurrency": "CLP",
+            "price": "284000",
+            "description": "Desde 7 UF (aprox. CLP $284.000). Para corregir lo evidente y dejar el sitio técnicamente más sobrio, con registro verificable para el administrador.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
+          },
+          {
+            "@type": "Offer",
+            "name": "Revisión y Hardening Operativo",
+            "priceCurrency": "CLP",
+            "price": "527000",
+            "description": "Desde 13 UF (aprox. CLP $527.000). Para sitios que necesitan hardening y revisión operativa completa, sin requerimiento de entregable para dirección.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
+          },
+          {
+            "@type": "Offer",
+            "name": "Revisión Integral con Reporte Ejecutivo",
+            "priceCurrency": "CLP",
+            "price": "608000",
+            "description": "Desde 15 UF (aprox. CLP $608.000). Para cuando el resultado debe poder mostrarse a perfiles no técnicos sin traducción, con evidencia completa y hoja de ruta para el mes siguiente.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
+          },
+          {
+            "@type": "Offer",
+            "name": "Soporte Técnico Web Mensual",
+            "priceCurrency": "CLP",
+            "price": "162000",
+            "description": "Desde 4 UF/mes (aprox. CLP $162.000/mes). Para mantener lo corregido y tener criterio técnico externo mirando lo básico con regularidad.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Esto es ciberseguridad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es una capa de higiene técnica y hardening web básico. No reemplaza pentesting, compliance ni una auditoría profunda."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué significa una mala nota en SecurityHeaders.com?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Significa que faltan algunos headers de seguridad esperados por navegadores modernos. No significa automáticamente que el sitio esté comprometido."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedes garantizar que el sitio será seguro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Nadie serio debería prometer seguridad total. Sí puedo corregir configuraciones visibles, documentar mejoras y reducir descuidos razonables."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Trabajas con WordPress?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, pero el alcance depende del hosting, plugins, permisos disponibles y del estado general del sitio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Trabajas con sitios estáticos, Astro, Next o similares?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. En muchos casos el hardening se resuelve en hosting, CDN, reglas del servidor o headers del framework."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesitas acceso al sitio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para diagnóstico externo, no necesariamente. Para corregir, sí se requiere acceso controlado al hosting, CMS, repositorio, DNS o proveedor correspondiente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si detectas algo grave?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lo informo con prioridad, propongo un curso de acción y, si excede el alcance, recomiendo derivar a un especialista o a una auditoría más profunda."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Por qué los precios están en UF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Porque esta versión está orientada al mercado chileno y la UF mantiene mejor el valor de referencia frente a la inflación: expresa el costo del servicio sin que fluctúe semana a semana. La cotización final se emite en CLP según el valor de la UF el día de la propuesta. Para clientes fuera de Chile, la propuesta se cotiza en USD o moneda acordada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si el diagnóstico no encuentra nada relevante?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puede ocurrir, especialmente en sitios bien mantenidos. En ese caso el reporte lo confirma con evidencia: saber que lo básico está bien también tiene valor, especialmente antes de cambiar hosting, proveedor o lanzar una campaña. El valor del diagnóstico aplica igual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El alcance puede crecer durante la revisión?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El alcance está definido por el plan contratado. Si durante la revisión aparece algo que excede ese alcance, queda documentado en el reporte con una recomendación de siguiente paso, pero no se ejecuta sin acuerdo previo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El precio es negociable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los valores están fijados en UF para mantener una referencia estable. Para agencias con varios sitios o proyectos de mayor volumen, es posible acordar condiciones distintas en la propuesta — escríbeme con el contexto y lo vemos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los precios son los mismos en todos los países?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Los planes en esta versión están cotizados en UF para el mercado chileno, con documentación en español adaptada a ese contexto. Para clientes fuera de Chile, la propuesta se emite en USD o moneda acordada, con ajuste de alcance según idioma de entrega, zona horaria y nivel de documentación requerido. La diferencia no es de calidad — es de contexto operativo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo contratar desde Argentina, México o España aunque vea la página en español?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. La versión en español está pensada para el mercado hispanohablante en general, no solo para Chile. La propuesta se puede adaptar a tu moneda, zona horaria y contexto específico. Escríbeme con el detalle y lo vemos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El servicio es igual al de la versión en inglés?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El nivel técnico aplicado es el mismo. Lo que difiere es el alcance del entregable: idioma de la documentación, estándar de presentación y calibración de precio al mercado local. No es una versión de menor calidad — es una versión diseñada para un contexto de operación distinto."
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Tooltician",
+          "item": "https://tooltician.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://tooltician.com/es/#services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Higiene Técnica Web",
+          "item": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
+        }
+      ]
+    }
+  ]
+}

@@ -1826,7 +1826,10 @@ const staticSites: ServiceDefinition = {
   },
 };
 
-export const services: Record<string, ServiceDefinition> = {
+export const services: Record<
+  'python-automation' | 'internal-tools' | 'financial-tooling' | 'static-sites',
+  ServiceDefinition
+> = {
   'python-automation': pythonAutomation,
   'internal-tools': internalTools,
   'financial-tooling': financialTooling,

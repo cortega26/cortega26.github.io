@@ -518,9 +518,10 @@ const enrichProjects = (projects: Project[], currentLang: 'en' | 'es'): Project[
 
     // Find and update star chip if it exists, otherwise prepend if stars > 0
     const starIndex = newEvidence.findIndex(chip => chip.type === 'star');
-    if (starIndex !== -1) {
+    const existingStarChip = newEvidence[starIndex];
+    if (starIndex !== -1 && existingStarChip) {
       newEvidence[starIndex] = {
-        ...newEvidence[starIndex],
+        ...existingStarChip,
         label: `★ ${stars}`
       };
     } else if (stars > 0) {
@@ -534,9 +535,10 @@ const enrichProjects = (projects: Project[], currentLang: 'en' | 'es'): Project[
 
     // Process forks chip: find if one exists, otherwise append if forks > 0
     const forkIndex = newEvidence.findIndex(chip => chip.type === 'fork');
-    if (forkIndex !== -1) {
+    const existingForkChip = newEvidence[forkIndex];
+    if (forkIndex !== -1 && existingForkChip) {
       newEvidence[forkIndex] = {
-        ...newEvidence[forkIndex],
+        ...existingForkChip,
         label: `${forks} fork${forks !== 1 ? 's' : ''}`
       };
     } else if (forks > 0) {

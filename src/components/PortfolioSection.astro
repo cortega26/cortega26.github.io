@@ -89,7 +89,7 @@ const projectsEN: Project[] = [
     tagType: 'accent',
     featured: true,
     evidence: [
-      { label: '★ 58', href: 'https://github.com/cortega26/chile-hub/stargazers', type: 'star' },
+      { label: '★ 58', href: 'https://github.com/cortega26/chile-hub', type: 'star' },
       { label: 'DuckDB + Parquet', type: 'metric' },
       { label: 'CI/CD Pipeline', type: 'ci' },
     ],
@@ -172,7 +172,7 @@ const projectsEN: Project[] = [
     filters: ['python', 'cli'],
     tagType: 'accent',
     evidence: [
-      { label: '★ 12', href: 'https://github.com/cortega26/rutificador/stargazers', type: 'star' },
+      { label: '★ 12', href: 'https://github.com/cortega26/rutificador', type: 'star' },
       { label: 'PyPI', href: 'https://pypi.org/project/rutificador/', type: 'pypi' },
       { label: 'CI ✓', href: 'https://github.com/cortega26/rutificador/actions', type: 'ci' },
       { label: 'CodeQL ✓', type: 'ci' },
@@ -209,7 +209,7 @@ const projectsEN: Project[] = [
     filters: ['python', 'data'],
     tagType: 'accent',
     evidence: [
-      { label: '★ 5', href: 'https://github.com/cortega26/polla/stargazers', type: 'star' },
+      { label: '★ 5', href: 'https://github.com/cortega26/polla', type: 'star' },
       { label: 'Production', type: 'live' },
     ],
     links: [
@@ -296,7 +296,7 @@ const projectsES: Project[] = [
     tagType: 'accent',
     featured: true,
     evidence: [
-      { label: '★ 58', href: 'https://github.com/cortega26/chile-hub/stargazers', type: 'star' },
+      { label: '★ 58', href: 'https://github.com/cortega26/chile-hub', type: 'star' },
       { label: 'DuckDB + Parquet', type: 'metric' },
       { label: 'Pipeline CI/CD', type: 'ci' },
     ],
@@ -379,7 +379,7 @@ const projectsES: Project[] = [
     filters: ['python', 'cli'],
     tagType: 'accent',
     evidence: [
-      { label: '★ 12', href: 'https://github.com/cortega26/rutificador/stargazers', type: 'star' },
+      { label: '★ 12', href: 'https://github.com/cortega26/rutificador', type: 'star' },
       { label: 'PyPI', href: 'https://pypi.org/project/rutificador/', type: 'pypi' },
       { label: 'CI ✓', href: 'https://github.com/cortega26/rutificador/actions', type: 'ci' },
       { label: 'CodeQL ✓', type: 'ci' },
@@ -416,7 +416,7 @@ const projectsES: Project[] = [
     filters: ['python', 'data'],
     tagType: 'accent',
     evidence: [
-      { label: '★ 5', href: 'https://github.com/cortega26/polla/stargazers', type: 'star' },
+      { label: '★ 5', href: 'https://github.com/cortega26/polla', type: 'star' },
       { label: 'Producción', type: 'live' },
     ],
     links: [
@@ -528,7 +528,7 @@ const enrichProjects = (projects: Project[], currentLang: 'en' | 'es'): Project[
       // Prepend star chip for this project
       newEvidence.unshift({
         label: `★ ${stars}`,
-        href: `https://github.com/cortega26/${repoName}/stargazers`,
+        href: `https://github.com/cortega26/${repoName}`,
         type: 'star'
       });
     }

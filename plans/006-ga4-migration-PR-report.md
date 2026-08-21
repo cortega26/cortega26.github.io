@@ -1,17 +1,17 @@
 # Plan 006 — Reporte de Implementación: Plausible → GA4 (G-2HK4GHK7GR) — Rev. Codex P1/P2
 
-**Fecha:** 2026-08-21 (rev. 88f020a → HEAD actualizado con fixes Codex)  
+**Fecha:** 2026-08-21 (rev. 88f020a → 5f2f72b fixes Codex P1/P2 aplicados)  
 **Plan:** `plans/006-plausible-to-ga4-migration.md` (inline bootstrap aprobado, `tt_*`, sin `dataLayer.push`, `cookie_expires: 60*60*24*395`)  
-**Estado:** Branch `feat/ga4-migration` actualizado, fixes P1 (deploy.yml vars + validación) y P2 (`cookie_expires` 395d) aplicados. **No se modificó Cloudflare. No se mergeó.** Esperando re-review Codex.
+**Estado:** Branch `feat/ga4-migration` actualizado a `5f2f72b`, fixes P1 (deploy.yml vars + validación) y P2 (`cookie_expires` 395d) aplicados, gates pass, HTML verificado. **No se modificó Cloudflare. No se mergeó.** Esperando re-review Codex.
 
 ## PR
 
 - **URL:** https://github.com/cortega26/cortega26.github.io/pull/66
 - **Branch:** `feat/ga4-migration` → `master`
 - **Base:** `bf90ea4` (origin/master)
-- **HEAD anterior:** `88f020a5bca667c7bdd4f60d074df327dcc99ebb`
-- **HEAD nuevo:** (ver `git rev-parse HEAD` tras push, ej. `b7f...` — se actualiza en PR)
-- **.env:** `PUBLIC_GA4_MEASUREMENT_ID=G-2HK4GHK7GR` (gitignored, local `/home/carlos/VS_Code_Projects/platform/tooltician-site/.env`; para CI usar `vars.PUBLIC_GA4_MEASUREMENT_ID`)
+- **HEAD anterior:** `88f020a5bca667c7bdd4f60d074df327dcc99ebb` (feat GA4 inicial)
+- **HEAD actual:** `5f2f72bb99ef23fd8b05bba21bc87d027d8df059` (fix P1/P2 — GA4 vars + cookie_expires 395d, CSP hash 4IyZhVv...)
+- **.env:** `PUBLIC_GA4_MEASUREMENT_ID=G-2HK4GHK7GR` (gitignored, local presente; CI usa `vars.PUBLIC_GA4_MEASUREMENT_ID`)
 
 ## Issues Codex y fixes
 

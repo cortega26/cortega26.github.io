@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-21 — Plan 006: GA4 migration (G-2HK4GHK7GR)
+
+### Added
+- GA4 direct (`gtag.js`, `G-2HK4GHK7GR`) in `src/layouts/BaseLayout.astro`:
+  synchronous inline bootstrap (`window.dataLayer`/`window.gtag`/`gtag('js')`/`gtag('config')` via `define:vars={{ga4Id}}` from `PUBLIC_GA4_MEASUREMENT_ID`) **before** async `https://www.googletagmanager.com/gtag/js`. Retains Ahrefs (`analytics.ahrefs.com`) 30–60d. CSP updated with `sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=` and GA4 hosts (`googletagmanager.com`, `google-analytics.com`, `region1`). `track.js` now maps `ttTrack({location,label,status})` → `gtag('event', name, {tt_location, tt_label, tt_status})` with no `dataLayer.push` duplication. Privacy/Cookie docs updated for GA4 cookies `_ga/_ga_*` (14 months). See `plans/006-plausible-to-ga4-migration.md` and `docs/cloudflare-security-headers.md`.
+
+### Removed
+- Plausible (`https://plausible.io`) stub and script removed from `BaseLayout.astro`; `track.js` no longer forwards to `window.plausible`; docs updated. Cloudflare CSP no longer allows `plausible.io` (remove after GA4 validation).
+
+### Pending (manual, outside the repo)
+- Set `PUBLIC_GA4_MEASUREMENT_ID=G-2HK4GHK7GR` in CI/build env (`.env` already present locally, gitignored). Until Cloudflare CSP (§5 with new `sha256-`) is applied, GA4 inline stub is blocked in production.
+- GA4: create custom dimensions `tt_location`, `tt_label`, `tt_status` (event-scoped) and mark `cta_book_call`/`form_submit_success` as conversions.
+- `TS-002`: confirmed the sitemap (`astro.config.mjs`) needed no code changes — `https://tooltician.com/sitemap-index.xml` already covers `en`/`es` alternates correctly. Verifying domain ownership in Google Search Console (DNS TXT record) and submitting the sitemap are manual steps in the user's DNS/Google account, outside the repo.
+
 ## 2026-06-30
 
 ### Added
@@ -7,13 +21,13 @@
   the `https://plausible.io/js/script.js` snippet with `data-domain="tooltician.com"`
   plus a queue stub so `track.js`'s existing `window.plausible` forwarding
   (no-op until now) starts reaching a real panel. `TS-001` in
-  `docs/tasks/tooltician-strategy-execution-plan.md`.
+  `docs/tasks/tooltician-strategy-execution-plan.md`. **Superseded 2026-08-21 by GA4 (Plan 006).**
 
 ### Pending (manual, outside the repo)
-- Create/verify the `tooltician.com` site at plausible.io.
+- Create/verify the `tooltician.com` site at plausible.io. **Cancelled — migrated to GA4.**
 - Apply the updated Cloudflare CSP (`docs/cloudflare-security-headers.md`
   now allows `https://plausible.io` in `script-src`/`connect-src`) — until
-  this is set in Cloudflare, the script is blocked in production.
+  this is set in Cloudflare, the script is blocked in production. **Replaced by GA4 CSP (§5 with sha256).**
 - `TS-002`: confirmed the sitemap (`astro.config.mjs`) needed no code
   changes — `https://tooltician.com/sitemap-index.xml` already covers
   `en`/`es` alternates correctly. Verifying domain ownership in Google

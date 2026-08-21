@@ -29,7 +29,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       intro:
         'This page explains what this site collects, why it is collected, and which third-party services are involved when you contact me or schedule a call.',
       updatedLabel: 'Last updated',
-      updatedAt: '27 May 2026',
+      updatedAt: '21 Aug 2026',
       sections: [
         {
           heading: 'What this site collects',
@@ -41,7 +41,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
             'Project brief form: name, email address, and the message you submit through Formspree.',
             'Scheduling: the information you provide directly to Calendly when booking an intro call.',
             'Language preference: the selected site language stored in local browser storage so the site can remember your choice.',
-            'Basic usage analytics: Ahrefs Analytics may receive page-view and browser metadata needed for aggregate traffic reporting.',
+            'Basic usage analytics: Google Analytics 4 (gtag.js, G-2HK4GHK7GR, cookie_expires: 60*60*24*395 = 34128000s ≈395 days) and Ahrefs Analytics may receive page-view, event (tt_location/tt_label/tt_status), and browser metadata for aggregate traffic reporting. GA4 sets cookies _ga/_ga_* (395 days, see Cookie Notice).',
           ],
         },
         {
@@ -62,7 +62,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         {
           heading: 'Third-party services involved',
           paragraphs: [
-            'Form submissions are delivered by Formspree, meeting scheduling is handled by Calendly, and site analytics are measured with Ahrefs Analytics.',
+            'Form submissions are delivered by Formspree, meeting scheduling is handled by Calendly, and site analytics are measured with Google Analytics 4 (primary, event-level, G-2HK4GHK7GR) and Ahrefs Analytics (pageviews, retained 30–60d).',
             'Those providers process information according to their own terms and privacy commitments when you use their services through this site.',
           ],
         },
@@ -85,7 +85,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       intro:
         'Esta página explica qué recopila este sitio, por qué se recopila y qué servicios de terceros intervienen cuando contactas o agendas una llamada.',
       updatedLabel: 'Última actualización',
-      updatedAt: '27 de mayo de 2026',
+      updatedAt: '21 de agosto de 2026',
       sections: [
         {
           heading: 'Qué recopila este sitio',
@@ -97,7 +97,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
             'Formulario de brief: nombre, correo y el mensaje que envías a través de Formspree.',
             'Agenda: la información que entregas directamente a Calendly al reservar una llamada inicial.',
             'Preferencia de idioma: el idioma elegido se guarda en el almacenamiento local del navegador para recordar tu elección.',
-            'Analítica básica de uso: Ahrefs Analytics puede recibir vistas de página y metadatos del navegador para reportes agregados de tráfico.',
+            'Analítica básica de uso: Google Analytics 4 (gtag.js, G-2HK4GHK7GR, cookie_expires: 60*60*24*395 = 34128000s ≈395 días) y Ahrefs Analytics pueden recibir vistas de página, eventos (tt_location/tt_label/tt_status) y metadatos del navegador para reportes agregados. GA4 usa cookies _ga/_ga_* (395 días, ver Aviso de Cookies).',
           ],
         },
         {
@@ -118,7 +118,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         {
           heading: 'Servicios de terceros involucrados',
           paragraphs: [
-            'Los formularios se entregan con Formspree, la agenda se gestiona con Calendly y la analítica del sitio se mide con Ahrefs Analytics.',
+            'Los formularios se entregan con Formspree, la agenda se gestiona con Calendly y la analítica del sitio se mide con Google Analytics 4 (principal, a nivel de evento, G-2HK4GHK7GR) y Ahrefs Analytics (vistas de página, retención 30–60d).',
             'Esos proveedores procesan información según sus propios términos y compromisos de privacidad cuando usas sus servicios desde este sitio.',
           ],
         },
@@ -143,7 +143,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       intro:
         'This site keeps browser storage to a minimum, but some local preferences and third-party services still rely on technical storage to work correctly.',
       updatedLabel: 'Last updated',
-      updatedAt: '17 May 2026',
+      updatedAt: '21 Aug 2026',
       sections: [
         {
           heading: 'What is used directly on this site',
@@ -155,7 +155,8 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         {
           heading: 'Third-party storage',
           paragraphs: [
-            'Calendly, Formspree, Ahrefs Analytics, and infrastructure providers may set or access technical browser storage when their services load or when you interact with them.',
+            'Google Analytics 4 (gtag.js, G-2HK4GHK7GR, cookie_expires: 60*60*24*395 = 34128000s ≈395 days) sets cookies _ga and _ga_* (395 days, ~13 months) to measure pageviews and events (tt_location/tt_label/tt_status). API only supports seconds, so months are expressed as deterministic days (395). IP anonymization is enabled by default and Google Signals is off.',
+            'Calendly, Formspree, Ahrefs Analytics (pageviews, retained 30–60d), and infrastructure providers may set or access technical browser storage when their services load or when you interact with them.',
             'Those mechanisms are controlled by the providers that run the service, not by a custom cookie system built into this site.',
           ],
         },
@@ -178,7 +179,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       intro:
         'Este sitio mantiene el almacenamiento del navegador al mínimo, pero algunas preferencias locales y servicios de terceros dependen de almacenamiento técnico para funcionar bien.',
       updatedLabel: 'Última actualización',
-      updatedAt: '17 de mayo de 2026',
+      updatedAt: '21 de agosto de 2026',
       sections: [
         {
           heading: 'Qué usa directamente este sitio',
@@ -190,7 +191,8 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         {
           heading: 'Almacenamiento de terceros',
           paragraphs: [
-            'Calendly, Formspree, Ahrefs Analytics y proveedores de infraestructura pueden definir o leer almacenamiento técnico del navegador cuando sus servicios cargan o cuando interactúas con ellos.',
+            'Google Analytics 4 (gtag.js, G-2HK4GHK7GR, cookie_expires: 60*60*24*395 = 34128000s ≈395 días) fija cookies _ga y _ga_* (395 días, ~13 meses) para medir vistas de página y eventos (tt_location/tt_label/tt_status). La API solo soporta segundos, por lo que los meses se expresan como días deterministas (395). La anonimización de IP está activa por defecto y Google Signals está desactivado.',
+            'Calendly, Formspree, Ahrefs Analytics (vistas de página, retención 30–60d) y proveedores de infraestructura pueden definir o leer almacenamiento técnico del navegador cuando sus servicios cargan o cuando interactúas con ellos.',
             'Esos mecanismos son controlados por los proveedores que operan el servicio, no por un sistema de cookies personalizado construido en este sitio.',
           ],
         },

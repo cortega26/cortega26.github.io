@@ -24,6 +24,8 @@ const {
   robots = 'index, follow',
   alternates = defaultAlternates,
 } = Astro.props;
+
+const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -80,6 +82,12 @@ const {
 
   <!-- Third-party preconnects -->
   <link rel="preconnect" href="https://formspree.io" />
+  {ga4Id && (
+    <>
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="preconnect" href="https://www.google-analytics.com" />
+    </>
+  )}
 
   <slot name="head" />
 </head>
@@ -95,15 +103,25 @@ const {
     </svg>
   </button>
 
+  <!-- GA4 (gtag.js direct — inline stub síncrono ANTES de async gtag.js, Plan 006) -->
+  <!-- cookie_expires: 60*60*24*395 = 34128000s = 395 días ≈13 meses (API solo soporta segundos, sin precisión calendárica) -->
+  {ga4Id && (
+    <script is:inline define:vars={{ ga4Id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', ga4Id, { send_page_view: true, cookie_expires: 60 * 60 * 24 * 395 });
+    </script>
+  )}
+  {ga4Id && (
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+  )}
+
   <script is:inline src="/assets/js/site-layout.js" defer></script>
   <script is:inline src="/assets/js/track.js" defer></script>
 
-  <!-- Analytics (after main content — async, non-blocking) -->
+  <!-- Ahrefs Analytics (pageviews only, retained 30–60d per Plan 006) -->
   <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="uU7HA5yyjlR9jxjk2RvjzA" async integrity="sha384-W1wjYK8T9Gz7xq6XpVAitAMIbyk3r/jlMxGQAdL3M058ajAAUoV9TVg2+zPMr3jR" crossorigin="anonymous"></script>
-
-  <!-- Plausible (cookieless event analytics — track.js forwards data-track events to window.plausible) -->
-  <!-- TODO(TS-001): pending manual step — create/verify the tooltician.com site at plausible.io and allow https://plausible.io in the Cloudflare CSP (script-src, connect-src). See docs/cloudflare-security-headers.md. -->
-  <script is:inline>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
-  <script is:inline defer data-domain="tooltician.com" src="https://plausible.io/js/script.js"></script>
 </body>
 </html>

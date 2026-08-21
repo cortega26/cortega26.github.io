@@ -2,7 +2,7 @@
 
 > **Estado:** `INSPECCIÓN READ-ONLY COMPLETADA — 2026-08-21` / `CORREGIDO 2026-08-21 (bootstrap+env)` / `AJUSTE FINAL 2026-08-21 (tt_status, sin dataLayer.push, CSP hash inline)` — Sin cambios en código/CSP/GA4. Esperando `G-XXXXXXXXXX` para PR.
 > **Objetivo:** Usar GA4 estándar como analytics principal de `tooltician.com`, integración directa `gtag.js`, sin GTM salvo necesidad documentada. Preservar contrato `window.ttTrack` y CSP de `chile-hub`.
-> **Decisiones aprobadas:** GA4 directo sin GTM · `window.ttTrack` abstraction boundary · conservar Ahrefs 30–60d · retirar Plausible tras validar GA4 · CSP §5 unificada con `sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=` inline (G-2HK4GHK7GR) · mapping `location→tt_location`, `label→tt_label`, `status→tt_status` · sin `dataLayer.push` adicional (solo `gtag('event')`) · preservar íntegramente requisitos `chile-hub`.
+> **Decisiones aprobadas:** GA4 directo sin GTM · `window.ttTrack` abstraction boundary · conservar Ahrefs 30–60d · retirar Plausible tras validar GA4 · CSP §5 unificada con `sha256-4IyZhVv+RWju+1/qJEKCsZqtEjlfkQeg7lwN85qT6Y8=` inline (G-2HK4GHK7GR, `cookie_expires: 60*60*24*395`) · mapping `location→tt_location`, `label→tt_label`, `status→tt_status` · sin `dataLayer.push` adicional (solo `gtag('event')`) · preservar íntegramente requisitos `chile-hub`.
 > **No tocar hasta Measurement ID:** Cloudflare, GA4, merge.
 
 ## 1. Inspección READ-ONLY
@@ -177,8 +177,8 @@ src/layouts/BaseLayout.astro (procesado por Astro)
        function gtag(){dataLayer.push(arguments);}
        window.gtag = gtag;
        gtag('js', new Date());
-       if (ga4Id) gtag('config', ga4Id, { send_page_view: true });
-     </script>  // ← SHA-256 incorporado a CSP §5
+       if (ga4Id) gtag('config', ga4Id, { send_page_view: true, cookie_expires: 60 * 60 * 24 * 395 });
+      </script>  // ← SHA-256 4IyZhVv... incorporado a CSP §5 (395d = 34128000s)
   2) <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXX"></script> // async DESPUÉS
                                ^
                     https://www.google-analytics.com/g/collect
@@ -259,13 +259,14 @@ No tocar: `public/assets/js/intake-form.js`, `src/components/*` (contrato intact
 +        function gtag(){dataLayer.push(arguments);}
 +        window.gtag = gtag;
 +        gtag('js', new Date());
-+        gtag('config', ga4Id, { send_page_view: true });
++        gtag('config', ga4Id, { send_page_view: true, cookie_expires: 60 * 60 * 24 * 395 });
 +      </script>
++      <!-- cookie_expires 60*60*24*395 = 34128000s = 395d ≈13 meses (API solo soporta segundos) -->
 +      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
 +    </>
 +  )}
-   <script is:inline src="/assets/js/site-layout.js" defer></script>
-   <script is:inline src="/assets/js/track.js" defer></script>
+    <script is:inline src="/assets/js/site-layout.js" defer></script>
+    <script is:inline src="/assets/js/track.js" defer></script>
 
 --- public/assets/js/ga4.js  (v1, eliminado)
 - window.dataLayer = window.dataLayer || [];
@@ -279,7 +280,7 @@ No tocar: `public/assets/js/intake-form.js`, `src/components/*` (contrato intact
 + Content-Security-Policy: <CSP unificada exacta §5>  (+ sha256 del inline stub si se usa inline)
 ```
 
-**Nota CSP hash (aprobado inline, G-2HK4GHK7GR):** Inline stub `sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=` verificado tras `astro build` con `G-2HK4GHK7GR` (`dist/en/index.html` inline `(function(){const ga4Id = "G-2HK4GHK7GR";...})();`). Ya incorporado en CSP §5. Si `G-XXX` cambia, recalcular.
+**Nota CSP hash (aprobado inline, G-2HK4GHK7GR, 2026-08-21 fix P2):** Inline stub `sha256-4IyZhVv+RWju+1/qJEKCsZqtEjlfkQeg7lwN85qT6Y8=` verificado tras `astro build` con `G-2HK4GHK7GR` + `cookie_expires: 60*60*24*395` (`dist/en/index.html` inline `(function(){const ga4Id = "G-2HK4GHK7GR";... gtag('config',ga4Id,{send_page_view:true, cookie_expires: 60*60*24*395})})();`). Ya incorporado en CSP §5. Hash anterior `sha256-BZJxfeK...` era sin `cookie_expires`. Si `G-XXX` o `cookie_expires` cambia, recalcular.
 
 ---
 
@@ -289,9 +290,9 @@ No tocar: `public/assets/js/intake-form.js`, `src/components/*` (contrato intact
 
 **Unificada aprobada (con inline bootstrap síncrono):**
 ```
-default-src 'self'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'wasm-unsafe-eval' 'sha256-TmHOajS6t5/QY5KaUTImfqGzR2lm8kRkwsvdwdyyJ2k=' 'sha256-Jg+1a9BpA31iySvZGcqQpUpwXgkkS/6nQZErUKX8Es=' 'sha256-AgdfQ26gNc5sf5Njp+l68xeI3QwSHUs5YBMqXmFAwUo=' 'sha256-R+ThK1ExJbsszqXj3FZbVZ15e9+xFQeukNF1TYuHXp8=' 'sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=' https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' blob: https://gc.zgo.at https://formspree.io https://extensions.duckdb.org https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://analytics.ahrefs.com; manifest-src 'self'; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests
+default-src 'self'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'wasm-unsafe-eval' 'sha256-TmHOajS6t5/QY5KaUTImfqGzR2lm8kRkwsvdwdyyJ2k=' 'sha256-Jg+1a9BpA31iySvZGcqQpUpwXgkkS/6nQZErUKX8Es=' 'sha256-AgdfQ26gNc5sf5Njp+l68xeI3QwSHUs5YBMqXmFAwUo=' 'sha256-R+ThK1ExJbsszqXj3FZbVZ15e9+xFQeukNF1TYuHXp8=' 'sha256-4IyZhVv+RWju+1/qJEKCsZqtEjlfkQeg7lwN85qT6Y8=' https://gc.zgo.at https://www.googletagmanager.com https://www.google-analytics.com https://analytics.ahrefs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' blob: https://gc.zgo.at https://formspree.io https://extensions.duckdb.org https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://analytics.ahrefs.com; manifest-src 'self'; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests
 ```
-> `sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=` = hash del inline stub síncrono `window.dataLayer/gtag/js/config` con `ga4Id="G-2HK4GHK7GR"` (ver §4). **Incorporado en esta CSP unificada** (inline bootstrap aprobado, verificado en `dist/en/index.html`, `dist/es/index.html`, `dist/en/privacy/index.html` — todos idéntico). Sin este hash, el stub sería bloqueado por `script-src` (no hay `unsafe-inline`).
+> `sha256-4IyZhVv+RWju+1/qJEKCsZqtEjlfkQeg7lwN85qT6Y8=` = hash del inline stub síncrono `window.dataLayer/gtag/js/config` con `ga4Id="G-2HK4GHK7GR"` + `cookie_expires: 60*60*24*395` (ver §4, `34128000s = 395d ≈13 meses`; API solo soporta segundos, sin precisión calendárica). **Incorporado en esta CSP unificada** (inline bootstrap aprobado, verificado en `dist/en/index.html`, `dist/es/index.html`, `dist/en/privacy/index.html` — todos idéntico). Hash anterior `sha256-BZJxfeK...` era sin `cookie_expires`. Sin este hash, el stub sería bloqueado por `script-src` (no hay `unsafe-inline`).
 
 - Quita `https://plausible.io` intencionalmente (retiro tras validar GA4 30–60d).
 - Si eliminas Ahrefs tras 30–60d, quita `https://analytics.ahrefs.com` de `script-src` y `connect-src`.
@@ -300,7 +301,7 @@ default-src 'self'; base-uri 'self'; form-action 'self' https://formspree.io; fr
 Verificar:
 ```bash
 curl -sSI https://tooltician.com | grep -i content-security-policy
-# debe contener googletagmanager.com + google-analytics.com + region1.google-analytics.com + sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=, sin plausible.io, con 4 sha256 chile-hub + 1 bootstrap y gc.zgo.at
+# debe contener googletagmanager.com + google-analytics.com + region1.google-analytics.com + sha256-4IyZhVv+RWju+1/qJEKCsZqtEjlfkQeg7lwN85qT6Y8=, sin plausible.io, con 4 sha256 chile-hub + 1 bootstrap (cookie_expires 395d) y gc.zgo.at
 ```
 
 ---
@@ -388,7 +389,7 @@ curl -sSI https://tooltician.com | grep -i CSP
 ## 12. Checklist pre-PR (no implementar hasta tu OK)
 
 - [x] Orden bootstrap §2 (stub síncrono → async) aprobado
-- [x] CSP §5 unificada aprobada con `sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=` (G-2HK4GHK7GR) incorporado
+- [x] CSP §5 unificada aprobada con `sha256-4IyZhVv+RWju+1/qJEKCsZqtEjlfkQeg7lwN85qT6Y8=` (G-2HK4GHK7GR, cookie_expires 395d) incorporado
 - [x] Mapping `location→tt_location`, `label→tt_label`, `status→tt_status` (§1.7) aprobado
 - [x] Sin `dataLayer.push` adicional — solo `gtag('event')` (cola oficial `function gtag(){dataLayer.push(arguments)}`) aprobado
 - [x] Retiro Plausible después de validar GA4 (30–60d con Ahrefs) aprobado

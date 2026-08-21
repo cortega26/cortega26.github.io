@@ -104,13 +104,14 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
   </button>
 
   <!-- GA4 (gtag.js direct — inline stub síncrono ANTES de async gtag.js, Plan 006) -->
+  <!-- cookie_expires: 60*60*24*395 = 34128000s = 395 días ≈13 meses (API solo soporta segundos, sin precisión calendárica) -->
   {ga4Id && (
     <script is:inline define:vars={{ ga4Id }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       window.gtag = gtag;
       gtag('js', new Date());
-      gtag('config', ga4Id, { send_page_view: true });
+      gtag('config', ga4Id, { send_page_view: true, cookie_expires: 60 * 60 * 24 * 395 });
     </script>
   )}
   {ga4Id && (

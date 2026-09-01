@@ -34,6 +34,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="canonical" href={canonical} />
   <meta name="robots" content={robots} />
   {alternates.map((alternate) => (
@@ -93,7 +94,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
 </head>
 <body>
   <div id="scroll-progress" aria-hidden="true"></div>
-  <a class="skip-link" href="#main">Skip to main content</a>
+  <a class="skip-link" href="#main">{lang === 'en' ? 'Skip to main content' : 'Saltar al contenido principal'}</a>
 
   <slot />
 
@@ -121,7 +122,5 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
   <script is:inline src="/assets/js/site-layout.js" defer></script>
   <script is:inline src="/assets/js/track.js" defer></script>
 
-  <!-- Ahrefs Analytics (pageviews only, retained 30–60d per Plan 006) -->
-  <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="uU7HA5yyjlR9jxjk2RvjzA" async integrity="sha384-W1wjYK8T9Gz7xq6XpVAitAMIbyk3r/jlMxGQAdL3M058ajAAUoV9TVg2+zPMr3jR" crossorigin="anonymous"></script>
 </body>
 </html>

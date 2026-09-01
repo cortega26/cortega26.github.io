@@ -1,4 +1,6 @@
 ---
+import { pricing } from '../data/pricing';
+
 interface Props {
   lang: 'en' | 'es';
 }
@@ -17,11 +19,11 @@ const en = {
   ],
   disclaimer: 'No alarmism. No promises of total security. Just clear technical review, verifiable fixes, and a before/after report.',
   priceEyebrow: 'Diagnostic',
-  price: '$69',
+  price: pricing.webHygiene.en.diagnostic,
   priceSub: 'one-time',
   priceNote: 'Applied as a credit toward any implementation plan.',
   monthlyEyebrow: 'Monthly support',
-  monthlyPrice: 'from $279/mo',
+  monthlyPrice: `from ${pricing.webHygiene.en.retainer}`,
   monthlySub: '',
   monthlyNote: 'Lightweight monitoring, periodic reviews, and small fixes — no internal hire needed.',
   ctaFull: 'View the full service',
@@ -42,12 +44,12 @@ const es = {
   ],
   disclaimer: 'Sin alarmismo. Sin promesas de seguridad total. Solo revisión técnica clara, correcciones verificables y evidencia antes/después.',
   priceEyebrow: 'Entrada',
-  price: '1 UF',
-  priceSub: 'aprox. CLP $41.000',
+  price: pricing.webHygiene.es.diagnostic,
+  priceSub: 'pago único',
   priceNote: 'Diagnóstico inicial descontable si contratas implementación.',
   monthlyEyebrow: 'Soporte mensual',
-  monthlyPrice: 'desde 4 UF/mes',
-  monthlySub: 'aprox. CLP $162.000/mes',
+  monthlyPrice: `desde ${pricing.webHygiene.es.retainer}`,
+  monthlySub: 'mensual',
   monthlyNote: 'Monitoreo liviano, revisiones periódicas y pequeñas correcciones sin incorporar un perfil interno.',
   ctaFull: 'Ver el servicio completo',
   ctaBrief: 'Solicitar diagnóstico',

@@ -1,4 +1,6 @@
 ---
+import { pricing } from '../data/pricing';
+
 // Reusable qualifying intake form (Formspree backend).
 // Replaces the previous mailto / generic-form split with one low-friction,
 // lead-qualifying form usable on the home page and on service landings.
@@ -37,13 +39,13 @@ const en = {
   urlPh: { general: 'https:// (if there is one)', htw: 'https://yoursite.com' },
   goalLabel: 'What do you need?',
   goalOptions: {
-    general: ['Automate a report or workflow', 'Data cleanup / ETL', 'Scraping / recurring collection', 'Internal tool', 'Web technical hygiene', 'Other'],
+    general: ['Python automation & data pipelines', 'Recurring data collection', 'Internal tools & APIs', 'Financial & audit systems', 'Static sites & focused front ends', 'Web technical hygiene', 'Other'],
     htw: ['Diagnose a live site', 'Monthly technical support', 'Agency / external support', 'Implement fixes', 'Other'],
   },
   budgetLabel: 'Budget band (optional)',
   budgetOptions: {
     general: ['Still defining', 'Under $1,000', '$1,000–$3,000', '$3,000–$8,000', '$8,000+'],
-    htw: ['Still defining', 'Diagnostic ($69)', 'Implementation (from $499)', 'Monthly support (from $279/mo)'],
+    htw: ['Still defining', `Diagnostic (${pricing.webHygiene.en.diagnostic})`, `Implementation (from ${pricing.webHygiene.en.essentials})`, `Monthly support (from ${pricing.webHygiene.en.retainer})`],
   },
   timelineLabel: 'Timeline (optional)',
   timelineOptions: ['As soon as possible', '2–4 weeks', '1–2 months', 'Exploring / no rush'],
@@ -81,13 +83,13 @@ const es = {
   urlPh: { general: 'https:// (si existe)', htw: 'https://tusitio.com' },
   goalLabel: '¿Qué necesitas?',
   goalOptions: {
-    general: ['Automatizar un reporte o flujo', 'Limpieza de datos / ETL', 'Scraping / recolección recurrente', 'Herramienta interna', 'Higiene técnica web', 'Otro'],
+    general: ['Automatización Python y pipelines de datos', 'Recolección recurrente de datos', 'Herramientas internas y APIs', 'Sistemas financieros y de auditoría', 'Sitios estáticos y frontends acotados', 'Higiene técnica web', 'Otro'],
     htw: ['Diagnosticar un sitio publicado', 'Soporte técnico mensual', 'Soy agencia / soporte externo', 'Implementar correcciones', 'Otro'],
   },
   budgetLabel: 'Banda de presupuesto (opcional)',
   budgetOptions: {
-    general: ['Por definir', 'Menos de $1.000', '$1.000–$3.000', '$3.000–$8.000', '$8.000+'],
-    htw: ['Por definir', 'Diagnóstico (1 UF)', 'Implementación (desde 13 UF)', 'Soporte mensual (desde 4 UF/mes)'],
+    general: ['Por definir', 'Menos de 15 UF', '15–40 UF', '40–80 UF', '80+ UF'],
+    htw: ['Por definir', `Diagnóstico (${pricing.webHygiene.es.diagnostic})`, `Implementación (desde ${pricing.webHygiene.es.operational})`, `Soporte mensual (desde ${pricing.webHygiene.es.retainer})`],
   },
   timelineLabel: 'Plazo (opcional)',
   timelineOptions: ['Lo antes posible', '2–4 semanas', '1–2 meses', 'Explorando / sin apuro'],

@@ -9,7 +9,7 @@ const { lang } = Astro.props;
 
 const en = {
   label: 'Verifiable results',
-  caption: 'Not testimonials yet — measurable facts you can check right now.',
+  caption: 'Measurable signals you can check before deciding whether the work fits.',
   stats: [
     { value: '0', unit: 'outages', detail: 'live store, 14 months in production', href: 'https://elrincondeebano.com' },
     { value: '100+', unit: 'SKUs', detail: 'daily orders handled without an internal team' },
@@ -21,7 +21,7 @@ const en = {
 
 const es = {
   label: 'Resultados verificables',
-  caption: 'Aún no hay testimonios — hechos medibles que puedes comprobar ahora mismo.',
+  caption: 'Señales medibles que puedes comprobar antes de decidir si el trabajo encaja.',
   stats: [
     { value: '0', unit: 'caídas', detail: 'tienda en producción, 14 meses activos', href: 'https://elrincondeebano.com' },
     { value: '100+', unit: 'SKUs', detail: 'pedidos diarios gestionados sin equipo interno' },
@@ -33,7 +33,7 @@ const es = {
 
 const c = lang === 'en' ? en : es;
 ---
-<section class="results-band" aria-label={c.label}>
+<section class="results-band" id="proof" aria-label={c.label}>
   <div class="container">
     <div class="results-band__inner reveal">
       <p class="results-band__label">{c.label}</p>

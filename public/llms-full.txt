@@ -31,7 +31,7 @@ All software, scripts, and sites delivered by Tooltician must meet strict qualit
 
 ## 3. Service Detail Breakdown
 
-Tooltician offers five distinct service lines, priced in USD (for English-language delivery internationally) or UF (Unidades de Fomento, for Spanish-language delivery in Chile/LATAM).
+Tooltician offers six distinct service lines, priced in USD (for English-language delivery internationally) or UF (Unidades de Fomento, for Spanish-language delivery in Chile/LATAM).
 
 ### Service 1: Python Automation & Data Pipelines
 *Robust, automated workflows that replace manual data entry and fragile, undocumented scripts.*
@@ -44,7 +44,15 @@ Tooltician offers five distinct service lines, priced in USD (for English-langua
   - **Multi-Source Data System (Flujo Multi-Fuente):** From $3,200 / Desde 60 UF (one-time). Comprehensive multi-input ETL system with error states.
   - **Stabilization Retainer (Soporte Mensual):** From $290/mo / Desde 6 UF/mes. Priority updates for schema changes or third-party API breakages.
 
-### Service 2: Internal Tools & APIs
+### Service 2: Recurring Data Collection
+*Lawful, repeatable acquisition from public or explicitly authorized sources, built to fail visibly instead of publishing partial data silently.*
+- **Ideal Fit:** Teams whose reporting, operations, analysis, or publishing depend on a recurring external source.
+- **Key Deliverables:** Scheduled collectors, schema and record-count validation, logs, alerts, structured outputs, and a repair-oriented runbook.
+- **Hard Boundaries:** No bypassing logins, paywalls, CAPTCHAs, rate limits, robots policies, or other access controls; no covert personal-data enrichment or one-off lead harvesting.
+- **Pricing & Tiers:** Uses the Python automation pricing ladder: $290 / 3 UF scoping, builds from $1,500 / 30 UF, and optional stabilization from $290/mo / 6 UF/mes.
+- **Pages:** https://tooltician.com/en/services/recurring-data-collection/ and https://tooltician.com/es/servicios/recoleccion-recurrente-datos/
+
+### Service 3: Internal Tools & APIs
 *Turning single-person terminal scripts or tribal knowledge into maintainable, team-accessible CLI tools and internal APIs.*
 - **Ideal Fit:** Companies whose workflows depend on a single laptop, founders looking for reliable tools for their staff, or teams experiencing data contamination from manual tools.
 - **Key Deliverables:** FastAPI-based backend applications, command-line interfaces (CLIs), input validation layers, and team-ready tool documentation.
@@ -55,7 +63,7 @@ Tooltician offers five distinct service lines, priced in USD (for English-langua
   - **Team Platform (Plataforma de Equipo):** From $3,600 / Desde 70 UF (one-time). Multi-role API or CLI system integrating multiple databases or files.
   - **Stabilization Retainer (Soporte Mensual):** From $290/mo / Desde 6 UF/mes. Basic support, library security patches, and minor enhancements.
 
-### Service 3: Financial & Audit Tooling
+### Service 4: Financial & Audit Tooling
 *Ledger, payment, and reconciliation workflows built fail-closed to stop on mismatches and leave clear audit artifacts.*
 - **Ideal Fit:** Finance and operations teams where manual bank/ledger matching is slow and error-prone, or founders preparing for external financial audits.
 - **Key Deliverables:** Custom reconciliation engines, deterministic ledger-matching algorithms, and automated audit report generators.
@@ -66,7 +74,7 @@ Tooltician offers five distinct service lines, priced in USD (for English-langua
   - **Financial Control System (Sistema de Controles):** From $4,800 / Desde 90 UF (one-time). Multiple-source reconciliation system with versioned rules.
   - **Stabilization Retainer (Soporte Mensual):** From $390/mo / Desde 8 UF/mes. Rule updates, source modifications, and priority audit support.
 
-### Service 4: Static Sites & Front Ends
+### Service 5: Static Sites & Front Ends
 *High-performance, search-indexable, accessible public surfaces built to load instantly and stay maintainable.*
 - **Ideal Fit:** Founders seeking professional marketing sites without the bloating and security risks of heavy visual page-builders, or companies needing clean, multilingual sites.
 - **Key Deliverables:** Astro static site builds, semantic HTML pages, self-hosted fonts, automated build/deploy scripts, and developer-friendly content files.
@@ -77,7 +85,7 @@ Tooltician offers five distinct service lines, priced in USD (for English-langua
   - **Full Bilingual Site (Sitio Bilingüe Completo):** From $2,600 / Desde 50 UF (one-time). Full multi-page layout with hreflang structures.
   - **Maintenance Retainer (Soporte Mensual):** From $150/mo / Desde 3 UF/mes. Performance monitoring, security checks, and minor layout adjustments.
 
-### Service 5: Web Technical Hygiene & Hardening
+### Service 6: Web Technical Hygiene & Hardening
 *Diagnostics and hardening for published sites (WordPress, Jamstack, static) that are online but technically neglected.*
 - **Ideal Fit:** Companies without an in-house technical web owner, B2B companies whose form submissions must never fail, or agencies outsourcing technical site maintenance.
 - **Key Deliverables:** Browser security hardening, DNS validation, form testing, response header sanitization, and site diagnostic logs.

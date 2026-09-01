@@ -29,8 +29,8 @@ function evidenceBadgeClass(type: EvidenceChip['type']): string {
   return 'badge-neutral';
 }
 
-interface Props { lang: 'en' | 'es'; }
-const { lang } = Astro.props;
+interface Props { lang: 'en' | 'es'; full?: boolean; }
+const { lang, full = false } = Astro.props;
 
 const projectsEN: Project[] = [
   {
@@ -560,35 +560,42 @@ const enrichProjects = (projects: Project[], currentLang: 'en' | 'es'): Project[
 };
 
 const enrichedProjects = enrichProjects(lang === 'en' ? projectsEN : projectsES, lang);
+const visibleProjects = full ? enrichedProjects : enrichedProjects.filter(project => project.featured).slice(0, 3);
 
 const c = {
-  projects: enrichedProjects,
-  title: lang === 'en' ? 'Selected production work' : 'Trabajo de producción seleccionado',
+  projects: visibleProjects,
+  title: full
+    ? (lang === 'en' ? 'Production work, with evidence' : 'Trabajo en producción, con evidencia')
+    : (lang === 'en' ? 'Selected production work' : 'Trabajo de producción seleccionado'),
   eyebrow: lang === 'en' ? 'Portfolio' : 'Portafolio',
   subtitle: lang === 'en'
     ? 'Live sites, published packages, and automation already running in production.'
     : 'Sitios activos, paquetes publicados y automatización ya funcionando en producción.',
   fl: filterLabels[lang],
+  allWorkLabel: lang === 'en' ? 'See all 10 projects' : 'Ver los 10 proyectos',
+  allWorkHref: lang === 'en' ? '/en/work/' : '/es/trabajo/',
 };
 ---
 <section class="section" id="portfolio">
   <div class="container">
     <div class="section-header section-header--center">
       <span class="section-eyebrow reveal">{c.eyebrow}</span>
-      <h2 class="section-title reveal">{c.title}</h2>
+      {full
+        ? <h1 class="section-title reveal">{c.title}</h1>
+        : <h2 class="section-title reveal">{c.title}</h2>}
       <div class="divider reveal"></div>
       <p class="section-subtitle reveal">{c.subtitle}</p>
     </div>
 
-    <div class="filter-bar reveal" role="group" aria-label={c.fl.label}>
+    {full && <div class="filter-bar reveal" role="group" aria-label={c.fl.label}>
       <span class="filter-label">{c.fl.label}</span>
       <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">{c.fl.all}</button>
       <button class="filter-btn" type="button" data-filter="python" aria-pressed="false">{c.fl.python}</button>
       <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">{c.fl.web}</button>
       <button class="filter-btn" type="button" data-filter="cli" aria-pressed="false">{c.fl.cli}</button>
       <button class="filter-btn" type="button" data-filter="data" aria-pressed="false">{c.fl.data}</button>
-    </div>
-    <noscript><style>#portfolio-grid .project-card { display: flex !important; } .filter-bar { display: none; }</style></noscript>
+    </div>}
+    {full && <noscript><style>#portfolio-grid .project-card { display: flex !important; } .filter-bar { display: none; }</style></noscript>}
 
     <div class="portfolio-grid" id="portfolio-grid">
       {c.projects.map((proj, i) => (
@@ -640,7 +647,7 @@ const c = {
 
           <div class="project-links">
             {proj.links.map(l => (
-              <a class="project-link" href={l.href} target="_blank" rel="noopener noreferrer">
+              <a class="project-link" href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
                 <span>{l.label}</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path d="M7 17 17 7" />
@@ -652,6 +659,11 @@ const c = {
         </article>
       ))}
     </div>
+    {!full && (
+      <div class="portfolio-all reveal">
+        <a class="btn btn-ghost" href={c.allWorkHref}>{c.allWorkLabel} →</a>
+      </div>
+    )}
   </div>
 </section>
 
@@ -835,6 +847,12 @@ const c = {
 
 .project-link svg {
   flex-shrink: 0;
+}
+
+.portfolio-all {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 @media (max-width: 900px) {

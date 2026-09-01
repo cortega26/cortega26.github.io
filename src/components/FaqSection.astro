@@ -1,4 +1,6 @@
 ---
+import { pricing } from '../data/pricing';
+
 interface Props { lang: 'en' | 'es'; }
 const { lang } = Astro.props;
 
@@ -6,9 +8,9 @@ const en = {
   eyebrow: 'FAQ',
   title: 'Common questions before we start',
   faqs: [
-    ['What exactly do you do?', 'Two things: Python automation systems (ETL pipelines, scrapers, internal tools, and reporting workflows) and web technical hygiene for live sites (security headers, HTTPS, DNS, forms, Search Console, and lightweight monitoring). Both are scoped, documented, and built to keep running after handoff.'],
-    ['How much does it cost?', 'Scoped automation starts from 30 UF (~USD $1,200). An optional stabilization retainer is from 6 UF/month (~USD $240/mo). Web technical hygiene starts at a $69 diagnostic. Every engagement begins with a free 15-minute diagnostic call to confirm fit before any quote.'],
-    ['How does a project start?', 'With a free 15-minute call to confirm the problem is a fit. If it is, the next step is a short discovery to lock scope, inputs, outputs, owner, and success criteria — agreed in writing before implementation begins.'],
+    ['What exactly do you do?', 'Six scoped services: Python automation and data pipelines, recurring data collection, internal tools and APIs, financial and audit systems, static sites and focused front ends, and web technical hygiene. Each one has a stated fit, boundary, deliverable, and documented handoff.'],
+    ['How much does it cost?', `International automation builds start at ${pricing.automation.en.scoped}, with paid scoping from ${pricing.automation.en.scoping} credited toward the build. An optional stabilization retainer starts at ${pricing.automation.en.retainer}. Web technical hygiene starts with a ${pricing.webHygiene.en.diagnostic} diagnostic. Chile and LATAM pricing is available in UF on the Spanish version.`],
+    ['How does a project start?', 'With a free 15-minute diagnostic call to confirm fit. If there is a match, paid scoping locks the inputs, outputs, owner, failure modes, and success criteria in writing; that fee is credited toward the build.'],
     ['Do you work in English or Spanish?', 'Both. Delivery, documentation, and communication are bilingual. The Spanish-language services are calibrated for the Chilean and Latin American market; the English-language services are priced and delivered for US, UK, and European clients.'],
     ['Where are you based, and do you work remotely?', "I'm based in Santiago, Chile, and work remotely with clients worldwide. Engagements run async with visible progress in GitHub commits instead of status meetings."],
     ['What happens after the project is delivered?', 'You get handoff materials — README, operating notes, setup steps, and the failure points worth watching — so the next person can run, debug, and extend the system without me on a call. An optional retainer is available if you want ongoing stabilization.'],
@@ -21,9 +23,9 @@ const es = {
   eyebrow: 'FAQ',
   title: 'Preguntas frecuentes antes de empezar',
   faqs: [
-    ['¿Qué haces exactamente?', 'Dos cosas: sistemas de automatización en Python (pipelines ETL, scrapers, herramientas internas y flujos de reportes) e higiene técnica web para sitios publicados (security headers, HTTPS, DNS, formularios, Search Console y monitoreo liviano). Todo acotado, documentado y construido para seguir funcionando después del traspaso.'],
-    ['¿Cuánto cuesta?', 'La automatización acotada parte desde 30 UF (~USD $1.200). Hay un retainer de estabilización opcional desde 6 UF al mes (~USD $240/mes). La higiene técnica web parte con un diagnóstico desde 1 UF. Cada proyecto empieza con una llamada de diagnóstico gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.'],
-    ['¿Cómo empieza un proyecto?', 'Con una llamada gratuita de 15 minutos para confirmar que el problema encaja. Si encaja, el siguiente paso es un discovery corto para fijar alcance, inputs, outputs, responsable y criterios de éxito — acordados por escrito antes de implementar.'],
+    ['¿Qué haces exactamente?', 'Seis servicios acotados: automatización Python y pipelines de datos, recolección recurrente de datos, herramientas internas y APIs, sistemas financieros y de auditoría, sitios estáticos y frontends acotados, e higiene técnica web. Cada uno declara su encaje, límites, entregable y traspaso documentado.'],
+    ['¿Cuánto cuesta?', `Para Chile y LATAM, una automatización acotada parte desde ${pricing.automation.es.scoped}, con scoping pagado desde ${pricing.automation.es.scoping} que se acredita a la implementación. El retainer opcional parte desde ${pricing.automation.es.retainer} y la higiene técnica web desde un diagnóstico de ${pricing.webHygiene.es.diagnostic}. La versión inglesa muestra las tarifas internacionales en USD.`],
+    ['¿Cómo empieza un proyecto?', 'Con una llamada de diagnóstico gratuita de 15 minutos para confirmar el encaje. Si lo hay, un scoping pagado fija por escrito entradas, salidas, responsable, modos de falla y criterios de éxito; ese valor se acredita a la implementación.'],
     ['¿Trabajas en español o en inglés?', 'En ambos. La entrega, la documentación y la comunicación son bilingües. Los servicios en español están calibrados para el mercado chileno y latinoamericano; los servicios en inglés están cotizados y entregados para clientes de EE. UU., Reino Unido y Europa.'],
     ['¿Dónde estás y trabajas de forma remota?', 'Estoy en Santiago de Chile y trabajo de forma remota con clientes de todo el mundo. Los proyectos se llevan de forma asíncrona, con progreso visible en commits de GitHub en lugar de reuniones de estado.'],
     ['¿Qué pasa después de entregar el proyecto?', 'Recibes materiales de traspaso — README, notas operativas, pasos de setup y los puntos de falla que conviene vigilar — para que la siguiente persona pueda operar, depurar y extender el sistema sin necesitarme en una llamada. Si quieres mantención continua, hay un retainer opcional.'],

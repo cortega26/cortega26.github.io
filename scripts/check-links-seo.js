@@ -33,7 +33,7 @@ function parseTags(html, tagName) {
     let attrMatch;
     while ((attrMatch = attrRegex.exec(attrString)) !== null) {
       const name = attrMatch[1].toLowerCase();
-      const value = attrMatch[2] || attrMatch[3] || attrMatch[4];
+      const value = attrMatch[2] ?? attrMatch[3] ?? attrMatch[4];
       attrs[name] = value;
     }
     tags.push({
@@ -246,8 +246,9 @@ async function main() {
     
     // 2. Check Images
     for (const img of data.images) {
-      if (img.alt === undefined || img.alt.trim() === '') {
-        seoIssues.push({ page: relativePath, type: 'Image Alt', message: `Image missing or empty alt attribute: ${img.outerHtml}` });
+      // alt="" is the correct accessible treatment for decorative images.
+      if (img.alt === undefined) {
+        seoIssues.push({ page: relativePath, type: 'Image Alt', message: `Image missing alt attribute: ${img.outerHtml}` });
       }
       if (!img.width || !img.height) {
         seoIssues.push({ page: relativePath, type: 'Image Size', message: `Image missing width/height (causes layout shift): ${img.outerHtml}` });

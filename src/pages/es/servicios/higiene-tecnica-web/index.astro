@@ -3,6 +3,7 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Navbar from '../../../../components/Navbar.astro';
 import Footer from '../../../../components/Footer.astro';
 import IntakeForm from '../../../../components/IntakeForm.astro';
+import { pricing } from '../../../../data/pricing';
 import '../../../../styles/global.css';
 
 const canonical = 'https://tooltician.com/es/servicios/higiene-tecnica-web/';
@@ -23,11 +24,12 @@ const navItems = [
 ];
 
 const pricingNote =
-  'Valores referenciales para Chile, expresados en UF y aproximados en CLP. La cotización final se emite en CLP según el valor de la UF del día de propuesta. Para clientes fuera de Chile: el servicio se puede cotizar en USD con ajuste de alcance según idioma de entrega, zona horaria y nivel de documentación requerido — diagnóstico desde USD $69, planes de implementación desde USD $499, soporte mensual desde USD $279.';
+  'Precios de referencia para Chile y LATAM expresados en UF. La cotización fija el alcance y la equivalencia de pago vigente al emitir la propuesta. La versión inglesa muestra la tarifa internacional en USD.';
 
 // Primary CTAs now scroll to the in-page intake form (#brief) instead of
 // opening a mailto — lower friction, qualified capture, and tracked events.
 const diagnosticHref = '#brief';
+const diagnosticCta = `Solicitar diagnóstico de ${pricing.webHygiene.es.diagnostic}`;
 
 const symptoms = [
   ['Formulario que no avisa', 'El sitio recibe visitas, pero nadie confirma si las consultas llegan, quedan registradas o se pierden en silencio.'],
@@ -37,7 +39,7 @@ const symptoms = [
 ];
 
 const diagnosticPromise = [
-  ['Precio', '1 UF', 'aprox. CLP $41.000 para Chile'],
+  ['Precio', pricing.webHygiene.es.diagnostic, 'valor fijo en UF para Chile y LATAM'],
   ['Respuesta', '24–48 h', 'hábiles para confirmar contexto y disponibilidad'],
   ['Entrega', 'Reporte breve', 'hallazgos priorizados, evidencia y siguiente paso'],
   ['Crédito', 'Descontable', 'si luego contratas implementación'],
@@ -104,9 +106,9 @@ const sampleRows = [
 const plans = [
   {
     name: 'Diagnóstico Técnico Web',
-    priceLabel: '1 UF',
-    priceApprox: 'aprox. CLP $41.000',
-    priceValue: '41000',
+    priceLabel: pricing.webHygiene.es.diagnostic,
+    priceApprox: 'pago único',
+    priceValue: '1',
     note: 'El valor se aplica como crédito al contratar cualquier plan de implementación.',
     intro: 'Para saber con certeza qué está técnicamente descuidado antes de pagar por correcciones.',
     items: [
@@ -118,9 +120,9 @@ const plans = [
   },
   {
     name: 'Hardening Web Básico',
-    priceLabel: 'Desde 7 UF',
-    priceApprox: 'aprox. CLP $284.000',
-    priceValue: '284000',
+    priceLabel: `Desde ${pricing.webHygiene.es.essentials}`,
+    priceApprox: 'por implementación',
+    priceValue: '7',
     note: 'Para sitios simples o corporativos sin requerimiento de entregable ejecutivo.',
     intro: 'Para corregir lo evidente y dejar el sitio técnicamente más sobrio, con registro verificable para el administrador.',
     items: [
@@ -132,10 +134,10 @@ const plans = [
   },
   {
     name: 'Revisión y Hardening Operativo',
-    priceLabel: 'Desde 13 UF',
-    priceApprox: 'aprox. CLP $527.000',
-    priceValue: '527000',
-    note: 'Opción útil si hay administrador técnico. Si debes mostrar resultados a gerencia, la Integral suele cerrar mejor por 2 UF más.',
+    priceLabel: `Desde ${pricing.webHygiene.es.operational}`,
+    priceApprox: 'por implementación',
+    priceValue: '13',
+    note: `Opción útil si hay administrador técnico. Si debes mostrar resultados a gerencia, la Integral suele cerrar mejor por ${pricing.webHygiene.es.executiveUpgrade} más.`,
     intro: 'Para sitios que necesitan hardening y revisión operativa completa, sin requerimiento de entregable para dirección.',
     items: [
       'Hardening web completo: headers, HTTPS canónico y HSTS.',
@@ -146,9 +148,9 @@ const plans = [
   },
   {
     name: 'Revisión Integral con Reporte Ejecutivo',
-    priceLabel: 'Desde 15 UF',
-    priceApprox: 'aprox. CLP $608.000',
-    priceValue: '608000',
+    priceLabel: `Desde ${pricing.webHygiene.es.integral}`,
+    priceApprox: 'por implementación',
+    priceValue: '15',
     note: 'Recomendado para sitios que influyen en leads, reputación o ventas.',
     intro: 'Para cuando el resultado debe poder mostrarse a perfiles no técnicos sin traducción, con evidencia completa y hoja de ruta para el mes siguiente.',
     recommended: true,
@@ -161,9 +163,9 @@ const plans = [
   },
   {
     name: 'Soporte Técnico Web Mensual',
-    priceLabel: 'Desde 4 UF/mes',
-    priceApprox: 'aprox. CLP $162.000/mes',
-    priceValue: '162000',
+    priceLabel: `Desde ${pricing.webHygiene.es.retainer}`,
+    priceApprox: 'mensual',
+    priceValue: '4',
     note: 'Continuación natural de la Revisión Integral. Sin contratación interna.',
     intro: 'Para mantener lo corregido y tener criterio técnico externo mirando lo básico con regularidad.',
     items: [
@@ -198,15 +200,15 @@ const commercialPaths = [
   {
     label: 'Antes de corregir, entiende',
     title: 'Diagnóstico Técnico Web',
-    price: '1 UF',
+    price: pricing.webHygiene.es.diagnostic,
     body: 'Para saber si el sitio tiene descuidos visibles antes de pagar por correcciones. Reduce el arrepentimiento: primero criterio, después implementación.',
-    cta: 'Solicitar diagnóstico de 1 UF',
+    cta: `Solicitar diagnóstico de ${pricing.webHygiene.es.diagnostic}`,
     href: diagnosticHref,
   },
   {
     label: 'Corregir sin sobreactuar',
     title: 'Hardening o Revisión Operativa',
-    price: 'desde 7 UF',
+    price: `desde ${pricing.webHygiene.es.essentials}`,
     body: 'Para corregir lo que sí vale la pena tocar: headers, HTTPS, DNS, formularios, Search Console y evidencia antes/después.',
     cta: 'Ver planes de corrección',
     href: '#planes-detalle',
@@ -214,7 +216,7 @@ const commercialPaths = [
   {
     label: 'Dejar de acordarse tarde',
     title: 'Soporte Técnico Web Mensual',
-    price: 'desde 4 UF/mes',
+    price: `desde ${pricing.webHygiene.es.retainer}`,
     body: 'Para que alguien revise lo básico con regularidad sin contratar un perfil técnico interno.',
     cta: 'Consultar soporte mensual',
     href: '#brief',
@@ -268,7 +270,7 @@ const jsonLd = {
     itemListElement: plans.map((plan) => ({
       '@type': 'Offer',
       name: plan.name,
-      priceCurrency: 'CLP',
+      priceCurrency: 'CLF',
       price: plan.priceValue,
       description: `${plan.priceLabel} (${plan.priceApprox}). ${plan.intro}`,
       availability: 'https://schema.org/InStock',
@@ -325,7 +327,7 @@ const breadcrumbJsonLd = {
             Antes de pagar por correcciones, confirma qué vale la pena corregir. Reviso lo básico, separo señales reales de ruido automático y te dejo evidencia con una recomendación clara de siguiente paso.
           </p>
           <div class="service-hero__actions reveal reveal-delay-2">
-            <a class="btn btn-primary" href={diagnosticHref}>Solicitar diagnóstico de 1 UF</a>
+            <a class="btn btn-primary" href={diagnosticHref}>{diagnosticCta}</a>
             <a class="btn btn-ghost" href="#diagnostico">Ver cómo funciona</a>
           </div>
           <p class="service-hero__microcopy reveal reveal-delay-2">
@@ -410,7 +412,7 @@ const breadcrumbJsonLd = {
     <section class="section section--alt" id="diagnostico">
       <div class="container section-stack">
         <div class="section-header">
-          <span class="section-eyebrow reveal">Diagnóstico 1 UF</span>
+          <span class="section-eyebrow reveal">Diagnóstico {pricing.webHygiene.es.diagnostic}</span>
           <h2 class="section-title reveal">Compra tranquilidad antes de comprar implementación</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
@@ -420,7 +422,7 @@ const breadcrumbJsonLd = {
         <div class="diagnostic-band reveal">
           <div class="diagnostic-band__copy">
             <p class="diagnostic-band__eyebrow">Diagnóstico técnico web</p>
-            <h3>1 UF para saber qué corregir, qué ignorar y qué revisar después</h3>
+            <h3>{pricing.webHygiene.es.diagnostic} para saber qué corregir, qué ignorar y qué revisar después</h3>
             <p>Revisión externa inicial de dominio, HTTPS, formularios visibles, DNS básico, correo, sitemap, robots.txt, señales públicas y herramientas de referencia. Si luego implementamos, se descuenta.</p>
           </div>
           <div class="diagnostic-band__panel">
@@ -433,7 +435,7 @@ const breadcrumbJsonLd = {
                 </div>
               ))}
             </div>
-            <a class="btn btn-primary diagnostic-band__cta" href={diagnosticHref}>Solicitar diagnóstico de 1 UF</a>
+            <a class="btn btn-primary diagnostic-band__cta" href={diagnosticHref}>{diagnosticCta}</a>
           </div>
         </div>
       </div>
@@ -640,7 +642,7 @@ const breadcrumbJsonLd = {
             <h3>Si el sitio influye en leads o reputación, la Integral suele ser la opción racional.</h3>
           </div>
           <p>
-            La Revisión Operativa cubre lo técnico desde 13 UF. Por 2 UF más, la Integral agrega reporte ejecutivo, evidencia completa y hoja de ruta para seguimiento. No es “más caro porque sí”: reduce traducción interna y deja una decisión presentable para dirección.
+            La Revisión Operativa cubre lo técnico desde {pricing.webHygiene.es.operational}. Por {pricing.webHygiene.es.executiveUpgrade} más, la Integral agrega reporte ejecutivo, evidencia completa y hoja de ruta para seguimiento. No es “más caro porque sí”: reduce traducción interna y deja una decisión presentable para dirección.
           </p>
         </div>
         <div class="pricing-detail" id="planes-detalle">
@@ -700,7 +702,7 @@ const breadcrumbJsonLd = {
         <p class="pricing-footnote reveal">{pricingNote}</p>
         <div class="inline-cta reveal">
           <p>Si todavía no sabes qué plan corresponde, esa duda ya es información: parte con el diagnóstico y evita comprar de más.</p>
-          <a class="btn btn-primary" href={diagnosticHref}>Solicitar diagnóstico de 1 UF</a>
+          <a class="btn btn-primary" href={diagnosticHref}>{diagnosticCta}</a>
         </div>
       </div>
     </section>
@@ -810,7 +812,7 @@ const breadcrumbJsonLd = {
         <div class="final-action final-action--form card-glass reveal">
           <div class="brief-grid">
             <article class="brief-card">
-              <h3 class="card-title">Diagnóstico técnico web — 1 UF</h3>
+              <h3 class="card-title">Diagnóstico técnico web — {pricing.webHygiene.es.diagnostic}</h3>
               <p class="body-copy">
                 Revisión externa inicial con reporte de prioridades, evidencia y siguiente paso claro. Es una forma barata de evitar dos errores caros: ignorar algo importante o pagar por algo que no importaba.
               </p>

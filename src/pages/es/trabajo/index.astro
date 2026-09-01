@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import PortfolioSection from '../../../components/PortfolioSection.astro';
+import '../../../styles/global.css';
+
+const navItems = [
+  { href: '/es/#proof', label: 'Evidencia' },
+  { href: '/es/#services', label: 'Servicios' },
+  { href: '#portfolio', label: 'Trabajo' },
+  { href: '/es/#about', label: 'Perfil' },
+];
+---
+<BaseLayout
+  title="Trabajo en Producción y Casos Reales | Tooltician"
+  description="Diez proyectos en producción: automatización Python, pipelines de datos, herramientas internas, controles financieros, extensiones y frontends acotados."
+  lang="es"
+  canonical="https://tooltician.com/es/trabajo/"
+  alternates={[
+    { hreflang: 'en', href: 'https://tooltician.com/en/work/' },
+    { hreflang: 'es', href: 'https://tooltician.com/es/trabajo/' },
+    { hreflang: 'x-default', href: 'https://tooltician.com/en/work/' },
+  ]}
+>
+  <Navbar lang="es" items={navItems} ctaHref="/es/#contact-form" switchHref="/en/work/" />
+  <main id="main" class="portfolio-page">
+    <PortfolioSection lang="es" full />
+  </main>
+  <Footer lang="es" />
+</BaseLayout>
+
+<style>
+  .portfolio-page { padding-top: var(--nav-height); }
+</style>

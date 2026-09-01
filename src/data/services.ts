@@ -3,6 +3,8 @@
 // Each service renders through src/components/ServicePage.astro via thin
 // per-locale route files under /en/services/<slug>/ and /es/servicios/<slug>/.
 
+import { pricing } from './pricing';
+
 export type ServiceLocale = 'en' | 'es';
 
 export interface ServicePricingTier {
@@ -126,7 +128,7 @@ const pythonAutomation: ServiceDefinition = {
     lede: 'I replace recurring manual data work — report assembly, fragile scrapes, copy-paste delivery — with scheduled, reproducible pipelines that emit the same answer every time and are documented for the next person to operate.',
     subcopy:
       'All deliverables are in English. You get a production-minded system with tests, logging, and a runbook — not a script that only the author can run.',
-    ctaPrimary: 'Scope my automation — from $290',
+    ctaPrimary: `Scope my automation — from ${pricing.automation.en.scoping}`,
     ctaSecondary: "See what's included",
     microcopy:
       'Fixed scope, not open-ended hours. Every engagement starts with a free 15-minute call to confirm fit before any quote.',
@@ -144,7 +146,7 @@ const pythonAutomation: ServiceDefinition = {
       { label: 'Failure alerts' },
     ],
     entryEyebrow: 'Entry point',
-    entryPrice: '$290',
+    entryPrice: pricing.automation.en.scoping,
     entryCaption: 'Automation scoping. Applied as credit toward any build.',
     availabilityEyebrow: 'Availability',
     availability: '2–3 new builds per month. Response within 24–48 business hours.',
@@ -212,10 +214,10 @@ const pythonAutomation: ServiceDefinition = {
     plansEyebrow: 'Plans & pricing',
     plansTitle: 'A clear scope at each step, from first pipeline to ongoing upkeep',
     plansSubtitle:
-      'The natural entry point is Automation Scoping ($290, credited toward the build). Most teams start with a Scoped Build for one flow, then add a Stabilization Retainer once the system is load-bearing.',
+      `The natural entry point is Automation Scoping (${pricing.automation.en.scoping}, credited toward the build). Most teams start with a Scoped Build for one flow, then add a Stabilization Retainer once the system is load-bearing.`,
     plans: [
       {
-        priceLabel: 'From $290',
+        priceLabel: `From ${pricing.automation.en.scoping}`,
         priceApprox: 'credited to build',
         name: 'Automation Scoping',
         intro: 'A written scope before any build: inputs, outputs, owner, failure modes, and success criteria.',
@@ -223,7 +225,7 @@ const pythonAutomation: ServiceDefinition = {
         items: ['Free 15-min diagnostic call', 'Written scope document', 'Fixed-price build quote', 'Credited toward the build'],
       },
       {
-        priceLabel: 'From $1,500',
+        priceLabel: `From ${pricing.automation.en.scoped}`,
         priceApprox: 'one-time',
         name: 'Scoped Automation Build',
         intro: 'One pipeline, scraper, or reporting flow built to production standards and handed off cleanly.',
@@ -232,14 +234,14 @@ const pythonAutomation: ServiceDefinition = {
         items: ['Everything in Scoping', 'One flow built end-to-end', 'Tests, logging, CI/schedule', 'Failure alerts', 'README + runbook handoff'],
       },
       {
-        priceLabel: 'From $3,200',
+        priceLabel: `From ${pricing.automation.en.multi}`,
         priceApprox: 'one-time',
         name: 'Multi-source Data System',
         intro: 'Several sources extracted, orchestrated, monitored, and delivered as one coherent system.',
         items: ['Everything in Scoped Build', 'Multiple sources orchestrated', 'Centralized monitoring', 'Structured delivery layer'],
       },
       {
-        priceLabel: 'From $290/mo',
+        priceLabel: `From ${pricing.automation.en.retainer}`,
         priceApprox: 'per month',
         name: 'Stabilization Retainer',
         intro: 'Keep the system healthy: monitoring, small changes, and external technical judgment as things evolve.',
@@ -301,7 +303,7 @@ const pythonAutomation: ServiceDefinition = {
     faqTitle: 'Questions worth answering precisely',
     faqs: [
       ['How do you price this — hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
-      ['What does the $290 scoping include?', 'A written scope document: inputs, outputs, owner, failure modes, and success criteria, plus a fixed-price quote for the build. If you proceed, the $290 is credited toward the build.'],
+      [`What does the ${pricing.automation.en.scoping} scoping include?`, `A written scope document: inputs, outputs, owner, failure modes, and success criteria, plus a fixed-price quote for the build. If you proceed, the ${pricing.automation.en.scoping} is credited toward the build.`],
       ['Do you need access to our systems?', 'For scoping, usually not. For the build, controlled access to the relevant data sources, repository, or environment is required — scoped to what the work needs and no more.'],
       ['What language and stack do you use?', 'Primarily Python (Pandas, FastAPI, Selenium, BeautifulSoup) with SQL, Bash, GitHub Actions, and reliability-minded packaging. The stack is chosen to fit your environment and handoff, not the other way around.'],
       ['What happens after delivery?', 'You get handoff materials — README, runbook, setup, and failure points — so your team can run and extend it. An optional Stabilization Retainer is available if you want ongoing upkeep, but it is not a lock-in.'],
@@ -311,7 +313,7 @@ const pythonAutomation: ServiceDefinition = {
     contactTitle: 'Start with a scoped problem, not an open-ended retainer',
     contactSubtitle:
       'If a recurring workflow is eating time or quietly creating risk, the right entry point is a short scoping pass that turns it into a fixed-price build.',
-    contactCardTitle: 'Automation scoping — $290',
+    contactCardTitle: `Automation scoping — ${pricing.automation.en.scoping}`,
     contactCardBody:
       'A written scope of the workflow: inputs, outputs, owner, failure modes, and success criteria, plus a fixed-price build quote. The fee is credited toward the build.',
     contactRiskNote:
@@ -337,7 +339,7 @@ const pythonAutomation: ServiceDefinition = {
     lede: 'Reemplazo el trabajo manual recurrente con datos — armado de reportes, scrapes frágiles, copia-pega entre sistemas — por pipelines programados y reproducibles que entregan la misma respuesta cada vez y quedan documentados para que la siguiente persona los opere.',
     subcopy:
       'Obtienes un sistema pensado para producción, con tests, logging y un runbook — no un script que solo el autor sabe ejecutar.',
-    ctaPrimary: 'Acotar mi automatización — desde 3 UF',
+    ctaPrimary: `Acotar mi automatización — desde ${pricing.automation.es.scoping}`,
     ctaSecondary: 'Ver qué incluye',
     microcopy:
       'Alcance fijo, no horas abiertas. Cada proyecto empieza con una llamada gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.',
@@ -355,7 +357,7 @@ const pythonAutomation: ServiceDefinition = {
       { label: 'Alertas de falla' },
     ],
     entryEyebrow: 'Punto de entrada',
-    entryPrice: '3 UF',
+    entryPrice: pricing.automation.es.scoping,
     entryCaption: 'Diagnóstico de automatización. Se acredita a cualquier implementación.',
     availabilityEyebrow: 'Disponibilidad',
     availability: '2–3 proyectos nuevos al mes. Respuesta en 24–48 horas hábiles.',
@@ -423,10 +425,10 @@ const pythonAutomation: ServiceDefinition = {
     plansEyebrow: 'Planes y precios',
     plansTitle: 'Un alcance claro en cada paso, del primer pipeline a la mantención',
     plansSubtitle:
-      'El punto de entrada natural es el Diagnóstico de Automatización (3 UF, acreditable a la implementación). La mayoría parte con una Construcción Acotada de un flujo y luego suma un Retainer de Estabilización cuando el sistema se vuelve crítico.',
+      `El punto de entrada natural es el Diagnóstico de Automatización (${pricing.automation.es.scoping}, acreditable a la implementación). La mayoría parte con una Construcción Acotada de un flujo y luego suma un Retainer de Estabilización cuando el sistema se vuelve crítico.`,
     plans: [
       {
-        priceLabel: '3 UF',
+        priceLabel: pricing.automation.es.scoping,
         priceApprox: 'acreditable',
         name: 'Diagnóstico de Automatización',
         intro: 'Un alcance por escrito antes de construir: inputs, outputs, responsable, modos de falla y criterios de éxito.',
@@ -434,7 +436,7 @@ const pythonAutomation: ServiceDefinition = {
         items: ['Llamada de diagnóstico gratis', 'Documento de alcance', 'Cotización a precio fijo', 'Acreditable a la construcción'],
       },
       {
-        priceLabel: 'Desde 30 UF',
+        priceLabel: `Desde ${pricing.automation.es.scoped}`,
         priceApprox: 'por proyecto',
         name: 'Construcción Acotada',
         intro: 'Un pipeline, scraper o flujo de reportes construido con estándar de producción y traspasado limpiamente.',
@@ -443,14 +445,14 @@ const pythonAutomation: ServiceDefinition = {
         items: ['Todo lo del Diagnóstico', 'Un flujo de extremo a extremo', 'Tests, logging, CI/programación', 'Alertas de falla', 'Traspaso con README + runbook'],
       },
       {
-        priceLabel: 'Desde 60 UF',
+        priceLabel: `Desde ${pricing.automation.es.multi}`,
         priceApprox: 'por proyecto',
         name: 'Sistema de Datos Multi-fuente',
         intro: 'Varias fuentes extraídas, orquestadas, monitoreadas y entregadas como un solo sistema coherente.',
         items: ['Todo lo de la Construcción Acotada', 'Varias fuentes orquestadas', 'Monitoreo centralizado', 'Capa de entrega estructurada'],
       },
       {
-        priceLabel: 'Desde 6 UF/mes',
+        priceLabel: `Desde ${pricing.automation.es.retainer}`,
         priceApprox: 'por mes',
         name: 'Retainer de Estabilización',
         intro: 'Mantén el sistema sano: monitoreo, cambios pequeños y juicio técnico externo a medida que las cosas evolucionan.',
@@ -512,7 +514,7 @@ const pythonAutomation: ServiceDefinition = {
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
       ['¿Cómo cobras esto — por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
-      ['¿Qué incluye el diagnóstico de 3 UF?', 'Un documento de alcance: inputs, outputs, responsable, modos de falla y criterios de éxito, más una cotización a precio fijo. Si avanzas, las 3 UF se acreditan a la construcción.'],
+      [`¿Qué incluye el diagnóstico de ${pricing.automation.es.scoping}?`, `Un documento de alcance: inputs, outputs, responsable, modos de falla y criterios de éxito, más una cotización a precio fijo. Si avanzas, las ${pricing.automation.es.scoping} se acreditan a la construcción.`],
       ['¿Necesitas acceso a nuestros sistemas?', 'Para el diagnóstico, normalmente no. Para la construcción se requiere acceso controlado a las fuentes de datos, el repositorio o el entorno relevante — acotado a lo que el trabajo necesita y nada más.'],
       ['¿Qué lenguaje y stack usas?', 'Principalmente Python (Pandas, FastAPI, Selenium, BeautifulSoup) con SQL, Bash, GitHub Actions y empaquetado orientado a confiabilidad. El stack se elige para encajar con tu entorno y traspaso, no al revés.'],
       ['¿Qué pasa después de la entrega?', 'Recibes materiales de traspaso — README, runbook, setup y puntos de falla — para que tu equipo lo opere y extienda. Hay un Retainer de Estabilización opcional si quieres mantención continua, pero no es un amarre.'],
@@ -522,7 +524,7 @@ const pythonAutomation: ServiceDefinition = {
     contactTitle: 'Parte de un problema acotado, no de un retainer abierto',
     contactSubtitle:
       'Si un flujo recurrente está consumiendo tiempo o creando riesgo en silencio, el punto de entrada correcto es un diagnóstico corto que lo convierte en una construcción a precio fijo.',
-    contactCardTitle: 'Diagnóstico de automatización — 3 UF',
+    contactCardTitle: `Diagnóstico de automatización — ${pricing.automation.es.scoping}`,
     contactCardBody:
       'Un alcance por escrito del flujo: inputs, outputs, responsable, modos de falla y criterios de éxito, más una cotización a precio fijo. El valor se acredita a la construcción.',
     contactRiskNote:
@@ -536,6 +538,157 @@ const pythonAutomation: ServiceDefinition = {
     ],
     outreach:
       'Si llegaste aquí por un cuello de botella específico — un reporte manual, un scrape frágil, copia-pega entre sistemas — el alcance es este: fijarlo, construirlo de forma confiable y traspasarlo documentado. Precio fijo, sin horas abiertas.',
+  },
+};
+
+const recurringData: ServiceDefinition = {
+  slugEn: 'recurring-data-collection',
+  slugEs: 'recoleccion-recurrente-datos',
+  serviceKey: 'recurring-data',
+  areaServed: ['US', 'GB', 'EU', 'LATAM'],
+  en: {
+    ...pythonAutomation.en,
+    title: 'Recurring Data Collection & Scraping | Tooltician',
+    description: 'Resilient recurring collection from public or authorized sources, with validation, alerts, structured outputs, and a documented repair path.',
+    serviceName: 'Recurring Data Collection',
+    serviceType: ['Recurring data collection', 'Web scraping', 'Data acquisition pipelines', 'Source monitoring'],
+    eyebrow: 'Recurring Data Collection · Tooltician',
+    h1: 'Recurring data collection that fails loudly instead of drifting silently',
+    lede: 'I build repeatable collection flows for public or authorized sources, with validation, retries, logs, alerts, and structured outputs your downstream work can trust.',
+    subcopy: 'This is for legitimate recurring acquisition with a known operational use. It excludes access-control bypasses, credential abuse, and one-off lead harvesting.',
+    ctaPrimary: `Scope my collector — from ${pricing.automation.en.scoping}`,
+    fitItems: [
+      'A public or authorized source feeds reporting, operations, analysis, or publishing.',
+      'Manual collection or a fragile scraper already consumes time or creates silent risk.',
+      'The destination, cadence, owner, and acceptable failure behavior can be named.',
+    ],
+    entryPrice: pricing.automation.en.scoping,
+    entryCaption: 'Collection scoping. Applied as credit toward any build.',
+    problemTitle: 'The source keeps changing, but the downstream work still expects clean data',
+    problemSubtitle: 'Recurring acquisition fails in predictable ways: layouts change, records disappear, schemas drift, and a quiet partial result looks valid until somebody acts on it.',
+    problemCards: [
+      { title: 'What typically happens', body: 'A person copies results by hand or a scraper runs without validation. When a source changes, the workflow either stops without notice or keeps publishing incomplete data.' },
+      { title: 'The real requirement', body: 'Collection is only useful when the source is authorized, failures are visible, outputs are validated, and somebody other than the original author can repair the flow.' },
+    ],
+    scopeTitle: 'Collection designed around source behavior and downstream trust',
+    scopeSubtitle: 'The scope fixes the authorized sources, collection cadence, expected records, validation rules, output contract, alert path, and handoff owner before implementation.',
+    scopeNote: { label: 'Hard boundary', body: 'No bypassing logins, paywalls, CAPTCHAs, rate limits, robots policies, or other access controls. No covert personal-data enrichment or one-off lead harvesting.' },
+    reviewGroups: [
+      { title: 'Collection', items: ['Public APIs, feeds, files, or authorized web sources.', 'Retries, backoff, rate-aware scheduling, and resumable runs.', 'Documented selectors, assumptions, and source ownership.', 'Secrets kept outside source code when authorized access is required.'] },
+      { title: 'Validation', items: ['Schema and record-count checks before delivery.', 'Explicit empty, partial, duplicate, and drift states.', 'Raw snapshots where appropriate for diagnosis and replay.', 'Alerts that identify the source and likely repair point.'] },
+      { title: 'Delivery & handoff', items: ['Structured CSV, JSON, Parquet, database, sheet, or API outputs.', 'Scheduled delivery to the system the team already uses.', 'Tests, README, runbook, and repair notes.', 'A named operator and a clean path for future source changes.'] },
+    ],
+    processTitle: 'How a recurring collection build works',
+    plansTitle: 'From source scoping to a maintained collector',
+    plansSubtitle: `The entry point is Collection Scoping (${pricing.automation.en.scoping}, credited toward the build). A scoped collector starts at ${pricing.automation.en.scoped}; multi-source systems and ongoing stabilization are quoted separately.`,
+    plans: pythonAutomation.en.plans.map((plan, index) => ({
+      ...plan,
+      name: ['Collection Scoping', 'Scoped Collector', 'Multi-Source Collection System', 'Source Stabilization Retainer'][index] ?? plan.name,
+    })),
+    casesTitle: 'Where recurring collection is the right service',
+    casesSubtitle: 'For lawful, repeatable acquisition that already feeds a real operational or publishing workflow.',
+    cases: [
+      ['Public-data monitoring', 'Collect releases or indicators on a schedule, validate them, and deliver a stable downstream dataset.'],
+      ['Publishing pipelines', 'Acquire structured source material repeatedly for an editorial or informational product with clear provenance.'],
+      ['Operational source tracking', 'Monitor authorized supplier, marketplace, or partner data where missed or partial records affect decisions.'],
+      ['Fragile scraper replacement', 'Replace a script that breaks silently with a collector that validates, alerts, and leaves a repair path.'],
+    ],
+    related: [
+      { label: 'Jackpot Data Pipeline', href: 'https://github.com/cortega26/polla', accent: true },
+      { label: 'Noticiencias', href: 'https://noticiencias.com', accent: true },
+      { label: 'chile-hub', href: 'https://github.com/cortega26/chile-hub', accent: true },
+      { label: 'All production work', href: '/en/work/' },
+    ],
+    faqs: [
+      ['What sources will you collect from?', 'Public APIs, feeds, files, and websites, plus private sources where the client has explicit authorization and provides legitimate access.'],
+      ['Will you bypass a login, CAPTCHA, paywall, or rate limit?', 'No. The service does not bypass access controls or conceal collection behavior. If a source cannot be collected lawfully and responsibly, it is out of scope.'],
+      ['How do you handle layout or schema changes?', 'The build includes validation, visible failure states, logs, and repair notes. An optional stabilization retainer covers reasonable source changes after handoff.'],
+      ['Is this for lead generation?', 'Not for one-off harvesting or covert personal-data enrichment. A legitimate recurring operational dataset with clear authorization and purpose may fit.'],
+      ['What do I receive?', 'A scheduled, re-runnable collector, structured outputs, tests, logs, alerts, setup instructions, a README, and a repair-oriented runbook.'],
+      ['Why is English priced in USD and Spanish in UF?', 'International delivery is produced in English and priced in USD. Chile and LATAM delivery is available in Spanish at locally calibrated UF pricing.'],
+    ],
+    contactTitle: 'Start with the source contract, not with a scraping library',
+    contactSubtitle: 'Name the source, authorization, cadence, destination, downstream owner, and what a failed or partial run must do.',
+    contactCardTitle: `Collection scoping — ${pricing.automation.en.scoping}`,
+    contactCardBody: 'A written source and output contract covering authorization, cadence, validation, failure modes, delivery, and ownership. Credited toward the build.',
+    intakeHeading: 'Tell me about the recurring source',
+    intents: [
+      { tag: 'A public source changes often', body: 'Collect it on a schedule with validation, alerts, and repair notes.' },
+      { tag: 'Manual collection feeds a report', body: 'Replace copy-paste with a reproducible collector and structured delivery.' },
+      { tag: 'Our scraper fails silently', body: 'Rebuild it with explicit failure states and an operator-ready runbook.' },
+    ],
+  },
+  es: {
+    ...pythonAutomation.es,
+    title: 'Recolección Recurrente de Datos y Scraping | Tooltician',
+    description: 'Recolección recurrente y resiliente desde fuentes públicas o autorizadas, con validación, alertas, salidas estructuradas y ruta de reparación documentada.',
+    serviceName: 'Recolección Recurrente de Datos',
+    serviceType: ['Recolección recurrente de datos', 'Web scraping', 'Pipelines de adquisición', 'Monitoreo de fuentes'],
+    eyebrow: 'Recolección Recurrente de Datos · Tooltician',
+    h1: 'Recolección recurrente que falla de forma visible, no en silencio',
+    lede: 'Construyo flujos repetibles para fuentes públicas o autorizadas, con validación, reintentos, logs, alertas y salidas estructuradas en las que tu operación pueda confiar.',
+    subcopy: 'Este servicio cubre adquisición legítima y recurrente con un uso operacional conocido. Excluye evadir controles de acceso, abusar credenciales y recolectar leads por única vez.',
+    ctaPrimary: `Acotar mi colector — desde ${pricing.automation.es.scoping}`,
+    fitItems: [
+      'Una fuente pública o autorizada alimenta reportes, operaciones, análisis o publicación.',
+      'La recolección manual o un scraper frágil ya consume tiempo o crea riesgo silencioso.',
+      'Se pueden nombrar destino, frecuencia, responsable y comportamiento aceptable ante fallas.',
+    ],
+    entryPrice: pricing.automation.es.scoping,
+    entryCaption: 'Diagnóstico de recolección. Se acredita a cualquier implementación.',
+    problemTitle: 'La fuente cambia, pero el trabajo posterior sigue esperando datos limpios',
+    problemSubtitle: 'La adquisición recurrente falla de formas previsibles: cambia el layout, desaparecen registros, deriva el esquema y un resultado parcial parece válido hasta que alguien actúa sobre él.',
+    problemCards: [
+      { title: 'Lo que suele pasar', body: 'Una persona copia resultados a mano o un scraper corre sin validación. Cuando cambia la fuente, el flujo se detiene sin aviso o sigue publicando datos incompletos.' },
+      { title: 'El requisito real', body: 'La recolección solo sirve cuando la fuente está autorizada, las fallas son visibles, las salidas se validan y otra persona puede reparar el flujo.' },
+    ],
+    scopeTitle: 'Recolección diseñada según la fuente y la confianza aguas abajo',
+    scopeSubtitle: 'El alcance fija fuentes autorizadas, frecuencia, registros esperados, validaciones, contrato de salida, alertas y responsable de traspaso antes de implementar.',
+    scopeNote: { label: 'Límite estricto', body: 'No se evaden logins, paywalls, CAPTCHAs, límites de frecuencia, políticas robots ni otros controles de acceso. Tampoco se enriquece información personal de forma encubierta ni se recolectan leads por única vez.' },
+    reviewGroups: [
+      { title: 'Recolección', items: ['APIs públicas, feeds, archivos o sitios autorizados.', 'Reintentos, backoff, frecuencia responsable y ejecuciones reanudables.', 'Selectores, supuestos y propiedad de la fuente documentados.', 'Secretos fuera del código cuando se requiere acceso autorizado.'] },
+      { title: 'Validación', items: ['Validación de esquema y cantidad de registros antes de entregar.', 'Estados explícitos para vacío, parcial, duplicados y deriva.', 'Snapshots crudos cuando aportan diagnóstico y replay.', 'Alertas que identifican la fuente y el punto probable de reparación.'] },
+      { title: 'Entrega y traspaso', items: ['Salidas CSV, JSON, Parquet, base de datos, planilla o API.', 'Entrega programada al sistema que el equipo ya usa.', 'Pruebas, README, runbook y notas de reparación.', 'Responsable definido y ruta clara para futuros cambios de fuente.'] },
+    ],
+    processTitle: 'Cómo funciona una implementación de recolección',
+    plansTitle: 'Desde el contrato de fuente hasta un colector mantenible',
+    plansSubtitle: `El punto de entrada es el Diagnóstico de Recolección (${pricing.automation.es.scoping}, acreditable a la implementación). Un colector acotado parte en ${pricing.automation.es.scoped}; sistemas multi-fuente y estabilización continua se cotizan aparte.`,
+    plans: pythonAutomation.es.plans.map((plan, index) => ({
+      ...plan,
+      name: ['Diagnóstico de Recolección', 'Colector Acotado', 'Sistema de Recolección Multi-Fuente', 'Retainer de Estabilización de Fuentes'][index] ?? plan.name,
+    })),
+    casesTitle: 'Dónde la recolección recurrente es el servicio correcto',
+    casesSubtitle: 'Para adquisición legal y repetible que ya alimenta una operación o publicación real.',
+    cases: [
+      ['Monitoreo de datos públicos', 'Recolectar publicaciones o indicadores con frecuencia definida, validarlos y entregar un dataset estable.'],
+      ['Pipelines editoriales', 'Adquirir material estructurado de forma recurrente para un producto informativo con procedencia clara.'],
+      ['Seguimiento operacional', 'Monitorear datos autorizados de proveedores, marketplaces o partners donde registros faltantes afectan decisiones.'],
+      ['Reemplazo de scraper frágil', 'Sustituir un script que falla en silencio por un colector que valida, alerta y deja ruta de reparación.'],
+    ],
+    related: [
+      { label: 'Pipeline de Datos de Lotería', href: 'https://github.com/cortega26/polla', accent: true },
+      { label: 'Noticiencias', href: 'https://noticiencias.com', accent: true },
+      { label: 'chile-hub', href: 'https://github.com/cortega26/chile-hub', accent: true },
+      { label: 'Todo el trabajo en producción', href: '/es/trabajo/' },
+    ],
+    faqs: [
+      ['¿Desde qué fuentes recolectas?', 'APIs públicas, feeds, archivos y sitios web, además de fuentes privadas cuando el cliente tiene autorización explícita y entrega acceso legítimo.'],
+      ['¿Puedes evadir un login, CAPTCHA, paywall o límite de frecuencia?', 'No. El servicio no evade controles de acceso ni oculta la recolección. Si una fuente no puede recolectarse de forma legal y responsable, queda fuera de alcance.'],
+      ['¿Qué pasa cuando cambia el layout o esquema?', 'La implementación incluye validación, estados de falla visibles, logs y notas de reparación. Un retainer opcional cubre cambios razonables después del traspaso.'],
+      ['¿Esto sirve para generar leads?', 'No para harvesting puntual ni enriquecimiento encubierto de datos personales. Un dataset operacional recurrente, con autorización y propósito claros, sí puede encajar.'],
+      ['¿Qué recibo?', 'Un colector programado y reejecutable, salidas estructuradas, pruebas, logs, alertas, instrucciones de setup, README y runbook orientado a reparación.'],
+      ['¿Por qué inglés se cotiza en USD y español en UF?', 'La entrega internacional se produce en inglés y se cotiza en USD. Para Chile y LATAM está disponible en español con precios locales en UF.'],
+    ],
+    contactTitle: 'Parte por el contrato de fuente, no por una librería de scraping',
+    contactSubtitle: 'Indica fuente, autorización, frecuencia, destino, responsable aguas abajo y qué debe pasar ante una ejecución fallida o parcial.',
+    contactCardTitle: `Diagnóstico de recolección — ${pricing.automation.es.scoping}`,
+    contactCardBody: 'Un contrato escrito de fuente y salida que cubre autorización, frecuencia, validación, fallas, entrega y responsable. Se acredita a la implementación.',
+    intakeHeading: 'Cuéntame sobre la fuente recurrente',
+    intents: [
+      { tag: 'Una fuente pública cambia seguido', body: 'Recolectarla en calendario con validación, alertas y notas de reparación.' },
+      { tag: 'La recolección manual alimenta un reporte', body: 'Reemplazar copia-pega por un colector reproducible y entrega estructurada.' },
+      { tag: 'Nuestro scraper falla en silencio', body: 'Reconstruirlo con estados de falla explícitos y un runbook operable.' },
+    ],
   },
 };
 
@@ -555,7 +708,7 @@ const internalTools: ServiceDefinition = {
     lede: 'I wrap fragile scripts and one-person workflows behind internal APIs, CLIs, or guided interfaces — with auth, validation, tests, and documentation — so the workflow stays usable when the original builder is on holiday or gone.',
     subcopy:
       'All deliverables are in English. The result is a maintainable internal tool, not a notebook with tribal knowledge attached.',
-    ctaPrimary: 'Scope my internal tool — from $290',
+    ctaPrimary: `Scope my internal tool — from ${pricing.internalTools.en.scoping}`,
     ctaSecondary: "See what's included",
     microcopy:
       'Fixed scope, not open-ended hours. Every engagement starts with a free 15-minute call to confirm fit before any quote.',
@@ -573,7 +726,7 @@ const internalTools: ServiceDefinition = {
       { label: 'Docs + handoff' },
     ],
     entryEyebrow: 'Entry point',
-    entryPrice: '$290',
+    entryPrice: pricing.internalTools.en.scoping,
     entryCaption: 'Tool scoping. Applied as credit toward any build.',
     availabilityEyebrow: 'Availability',
     availability: '2–3 new builds per month. Response within 24–48 business hours.',
@@ -641,10 +794,10 @@ const internalTools: ServiceDefinition = {
     plansEyebrow: 'Plans & pricing',
     plansTitle: 'From one wrapped workflow to a platform several people rely on',
     plansSubtitle:
-      'The natural entry point is Tool Scoping ($290, credited toward the build). Most teams start by wrapping one workflow, then expand to a small platform as more people depend on it.',
+      `The natural entry point is Tool Scoping (${pricing.internalTools.en.scoping}, credited toward the build). Most teams start by wrapping one workflow, then expand to a small platform as more people depend on it.`,
     plans: [
       {
-        priceLabel: 'From $290',
+        priceLabel: `From ${pricing.internalTools.en.scoping}`,
         priceApprox: 'credited to build',
         name: 'Tool Scoping',
         intro: 'A written interface contract before any build: users, valid inputs, access model, and handoff target.',
@@ -652,7 +805,7 @@ const internalTools: ServiceDefinition = {
         items: ['Free 15-min diagnostic call', 'Interface contract in writing', 'Fixed-price build quote', 'Credited toward the build'],
       },
       {
-        priceLabel: 'From $1,800',
+        priceLabel: `From ${pricing.internalTools.en.scoped}`,
         priceApprox: 'one-time',
         name: 'Scoped Internal Tool',
         intro: 'One workflow wrapped behind an API, CLI, or guided interface, with auth, tests, and a clean handoff.',
@@ -661,14 +814,14 @@ const internalTools: ServiceDefinition = {
         items: ['Everything in Scoping', 'One workflow wrapped', 'Auth & input validation', 'Tests & CI', 'Operator docs + handoff'],
       },
       {
-        priceLabel: 'From $3,600',
+        priceLabel: `From ${pricing.internalTools.en.multi}`,
         priceApprox: 'one-time',
         name: 'Team Platform',
         intro: 'Several workflows behind one coherent internal surface that multiple roles can use safely.',
         items: ['Everything in Scoped Tool', 'Multiple workflows unified', 'Role-based access', 'Shared documentation'],
       },
       {
-        priceLabel: 'From $290/mo',
+        priceLabel: `From ${pricing.internalTools.en.retainer}`,
         priceApprox: 'per month',
         name: 'Stabilization Retainer',
         intro: 'Keep the tool healthy as needs evolve: small changes, upkeep, and external technical judgment.',
@@ -730,7 +883,7 @@ const internalTools: ServiceDefinition = {
     faqTitle: 'Questions worth answering precisely',
     faqs: [
       ['How do you price this — hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
-      ['What does the $290 scoping include?', 'A written interface contract: users, valid inputs, access model, and handoff target, plus a fixed-price quote. If you proceed, the $290 is credited toward the build.'],
+      [`What does the ${pricing.internalTools.en.scoping} scoping include?`, `A written interface contract: users, valid inputs, access model, and handoff target, plus a fixed-price quote. If you proceed, the ${pricing.internalTools.en.scoping} is credited toward the build.`],
       ['Can you wrap an existing script we already have?', 'Yes — that is the common case. I wrap existing logic behind a clean interface with validation, tests, and docs, rather than rewriting it from scratch unless the code requires it.'],
       ['What stack do you use?', 'Primarily Python and FastAPI for APIs, plus CLIs and lightweight interfaces, with auth, tests, and GitHub Actions. The stack is chosen to fit your environment and handoff.'],
       ['Do you build the frontend too?', 'I build lean, functional interfaces where they help operators. This service is not a design-heavy product UI — if you need that, a Static Sites & Front Ends engagement is the better fit.'],
@@ -740,7 +893,7 @@ const internalTools: ServiceDefinition = {
     contactTitle: 'Start by scoping the tool, not by signing a retainer',
     contactSubtitle:
       'If a workflow is trapped in one person or one script, the right entry point is a short scoping pass that turns it into a fixed-price build.',
-    contactCardTitle: 'Tool scoping — $290',
+    contactCardTitle: `Tool scoping — ${pricing.internalTools.en.scoping}`,
     contactCardBody:
       'A written interface contract: users, valid inputs, access model, and handoff target, plus a fixed-price build quote. The fee is credited toward the build.',
     contactRiskNote:
@@ -766,7 +919,7 @@ const internalTools: ServiceDefinition = {
     lede: 'Empaqueto scripts frágiles y flujos de una sola persona detrás de APIs internas, CLIs o interfaces guiadas — con autenticación, validación, tests y documentación — para que el flujo siga siendo usable cuando el autor está de vacaciones o ya no está.',
     subcopy:
       'El resultado es una herramienta interna mantenible, no un notebook con conocimiento tribal adjunto.',
-    ctaPrimary: 'Acotar mi herramienta — desde 3 UF',
+    ctaPrimary: `Acotar mi herramienta — desde ${pricing.internalTools.es.scoping}`,
     ctaSecondary: 'Ver qué incluye',
     microcopy:
       'Alcance fijo, no horas abiertas. Cada proyecto empieza con una llamada gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.',
@@ -784,7 +937,7 @@ const internalTools: ServiceDefinition = {
       { label: 'Docs + traspaso' },
     ],
     entryEyebrow: 'Punto de entrada',
-    entryPrice: '3 UF',
+    entryPrice: pricing.internalTools.es.scoping,
     entryCaption: 'Diagnóstico de la herramienta. Se acredita a cualquier implementación.',
     availabilityEyebrow: 'Disponibilidad',
     availability: '2–3 proyectos nuevos al mes. Respuesta en 24–48 horas hábiles.',
@@ -852,10 +1005,10 @@ const internalTools: ServiceDefinition = {
     plansEyebrow: 'Planes y precios',
     plansTitle: 'De un flujo empaquetado a una plataforma de la que dependen varios',
     plansSubtitle:
-      'El punto de entrada natural es el Diagnóstico de la Herramienta (3 UF, acreditable a la implementación). La mayoría parte empaquetando un flujo y luego se expande a una pequeña plataforma a medida que más personas dependen de ella.',
+      `El punto de entrada natural es el Diagnóstico de la Herramienta (${pricing.internalTools.es.scoping}, acreditable a la implementación). La mayoría parte empaquetando un flujo y luego se expande a una pequeña plataforma a medida que más personas dependen de ella.`,
     plans: [
       {
-        priceLabel: '3 UF',
+        priceLabel: pricing.internalTools.es.scoping,
         priceApprox: 'acreditable',
         name: 'Diagnóstico de la Herramienta',
         intro: 'Un contrato de interfaz por escrito antes de construir: usuarios, inputs válidos, modelo de acceso y objetivo de traspaso.',
@@ -863,7 +1016,7 @@ const internalTools: ServiceDefinition = {
         items: ['Llamada de diagnóstico gratis', 'Contrato de interfaz por escrito', 'Cotización a precio fijo', 'Acreditable a la construcción'],
       },
       {
-        priceLabel: 'Desde 35 UF',
+        priceLabel: `Desde ${pricing.internalTools.es.scoped}`,
         priceApprox: 'por proyecto',
         name: 'Herramienta Interna Acotada',
         intro: 'Un flujo empaquetado detrás de una API, CLI o interfaz guiada, con auth, tests y un traspaso limpio.',
@@ -872,14 +1025,14 @@ const internalTools: ServiceDefinition = {
         items: ['Todo lo del Diagnóstico', 'Un flujo empaquetado', 'Auth y validación de inputs', 'Tests y CI', 'Docs de operador + traspaso'],
       },
       {
-        priceLabel: 'Desde 70 UF',
+        priceLabel: `Desde ${pricing.internalTools.es.multi}`,
         priceApprox: 'por proyecto',
         name: 'Plataforma de Equipo',
         intro: 'Varios flujos detrás de una superficie interna coherente que múltiples roles pueden usar con seguridad.',
         items: ['Todo lo de la Herramienta Acotada', 'Varios flujos unificados', 'Acceso por rol', 'Documentación compartida'],
       },
       {
-        priceLabel: 'Desde 6 UF/mes',
+        priceLabel: `Desde ${pricing.internalTools.es.retainer}`,
         priceApprox: 'por mes',
         name: 'Retainer de Estabilización',
         intro: 'Mantén la herramienta sana a medida que evolucionan las necesidades: cambios pequeños, mantención y juicio técnico externo.',
@@ -941,7 +1094,7 @@ const internalTools: ServiceDefinition = {
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
       ['¿Cómo cobras esto — por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
-      ['¿Qué incluye el diagnóstico de 3 UF?', 'Un contrato de interfaz por escrito: usuarios, inputs válidos, modelo de acceso y objetivo de traspaso, más una cotización a precio fijo. Si avanzas, las 3 UF se acreditan a la construcción.'],
+      [`¿Qué incluye el diagnóstico de ${pricing.internalTools.es.scoping}?`, `Un contrato de interfaz por escrito: usuarios, inputs válidos, modelo de acceso y objetivo de traspaso, más una cotización a precio fijo. Si avanzas, las ${pricing.internalTools.es.scoping} se acreditan a la construcción.`],
       ['¿Puedes empaquetar un script que ya tenemos?', 'Sí — es el caso común. Empaqueto la lógica existente detrás de una interfaz limpia con validación, tests y docs, en vez de reescribirla desde cero salvo que el código lo exija.'],
       ['¿Qué stack usas?', 'Principalmente Python y FastAPI para APIs, más CLIs e interfaces livianas, con auth, tests y GitHub Actions. El stack se elige para encajar con tu entorno y traspaso.'],
       ['¿También construyes el frontend?', 'Construyo interfaces sobrias y funcionales donde ayudan a los operadores. Este servicio no es una UI de producto cargada de diseño — si necesitas eso, un proyecto de Sitios y Frontends encaja mejor.'],
@@ -951,7 +1104,7 @@ const internalTools: ServiceDefinition = {
     contactTitle: 'Parte acotando la herramienta, no firmando un retainer',
     contactSubtitle:
       'Si un flujo está atrapado en una persona o un script, el punto de entrada correcto es un diagnóstico corto que lo convierte en una construcción a precio fijo.',
-    contactCardTitle: 'Diagnóstico de la herramienta — 3 UF',
+    contactCardTitle: `Diagnóstico de la herramienta — ${pricing.internalTools.es.scoping}`,
     contactCardBody:
       'Un contrato de interfaz por escrito: usuarios, inputs válidos, modelo de acceso y objetivo de traspaso, más una cotización a precio fijo. El valor se acredita a la construcción.',
     contactRiskNote:
@@ -984,7 +1137,7 @@ const financialTooling: ServiceDefinition = {
     lede: 'I build finance and reconciliation workflows that fail closed — they halt on discrepancies, preserve deterministic audit trails, and make review easier — so a wrong number is caught before it becomes an expensive surprise.',
     subcopy:
       'All deliverables are in English. Trust-critical work, built with the explicit checks and audit artifacts that finance review actually needs.',
-    ctaPrimary: 'Scope my controls — from $390',
+    ctaPrimary: `Scope my controls — from ${pricing.financial.en.scoping}`,
     ctaSecondary: "See what's included",
     microcopy:
       'Fixed scope, not open-ended hours. Every engagement starts with a free 15-minute call to confirm fit before any quote.',
@@ -1002,7 +1155,7 @@ const financialTooling: ServiceDefinition = {
       { label: 'Tested controls' },
     ],
     entryEyebrow: 'Entry point',
-    entryPrice: '$390',
+    entryPrice: pricing.financial.en.scoping,
     entryCaption: 'Controls scoping. Applied as credit toward any build.',
     availabilityEyebrow: 'Availability',
     availability: '1–2 new builds per month. Response within 24–48 business hours.',
@@ -1070,10 +1223,10 @@ const financialTooling: ServiceDefinition = {
     plansEyebrow: 'Plans & pricing',
     plansTitle: 'From one reconciliation to a system of financial controls',
     plansSubtitle:
-      'The natural entry point is Controls Scoping ($390, credited toward the build). Most teams start with one reconciliation flow, then expand to a broader control system as trust requirements grow.',
+      `The natural entry point is Controls Scoping (${pricing.financial.en.scoping}, credited toward the build). Most teams start with one reconciliation flow, then expand to a broader control system as trust requirements grow.`,
     plans: [
       {
-        priceLabel: 'From $390',
+        priceLabel: `From ${pricing.financial.en.scoping}`,
         priceApprox: 'credited to build',
         name: 'Controls Scoping',
         intro: 'A written control spec before any build: what must match, tolerances, refusals, and required evidence.',
@@ -1081,7 +1234,7 @@ const financialTooling: ServiceDefinition = {
         items: ['Free 15-min diagnostic call', 'Control spec in writing', 'Fixed-price build quote', 'Credited toward the build'],
       },
       {
-        priceLabel: 'From $2,400',
+        priceLabel: `From ${pricing.financial.en.scoped}`,
         priceApprox: 'one-time',
         name: 'Scoped Implementation',
         intro: 'One reconciliation or control flow built fail-closed, with deterministic outputs and audit artifacts.',
@@ -1090,14 +1243,14 @@ const financialTooling: ServiceDefinition = {
         items: ['Everything in Scoping', 'One fail-closed control flow', 'Deterministic audit artifacts', 'Tested controls', 'Documentation + handoff'],
       },
       {
-        priceLabel: 'From $4,800',
+        priceLabel: `From ${pricing.financial.en.multi}`,
         priceApprox: 'one-time',
         name: 'Financial Control System',
         intro: 'Multiple sources and controls unified into one auditable system with consistent evidence.',
         items: ['Everything in Scoped Implementation', 'Multiple sources reconciled', 'Unified audit trail', 'Versioned control rules'],
       },
       {
-        priceLabel: 'From $390/mo',
+        priceLabel: `From ${pricing.financial.en.retainer}`,
         priceApprox: 'per month',
         name: 'Stabilization Retainer',
         intro: 'Keep controls current as rules, sources, and requirements evolve, with external review.',
@@ -1169,7 +1322,7 @@ const financialTooling: ServiceDefinition = {
     contactTitle: 'Start by scoping the controls, not by trusting the spreadsheet',
     contactSubtitle:
       'If a reconciliation or control matters enough that a silent error would hurt, the right entry point is a short scoping pass that turns it into a fail-closed build.',
-    contactCardTitle: 'Controls scoping — $390',
+    contactCardTitle: `Controls scoping — ${pricing.financial.en.scoping}`,
     contactCardBody:
       'A written control spec: what must match, tolerances, refusals, and required evidence, plus a fixed-price build quote. The fee is credited toward the build.',
     contactRiskNote:
@@ -1195,7 +1348,7 @@ const financialTooling: ServiceDefinition = {
     lede: 'Construyo flujos financieros y de conciliación que fallan cerrado — se detienen ante discrepancias, preservan trazas de auditoría deterministas y facilitan la revisión — para que un número equivocado se detecte antes de volverse una sorpresa cara.',
     subcopy:
       'Trabajo crítico para la confianza, construido con los chequeos explícitos y artefactos de auditoría que la revisión financiera realmente necesita.',
-    ctaPrimary: 'Acotar mis controles — desde 4 UF',
+    ctaPrimary: `Acotar mis controles — desde ${pricing.financial.es.scoping}`,
     ctaSecondary: 'Ver qué incluye',
     microcopy:
       'Alcance fijo, no horas abiertas. Cada proyecto empieza con una llamada gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.',
@@ -1213,7 +1366,7 @@ const financialTooling: ServiceDefinition = {
       { label: 'Controles testeados' },
     ],
     entryEyebrow: 'Punto de entrada',
-    entryPrice: '4 UF',
+    entryPrice: pricing.financial.es.scoping,
     entryCaption: 'Diagnóstico de controles. Se acredita a cualquier implementación.',
     availabilityEyebrow: 'Disponibilidad',
     availability: '1–2 proyectos nuevos al mes. Respuesta en 24–48 horas hábiles.',
@@ -1281,10 +1434,10 @@ const financialTooling: ServiceDefinition = {
     plansEyebrow: 'Planes y precios',
     plansTitle: 'De una conciliación a un sistema de controles financieros',
     plansSubtitle:
-      'El punto de entrada natural es el Diagnóstico de Controles (4 UF, acreditable a la implementación). La mayoría parte con un flujo de conciliación y luego se expande a un sistema de control más amplio a medida que crecen los requisitos de confianza.',
+      `El punto de entrada natural es el Diagnóstico de Controles (${pricing.financial.es.scoping}, acreditable a la implementación). La mayoría parte con un flujo de conciliación y luego se expande a un sistema de control más amplio a medida que crecen los requisitos de confianza.`,
     plans: [
       {
-        priceLabel: '4 UF',
+        priceLabel: pricing.financial.es.scoping,
         priceApprox: 'acreditable',
         name: 'Diagnóstico de Controles',
         intro: 'Una especificación de control por escrito antes de construir: qué debe cuadrar, tolerancias, rechazos y evidencia requerida.',
@@ -1292,7 +1445,7 @@ const financialTooling: ServiceDefinition = {
         items: ['Llamada de diagnóstico gratis', 'Especificación de control por escrito', 'Cotización a precio fijo', 'Acreditable a la construcción'],
       },
       {
-        priceLabel: 'Desde 45 UF',
+        priceLabel: `Desde ${pricing.financial.es.scoped}`,
         priceApprox: 'por proyecto',
         name: 'Implementación Acotada',
         intro: 'Un flujo de conciliación o control construido fail-closed, con salidas deterministas y artefactos de auditoría.',
@@ -1301,14 +1454,14 @@ const financialTooling: ServiceDefinition = {
         items: ['Todo lo del Diagnóstico', 'Un flujo de control fail-closed', 'Artefactos de auditoría deterministas', 'Controles testeados', 'Documentación + traspaso'],
       },
       {
-        priceLabel: 'Desde 90 UF',
+        priceLabel: `Desde ${pricing.financial.es.multi}`,
         priceApprox: 'por proyecto',
         name: 'Sistema de Control Financiero',
         intro: 'Varias fuentes y controles unificados en un sistema auditable con evidencia consistente.',
         items: ['Todo lo de la Implementación Acotada', 'Varias fuentes conciliadas', 'Traza de auditoría unificada', 'Reglas de control versionadas'],
       },
       {
-        priceLabel: 'Desde 8 UF/mes',
+        priceLabel: `Desde ${pricing.financial.es.retainer}`,
         priceApprox: 'por mes',
         name: 'Retainer de Estabilización',
         intro: 'Mantén los controles vigentes a medida que evolucionan reglas, fuentes y requisitos, con revisión externa.',
@@ -1380,7 +1533,7 @@ const financialTooling: ServiceDefinition = {
     contactTitle: 'Parte acotando los controles, no confiando en la planilla',
     contactSubtitle:
       'Si una conciliación o control importa lo suficiente como para que un error silencioso duela, el punto de entrada correcto es un diagnóstico corto que lo convierte en una construcción fail-closed.',
-    contactCardTitle: 'Diagnóstico de controles — 4 UF',
+    contactCardTitle: `Diagnóstico de controles — ${pricing.financial.es.scoping}`,
     contactCardBody:
       'Una especificación de control por escrito: qué debe cuadrar, tolerancias, rechazos y evidencia requerida, más una cotización a precio fijo. El valor se acredita a la construcción.',
     contactRiskNote:
@@ -1413,7 +1566,7 @@ const staticSites: ServiceDefinition = {
     lede: 'I build lean Astro and static surfaces with SEO and performance baked in, bilingual where you need it, and a clean deploy pipeline — sites that convert the right lead and stay maintainable instead of rotting after launch.',
     subcopy:
       'All deliverables are in English. You get a fast, accessible, documented site, not a heavy template you cannot edit.',
-    ctaPrimary: 'Scope my site — from $190',
+    ctaPrimary: `Scope my site — from ${pricing.staticSites.en.scoping}`,
     ctaSecondary: "See what's included",
     microcopy:
       'Fixed scope, not open-ended hours. Every engagement starts with a free 15-minute call to confirm fit before any quote.',
@@ -1431,7 +1584,7 @@ const staticSites: ServiceDefinition = {
       { label: 'Clean deploy' },
     ],
     entryEyebrow: 'Entry point',
-    entryPrice: '$190',
+    entryPrice: pricing.staticSites.en.scoping,
     entryCaption: 'Site scoping. Applied as credit toward any build.',
     availabilityEyebrow: 'Availability',
     availability: '2–3 new sites per month. Response within 24–48 business hours.',
@@ -1499,10 +1652,10 @@ const staticSites: ServiceDefinition = {
     plansEyebrow: 'Plans & pricing',
     plansTitle: 'From a fast landing to a complete bilingual site',
     plansSubtitle:
-      'The natural entry point is Site Scoping ($190, credited toward the build). Most projects start with a scoped site or landing, then grow into a multi-page bilingual build.',
+      `The natural entry point is Site Scoping (${pricing.staticSites.en.scoping}, credited toward the build). Most projects start with a scoped site or landing, then grow into a multi-page bilingual build.`,
     plans: [
       {
-        priceLabel: 'From $190',
+        priceLabel: `From ${pricing.staticSites.en.scoping}`,
         priceApprox: 'credited to build',
         name: 'Site Scoping',
         intro: 'A sitemap and scope before any build: pages, content surfaces, conversion goal, and success criteria.',
@@ -1510,7 +1663,7 @@ const staticSites: ServiceDefinition = {
         items: ['Free 15-min diagnostic call', 'Sitemap + scope in writing', 'Fixed-price build quote', 'Credited toward the build'],
       },
       {
-        priceLabel: 'From $1,200',
+        priceLabel: `From ${pricing.staticSites.en.scoped}`,
         priceApprox: 'one-time',
         name: 'Scoped Site / Landing',
         intro: 'One fast, indexable site or landing with SEO and performance baked in and a clean handoff.',
@@ -1519,14 +1672,14 @@ const staticSites: ServiceDefinition = {
         items: ['Everything in Scoping', 'One fast, indexable site', 'SEO + performance built in', 'Accessible by default', 'Deploy pipeline + handoff'],
       },
       {
-        priceLabel: 'From $2,600',
+        priceLabel: `From ${pricing.staticSites.en.multi}`,
         priceApprox: 'one-time',
         name: 'Multi-page + i18n',
         intro: 'A larger bilingual site, SEO-complete, with the structure to grow without rotting.',
         items: ['Everything in Scoped Site', 'Multiple pages', 'Bilingual / i18n + hreflang', 'Structured content model'],
       },
       {
-        priceLabel: 'From $150/mo',
+        priceLabel: `From ${pricing.staticSites.en.retainer}`,
         priceApprox: 'per month',
         name: 'Maintenance',
         intro: 'Keep the site fast and current: updates, monitoring, and small changes as needs evolve.',
@@ -1598,7 +1751,7 @@ const staticSites: ServiceDefinition = {
     contactTitle: 'Start by scoping the site, not by picking a template',
     contactSubtitle:
       'If you need a fast, credible, maintainable site, the right entry point is a short scoping pass that turns it into a fixed-price build.',
-    contactCardTitle: 'Site scoping — $190',
+    contactCardTitle: `Site scoping — ${pricing.staticSites.en.scoping}`,
     contactCardBody:
       'A sitemap and scope: pages, content surfaces, conversion goal, and success criteria, plus a fixed-price build quote. The fee is credited toward the build.',
     contactRiskNote:
@@ -1624,7 +1777,7 @@ const staticSites: ServiceDefinition = {
     lede: 'Construyo superficies sobrias en Astro y estáticas con SEO y rendimiento integrados, bilingües donde lo necesites, y un pipeline de despliegue limpio — sitios que convierten al lead correcto y se mantienen mantenibles en vez de pudrirse después del lanzamiento.',
     subcopy:
       'Obtienes un sitio rápido, accesible y documentado, no un template pesado que no puedes editar.',
-    ctaPrimary: 'Acotar mi sitio — desde 2 UF',
+    ctaPrimary: `Acotar mi sitio — desde ${pricing.staticSites.es.scoping}`,
     ctaSecondary: 'Ver qué incluye',
     microcopy:
       'Alcance fijo, no horas abiertas. Cada proyecto empieza con una llamada gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.',
@@ -1642,7 +1795,7 @@ const staticSites: ServiceDefinition = {
       { label: 'Despliegue limpio' },
     ],
     entryEyebrow: 'Punto de entrada',
-    entryPrice: '2 UF',
+    entryPrice: pricing.staticSites.es.scoping,
     entryCaption: 'Diagnóstico del sitio. Se acredita a cualquier implementación.',
     availabilityEyebrow: 'Disponibilidad',
     availability: '2–3 sitios nuevos al mes. Respuesta en 24–48 horas hábiles.',
@@ -1710,10 +1863,10 @@ const staticSites: ServiceDefinition = {
     plansEyebrow: 'Planes y precios',
     plansTitle: 'De una landing rápida a un sitio bilingüe completo',
     plansSubtitle:
-      'El punto de entrada natural es el Diagnóstico del Sitio (2 UF, acreditable a la implementación). La mayoría parte con un sitio o landing acotado y luego crece a una construcción bilingüe de varias páginas.',
+      `El punto de entrada natural es el Diagnóstico del Sitio (${pricing.staticSites.es.scoping}, acreditable a la implementación). La mayoría parte con un sitio o landing acotado y luego crece a una construcción bilingüe de varias páginas.`,
     plans: [
       {
-        priceLabel: '2 UF',
+        priceLabel: pricing.staticSites.es.scoping,
         priceApprox: 'acreditable',
         name: 'Diagnóstico del Sitio',
         intro: 'Un sitemap y alcance antes de construir: páginas, superficies de contenido, objetivo de conversión y criterios de éxito.',
@@ -1721,7 +1874,7 @@ const staticSites: ServiceDefinition = {
         items: ['Llamada de diagnóstico gratis', 'Sitemap + alcance por escrito', 'Cotización a precio fijo', 'Acreditable a la construcción'],
       },
       {
-        priceLabel: 'Desde 25 UF',
+        priceLabel: `Desde ${pricing.staticSites.es.scoped}`,
         priceApprox: 'por proyecto',
         name: 'Sitio / Landing Acotado',
         intro: 'Un sitio o landing rápido e indexable con SEO y rendimiento integrados y un traspaso limpio.',
@@ -1730,14 +1883,14 @@ const staticSites: ServiceDefinition = {
         items: ['Todo lo del Diagnóstico', 'Un sitio rápido e indexable', 'SEO + rendimiento integrados', 'Accesible por defecto', 'Pipeline de despliegue + traspaso'],
       },
       {
-        priceLabel: 'Desde 50 UF',
+        priceLabel: `Desde ${pricing.staticSites.es.multi}`,
         priceApprox: 'por proyecto',
         name: 'Multi-página + i18n',
         intro: 'Un sitio bilingüe más grande, SEO-completo, con la estructura para crecer sin pudrirse.',
         items: ['Todo lo del Sitio Acotado', 'Varias páginas', 'Bilingüe / i18n + hreflang', 'Modelo de contenido estructurado'],
       },
       {
-        priceLabel: 'Desde 3 UF/mes',
+        priceLabel: `Desde ${pricing.staticSites.es.retainer}`,
         priceApprox: 'por mes',
         name: 'Mantención',
         intro: 'Mantén el sitio rápido y vigente: actualizaciones, monitoreo y cambios pequeños a medida que evolucionan las necesidades.',
@@ -1809,7 +1962,7 @@ const staticSites: ServiceDefinition = {
     contactTitle: 'Parte acotando el sitio, no eligiendo un template',
     contactSubtitle:
       'Si necesitas un sitio rápido, creíble y mantenible, el punto de entrada correcto es un diagnóstico corto que lo convierte en una construcción a precio fijo.',
-    contactCardTitle: 'Diagnóstico del sitio — 2 UF',
+    contactCardTitle: `Diagnóstico del sitio — ${pricing.staticSites.es.scoping}`,
     contactCardBody:
       'Un sitemap y alcance: páginas, superficies de contenido, objetivo de conversión y criterios de éxito, más una cotización a precio fijo. El valor se acredita a la construcción.',
     contactRiskNote:
@@ -1827,10 +1980,11 @@ const staticSites: ServiceDefinition = {
 };
 
 export const services: Record<
-  'python-automation' | 'internal-tools' | 'financial-tooling' | 'static-sites',
+  'python-automation' | 'recurring-data' | 'internal-tools' | 'financial-tooling' | 'static-sites',
   ServiceDefinition
 > = {
   'python-automation': pythonAutomation,
+  'recurring-data': recurringData,
   'internal-tools': internalTools,
   'financial-tooling': financialTooling,
   'static-sites': staticSites,

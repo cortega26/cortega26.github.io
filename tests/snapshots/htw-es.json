@@ -117,45 +117,45 @@
           {
             "@type": "Offer",
             "name": "Diagnóstico Técnico Web",
-            "priceCurrency": "CLP",
-            "price": "41000",
-            "description": "1 UF (aprox. CLP $41.000). Para saber con certeza qué está técnicamente descuidado antes de pagar por correcciones.",
+            "priceCurrency": "CLF",
+            "price": "1",
+            "description": "1 UF (pago único). Para saber con certeza qué está técnicamente descuidado antes de pagar por correcciones.",
             "availability": "https://schema.org/InStock",
             "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
           },
           {
             "@type": "Offer",
             "name": "Hardening Web Básico",
-            "priceCurrency": "CLP",
-            "price": "284000",
-            "description": "Desde 7 UF (aprox. CLP $284.000). Para corregir lo evidente y dejar el sitio técnicamente más sobrio, con registro verificable para el administrador.",
+            "priceCurrency": "CLF",
+            "price": "7",
+            "description": "Desde 7 UF (por implementación). Para corregir lo evidente y dejar el sitio técnicamente más sobrio, con registro verificable para el administrador.",
             "availability": "https://schema.org/InStock",
             "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
           },
           {
             "@type": "Offer",
             "name": "Revisión y Hardening Operativo",
-            "priceCurrency": "CLP",
-            "price": "527000",
-            "description": "Desde 13 UF (aprox. CLP $527.000). Para sitios que necesitan hardening y revisión operativa completa, sin requerimiento de entregable para dirección.",
+            "priceCurrency": "CLF",
+            "price": "13",
+            "description": "Desde 13 UF (por implementación). Para sitios que necesitan hardening y revisión operativa completa, sin requerimiento de entregable para dirección.",
             "availability": "https://schema.org/InStock",
             "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
           },
           {
             "@type": "Offer",
             "name": "Revisión Integral con Reporte Ejecutivo",
-            "priceCurrency": "CLP",
-            "price": "608000",
-            "description": "Desde 15 UF (aprox. CLP $608.000). Para cuando el resultado debe poder mostrarse a perfiles no técnicos sin traducción, con evidencia completa y hoja de ruta para el mes siguiente.",
+            "priceCurrency": "CLF",
+            "price": "15",
+            "description": "Desde 15 UF (por implementación). Para cuando el resultado debe poder mostrarse a perfiles no técnicos sin traducción, con evidencia completa y hoja de ruta para el mes siguiente.",
             "availability": "https://schema.org/InStock",
             "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
           },
           {
             "@type": "Offer",
             "name": "Soporte Técnico Web Mensual",
-            "priceCurrency": "CLP",
-            "price": "162000",
-            "description": "Desde 4 UF/mes (aprox. CLP $162.000/mes). Para mantener lo corregido y tener criterio técnico externo mirando lo básico con regularidad.",
+            "priceCurrency": "CLF",
+            "price": "4",
+            "description": "Desde 4 UF/mes (mensual). Para mantener lo corregido y tener criterio técnico externo mirando lo básico con regularidad.",
             "availability": "https://schema.org/InStock",
             "url": "https://tooltician.com/es/servicios/higiene-tecnica-web/"
           }

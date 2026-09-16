@@ -3,6 +3,7 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Navbar from '../../../../components/Navbar.astro';
 import Footer from '../../../../components/Footer.astro';
 import IntakeForm from '../../../../components/IntakeForm.astro';
+import { pricing } from '../../../../data/pricing';
 import '../../../../styles/global.css';
 
 const canonical = 'https://tooltician.com/en/services/web-technical-hygiene/';
@@ -66,7 +67,7 @@ const processSteps = [
 const plans = [
   {
     name: 'Web Technical Diagnostic',
-    priceLabel: '$69',
+    priceLabel: pricing.webHygiene.en.diagnostic,
     priceApprox: 'one-time',
     priceValue: '69',
     note: 'Applied as a credit toward any implementation plan.',
@@ -80,7 +81,7 @@ const plans = [
   },
   {
     name: 'Basic Web Hardening',
-    priceLabel: 'From $499',
+    priceLabel: `From ${pricing.webHygiene.en.essentials}`,
     priceApprox: 'one-time',
     priceValue: '499',
     note: 'For simple or corporate sites with no executive deliverable requirement.',
@@ -94,7 +95,7 @@ const plans = [
   },
   {
     name: 'Operational Review & Hardening',
-    priceLabel: 'From $899',
+    priceLabel: `From ${pricing.webHygiene.en.operational}`,
     priceApprox: 'one-time',
     priceValue: '899',
     note: 'Covers the technical. No executive report or follow-up roadmap.',
@@ -108,7 +109,7 @@ const plans = [
   },
   {
     name: 'Full Review with Executive Report',
-    priceLabel: 'From $999',
+    priceLabel: `From ${pricing.webHygiene.en.integral}`,
     priceApprox: 'one-time',
     priceValue: '999',
     note: 'Recommended for sites that drive leads, reputation, or sales.',
@@ -123,7 +124,7 @@ const plans = [
   },
   {
     name: 'Monthly Technical Web Support',
-    priceLabel: 'From $279/mo',
+    priceLabel: `From ${pricing.webHygiene.en.retainer}`,
     priceApprox: 'per month',
     priceValue: '279',
     note: 'Natural continuation of the Full Review. No in-house hiring needed.',
@@ -166,7 +167,7 @@ const faqs = [
   ['What if you find something serious?', 'I report it with priority, propose a course of action, and if it exceeds the scope, I recommend escalating to a specialist or a deeper audit.'],
   ['What if the diagnostic finds nothing relevant?', 'It can happen, especially with well-maintained sites. In that case the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The diagnostic fee applies regardless, but there are no surprises or additional charges.'],
   ['Can the scope grow during the review?', 'No. The scope is defined by the contracted plan. If something beyond that scope appears during the review, it is documented in the report with a recommended next step — but not executed without prior agreement.'],
-  ['Why are you less expensive than a local consultant?', 'A US or EU technical consultant typically bills $100–150/hour. The Full Review at $999 is the equivalent of 7–10 hours — with an executive-ready report delivered, not just a call. All deliverables are in English.'],
+  ['Why are you less expensive than a local consultant?', `A US or EU technical consultant typically bills $100–150/hour. The Full Review at ${pricing.webHygiene.en.integral} is the equivalent of 7–10 hours — with an executive-ready report delivered, not just a call. All deliverables are in English.`],
   ['Why are the prices different from the Spanish version?', 'The Spanish-language version is calibrated for the Chilean and Latin American market: different currency, different purchasing power, and documentation delivered in Spanish. The international service is priced in USD, delivered entirely in English, and structured to meet the expectations of clients in the US, UK, and European markets — including executive-ready deliverables and formal documentation standards. The technical scope is equivalent; the context of delivery is not.'],
   ['Can I hire you if I prefer to work in Spanish?', 'Yes. If your site is in English and you need deliverables in English, the international rates apply regardless of your language preference. If you prefer Spanish documentation and local pricing, the Spanish version of this service is the right entry point — same technical scope, calibrated for that market.'],
 ];
@@ -258,7 +259,7 @@ const breadcrumbJsonLd = {
             All deliverables are in English. You get the technical depth of a seasoned developer at a fraction of the cost of a local consultant.
           </p>
           <div class="service-hero__actions reveal reveal-delay-2">
-            <a class="btn btn-primary" href="#contact">Review my site — from $69</a>
+            <a class="btn btn-primary" href="#contact">Review my site — from {pricing.webHygiene.en.diagnostic}</a>
             <a class="btn btn-ghost" href="#scope">See what's included</a>
           </div>
           <p class="service-hero__microcopy reveal reveal-delay-2">
@@ -284,7 +285,7 @@ const breadcrumbJsonLd = {
           </div>
           <div class="service-summary__proof">
             <p class="service-summary__eyebrow">Entry point</p>
-            <p class="service-summary__price">$69</p>
+            <p class="service-summary__price">{pricing.webHygiene.en.diagnostic}</p>
             <p class="service-summary__muted">Diagnostic. Applied as credit toward any implementation plan.</p>
           </div>
           <div class="service-summary__proof">
@@ -403,7 +404,7 @@ const breadcrumbJsonLd = {
           <h2 class="section-title reveal">A simple entry point and a clear path to monthly support</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            The natural entry point is the Diagnostic ($69, credited toward implementation). Most simple sites scale to Basic Hardening. When the site drives leads, reputation, or sales, the Full Review closes better at just $100 more than the operational plan — and delivers the executive report and roadmap that open the path to monthly support.
+            The natural entry point is the Diagnostic ({pricing.webHygiene.en.diagnostic}, credited toward implementation). Most simple sites scale to Basic Hardening. When the site drives leads, reputation, or sales, the Full Review closes better at just {pricing.webHygiene.en.executiveUpgrade} more than the operational plan — and delivers the executive report and roadmap that open the path to monthly support.
           </p>
         </div>
         <div class="pricing-compare-wrapper">
@@ -569,7 +570,7 @@ const breadcrumbJsonLd = {
         </div>
         <div class="grid-2">
           <article class="card-glass brief-card reveal">
-            <h3 class="card-title">Web technical diagnostic — $69</h3>
+            <h3 class="card-title">Web technical diagnostic — {pricing.webHygiene.en.diagnostic}</h3>
             <p class="body-copy">
               Initial external review with a prioritized findings report and a clear next step. The cost is credited toward any implementation plan. No-commitment entry point.
             </p>
@@ -586,7 +587,7 @@ const breadcrumbJsonLd = {
         <div class="intent-grid">
           <a class="intent-link reveal" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_diagnostic">
             <span>I want to review a live site</span>
-            <strong>Diagnostic from $69, with a brief report and clear priorities.</strong>
+            <strong>Diagnostic from {pricing.webHygiene.en.diagnostic}, with a brief report and clear priorities.</strong>
           </a>
           <a class="intent-link reveal reveal-delay-1" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_agency">
             <span>I run an agency and need external support</span>

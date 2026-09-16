@@ -1,4 +1,6 @@
 ---
+import { engagementSummary } from '../data/pricing';
+
 interface Props { lang: 'en' | 'es'; }
 const { lang } = Astro.props;
 
@@ -7,24 +9,22 @@ const SVG_SEARCH   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none
 const SVG_LAYERS   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>';
 const SVG_GLOBE    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
 const SVG_SHIELD   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
-const SVG_CHART    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>';
-
 const en = {
-  eyebrow: 'Services', title: 'Two service lines, seven delivery modes',
-  subtitle: 'Python automation for operations-heavy workflows — plus web technical hygiene for live sites that commercially matter but have no internal technical owner. Each service addresses a concrete problem with defined deliverables.',
+  eyebrow: 'Services', title: 'Six scoped services. One delivery standard.',
+  subtitle: 'Each service starts with a concrete operational problem, ends with something your team can run, and states what sits outside the engagement. Fixed scope, visible progress, and a documented handoff.',
   fitLabel: 'Best when:',
+  scopeLabel: 'Scope:',
+  moreLabel: 'Scope & evidence',
   ctaLabel: 'View service',
-  ctaContactLabel: 'Discuss this service',
   termsLabel: 'Engagement terms →',
   termsHref: '/en/engagement/',
   services: [
-    { icon: SVG_REFRESH, title: 'Reporting Automation', desc: 'Replace recurring report assembly and back-office steps with scheduled or reproducible runs that emit the same answer every time.', fit: 'Inputs, outputs, and workflow ownership are already known.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }], href: '/en/services/python-automation/' },
-    { icon: SVG_SHIELD,  title: 'Web Technical Hygiene', desc: 'Review security headers, HTTPS, DNS, forms, Search Console, and basic monitoring for live sites that have no internal technical owner.', fit: 'The site is live, commercially matters, and nobody is reviewing the basics regularly.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/en/services/web-technical-hygiene/' },
-    { icon: SVG_SEARCH,  title: 'Recurring Data Collection', desc: 'Build scraping and acquisition flows that can be rerun safely, logged properly, and repaired without starting from zero.', fit: 'The team needs dependable collection, not a one-off demo scrape.', examples: [{ name: 'Jackpot Pipeline', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '/en/services/python-automation/' },
-    { icon: SVG_LAYERS,  title: 'Operator-Ready Internal Tools', desc: 'Package scripts behind internal APIs or guided interfaces so the workflow stays usable after the original builder steps away.', fit: 'Several people touch the same workflow and handoff risk is real.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }], href: '/en/services/internal-tools/' },
-    { icon: SVG_GLOBE,   title: 'Public Technical Surfaces', desc: 'Build lean Astro and web app surfaces that explain the system clearly, convert the right leads, and stay maintainable.', fit: 'The site needs evidence and clarity more than decorative marketing.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }], href: '/en/services/static-sites/' },
-    { icon: SVG_SHIELD,  title: 'Fail-Closed Financial Controls', desc: 'Implement reconciliation and finance workflows that stop on mismatches, preserve audit traces, and make review easier.', fit: 'A wrong answer is more expensive than a slower explicit check.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '/en/services/financial-tooling/' },
-    { icon: SVG_CHART,   title: 'Structured Data Delivery', desc: 'Produce outputs, dashboards, or publishing flows that remove manual copy-paste and make downstream use more predictable.', fit: 'The pain sits in recurring delivery, not a single isolated analysis.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '/en/services/python-automation/' },
+    { icon: SVG_REFRESH, title: 'Python Automation & Data Pipelines', desc: 'Turn recurring reports, ETL steps, and manual data delivery into scheduled, reproducible workflows.', fit: 'Inputs, outputs, owner, cadence, and success criteria can be named.', scope: 'One defined workflow or a coordinated multi-source system; excludes full data-platform programs and ML model development.', examples: [{ name: 'chile-hub', href: 'https://github.com/cortega26/chile-hub' }, { name: 'Jackpot Pipeline', href: 'https://github.com/cortega26/polla' }], href: '/en/services/python-automation/' },
+    { icon: SVG_SEARCH, title: 'Recurring Data Collection', desc: 'Collect public or authorized data repeatedly through resilient scraping and acquisition flows that fail loudly instead of drifting silently.', fit: 'A recurring source feeds operations, analysis, or publishing.', scope: 'Public or authorized sources with a repeatable collection need; excludes access-control bypasses and one-off lead harvesting.', examples: [{ name: 'Jackpot Pipeline', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '/en/services/recurring-data-collection/' },
+    { icon: SVG_LAYERS, title: 'Internal Tools & APIs', desc: 'Turn scripts and brittle operator steps into a CLI, internal API, or guided interface a team can use and hand off.', fit: 'Several people touch the workflow, or the original author has become a bottleneck.', scope: 'One known internal workflow; excludes full SaaS products, mobile apps, and open-ended staff augmentation.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }], href: '/en/services/internal-tools/' },
+    { icon: SVG_SHIELD, title: 'Financial & Audit Systems', desc: 'Build reconciliation and control workflows that stop on mismatches, preserve audit trails, and make review easier.', fit: 'A wrong answer costs more than a slower, explicit check.', scope: 'One defined control flow or coordinated multi-source system; excludes certified audits, tax advice, and full ERP replacement.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '/en/services/financial-tooling/' },
+    { icon: SVG_GLOBE, title: 'Static Sites & Focused Front Ends', desc: 'Build fast, maintainable public surfaces that explain the work clearly, convert the right lead, and survive handoff.', fit: 'Clarity, performance, and maintainability matter more than decorative marketing.', scope: 'Informational sites, landing pages, bilingual surfaces, and focused front ends; excludes complex SaaS and e-commerce backends.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }], href: '/en/services/static-sites/' },
+    { icon: SVG_SHIELD, title: 'Web Technical Hygiene', desc: 'Review and improve security headers, HTTPS, DNS, forms, Search Console, and lightweight monitoring on an existing live site.', fit: 'The site matters commercially, but nobody owns its technical basics.', scope: 'Review, basic hardening, verified fixes, and light monitoring; excludes penetration tests and guarantees of total security.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/en/services/web-technical-hygiene/' },
   ],
   examplesLabel: 'Evidence:',
   notFitTitle: 'Not the right fit',
@@ -36,27 +36,27 @@ const en = {
   ],
   shapesLabel: 'Engagement shapes',
   shapes: [
-    { name: 'Scoped automation', range: 'from 30 UF', note: '~USD $1,200', href: '#contact-form' },
-    { name: 'Stabilization retainer', range: 'from 6 UF / month', note: '~USD $240/mo', href: '#contact-form' },
-    { name: 'Web hygiene', range: 'from $69 diagnostic', note: 'already priced', href: '/en/services/web-technical-hygiene/' },
+    { name: 'Scoped automation', range: engagementSummary.en.automation, note: 'international delivery', href: '/en/services/python-automation/' },
+    { name: 'Stabilization retainer', range: engagementSummary.en.retainer, note: 'optional, no lock-in', href: '/en/services/python-automation/#plans' },
+    { name: 'Web hygiene', range: engagementSummary.en.webDiagnostic, note: 'already priced', href: '/en/services/web-technical-hygiene/' },
     { name: 'Diagnostic call', range: 'free', note: '15 min', href: 'https://calendly.com/ciortega26' },
   ],
 };
 
 const es = {
-  eyebrow: 'Servicios', title: 'Dos líneas de servicio, siete modalidades de entrega',
-  subtitle: 'Automatización Python para flujos operativos — más higiene técnica web para sitios publicados que importan comercialmente pero no tienen responsable técnico interno. Cada servicio responde a un problema concreto con entregables definidos.',
+  eyebrow: 'Servicios', title: 'Seis servicios acotados. Un mismo estándar de entrega.',
+  subtitle: 'Cada servicio parte de un problema operativo concreto, termina en algo que tu equipo puede operar y deja claro qué queda fuera. Alcance fijo, avance visible y traspaso documentado.',
   fitLabel: 'Encaja cuando:',
+  scopeLabel: 'Alcance:',
+  moreLabel: 'Alcance y evidencia',
   ctaLabel: 'Ver servicio',
-  ctaContactLabel: 'Hablar de este servicio',
   services: [
-    { icon: SVG_REFRESH, title: 'Automatización de Reportes', desc: 'Reemplazo el armado recurrente de reportes y pasos de back-office por ejecuciones programadas o reproducibles que entregan la misma respuesta cada vez.', fit: 'Ya se conocen inputs, outputs y dueño del flujo.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }], href: '/es/servicios/automatizacion-python/' },
-    { icon: SVG_SHIELD,  title: 'Higiene Técnica Web', desc: 'Reviso headers, HTTPS, DNS, formularios, Search Console y monitoreo liviano para sitios publicados que no tienen responsable técnico interno.', fit: 'El sitio ya está online, importa comercialmente y nadie está revisando lo básico con regularidad.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/es/servicios/higiene-tecnica-web/' },
-    { icon: SVG_SEARCH,  title: 'Recolección de Datos Recurrente', desc: 'Construyo flujos de scraping y adquisición que pueden reejecutarse con seguridad, quedar bien logueados y repararse sin partir de cero.', fit: 'El equipo necesita recolección confiable, no un scrape de demostración.', examples: [{ name: 'Pipeline de Lotería', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '/es/servicios/automatizacion-python/' },
-    { icon: SVG_LAYERS,  title: 'Herramientas Internas Operables', desc: 'Empaqueto scripts detrás de APIs internas o interfaces guiadas para que el flujo siga siendo usable cuando el autor ya no está encima.', fit: 'Varias personas tocan el mismo flujo y el riesgo de traspaso es real.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }], href: '/es/servicios/herramientas-internas/' },
-    { icon: SVG_GLOBE,   title: 'Superficies Técnicas Públicas', desc: 'Construyo sitios Astro y superficies web sobrias que explican el sistema con claridad, convierten al lead correcto y siguen siendo mantenibles.', fit: 'El sitio necesita evidencia y claridad más que marketing decorativo.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }], href: '/es/servicios/sitios-web/' },
-    { icon: SVG_SHIELD,  title: 'Controles Financieros Fail-Closed', desc: 'Implemento flujos financieros y de conciliación que se detienen ante diferencias, preservan trazas de auditoría y facilitan la revisión.', fit: 'Una respuesta equivocada cuesta más que una verificación explícita un poco más lenta.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '/es/servicios/herramientas-financieras/' },
-    { icon: SVG_CHART,   title: 'Entrega Estructurada de Datos', desc: 'Genero salidas, dashboards o flujos de publicación que eliminan el copia-pega manual y vuelven más predecible el consumo aguas abajo.', fit: 'El dolor está en la entrega recurrente, no en un análisis aislado.', examples: [{ name: 'Polla App', href: 'https://github.com/cortega26/polla' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '/es/servicios/automatizacion-python/' },
+    { icon: SVG_REFRESH, title: 'Automatización Python y Pipelines de Datos', desc: 'Convierto reportes recurrentes, pasos ETL y entregas manuales de datos en flujos programados y reproducibles.', fit: 'Se pueden nombrar entradas, salidas, responsable, frecuencia y criterios de éxito.', scope: 'Un flujo definido o un sistema coordinado de varias fuentes; no incluye levantar una plataforma de datos completa ni desarrollar modelos de ML.', examples: [{ name: 'chile-hub', href: 'https://github.com/cortega26/chile-hub' }, { name: 'Pipeline de Lotería', href: 'https://github.com/cortega26/polla' }], href: '/es/servicios/automatizacion-python/' },
+    { icon: SVG_SEARCH, title: 'Recolección Recurrente de Datos', desc: 'Recolecto datos públicos o autorizados mediante scraping y flujos de adquisición resilientes que fallan de forma visible en vez de degradarse en silencio.', fit: 'Una fuente recurrente alimenta operaciones, análisis o publicación.', scope: 'Fuentes públicas o autorizadas con una necesidad repetible; no incluye evadir controles de acceso ni recolectar leads por única vez.', examples: [{ name: 'Pipeline de Lotería', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '/es/servicios/recoleccion-recurrente-datos/' },
+    { icon: SVG_LAYERS, title: 'Herramientas Internas y APIs', desc: 'Convierto scripts y pasos operativos frágiles en una CLI, API interna o interfaz guiada que un equipo puede usar y traspasar.', fit: 'Varias personas tocan el flujo o el autor original se volvió un cuello de botella.', scope: 'Un flujo interno conocido; no incluye productos SaaS completos, apps móviles ni asignación de personal sin responsabilidades definidas.', examples: [{ name: 'Rutificador', href: 'https://github.com/cortega26/rutificador' }, { name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }], href: '/es/servicios/herramientas-internas/' },
+    { icon: SVG_SHIELD, title: 'Sistemas Financieros y de Auditoría', desc: 'Construyo flujos de conciliación y control que se detienen ante diferencias, preservan trazas de auditoría y facilitan la revisión.', fit: 'Una respuesta equivocada cuesta más que una verificación explícita un poco más lenta.', scope: 'Un control definido o un sistema coordinado de varias fuentes; no incluye auditoría certificada, asesoría tributaria ni reemplazar un ERP completo.', examples: [{ name: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario' }, { name: 'Portfolio Manager', href: 'https://github.com/cortega26/portfolio-manager-server' }], href: '/es/servicios/herramientas-financieras/' },
+    { icon: SVG_GLOBE, title: 'Sitios Estáticos y Frontends Acotados', desc: 'Construyo superficies públicas rápidas y mantenibles que explican el trabajo con claridad, convierten al lead correcto y sobreviven al traspaso.', fit: 'La claridad, el rendimiento y la mantenibilidad importan más que el marketing decorativo.', scope: 'Sitios informativos, landings, superficies bilingües y frontends enfocados; no incluye backends SaaS o e-commerce complejos.', examples: [{ name: 'Monedario', href: 'https://monedario.cl' }, { name: 'El Rincón de Ébano', href: 'https://elrincondeebano.com' }], href: '/es/servicios/sitios-web/' },
+    { icon: SVG_SHIELD, title: 'Higiene Técnica Web', desc: 'Reviso y mejoro headers de seguridad, HTTPS, DNS, formularios, Search Console y monitoreo liviano en un sitio que ya está publicado.', fit: 'El sitio importa comercialmente, pero nadie es responsable de sus fundamentos técnicos.', scope: 'Revisión, hardening básico, correcciones verificadas y monitoreo liviano; no incluye pentesting ni promesas de seguridad total.', examples: [{ name: 'DNSpect', href: 'https://github.com/cortega26/DNSpect' }, { name: 'Monedario', href: 'https://monedario.cl' }], href: '/es/servicios/higiene-tecnica-web/' },
   ],
   examplesLabel: 'Evidencia:',
   notFitTitle: 'No es el encaje correcto',
@@ -68,9 +68,9 @@ const es = {
   ],
   shapesLabel: 'Modalidades de trabajo',
   shapes: [
-    { name: 'Automatización acotada', range: 'desde 30 UF', note: '~USD $1.200', href: '#contact-form' },
-    { name: 'Retainer de estabilización', range: 'desde 6 UF / mes', note: '~USD $240/mes', href: '#contact-form' },
-    { name: 'Higiene técnica web', range: 'desde 1 UF diagnóstico', note: 'ya con precio', href: '/es/servicios/higiene-tecnica-web/' },
+    { name: 'Automatización acotada', range: engagementSummary.es.automation, note: 'tarifa Chile / LATAM', href: '/es/servicios/automatizacion-python/' },
+    { name: 'Retainer de estabilización', range: engagementSummary.es.retainer, note: 'opcional, sin permanencia', href: '/es/servicios/automatizacion-python/#plans' },
+    { name: 'Higiene técnica web', range: engagementSummary.es.webDiagnostic, note: 'ya con precio', href: '/es/servicios/higiene-tecnica-web/' },
     { name: 'Llamada de diagnóstico', range: 'gratis', note: '15 min', href: 'https://calendly.com/ciortega26' },
   ],
   termsLabel: 'Condiciones de trabajo →',
@@ -82,21 +82,19 @@ const c = lang === 'en' ? en : es;
 // Concrete deliverable per service — anchors perceived value to a tangible
 // outcome rather than an abstract capability. Keyed by service title.
 const serviceResults: Record<string, string> = lang === 'en' ? {
-  'Reporting Automation': 'A scheduled job plus a runbook that reproduces the same report on demand.',
-  'Web Technical Hygiene': 'A before/after report with verified fixes and clear priorities.',
+  'Python Automation & Data Pipelines': 'A tested pipeline with a schedule, logging, alerts, structured outputs, README, and runbook.',
   'Recurring Data Collection': 'A re-runnable collector with proper logs and repair notes.',
-  'Operator-Ready Internal Tools': 'A documented internal API or interface the team can run without you.',
-  'Public Technical Surfaces': 'A lean, maintainable Astro surface that loads fast and converts the right lead.',
-  'Fail-Closed Financial Controls': 'Reconciliation that halts on mismatch and preserves audit-grade logs.',
-  'Structured Data Delivery': 'Structured outputs or dashboards with no manual copy-paste downstream.',
+  'Internal Tools & APIs': 'A deployed CLI, API, or interface with validation, tests, operating docs, and handoff.',
+  'Financial & Audit Systems': 'A fail-closed control flow with deterministic outputs, validation rules, and audit-grade logs.',
+  'Static Sites & Focused Front Ends': 'A deployed, fast, indexable surface with forms, analytics, and maintenance documentation.',
+  'Web Technical Hygiene': 'A before/after report with verified fixes, clear priorities, and an optional monitoring plan.',
 } : {
-  'Automatización de Reportes': 'Un job programado más un runbook que reproduce el mismo reporte cuando lo necesitas.',
-  'Higiene Técnica Web': 'Un reporte antes/después con correcciones verificadas y prioridades claras.',
-  'Recolección de Datos Recurrente': 'Un colector reejecutable con logs adecuados y notas de reparación.',
-  'Herramientas Internas Operables': 'Una API o interfaz interna documentada que el equipo opera sin ti.',
-  'Superficies Técnicas Públicas': 'Una superficie Astro liviana y mantenible que carga rápido y convierte al lead correcto.',
-  'Controles Financieros Fail-Closed': 'Conciliación que se detiene ante diferencias y preserva logs de auditoría.',
-  'Entrega Estructurada de Datos': 'Salidas o dashboards estructurados, sin copia-pega manual aguas abajo.',
+  'Automatización Python y Pipelines de Datos': 'Un pipeline probado con programación, logs, alertas, salidas estructuradas, README y runbook.',
+  'Recolección Recurrente de Datos': 'Un colector reejecutable con logs adecuados y notas de reparación.',
+  'Herramientas Internas y APIs': 'Una CLI, API o interfaz desplegada con validación, pruebas, documentación operativa y traspaso.',
+  'Sistemas Financieros y de Auditoría': 'Un flujo fail-closed con salidas deterministas, reglas de validación y logs aptos para auditoría.',
+  'Sitios Estáticos y Frontends Acotados': 'Una superficie desplegada, rápida e indexable, con formularios, analítica y documentación de mantención.',
+  'Higiene Técnica Web': 'Un reporte antes/después con correcciones verificadas, prioridades claras y un plan opcional de monitoreo.',
 };
 const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
 ---
@@ -115,18 +113,29 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
           <h3 class="card-title">{svc.title}</h3>
           <p class="svc-desc">{svc.desc}</p>
           <p class="svc-fit"><span>{c.fitLabel}</span> {svc.fit}</p>
+          <p class="svc-scope svc-desktop-detail"><span>{c.scopeLabel}</span> {svc.scope}</p>
           {serviceResults[svc.title] && (
             <p class="svc-result"><span>{resultLabel}</span> {serviceResults[svc.title]}</p>
           )}
           {svc.href && (
-            <a class="btn btn-ghost btn-sm svc-inline-cta" href={svc.href}>{svc.href === '#contact-form' ? c.ctaContactLabel : c.ctaLabel}</a>
+            <a class="btn btn-ghost btn-sm svc-inline-cta" href={svc.href}>{c.ctaLabel}</a>
           )}
-          <p class="svc-examples-label">{c.examplesLabel}</p>
-          <div class="svc-examples">
+          <p class="svc-examples-label svc-desktop-detail">{c.examplesLabel}</p>
+          <div class="svc-examples svc-desktop-detail">
             {svc.examples.map(ex => (
               <a class="badge badge-accent" href={ex.href} target="_blank" rel="noopener noreferrer">{ex.name}</a>
             ))}
           </div>
+          <details class="svc-mobile-detail">
+            <summary>{c.moreLabel}</summary>
+            <p class="svc-scope"><span>{c.scopeLabel}</span> {svc.scope}</p>
+            <p class="svc-examples-label">{c.examplesLabel}</p>
+            <div class="svc-examples">
+              {svc.examples.map(ex => (
+                <a class="badge badge-accent" href={ex.href} target="_blank" rel="noopener noreferrer">{ex.name}</a>
+              ))}
+            </div>
+          </details>
         </article>
       ))}
     </div>
@@ -176,6 +185,20 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
   color: var(--clr-text);
   font-weight: 600;
 }
+.svc-scope {
+  font-size: 0.77rem;
+  line-height: 1.6;
+  color: var(--clr-text-faint);
+  margin-bottom: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.015);
+}
+.svc-scope span {
+  color: var(--clr-text-muted);
+  font-weight: 600;
+}
 .svc-result {
   font-size: 0.78rem;
   line-height: 1.6;
@@ -206,6 +229,7 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
   align-self: flex-start;
   margin-bottom: 1rem;
 }
+.svc-mobile-detail { display: none; }
 
 .not-fit-strip {
   display: flex;
@@ -353,5 +377,25 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
   .services-grid {
     grid-template-columns: 1fr;
   }
+  .svc-card { padding: 1.15rem; }
+  .svc-desc { font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .svc-fit, .svc-result { font-size: 0.84rem; }
+  .svc-desktop-detail { display: none; }
+  .svc-mobile-detail {
+    display: block;
+    margin-top: 0.1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--clr-border);
+  }
+  .svc-mobile-detail summary {
+    color: var(--clr-accent);
+    cursor: pointer;
+    font-family: var(--ff-label);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .svc-mobile-detail .svc-scope { margin: 0.75rem 0; font-size: 0.82rem; }
 }
 </style>

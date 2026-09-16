@@ -4,8 +4,12 @@
  * form_submit_success / form_submit_error) via window.ttTrack when present.
  */
 (() => {
+  /** @type {Window & typeof globalThis & {ttTrack?: (name: string, props?: Record<string, unknown>) => void}} */
+  const typedWindow = window;
+
+  /** @param {string} name @param {Record<string, unknown>} [props] */
   const track = (name, props) => {
-    if (typeof window.ttTrack === 'function') window.ttTrack(name, props);
+    if (typeof typedWindow.ttTrack === 'function') typedWindow.ttTrack(name, props);
   };
 
   document.querySelectorAll('form.intake-form').forEach((form) => {

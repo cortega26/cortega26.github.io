@@ -35,7 +35,7 @@ interface Props {
 const { lang, documentKey, content } = Astro.props as Props;
 const switchLang = lang === 'en' ? 'es' : 'en';
 const switchHref = `/${switchLang}/${documentKey}/`;
-const contactHref = `/${lang}/#contact-form`;
+const contactHref = `/${lang}/#contact`;
 const canonical = `https://tooltician.com/${lang}/${documentKey}/`;
 const alternates = [
   { hreflang: 'en', href: `https://tooltician.com/en/${documentKey}/` },

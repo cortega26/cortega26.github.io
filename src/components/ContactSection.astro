@@ -12,7 +12,7 @@ const en = {
     "Send the workflow, the bottleneck, the current owner, and the outcome you want.",
   copy: "Use the form as the starting point. A short note is enough — cover the workflow, the bottleneck, and what a good result looks like.",
   preferred:
-    "Fit: scoped automation, ETL cleanup, scraping, internal tools, or web technical hygiene for a live site with a clear owner. Not fit: open-ended discovery without a concrete workflow or site.",
+    "Fit: a defined automation, data collection, internal tool, financial control, focused front end, or live-site hygiene problem with a clear owner. Not fit: open-ended discovery without a concrete workflow or site.",
   availability: "Currently open for new scoped engagements.",
   briefChecklistTitle: "Useful in the first note",
   briefChecklist: [
@@ -45,7 +45,7 @@ const en = {
   messagePh:
     "Workflow and tools · Main bottleneck or failure · Who will operate it · Deadline or handoff constraint",
   callAlt: "If you’d rather not type, book a 15-min call.",
-  replyNote: "Reply within 2 business days · Direct yes/no on fit · Free 30-min scoping call if it’s a fit · No sales sequence.",
+  replyNote: "Reply within 2 business days · Direct yes/no on fit · Free 15-min diagnostic call · Paid scoping credited toward any build.",
   howItWorksTitle: "How it works",
   howItWorks: [
     { step: "01", label: "Send a brief or book a call", body: "Describe the workflow, the bottleneck, and what working looks like. A short note is enough — no deck required." },
@@ -57,9 +57,9 @@ const en = {
   successMsg: "Message sent. I’ll reply within two business days.",
   errorMsg:
     "Something went wrong. Please email me directly at carlos@tooltician.com.",
-  serviceLead: "If your need is not a new internal workflow but a live site that needs periodic technical review, start with",
-  serviceCta: "Web Technical Diagnostic",
-  serviceHref: "/en/services/web-technical-hygiene/",
+  serviceLead: "Need more detail before writing? Compare the fit, boundaries, deliverables, and evidence for all",
+  serviceCta: "six scoped services",
+  serviceHref: "#services",
 };
 
 const es = {
@@ -69,7 +69,7 @@ const es = {
     "Envía el flujo, el cuello de botella, el responsable actual y el resultado que quieres.",
   copy: "El formulario es el punto de partida más limpio. Un mensaje corto basta — incluye el flujo, el cuello de botella y cómo se ve un buen resultado.",
   preferred:
-    "Encaja: automatización acotada, limpieza ETL, scraping, herramientas internas con owner claro, o higiene técnica web para un sitio publicado. No encaja: discovery abierto sin flujo concreto ni sitio identificado.",
+    "Encaja: un problema definido de automatización, recolección de datos, herramienta interna, control financiero, frontend acotado o higiene técnica web con responsable claro. No encaja: discovery abierto sin un flujo o sitio concreto.",
   availability: "Actualmente disponible para nuevos proyectos acotados.",
   briefChecklistTitle: "Útil en el primer mensaje",
   briefChecklist: [
@@ -86,9 +86,9 @@ const es = {
   copied: "Dirección copiada.",
   schedule: "Agendar llamada inicial",
   scheduleAria: "Agendar una llamada inicial en Calendly",
-  serviceLead: "Si tu problema no es un flujo interno nuevo sino un sitio ya publicado que necesita revisión técnica periódica, parte por",
-  serviceCta: "Diagnóstico Técnico Web",
-  serviceHref: "/es/servicios/higiene-tecnica-web/",
+  serviceLead: "¿Necesitas más detalle antes de escribir? Compara el encaje, los límites, entregables y evidencia de los",
+  serviceCta: "seis servicios acotados",
+  serviceHref: "#services",
   formTitle: "Formulario de brief",
   formIntro: "Si el alcance ya está claro por escrito, déjalo aquí y te respondo por correo con encaje, preguntas siguientes o un no directo si queda fuera de alcance.",
   policyLead:
@@ -104,7 +104,7 @@ const es = {
   messageLabel: "Brief del proyecto",
   messagePh: "Flujo y herramientas · Cuello de botella principal · Quién lo va a operar · Deadline o restricción de traspaso",
   callAlt: "Si prefieres no escribir, agenda una llamada de 15 min.",
-  replyNote: "Respuesta en 2 días hábiles · Sí o no directo según encaje · Llamada de scoping de 30 min si hay encaje · Sin secuencia de ventas.",
+  replyNote: "Respuesta en 2 días hábiles · Sí o no directo según encaje · Diagnóstico gratis de 15 min · Scoping pagado acreditable a la implementación.",
   howItWorksTitle: "Cómo funciona",
   howItWorks: [
     { step: "01", label: "Envía un brief o agenda una llamada", body: "Describe el flujo, el cuello de botella y cómo se ve un resultado bueno. Una nota corta basta — sin deck." },
@@ -212,6 +212,13 @@ const c = lang === "en" ? en : es;
             </svg>
             {c.copyEmail}
           </button>
+          <a
+            class="btn btn-ghost"
+            href="/assets/docs/scoping-template.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            >{lang === "en" ? "See a scoping template" : "Ver plantilla de alcance"}</a
+          >
         </div>
 
         <p class="copy-confirm" id="copy-confirm" aria-live="polite">

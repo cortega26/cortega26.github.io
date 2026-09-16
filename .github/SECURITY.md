@@ -17,4 +17,4 @@ For encrypted communication, ask for the PGP key via email.
 
 ## Out of Scope
 
-- Third-party services linked from the site (Formspree, Calendly, Ahrefs, LinkedIn)
+- Third-party services linked from the site (Formspree, Calendly, LinkedIn)

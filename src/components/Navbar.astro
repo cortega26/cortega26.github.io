@@ -13,7 +13,7 @@ interface Props {
 
 const { lang, items, ctaHref, switchHref } = Astro.props;
 const ctaLabel = lang === 'en' ? 'Start a project' : 'Inicia un proyecto';
-const resolvedCtaHref = ctaHref ?? '#contact-form';
+const resolvedCtaHref = ctaHref ?? '#contact';
 const brandTag = lang === 'en' ? 'automation systems' : 'sistemas de automatización';
 
 const switchLabel = lang === 'en' ? 'ES' : 'EN';
@@ -22,7 +22,7 @@ const resolvedSwitchHref = switchHref ?? (lang === 'en' ? '/es/' : '/en/');
 <nav class="navbar" aria-label={lang === 'en' ? 'Primary navigation' : 'Navegación principal'}>
   <div class="container">
     <div class="navbar__inner">
-      <a class="navbar__brand" href={lang === 'en' ? '/en/' : '/es/'} aria-label="Tooltician">
+      <a class="navbar__brand" href={lang === 'en' ? '/en/' : '/es/'}>
         <img
           class="navbar__brand-logo"
           src="/assets/images/tooltician-logo-128.webp"

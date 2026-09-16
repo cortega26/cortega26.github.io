@@ -9,9 +9,9 @@ const { lang } = Astro.props;
 
 const en = {
   label: 'Verifiable results',
-  caption: 'Not testimonials yet — measurable facts you can check right now.',
+  caption: 'Measurable signals you can check before deciding whether the work fits.',
   stats: [
-    { value: '0', unit: 'outages', detail: 'live store, 14 months in production', href: 'https://elrincondeebano.com' },
+    { value: '24/7', unit: 'in production', detail: 'live storefront serving daily orders', href: 'https://elrincondeebano.com' },
     { value: '100+', unit: 'SKUs', detail: 'daily orders handled without an internal team' },
     { value: 'A+', unit: 'headers', detail: 'own site security grade, independently checkable', href: 'https://securityheaders.com/?q=tooltician.com&followRedirects=on' },
     { value: '3', unit: 'on PyPI', detail: 'published packages with audit-grade logs', href: 'https://pypi.org/user/cortega/' },
@@ -21,9 +21,9 @@ const en = {
 
 const es = {
   label: 'Resultados verificables',
-  caption: 'Aún no hay testimonios — hechos medibles que puedes comprobar ahora mismo.',
+  caption: 'Señales medibles que puedes comprobar antes de decidir si el trabajo encaja.',
   stats: [
-    { value: '0', unit: 'caídas', detail: 'tienda en producción, 14 meses activos', href: 'https://elrincondeebano.com' },
+    { value: '24/7', unit: 'en producción', detail: 'tienda activa con pedidos diarios', href: 'https://elrincondeebano.com' },
     { value: '100+', unit: 'SKUs', detail: 'pedidos diarios gestionados sin equipo interno' },
     { value: 'A+', unit: 'headers', detail: 'nota de seguridad del propio sitio, comprobable', href: 'https://securityheaders.com/?q=tooltician.com&followRedirects=on' },
     { value: '3', unit: 'en PyPI', detail: 'paquetes publicados con logs de auditoría', href: 'https://pypi.org/user/cortega/' },
@@ -33,7 +33,7 @@ const es = {
 
 const c = lang === 'en' ? en : es;
 ---
-<section class="results-band" aria-label={c.label}>
+<section class="results-band" id="proof" aria-label={c.label}>
   <div class="container">
     <div class="results-band__inner reveal">
       <p class="results-band__label">{c.label}</p>

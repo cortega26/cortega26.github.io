@@ -13,7 +13,7 @@ interface Props {
 
 const { lang, items, ctaHref, switchHref } = Astro.props;
 const ctaLabel = lang === 'en' ? 'Start a project' : 'Inicia un proyecto';
-const resolvedCtaHref = ctaHref ?? '#contact-form';
+const resolvedCtaHref = ctaHref ?? '#contact';
 const brandTag = lang === 'en' ? 'automation systems' : 'sistemas de automatización';
 
 const switchLabel = lang === 'en' ? 'ES' : 'EN';

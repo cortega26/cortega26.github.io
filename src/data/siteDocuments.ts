@@ -76,7 +76,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       ],
       closing: 'Questions about data handling or a specific inquiry? The project brief form is the fastest route.',
       ctaLabel: 'Open project brief',
-      ctaHref: '/en/#contact-form',
+      ctaHref: '/en/#contact',
     },
     es: {
       eyebrow: 'Política',
@@ -132,7 +132,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       ],
       closing: 'Si tienes dudas sobre tratamiento de datos o sobre una consulta concreta, el formulario de brief sigue siendo la vía más rápida.',
       ctaLabel: 'Abrir brief',
-      ctaHref: '/es/#contact-form',
+      ctaHref: '/es/#contact',
     },
   },
   cookies: {
@@ -250,7 +250,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       ],
       closing: 'If you need a written project scope, timeline, or commercial agreement, use the brief form so that conversation starts explicitly.',
       ctaLabel: 'Start with a brief',
-      ctaHref: '/en/#contact-form',
+      ctaHref: '/en/#contact',
     },
     es: {
       eyebrow: 'Política',
@@ -292,7 +292,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       ],
       closing: 'Si necesitas un alcance, plazo o acuerdo comercial por escrito, usa el formulario de brief para iniciar esa conversación de forma explícita.',
       ctaLabel: 'Empezar con un brief',
-      ctaHref: '/es/#contact-form',
+      ctaHref: '/es/#contact',
     },
   },
   engagement: {

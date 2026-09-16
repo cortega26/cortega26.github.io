@@ -127,6 +127,18 @@ Wave 5, all scopes file-disjoint (parallel-safe). Entry points use
 
 Progress (follow-up): 4/4 DONE.
 
+## Growth series (021–023, all TODO)
+
+Protective tests + ES-first organic engine (pilot with kill switch).
+
+| Plan | Title | Pri | Eff | Status |
+|------|-------|-----|-----|--------|
+| 021 | Behavioral funnel tests | P1 | M | DONE (red-then-green proven, orphans verified absent) |
+| 022 | ES-first keyword research | P1 | S | DONE (10 rows, 8 ES, 3 picks with kills) |
+| 023 | Pilot batch (3 ES articles, needs 022) | P2 | M | TODO |
+
+Progress (growth): 2/3 DONE (023 pilot awaits dispatch).
+
 ## Backlog (accepted, not yet planned)
 
 Sourced from the `**Deferred:**` lines in the plans and the audit's

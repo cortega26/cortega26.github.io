@@ -146,6 +146,12 @@ async function testSingleSubmit(browser) {
   } catch {
     successVisible = false;
   }
+  // scrollIntoView({behavior:'smooth'}) animates; give it a moment before
+  // checking where focus landed.
+  await page.waitForTimeout(500);
+  const focusedOnSuccess = await page.evaluate(
+    () => document.activeElement === document.querySelector('#contact-form .intake-form__success')
+  );
 
   // Read back what actually reached the GA4 dataLayer for this submission,
   // and confirm no PII (name/email/message) leaked into it.
@@ -181,6 +187,8 @@ async function testSingleSubmit(browser) {
     fail(label, `expected exactly 1 POST to formspree.io, observed ${postAttempts}`);
   } else if (!successVisible) {
     fail(label, '1 POST observed but .intake-form__success.show never became visible');
+  } else if (!focusedOnSuccess) {
+    fail(label, 'focus did not land on the success banner after it was revealed');
   } else if (!legacySuccessSeen) {
     fail(label, `legacy form_submit_success never reached the dataLayer. observed: ${JSON.stringify(eventNames)}`);
   } else if (!canonicalCorrectlySuppressed) {
@@ -286,6 +294,13 @@ async function testErrorPath(browser) {
   }
   const successVisible = await page.locator('#contact-form .intake-form__success.show').count();
 
+  await page.waitForTimeout(500);
+  const focusedOnError = await page.evaluate(
+    () => document.activeElement === document.querySelector('#contact-form .intake-form__error')
+  );
+  // A failed submission must not silently discard what the user typed.
+  const nameKept = await page.locator('#contact-name').inputValue();
+
   // See the localhost-suppression note in testSingleSubmit: brief_error is
   // canonical and is suppressed on this localhost preview by design, so only
   // the legacy form_submit_error (which has no such gating) is asserted here.
@@ -306,6 +321,10 @@ async function testErrorPath(browser) {
     fail(label, 'error banner never became visible on a 500 response');
   } else if (successVisible > 0) {
     fail(label, 'success banner incorrectly shown on a failed submission');
+  } else if (!focusedOnError) {
+    fail(label, 'focus did not land on the error banner after it was revealed');
+  } else if (nameKept !== 'Behavioral Test') {
+    fail(label, `form values were not preserved after a failed submission (name=${JSON.stringify(nameKept)})`);
   } else if (!legacyErrorSeen) {
     fail(label, `legacy form_submit_error never reached the dataLayer. observed: ${JSON.stringify(result.dataLayerEvents)}`);
   } else if (!canonicalCorrectlySuppressed) {
@@ -362,13 +381,26 @@ async function testMobileSuccessVisibility(browser) {
   // the smooth-scroll animation a moment to actually finish before checking.
   await page.waitForTimeout(600);
 
-  const inViewport = await page.locator('#contact-form .intake-form__success').evaluate((el) => {
+  const check = await page.evaluate(() => {
+    const btn = document.querySelector('#contact-form button[type="submit"]');
+    const el = document.querySelector('#contact-form .intake-form__success');
     const r = el.getBoundingClientRect();
-    return r.top >= 0 && r.bottom <= window.innerHeight;
+    const btnRect = btn.getBoundingClientRect();
+    return {
+      // 2px tolerance for sub-pixel layout rounding, not a real visibility gap.
+      inViewport: r.top >= -2 && r.bottom <= window.innerHeight + 2,
+      focused: document.activeElement === el,
+      // Banner must not visually overlap the submit button it follows.
+      overlapsButton: r.top < btnRect.bottom && r.bottom > btnRect.top,
+    };
   });
 
-  if (!inViewport) {
+  if (!check.inViewport) {
     fail(label, 'success banner is visible in the DOM but its box is outside the mobile viewport after submit');
+  } else if (check.overlapsButton) {
+    fail(label, 'success banner overlaps the submit button');
+  } else if (!check.focused) {
+    fail(label, 'focus did not land on the success banner on mobile');
   } else if (pageErrors.length > 0 || consoleErrors.length > 0) {
     fail(label, `page errors: [${pageErrors.join('; ')}] console errors: [${consoleErrors.join('; ')}]`);
   } else {

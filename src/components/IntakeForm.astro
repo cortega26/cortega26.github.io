@@ -33,6 +33,12 @@ const {
 
 const id = (name: string) => `${formId}-${name}`;
 
+// Decorative-only status icons (aria-hidden; the text + role/aria-live on the
+// containing <p> carry all accessible meaning). Same inline-SVG convention as
+// the icon constants elsewhere in this codebase (e.g. AboutSection.astro).
+const SVG_CHECK_CIRCLE = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 17"/></svg>';
+const SVG_ALERT_TRIANGLE = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>';
+
 const en = {
   heading: heading === undefined ? 'Project brief' : heading,
   intro: {
@@ -84,7 +90,7 @@ const en = {
   },
   submit: 'Send brief',
   submitSending: 'Sending…',
-  success: 'Sent. I’ll reply by email within two business days.',
+  success: 'Brief sent. I’ll reply by email within two business days.',
   error: 'Something went wrong. Please email carlos@tooltician.com directly.',
   altLabel: 'Prefer to talk first?',
   altCta: 'Book a 15-min call →',
@@ -148,7 +154,7 @@ const es = {
   },
   submit: 'Enviar brief',
   submitSending: 'Enviando…',
-  success: 'Enviado. Respondo por correo en dos días hábiles.',
+  success: 'Brief enviado. Respondo por correo en dos días hábiles.',
   error: 'Algo salió mal. Escríbeme directamente a carlos@tooltician.com.',
   altLabel: '¿Prefieres hablar primero?',
   altCta: 'Agendar llamada de 15 min →',
@@ -252,8 +258,14 @@ const introCopy = c.intro[service];
     </p>
   </div>
 
-  <p class="intake-form__success" role="status" aria-live="polite" tabindex="-1">{c.success}</p>
-  <p class="intake-form__error" role="alert" aria-live="polite" tabindex="-1">{c.error}</p>
+  <p class="intake-form__success" role="status" aria-live="polite" tabindex="-1">
+    <span class="intake-form__feedback-icon" aria-hidden="true" set:html={SVG_CHECK_CIRCLE} />
+    <span>{c.success}</span>
+  </p>
+  <p class="intake-form__error" role="alert" aria-live="polite" tabindex="-1">
+    <span class="intake-form__feedback-icon" aria-hidden="true" set:html={SVG_ALERT_TRIANGLE} />
+    <span>{c.error}</span>
+  </p>
 
   <p class="intake-form__policy">
     {c.policyLead}{' '}
@@ -388,30 +400,56 @@ const introCopy = c.intro[service];
     color: var(--clr-accent-hover);
   }
 
+  /*
+   * Submission feedback: restrained but unmistakable. Stronger than ordinary
+   * helper text via a left accent border, heavier weight, more internal
+   * padding, and a small semantic icon — success and error also differ in
+   * icon shape (circle-check vs triangle-alert), not just color, so the two
+   * states read apart at a glance without relying on color alone.
+   */
   .intake-form__success,
   .intake-form__error {
     display: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.6rem 0.9rem;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.5;
+    padding: 0.85rem 1.05rem;
     border-radius: var(--radius-sm);
+    margin-top: 0.7rem;
+  }
+
+  .intake-form__feedback-icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 0.15rem;
+  }
+
+  .intake-form__feedback-icon :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .intake-form__success {
     color: var(--clr-accent);
-    background: rgba(196, 160, 74, 0.08);
-    border: 1px solid rgba(196, 160, 74, 0.15);
+    background: rgba(196, 160, 74, 0.12);
+    border: 1px solid rgba(196, 160, 74, 0.2);
+    border-left: 3px solid var(--clr-accent);
   }
 
   .intake-form__error {
     color: #f87171;
-    background: rgba(248, 113, 113, 0.08);
-    border: 1px solid rgba(248, 113, 113, 0.15);
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    border-left: 3px solid #f87171;
   }
 
   .intake-form__success.show,
   .intake-form__error.show {
-    display: block;
+    display: flex;
   }
 
   .intake-form__policy {

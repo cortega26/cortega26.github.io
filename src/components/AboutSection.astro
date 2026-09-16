@@ -8,6 +8,7 @@ const SVG_GEAR    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none"
 
 const en = {
   eyebrow: 'About', title: 'Fit and Delivery',
+  cvLabel: 'Download CV',
   intro: 'My approach starts with the workflow, not the code. Before implementation begins, every engagement goes through a scope pass — inputs, outputs, owner, failure modes, and handoff target. What gets built is a system the next person can run, diagnose, and improve without reverse-engineering it.',
   workStyle: 'Explicit tradeoffs documented before decisions are made. Progress visible in GitHub commits, not status updates. Delivery notes written so the next person can run, debug, and extend the system without the original author on a call.',
   cards: [
@@ -19,6 +20,7 @@ const en = {
 
 const es = {
   eyebrow: 'Perfil', title: 'Encaje y entrega',
+  cvLabel: 'Descargar CV',
   intro: 'Mi enfoque parte del flujo de trabajo, no del código. Antes de implementar, cada proyecto pasa por una revisión de alcance — inputs, outputs, responsable, modos de falla y objetivo de traspaso. Lo que se construye es un sistema que la siguiente persona puede operar, diagnosticar y mejorar sin tener que descifrarlo.',
   workStyle: 'Tradeoffs explícitos documentados antes de tomar decisiones. Progreso visible en commits de GitHub, no en reportes de estado. Notas de entrega escritas para que la siguiente persona pueda operar, depurar y extender el sistema sin necesitar al autor original en una llamada.',
   cards: [
@@ -50,6 +52,9 @@ const c = lang === 'en' ? en : es;
         </article>
       ))}
     </div>
+    <div class="about-cta reveal">
+      <a class="btn btn-ghost" href="/assets/docs/carlos-ortega-resume.pdf" target="_blank" rel="noopener noreferrer" data-track="cta_download_cv" data-track-loc="about">{c.cvLabel}</a>
+    </div>
   </div>
 </section>
 
@@ -70,5 +75,10 @@ const c = lang === 'en' ? en : es;
   line-height: 1.7;
   max-width: 60ch;
   margin-top: 0.5rem;
+}
+.about-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.75rem;
 }
 </style>

@@ -246,7 +246,7 @@ const breadcrumbJsonLd = {
 
   <Navbar lang="en" items={navItems} ctaHref="#contact" switchHref="/es/servicios/higiene-tecnica-web/" />
 
-  <main id="main">
+  <main id="main" data-service-id="htw" data-service-category="hygiene">
     <section class="service-hero" id="hero">
       <div class="container service-hero__grid">
         <div class="service-hero__main">
@@ -501,7 +501,7 @@ const breadcrumbJsonLd = {
           <p class="body-copy">
             Tooltician applies these same practices to its own site: canonical HTTPS, fully configured email authentication (SPF, DKIM, DMARC), active security headers, and no uncontrolled external dependencies. The code is public and auditable.
           </p>
-          <div class="evidence-links__items">
+          <div class="evidence-links__items" data-proof-click>
             <a class="badge badge-accent" href="https://securityheaders.com/?q=tooltician.com&followRedirects=on" target="_blank" rel="noopener noreferrer">Verify on SecurityHeaders.com</a>
             <a class="badge badge-neutral" href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">Public code</a>
           </div>
@@ -530,7 +530,7 @@ const breadcrumbJsonLd = {
 
         <div class="card-glass evidence-links reveal">
           <p class="evidence-links__eyebrow">Related projects</p>
-          <div class="evidence-links__items">
+          <div class="evidence-links__items" data-proof-click>
             <a class="badge badge-accent" href="https://github.com/cortega26/DNSpect" target="_blank" rel="noopener noreferrer">DNSpect</a>
             <a class="badge badge-accent" href="https://monedario.cl" target="_blank" rel="noopener noreferrer">Monedario</a>
             <a class="badge badge-accent" href="https://elrincondeebano.com" target="_blank" rel="noopener noreferrer">El Rincón de Ébano</a>
@@ -578,22 +578,22 @@ const breadcrumbJsonLd = {
               <p>If the diagnostic finds nothing actionable, the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The fee applies regardless, but there are no surprises or additional charges.</p>
             </div>
             <div class="landing-cta-group">
-              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="htw_brief">Schedule a call instead</a>
+              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="htw_brief" data-book-call>Schedule a call instead</a>
             </div>
           </article>
           <IntakeForm lang="en" service="htw" formId="htw-brief" heading="Request your diagnostic" />
         </div>
 
         <div class="intent-grid">
-          <a class="intent-link reveal" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_diagnostic">
+          <a class="intent-link reveal" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_diagnostic" data-service-engage>
             <span>I want to review a live site</span>
             <strong>Diagnostic from {pricing.webHygiene.en.diagnostic}, with a brief report and clear priorities.</strong>
           </a>
-          <a class="intent-link reveal reveal-delay-1" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_agency">
+          <a class="intent-link reveal reveal-delay-1" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_agency" data-service-engage>
             <span>I run an agency and need external support</span>
             <strong>Recurring technical review without burdening the design or dev team with low-margin tasks.</strong>
           </a>
-          <a class="intent-link reveal reveal-delay-2" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_monthly">
+          <a class="intent-link reveal reveal-delay-2" href="#htw-brief-form" data-track="intent_select" data-track-loc="htw_monthly" data-service-engage>
             <span>I want monthly support</span>
             <strong>Light monitoring, small fixes, and operational documentation without an in-house hire.</strong>
           </a>

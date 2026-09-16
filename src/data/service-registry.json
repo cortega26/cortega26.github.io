@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": 1,
+  "note": "Canonical Sprint 0 service registry for tooltician.com lead-funnel analytics. service_id is stable and never derived from display text. Routes are informational only — never rename routes for analytics. Client-side copy lives in public/assets/js/product-analytics.js (SERVICE_REGISTRY) and is verified identical by tests/analytics-service-funnel.mjs.",
+  "services": [
+    {
+      "service_id": "automation",
+      "public_name": "Python Automation & Data Pipelines",
+      "service_category": "automation",
+      "route_en": "/en/services/python-automation/",
+      "route_es": "/es/servicios/automatizacion-python/"
+    },
+    {
+      "service_id": "recurring-data",
+      "public_name": "Recurring Data Collection",
+      "service_category": "data-collection",
+      "route_en": "/en/services/recurring-data-collection/",
+      "route_es": "/es/servicios/recoleccion-recurrente-datos/"
+    },
+    {
+      "service_id": "internal-tools",
+      "public_name": "Internal Tools & APIs",
+      "service_category": "internal-tools",
+      "route_en": "/en/services/internal-tools/",
+      "route_es": "/es/servicios/herramientas-internas/"
+    },
+    {
+      "service_id": "financial",
+      "public_name": "Financial & Audit Systems",
+      "service_category": "financial",
+      "route_en": "/en/services/financial-tooling/",
+      "route_es": "/es/servicios/herramientas-financieras/"
+    },
+    {
+      "service_id": "web",
+      "public_name": "Static Sites & Focused Front Ends",
+      "service_category": "web",
+      "route_en": "/en/services/static-sites/",
+      "route_es": "/es/servicios/sitios-web/"
+    },
+    {
+      "service_id": "htw",
+      "public_name": "Web Technical Hygiene",
+      "service_category": "hygiene",
+      "route_en": "/en/services/web-technical-hygiene/",
+      "route_es": "/es/servicios/higiene-tecnica-web/"
+    }
+  ]
+}

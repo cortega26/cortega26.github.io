@@ -314,7 +314,7 @@ const breadcrumbJsonLd = {
 
   <Navbar lang="es" items={navItems} ctaHref="#brief" switchHref="/en/services/web-technical-hygiene/" />
 
-  <main id="main">
+  <main id="main" data-service-id="htw" data-service-category="hygiene">
     <section class="service-hero" id="hero">
       <div class="container service-hero__grid">
         <div class="service-hero__main">
@@ -756,7 +756,7 @@ const breadcrumbJsonLd = {
           <p class="body-copy">
             Tooltician aplica estas mismas prácticas en su propio sitio: HTTPS canónico, autenticación de correo configurada (SPF, DKIM, DMARC), headers de seguridad activos y sin dependencias externas no controladas. El código es público y auditable.
           </p>
-          <div class="evidence-links__items">
+          <div class="evidence-links__items" data-proof-click>
             <a class="badge badge-accent" href="https://securityheaders.com/?q=tooltician.com&followRedirects=on" target="_blank" rel="noopener noreferrer">Verificar en SecurityHeaders.com</a>
             <a class="badge badge-neutral" href="https://github.com/cortega26/cortega26.github.io" target="_blank" rel="noopener noreferrer">Código público</a>
           </div>
@@ -764,7 +764,7 @@ const breadcrumbJsonLd = {
 
         <div class="card-glass evidence-links reveal">
           <p class="evidence-links__eyebrow">Proyectos relacionados</p>
-          <div class="evidence-links__items">
+          <div class="evidence-links__items" data-proof-click>
             <a class="badge badge-accent" href="https://github.com/cortega26/DNSpect" target="_blank" rel="noopener noreferrer">DNSpect</a>
             <a class="badge badge-accent" href="https://monedario.cl" target="_blank" rel="noopener noreferrer">Monedario</a>
             <a class="badge badge-accent" href="https://elrincondeebano.com" target="_blank" rel="noopener noreferrer">El Rincón de Ébano</a>
@@ -825,7 +825,7 @@ const breadcrumbJsonLd = {
                 <p>Si el diagnóstico no encuentra nada accionable, el reporte lo confirma con evidencia — y eso también tiene valor antes de cambiar hosting, lanzar una campaña o delegar el sitio a un tercero. El costo aplica igual, pero no hay sorpresas ni cobros adicionales.</p>
               </div>
               <div class="landing-cta-group">
-                <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="htw_brief">Agendar revisión en su lugar</a>
+                <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="htw_brief" data-book-call>Agendar revisión en su lugar</a>
               </div>
             </article>
             <IntakeForm lang="es" service="htw" formId="htw-brief" heading="Solicita tu diagnóstico" />

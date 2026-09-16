@@ -43,7 +43,7 @@ const c = lang === 'en' ? en : es;
             <p class="results-band__value">{stat.value}<span class="results-band__unit">{stat.unit}</span></p>
             <p class="results-band__detail">{stat.detail}</p>
             {stat.href && (
-              <a class="results-band__verify" href={stat.href} target="_blank" rel="noopener noreferrer" data-track="proof_verify" data-track-loc="results_band">{c.verify}</a>
+              <a class="results-band__verify" href={stat.href} target="_blank" rel="noopener noreferrer" data-track="proof_verify" data-track-loc="results_band" data-proof-click>{c.verify}</a>
             )}
           </div>
         ))}

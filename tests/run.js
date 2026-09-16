@@ -894,6 +894,59 @@ if (BUILT) {
   );
 }
 
+// ─── Sprint 0 (corrected) · Service/lead analytics wiring ───────────────────
+
+group('S0 · Service registry, transport, and declarative wiring', () => {
+  const registryRaw = read('src/data/service-registry.json');
+  let registry = null;
+  try { registry = JSON.parse(registryRaw || 'null'); } catch { registry = null; }
+  assert('service-registry.json parses', !!registry && Array.isArray(registry.services), 'Invalid JSON');
+  const ids = registry ? registry.services.map(t => t.service_id).sort() : [];
+  assert(
+    'registry holds the 6 real service_ids',
+    JSON.stringify(ids) === JSON.stringify(['automation', 'financial', 'htw', 'internal-tools', 'recurring-data', 'web']),
+    `Got: ${JSON.stringify(ids)}`
+  );
+  assert('registry uses service_* keys (no tool_* vocabulary)', registryRaw.includes('"service_id"') && !registryRaw.includes('tool_'), 'Stale keys');
+  if (registry) {
+    for (const t of registry.services) {
+      assert(
+        `registry routes exist as pages: ${t.service_id}`,
+        read(`src/pages${t.route_en}index.astro`) !== null && read(`src/pages${t.route_es}index.astro`) !== null,
+        `${t.route_en} / ${t.route_es}`
+      );
+    }
+  }
+
+  const productJs = read('public/assets/js/product-analytics.js') || '';
+  const trackJs = read('public/assets/js/track.js') || '';
+  const intakeJs = read('public/assets/js/intake-form.js') || '';
+  assert(
+    'canonical layer uses service/lead events only',
+    ['service_view', 'service_engage', 'brief_start', 'brief_submit', 'brief_success', 'brief_error', 'book_call', 'email_copy', 'proof_click', 'portfolio_click', 'cv_download', 'template_open', 'language_select', 'contact_intent'].every(e => productJs.includes(e)) &&
+      !productJs.includes('tool_') && !productJs.includes('result_action'),
+    'Stale or missing event name'
+  );
+  assert('track.js passes service params through', trackJs.includes('CANONICAL_PARAMS') && trackJs.includes('service_id'), 'No pass-through');
+  assert('track.js carries no tool_* params', !/'tool_id'|'tool_category'|'action_type'|'page_path'|'execution_mode'|'execution_stage'/.test(trackJs), 'Stale param');
+  assert('track.js keeps legacy tt_* mapping', trackJs.includes('tt_location') && trackJs.includes('ttTrack = track'), 'Legacy contract broken');
+  assert('intake mirrors brief lifecycle', intakeJs.includes("funnel('briefStart'") && intakeJs.includes("funnel('briefSubmit'") && intakeJs.includes("funnel('briefSuccess'") && intakeJs.includes("funnel('briefError'"), 'Missing funnel call');
+  assert('intake keeps legacy form_* events', intakeJs.includes('form_start') && intakeJs.includes('form_submit_success') && intakeJs.includes('form_submit_error'), 'Legacy form events removed');
+
+  const baseLayout = read('src/layouts/BaseLayout.astro') || '';
+  assert('BaseLayout loads track.js then product-analytics.js', baseLayout.indexOf('/assets/js/track.js') > -1 && baseLayout.indexOf('/assets/js/product-analytics.js') > baseLayout.indexOf('/assets/js/track.js'), 'Script wiring wrong');
+  assert('BaseLayout GA4 stub untouched (CSP hash)', baseLayout.includes('cookie_expires: 60 * 60 * 24 * 395'), 'GA4 stub changed — CSP hash would break');
+
+  const servicePage = read('src/components/ServicePage.astro') || '';
+  assert('ServicePage stamps data-service-id', servicePage.includes('data-service-id={serviceKey}'), 'Missing scope attr');
+  assert('ServicePage uses service-engage + book-call semantics', servicePage.includes('data-service-engage') && servicePage.includes('data-book-call'), 'Stale attrs');
+  const htwEN = read('src/pages/en/services/web-technical-hygiene/index.astro') || '';
+  const htwES = read('src/pages/es/servicios/higiene-tecnica-web/index.astro') || '';
+  assert('HTW pages stamp htw scope', htwEN.includes('data-service-id="htw"') && htwES.includes('data-service-id="htw"'), 'HTW scope missing');
+  const gateway = read('src/pages/index.astro') || '';
+  assert('gateway loads analytics + tracks language choice', gateway.includes('/assets/js/product-analytics.js') && gateway.includes('data-language-select'), 'Gateway wiring missing');
+});
+
 // ─── Summary ──────────────────────────────────────────────────────────────
 
 const total = passed + failed;

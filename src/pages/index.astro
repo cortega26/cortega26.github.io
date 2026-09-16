@@ -261,11 +261,11 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
       <p class="gateway-panel__copy">First visits are auto-routed from browser language. Choose once below and the site will remember your preference.</p>
 
       <div class="gateway-panel__options">
-        <a class="gateway-panel__card" href="/en/" data-language-preference="en">
+        <a class="gateway-panel__card" href="/en/" data-language-preference="en" data-language-select>
           <strong>English</strong>
           <span>Proof, production work, and a direct project brief.</span>
         </a>
-        <a class="gateway-panel__card" href="/es/" data-language-preference="es">
+        <a class="gateway-panel__card" href="/es/" data-language-preference="es" data-language-select>
           <strong>Español</strong>
           <span>Evidencia pública, trabajo en producción y brief directo.</span>
         </a>
@@ -278,6 +278,8 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
     </div>
   </div>
   <script is:inline src="/assets/js/root-language-picker.js" defer></script>
+  <script is:inline src="/assets/js/track.js" defer></script>
+  <script is:inline src="/assets/js/product-analytics.js" defer></script>
 
   <!-- GA4 (gtag.js direct — inline stub síncrono ANTES de async gtag.js, Plan 006) -->
   <!-- cookie_expires: 60*60*24*395 = 34128000s = 395 días ≈13 meses (API solo soporta segundos, sin precisión calendárica) -->

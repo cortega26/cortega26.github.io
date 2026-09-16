@@ -604,11 +604,11 @@ const c = {
 
     {full && <div class="filter-bar reveal" role="group" aria-label={c.fl.label}>
       <span class="filter-label">{c.fl.label}</span>
-      <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">{c.fl.all}</button>
-      <button class="filter-btn" type="button" data-filter="python" aria-pressed="false">{c.fl.python}</button>
-      <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">{c.fl.web}</button>
-      <button class="filter-btn" type="button" data-filter="cli" aria-pressed="false">{c.fl.cli}</button>
-      <button class="filter-btn" type="button" data-filter="data" aria-pressed="false">{c.fl.data}</button>
+      <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true" data-track="portfolio_filter" data-track-loc="work_filters">{c.fl.all}</button>
+      <button class="filter-btn" type="button" data-filter="python" aria-pressed="false" data-track="portfolio_filter" data-track-loc="work_filters">{c.fl.python}</button>
+      <button class="filter-btn" type="button" data-filter="web" aria-pressed="false" data-track="portfolio_filter" data-track-loc="work_filters">{c.fl.web}</button>
+      <button class="filter-btn" type="button" data-filter="cli" aria-pressed="false" data-track="portfolio_filter" data-track-loc="work_filters">{c.fl.cli}</button>
+      <button class="filter-btn" type="button" data-filter="data" aria-pressed="false" data-track="portfolio_filter" data-track-loc="work_filters">{c.fl.data}</button>
     </div>}
     {full && <noscript><style>#portfolio-grid .project-card { display: flex !important; } .filter-bar { display: none; }</style></noscript>}
 
@@ -660,7 +660,7 @@ const c = {
             </div>
           </dl>
 
-          <div class="project-links">
+          <div class="project-links" data-portfolio-click>
             {proj.links.map(l => (
               <a class="project-link" href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
                 <span>{l.label}</span>

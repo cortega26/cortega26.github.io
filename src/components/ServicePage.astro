@@ -41,6 +41,17 @@ const ui =
     ? { recommended: 'Recommended', serviceLabel: 'Services', proofEyebrow: 'Own technical proof' }
     : { recommended: 'Recomendado', serviceLabel: 'Servicios', proofEyebrow: 'Evidencia técnica propia' };
 
+// Sprint 0: stable service category per serviceKey (mirrors src/data/service-registry.json).
+const serviceCategories: Record<string, string> = {
+  automation: 'automation',
+  'recurring-data': 'data-collection',
+  'internal-tools': 'internal-tools',
+  financial: 'financial',
+  web: 'web',
+  htw: 'hygiene',
+};
+const serviceCategory = serviceCategories[serviceKey] ?? 'site';
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -97,7 +108,7 @@ const breadcrumbJsonLd = {
 
   <Navbar lang={lang} items={navItems} ctaHref="#contact" switchHref={crossLocaleHref} />
 
-  <main id="main">
+  <main id="main" data-service-id={serviceKey} data-service-category={serviceCategory}>
     <section class="service-hero" id="hero">
       <div class="container service-hero__grid">
         <div class="service-hero__main">
@@ -311,7 +322,7 @@ const breadcrumbJsonLd = {
         </div>
         <div class="card-glass evidence-links reveal">
           <p class="evidence-links__eyebrow">{c.relatedLabel}</p>
-          <div class="evidence-links__items">
+          <div class="evidence-links__items" data-proof-click>
             {c.related.map((link) => (
               <a class={link.accent ? 'badge badge-accent' : 'badge badge-neutral'} href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{link.label}</a>
             ))}
@@ -356,8 +367,8 @@ const breadcrumbJsonLd = {
               </div>
             )}
             <div class="landing-cta-group">
-              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc={`${slug}_brief`}>{c.contactCallLabel}</a>
-              <a class="btn btn-ghost" href="/assets/docs/scoping-template.md" target="_blank" rel="noopener noreferrer">{lang === 'en' ? 'See a scoping template' : 'Ver plantilla de alcance'}</a>
+              <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc={`${slug}_brief`} data-book-call>{c.contactCallLabel}</a>
+              <a class="btn btn-ghost" href="/assets/docs/scoping-template.md" target="_blank" rel="noopener noreferrer" data-template-open>{lang === 'en' ? 'See a scoping template' : 'Ver plantilla de alcance'}</a>
             </div>
           </article>
           <IntakeForm lang={lang} service={serviceKey as IntakeService} formId={formId} heading={c.intakeHeading} />
@@ -365,7 +376,7 @@ const breadcrumbJsonLd = {
 
         <div class="intent-grid">
           {c.intents.map((intent, index) => (
-            <a class={`intent-link reveal reveal-delay-${index}`} href={`#${formId}-form`} data-track="intent_select" data-track-loc={`${slug}_${index}`}>
+            <a class={`intent-link reveal reveal-delay-${index}`} href={`#${formId}-form`} data-track="intent_select" data-track-loc={`${slug}_${index}`} data-service-engage>
               <span>{intent.tag}</span>
               <strong>{intent.body}</strong>
             </a>

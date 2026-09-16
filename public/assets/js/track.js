@@ -7,13 +7,37 @@
  * No direct gtag() calls outside this bridge. gtag() itself queues via dataLayer.
  */
 (() => {
-  /** @typedef {{location?: unknown, label?: unknown, status?: unknown}} TrackingProps */
+  /** @typedef {{location?: unknown, label?: unknown, status?: unknown, service_id?: unknown, service_category?: unknown, contact_type?: unknown, cta_location?: unknown, error_category?: unknown, error_stage?: unknown}} TrackingProps */
   /** @type {Window & typeof globalThis & {gtag?: (...args: unknown[]) => void, ttTrack?: (name: string, props?: TrackingProps) => void}} */
   const typedWindow = window;
 
   /** Bounded in-memory queue for events fired before gtag is ready (Plan 011). */
   const queue = [];
   const MAX_QUEUE = 50;
+
+  /**
+   * Canonical Sprint 0 params passed through verbatim to GA4 (in addition to
+   * the legacy tt_* mapping). Allowlisted, string-only, length-capped so the
+   * transport can never leak raw user content even if a caller errs.
+   * Page identity uses GA4's built-in page dimensions — no page_path here.
+   */
+  const CANONICAL_PARAMS = [
+    'service_id',
+    'service_category',
+    'contact_type',
+    'cta_location',
+    'error_category',
+    'error_stage',
+  ];
+  const MAX_PARAM_LEN = 100;
+
+  /** @param {unknown} value */
+  function sanitizeParam(value) {
+    if (typeof value !== 'string') return undefined;
+    const trimmed = value.trim();
+    if (!trimmed) return undefined;
+    return trimmed.slice(0, MAX_PARAM_LEN);
+  }
 
   /** @param {string | null} name @param {TrackingProps} [props] */
   function send(name, payload) {
@@ -26,6 +50,10 @@
         if (payload.location !== undefined) params.tt_location = payload.location;
         if (payload.label !== undefined) params.tt_label = payload.label;
         if (payload.status !== undefined) params.tt_status = payload.status;
+        for (const key of CANONICAL_PARAMS) {
+          const clean = sanitizeParam(payload[key]);
+          if (clean !== undefined) params[key] = clean;
+        }
         typedWindow.gtag('event', name, params);
       }
     } catch (_) {

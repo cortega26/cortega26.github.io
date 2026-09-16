@@ -170,9 +170,10 @@ const c = lang === "en" ? en : es;
             rel="noopener noreferrer"
             data-track="cta_book_call"
             data-track-loc="contact"
+            data-book-call
             aria-label={c.scheduleAria}>{c.schedule}</a
           >
-          <a class="btn btn-ghost" href={c.emailHref}>
+          <a class="btn btn-ghost" href={c.emailHref} data-track-loc="contact" data-contact-intent="email">
             <svg
               width="16"
               height="16"
@@ -217,7 +218,7 @@ const c = lang === "en" ? en : es;
             href="/assets/docs/scoping-template.md"
             target="_blank"
             rel="noopener noreferrer"
-            >{lang === "en" ? "See a scoping template" : "Ver plantilla de alcance"}</a
+            data-template-open>{lang === "en" ? "See a scoping template" : "Ver plantilla de alcance"}</a
           >
         </div>
 

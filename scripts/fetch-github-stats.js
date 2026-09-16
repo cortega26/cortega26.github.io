@@ -5,7 +5,7 @@ const REPOS = [
   'elrincondeebano',
   'portfolio-manager-server',
   'chile-hub',
-  'tuplatainforma',
+  'Monedario',
   'stop-spam-linkedin',
   'conciliador_bancario',
   'rutificador',
@@ -14,7 +14,7 @@ const REPOS = [
   'noticiencias'
 ];
 
-const PRIVATE_REPOS = ['tuplatainforma'];
+const PRIVATE_REPOS = ['Monedario'];
 
 async function fetchStats() {
   const stats = {};

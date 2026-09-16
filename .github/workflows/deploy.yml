@@ -39,6 +39,8 @@ jobs:
           echo "PUBLIC_GA4_MEASUREMENT_ID is set (${{ vars.PUBLIC_GA4_MEASUREMENT_ID }}) — will be injected into build."
       - name: Type check
         run: npm run check
+      - name: Source tests
+        run: node tests/run.js
       - name: Build Astro
         run: npm run build
         env:
@@ -49,6 +51,19 @@ jobs:
           # GA4 Measurement ID — public, so vars (not secrets). Injected as
           # PUBLIC_GA4_MEASUREMENT_ID for Astro/Vite (import.meta.env). See Plan 006.
           PUBLIC_GA4_MEASUREMENT_ID: ${{ vars.PUBLIC_GA4_MEASUREMENT_ID }}
+      - name: Built output tests
+        run: node tests/run.js --built
+      - name: HTW snapshot
+        run: node test-htw-snapshot.mjs
+      - name: Link & SEO audit (informational)
+        run: node scripts/check-links-seo.js
+        continue-on-error: true
+      - name: Upload SEO audit report
+        if: always()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
+        with:
+          name: seo-audit-report
+          path: output/seo-audit-report.md
       - name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:

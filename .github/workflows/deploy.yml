@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
   schedule:
     # Rebuild daily at 06:00 UTC so build-time GitHub stats (stars/forks) stay fresh
@@ -78,6 +80,8 @@ jobs:
           path: dist
 
   deploy:
+    # PR runs verify only — never deploy from a pull request.
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

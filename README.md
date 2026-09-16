@@ -36,21 +36,44 @@ It is intentionally lightweight and focused on:
 
 ## Repository structure
 
-- `index.html` — language selector landing page
-- `en/`, `es/` — localized portfolio pages
-- `assets/css/` — shared styling
-- `assets/js/` — shared client-side behavior
-- `assets/images/` — profile and site imagery
-- `assets/docs/` — downloadable resume and supporting assets
-- `CNAME` — GitHub Pages custom domain binding
+Astro static site (`output: 'static'`, config in `astro.config.mjs`):
 
-## Local preview
+- `src/pages/` — routes: `index.astro` language gateway, `en/` + `es/` homepages, `en/services/*` + `es/servicios/*` service pages, `en/work/` + `es/trabajo/`, `[lang]/[document].astro` legal pages
+- `src/components/` — section components (`Navbar`, `HeroSection`, `ServicesSection`, `PortfolioSection`, `ProofSection`, `AboutSection`, `ContactSection`, `Footer`, …)
+- `src/layouts/` — `BaseLayout.astro` HTML shell (SEO meta, Open Graph, JSON-LD, fonts, nav)
+- `src/data/` — single-source content (`services.ts`, `pricing.ts`, `siteDocuments.ts`)
+- `src/styles/` — `global.css` design system
+- `public/` — static assets: favicons, `fonts/`, `assets/js`, `assets/images`, `llms.txt`, `CNAME` (custom-domain binding)
+- `scripts/` — `fetch-github-stats.js` (build-time stats), `check-links-seo.js` (link/SEO audit), `generate-og.mjs`
+- `tests/` — `run.js` source + built-output checks; `test-htw-snapshot.mjs` snapshot test at the repo root
+- `dist/` — build output, gitignored (what gets published)
 
-This is a static site. Preview it with any HTTP server, for example:
+## Local development
+
+Requires `node >= 24` (see `.nvmrc`):
 
 ```bash
-npx serve .
+npm ci
+npm run dev      # http://localhost:4321
+npm run build    # fetch GitHub stats, then `astro build` → `dist/`
+npm run preview  # serve the production build locally
 ```
+
+## Verification
+
+- `npm test` — full gate: source tests, built-output tests, HTW snapshot
+- `node tests/run.js` — source checks (`--built` variant runs against `dist/`, needs a build first)
+- `npm run check` — Astro typecheck
+- `npm run test:htw` — HTW snapshot test
+- `npm run test:links` — link & SEO audit (informational, hits the network)
+
+CI (`master` → GitHub Pages) runs four blocking gates — Source tests → Build → Built tests → HTW snapshot — plus a non-blocking Link & SEO audit whose report is uploaded as an artifact.
+
+## Environment
+
+- Local builds read `PUBLIC_GA4_MEASUREMENT_ID` from `.env` (gitignored — never committed).
+- Production builds get it from the `PUBLIC_GA4_MEASUREMENT_ID` repository variable; CI fails the build if it is unset.
+- See [CLAUDE.md](CLAUDE.md) for architecture detail.
 
 ## Notes
 

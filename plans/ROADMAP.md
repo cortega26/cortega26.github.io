@@ -25,8 +25,8 @@ User-facing bugs, independent of each other. Land both before anything else.
 
 | Plan | Entry point | Branch |
 |------|-------------|--------|
-| 007 — Service context into IntakeForm | `plans/007-service-context.md` | `advisor/007-service-context` |
-| 008 — Remove duplicate Formspree submit | `plans/008-double-submit.md` | `advisor/008-double-submit` |
+| 007 — Service context into IntakeForm | `plans/archive/007-service-context.md` | `advisor/007-service-context` |
+| 008 — Remove duplicate Formspree submit | `plans/archive/008-double-submit.md` | `advisor/008-double-submit` |
 
 Goto:
 ```
@@ -43,8 +43,8 @@ unchanged from baseline (the suite is stale by design until Wave 2);
 
 | Order | Plan | Entry point | Branch |
 |-------|------|-------------|--------|
-| 2a | 009 — Rewrite stale suite assertions | `plans/009-stale-suite.md` | `advisor/009-stale-suite` |
-| 2b | 010 — Gate deploys on the suite | `plans/010-ci-gates.md` | `advisor/010-ci-gates` |
+| 2a | 009 — Rewrite stale suite assertions | `plans/archive/009-stale-suite.md` | `advisor/009-stale-suite` |
+| 2b | 010 — Gate deploys on the suite | `plans/archive/010-ci-gates.md` | `advisor/010-ci-gates` |
 
 009 requires 007+008 DONE (it locks in their intended effects — running it
 early means re-touching it later). 010 requires 009 DONE (never gate deploys
@@ -64,8 +64,8 @@ artifact). After this wave, every later wave is verifiable end-to-end.
 
 | Plan | Entry point | Branch | Note |
 |------|-------------|--------|------|
-| 011 — Queue analytics events until gtag ready | `plans/011-track-queue.md` | `advisor/011-track-queue` | Needs 007 DONE (satisfied in Wave 1) |
-| 012 — Harden GitHub stats fetch | `plans/012-stats-fetch.md` | `advisor/012-stats-fetch` | Independent; restores `github-stats.json` if dirtied |
+| 011 — Queue analytics events until gtag ready | `plans/archive/011-track-queue.md` | `advisor/011-track-queue` | Needs 007 DONE (satisfied in Wave 1) |
+| 012 — Harden GitHub stats fetch | `plans/archive/012-stats-fetch.md` | `advisor/012-stats-fetch` | Independent; restores `github-stats.json` if dirtied |
 
 Goto:
 ```
@@ -80,10 +80,10 @@ Exit gate: both DONE; suite still green; stats file untouched-or-legitimately-up
 
 | Plan | Entry point | Branch | Note |
 |------|-------------|--------|------|
-| 013 — Generate portfolio impact counts | `plans/013-portfolio-counts.md` | `advisor/013-portfolio-counts` | Step 3 conditional on 009 (DONE by now) → apply it |
-| 014 — Contact CTAs → `#contact` | `plans/014-contact-anchors.md` | `advisor/014-contact-anchors` | Independent |
-| 016 — Rewrite stale README | `plans/016-readme.md` | `advisor/016-readme` | Read `deploy.yml` live (post-010 step list) |
-| 015 — CSP hash check + single-source GA4 ID | `plans/015-csp-hashes.md` | `advisor/015-csp-hashes` | Touches `deploy.yml` — land AFTER 010 and insert adjacent to its steps |
+| 013 — Generate portfolio impact counts | `plans/archive/013-portfolio-counts.md` | `advisor/013-portfolio-counts` | Step 3 conditional on 009 (DONE by now) → apply it |
+| 014 — Contact CTAs → `#contact` | `plans/archive/014-contact-anchors.md` | `advisor/014-contact-anchors` | Independent |
+| 016 — Rewrite stale README | `plans/archive/016-readme.md` | `advisor/016-readme` | Read `deploy.yml` live (post-010 step list) |
+| 015 — CSP hash check + single-source GA4 ID | `plans/archive/015-csp-hashes.md` | `advisor/015-csp-hashes` | Touches `deploy.yml` — land AFTER 010 and insert adjacent to its steps |
 
 Goto:
 ```

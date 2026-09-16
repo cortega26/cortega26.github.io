@@ -11,7 +11,7 @@ commands), see `plans/ROADMAP.md`.
 > (not `master`) with uncommitted changes: a one-line README link fix and a
 > `test` script addition in `package.json` (`node tests/run.js && node
 > tests/run.js --built && node test-htw-snapshot.mjs`), plus untracked
-> `.codex/`, `.env.example`, `plans/006-ga4-migration-P1P2-fixes-report-2026-08-21.md`.
+> `.codex/`, `.env.example`, `plans/archive/006-ga4-migration-P1P2-fixes-report-2026-08-21.md`.
 > Plans below invoke the `node` entrypoints directly so they work with or
 > without the uncommitted `test` script. The `test` script itself is NOT part
 > of any plan's scope — committing it is the operator's call.
@@ -65,7 +65,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJE
 
 Detail on 001–004: see `plans/archive/` and the previous index entries
 (commits `967f644`, `83fcb73`, `f61b50c`, `cd942f3`). GA4 series: see
-`plans/006-plausible-to-ga4-migration.md` and its reports. Nothing in the
+`plans/archive/006-plausible-to-ga4-migration.md` and its reports. Nothing in the
 2026-09-16 series re-plans or invalidates them — except that Plan 009 here
 updates `tests/run.js` assertions that Plan 002's JSON-LD fix intentionally
 invalidated (I8b), and the built Ahrefs assertion that Plan 006's migration

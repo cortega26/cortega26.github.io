@@ -130,31 +130,29 @@ Progress (follow-up): 4/4 DONE.
 ## Backlog (accepted, not yet planned)
 
 Sourced from the `**Deferred:**` lines in the plans and the audit's
-direction notes. Each needs a decision (plan it, schedule it, or reject it)
-— do NOT silently absorb these into the waves above.
+direction notes. Verdicts reviewed with the maintainer 2026-09-16: one item
+is next-series candidate, two are opportunistic/data-gated, two moved to
+Rejected below, two parked. Do NOT silently absorb these into past waves.
 
-- [ ] **Per-service IntakeForm options** (from 007): each service key reuses
-  `general` goal/budget lists. Tailor them per service if the maintainer
-  wants it. Effort S. Unblocked.
-- [ ] **Behavioral form/filter tests** (from 008/009): Playwright
-  submit-count test (exactly one POST per brief) + filter-interaction test.
-  Effort M. Unblocked after Wave 2 (needs green CI to be worth it).
-- [ ] **Employer route** (direction D1): `public/assets/docs/carlos-ortega-resume.pdf`
-  exists, zero links from `src/`. Strategy doc Fase 1 owns the spec —
-  check it first to avoid duplicating. Effort S. Unblocked.
-- [ ] **Case-study depth** (direction D3): replace a marketing proof line
-  with one real before/after artifact. Design/spike, not a build. Effort M.
-- [ ] **Server-side analytics fallback** (from 011): ad-blocked users are
-  still unmeasured by design. Needs a measurement-endpoint decision first.
-- [ ] **`report-uri` for the CSP** (from 015): needs an operator-owned
-  collector endpoint decision.
-- [ ] **GA4-ID rotation friction** (from 015 Step-2 STOP): the measurement ID
-  remains pasted in six places in `siteDocuments.ts` because no fallback
-  preserves the legal sentences' grammar. If the ID ever rotates, either
-  hand-edit the six spots or re-plan with a copy-approved fallback sentence.
-  Effort S when triggered; dormant until rotation.
-- [ ] **README/CLAUDE.md/AGENTS.md lane split** (from 016): pick one lane per
-  file at the next docs touch.
+- [ ] **Behavioral form/filter tests** (from 008/009) — NEXT-SERIES
+  CANDIDATE. Playwright submit-count test (exactly one POST per brief) +
+  filter-interaction test. Effort M. Infra cost already sunk (Playwright is
+  a devDependency and CI installs the browser for the HTW step). The
+  double-submit bug class has no automated coverage today.
+- [ ] **Case-study depth** (direction D3) — PARKED as personal habit, not
+  code work. Blocked on a willing client. Action: add a testimonial/case
+  ask to the project closeout habit; the quarterly runbook review is the
+  trigger. Effort M when unblocked (design/spike, not a build).
+- [ ] **Per-service IntakeForm options** (from 007) — DATA-GATED. Revisit
+  only after ~30 days of per-service GA4 data (now collected via 007+011):
+  tailor a service's options only if its briefs prove unqualified. Effort S.
+- [ ] **README/CLAUDE.md/AGENTS.md lane split** (from 016) —
+  OPPORTUNISTIC. Fold into the next docs touch; never its own dispatch.
+- [ ] **GA4-ID rotation friction** (from 015 Step-2 STOP) — DORMANT. The
+  measurement ID remains pasted in six places in `siteDocuments.ts`
+  because no fallback preserves the legal sentences' grammar. If the ID
+  ever rotates, either hand-edit the six spots or re-plan with a
+  copy-approved fallback sentence. Effort S when triggered.
 
 ## Rejected (do not re-propose without new evidence)
 
@@ -164,3 +162,10 @@ direction notes. Each needs a decision (plan it, schedule it, or reject it)
 - Dependency migration (`npm audit` clean, Astro 7 current).
 - Making the link audit or CSP check CI-blocking (flake rate must be
   addressed first — see 010/015 maintenance notes).
+- Server-side analytics fallback (rejected 2026-09-16: needs an owned
+  endpoint + privacy-copy rework to recover ad-blocked visits on a
+  portfolio site; revisit only if conversion data shows a material blind
+  spot).
+- `report-uri` for the CSP (rejected 2026-09-16: the in-repo hash check +
+  non-blocking CI step already cover realistic stub-drift failures;
+  revisit only on an otherwise-unexplained analytics drop).

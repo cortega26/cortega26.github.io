@@ -38,6 +38,21 @@ commands), see `plans/ROADMAP.md`.
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
+## Follow-up series — trust transfer (planned 2026-09-16, against `e2e86eb`)
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 017 | Link the resume PDF (employer route) | P1 | S | — | DONE |
+| 018 | Reword unverifiable outage claims | P1 | S | — | DONE |
+| 019 | Backlink recon + sample-scope template | P2 | M | — | DONE |
+| 020 | Freshness runbook + funnel self-test | P3 | S | — | DONE |
+
+All four scopes are file-disjoint — parallel-safe. 017 has a read-only PDF
+freshness gate (STALE stops the plan). 018 uses maintainer-approved verbatim
+replacements ("daily orders" + "100+ SKUs" confirmed current; zero-claim
+dropped for lack of logs). 019 takes the template route (no client data).
+020 is docs-only plus operator manual steps.
+
 ## Dependency notes
 
 - 008 and 007 first (small, user-facing correctness; independent of each other).

@@ -113,6 +113,20 @@ built EN/ES pages show live star counts; no CTA points at `#contact-form`.
 
 Progress: 10/10 DONE (all waves complete).
 
+## Follow-up series — trust transfer (017–020, all TODO)
+
+Wave 5, all scopes file-disjoint (parallel-safe). Entry points use
+`plans/<file>` until archived.
+
+| Plan | Title | Pri | Eff | Status |
+|------|-------|-----|-----|--------|
+| 017 | Employer route (resume link, PDF freshness-gated) | P1 | S | DONE |
+| 018 | Claim reword (verbatim replacements baked in) | P1 | S | DONE |
+| 019 | Backlink recon + scope template | P2 | M | DONE |
+| 020 | Freshness runbook | P3 | S | DONE |
+
+Progress (follow-up): 4/4 DONE.
+
 ## Backlog (accepted, not yet planned)
 
 Sourced from the `**Deferred:**` lines in the plans and the audit's

@@ -16,7 +16,6 @@ const en = {
   scopeLabel: 'Scope:',
   moreLabel: 'Scope & evidence',
   ctaLabel: 'View service',
-  ctaContactLabel: 'Discuss this service',
   termsLabel: 'Engagement terms →',
   termsHref: '/en/engagement/',
   services: [
@@ -51,7 +50,6 @@ const es = {
   scopeLabel: 'Alcance:',
   moreLabel: 'Alcance y evidencia',
   ctaLabel: 'Ver servicio',
-  ctaContactLabel: 'Hablar de este servicio',
   services: [
     { icon: SVG_REFRESH, title: 'Automatización Python y Pipelines de Datos', desc: 'Convierto reportes recurrentes, pasos ETL y entregas manuales de datos en flujos programados y reproducibles.', fit: 'Se pueden nombrar entradas, salidas, responsable, frecuencia y criterios de éxito.', scope: 'Un flujo definido o un sistema coordinado de varias fuentes; no incluye levantar una plataforma de datos completa ni desarrollar modelos de ML.', examples: [{ name: 'chile-hub', href: 'https://github.com/cortega26/chile-hub' }, { name: 'Pipeline de Lotería', href: 'https://github.com/cortega26/polla' }], href: '/es/servicios/automatizacion-python/' },
     { icon: SVG_SEARCH, title: 'Recolección Recurrente de Datos', desc: 'Recolecto datos públicos o autorizados mediante scraping y flujos de adquisición resilientes que fallan de forma visible en vez de degradarse en silencio.', fit: 'Una fuente recurrente alimenta operaciones, análisis o publicación.', scope: 'Fuentes públicas o autorizadas con una necesidad repetible; no incluye evadir controles de acceso ni recolectar leads por única vez.', examples: [{ name: 'Pipeline de Lotería', href: 'https://github.com/cortega26/polla' }, { name: 'Noticiencias', href: 'https://github.com/cortega26/noticiencias' }], href: '/es/servicios/recoleccion-recurrente-datos/' },
@@ -120,7 +118,7 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
             <p class="svc-result"><span>{resultLabel}</span> {serviceResults[svc.title]}</p>
           )}
           {svc.href && (
-            <a class="btn btn-ghost btn-sm svc-inline-cta" href={svc.href}>{svc.href === '#contact-form' ? c.ctaContactLabel : c.ctaLabel}</a>
+            <a class="btn btn-ghost btn-sm svc-inline-cta" href={svc.href}>{c.ctaLabel}</a>
           )}
           <p class="svc-examples-label svc-desktop-detail">{c.examplesLabel}</p>
           <div class="svc-examples svc-desktop-detail">

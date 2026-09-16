@@ -31,10 +31,10 @@ commands), see `plans/ROADMAP.md`.
 | 010 | Gate deploys on the test suite | P2 | S | 009 | DONE |
 | 011 | Queue analytics events until GA4 is ready | P2 | S | 007 | DONE |
 | 012 | Harden the build-time GitHub stats fetch | P2 | S | — | DONE |
-| 013 | Generate portfolio impact lines from stats | P3 | S | — | TODO |
-| 014 | Point contact CTAs at the section, not the form | P3 | S | — | TODO |
-| 015 | Verify CSP hashes in-repo, single-source GA4 ID | P3 | S | — | TODO |
-| 016 | Rewrite the stale README | P3 | S | — | TODO |
+| 013 | Generate portfolio impact lines from stats | P3 | S | — | DONE |
+| 014 | Point contact CTAs at the section, not the form | P3 | S | — | DONE |
+| 015 | Verify CSP hashes in-repo, single-source GA4 ID | P3 | S | — | DONE |
+| 016 | Rewrite the stale README | P3 | S | — | DONE |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 

@@ -106,12 +106,12 @@ built EN/ES pages show live star counts; no CTA points at `#contact-form`.
 | 010 | 2b | P2 | S | DONE | 4 gates in order, YAML parses, artifact pinned to SHA (verified 2026-09-16) |
 | 011 | 3 | P2 | S | DONE | harness green (order/bound/null-safety), suite green (verified 2026-09-16) |
 | 012 | 3 | P2 | S | DONE | 9/10 live run, byte-identical JSON, suite green (verified 2026-09-16) |
-| 013 | 4 | P3 | S | TODO | built pages match `github-stats.json` |
-| 014 | 4 | P3 | S | TODO | link checker, 0 internal issues |
-| 015 | 4 | P3 | S | TODO | `CSP HASH MATCH` |
-| 016 | 4 | P3 | S | TODO | paths/commands/links all exist |
+| 013 | 4 | P3 | S | DONE | live counts, zero ★0, 134/134 built (verified 2026-09-16) |
+| 014 | 4 | P3 | S | DONE | link checker 0/0/0 re-run, suite green (verified 2026-09-16) |
+| 015 | 4 | P3 | S | DONE | MATCH both pages, YAML OK (verified 2026-09-16; Step-2 ID derivation STOPped per plan — see backlog) |
+| 016 | 4 | P3 | S | DONE | single-hunk docs diff, links resolve, suite green (verified 2026-09-16) |
 
-Progress: 6/10 DONE (Waves 1–3 complete).
+Progress: 10/10 DONE (all waves complete).
 
 ## Backlog (accepted, not yet planned)
 
@@ -134,6 +134,11 @@ direction notes. Each needs a decision (plan it, schedule it, or reject it)
   still unmeasured by design. Needs a measurement-endpoint decision first.
 - [ ] **`report-uri` for the CSP** (from 015): needs an operator-owned
   collector endpoint decision.
+- [ ] **GA4-ID rotation friction** (from 015 Step-2 STOP): the measurement ID
+  remains pasted in six places in `siteDocuments.ts` because no fallback
+  preserves the legal sentences' grammar. If the ID ever rotates, either
+  hand-edit the six spots or re-plan with a copy-approved fallback sentence.
+  Effort S when triggered; dormant until rotation.
 - [ ] **README/CLAUDE.md/AGENTS.md lane split** (from 016): pick one lane per
   file at the next docs touch.
 

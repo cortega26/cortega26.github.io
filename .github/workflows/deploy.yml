@@ -64,6 +64,9 @@ jobs:
         with:
           name: seo-audit-report
           path: output/seo-audit-report.md
+      - name: CSP hash check (informational)
+        run: node scripts/check-csp-hashes.mjs
+        continue-on-error: true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:

@@ -34,31 +34,58 @@ async function fetchStats() {
     'Accept': 'application/vnd.github.v3+json'
   };
   if (token) {
-    headers['Authorization'] = `token ${token}`;
+    headers['Authorization'] = `Bearer ${token}`;
   }
 
   console.log('Fetching GitHub repository stats...');
-  for (const repo of REPOS) {
+  let liveCount = 0;
+  let fallbackCount = 0;
+  const results = await Promise.all(REPOS.map(async (repo) => {
     if (PRIVATE_REPOS.includes(repo) && !token) {
-      stats[repo] = fallback[repo] || { stars: 0, forks: 0 };
-      console.log(`ℹ Skipping fetch for private repo ${repo} (no GITHUB_TOKEN), using fallback`);
-      continue;
+      return { repo, skipped: true };
     }
     try {
-      const res = await fetch(`https://api.github.com/repos/cortega26/${repo}`, { headers });
+      const res = await fetch(`https://api.github.com/repos/cortega26/${repo}`, { headers, signal: AbortSignal.timeout(10000) });
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
       const data = await res.json();
-      stats[repo] = {
+      return {
+        repo,
         stars: typeof data.stargazers_count === 'number' ? data.stargazers_count : (fallback[repo]?.stars ?? 0),
-        forks: typeof data.forks_count === 'number' ? data.forks_count : (fallback[repo]?.forks ?? 0)
+        forks: typeof data.forks_count === 'number' ? data.forks_count : (fallback[repo]?.forks ?? 0),
+        live: true
       };
-      console.log(`✓ Fetched ${repo}: ${stats[repo].stars} stars, ${stats[repo].forks} forks`);
     } catch (e) {
-      console.warn(`✗ Failed to fetch ${repo}, using fallback:`, e.message);
-      stats[repo] = fallback[repo] || { stars: 0, forks: 0 };
+      return { repo, error: e.message, live: false };
     }
+  }));
+
+  for (const result of results) {
+    const { repo } = result;
+    if (result.skipped) {
+      stats[repo] = fallback[repo] || { stars: 0, forks: 0 };
+      console.log(`ℹ Skipping fetch for private repo ${repo} (no GITHUB_TOKEN), using fallback`);
+      fallbackCount++;
+    } else if (result.live) {
+      stats[repo] = { stars: result.stars, forks: result.forks };
+      console.log(`✓ Fetched ${repo}: ${stats[repo].stars} stars, ${stats[repo].forks} forks`);
+      liveCount++;
+    } else {
+      console.warn(`✗ Failed to fetch ${repo}, using fallback:`, result.error);
+      stats[repo] = fallback[repo] || { stars: 0, forks: 0 };
+      fallbackCount++;
+    }
+  }
+
+  console.log(`${liveCount}/${REPOS.length} live, ${fallbackCount}/${REPOS.length} fallback`);
+  if (fallbackCount > REPOS.length / 2 && token) {
+    console.warn(`WARNING: ${fallbackCount} of ${REPOS.length} repos used fallback data despite GITHUB_TOKEN being set — counts may be stale. Build continues with fallback values.`);
+  }
+
+  if (liveCount === 0) {
+    console.log('All repos used fallback — leaving src/data/github-stats.json untouched');
+    return;
   }
 
   try {

@@ -37,6 +37,12 @@
   --clr-accent-2:    #b8923a;
   --clr-accent-warm: #c4a04a;
   --clr-focus-ring:  rgba(196, 160, 74, 0.3);
+  /* Dedicated success signal — kept separate from --clr-accent (gold, used
+     for brand/CTA emphasis) so a completed action reads as unambiguously
+     "done" rather than just "notable". Tailwind green-400: ~8:1 contrast
+     against the card background, pairs with the existing error red (also a
+     Tailwind -400 shade) for a consistent two-color feedback system. */
+  --clr-success:     #4ade80;
 
   --clr-text:        #f1f5f9;
   --clr-text-muted:  #94a3b8;

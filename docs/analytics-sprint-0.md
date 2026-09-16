@@ -723,10 +723,134 @@ submission was made by Claude. Recommended before the next one:
    `brief_submit` → `brief_success`, and watch the page itself for the
    (now scroll-and-focus-assisted) success banner.
 
-**Verdict: SPRINT 0 NOT CLOSED.** Closure still requires: one real
-production submission, performed by Carlos, in a browser confirmed able to
-reach GA4 first; `brief_submit` observed; `brief_success` observed;
-`brief_success` configured as the GA4 Key Event; and the clean baseline
-timestamp recorded per §16. None of those have happened yet — this pass
-fixed a real UX bug and strengthened the evidence that the analytics gap is
-environmental, but did not close any of the outstanding closure criteria.
+**Verdict at the end of the previous pass: SPRINT 0 NOT CLOSED.** Closure
+still required: one real production submission, performed by Carlos, in a
+browser confirmed able to reach GA4 first; `brief_submit` observed;
+`brief_success` observed; `brief_success` configured as the GA4 Key Event;
+and the clean baseline timestamp recorded per §16.
+
+## 19. Submission feedback salience refinement (2026-09-16, cont.)
+
+Visual salience of the success/error banners was low (small text, no icon,
+no left-accent border) even though the banners themselves worked and were
+now scroll/focus-assisted per §18. Refined, within the constraint of using
+only existing design tokens and not changing the interaction model, the
+copy/CSS/markup:
+
+- Copy: EN `"Brief sent. I'll reply by email within two business days."`
+  (was `"Sent. ..."`); ES `"Brief enviado. Respondo por correo en dos días
+  hábiles."` (was `"Enviado. ..."`).
+- Markup: added an inline SVG icon (check-circle for success, alert-triangle
+  for error) inside each banner via `set:html`, `aria-hidden="true"` so
+  screen readers still only hear the existing `role="status"`/`role="alert"`
+  text.
+- CSS: heavier weight, more padding, a left accent border, and (at the
+  time) `color: var(--clr-accent)` (gold) for success — the site's design
+  system had no dedicated success color, and the task constraint at the
+  time was explicitly "no new design tokens."
+- `tabindex="-1"` (from §18's mobile fix) and `revealFeedback()`
+  (scroll-into-view + focus) were both preserved unchanged.
+
+Full regression pass (`npm run check`, `npm test` — 155/155, `npm run
+build`, `node tests/run.js --built`, `node test-htw-snapshot.mjs`, `node
+test-behavioral.mjs`) passed, including a new mobile-viewport visibility
+assertion and new keyboard-focus assertions added to `test-behavioral.mjs`.
+
+This work was written to Carlos's local working tree across two passes but
+did **not** reach `origin/master` until commit `1ba4f99` ("fix(intake-form):
+add success/error icons and mobile visibility tests"), pushed on top of
+`dfabe4a`. Two prior passes reported the same defect (files present on
+disk, confirmed via re-stage, but missing from what was actually committed)
+— root cause on Carlos's end was never diagnosed, only worked around by
+re-writing and Carlos re-committing. Deployment was verified complete only
+after this commit: `git show origin/master:<path>` byte-identical to the
+authoritative copy for both files, GitHub Actions "Deploy to GitHub Pages"
+run succeeded, and live `https://tooltician.com/en/` (checked via direct
+`curl`, not cache) served the new copy/icons.
+
+## 20. First real production submission, Key Event status, and success color change (2026-09-16, cont.)
+
+### 20.1 Manual submission — full funnel confirmed
+
+With deployment verified live, Carlos performed one real test submission
+(name "GA4 Sprint 0 Test", a controlled message, his own email). GA4
+Realtime showed the complete expected lifecycle within seconds:
+`page_view → form_start → brief_start → brief_submit → brief_success`,
+plus the legacy `form_submit_success` and the existing `service_engage` /
+`service_view` / `scroll` events. This is the first time `brief_submit` /
+`brief_success` have been directly observed firing from a real user
+action against production.
+
+### 20.2 Privacy check on the real event
+
+All 8 parameters GA4 recorded on this `brief_success` event were pulled
+directly from Realtime's parameter breakdown: `batch_ordering_id`,
+`batch_page_id`, `ga_session_id`, `ga_session_number`, `page_location`,
+`page_title`, `service_category`, `service_id`. No name, email, or message
+content — consistent with the "coarse, content-free params only" design
+documented in §10.
+
+### 20.3 Key Event status — blocked by GA4 indexing latency, not a defect
+
+Immediately after the submission, `brief_success` did not yet appear in
+GA4 Admin → Events → Recent events (the list the "star as Key Event"
+control lives on), despite being visible in Realtime seconds earlier.
+Confirmed directly: Recent events still listed only the pre-existing 17
+event names (`book_call`, `brief_error`, `brief_start`, `click`, ... —
+notably `brief_start` was already indexed there from earlier testing, but
+not `brief_submit`/`brief_success`). This is normal GA4 processing
+latency between the Realtime pipeline and the processed Recent-events list
+(typically hours, per Google's own documentation, occasionally up to
+~24h) — not a code or configuration defect. No derived/alias event was
+created as a workaround (explicitly forbidden by task constraints in the
+prior pass); the correct action once `brief_success` is indexed is to
+star it directly.
+
+### 20.4 Success color changed from gold to a dedicated green
+
+Carlos's feedback after seeing the live banner: gold (matching the accent/
+button color) is harder to identify at a glance as a distinct "success"
+signal than a conventional green would be. Change made:
+
+- Added `--clr-success: #4ade80` (Tailwind green-400) to the token block
+  in `src/styles/global.css`, next to `--clr-accent`. This is the first
+  dedicated success color in the design system — previously
+  `--clr-accent` (gold) was reused because no success token existed.
+- `.intake-form__success` in `src/components/IntakeForm.astro` now uses
+  `color: var(--clr-success)`, `background: rgba(74, 222, 128, 0.12)`,
+  `border-left: 3px solid var(--clr-success)` (was gold/`--clr-accent`
+  throughout). Error state, icons, copy, markup, and the interaction model
+  (scroll-into-view + focus) are all unchanged.
+- Contrast verified programmatically (WCAG relative-luminance formula)
+  against the effective background (12%-alpha tint over `--clr-bg-card`
+  `#111827`): green-400 text-on-tint = **7.99:1** (was gold 5.96:1, error
+  red unchanged at 5.44:1) — comfortably AAA for normal text, and a clear
+  improvement in at-a-glance distinctiveness over gold, which was visually
+  close to the button/accent color it was trying to be distinguished from.
+- Verified in the compiled build output (`dist/_astro/*.css`): the token
+  resolves to `--clr-success:#4ade80`, and `.intake-form__success` compiles
+  to `color:var(--clr-success);border:1px solid #4ade8033;border-left:3px
+  solid var(--clr-success);background:#4ade801f` — correct alpha values.
+- Full regression pass re-run after the change: `npm run check` (0
+  errors), `npm test` (155/155), `npm run build` (29 pages), `node
+  tests/run.js --built` (155/155). Not yet re-verified on live production
+  at the time of writing — pending Carlos's commit/push of this change.
+
+### 20.5 Outstanding items
+
+1. Commit/push `src/styles/global.css`, `src/components/IntakeForm.astro`
+   (green color change), and this doc update.
+2. Once deployed, re-verify the green color renders correctly on live
+   production (desktop + mobile).
+3. Once `brief_success` appears in GA4 Admin → Events → Recent events,
+   star it as a Key Event (no alias/derived event).
+4. Record the clean baseline timestamp per §16 template once the above
+   settle.
+
+**Verdict: SPRINT 0 substantively complete.** Deployment, live UX
+(including the mobile fix and salience refinement), the real submission's
+full funnel, and the privacy check have all been independently verified.
+The only remaining items are the green-color redeploy (code written,
+tested, not yet pushed) and starring `brief_success` as a Key Event once
+GA4's own indexing catches up — both mechanical, neither blocked by an
+unresolved defect.

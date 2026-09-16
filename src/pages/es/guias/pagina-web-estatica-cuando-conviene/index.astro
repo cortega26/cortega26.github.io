@@ -1,0 +1,346 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Navbar from '../../../../components/Navbar.astro';
+import Footer from '../../../../components/Footer.astro';
+import '../../../../styles/global.css';
+
+const canonical = 'https://tooltician.com/es/guias/pagina-web-estatica-cuando-conviene/';
+const alternates = [
+  { hreflang: 'es', href: canonical },
+  { hreflang: 'x-default', href: canonical },
+];
+
+const serviceHref = '/es/servicios/sitios-web/';
+const serviceContactHref = '/es/servicios/sitios-web/#contact';
+
+const navItems = [
+  { href: '#definicion', label: 'Definición' },
+  { href: '#ventajas', label: 'Ventajas' },
+  { href: '#cuando-no', label: 'Cuándo no' },
+  { href: '#comparacion', label: 'Comparación' },
+  { href: '#faq', label: 'FAQ' },
+];
+
+const faqs: [string, string][] = [
+  [
+    '¿Una página estática significa que el contenido nunca cambia?',
+    'No. Estática describe cómo se genera el sitio, no cada cuánto se actualiza. El contenido se edita y se publica con un proceso de despliegue documentado; lo que no hay es generación de páginas en cada visita ni base de datos en línea para mostrar contenido fijo.',
+  ],
+  [
+    '¿Puedo tener formulario de contacto en un sitio estático?',
+    'Sí. Los formularios se conectan a un servicio de recepción externo o a un endpoint dedicado, con confirmación visible y registro de entrega. Lo importante —que los mensajes lleguen y quede constancia— se resuelve igual que en un sitio dinámico, y conviene probarlo de forma controlada.',
+  ],
+  [
+    '¿Mi equipo puede editar el sitio después sin saber programar?',
+    'Sí, si el contenido se estructura para eso desde el inicio. Con un modelo de contenido ordenado y documentación de actualización, despliegue y reversión, personas no técnicas pueden editar textos e imágenes con seguridad. Eso debe pedirse como parte del traspaso, no darse por sentado.',
+  ],
+  [
+    '¿Cuándo conviene reconstruir en vez de arreglar el sitio actual?',
+    'Cuando el sitio existente es lento, difícil de editar y acumula dependencias que nadie se atreve a tocar, reconstruir sobrio suele costar menos a lo largo de su vida que parchear. Si en cambio el problema son arreglos puntuales, un diagnóstico honesto lo dice y recomienda la opción más pequeña.',
+  ],
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Qué es una página web estática y cuándo conviene',
+  description:
+    'Qué es una página web estática, qué ventajas ofrece frente a un CMS y en qué casos conviene elegirla para el sitio de un negocio pequeño.',
+  inLanguage: 'es',
+  author: {
+    '@type': 'Person',
+    name: 'Carlos Ortega Gonzalez',
+    url: 'https://tooltician.com/es/',
+  },
+  publisher: {
+    '@type': 'ProfessionalService',
+    name: 'Tooltician',
+    url: 'https://tooltician.com/es/',
+  },
+  mainEntityOfPage: canonical,
+  datePublished: '2026-09-16',
+  dateModified: '2026-09-16',
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/es/' },
+    { '@type': 'ListItem', position: 2, name: 'Qué es una página web estática y cuándo conviene', item: canonical },
+  ],
+};
+---
+<BaseLayout
+  title="Página web estática: qué es y cuándo conviene | Tooltician"
+  description="Qué es una página web estática, qué ventajas ofrece frente a un CMS y en qué casos conviene elegirla para el sitio de un negocio pequeño."
+  lang="es"
+  canonical={canonical}
+  alternates={alternates}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
+  <Navbar lang="es" items={navItems} ctaHref={serviceContactHref} />
+
+  <main id="main">
+    <section class="article-hero" id="hero">
+      <div class="container article-hero__inner">
+        <span class="section-eyebrow reveal">Guía · Tooltician</span>
+        <h1 class="section-title reveal reveal-delay-1">Qué es una página web estática y cuándo conviene</h1>
+        <p class="article-hero__lede reveal reveal-delay-2">
+          Si tu sitio es lento, difícil de editar o depende de plugins que nadie se atreve a actualizar,
+          quizás el problema no es el diseño sino la tecnología base. Esta guía explica qué es una página
+          web estática en lenguaje simple, qué ventajas ofrece y en qué casos conviene —y en cuáles no—
+          para el sitio de un negocio pequeño.
+        </p>
+        <p class="article-byline reveal reveal-delay-2">Por Carlos Ortega Gonzalez · Consultor en automatización y sistemas · Septiembre de 2026</p>
+      </div>
+    </section>
+
+    <section class="section" id="definicion">
+      <div class="container article-block">
+        <h2 class="section-title">Qué significa que un sitio sea estático</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          En un sitio tradicional con CMS, cada visita ejecuta programas en el servidor: se consulta una
+          base de datos, se arman las páginas al momento y se entregan al visitante. En un sitio
+          estático, en cambio, las páginas se generan una vez —cuando se publica el contenido— y el
+          servidor entrega archivos ya listos. No hay base de datos en línea ni armado de páginas en cada
+          visita para mostrar contenido que, en la práctica, cambia poco: textos de servicios, páginas de
+          contacto, portafolios o artículos como este.
+        </p>
+        <p class="body-copy">
+          La palabra estática describe esa forma de generación, no la frecuencia de actualización. Un
+          sitio estático se edita y se vuelve a publicar con un proceso documentado cada vez que el
+          contenido cambia; lo que desaparece es la maquinaria intermedia que se ejecuta en cada visita.
+          Herramientas modernas como Astro siguen este enfoque: generan páginas livianas con el mínimo de
+          JavaScript necesario, fuentes propias y recursos optimizados desde la primera publicación.
+        </p>
+        <p class="body-copy">
+          El resultado práctico es un sitio con menos piezas móviles. Menos piezas móviles significa menos
+          cosas que actualizar por seguridad, menos cosas que se rompen solas y menos dependencias de
+          terceros arrastrando la carga de cada página. Para un negocio sin equipo técnico interno, esa
+          simplicidad operativa es una ventaja silenciosa pero decisiva.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="ventajas">
+      <div class="container article-block">
+        <h2 class="section-title">Ventajas concretas para un negocio pequeño</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          La primera ventaja es la velocidad. Como el servidor entrega archivos ya generados, el primer
+          render es rápido incluso en conexiones modestas y en teléfonos de gama media, que es donde una
+          parte importante de los clientes reales navega. Un sitio rápido no solo se siente mejor: reduce
+          abandonos en el momento exacto en que alguien decide si contactarte o volver al buscador.
+        </p>
+        <p class="body-copy">
+          La segunda es el posicionamiento. Los buscadores leen con facilidad páginas con marcado
+          semántico, metadatos completos, sitemap, URLs canónicas y datos estructurados —todo lo cual se
+          integra desde la primera versión en un sitio estático bien construido, en vez de pegarse después
+          con plugins. Para sitios bilingües se suma el hreflang correcto, que indica a cada buscador qué
+          versión mostrar en cada idioma sin contenido duplicado.
+        </p>
+        <p class="body-copy">
+          La tercera es la mantenibilidad. Sin base de datos en línea ni ecosistema de plugins, no hay
+          actualizaciones semanales que alguien deba aplicar con miedo a romper el diseño. El contenido se
+          estructura para que personas no técnicas editen con seguridad, el despliegue sigue un pipeline
+          limpio y documentado, y el traspaso incluye instrucciones de actualización y reversión. El sitio
+          envejece mejor porque hay menos que se pudra solo.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="cuando-no">
+      <div class="container article-block">
+        <h2 class="section-title">Cuándo no conviene un sitio estático</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          La honestidad obliga a la otra mitad de la respuesta. Si tu negocio necesita una tienda en línea
+          con carrito, pagos e inventario en tiempo real, un sitio estático puro no es la herramienta: eso
+          es una aplicación de comercio con backend, con requisitos distintos de sesiones, stock y
+          transacciones. Lo mismo aplica a aplicaciones web complejas con cuentas de usuario, paneles
+          interactivos o contenido que cambia minuto a minuto según quién lo mira.
+        </p>
+        <p class="body-copy">
+          Tampoco conviene si el equipo publica contenido varias veces al día y necesita flujos
+          editoriales con roles, revisiones y programación avanzada. En ese caso un CMS con su curva de
+          mantención puede justificarse, siempre que alguien asuma esa mantención de forma explícita. La
+          regla práctica es simple: si el contenido es mayormente estable y el objetivo es explicar,
+          rankear y convertir, lo estático encaja; si el sitio es en sí mismo una aplicación, se necesita
+          otra arquitectura.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="comparacion">
+      <div class="container article-block">
+        <h2 class="section-title">Frente a un CMS o un page builder</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          Un page builder o un tema recargado sale rápido y se ve bien el día del lanzamiento. El costo
+          aparece después: carga lenta, puntaje pobre en móvil, lo básico de SEO descuidado y edición
+          trabada tras una herramienta que solo la agencia original entiende. Cada cambio se vuelve un
+          ticket, cada plugin nuevo es una dependencia más que alguien deberá actualizar, y con el tiempo
+          nadie puede tocar nada con seguridad.
+        </p>
+        <p class="body-copy">
+          Un sitio estático sobrio y documentado invierte ese orden: cuesta un poco más de criterio al
+          inicio —acordar el mapa del sitio, las superficies de contenido y el objetivo de conversión— y
+          mucho menos durante su vida. La comparación honesta no es precio inicial contra precio inicial,
+          sino costo total: velocidad y posicionamiento sostenidos, ediciones que tu propio equipo puede
+          hacer y un traspaso que no te deja afuera de tu propio sitio.
+        </p>
+        <div class="card-glass article-cta reveal">
+          <div>
+            <p class="article-cta__eyebrow">Servicio relacionado</p>
+            <h3 class="card-title">¿Tu sitio es lento o imposible de editar?</h3>
+            <p class="body-copy">
+              El servicio de sitios web construye superficies rápidas e indexables con SEO y rendimiento
+              integrados, bilingües donde lo necesites, y un traspaso documentado. Alcance fijo, sin
+              horas abiertas.
+            </p>
+          </div>
+          <a class="btn btn-primary" href={serviceContactHref}>Acotar mi sitio</a>
+        </div>
+        <p class="body-copy article-alt">
+          Más detalle sobre el proceso, los planes y las preguntas comunes en la
+          <a href={serviceHref}>página del servicio de sitios web</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container article-block">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <div class="divider"></div>
+        <div class="faq-accordion">
+          {faqs.map(([question, answer], index) => (
+            <details class={`faq-item reveal reveal-delay-${(index % 2) + 1}`}>
+              <summary class="faq-question">{question}</summary>
+              <p class="faq-answer body-copy">{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="es" langHref="/en/" />
+</BaseLayout>
+
+<style>
+.article-hero {
+  padding-top: calc(var(--nav-height) + 5rem);
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+.article-hero__inner {
+  display: grid;
+  gap: 1rem;
+  max-width: 54rem;
+}
+.article-hero__lede {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+  font-size: 1.05rem;
+  max-width: 62ch;
+}
+.article-byline {
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+.article-block {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 54rem;
+}
+.body-copy {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+.article-cta {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+.article-cta__eyebrow {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  margin-bottom: 0.5rem;
+}
+.article-alt {
+  font-size: 0.9rem;
+}
+.article-alt a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.faq-accordion {
+  display: grid;
+  border-top: 1px solid var(--clr-border);
+}
+.faq-item {
+  border-bottom: 1px solid var(--clr-border);
+}
+.faq-question {
+  padding: 1rem var(--sp-4);
+  font-family: var(--ff-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  letter-spacing: -0.02em;
+}
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+.faq-question::after {
+  content: '+';
+  color: var(--clr-accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.faq-item[open] .faq-question::after {
+  content: '−';
+  opacity: 0.7;
+}
+.faq-answer {
+  padding: 0 var(--sp-4) 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+@media (max-width: 720px) {
+  .article-hero {
+    padding-top: calc(var(--nav-height) + 4rem);
+  }
+}
+</style>

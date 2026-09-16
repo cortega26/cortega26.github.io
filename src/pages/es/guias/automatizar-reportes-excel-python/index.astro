@@ -1,0 +1,357 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Navbar from '../../../../components/Navbar.astro';
+import Footer from '../../../../components/Footer.astro';
+import '../../../../styles/global.css';
+
+const canonical = 'https://tooltician.com/es/guias/automatizar-reportes-excel-python/';
+const alternates = [
+  { hreflang: 'es', href: canonical },
+  { hreflang: 'x-default', href: canonical },
+];
+
+const serviceHref = '/es/servicios/automatizacion-python/';
+const serviceContactHref = '/es/servicios/automatizacion-python/#contact';
+
+const navItems = [
+  { href: '#problema', label: 'Problema' },
+  { href: '#criterio', label: 'Qué automatizar' },
+  { href: '#pipeline', label: 'Pipeline' },
+  { href: '#encargo', label: 'Encargo' },
+  { href: '#faq', label: 'FAQ' },
+];
+
+const faqs: [string, string][] = [
+  [
+    '¿Hay que dejar de usar Excel para automatizar un reporte?',
+    'No. Excel puede seguir siendo la entrada, la salida o ambas. Lo que se automatiza es el armado: lectura de fuentes, transformación con reglas explícitas, validación y entrega programada. El equipo sigue recibiendo el archivo donde siempre lo leyó.',
+  ],
+  [
+    '¿Qué pasa si cambia el formato de la hoja de origen?',
+    'Un pipeline bien construido valida los datos antes de entregar: revisa esquema y totales esperados, y si algo no cuadra, falla de forma visible con un registro del problema en vez de publicar números incompletos. Las notas de reparación documentan dónde ajustar cuando la fuente cambia.',
+  ],
+  [
+    '¿Se necesita un servidor especial para correr la automatización?',
+    'En general no. Un flujo acotado corre en un equipo designado o en una tarea programada con herramientas estándar como GitHub Actions, con la configuración y los secretos separados del código. El traspaso documenta dónde corre, cómo reejecutarlo y qué vigilar.',
+  ],
+  [
+    '¿Cómo se cotiza un proyecto así?',
+    'Con alcance fijo, no por hora. El punto de entrada es un diagnóstico que deja por escrito inputs, outputs, responsable, modos de falla y criterios de éxito, más una cotización a precio fijo para la construcción. Si el diagnóstico muestra que aún no conviene automatizar, el documento lo dice con argumentos.',
+  ],
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Automatizar reportes de Excel con Python: qué conviene y qué no',
+  description:
+    'Guía práctica para automatizar reportes de Excel con Python: qué flujos conviene automatizar, cómo es un pipeline reproducible y qué pedir en el alcance.',
+  inLanguage: 'es',
+  author: {
+    '@type': 'Person',
+    name: 'Carlos Ortega Gonzalez',
+    url: 'https://tooltician.com/es/',
+  },
+  publisher: {
+    '@type': 'ProfessionalService',
+    name: 'Tooltician',
+    url: 'https://tooltician.com/es/',
+  },
+  mainEntityOfPage: canonical,
+  datePublished: '2026-09-16',
+  dateModified: '2026-09-16',
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/es/' },
+    { '@type': 'ListItem', position: 2, name: 'Automatizar reportes de Excel con Python', item: canonical },
+  ],
+};
+---
+<BaseLayout
+  title="Automatizar reportes de Excel con Python | Tooltician"
+  description="Guía práctica para automatizar reportes de Excel con Python: qué flujos conviene automatizar, cómo es un pipeline reproducible y qué pedir en el alcance."
+  lang="es"
+  canonical={canonical}
+  alternates={alternates}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
+  <Navbar lang="es" items={navItems} ctaHref={serviceContactHref} />
+
+  <main id="main">
+    <section class="article-hero" id="hero">
+      <div class="container article-hero__inner">
+        <span class="section-eyebrow reveal">Guía · Tooltician</span>
+        <h1 class="section-title reveal reveal-delay-1">Automatizar reportes de Excel con Python: qué conviene y qué no</h1>
+        <p class="article-hero__lede reveal reveal-delay-2">
+          Si cada semana alguien de tu equipo arma el mismo reporte en Excel —abrir archivos, copiar
+          datos, cuadrar totales, dar formato, enviar por correo—, esta guía explica qué partes de ese
+          trabajo conviene automatizar con Python, cómo es un pipeline bien construido y qué pedir por
+          escrito cuando encargas el trabajo a un tercero.
+        </p>
+        <p class="article-byline reveal reveal-delay-2">Por Carlos Ortega Gonzalez · Consultor en automatización y sistemas · Septiembre de 2026</p>
+      </div>
+    </section>
+
+    <section class="section" id="problema">
+      <div class="container article-block">
+        <h2 class="section-title">El costo del reporte armado a mano</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          El reporte manual funciona hasta que deja de funcionar. Una semana la persona que lo arma está
+          de vacaciones y nadie recuerda el orden exacto de los pasos. Otra semana una planilla de origen
+          trae una columna nueva y los totales cuadran mal sin que nadie lo note. El archivo igual se
+          envía, la decisión igual se toma, y el error recién aparece cuando ya costó dinero o una
+          discusión incómoda con un cliente o con dirección.
+        </p>
+        <p class="body-copy">
+          El problema no es la dedicación del equipo sino el diseño del proceso: un flujo que
+          depende de memoria, de copiar y pegar entre archivos y de revisiones visuales no avisa cuando
+          algo sale mal. El costo real —horas repetidas cada mes, números poco confiables, dependencia
+          de una sola persona— rara vez se mide porque está repartido en el trabajo cotidiano.
+        </p>
+        <p class="body-copy">
+          Automatizar no significa eliminar a la persona del proceso. Significa mover su tiempo desde el
+          armado mecánico hacia la revisión y la decisión: el sistema produce el reporte igual cada vez,
+          valida que los datos cuadren y deja a la persona la tarea de interpretar y actuar, que es donde
+          realmente aporta.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="criterio">
+      <div class="container article-block">
+        <h2 class="section-title">Qué conviene automatizar (y qué no)</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          Un buen candidato es un reporte recurrente con reglas conocidas: se genera cada semana o
+          cada mes, los pasos están definidos aunque vivan en la cabeza de alguien, las fuentes son las
+          mismas y el formato de salida cambia poco. Reportes de ventas, cobranza, inventario o gastos
+          suelen encajar en este perfil: mientras más predecible el proceso, más directa la
+          automatización.
+        </p>
+        <p class="body-copy">
+          También conviene cuando el costo del error es alto. Un reporte que alimenta facturación,
+          remuneraciones o decisiones de compra no puede depender de una revisión visual apurada un
+          viernes en la tarde. La validación automática —que los totales cuadren, que no falten
+          registros— convierte un número frágil en un número confiable.
+        </p>
+        <p class="body-copy">
+          Y hay casos donde lo honesto es esperar. Si el reporte se genera por única vez, si las reglas
+          todavía se están inventando o si las fuentes cambian de forma cada semana sin que nadie las
+          controle, automatizar ahora es construir sobre arena: el desarrollo cuesta más que hacerlo a mano
+          unas veces y el resultado se rompe seguido. En esa situación lo razonable es estabilizar primero
+          el proceso manual —fijar fuentes, formatos y responsables— y automatizar cuando el flujo ya es
+          repetible. Un buen diagnóstico dice esto de frente en vez de vender una construcción que no se
+          justifica.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="pipeline">
+      <div class="container article-block">
+        <h2 class="section-title">Cómo es un pipeline bien construido</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          Un pipeline de reportes tiene cinco piezas, y vale la pena exigirlas todas. La primera es la
+          extracción: leer las fuentes —archivos Excel, CSV, bases de datos o sistemas internos— de forma
+          programada y reproducible, sin pasos manuales intermedios. La segunda es la transformación con
+          reglas explícitas en código: limpieza, cruces y cálculos que cualquiera puede leer, en lugar de
+          fórmulas escondidas en celdas.
+        </p>
+        <p class="body-copy">
+          La tercera pieza es la validación, y es la que separa una automatización confiable de un script
+          frágil. Antes de entregar, el sistema revisa que los datos tengan el esquema esperado, que los
+          totales cuadren con las fuentes y que no haya vacíos ni duplicados inexplicados. Si algo no
+          cuadra, el pipeline falla de forma visible —con un registro del problema— en vez de publicar un
+          reporte incompleto que parece correcto. Las ejecuciones además son idempotentes: se pueden
+          repetir con seguridad sin duplicar resultados.
+        </p>
+        <p class="body-copy">
+          La cuarta pieza es la entrega programada al lugar donde el equipo realmente trabaja: el
+          archivo Excel en la carpeta compartida, el correo con el adjunto o la planilla actualizada.
+          Nada de portales nuevos que nadie abre. Y la quinta es la operación continua: registros de cada
+          ejecución, alertas cuando una fuente cambia o una validación falla, y documentación —un README
+          y un runbook— para que la siguiente persona opere el sistema sin depender del autor original.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="encargo">
+      <div class="container article-block">
+        <h2 class="section-title">Qué pedir cuando encargas la automatización</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          Pide alcance fijo por escrito antes de construir: entradas y salidas del flujo, responsable
+          de cada fuente, qué es una ejecución correcta y qué debe pasar cuando algo falla. Este paso
+          previo —diagnóstico para confirmar el encaje y documento de alcance con cotización a precio
+          fijo— existe para que sepas el costo antes de empezar.
+        </p>
+        <p class="body-copy">
+          Pide también los materiales de traspaso como parte del acuerdo, no como un favor posterior:
+          código ordenado con pruebas básicas, registros y alertas funcionando, instrucciones de
+          instalación y un runbook con los puntos de falla conocidos. Sin traspaso, el sistema se vence
+          con la partida del autor; con traspaso, tu equipo lo opera aunque el consultor ya no esté.
+        </p>
+        <p class="body-copy">
+          Y pide criterio sobre si conviene hacerlo. Si el diagnóstico muestra que el flujo todavía no es
+          repetible o que el volumen no justifica la construcción, el documento debe decirlo con
+          argumentos. Saber dónde está el cuello de botella real también es un resultado valioso, y es
+          preferible a pagar por una automatización que se rompe cada dos semanas.
+        </p>
+        <div class="card-glass article-cta reveal">
+          <div>
+            <p class="article-cta__eyebrow">Servicio relacionado</p>
+            <h3 class="card-title">¿Tienes un reporte que se arma igual cada semana?</h3>
+            <p class="body-copy">
+              El servicio de automatización en Python convierte ese flujo manual en un pipeline
+              programado y reproducible, con validación, alertas y traspaso documentado. Alcance fijo,
+              sin horas abiertas.
+            </p>
+          </div>
+          <a class="btn btn-primary" href={serviceContactHref}>Acotar mi automatización</a>
+        </div>
+        <p class="body-copy article-alt">
+          Más detalle sobre el proceso, los planes y las preguntas comunes en la
+          <a href={serviceHref}>página del servicio de automatización en Python</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container article-block">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <div class="divider"></div>
+        <div class="faq-accordion">
+          {faqs.map(([question, answer], index) => (
+            <details class={`faq-item reveal reveal-delay-${(index % 2) + 1}`}>
+              <summary class="faq-question">{question}</summary>
+              <p class="faq-answer body-copy">{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="es" langHref="/en/" />
+</BaseLayout>
+
+<style>
+.article-hero {
+  padding-top: calc(var(--nav-height) + 5rem);
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+.article-hero__inner {
+  display: grid;
+  gap: 1rem;
+  max-width: 54rem;
+}
+.article-hero__lede {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+  font-size: 1.05rem;
+  max-width: 62ch;
+}
+.article-byline {
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+.article-block {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 54rem;
+}
+.body-copy {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+.article-cta {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+.article-cta__eyebrow {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  margin-bottom: 0.5rem;
+}
+.article-alt {
+  font-size: 0.9rem;
+}
+.article-alt a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.faq-accordion {
+  display: grid;
+  border-top: 1px solid var(--clr-border);
+}
+.faq-item {
+  border-bottom: 1px solid var(--clr-border);
+}
+.faq-question {
+  padding: 1rem var(--sp-4);
+  font-family: var(--ff-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  letter-spacing: -0.02em;
+}
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+.faq-question::after {
+  content: '+';
+  color: var(--clr-accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.faq-item[open] .faq-question::after {
+  content: '−';
+  opacity: 0.7;
+}
+.faq-answer {
+  padding: 0 var(--sp-4) 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+@media (max-width: 720px) {
+  .article-hero {
+    padding-top: calc(var(--nav-height) + 4rem);
+  }
+}
+</style>

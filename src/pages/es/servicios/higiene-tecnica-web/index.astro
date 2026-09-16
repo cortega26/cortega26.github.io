@@ -793,6 +793,11 @@ const breadcrumbJsonLd = {
             <details class={`faq-item reveal reveal-delay-${(index % 2) + 1}`}>
               <summary class="faq-question">{question}</summary>
               <p class="faq-answer body-copy">{answer}</p>
+              {question === '¿Qué significa una mala nota en SecurityHeaders.com?' && (
+                <p class="faq-answer body-copy">
+                  Lectura relacionada: <a href="/es/guias/auditoria-tecnica-web-negocios-pequenos/">qué revisa una auditoría técnica web y cuándo conviene pedirla</a>.
+                </p>
+              )}
             </details>
           ))}
         </div>
@@ -1394,6 +1399,12 @@ const breadcrumbJsonLd = {
   line-height: 1.7;
   color: var(--clr-text-muted);
   max-width: 68ch;
+}
+
+.faq-answer a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .plan-card {

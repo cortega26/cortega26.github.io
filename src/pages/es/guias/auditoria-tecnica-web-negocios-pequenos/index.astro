@@ -1,0 +1,351 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Navbar from '../../../../components/Navbar.astro';
+import Footer from '../../../../components/Footer.astro';
+import '../../../../styles/global.css';
+
+const canonical = 'https://tooltician.com/es/guias/auditoria-tecnica-web-negocios-pequenos/';
+const alternates = [
+  { hreflang: 'es', href: canonical },
+  { hreflang: 'x-default', href: canonical },
+];
+
+const serviceHref = '/es/servicios/higiene-tecnica-web/';
+const serviceContactHref = '/es/servicios/higiene-tecnica-web/#brief';
+
+const navItems = [
+  { href: '#senales', label: 'Señales' },
+  { href: '#revision', label: 'Revisión' },
+  { href: '#limites', label: 'Límites' },
+  { href: '#reporte', label: 'Reporte' },
+  { href: '#faq', label: 'FAQ' },
+];
+
+const faqs: [string, string][] = [
+  [
+    '¿Una auditoría técnica reemplaza a un pentest o a una auditoría de seguridad?',
+    'No. Es una capa de higiene técnica y hardening básico: configuraciones visibles, controles elementales y fallas operativas comunes. No reemplaza pruebas de intrusión, procesos de compliance ni respuesta a incidentes, y nadie serio debería prometer seguridad total a partir de ella.',
+  ],
+  [
+    '¿Necesito dar acceso a mi hosting o a mi sitio para el diagnóstico?',
+    'Para el diagnóstico externo inicial no es necesario: se revisa lo visible desde fuera, como headers, HTTPS, DNS básico y señales públicas. Para aplicar correcciones sí se requiere acceso controlado al hosting, CMS, DNS o proveedor correspondiente, acotado a lo que el trabajo necesita.',
+  ],
+  [
+    '¿Qué significa una mala nota en una herramienta automática?',
+    'Significa que faltan algunas configuraciones esperadas por navegadores modernos, no automáticamente que el sitio esté comprometido. Una nota baja puede ser un pendiente real, una decisión razonable o una restricción del hosting: el diagnóstico explica cuál es cuál antes de corregir nada.',
+  ],
+  [
+    '¿Qué recibo al final de la revisión?',
+    'Una lista priorizada de hallazgos —qué importa ahora, qué puede esperar y qué es ruido automático—, evidencia verificable del estado antes y después cuando hay correcciones, y una recomendación clara de siguiente paso: cerrar, corregir lo básico o pasar a una revisión periódica.',
+  ],
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(([question, answer]) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Auditoría técnica web para negocios pequeños: qué revisa y cuándo pedirla',
+  description:
+    'Qué revisa una auditoría técnica web para negocios pequeños: headers, HTTPS, correo, formularios y SEO básico, y cómo decidir el siguiente paso sin alarmismo.',
+  inLanguage: 'es',
+  author: {
+    '@type': 'Person',
+    name: 'Carlos Ortega Gonzalez',
+    url: 'https://tooltician.com/es/',
+  },
+  publisher: {
+    '@type': 'ProfessionalService',
+    name: 'Tooltician',
+    url: 'https://tooltician.com/es/',
+  },
+  mainEntityOfPage: canonical,
+  datePublished: '2026-09-16',
+  dateModified: '2026-09-16',
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/es/' },
+    { '@type': 'ListItem', position: 2, name: 'Auditoría técnica web para negocios pequeños', item: canonical },
+  ],
+};
+---
+<BaseLayout
+  title="Auditoría técnica web para negocios pequeños | Tooltician"
+  description="Qué revisa una auditoría técnica web para negocios pequeños: headers, HTTPS, correo, formularios y SEO básico, y cómo decidir el siguiente paso sin alarmismo."
+  lang="es"
+  canonical={canonical}
+  alternates={alternates}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
+  <Navbar lang="es" items={navItems} ctaHref={serviceContactHref} />
+
+  <main id="main">
+    <section class="article-hero" id="hero">
+      <div class="container article-hero__inner">
+        <span class="section-eyebrow reveal">Guía · Tooltician</span>
+        <h1 class="section-title reveal reveal-delay-1">Auditoría técnica web para negocios pequeños: qué revisa y cuándo pedirla</h1>
+        <p class="article-hero__lede reveal reveal-delay-2">
+          La mayoría de los negocios pequeños tiene un sitio publicado que nadie revisa en lo técnico:
+          nadie confirma si los formularios llegan, si los correos caen en spam o si la configuración
+          básica sigue sana. Esta guía explica qué revisa una auditoría técnica web, qué no promete y
+          cómo decidir el siguiente paso sin alarmismo.
+        </p>
+        <p class="article-byline reveal reveal-delay-2">Por Carlos Ortega Gonzalez · Consultor en automatización y sistemas · Septiembre de 2026</p>
+      </div>
+    </section>
+
+    <section class="section" id="senales">
+      <div class="container article-block">
+        <h2 class="section-title">Señales de que tu sitio necesita una revisión</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          La primera señal es el silencio operativo: el sitio recibe visitas pero nadie verifica si las
+          consultas del formulario llegan, quedan registradas o se pierden sin aviso. Un formulario puede
+          verse perfecto y estar fallando hace semanas; sin una prueba controlada, la pérdida de
+          oportunidades es invisible hasta que alguien se queja o hasta que nunca se queja y el negocio
+          simplemente recibe menos contactos de los que debería.
+        </p>
+        <p class="body-copy">
+          La segunda señal está en el correo corporativo. Si las cotizaciones o los seguimientos
+          comerciales terminan en spam, la causa frecuente es técnica y discreta: registros SPF, DKIM o
+          DMARC mal configurados en el DNS del dominio. No es un problema de redacción ni del proveedor
+          de correo en sí, sino de autenticación del dominio, y se detecta con una revisión puntual en
+          lugar de meses de mensajes perdidos.
+        </p>
+        <p class="body-copy">
+          La tercera señal es la ausencia de un responsable técnico. El sitio se lanzó hace uno o dos
+          años, el proveedor original ya no está, nadie mira Search Console, nadie confirma que el
+          certificado HTTPS renueve bien ni que las redirecciones entre versiones con y sin www funcionen.
+          Cada uno de estos descuidos es menor por separado; juntos erosionan posicionamiento, confianza
+          y captación justo cuando alguien quiere contactarte. Si ninguna persona tiene asignada la tarea
+          de mirar lo básico con periodicidad, una revisión externa es la forma más barata de saber dónde
+          estás parado.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="revision">
+      <div class="container article-block">
+        <h2 class="section-title">Qué incluye una revisión seria</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          Una revisión seria parte por lo visible desde fuera, sin pedir accesos de entrada. Del lado del
+          navegador y el transporte revisa los headers de seguridad —las restricciones razonables que el
+          navegador aplica frente a cargas externas—, la consistencia de HTTPS y las redirecciones, y las
+          respuestas del servidor que exponen más información de la cuenta. Herramientas públicas de
+          referencia sirven como punto de partida visible, no como veredicto final: la lectura considera
+          el contexto del sitio y el costo real de cada corrección.
+        </p>
+        <p class="body-copy">
+          Del lado del correo y la infraestructura revisa la autenticación básica del dominio, la
+          delegación DNS y los registros críticos donde un error pequeño puede dejar el correo o el sitio
+          en una zona gris. También verifica si existe una base mínima de respaldos antes de tocar algo
+          importante, porque corregir sin reversibilidad es una apuesta innecesaria.
+        </p>
+        <p class="body-copy">
+          Y del lado operativo revisa lo que más dinero pierde en silencio: que los formularios críticos
+          efectivamente entreguen los mensajes, que el sitemap y el robots.txt estén sanos, que Search
+          Console no acumule errores de cobertura sin atender y que los enlaces rotos visibles estén
+          priorizados. En sitios WordPress se suman los puntos básicos: dependencias visibles, estado de
+          actualización y señales de abandono técnico. Todo queda documentado: qué se hizo, qué queda
+          pendiente y dónde mirar la próxima vez.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="limites">
+      <div class="container article-block">
+        <h2 class="section-title">Qué no es una auditoría técnica web</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          Conviene decirlo con claridad porque aquí abundan las promesas irresponsables. Una revisión de
+          higiene técnica no es un pentest, no es una auditoría de seguridad profunda, no es un proceso de
+          compliance y no es respuesta a incidentes. Tampoco puede prometer seguridad total: nadie serio
+          debería ofrecer eso. Lo que sí ofrece es una capa práctica —configuraciones visibles, controles
+          básicos, fallas operativas comunes y documentación— que deja el sitio técnicamente más sobrio y
+          con un responsable informado.
+        </p>
+        <p class="body-copy">
+          Tampoco es una invitación a corregir todo de una vez. No todo puntaje bajo es urgente y no todo
+          hallazgo se corrige hoy: si algo no afecta contactos, reputación, correo u operación, puede
+          quedar documentado para el siguiente ciclo en vez de inflar el alcance. Esa separación entre
+          señal real y ruido automático es precisamente el valor del diagnóstico previo a cualquier
+          implementación.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="reporte">
+      <div class="container article-block">
+        <h2 class="section-title">Cómo leer el reporte y decidir el siguiente paso</h2>
+        <div class="divider"></div>
+        <p class="body-copy">
+          Un buen reporte se entiende sin intermediario técnico: lista priorizada de hallazgos —qué
+          importa ahora, qué puede esperar—, evidencia del estado encontrado y una recomendación de
+          siguiente paso. Los caminos habituales son tres: cerrar porque lo básico está sano, corregir lo
+          puntual con una implementación acotada, o pasar a una revisión periódica si nadie interno va a
+          mirar el sitio después. La decisión se toma según el riesgo real del sitio, no según el tamaño
+          de la tabla de precios.
+        </p>
+        <p class="body-copy">
+          Dos reglas protegen la compra. Primera: el alcance no crece durante la revisión; si aparece algo
+          que excede lo contratado, queda documentado con una recomendación, pero no se ejecuta sin
+          acuerdo previo. Segunda: si el diagnóstico no encuentra nada relevante, el reporte lo confirma
+          con evidencia, y eso también tiene valor —saber que lo básico está bien antes de cambiar de
+          hosting, lanzar una campaña o delegar el sitio evita gastos peores.
+        </p>
+        <div class="card-glass article-cta reveal">
+          <div>
+            <p class="article-cta__eyebrow">Servicio relacionado</p>
+            <h3 class="card-title">¿Nadie está cuidando lo técnico de tu sitio?</h3>
+            <p class="body-copy">
+              El servicio de higiene técnica web revisa lo básico, separa señales reales de ruido
+              automático y deja evidencia con una recomendación clara. Sin alarmismo y sin promesas de
+              seguridad total.
+            </p>
+          </div>
+          <a class="btn btn-primary" href={serviceContactHref}>Solicitar diagnóstico</a>
+        </div>
+        <p class="body-copy article-alt">
+          Más detalle sobre planes, entregables y preguntas comunes en la
+          <a href={serviceHref}>página del servicio de higiene técnica web</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container article-block">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <div class="divider"></div>
+        <div class="faq-accordion">
+          {faqs.map(([question, answer], index) => (
+            <details class={`faq-item reveal reveal-delay-${(index % 2) + 1}`}>
+              <summary class="faq-question">{question}</summary>
+              <p class="faq-answer body-copy">{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="es" langHref="/en/" />
+</BaseLayout>
+
+<style>
+.article-hero {
+  padding-top: calc(var(--nav-height) + 5rem);
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+.article-hero__inner {
+  display: grid;
+  gap: 1rem;
+  max-width: 54rem;
+}
+.article-hero__lede {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+  font-size: 1.05rem;
+  max-width: 62ch;
+}
+.article-byline {
+  color: var(--clr-text-faint);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+.article-block {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 54rem;
+}
+.body-copy {
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+}
+.article-cta {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+.article-cta__eyebrow {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  margin-bottom: 0.5rem;
+}
+.article-alt {
+  font-size: 0.9rem;
+}
+.article-alt a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.faq-accordion {
+  display: grid;
+  border-top: 1px solid var(--clr-border);
+}
+.faq-item {
+  border-bottom: 1px solid var(--clr-border);
+}
+.faq-question {
+  padding: 1rem var(--sp-4);
+  font-family: var(--ff-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-text);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  letter-spacing: -0.02em;
+}
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+.faq-question::after {
+  content: '+';
+  color: var(--clr-accent);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.faq-item[open] .faq-question::after {
+  content: '−';
+  opacity: 0.7;
+}
+.faq-answer {
+  padding: 0 var(--sp-4) 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  max-width: 68ch;
+}
+@media (max-width: 720px) {
+  .article-hero {
+    padding-top: calc(var(--nav-height) + 4rem);
+  }
+}
+</style>

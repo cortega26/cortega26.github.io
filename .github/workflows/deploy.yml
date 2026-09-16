@@ -53,6 +53,11 @@ jobs:
           PUBLIC_GA4_MEASUREMENT_ID: ${{ vars.PUBLIC_GA4_MEASUREMENT_ID }}
       - name: Built output tests
         run: node tests/run.js --built
+      - name: Install Playwright browser
+        # test-htw-snapshot.mjs launches real Chromium, whose binary is not
+        # present on a fresh runner (npm ci installs the npm package only).
+        # --with-deps also installs the OS libraries headless Chromium needs.
+        run: npx playwright install --with-deps chromium
       - name: HTW snapshot
         run: node test-htw-snapshot.mjs
       - name: Link & SEO audit (informational)

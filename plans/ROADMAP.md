@@ -102,16 +102,16 @@ built EN/ES pages show live star counts; no CTA points at `#contact-form`.
 |------|------|-----|-----|--------|-------------|
 | 007 | 1 | P1 | S | DONE | per-page `data-track-form` greps (10/10 + home/htw unchanged, verified 2026-09-16) |
 | 008 | 1 | P1 | S | DONE | `fetch(` count = 0, clipboard intact (verified 2026-09-16) |
-| 009 | 2a | P1 | M | TODO | `node tests/run.js` exit 0 |
-| 010 | 2b | P2 | S | TODO | first CI run on branch |
-| 011 | 3 | P2 | S | TODO | throwaway harness exit 0 |
-| 012 | 3 | P2 | S | TODO | exit 0 ± token; `N/10 live` summary |
+| 009 | 2a | P1 | M | DONE | suite green 109/109 src, 134/134 built (verified 2026-09-16) |
+| 010 | 2b | P2 | S | DONE | 4 gates in order, YAML parses, artifact pinned to SHA (verified 2026-09-16) |
+| 011 | 3 | P2 | S | DONE | harness green (order/bound/null-safety), suite green (verified 2026-09-16) |
+| 012 | 3 | P2 | S | DONE | 9/10 live run, byte-identical JSON, suite green (verified 2026-09-16) |
 | 013 | 4 | P3 | S | TODO | built pages match `github-stats.json` |
 | 014 | 4 | P3 | S | TODO | link checker, 0 internal issues |
 | 015 | 4 | P3 | S | TODO | `CSP HASH MATCH` |
 | 016 | 4 | P3 | S | TODO | paths/commands/links all exist |
 
-Progress: 2/10 DONE (Wave 1 complete).
+Progress: 6/10 DONE (Waves 1–3 complete).
 
 ## Backlog (accepted, not yet planned)
 

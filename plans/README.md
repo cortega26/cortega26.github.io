@@ -27,10 +27,10 @@ commands), see `plans/ROADMAP.md`.
 |------|-------|----------|--------|------------|--------|
 | 007 | Pass service context from ServicePage into IntakeForm | P1 | S | — | DONE |
 | 008 | Remove the duplicate Formspree submit handler | P1 | S | — | DONE |
-| 009 | Rewrite the stale assertions in tests/run.js | P1 | M | 007, 008 | TODO |
-| 010 | Gate deploys on the test suite | P2 | S | 009 | TODO |
-| 011 | Queue analytics events until GA4 is ready | P2 | S | 007 | TODO |
-| 012 | Harden the build-time GitHub stats fetch | P2 | S | — | TODO |
+| 009 | Rewrite the stale assertions in tests/run.js | P1 | M | 007, 008 | DONE |
+| 010 | Gate deploys on the test suite | P2 | S | 009 | DONE |
+| 011 | Queue analytics events until GA4 is ready | P2 | S | 007 | DONE |
+| 012 | Harden the build-time GitHub stats fetch | P2 | S | — | DONE |
 | 013 | Generate portfolio impact lines from stats | P3 | S | — | TODO |
 | 014 | Point contact CTAs at the section, not the form | P3 | S | — | TODO |
 | 015 | Verify CSP hashes in-repo, single-source GA4 ID | P3 | S | — | TODO |

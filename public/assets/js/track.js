@@ -11,10 +11,12 @@
   /** @type {Window & typeof globalThis & {gtag?: (...args: unknown[]) => void, ttTrack?: (name: string, props?: TrackingProps) => void}} */
   const typedWindow = window;
 
+  /** Bounded in-memory queue for events fired before gtag is ready (Plan 011). */
+  const queue = [];
+  const MAX_QUEUE = 50;
+
   /** @param {string | null} name @param {TrackingProps} [props] */
-  function track(name, props) {
-    if (!name) return;
-    const payload = props && typeof props === 'object' ? props : {};
+  function send(name, payload) {
     try {
       // GA4 direct — single gtag('event') call, namespaced params (Plan 006).
       // gtag() queues via dataLayer internally; no additional dataLayer.push.
@@ -31,7 +33,47 @@
     }
   }
 
+  /** Drain buffered events in order; splice-take prevents double-flush. */
+  function flush() {
+    const pending = queue.splice(0, queue.length);
+    for (const item of pending) send(item.name, item.payload);
+  }
+
+  /** @param {string | null} name @param {TrackingProps} [props] */
+  function track(name, props) {
+    if (!name) return;
+    const payload = props && typeof props === 'object' ? props : {};
+    if (typeof typedWindow.gtag !== 'function') {
+      if (queue.length >= MAX_QUEUE) queue.shift();
+      queue.push({ name, payload });
+      return;
+    }
+    flush();
+    send(name, payload);
+  }
+
   typedWindow.ttTrack = track;
+
+  // Flush any events buffered before gtag arrived, then poll briefly for late gtag.
+  try {
+    if (typeof typedWindow.gtag === 'function') flush();
+    let ticks = 0;
+    const timer = setInterval(() => {
+      ticks += 1;
+      try {
+        if (typeof typedWindow.gtag === 'function') {
+          flush();
+          clearInterval(timer);
+        } else if (ticks >= 10) {
+          clearInterval(timer);
+        }
+      } catch (_) {
+        /* never let instrumentation break the page */
+      }
+    }, 500);
+  } catch (_) {
+    /* timers unavailable — events stay queued until the next track() call */
+  }
 
   // Auto-bind declarative click tracking.
   document.addEventListener(

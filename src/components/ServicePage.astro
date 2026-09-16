@@ -2,20 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from './Navbar.astro';
 import Footer from './Footer.astro';
-import IntakeForm from './IntakeForm.astro';
+import IntakeForm, { type IntakeService } from './IntakeForm.astro';
 import type { ServiceContent } from '../data/services';
 
 interface Props {
   lang: 'en' | 'es';
   content: ServiceContent;
   slug: string;
+  serviceKey: string;
   canonical: string;
   alternates: { hreflang: string; href: string }[];
   crossLocaleHref: string;
   areaServed: string[];
 }
 
-const { lang, content: c, slug, canonical, alternates, crossLocaleHref, areaServed } = Astro.props;
+const { lang, content: c, slug, serviceKey, canonical, alternates, crossLocaleHref, areaServed } = Astro.props;
 
 const formId = `${slug}-brief`;
 const homeUrl = `https://tooltician.com/${lang}/`;
@@ -358,7 +359,7 @@ const breadcrumbJsonLd = {
               <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc={`${slug}_brief`}>{c.contactCallLabel}</a>
             </div>
           </article>
-          <IntakeForm lang={lang} service="general" formId={formId} heading={c.intakeHeading} />
+          <IntakeForm lang={lang} service={serviceKey as IntakeService} formId={formId} heading={c.intakeHeading} />
         </div>
 
         <div class="intent-grid">

@@ -57,6 +57,9 @@ const rootHTML   = () => read('index.html') || '';
 const indexAstro = () => read('src/pages/index.astro') || '';
 const layout     = () => read('src/layouts/BaseLayout.astro') || '';
 const globalCss  = () => read('src/styles/global.css') || '';
+const siteLayoutJs = () => read('public/assets/js/site-layout.js') || '';
+const portfolioFiltersJs = () => read('public/assets/js/portfolio-filters.js') || '';
+const intakeForm = () => read('src/components/IntakeForm.astro') || '';
 
 // ─── Tests ───────────────────────────────────────────────────────────────────
 
@@ -202,7 +205,7 @@ group('TT-007 · Hero support content simplified', () => {
 
 group('TT-008 · Mobile nav uses controlled overlay behavior', () => {
   const navSrc = navbar();
-  const layoutSrc = layout();
+  const navJs = siteLayoutJs();
   const cssSrc = globalCss();
   assert(
     'Navbar has overlay close control',
@@ -211,13 +214,13 @@ group('TT-008 · Mobile nav uses controlled overlay behavior', () => {
   );
   assert(
     'Layout script uses setNavOpen helper',
-    layoutSrc.includes('function setNavOpen') && layoutSrc.includes('closeNav'),
-    'Expected controlled nav open/close helpers in BaseLayout'
+    navJs.includes('setNavOpen') && navJs.includes('closeNav'),
+    'Expected controlled nav open/close helpers in site-layout.js'
   );
   assert(
     'Layout handles Escape and scroll lock',
-    layoutSrc.includes("event.key === 'Escape'") &&
-    layoutSrc.includes("document.body.classList.toggle('nav-open'"),
+    navJs.includes("event.key === 'Escape'") &&
+    navJs.includes("document.body.classList.toggle('nav-open'"),
     'Expected Escape close and body scroll lock'
   );
   assert(
@@ -241,23 +244,23 @@ group('TT-014 · Focus-visible styles are present', () => {
   );
 });
 
-group('C1 · Section order: Portfolio before Services', () => {
+group('C1 · Section order: Services before Portfolio', () => {
   const en = pageEN();
   const es = pageES();
   // Match component usage tags (not import statements)
   const portfolioPosEN = en.indexOf('<PortfolioSection');
   const servicesPosEN  = en.indexOf('<ServicesSection');
   assert(
-    'EN page: PortfolioSection before ServicesSection',
-    portfolioPosEN > -1 && servicesPosEN > -1 && portfolioPosEN < servicesPosEN,
-    `EN: <PortfolioSection at ${portfolioPosEN}, <ServicesSection at ${servicesPosEN}`
+    'EN page: ServicesSection before PortfolioSection',
+    portfolioPosEN > -1 && servicesPosEN > -1 && servicesPosEN < portfolioPosEN,
+    `EN: <ServicesSection at ${servicesPosEN}, <PortfolioSection at ${portfolioPosEN}`
   );
   const portfolioPosES = es.indexOf('<PortfolioSection');
   const servicesPosES  = es.indexOf('<ServicesSection');
   assert(
-    'ES page: PortfolioSection before ServicesSection',
-    portfolioPosES > -1 && servicesPosES > -1 && portfolioPosES < servicesPosES,
-    `ES: <PortfolioSection at ${portfolioPosES}, <ServicesSection at ${servicesPosES}`
+    'ES page: ServicesSection before PortfolioSection',
+    portfolioPosES > -1 && servicesPosES > -1 && servicesPosES < portfolioPosES,
+    `ES: <ServicesSection at ${servicesPosES}, <PortfolioSection at ${portfolioPosES}`
   );
 });
 
@@ -389,23 +392,24 @@ group('D8 · Monedario description rewritten', () => {
 group('D9 · Portfolio subtitle updated', () => {
   const src = portfolio();
   assert(
-    'Portfolio subtitle contains "not just repositories"',
-    src.includes('already operates outside a demo environment') || src.includes('ya opera fuera de un entorno de demo'),
-    'Portfolio subtitle still uses old "Nine public projects" text'
+    'Portfolio subtitle mentions live production work',
+    src.includes('already running in production') || src.includes('ya funcionando en producción'),
+    'Portfolio subtitle does not match current copy in PortfolioSection.astro'
   );
 });
 
 group('D10 · Portfolio title updated', () => {
   const src = portfolio();
   assert(
-    "EN title is 'Production Work Index'",
-    src.includes("'Production Work Index'") || src.includes('"Production Work Index"'),
-    "Portfolio title should be 'Production Work Index'"
+    "Home title is 'Selected production work'",
+    src.includes("'Selected production work'") || src.includes('"Selected production work"'),
+    "Portfolio home title should be 'Selected production work'"
   );
 });
 
 group('TT-004 · Portfolio filtering removes cards from layout', () => {
   const src = portfolio();
+  const filterJs = portfolioFiltersJs();
   assert(
     'Projects define explicit filter categories',
     src.includes('filters: [') && src.includes('data-categories={proj.filters.join'),
@@ -413,7 +417,7 @@ group('TT-004 · Portfolio filtering removes cards from layout', () => {
   );
   assert(
     'Filter script uses hidden property',
-    src.includes('card.hidden = !match'),
+    filterJs.includes('card.hidden = !match'),
     'Expected filtering to use hidden property so cards leave layout'
   );
   assert(
@@ -481,6 +485,7 @@ group('TT-009 · Small external links read as actions', () => {
 
 group('TT-018 · Contact labels match action behavior', () => {
   const src = contact();
+  const intakeSrc = intakeForm();
   assert(
     'Primary contact path is explicit email',
     src.includes('Email instead') || src.includes('Correo directo'),
@@ -493,8 +498,8 @@ group('TT-018 · Contact labels match action behavior', () => {
   );
   assert(
     'Submit button has localized sending label',
-    src.includes('data-sending={c.submitSending}'),
-    'Expected localized submit-pending label via data-sending'
+    intakeSrc.includes('data-sending={c.submitSending}'),
+    'Expected localized submit-pending label via data-sending in IntakeForm'
   );
   assert(
     'Legacy misleading ES copy button label removed',
@@ -506,9 +511,9 @@ group('TT-018 · Contact labels match action behavior', () => {
 group('E1 · Services title updated', () => {
   const src = services();
   assert(
-    "EN title is 'How I Can Help'",
-    src.includes("'How I Can Help'") || src.includes('"How I Can Help"'),
-    "Services EN title should be 'How I Can Help'"
+    "EN title is 'Six scoped services. One delivery standard.'",
+    src.includes("'Six scoped services. One delivery standard.'") || src.includes('"Six scoped services. One delivery standard."'),
+    "Services EN title should be 'Six scoped services. One delivery standard.'"
   );
   assert(
     'Old title "What I Build" is gone',
@@ -520,17 +525,17 @@ group('E1 · Services title updated', () => {
 group('E2 · Services subtitle updated', () => {
   const src = services();
   assert(
-    'Services subtitle contains "recurring problem"',
-    src.includes('recurring problem') || src.includes('problema recurrente'),
-    'Services subtitle should mention "recurring problem"'
+    'Services subtitle mentions a concrete operational problem',
+    src.includes('concrete operational problem') || src.includes('problema operativo concreto'),
+    'Services subtitle should mention the concrete operational problem'
   );
 });
 
 group('F1 · About title updated', () => {
   const src = about();
   assert(
-    'About title contains "Who I Help"',
-    src.includes('Who I Help') || src.includes('A quién ayudo'),
+    'About title is "Fit and Delivery"',
+    src.includes('Fit and Delivery') || src.includes('Encaje y entrega'),
     'About title not updated'
   );
 });
@@ -538,9 +543,9 @@ group('F1 · About title updated', () => {
 group('F2 · About intro rewritten', () => {
   const src = about();
   assert(
-    'About intro starts with "Operations teams"',
-    src.includes('Operations teams') || src.includes('Los equipos operativos'),
-    'About intro should start with "Operations teams"'
+    'About intro starts from the workflow',
+    src.includes('starts with the workflow') || src.includes('parte del flujo de trabajo'),
+    'About intro should start from the workflow, not the code'
   );
 });
 
@@ -641,9 +646,9 @@ group('I3 · Meta description updated', () => {
   const en = pageEN();
   const es = pageES();
   assert(
-    'EN description contains "Bilingual"',
-    en.includes('Bilingual') || en.includes('bilingual'),
-    'EN description should lead with Bilingual'
+    'EN description mentions scoped Python automation',
+    en.includes('Scoped Python automation'),
+    'EN description should describe scoped Python automation'
   );
   assert(
     'EN description contains "handoff-ready"',
@@ -711,7 +716,7 @@ group('J1 · Gmail address removed from source files', () => {
 
 group('L1 · Public trust surfaces linked from source', () => {
   const footerSrc = footer();
-  const contactSrc = contact();
+  const intakeSrc = intakeForm();
 
   assert(
     'Footer links to privacy, cookies, and terms pages',
@@ -720,8 +725,10 @@ group('L1 · Public trust surfaces linked from source', () => {
   );
   assert(
     'Contact section references privacy expectations',
-    contactSrc.includes('/privacy/') && contactSrc.includes('/cookies/') && contactSrc.includes('Formspree') && contactSrc.includes('Calendly'),
-    'Contact section is missing its privacy/cookies disclosure note'
+    intakeSrc.includes('/en/privacy/') && intakeSrc.includes('/en/cookies/') &&
+    intakeSrc.includes('/es/privacy/') && intakeSrc.includes('/es/cookies/') &&
+    intakeSrc.includes('Formspree') && intakeSrc.toLowerCase().includes('calendly'),
+    'IntakeForm is missing its privacy/cookies disclosure note'
   );
 });
 
@@ -742,18 +749,22 @@ group('I8b · JSON-LD is valid and parseable in built output', () => {
     assert('[built] JSON-LD parse (skipped — run --built)', true);
     return;
   }
-  const match = distEN.match(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/);
-  if (!match) {
-    assert('dist/en JSON-LD block found', false, 'No JSON-LD script tag in built EN HTML');
-    return;
+  const blocks = [...distEN.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+    .map(m => { try { return JSON.parse(m[1]); } catch { return null; } })
+    .filter(Boolean);
+  assert('dist/en JSON-LD blocks found', blocks.length > 0, 'No JSON-LD script tags in built EN HTML');
+  if (blocks.length === 0) return;
+  const person = blocks.find(b => Array.isArray(b['@type']) && b['@type'].includes('Person'));
+  assert('dist/en primary JSON-LD @type includes Person', !!person, 'No JSON-LD block with @type array containing Person');
+  if (person) {
+    assert('JSON-LD @type array contains Person', person['@type'].includes('Person'), `Got: ${JSON.stringify(person['@type'])}`);
+    assert('JSON-LD has makesOffer array', Array.isArray(person.makesOffer), 'makesOffer missing or not array');
+    assert('JSON-LD primary block has no itemListElement', !('itemListElement' in person), 'Primary block should not carry itemListElement');
   }
-  let parsed = null;
-  try { parsed = JSON.parse(match[1]); } catch (e) { /* handled below */ }
-  assert('dist/en JSON-LD parses as valid JSON', parsed !== null, 'JSON-LD is invalid JSON');
-  if (parsed) {
-    assert('JSON-LD @type is Person', parsed['@type'] === 'Person', `Got: ${parsed['@type']}`);
-    assert('JSON-LD has makesOffer array', Array.isArray(parsed.makesOffer), 'makesOffer missing or not array');
-    assert('JSON-LD has itemListElement array', Array.isArray(parsed.itemListElement), 'itemListElement missing or not array');
+  const itemList = blocks.find(b => b['@type'] === 'ItemList');
+  assert('dist/en has ItemList JSON-LD block', !!itemList, 'No JSON-LD block with @type ItemList');
+  if (itemList) {
+    assert('ItemList has 10 itemListElement entries', Array.isArray(itemList.itemListElement) && itemList.itemListElement.length === 10, `Got: ${itemList.itemListElement ? itemList.itemListElement.length : 'missing'}`);
   }
 });
 
@@ -823,13 +834,13 @@ if (BUILT) {
     'spin-ring animation still in built output'
   );
   assert(
-    '[built] Portfolio section before Services section in EN HTML',
+    '[built] Services section before Portfolio section in EN HTML',
     (() => {
       const portfolioId = distEN.indexOf('id="portfolio"');
       const servicesId  = distEN.indexOf('id="services"');
-      return portfolioId > -1 && servicesId > -1 && portfolioId < servicesId;
+      return portfolioId > -1 && servicesId > -1 && servicesId < portfolioId;
     })(),
-    'Portfolio section does not precede Services section in built EN HTML'
+    'Services section does not precede Portfolio section in built EN HTML'
   );
   assert(
     '[built] No 580M in built EN HTML',
@@ -873,7 +884,7 @@ if (BUILT) {
   );
   assert(
     '[built] EN privacy page references core data services',
-    distPrivacyEN.includes('Formspree') && distPrivacyEN.includes('Calendly') && distPrivacyEN.includes('Ahrefs'),
+    distPrivacyEN.includes('Formspree') && distPrivacyEN.includes('Calendly') && distPrivacyEN.includes('Google Analytics 4'),
     'Built EN privacy page is missing one or more core service references'
   );
   assert(

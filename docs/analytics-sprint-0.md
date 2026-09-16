@@ -192,11 +192,20 @@ off (matches current disclosure).
 
 ## 7. Key Events (recommendation)
 
-- **`brief_success`** — primary Key Event. A delivered brief is the qualified
-  lead: highest economic value, unambiguous success criterion.
-- **`book_call`** — secondary Key Event, kept separate. A call click is strong
-  intent but not a delivered lead; merging it with `brief_success` would
-  overstate lead volume and hide channel mix.
+> Corrected 2026-09-16: the earlier version of this section recommended
+> `book_call` as a secondary Key Event. That was wrong and has been reverted.
+> `book_call` fires on Calendly CTA click/open only (confirmed by live
+> production validation, §12) — it proves scheduling intent, not a completed
+> meeting. Marking a click as a Key Event would misrepresent it as a
+> conversion. It stays a normal (non-Key) event until a technically verified
+> "booking confirmed" signal exists (e.g. a Calendly webhook), which is not
+> implemented and is out of scope for Sprint 0.
+
+- **`brief_success`** — the only Key Event. A delivered brief is the
+  qualified lead: highest economic value, unambiguous success criterion.
+- **`book_call`** — normal event, **not** a Key Event. Booking intent only
+  (Calendly click/open); no technical confirmation of an actual meeting
+  exists in this implementation. Do not infer conversion from a click.
 - Do **not** mark `service_view`, `service_engage`, `proof_click`, or
   `cv_download` as Key Events: they are diagnostic funnel steps, and inflating
   the key-event count would dilute lead reporting.
@@ -358,3 +367,366 @@ CF visits / GA4 sessions:  Notes/anomalies:
   actually gets verified before contact.
 - `template_open → brief_start` sequence as an evaluation-depth predictor of
   lead quality.
+
+## 16. Sprint 0 production baseline start
+
+> Recorded by Claude (Cowork) during the production closeout pass. Deployment
+> facts below come from `master`'s local git ref, read directly off
+> `carlos@i5-12600k:~/VS_Code_Projects/platform/tooltician-site`; the GitHub
+> Actions run id/status were supplied by the closeout task and could not be
+> independently re-verified against the GitHub API in this session (repo API
+> access was not enabled for the session). GA4 facts below were observed
+> directly, live, in this session.
+
+```text
+Deployment commit:      1f95ff6ca99109aea186d21b3138f99f4e800365 (master)
+Deployment workflow:    Deploy to GitHub Pages, run 35125959168 (SUCCESS, as
+                         reported — not independently re-verified via GitHub API)
+Deployment date/time:   not independently confirmed (GitHub API unavailable
+                         this session); local master ref matches this commit
+                         as of 2026-09-16 17:11 UTC
+Timezone:                UTC (deployment) / America/Santiago (validation, UTC-3)
+
+GA4 property:            Tooltician (account casabea.cl, 404807309),
+                         property 551059139, stream 15478383962,
+                         https://tooltician.com, G-2HK4GHK7GR
+GA4 validation timestamp: 2026-09-16 17:12–17:23 UTC (2026-09-16 14:12–14:23
+                          America/Santiago)
+Custom dimensions configured (event-scoped, all 6 newly created — none
+existed before this pass; two unrelated legacy dimensions `label`/`location`
+→ `tt_label`/`tt_location` were left untouched):
+  - Service ID            → service_id
+  - Service Category       → service_category
+  - Contact Type           → contact_type
+  - CTA Location           → cta_location
+  - Error Category         → error_category
+  - Error Stage            → error_stage
+
+brief_success Key Event:  STILL NOT marked as of this update. Two independent
+                          blockers: (1) a real production submission to test
+                          the full brief_submit → brief_success chain was
+                          attempted and was blocked by this session's own
+                          safety controls (automated form-fill/submission is
+                          treated as a real-world transaction requiring a
+                          human to do it directly, not an agent); (2) even
+                          for events already confirmed firing live (book_call,
+                          proof_click, etc. — see below), GA4's Admin → Events
+                          list had still not indexed any canonical event name
+                          ~25 minutes after they fired in Realtime, only the
+                          legacy `cta_book_call`. Action needed from Carlos:
+                          submit one real test brief himself (see below), then
+                          star `brief_success` once it appears under
+                          Admin → Events → Eventos recientes (GA4 propagation
+                          is same-day to next-day, not instant).
+book_call Key Event:      Correctly NOT marked, and §7 above has been
+                          corrected: this doc previously recommended `book_call`
+                          as a secondary Key Event, which was wrong and has
+                          been reverted. book_call is booking *intent* only
+                          (Calendly click/open) — no signal in this
+                          implementation confirms a meeting actually happened.
+book_call semantics:      Confirmed by live production interaction: clicking
+                          a Calendly CTA fires `book_call {service_id,
+                          service_category, cta_location}` immediately, via
+                          the analytics layer, before the browser navigates
+                          to calendly.com. No later event confirms an actual
+                          completed booking. This is click/open intent only —
+                          matches the corrected §4/§7 of this doc exactly.
+
+Known measurement caveats:
+  - brief_submit / brief_success remain NOT live-tested. A real Formspree
+    submission is the only way to trigger them for real (no DevTools
+    injection was used or will be used, per instruction not to fabricate
+    success). A second closeout pass explicitly authorized one controlled
+    test submission, but the acting agent's own automated-browser guardrails
+    blocked filling/submitting the live production form ("Real-World
+    Transactions" — agents are not permitted to submit real forms on a
+    person's behalf even with in-chat authorization). This needs Carlos to
+    submit one test brief himself on https://tooltician.com (any service
+    page's form, or the homepage form), using his own email, then delete the
+    resulting Formspree entry if he doesn't want to keep it. brief_start and
+    brief_error WERE confirmed live (correct params, no PII, no real
+    submission — native validation blocked the POST for brief_error).
+  - email_copy was attempted but the browser used for validation blocked
+    the Clipboard API silently (no permission grant available in this
+    automated session), so no event fired. Implementation looks correct
+    (product-analytics.js fires on successful clipboard write only); this
+    specific event needs a manual click-test in a normal browser session to
+    fully confirm.
+  - language_select was not reachable: the gateway ("/") auto-redirected
+    to a locale before the manual language-card UI ever rendered, so there
+    was no element to click. This is expected gateway behavior, not a defect.
+  - GitHub Actions run 35125959168 / commit 1f95ff6 status is as reported by
+    the task, not independently re-verified via the GitHub API in this
+    session (blocked: "GitHub access to this repository is not enabled for
+    this session"). The local git ref on `master` does match 1f95ff6.
+
+Clean baseline start: NOT YET — deferred until brief_success is observed via
+a real submission and marked as a GA4 Key Event. This section will need one
+more update once that happens.
+```
+
+## 17. Production submission incident — code audit findings (2026-09-16)
+
+> Recorded by Claude (Cowork) after Carlos reported that his one real manual
+> test brief reached Formspree successfully (he received the resulting
+> email) but GA4 Realtime recorded none of `brief_submit`, `brief_success`,
+> `form_submit_success`, or `form_submit_error`, and that he did not see a
+> visible success confirmation on the page. **Sprint 0 is NOT closed by this
+> section** — see the verdict at the end.
+
+### 17.1 Audit method
+
+Cloned the exact deployed commit (`1f95ff6`, verified against the local
+`master` ref on Carlos's machine) into an isolated environment with full
+shell access and traced every file in the submission path line by line,
+rather than guessing: `intake-form.js`, `track.js`, `product-analytics.js`,
+`contact-section.js`, `IntakeForm.astro`, `BaseLayout.astro`,
+`ServicePage.astro`. Then ran the full quality-gate suite against the
+unmodified code (`npm run check`, `node tests/run.js`,
+`node tests/analytics-service-funnel.mjs` — 77/77, `npm run build`,
+`node tests/run.js --built` — 155/155) and extended `test-behavioral.mjs`
+(real headless-Chromium + mocked Formspree) with two new end-to-end cases —
+double-click protection and the failure path — in addition to the existing
+single-submit case, then ran all three against the unmodified production
+code.
+
+### 17.2 Result: no code defect found
+
+Every file in the submission path is correct as deployed:
+
+- **`intake-form.js`**: `event.preventDefault()` → native `checkValidity()`
+  → `funnel('briefSubmit', …)` fires *before* the `fetch()` call, regardless
+  of outcome, exactly as required. `response.ok` branches to
+  `successEl.classList.add('show')` + `track('form_submit_success', …)` +
+  `funnel('briefSuccess', …)`; any non-2xx or a thrown `fetch()` branches to
+  the error banner + `form_submit_error` + `briefError`. The submit button is
+  disabled for the duration of the request (`finally` re-enables it),
+  preventing double submission.
+- **`IntakeForm.astro`**: the accessible, bilingual success/error banners
+  Carlos said were missing **already exist** in this exact deployed commit —
+  `<p class="intake-form__success" role="status" aria-live="polite">` (EN
+  "Sent. I'll reply by email within two business days." / ES "Enviado.
+  Respondo por correo en dos días hábiles.") and a matching
+  `<p class="intake-form__error" role="alert" aria-live="polite">`, toggled
+  by a plain `.show` CSS class (`display: none` → `display: block`). No
+  `.reveal`/IntersectionObserver interaction hides them.
+- **`track.js`** (legacy transport): has no DNT/GPC/localhost gating at
+  all — it queues events only until `window.gtag` exists (polling every
+  500ms, up to 5s), then calls `gtag('event', name, params)` unconditionally.
+- **`BaseLayout.astro`**: `window.gtag` is defined *synchronously*, inline,
+  before `track.js`/`product-analytics.js` even parse (both load with
+  `defer`, in document order, after the inline stub) — so the "queue until
+  gtag exists" path in `track.js` is never actually exercised in practice;
+  `gtag` is already a function the instant `track.js` runs.
+- **`product-analytics.js`** (canonical layer): suppression logic is
+  intentional and scoped — DNT, GPC, the `window.__TT_NO_ANALYTICS__`
+  kill-switch, and `localhost`/`127.0.0.1`/`file:` all suppress canonical
+  `brief_*` events by design (§10). This does **not** explain the reported
+  symptom: Carlos's test was on the live `tooltician.com` domain, and — more
+  importantly — the *legacy* transport (`form_submit_success`/
+  `form_submit_error`, called directly from `intake-form.js`, not gated by
+  `product-analytics.js` at all) was *also* silent. No suppression path in
+  this codebase can silence both the canonical and legacy transports at once
+  while leaving Formspree delivery intact.
+
+New end-to-end proof (`test-behavioral.mjs`, real Chromium, real DOM/CSS,
+mocked Formspree + mocked `googletagmanager.com`, unmodified production
+code): a single submit sends exactly 1 POST, shows the success banner, and
+`form_submit_success` reaches `window.dataLayer` with no PII. A double-click
+on the submit button still sends exactly 1 POST (button-disable protection
+confirmed). A 500 response shows the error banner (never the success one)
+and `form_submit_error` reaches `window.dataLayer`. In this local/preview
+run the canonical `brief_*` events are correctly suppressed with reason
+`local_host` (confirmed via `ttAnalytics.debug()`) — expected, by design,
+and separately proven to fire correctly against a real host by the existing
+unit suite (§S3 in `tests/analytics-service-funnel.mjs`). All of this ran
+against the code exactly as deployed — **no production file needed to
+change**.
+
+### 17.3 Most likely root cause (not confirmed — cannot be confirmed from here)
+
+Given every code path fires unconditionally and correctly, the one point
+common to *both* the canonical and legacy transports — and the only thing
+that could silence both while leaving an unrelated third-party POST
+(Formspree) untouched — is the browser environment Carlos's one real test
+ran in: a content blocker, tracking-protection extension, or DNS/hosts-level
+block (uBlock Origin, Brave Shields, Privacy Badger, a Pi-hole-style
+blocklist, etc.) preventing `googletagmanager.com`/`google-analytics.com`
+from ever being reached. `gtag()` itself only pushes to the local
+`dataLayer` array (always succeeds, no network call) — the actual network
+beacon to Google happens once `gtag.js` runs, and that request is one of the
+most commonly blocked third-party requests on the web. This is consistent
+with everything observed: Formspree delivery succeeded (not a typical block
+target), zero GA4 events of any kind reached GA4 (both transports funnel
+through the same blocked network path), and no defect surfaced anywhere in
+static or live-browser testing of the actual code. This cannot be verified
+without seeing Carlos's real browser/extension state at the time of that one
+submission, so it is recorded here as the leading hypothesis, not a
+confirmed root cause.
+
+### 17.4 Changes made this pass
+
+- `test-behavioral.mjs`: added `testDoubleClickProtection` and
+  `testErrorPath`, and strengthened `testSingleSubmit` to also assert the
+  `window.dataLayer` contents (GA4 events fired, and no PII in them). No
+  production file (`intake-form.js`, `track.js`, `product-analytics.js`,
+  `contact-section.js`, `IntakeForm.astro`) was changed, because none was
+  found to be defective.
+- This section (§17) of this doc.
+
+### 17.5 Recommended production revalidation
+
+Before the next real test submission: use a browser profile with **no
+content/ad blocker and no privacy extension**, confirm `navigator.doNotTrack`
+is not `'1'` and `globalPrivacyControl` is not `true` (both suppress the
+canonical layer by design), then submit one real test brief and check GA4
+Realtime within a minute or two. If events still don't appear under those
+conditions, that would newly implicate the code and warrant reopening this
+audit — but nothing found in this pass supports a code fix.
+
+**Verdict at the end of this pass: Sprint 0 remains NOT CLOSED** — superseded
+by §18 below, which found and fixed a real mobile UX defect that this
+section's static/desktop-only testing missed.
+
+## 18. Production revalidation & browser-environment diagnosis (2026-09-16, cont.)
+
+> Recorded by Claude (Cowork) in a follow-up pass that inspected the LIVE
+> `https://tooltician.com` production site directly (not just source/clone)
+> in two real browser environments, and checked GA4 Realtime directly for a
+> live-triggered event. This section corrects one conclusion in §17: the
+> "no visible success feedback" report **does reproduce**, on mobile.
+
+### 18.1 Browser environments used
+
+- **Claude in Chrome** (this session's Chrome automation extension) —
+  `navigator.doNotTrack === '1'`, no GPC. **This is a Claude-controlled
+  automation browser, not Carlos's personal browser** — it cannot be used to
+  explain or reproduce Carlos's own real test submission, and is not claimed
+  to. It's noted only as a data point: DNT alone (no blocker) suppresses just
+  the canonical `brief_*` layer by design (§10) — legacy `form_submit_*` is
+  never gated by DNT — so DNT alone cannot explain the *total* silence
+  (canonical + legacy) Carlos originally reported.
+- **Claude's built-in browser pane** — confirmed clean:
+  `navigator.doNotTrack === null`, no `globalPrivacyControl`. Used for the
+  GA4 connectivity proof and the mobile-viewport UX inspection below.
+
+### 18.2 GA4 pipeline proof (clean browser, live production, this pass)
+
+From the clean built-in-browser session, on `https://tooltician.com`:
+
+- `fetch()` probes (no-cors) to `https://www.googletagmanager.com/gtag/js`
+  and `https://www.google-analytics.com/g/collect` both completed without a
+  network error (a client-side block, e.g. `ERR_BLOCKED_BY_CLIENT`, throws
+  on `fetch()` — neither did) — GA4's endpoints are reachable from this
+  environment.
+- Navigating to a real service page fired `service_view` correctly:
+  `ttAnalytics.debug()` → `{sent: 1, suppressed: 0}`, `dataLayer` carried
+  the `event`/`service_view`/`{service_id, service_category}` push.
+- **That exact event was confirmed arriving in GA4 Realtime** (property
+  551059139, casabea.cl/Tooltician) within seconds, alongside `page_view` —
+  screenshotted live in the Realtime overview report.
+
+This proves the full pipeline — app code → `dataLayer` → `gtag` → network →
+GA4 property — works correctly, end to end, against this exact production
+property, right now, from a clean browser. Combined with §17's full code
+trace, this rules out a code-level cause for the analytics silence with much
+higher confidence: everything downstream of "is this browser blocked" is now
+directly demonstrated working, not just inferred from source reading.
+
+### 18.3 Success/error banner — real mobile defect found (not a false alarm)
+
+§17 checked the banner only in a desktop-sized Playwright browser and by
+static CSS/JS reading, and concluded (incorrectly, as it turns out) that
+nothing was wrong. Live inspection of the actual production page at a real
+mobile viewport (375×812, the built-in browser's mobile emulation) found a
+genuine, reproducible defect:
+
+- The success/error `<p>` sits in the DOM immediately after the submit
+  button. On a normal desktop-height viewport that's still on-screen when it
+  appears (confirmed via screenshot — clearly visible, well-contrasted,
+  directly below the "Send brief" button).
+- On a 375×812 mobile viewport, scrolled to the natural resting position
+  right before tapping submit (the submit button at or near the bottom edge
+  of the visible area — confirmed with the button scrolled to
+  `block:'end'`), the banner's bounding box (`top: ~855`, `bottom: ~919`)
+  falls entirely **below** the 812px-tall viewport. Reproduced identically
+  for both the success and the error banner.
+- No code anywhere called `scrollIntoView()` or moved focus after toggling
+  the `.show` class, so nothing brought the now-visible-but-off-screen
+  banner onto the user's screen. `aria-live="polite"`/`role="status"` still
+  announce it correctly to screen readers — this is a sighted-user,
+  small-viewport gap, not an accessibility-API gap.
+
+This plausibly explains Carlos's "no visible success confirmation" report
+directly, independent of the analytics question, if his check was on a phone
+(or a narrow/short browser window) — the email arriving from Formspree while
+the page itself appeared to do nothing.
+
+### 18.4 Fix applied (minimal, per the task's "do not redesign the form" constraint)
+
+- `public/assets/js/intake-form.js`: added a small `revealFeedback(el)`
+  helper (`el.scrollIntoView({behavior:'smooth', block:'nearest'})` then
+  `el.focus({preventScroll:true})`), called right after each place the code
+  already adds the `.show` class (success, HTTP-error, and network-error
+  paths). No change to the submit/fetch/event lifecycle logic itself.
+- `src/components/IntakeForm.astro`: added `tabindex="-1"` to both the
+  success and error `<p>` elements so they're programmatically focusable
+  (for the `.focus()` call above) without joining the page's normal Tab
+  order. `role`/`aria-live` unchanged.
+- `test-behavioral.mjs`: added `testMobileSuccessVisibility` — real
+  Playwright browser at a 375×812 viewport, scrolls the submit button to the
+  bottom edge (the realistic pre-tap position), submits, and asserts the
+  success banner's bounding box is fully inside the viewport afterward. This
+  test reproduces the exact defect found live (failed against the
+  pre-fix code) and passes against the fix.
+
+### 18.5 Full regression pass after the fix
+
+`npm run check` (0 errors) · `node tests/run.js` (130/130) ·
+`node tests/analytics-service-funnel.mjs` (77/77, unchanged — this fix
+touches UX only, not analytics emission) · `npm run build` +
+`node tests/run.js --built` (155/155) · `node test-htw-snapshot.mjs`
+(clean) · `node test-behavioral.mjs`: single-submit, double-click
+protection, error-path, **new mobile-visibility test**, and both filter
+pages — all passing, 0 console/page errors anywhere.
+
+### 18.6 Root cause — stated precisely, not overclaimed
+
+- **UX defect (no visible success confirmation): CONFIRMED and FIXED.** Root
+  cause was a missing scroll/focus step after revealing the banner,
+  reproducible on any short/mobile viewport. This is the more likely
+  explanation for what Carlos personally observed, and it is now fixed and
+  covered by an automated regression test.
+- **Analytics defect (zero GA4 events on Carlos's one real submission):
+  root cause remains unproven.** No code defect exists (§17's full trace +
+  this pass's live end-to-end GA4 proof in a clean browser). The
+  browser-side-blocking hypothesis is now better supported circumstantially
+  (clean pipeline proven to work; DNT alone can't explain legacy-transport
+  silence) but was not, and cannot be, directly confirmed without visibility
+  into Carlos's actual browser/extension state at the moment of that one
+  submission.
+
+### 18.7 Next manual revalidation step (for Carlos, not performed by Claude)
+
+Per this task's explicit instruction, no additional real production
+submission was made by Claude. Recommended before the next one:
+
+1. Use a normal or clean-Incognito browser profile with no ad/content
+   blocker and no privacy extension.
+2. Open DevTools → Network, filter `google`, confirm requests to
+   `googletagmanager.com`/`google-analytics.com` are not shown as
+   `(blocked)`/`ERR_BLOCKED_BY_CLIENT`.
+3. Visit any page and confirm in GA4 → Realtime that a `page_view` or
+   `service_view` appears within ~1 minute — this proves the browser can
+   reach GA4 before spending the one real test submission.
+4. Only then submit one real test brief and watch GA4 Realtime for
+   `brief_submit` → `brief_success`, and watch the page itself for the
+   (now scroll-and-focus-assisted) success banner.
+
+**Verdict: SPRINT 0 NOT CLOSED.** Closure still requires: one real
+production submission, performed by Carlos, in a browser confirmed able to
+reach GA4 first; `brief_submit` observed; `brief_success` observed;
+`brief_success` configured as the GA4 Key Event; and the clean baseline
+timestamp recorded per §16. None of those have happened yet — this pass
+fixed a real UX bug and strengthened the evidence that the analytics gap is
+environmental, but did not close any of the outstanding closure criteria.

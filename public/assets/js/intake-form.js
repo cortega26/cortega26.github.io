@@ -52,6 +52,25 @@
     }
   };
 
+  /**
+   * Show a submit-result banner and bring it into view. On short/mobile
+   * viewports the banner sits right after the submit button and can render
+   * below the visible viewport with no scroll or focus change (confirmed via
+   * live production inspection at 375x812) — every prior automated check ran
+   * at desktop height, where the banner was already in view, so this went
+   * unnoticed. `aria-live` already announces it to screen readers; this adds
+   * the matching visual/keyboard signal for sighted users on a small screen.
+   */
+  const revealFeedback = (el) => {
+    if (!el) return;
+    try {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      el.focus({ preventScroll: true });
+    } catch (_) {
+      /* never let instrumentation/UX polish break the form */
+    }
+  };
+
   document.querySelectorAll('form.intake-form').forEach((form) => {
     const ctx = form.getAttribute('data-track-form') || 'intake';
     const submitBtn = form.querySelector('button[type="submit"]');
@@ -102,15 +121,18 @@
         if (response.ok) {
           form.reset();
           successEl && successEl.classList.add('show');
+          revealFeedback(successEl);
           track('form_submit_success', { location: ctx });
           funnel('briefSuccess', serviceIdForForm(ctx, form));
         } else {
           errorEl && errorEl.classList.add('show');
+          revealFeedback(errorEl);
           track('form_submit_error', { location: ctx, status: response.status });
           funnel('briefError', serviceIdForForm(ctx, form), response.status);
         }
       } catch (_) {
         errorEl && errorEl.classList.add('show');
+        revealFeedback(errorEl);
         track('form_submit_error', { location: ctx, status: 'network' });
         funnel('briefError', serviceIdForForm(ctx, form), 'network');
       } finally {

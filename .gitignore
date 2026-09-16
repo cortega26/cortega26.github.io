@@ -3,6 +3,7 @@ dist/
 .astro/
 .agents/
 .claude/
+.codex/
 .continue/
 
 # Dependencies

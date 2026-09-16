@@ -59,7 +59,7 @@ dropped for lack of logs). 019 takes the template route (no client data).
 |------|-------|----------|--------|------------|--------|
 | 021 | Behavioral funnel tests (submit-count + filter) | P1 | M | — | DONE |
 | 022 | ES-first keyword research | P1 | S | — | DONE |
-| 023 | Pilot content batch (3 ES articles) | P2 | M | 022 | TODO |
+| 023 | Pilot content batch (3 ES articles) | P2 | M | 022 | DONE |
 
 021+022 are file-disjoint — parallel-safe. 023 needs 022's table.
 

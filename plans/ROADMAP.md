@@ -135,9 +135,9 @@ Protective tests + ES-first organic engine (pilot with kill switch).
 |------|-------|-----|-----|--------|
 | 021 | Behavioral funnel tests | P1 | M | DONE (red-then-green proven, orphans verified absent) |
 | 022 | ES-first keyword research | P1 | S | DONE (10 rows, 8 ES, 3 picks with kills) |
-| 023 | Pilot batch (3 ES articles, needs 022) | P2 | M | TODO |
+| 023 | Pilot batch (3 ES articles, needs 022) | P2 | M | DONE (sitemap-covered, suites green; snapshot rebased +1 link) |
 
-Progress (growth): 2/3 DONE (023 pilot awaits dispatch).
+Progress (growth): 3/3 DONE.
 
 ## Backlog (accepted, not yet planned)
 

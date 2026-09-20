@@ -83,6 +83,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
 
   <!-- Third-party preconnects -->
   <link rel="preconnect" href="https://formspree.io" />
+  {ga4Id && <script is:inline src="/assets/js/analytics-guard.js" data-ga4-id={ga4Id}></script>}
   {ga4Id && (
     <>
       <link rel="preconnect" href="https://www.googletagmanager.com" />

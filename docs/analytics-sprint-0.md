@@ -847,10 +847,115 @@ signal than a conventional green would be. Change made:
 4. Record the clean baseline timestamp per §16 template once the above
    settle.
 
-**Verdict: SPRINT 0 substantively complete.** Deployment, live UX
-(including the mobile fix and salience refinement), the real submission's
-full funnel, and the privacy check have all been independently verified.
-The only remaining items are the green-color redeploy (code written,
-tested, not yet pushed) and starring `brief_success` as a Key Event once
-GA4's own indexing catches up — both mechanical, neither blocked by an
-unresolved defect.
+**Verdict at the end of the previous pass: SPRINT 0 substantively
+complete.** Deployment, live UX (including the mobile fix and salience
+refinement), the real submission's full funnel, and the privacy check had
+all been independently verified. Remaining items were the green-color
+redeploy and starring `brief_success` as a Key Event once GA4's own
+indexing caught up.
+
+## 21. Final administrative closure (2026-09-16, cont.)
+
+```text
+Functional analytics baseline:
+2026-09-16, ~18:30–18:40 UTC (approximate — observed live in-session via
+GA4 Realtime immediately after Carlos's one real production submission;
+no exact system timestamp was captured at the moment of observation, so
+this is a window, not a to-the-minute reading). Full lifecycle confirmed:
+page_view → form_start → brief_start → brief_submit → brief_success, plus
+legacy form_submit_success. All 8 brief_success parameters checked
+(batch_ordering_id, batch_page_id, ga_session_id, ga_session_number,
+page_location, page_title, service_category, service_id) — no name/email/
+message content.
+
+brief_success Key Event configured:
+NOT YET. GA4's Key Events UI for this property was re-examined directly
+(2026-09-16, ~19:00 UTC) with Administrator-level access (confirmed via
+Admin → Property access management: Carlos Ortega, Administrador — not a
+permissions issue). Three paths exist in this property's actual UI:
+(1) star an event from "Eventos recientes" — brief_success searched
+directly, still "No hay resultados"; (2) star directly from "Eventos
+clave" — only lists events already indexed there (close_convert_lead,
+purchase, qualify_lead — unrelated); (3) "Crear evento" — opened and
+inspected directly: this ALWAYS creates a new derived event definition
+(name + trigger condition matching an existing event + required URL
+pattern), never attaches a Key Event flag to an existing canonical event
+by name alone. There is no fourth path. This is a structural limitation
+of GA4's current UI for this property, not a permissions gap and not
+something resolved by waiting differently — the fix is the same as
+before: once brief_success is indexed into "Eventos recientes" (Google's
+own processing latency, not under this project's control), star it there
+directly.
+
+Key Event baseline:
+N/A — not yet configured.
+
+book_call:
+intent-only, correctly not a Key Event (confirmed unchanged).
+
+Custom dimensions (6/6, unchanged, no duplicates):
+service_id, service_category, contact_type, cta_location, error_category,
+error_stage.
+
+Sprint 0:
+FUNCTIONALLY CLOSED — GA4 Key Event administration pending (blocked by
+GA4's own event-indexing latency, not by permissions, code, deployment,
+UX, or privacy — all of which are independently verified complete).
+```
+
+## 22. GA4 UI discrepancy — no preemptive "mark by name" control exists (2026-09-16, cont.)
+
+A later task assumed GA4 exposes a separate `Admin → Data display → Key
+events → New key event` page/control that can mark an unindexed event as a
+Key Event by exact name alone. This was checked exhaustively against the
+real Tooltician property, not assumed:
+
+- Confirmed again: property Tooltician (551059139, `G-2HK4GHK7GR`), user
+  Carlos Ortega (carlosortega77@gmail.com), role **Administrador** — not a
+  permissions gap.
+- The property's Admin nav has a single **Eventos** page (no separate
+  "Key events" nav item), with two tabs: **Eventos clave** and **Eventos
+  recientes**. Every control on both tabs was inspected: the top-level
+  "Crear evento" button, the "Configuraciones personalizadas" dropdown
+  (only "Eventos personalizados" / "Modificaciones" — neither is Key Event
+  creation), and each row's "⋮" overflow menu (on an existing Key Event:
+  "Cambiar método de recuento", "Definir valor predeterminado del evento
+  clave", "Marcar como ANP", "Desmarcar como evento clave" — all act on an
+  *existing, already-indexed* row, none add a new one by name).
+- "Crear evento" was opened again and confirmed to only build a **new
+  derived event**: a name field for the *new* event, a "Marcar como evento
+  clave" toggle that applies to *that new event*, and a required trigger
+  (an existing event name + URL-contains condition). There is no field to
+  target an existing canonical event by name without defining a trigger
+  condition against it — this is definitionally the alias/derived-event
+  path the task forbids, not a distinct "Key events" management surface.
+- **GA4 UI DISCREPANCY CONFIRMED** — the task's assumed control does not
+  exist in this property's current UI. The only two ways an event becomes
+  a Key Event here are: (a) star it once it is listed under Eventos
+  recientes/Eventos clave (requires GA4's own indexing), or (b) create a
+  derived event via "Crear evento" (forbidden by every pass of this task).
+
+Indexing progress observed this pass (Eventos recientes grew from 17 → 20
+distinct event names over ~15 minutes of checking, newly including
+`intent_select`, `service_engage`, `service_view`, then `brief_error`,
+`brief_start`, `cta_send_brief`): `brief_submit` and `brief_success`
+specifically were still absent from Eventos recientes as of the last check
+(2026-09-16 19:07 UTC). This is consistent with continued, real,
+in-progress indexing latency — not a stalled or broken pipeline — and
+supports the same conclusion as before: check back later and star
+`brief_success` directly once it appears; no workaround was created.
+
+## 22. Analytics remediation #1 (2026-09-20) — CSP scope and environment guard
+
+- **Finding:** Cloudflare Web Analytics is auto-injected but blocked by the host-wide CSP. The CSP is served by a
+  single Cloudflare rule (identical on every `tooltician.com` path, including `/polla/`, which forbids third-party
+  telemetry), so it is extended **per path**, not globally. Exact policies and rule expressions:
+  `docs/cloudflare-security-headers.md` → "Path-scoped CSP for analytics".
+- **Environment guard:** `public/assets/js/analytics-guard.js` (external, sync, before the inline stub) sets
+  `window['ga-disable-<ID>']` on any host other than `tooltician.com` / `www.tooltician.com`
+  and on `file:`. `dev` and `preview` builds (which read `PUBLIC_GA4_MEASUREMENT_ID` from `.env`) therefore no longer
+  send `page_view` to the production property. The inline GA4 stub is byte-identical, so its CSP hash is unchanged.
+  Covered by `tests/analytics-guard.mjs`.
+- **Unchanged:** DNT/GPC behaviour (canonical events suppressed; GA4 `page_view` is not), `brief_success` semantics
+  (still fired only on `response.ok`), GA4 property `G-2HK4GHK7GR`.
+- **Privacy:** privacy notice (ES/EN) now mentions Cloudflare Web Analytics (cookieless, aggregate).

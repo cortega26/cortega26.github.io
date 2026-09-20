@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-09-20 — Analytics remediation #1
+
+### Added
+- `public/assets/js/analytics-guard.js` + `tests/analytics-guard.mjs`: GA4 is disabled (`ga-disable-<ID>`) outside `tooltician.com`/`www.tooltician.com` and on `file:`, so dev/preview no longer pollute the production property. Inline GA4 stub (and its CSP hash) untouched.
+- Privacy notice (ES/EN) mentions Cloudflare Web Analytics.
+
+### Changed
+- `docs/cloudflare-security-headers.md`: documented path-scoped CSP rules (tooltician-site, chile-hub) that allow Cloudflare Web Analytics without widening the host-wide policy that also covers `/polla/`.
+
+### Pending (manual, outside the repo)
+- Create the two path-scoped Cloudflare Transform Rules and exclude `/polla/*` in Cloudflare Web Analytics (see the doc above).
+
 ## 2026-08-21 — Plan 006: GA4 migration (G-2HK4GHK7GR)
 
 ### Added

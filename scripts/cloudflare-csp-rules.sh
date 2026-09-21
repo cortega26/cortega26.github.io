@@ -5,8 +5,12 @@
 #   ./scripts/cloudflare-csp-rules.sh             # aplica (pide el token sin mostrarlo)
 #
 # Token: permisos "Zone > Transform Rules > Edit" y "Zone > Zone > Read", limitado a tooltician.com.
-# Idempotente: hace upsert por expresión — si ya existe una regla con la misma
-# expresión la actualiza (PUT) en vez de duplicarla.
+# Idempotente: hace upsert por expresión. Nota API (verificado 2026-09-21):
+# el PUT por regla (.../rules/{id}) rechaza Bearer tokens (10405/405), pero
+# POST (crear) y DELETE sí funcionan; por eso el upsert es POST de la nueva
+# + DELETE de las anteriores. Seguro ante fallos: si el POST falla, la regla
+# vieja sigue intacta; la nueva siempre queda última, que es la que gana
+# ("last rule wins") entre expresiones no solapadas.
 set -euo pipefail
 
 DOMAIN="tooltician.com"
@@ -18,17 +22,20 @@ DRY_RUN=0
 command -v jq >/dev/null   || { echo "Falta jq (sudo apt install jq)"; exit 1; }
 command -v curl >/dev/null || { echo "Falta curl"; exit 1; }
 
-# CSP exactas desde el doc: línea 2 = tooltician-site, línea 3 = chile-hub.
+# CSP exactas desde el doc: línea 1 = base host-wide, 2 = tooltician-site, 3 = chile-hub.
+CSP_BASE=$(grep '^default-src' "$DOC" | sed -n 1p)
 CSP_SITE=$(grep '^default-src' "$DOC" | sed -n 2p)
 CSP_HUB=$(grep '^default-src' "$DOC" | sed -n 3p)
 [[ $(grep -o 'static.cloudflareinsights.com' <<<"$CSP_SITE" | wc -l) -eq 1 ]] || { echo "CSP_SITE inesperada"; exit 1; }
 # ADR-020 (2026-09-21): el contador GoatCounter se retiró por falta de cuenta
 # del mantenedor — ningún origen suyo puede volver a ninguna regla.
+[[ "$CSP_BASE" != *goatcounter* && "$CSP_BASE" != *zgo.at* ]] || { echo "CSP_BASE no debe incluir GoatCounter"; exit 1; }
 [[ "$CSP_SITE" != *goatcounter* && "$CSP_SITE" != *zgo.at* ]] || { echo "CSP_SITE no debe incluir GoatCounter"; exit 1; }
 [[ "$CSP_HUB" != *goatcounter* && "$CSP_HUB" != *zgo.at* ]] || { echo "CSP_HUB no debe incluir GoatCounter"; exit 1; }
 
 DESC_SITE="CSP tooltician-site + Cloudflare Web Analytics"
 DESC_HUB="CSP chile-hub + Cloudflare Web Analytics"
+EXPR_BASE='(http.host eq "tooltician.com")'
 EXPR_SITE='(http.host eq "tooltician.com" and (http.request.uri.path eq "/" or starts_with(http.request.uri.path, "/en/") or starts_with(http.request.uri.path, "/es/")))'
 EXPR_HUB='(http.host eq "tooltician.com" and starts_with(http.request.uri.path, "/chile-hub/"))'
 
@@ -70,20 +77,37 @@ jq -e '[.result.rules[]? | select((.expression // "") | contains("tooltician.com
 
 upsert_rule() { # $1 descripción, $2 expresión, $3 CSP
   # Match por expresión (estable aunque cambie la descripción, p. ej. al
-  # retirar un origen): la regla existente se actualiza en su lugar, sin
-  # duplicados que romperían el "last rule wins".
-  local id
-  id=$(jq -r --arg e "$2" '[.result.rules[]? | select(.expression == $e) | .id][0] // empty' <<<"$R")
-  local out
-  if [[ -n "$id" ]]; then
-    out=$(rule_json "$1" "$2" "$3" | api -X PUT --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules/$id")
-    need_ok "$out"; echo "   actualizada: $1"
-  else
-    out=$(rule_json "$1" "$2" "$3" | api -X POST --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules")
-    need_ok "$out"; echo "   creada: $1"
+  # retirar un origen). POST crea al final (= la que gana); después se
+  # borran las anteriores con la misma expresión, si las hay.
+  local out del
+  local -a old_ids
+  mapfile -t old_ids < <(jq -r --arg e "$2" '.result.rules[]? | select(.expression == $e) | .id' <<<"$R")
+  # Si ya existe con el mismo valor, no hay nada que hacer (idempotente).
+  if jq -e --arg e "$2" --arg c "$3" '[.result.rules[]? | select(.expression == $e and (.action_parameters.headers."Content-Security-Policy".value // "") == $c)] | length > 0' >/dev/null <<<"$R"; then
+    echo "   sin cambios: $1"; return
+  fi
+  out=$(rule_json "$1" "$2" "$3" | api -X POST --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules")
+  need_ok "$out"; echo "   creada: $1"
+  if ((${#old_ids[@]} > 0)); then
+    for del in "${old_ids[@]}"; do
+      out=$(api -X DELETE "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules/$del")
+      need_ok "$out"; echo "   retirada anterior: $del"
+    done
   fi
 }
 echo "4) Creando/actualizando reglas (al final, debajo de la base)…"
+# La base gestiona más headers que la CSP (Permissions-Policy, Referrer-Policy,
+# ...): solo se reemplaza su valor CSP, preservando el resto byte a byte.
+base_cur=$(jq -c --arg e "$EXPR_BASE" '[.result.rules[]? | select(.expression == $e)][0] // empty' <<<"$R")
+[[ -n "$base_cur" ]] || { echo "No veo la regla base de tooltician.com; abortando por seguridad."; exit 1; }
+if [[ $(jq -r '.action_parameters.headers."Content-Security-Policy".value // ""' <<<"$base_cur") == "$CSP_BASE" ]]; then
+  echo "   sin cambios: CSP (base)"
+else
+  out=$(jq --arg c "$CSP_BASE" '.description = "CSP" | {action, description, expression, enabled, action_parameters: (.action_parameters | .headers."Content-Security-Policy".value = $c)}' <<<"$base_cur" | api -X POST --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules")
+  need_ok "$out"; echo "   creada: CSP (base, CSP estrechada)"
+  out=$(api -X DELETE "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules/$(jq -r '.id' <<<"$base_cur")")
+  need_ok "$out"; echo "   retirada anterior: $(jq -r '.id' <<<"$base_cur")"
+fi
 upsert_rule "$DESC_SITE" "$EXPR_SITE" "$CSP_SITE"
 upsert_rule "$DESC_HUB"  "$EXPR_HUB"  "$CSP_HUB"
 

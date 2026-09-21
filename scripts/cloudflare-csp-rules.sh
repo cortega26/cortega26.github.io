@@ -79,18 +79,21 @@ upsert_rule() { # $1 descripción, $2 expresión, $3 CSP
   # Match por expresión (estable aunque cambie la descripción, p. ej. al
   # retirar un origen). POST crea al final (= la que gana); después se
   # borran las anteriores con la misma expresión, si las hay.
-  local old_ids out new_id del
-  old_ids=$(jq -r --arg e "$2" '[.result.rules[]? | select(.expression == $e) | .id] | join(" ")' <<<"$R")
+  local out del
+  local -a old_ids
+  mapfile -t old_ids < <(jq -r --arg e "$2" '.result.rules[]? | select(.expression == $e) | .id' <<<"$R")
   # Si ya existe con el mismo valor, no hay nada que hacer (idempotente).
   if jq -e --arg e "$2" --arg c "$3" '[.result.rules[]? | select(.expression == $e and (.action_parameters.headers."Content-Security-Policy".value // "") == $c)] | length > 0' >/dev/null <<<"$R"; then
     echo "   sin cambios: $1"; return
   fi
   out=$(rule_json "$1" "$2" "$3" | api -X POST --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules")
   need_ok "$out"; echo "   creada: $1"
-  for del in $old_ids; do
-    out=$(api -X DELETE "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules/$del")
-    need_ok "$out"; echo "   retirada anterior: $del"
-  done
+  if ((${#old_ids[@]} > 0)); then
+    for del in "${old_ids[@]}"; do
+      out=$(api -X DELETE "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules/$del")
+      need_ok "$out"; echo "   retirada anterior: $del"
+    done
+  fi
 }
 echo "4) Creando/actualizando reglas (al final, debajo de la base)…"
 # La base gestiona más headers que la CSP (Permissions-Policy, Referrer-Policy,

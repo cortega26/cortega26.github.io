@@ -5,7 +5,8 @@
 #   ./scripts/cloudflare-csp-rules.sh             # aplica (pide el token sin mostrarlo)
 #
 # Token: permisos "Zone > Transform Rules > Edit" y "Zone > Zone > Read", limitado a tooltician.com.
-# Idempotente: si una regla con la misma descripción ya existe, no la duplica.
+# Idempotente: hace upsert por expresión — si ya existe una regla con la misma
+# expresión la actualiza (PUT) en vez de duplicarla.
 set -euo pipefail
 
 DOMAIN="tooltician.com"
@@ -21,11 +22,13 @@ command -v curl >/dev/null || { echo "Falta curl"; exit 1; }
 CSP_SITE=$(grep '^default-src' "$DOC" | sed -n 2p)
 CSP_HUB=$(grep '^default-src' "$DOC" | sed -n 3p)
 [[ $(grep -o 'static.cloudflareinsights.com' <<<"$CSP_SITE" | wc -l) -eq 1 ]] || { echo "CSP_SITE inesperada"; exit 1; }
-[[ "$CSP_HUB" == *chile-hub.goatcounter.com* ]] || { echo "CSP_HUB inesperada"; exit 1; }
-[[ "$CSP_SITE" != *goatcounter.com* ]] || { echo "CSP_SITE no debe incluir GoatCounter"; exit 1; }
+# ADR-020 (2026-09-21): el contador GoatCounter se retiró por falta de cuenta
+# del mantenedor — ningún origen suyo puede volver a ninguna regla.
+[[ "$CSP_SITE" != *goatcounter* && "$CSP_SITE" != *zgo.at* ]] || { echo "CSP_SITE no debe incluir GoatCounter"; exit 1; }
+[[ "$CSP_HUB" != *goatcounter* && "$CSP_HUB" != *zgo.at* ]] || { echo "CSP_HUB no debe incluir GoatCounter"; exit 1; }
 
 DESC_SITE="CSP tooltician-site + Cloudflare Web Analytics"
-DESC_HUB="CSP chile-hub + GoatCounter + Cloudflare Web Analytics"
+DESC_HUB="CSP chile-hub + Cloudflare Web Analytics"
 EXPR_SITE='(http.host eq "tooltician.com" and (http.request.uri.path eq "/" or starts_with(http.request.uri.path, "/en/") or starts_with(http.request.uri.path, "/es/")))'
 EXPR_HUB='(http.host eq "tooltician.com" and starts_with(http.request.uri.path, "/chile-hub/"))'
 
@@ -65,16 +68,24 @@ echo "$R" | jq -r '.result.rules[]? | "   existente: \(.description // "(sin des
 jq -e '[.result.rules[]? | select((.expression // "") | contains("tooltician.com"))] | length > 0' >/dev/null <<<"$R" \
   || { echo "No veo la regla base de tooltician.com; abortando por seguridad."; exit 1; }
 
-add_rule() { # $1 descripción, $2 expresión, $3 CSP
-  if jq -e --arg d "$1" '[.result.rules[]? | select(.description == $d)] | length > 0' >/dev/null <<<"$R"; then
-    echo "   ya existe, se omite: $1"; return
+upsert_rule() { # $1 descripción, $2 expresión, $3 CSP
+  # Match por expresión (estable aunque cambie la descripción, p. ej. al
+  # retirar un origen): la regla existente se actualiza en su lugar, sin
+  # duplicados que romperían el "last rule wins".
+  local id
+  id=$(jq -r --arg e "$2" '[.result.rules[]? | select(.expression == $e) | .id][0] // empty' <<<"$R")
+  local out
+  if [[ -n "$id" ]]; then
+    out=$(rule_json "$1" "$2" "$3" | api -X PUT --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules/$id")
+    need_ok "$out"; echo "   actualizada: $1"
+  else
+    out=$(rule_json "$1" "$2" "$3" | api -X POST --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules")
+    need_ok "$out"; echo "   creada: $1"
   fi
-  local out; out=$(rule_json "$1" "$2" "$3" | api -X POST --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules")
-  need_ok "$out"; echo "   creada: $1"
 }
-echo "4) Creando reglas (se añaden al final, debajo de la base)…"
-add_rule "$DESC_SITE" "$EXPR_SITE" "$CSP_SITE"
-add_rule "$DESC_HUB"  "$EXPR_HUB"  "$CSP_HUB"
+echo "4) Creando/actualizando reglas (al final, debajo de la base)…"
+upsert_rule "$DESC_SITE" "$EXPR_SITE" "$CSP_SITE"
+upsert_rule "$DESC_HUB"  "$EXPR_HUB"  "$CSP_HUB"
 
 echo "5) Verificando (espera 10 s a la propagación)…"
 sleep 10
@@ -84,8 +95,8 @@ for p in / /en/ /es/ /chile-hub/ /polla/; do
   [[ "$n" == "1" ]] && s=OK || { s="FALLA (headers=$n)"; FAIL=1; }
   echo "   $p -> $s"
 done
-curl -sSI "https://$DOMAIN/chile-hub/" | grep -i '^content-security-policy' | grep -q 'chile-hub.goatcounter.com' \
-  && echo "   /chile-hub/ permite GoatCounter: OK" || { echo "   /chile-hub/ NO permite GoatCounter (¿caché? purga y reintenta)"; FAIL=1; }
-curl -sSI "https://$DOMAIN/polla/" | grep -i '^content-security-policy' | grep -qi 'cloudflareinsights\|goatcounter' \
+curl -sSI "https://$DOMAIN/chile-hub/" | grep -i '^content-security-policy' | grep -qi 'goatcounter\|zgo\.at' \
+  && { echo "   /chile-hub/ permite el contador retirado: FALLA"; FAIL=1; } || echo "   /chile-hub/ sin contador: OK"
+curl -sSI "https://$DOMAIN/polla/" | grep -i '^content-security-policy' | grep -qi 'cloudflareinsights\|goatcounter\|zgo\.at' \
   && { echo "   /polla/ permite analítica: FALLA"; FAIL=1; } || echo "   /polla/ sin analítica: OK"
 [[ $FAIL -eq 0 ]] && echo "Listo." || { echo "Revisa las FALLAS (ver 'Verify the rules override' en el doc)."; exit 1; }

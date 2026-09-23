@@ -7,7 +7,7 @@
 > `plans/README.md` — unless a reviewer dispatched you and told you they
 > maintain the index.
 >
-> **Drift check (run first)**: `git diff --stat 1508fa2..HEAD -- src/components/HeroSection.astro tests/run.js`
+> **Drift check (run first)**: `git diff --stat 8503055..HEAD -- src/components/HeroSection.astro tests/run.js`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition.
@@ -17,9 +17,9 @@
 - **Priority**: P3
 - **Effort**: S
 - **Risk**: MED (copy change on the homepage; both locales)
-- **Depends on**: 036 (so TT-017's status is accurate when this lands)
+- **Depends on**: 036 DONE (TT-017's status is recorded)
 - **Category**: direction (home clarity / proof division)
-- **Planned at**: commit `1508fa2`, 2026-09-23
+- **Planned at**: commit `8503055`, 2026-09-23 (reconciled after plans 036–039; the only in-scope drift is `tests/run.js`, which gained the `EM` and `S0b` groups — Step 2 accounts for it)
 
 ## Why this matters
 
@@ -84,9 +84,11 @@ Facts the executor needs, inlined (verified by the advisor on 2026-09-23):
 - The home renders `HeroSection` then `ResultsBand` back to back
   (`src/pages/en/index.astro:46-47`, `src/pages/es/index.astro:47-48`).
 
-- No existing test references `elrincondeebano` or `100+ SKUs`
-  (`grep -rn "elrincondeebano\|100+ SKUs" tests/` → no matches). The HTW
-  snapshot covers the web-technical-hygiene pages only, not the home.
+- No existing test asserts the hero's Ébano copy. The only `tests/` references
+  to `elrincondeebano` are link lists in `tests/snapshots/htw-en.json` and
+  `htw-es.json` (the HTW pages link the store) — unrelated to the hero, and
+  this plan does not touch the HTW pages, so the snapshot must not drift. The
+  new `D6` group reads `HeroSection.astro`/`ResultsBand.astro` sources only.
 
 ## Commands you will need
 
@@ -150,11 +152,12 @@ Do not change `featuredOutcome.text` or `.href`.
 
 ### Step 2: Lock the division of labor with a test
 
-In `tests/run.js`, add a new group after the `EM` group if plan 039 landed
-(otherwise after `S0b`, or after `S0` which ends at line 1305):
+In `tests/run.js`, add a new group **immediately after the `S0b` group**
+(added by plan 038; it ends at line 1368, just before the `// ─── Summary`
+comment at line 1369):
 
 ```js
-group('D6 · Home proof division of labor', () => {
+group('D6b · Home proof division of labor', () => {
   const hero = read('src/components/HeroSection.astro') || '';
   const band = read('src/components/ResultsBand.astro') || '';
   assert(
@@ -185,8 +188,10 @@ preview build, as it does in CI).
 
 ## Test plan
 
-- New `D6` group in `tests/run.js` (source-level; guards the exact duplicate
-  from returning and asserts the band still owns the numbers).
+- New `D6b` group in `tests/run.js` (source-level; guards the exact duplicate
+  from returning and asserts the band still owns the numbers). Named `D6b`
+  because a pre-existing `D6 · Ébano description rewritten` group already
+  exists at `tests/run.js:366` — same suffix convention as `S0`/`S0b`.
 - `node test-behavioral.mjs` proves the home portfolio filters still work
   after the component edit.
 - No snapshot update needed: the HTW snapshot does not cover the home page.
@@ -198,10 +203,10 @@ Machine-checkable. ALL must hold:
 - [ ] `grep -c "elrincondeebano" src/components/HeroSection.astro` → `4`
 - [ ] `grep -c "100+ SKUs" src/components/HeroSection.astro` → `0`
 - [ ] `grep -n "value: '100+'" src/components/ResultsBand.astro` still returns a hit (the band keeps the numbers)
-- [ ] `npm run check` exits 0; `node tests/run.js` exits 0 with `D6` green
+- [ ] `npm run check` exits 0; `node tests/run.js` exits 0 with `D6b` green
 - [ ] `npm run build && node tests/run.js --built` exits 0
 - [ ] `node test-behavioral.mjs` passes
-- [ ] `git diff --name-only 1508fa2...HEAD` lists only the two in-scope files
+- [ ] `git diff --name-only 8503055...HEAD` lists only the two in-scope files
 - [ ] `plans/README.md` status row updated
 
 ## STOP conditions
@@ -224,7 +229,7 @@ For the human/agent who owns this code after the change lands:
   quantified verifiable stats; portfolio card = problem→solution→result. New
   proof should be added to exactly one of those.
 - If the Ébano store ever goes offline, update both the hero link and the
-  band's stats in the same change; the `D6` count assertion will force the
+  band's stats in the same change; the `D6b` count assertion will force the
   hero side.
 - Reviewer should check both locales render the shortened detail line without
   awkward wrapping at the 360 px breakpoint.

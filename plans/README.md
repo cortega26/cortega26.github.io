@@ -109,7 +109,7 @@ text) and plan 039 wires them per locale.
 | 037 | Content measurement loop (Search Console runbook + day-60 pilot review) | P1 | S | 036 (done) | DONE (branch `advisor/037-content-measurement` @ `d673512`, pending operator merge; reviewer-verified 2026-09-23: runbook 7 sections + 3 guide URLs + `2026-11-15` checkpoint, checklist item 7 + dated row, keyword pointer, zero code diff) |
 | 038 | Analytics coverage: home service cards + guide CTAs | P2 | M | — | DONE (branch `advisor/038-analytics-coverage` @ `c51eabd`, pending operator merge; reviewer-verified 2026-09-23 after one REVISE round — chip engage gated so the Calendly chip emits `book_call`, guide alt link self-scoped; built output confirms; 220/220 src, 249/249 built, 77/77 analytics, behavioral PASS; `product-analytics.js` untouched) |
 | 039 | Wire real EN/ES résumés per locale (retire placeholder) | P1 | M | — | DONE (landed as `fae35af`; reviewer-verified 2026-09-23: committed blob hashes == sources, 0 placeholder text, EN page→EN only / ES page→ES only in `dist/`, 209/209 src, 236/236 built, behavioral PASS, links 0/0/0) |
-| 040 | Home proof dedup (Ébano hero/band) | P3 | S | 036 (soft) | TODO |
+| 040 | Home proof dedup (Ébano hero/band) | P3 | S | 036 (done) | DONE (branch `advisor/040-home-proof-dedup` @ `3ee99dd`, pending operator merge; reviewer-verified 2026-09-23: hero Ébano count 4, `100+ SKUs` 0 in hero, band stats intact, `D6b` green, 223/223 src + 252/252 built, behavioral PASS, both locales' new detail strings in `dist/`) |
 
 Direction findings deferred or rejected this run (do not re-audit without new
 evidence):

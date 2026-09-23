@@ -244,6 +244,33 @@ no `TODO` rows; plans 024–033 archived.
 
 Progress (audit series): 11/11 DONE.
 
+## Direction series — "next" audit (035–040)
+
+Planned 2026-09-23 against `1508fa2`. Source: direction-only audit. Status
+authority is `plans/README.md`; plan files live in `plans/` and are archived
+under `plans/archive/` only once DONE.
+
+| Plan | Entry point | Branch | Note |
+|------|-------------|--------|------|
+| 035 — Live-host production verification | `plans/035-production-verification.md` | `advisor/035-production-check` | New script + separate scheduled workflow; never gates deploy |
+| 036 — Docs re-baseline | `plans/036-rebaseline-strategy-docs.md` | `advisor/036-rebaseline-docs` | Docs only; run first |
+| 037 — Content measurement loop | `plans/037-content-measurement-loop.md` | `advisor/037-content-measurement` | Operator runbook; day-60 checkpoint `2026-11-15` |
+| 038 — Analytics coverage | `plans/038-analytics-coverage.md` | `advisor/038-analytics-coverage` | No new events/dimensions |
+| 039 — Real EN/ES résumés | `plans/039-employer-route-placeholder.md` | `advisor/039-employer-route` | Replaces placeholder with the real EN PDF; adds ES PDF; locale-aware links; P1 |
+| 040 — Home proof dedup | `plans/040-home-proof-dedup.md` | `advisor/040-home-proof-dedup` | Hero copy + `D6` test only |
+
+Goto:
+
+```
+node tests/run.js && npm run check
+npm run build && node tests/run.js --built && node test-behavioral.mjs
+npm run check:prod        # after 035 lands
+```
+
+Exit gate: all six DONE; weekly production check green; strategy/refresh docs
+reconciled; content-review runbook scheduled; home cards and guide CTAs
+stamped; real EN/ES résumés wired per locale; `D6` green.
+
 ## Backlog (accepted, not yet planned)
 
 Sourced from the `**Deferred:**` lines in the plans and the audit's

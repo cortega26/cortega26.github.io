@@ -91,6 +91,43 @@ Waves: 0 = 024 (done); 1 = 025, 026, 028 (done); 2 = 027, 029, 031
 2026-09-23 — 11/11.** Full wave view, goto commands, and exit gates in
 `plans/ROADMAP.md`.
 
+## Direction series — "next" audit (planned 2026-09-23, against `1508fa2`)
+
+Source: direction-only audit (`improve next`) — recon + direction category,
+grounded in the strategy execution plan, the refresh backlog, the ES keyword
+research, and the Sprint 0 analytics record. Six findings, six plans; plans
+are design/spike- or runbook-shaped per the direction variant. Notable live
+finding: production was serving a **placeholder résumé PDF**
+(`carlos@example.com`); the maintainer supplied real EN and ES PDFs on
+2026-09-23 (verified: 2 pages each, `carlos@tooltician.com`, no placeholder
+text) and plan 039 wires them per locale.
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 035 | Live-host production verification (script + scheduled workflow) | P1 | M | — | TODO |
+| 036 | Re-baseline strategy/refresh/audit-map docs to shipped state | P1 | S | — | TODO |
+| 037 | Content measurement loop (Search Console runbook + day-60 pilot review) | P1 | S | 036 (soft) | TODO |
+| 038 | Analytics coverage: home service cards + guide CTAs | P2 | M | — | TODO |
+| 039 | Wire real EN/ES résumés per locale (retire placeholder) | P1 | M | — | DONE (landed as `fae35af`; reviewer-verified 2026-09-23: committed blob hashes == sources, 0 placeholder text, EN page→EN only / ES page→ES only in `dist/`, 209/209 src, 236/236 built, behavioral PASS, links 0/0/0) |
+| 040 | Home proof dedup (Ébano hero/band) | P3 | S | 036 (soft) | TODO |
+
+Direction findings deferred or rejected this run (do not re-audit without new
+evidence):
+
+- **EN translations of the ES guides** — locked decision (ES-only this cycle,
+  audit response §2.2).
+- **`/services/` summary page, `/pricing`, `/docs`, `/login`, `/demo`** —
+  locked (generic routes stay 404; demand-gated).
+- **Case-study quantified metrics** — parked pending a willing client
+  (backlog below); plan 029 shipped the role/date/CTA layer only.
+- **HTW bespoke pages → `ServicePage` migration** — previously rejected
+  (HIGH risk / L effort); no new evidence.
+- **Performance optimization pass** — previously rejected; no architectural
+  win found.
+- **Orphaned `ProofSection.astro` / `ServiceSpotlight.astro` cleanup** —
+  real dead code (~450 lines, zero references) but tech-debt, not direction;
+  deferred with a named owner note in plan 036's maintenance section.
+
 ## Dependency notes
 
 - 008 and 007 first (small, user-facing correctness; independent of each other).
@@ -126,6 +163,24 @@ Audit series (024–034) dependency notes:
   refactors its JSON-LD afterwards.
 - 034 is the integration gate: no new code, only verification, llms corpus,
   and index/status closure.
+
+Direction series (035–040) dependency notes:
+
+- 036 first: it records the shipped state that 037, 039, and 040 reference in
+  their "Why this matters" and maintenance sections. 036 is file-disjoint from
+  all of them.
+- 035 and 037 are fully independent.
+- 038 and 039 both append a group to `tests/run.js` (`S0b` / `EM`): whoever
+  lands second appends at the end; 039's group placement note covers both
+  cases (after `S0b` if it exists, else after `S0`).
+- 039 is P1: it retires a placeholder résumé that is live in production. It
+  requires the source PDFs at `/home/carlos/Descargas/` to be unchanged
+  (SHA-256 pinned in the plan); if they change, the executor STOPs.
+- 039 no longer edits `docs/analytics-sprint-0.md`; the tracking attributes
+  (`data-cv-download` / `data-track`) already exist and are unchanged.
+- 040's `D6` test group counts `elrincondeebano` occurrences in
+  `HeroSection.astro`; if the store link is ever reworded, update the count
+  and the copy in the same change.
 
 ## Prior series (unchanged history)
 
@@ -166,6 +221,17 @@ sized, no DB/N+1 surface exists); the ES bespoke HTW page was skimmed
 structurally rather than line-audited (EN read fully); Cloudflare edge state
 (CSP rule, headers) is unverifiable from the repo — Plan 015 covers only the
 in-repo verifiable half.
+
+## Scope of the direction audit (2026-09-23, `improve next`)
+
+Direction category only, against `1508fa2`: recon plus the direction pass.
+Correctness, security, performance, tests, debt, deps, DX, and docs were
+**not** re-swept — the 2026-09-16 deep audit and the 2026-09-23 content audit
+remain the record. Live checks were read-only (`curl`): 29-URL sitemap, CSP/
+HSTS/referrer/permissions headers, `robots.txt`, `http → 301 https`,
+`/pricing/ → 404`, and the placeholder résumé PDF. The six direction findings
+and their dispositions are in the series section above; deferred/rejected
+items are listed there so they are not re-audited.
 
 ## Findings considered and rejected
 

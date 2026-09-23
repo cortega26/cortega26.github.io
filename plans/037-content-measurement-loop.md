@@ -9,7 +9,7 @@
 > update the status row for this plan in `plans/README.md` — unless a reviewer
 > dispatched you and told you they maintain the index.
 >
-> **Drift check (run first)**: `git diff --stat 1508fa2..HEAD -- docs/tasks/content-pilot-review.md docs/tasks/maintenance-checklist.md docs/tasks/keyword-research-es.md`
+> **Drift check (run first)**: `git diff --stat f886e00..HEAD -- docs/tasks/content-pilot-review.md docs/tasks/maintenance-checklist.md docs/tasks/keyword-research-es.md`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live files before proceeding; on a
 > mismatch, treat it as a STOP condition.
@@ -19,9 +19,9 @@
 - **Priority**: P1
 - **Effort**: S
 - **Risk**: LOW
-- **Depends on**: 036 (docs re-baseline) recommended first, so cross-references point at corrected statuses
+- **Depends on**: 036 DONE (state recorded; this plan's cross-references were refreshed in reconciliation)
 - **Category**: direction (organic-content measurement)
-- **Planned at**: commit `1508fa2`, 2026-09-23
+- **Planned at**: commit `f886e00`, 2026-09-23 (reconciled after plans 036/035/039; the in-scope files' relevant content is unchanged — `maintenance-checklist.md` gained additive content in items 1–2 only)
 
 ## Why this matters
 
@@ -63,9 +63,10 @@ Facts the executor needs, inlined (verified by the advisor on 2026-09-23):
 
   Day-60 checkpoint: **2026-11-15** (60 days after `0246f64`).
 
-- `docs/tasks/tooltician-strategy-execution-plan.md:142` — TS-002 is blocked
-  and fully manual. Its note (lines 153–158) contains the exact operator steps
-  to reproduce in the runbook:
+- `docs/tasks/tooltician-strategy-execution-plan.md:168` — TS-002 is blocked
+  and fully manual (status cell now reads `Bloqueado (manual; runbook en plan
+  037)`). Its note at lines 179–184 contains the exact operator steps to
+  reproduce in the runbook:
 
   ```text
   1. En Google Search Console → Agregar propiedad → tipo Dominio → tooltician.com.
@@ -79,6 +80,8 @@ Facts the executor needs, inlined (verified by the advisor on 2026-09-23):
 - `docs/tasks/maintenance-checklist.md` — the quarterly runbook has six items
   (time-bound claims, A+ posture, OG card, full gates, funnel self-test,
   llms/sitemap) and a "Dated runs" table. It has no content-performance item.
+  (Items 1 and 2 gained additive paragraphs in plans 039/035 — a résumé-PDF
+  check and a `check:prod` step; they do not affect this plan's Step 2.)
 
 - The four unbuilt keyword rows (from `keyword-research-es.md`): #5 "controlar
   mi negocio en Excel vs herramienta a medida", #6 "cómo vigilar precios de
@@ -94,7 +97,7 @@ Facts the executor needs, inlined (verified by the advisor on 2026-09-23):
 | Runbook sections | `grep -c "## " docs/tasks/content-pilot-review.md` | declared | `≥ 6` |
 | Checklist item | `grep -c "Content pilot review" docs/tasks/maintenance-checklist.md` | declared | `1` |
 | Keyword-doc pointer | `grep -c "content-pilot-review" docs/tasks/keyword-research-es.md` | declared | `1` |
-| Scope | `git diff --stat 1508fa2...HEAD -- src public scripts tests` | executed | empty output |
+| Scope | `git diff --stat f886e00...HEAD -- src public scripts tests` | declared (base refreshed in reconciliation) | empty output |
 
 ## Scope
 
@@ -104,7 +107,8 @@ Facts the executor needs, inlined (verified by the advisor on 2026-09-23):
 - `docs/tasks/keyword-research-es.md` (add a pointer line under the intro)
 
 **Out of scope** (do NOT touch):
-- `docs/tasks/tooltician-strategy-execution-plan.md` — plan 036 owns it.
+- `docs/tasks/tooltician-strategy-execution-plan.md` — plan 036 landed and owns
+  its reconciliation; do not edit it here.
 - `src/data/guides.ts`, any guide page, or `src/data/routes.ts` — no code.
 - `docs/content-audit/**` — separate authority documents.
 - Search Console, GA4, Cloudflare, or any external account. The executor
@@ -244,8 +248,8 @@ In `docs/tasks/keyword-research-es.md`, directly under the intro paragraph
 ### Step 4: Final scope check
 
 ```sh
-git diff --name-only 1508fa2...HEAD
-git diff --stat 1508fa2...HEAD -- src public scripts tests
+git diff --name-only f886e00...HEAD
+git diff --stat f886e00...HEAD -- src public scripts tests
 ```
 
 **Verify**: first command lists exactly the three in-scope files; second
@@ -263,8 +267,8 @@ Machine-checkable. ALL must hold:
 - [ ] The runbook contains the three guide URLs, the `2026-11-15` checkpoint, and the decision matrix (`grep -c "2026-11-15" docs/tasks/content-pilot-review.md` → ≥ 1)
 - [ ] `grep -c "Content pilot review" docs/tasks/maintenance-checklist.md` → `2`
 - [ ] `grep -c "content-pilot-review" docs/tasks/keyword-research-es.md` → `1`
-- [ ] `git diff --stat 1508fa2...HEAD -- src public scripts tests` prints nothing
-- [ ] `git diff --name-only 1508fa2...HEAD` lists exactly the three in-scope files
+- [ ] `git diff --stat f886e00...HEAD -- src public scripts tests` prints nothing
+- [ ] `git diff --name-only f886e00...HEAD` lists exactly the three in-scope files
 - [ ] `plans/README.md` status row updated
 
 ## STOP conditions

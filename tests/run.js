@@ -1350,9 +1350,10 @@ group('S0b · Home service cards and guide CTAs carry canonical service context'
   assert('card CTAs + chips engage the service', (servicesSection.match(/data-service-engage/g) || []).length === 2, 'engage stamps');
   assert('example badges count as outbound portfolio clicks', (servicesSection.match(/data-portfolio-click/g) || []).length === 2, 'badge stamps');
   assert('calendly chip books a call', servicesSection.includes('data-book-call={s.bookCall'), 'chip book-call missing');
+  assert('service-less chip is not swallowed by the engage branch', servicesSection.includes("data-service-engage={s.serviceId ? '' : undefined}"), 'chip engage gate missing');
 
   const articleCta = read('src/components/ArticleCta.astro') || '';
-  assert('ArticleCta carries a service scope', articleCta.includes('serviceId?: string') && articleCta.includes('data-service-id={serviceId}'), 'ArticleCta scope missing');
+  assert('ArticleCta carries a service scope on section, card, and alt link', articleCta.includes('serviceId?: string') && (articleCta.match(/data-service-id=\{serviceId\}/g) || []).length === 3, 'ArticleCta scope missing');
   assert('ArticleCta anchors engage the service', (articleCta.match(/data-service-engage/g) || []).length === 3, 'ArticleCta engage stamps');
 
   for (const rel of [

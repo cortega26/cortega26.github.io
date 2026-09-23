@@ -155,7 +155,7 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
       <span class="shapes-label">{c.shapesLabel}</span>
       <div class="shapes-list">
         {c.shapes.map(s => (
-          <a class="shape-chip" data-service-id={s.serviceId} data-service-engage data-book-call={s.bookCall ? '' : undefined} data-track-loc={s.bookCall ? 'services_shapes' : undefined} href={s.href}>
+          <a class="shape-chip" data-service-id={s.serviceId} data-service-engage={s.serviceId ? '' : undefined} data-book-call={s.bookCall ? '' : undefined} data-track-loc={s.bookCall ? 'services_shapes' : undefined} href={s.href}>
             <span class="shape-name">{s.name}</span>
             <span class="shape-range">{s.range}</span>
             <span class="shape-note">{s.note}</span>

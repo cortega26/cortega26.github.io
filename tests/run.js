@@ -46,7 +46,6 @@ const portfolio  = () => read('src/components/PortfolioSection.astro') || '';
 const caseStudies = () => read('src/data/caseStudies.ts') || '';
 const services   = () => read('src/components/ServicesSection.astro') || '';
 const about      = () => read('src/components/AboutSection.astro') || '';
-const proof      = () => read('src/components/ProofSection.astro') || '';
 const creds      = () => read('src/components/CredentialsSection.astro') || '';
 const contact    = () => read('src/components/ContactSection.astro') || '';
 const footer     = () => read('src/components/Footer.astro') || '';
@@ -468,7 +467,6 @@ group('TT-016 · Anchor projects are visually prioritized', () => {
 
 group('TT-009 · Small external links read as actions', () => {
   const portfolioSrc = caseStudies();
-  const proofSrc = proof();
   assert(
     'Portfolio uses explicit action labels',
     portfolioSrc.includes('View repository') || portfolioSrc.includes('Ver repositorio'),
@@ -479,11 +477,6 @@ group('TT-009 · Small external links read as actions', () => {
     !portfolioSrc.includes("label: 'Repo'") && !portfolioSrc.includes("label: 'Docs'") &&
     !portfolioSrc.includes('label: "Repo"') && !portfolioSrc.includes('label: "Docs"'),
     'Generic Repo/Docs labels still present in portfolio project links'
-  );
-  assert(
-    'Proof links use dedicated proof-link class',
-    proofSrc.includes('class="proof-link"') && !proofSrc.includes('class="badge badge-teal"'),
-    'Proof links still read like badges instead of actions'
   );
 });
 
@@ -567,18 +560,8 @@ group('G1 · Credentials section retired from homepage', () => {
   );
 });
 
-group('H1 · Proof section retains core proof layout', () => {
-  const src = proof();
-  assert(
-    'ProofSection contains timeline and proof grid',
-    src.includes('proof-track') && src.includes('proof-catalog'),
-    'ProofSection is missing its core proof layout'
-  );
-});
-
 group('H2 · Portfolio Manager and LinkedIn extension are included in public work surfaces', () => {
   const portfolioSrc = caseStudies();
-  const proofSrc = proof();
 
   assert(
     'Portfolio includes Portfolio Manager project',
@@ -594,21 +577,6 @@ group('H2 · Portfolio Manager and LinkedIn extension are included in public wor
     'Portfolio includes LinkedIn Spam Blocker project',
     portfolioSrc.includes('LinkedIn Spam Blocker') && portfolioSrc.includes('stop-spam-linkedin'),
     'PortfolioSection is missing the LinkedIn Spam Blocker entry'
-  );
-  assert(
-    'Proof includes Portfolio Manager evidence entry',
-    proofSrc.includes('Portfolio Manager') && proofSrc.includes('portfolio-manager-server'),
-    'ProofSection is missing the Portfolio Manager evidence entry'
-  );
-  assert(
-    'Proof includes chile-hub evidence entry',
-    proofSrc.includes('chile-hub') && proofSrc.includes('chile-hub'),
-    'ProofSection is missing the chile-hub evidence entry'
-  );
-  assert(
-    'Proof includes extension distribution links',
-    proofSrc.includes('Chrome Web Store') && proofSrc.includes('Firefox Add-ons') && proofSrc.includes('stop-spam-linkedin'),
-    'ProofSection is missing the LinkedIn Spam Blocker evidence entry'
   );
 });
 

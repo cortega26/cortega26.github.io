@@ -5,6 +5,24 @@ Status: `Proposed`
 Scope: `tooltician.com` public portfolio refresh  
 Primary goal: improve perceived professionalism, clarity, mobile UX, and performance without a full redesign.
 
+## 0. Reconciliation (2026-09-23)
+
+Verified against commit `7a9cc1b`. The wave scoreboards below are
+historical; the master backlog §6 cells were corrected where the work has
+shipped. Details: `plans/README.md`.
+
+| Task | Verified state | Evidence |
+|---|---|---|
+| TT-010 duplicate Google Fonts | Done | Self-hosted `@font-face` (`global.css:7,15`); no `fonts.googleapis` in `src/` |
+| TT-011 hero image LCP | Moot | No hero image exists (`HeroSection.astro` has no `<img>`) |
+| TT-012 PNG fallback | Moot | Same as TT-011 |
+| TT-013 third-party scripts | Done | Only GA4 remains, documented in `docs/analytics-sprint-0.md` §10 |
+| TT-017 home redundancy | Done (partial) | Home consolidated in `79b5347`; residual in plan 040 |
+| TT-019 OG metadata | Done | `BaseLayout.astro:21,59-63` |
+| TT-020 root URL strategy | Done | Plan 031 (root x-default landing) |
+| TT-021 credential links | Done | Link checker 0/0/0 (audit closeout) |
+| TT-022/TT-023 CSS consolidation | Pending | Still open |
+
 ## 1. Executive Overview
 
 This document is the operational backlog for the Tooltician refresh program.
@@ -293,18 +311,18 @@ This is the single flattened backlog for ticket creation.
 | `TT-007` | Visual polish | Simplify hero cards and reduce template feel | `P2` | medium | `M` | `Wave 2` | `Done` |
 | `TT-008` | Mobile nav | Convert mobile menu into robust overlay | `P2` | medium | `M` | `Wave 2` | `Done` |
 | `TT-009` | Affordance | Clarify clickable badges and small links | `P2` | medium | `S` | `Wave 3` | `Done` |
-| `TT-010` | Performance | Remove duplicate Google Fonts loading | `P2` | medium | `S` | `Wave 4` | `Pending` |
-| `TT-011` | Performance | Improve hero image LCP handling | `P2` | medium | `S` | `Wave 4` | `Pending` |
-| `TT-012` | Assets | Compress or replace photo fallback strategy | `P2` | medium | `S` | `Wave 4` | `Pending` |
-| `TT-013` | Governance | Review third-party frontend scripts | `P3` | low | `S` | `Wave 4` | `Pending` |
+| `TT-010` | Performance | Remove duplicate Google Fonts loading | `P2` | medium | `S` | `Wave 4` | `Done` (2026-09-23) |
+| `TT-011` | Performance | Improve hero image LCP handling | `P2` | medium | `S` | `Wave 4` | `Done` — moot, no hero image |
+| `TT-012` | Assets | Compress or replace photo fallback strategy | `P2` | medium | `S` | `Wave 4` | `Done` — moot, no hero image |
+| `TT-013` | Governance | Review third-party frontend scripts | `P3` | low | `S` | `Wave 4` | `Done` (2026-09-23) |
 | `TT-014` | Accessibility | Add consistent `:focus-visible` states | `P2` | medium | `S` | `Wave 2` | `Done` |
 | `TT-015` | Portfolio copy | Rewrite project cards for scanability and proof | `P1` | high | `M` | `Wave 3` | `Done` |
 | `TT-016` | Information architecture | Reorder and emphasize anchor projects | `P2` | medium | `S` | `Wave 3` | `Done` |
-| `TT-017` | Content structure | Reduce redundancy across About, Proof, Credentials | `P2` | medium | `M` | `Wave 5` | `Pending` |
+| `TT-017` | Content structure | Reduce redundancy across About, Proof, Credentials | `P2` | medium | `M` | `Wave 5` | `Done (partial)` — residual in plan 040 |
 | `TT-018` | Contact UX | Fix form/contact microcopy and state clarity | `P2` | medium | `S` | `Wave 3` | `Done` |
-| `TT-019` | SEO/social | Use OG card asset in metadata | `P2` | medium | `S` | `Wave 5` | `Pending` |
-| `TT-020` | SEO architecture | Decide root URL and sitemap strategy | `P2` | medium | `M` | `Wave 5` | `Pending` |
-| `TT-021` | Trust QA | Revalidate credential links | `P2` | medium | `S` | `Wave 5` | `Pending` |
+| `TT-019` | SEO/social | Use OG card asset in metadata | `P2` | medium | `S` | `Wave 5` | `Done` (2026-09-23) |
+| `TT-020` | SEO architecture | Decide root URL and sitemap strategy | `P2` | medium | `M` | `Wave 5` | `Done` (2026-09-23) |
+| `TT-021` | Trust QA | Revalidate credential links | `P2` | medium | `S` | `Wave 5` | `Done` (2026-09-23) |
 | `TT-022` | Maintainability | Consolidate repeated CSS patterns | `P3` | low | `M` | `Wave 4` | `Pending` |
 | `TT-023` | Design system | Separate reusable tokens from decorative exceptions | `P3` | low | `M` | `Wave 4` | `Pending` |
 

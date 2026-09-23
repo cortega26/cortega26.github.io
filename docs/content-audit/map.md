@@ -1,3 +1,9 @@
+> **Historical document (pre-Astro).** This map describes the legacy
+> `cortega26.github.io` static pages and is kept for audit history. The live
+> route inventory is authoritative in `src/data/routes.ts`; current findings
+> and statuses live in `docs/content-audit/audits/audit-20260923-response.md`.
+> Do not use the table below to plan work.
+
 # Content Audit Map
 
 | Page Type | Locale(s) | URL | Source File | Notes |

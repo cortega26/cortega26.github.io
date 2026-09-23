@@ -8,6 +8,32 @@ Responsable: `Carlos Ortega` (ejecución en solitario; el plan está escrito par
 
 > **Cómo leer este documento.** Es autocontenido: no requiere abrir la auditoría ni otros docs para ejecutarse. Cada tarea trae archivos, cambio mínimo, criterio de aceptación, verificación, métrica y riesgo. Las fases se ejecutan en orden; dentro de una fase, máximo 3 tareas activas. Actualiza los scoreboards (§5, §6) y el registro de decisiones (§11) a medida que avanzas: ese es el rastro de auditoría.
 
+## 0. Reconciliación de estado (2026-09-23)
+
+Este documento es la dirección, no el estado. El estado verificado contra
+`7a9cc1b` está abajo; las tablas §5–§7 se corrigen en consecuencia. Fuentes:
+`plans/README.md` (series 007–040), `docs/analytics-sprint-0.md` (Sprint 0),
+y `docs/content-audit/audits/audit-20260923-response.md`.
+
+| Tarea | Estado real | Evidencia |
+|---|---|---|
+| TS-003 CTAs comerciales | Parcial — superseded por Sprint 0 | `product-analytics.js` + `ServicePage.astro:111`; residual en plan 038 |
+| TS-004 enlaces salientes | Hecho (parcial) | `portfolio_click`/`proof_click` canónicos; `ProofSection` ya no se renderiza |
+| TS-005 test de instrumentación | Hecho | `tests/analytics-service-funnel.mjs`, `analytics-guard.mjs`, grupo S0 |
+| TS-006 CV enlazado | Hecho (Plan 017 + 039) | `AboutSection.astro:60`, `Footer.astro:84`; PDF real EN/ES por locale (plan 039) |
+| TS-007 trayectoria | Pendiente | Diferido; hechos verificables ya en el CV (plan 039); requiere decisión del mantenedor |
+| TS-008 perfiles trackeados | Pendiente | Sin plan activo; GitHub/LinkedIn ya presentes en Footer |
+| TS-009/010/011 home | Hecho (parcial, `79b5347`) | Home consolidada; residual de prueba duplicada → plan 040 |
+| TS-012/013/014 casos | Parcial | Rol/fecha/CTA (Plan 029); métricas cuantificadas aparcadas |
+| TS-015 back-links | Pendiente | Recon/plantilla hechos (Plan 019); ejecución externa del operador |
+| TS-016 JSON-LD | Parcial | `jsonld.ts` + paridad (Plan 033); Rich Results externo pendiente |
+| TS-017 llms/OG | Hecho (Plan 034) | `llms.txt`/`llms-full.txt`; `BaseLayout.astro:21,59-63` |
+| TS-018/019/020 | Bloqueado | Sin datos (Search Console); runbook en plan 037 |
+
+El catálogo de eventos §4 quedó superseded por `docs/analytics-sprint-0.md`
+(capa canónica service/lead, cerrada 2026-09-16). No inventar eventos fuera de
+esa capa.
+
 ---
 
 ## 1. Contexto estratégico (resumen autocontenido)
@@ -117,14 +143,14 @@ Esta es la **fuente única de verdad** de la analítica. Nomenclatura: `snake_ca
 
 | Dimensión | Baseline (2026-06-30) | Objetivo | Estado | Notas |
 |---|---|---|---|---|
-| Eventos de conversión capturados | `0` (no-op) | `100% del catálogo §4` | `Pendiente` | Fase 0 |
-| Panel de analítica de eventos | `ninguno` (solo Ahrefs pageviews) | `1 panel cookieless` | `Pendiente` | Fase 0 |
-| Ruta de empleador | `inexistente` (CV huérfano) | `CV enlazado + trayectoria` | `Pendiente` | Fase 1 |
-| Redundancia de prueba en home | `alta` (4 secciones repiten) | `cada sección aporta prueba única` | `Pendiente` | Fase 2 (cierra TT-017) |
-| Casos de estudio reales | `0` ("aún no hay testimonios") | `≥1` | `Pendiente` | Fase 3 |
+| Eventos de conversión capturados | `0` (no-op) | `100% del catálogo §4` | `Hecho` — Sprint 0 canónico (2026-09-16) | Fase 0 |
+| Panel de analítica de eventos | `ninguno` (solo Ahrefs pageviews) | `1 panel cookieless` | `Hecho` — GA4 + 6 dimensiones (2026-09-16) | Fase 0 |
+| Ruta de empleador | `inexistente` (CV huérfano) | `CV enlazado + trayectoria` | `Parcial` — CV real EN/ES enlazado (Planes 017 + 039); trayectoria pendiente | Fase 1 |
+| Redundancia de prueba en home | `alta` (4 secciones repiten) | `cada sección aporta prueba única` | `Hecho (parcial)` — consolidación `79b5347`; residual plan 040 | Fase 2 (cierra TT-017) |
+| Casos de estudio reales | `0` ("aún no hay testimonios") | `≥1` | `Parcial` — evidencia rol/fecha (Plan 029) | Fase 3 |
 | Back-links desde productos propios | `0` medibles | `3 con UTM` | `Pendiente` | Fase 4 |
-| JSON-LD de servicios | `Service+FAQPage+BreadcrumbList` ✅ | `validado en Rich Results` | `Por validar` | Fase 4 |
-| Search Console conectado | `desconocido` | `conectado + sitemap enviado` | `Pendiente` | Fase 0 |
+| JSON-LD de servicios | `Service+FAQPage+BreadcrumbList` ✅ | `validado en Rich Results` | `Parcial` — builders/paridad (Plan 033); Rich Results externo | Fase 4 |
+| Search Console conectado | `desconocido` | `conectado + sitemap enviado` | `Pendiente` — manual; runbook en plan 037 | Fase 0 |
 
 ---
 
@@ -238,22 +264,22 @@ Objetivo: tomar con datos las decisiones que hoy serían adivinanzas.
 | ID | Fase | Área | Tarea | P | Impacto | Esf. | Estado |
 |---|---|---|---|---|---|---|---|
 | `TS-001` | 0 | Medición | Conectar GA4 `G-2HK4GHK7GR` (gtag.js directo, supersede Plausible) | `P1` | muy alto | `S` | `Hecho` (2026-08-21, Plan 006) — CSP + dimensiones `tt_*` pendientes manuales |
-| `TS-002` | 0 | SEO | Conectar Search Console + sitemap | `P1` | alto | `S` | `Bloqueado` (100% manual: verificación DNS TXT + envío de sitemap pendientes del usuario) |
-| `TS-003` | 0 | Medición | Instrumentar CTAs comerciales faltantes | `P1` | alto | `M` | `Pendiente` |
-| `TS-004` | 0 | Medición | Instrumentar enlaces salientes de evidencia | `P2` | medio | `M` | `Pendiente` |
-| `TS-005` | 0 | QA | Test de humo de instrumentación | `P2` | medio | `M` | `Pendiente` |
-| `TS-006` | 1 | Empleador | Enlazar CV con tracking | `P1` | alto | `S` | `Pendiente` |
-| `TS-007` | 1 | Empleador | Bloque "Trayectoria" en About | `P2` | alto | `M` | `Pendiente` |
-| `TS-008` | 1 | Empleador | Reforzar GitHub/LinkedIn trackeados | `P3` | bajo | `S` | `Pendiente` |
-| `TS-009` | 2 | Contenido | Mapear solapamientos de prueba | `P1` | medio | `S` | `Pendiente` |
-| `TS-010` | 2 | Contenido | Rol único por sección | `P1` | alto | `M` | `Pendiente` |
-| `TS-011` | 2 | IA | Revisar densidad/orden de home | `P2` | medio | `M` | `Pendiente` |
-| `TS-012` | 3 | Prueba | Caso de estudio #1 (Ébano) | `P1` | alto | `M` | `Pendiente` |
-| `TS-013` | 3 | Prueba | Casos #2 y #3 | `P2` | medio | `M` | `Pendiente` |
-| `TS-014` | 3 | Conversión | Conectar casos al funnel | `P2` | medio | `S` | `Pendiente` |
-| `TS-015` | 4 | Ecosistema | Back-links con UTM desde productos | `P2` | medio | `M` | `Pendiente` |
-| `TS-016` | 4 | SEO | Validar JSON-LD de servicios | `P2` | medio | `S` | `Pendiente` |
-| `TS-017` | 4 | GEO | Revisar llms.txt / OG | `P3` | bajo | `S` | `Pendiente` |
+| `TS-002` | 0 | SEO | Conectar Search Console + sitemap | `P1` | alto | `S` | `Bloqueado` (manual; runbook en plan 037) |
+| `TS-003` | 0 | Medición | Instrumentar CTAs comerciales faltantes | `P1` | alto | `M` | `Parcial` — Sprint 0 canónico; residual de cards/chips en plan 038 |
+| `TS-004` | 0 | Medición | Instrumentar enlaces salientes de evidencia | `P2` | medio | `M` | `Hecho (parcial)` — `portfolio_click`/`proof_click` canónicos |
+| `TS-005` | 0 | QA | Test de humo de instrumentación | `P2` | medio | `M` | `Hecho` — `tests/analytics-service-funnel.mjs` + grupo S0 |
+| `TS-006` | 1 | Empleador | Enlazar CV con tracking | `P1` | alto | `S` | `Hecho` (Plan 017 + 039) — CV EN/ES reales por locale |
+| `TS-007` | 1 | Empleador | Bloque "Trayectoria" en About | `P2` | alto | `M` | `Pendiente` — diferido; hechos en el CV (plan 039), requiere decisión |
+| `TS-008` | 1 | Empleador | Reforzar GitHub/LinkedIn trackeados | `P3` | bajo | `S` | `Pendiente` — sin plan activo; GitHub/LinkedIn en Footer |
+| `TS-009` | 2 | Contenido | Mapear solapamientos de prueba | `P1` | medio | `S` | `Hecho` (`79b5347`) |
+| `TS-010` | 2 | Contenido | Rol único por sección | `P1` | alto | `M` | `Hecho (parcial)` (`79b5347`) — residual en plan 040 |
+| `TS-011` | 2 | IA | Revisar densidad/orden de home | `P2` | medio | `M` | `Hecho` (`79b5347`) |
+| `TS-012` | 3 | Prueba | Caso de estudio #1 (Ébano) | `P1` | alto | `M` | `Parcial` — rol/fecha/CTA (Plan 029) |
+| `TS-013` | 3 | Prueba | Casos #2 y #3 | `P2` | medio | `M` | `Parcial` — modelo de evidencia (Plan 029) |
+| `TS-014` | 3 | Conversión | Conectar casos al funnel | `P2` | medio | `S` | `Hecho` — CTA por caso al servicio (Plan 029) |
+| `TS-015` | 4 | Ecosistema | Back-links con UTM desde productos | `P2` | medio | `M` | `Pendiente` — recon/plantilla hechos (Plan 019) |
+| `TS-016` | 4 | SEO | Validar JSON-LD de servicios | `P2` | medio | `S` | `Parcial` — builders/paridad (Plan 033); Rich Results externo |
+| `TS-017` | 4 | GEO | Revisar llms.txt / OG | `P3` | bajo | `S` | `Hecho` (Plan 034) |
 | `TS-018` | 5 | Datos | Análisis de funnel | `P1` | alto | `M` | `Bloqueado` |
 | `TS-019` | 5 | SEO | Decidir página resumen de servicios | `P2` | medio | `M` | `Bloqueado` |
 | `TS-020` | 5 | Pricing | Revisar premium EN | `P2` | medio | `S` | `Bloqueado` |
@@ -342,6 +368,7 @@ Una tarea está hecha solo si:
 | `2026-06-30` | NO hub de productos | Los productos no comparten narrativa de usuario; mejor como evidencia |
 | `2026-06-30` | NO blog/newsletter ni subdominios | Deuda de mantenimiento para una persona, sin estrategia editorial |
 | `2026-06-30` | Medir antes de optimizar precios/estructura | El tracking actual es no-op; decidir sin datos es adivinar |
+| `2026-09-23` | La capa canónica Sprint 0 (`docs/analytics-sprint-0.md`) supersede el catálogo de eventos §4 | El catálogo §4 quedó obsoleto con la migración a service/lead |
 
 ### Decisiones abiertas (resolver con datos en Fase 5)
 
@@ -396,6 +423,7 @@ Una tarea está hecha solo si:
 | `2026-06-30` | `Fase 0` | — (plan creado) | `n/a` | `n/a` | `0` | `ninguno` | `Iniciar TS-001` |
 | `2026-06-30` | `Fase 0` | `TS-001` | `Pass` | `n/a (sin cambio visual)` | `0` (script conectado, panel no verificado — falta cuenta Plausible + CSP Cloudflare) | `cuenta Plausible y aprobación de regla CSP en Cloudflare están fuera del repo, requieren acción del usuario` | Crear/verificar tooltician.com en plausible.io y aplicar la CSP actualizada en Cloudflare; luego confirmar `cta_book_call` en el panel y seguir con TS-002 |
 | `2026-06-30` | `Fase 0` | `TS-002` | `n/a (sin cambio de código)` | `n/a` | `0` | `verificación DNS TXT en Cloudflare y envío del sitemap en Search Console son 100% manuales, fuera del repo` | Agregar el TXT de Search Console al DNS de tooltician.com, verificar, y enviar `https://tooltician.com/sitemap-index.xml`; luego seguir con TS-003 |
+| `2026-09-23` | `Reconciliación` | `— (docs)` | `Pass` | `n/a` | Sprint 0 cerrado; 035 y 039 aterrizados | `ninguno` | `Ejecutar planes 036–038 y 040` |
 | `YYYY-MM-DD` | `Fase X` | `TS-00x` | `Pass/Fail` | `OK/Issue` | `lista` | `nota` | `un solo siguiente paso` |
 
 ---

@@ -7,7 +7,7 @@
 > `plans/README.md` — unless a reviewer dispatched you and told you they
 > maintain the index.
 >
-> **Drift check (run first)**: `git diff --stat 1508fa2..HEAD -- src/components/ServicesSection.astro src/components/ArticleCta.astro src/pages/es/guias tests/run.js docs/analytics-sprint-0.md`
+> **Drift check (run first)**: `git diff --stat 26d8529..HEAD -- src/components/ServicesSection.astro src/components/ArticleCta.astro src/pages/es/guias tests/run.js docs/analytics-sprint-0.md`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition.
@@ -19,7 +19,7 @@
 - **Risk**: MED (analytics semantics; no user-visible change)
 - **Depends on**: none
 - **Category**: direction (measurement coverage)
-- **Planned at**: commit `1508fa2`, 2026-09-23
+- **Planned at**: commit `26d8529`, 2026-09-23 (reconciled after plan 039; the only in-scope drift is `tests/run.js`, which gained the `EM` group at lines 1317–1331 — Step 5 accounts for it)
 
 ## Why this matters
 
@@ -199,9 +199,9 @@ In the same file:
 3. Example badges (lines 128 and 137): add `data-portfolio-click` to both
    anchors (they are external links, which is required for the event to fire).
 4. Price chips (line 158): add `data-service-id={s.serviceId}` and
-   `data-service-engage` to the `shape-chip` anchor. Because Astro renders
-   `undefined` attributes as absent, chips without `serviceId` stay generic —
-   that is intended.
+   `data-service-engage={s.serviceId ? '' : undefined}` to the `shape-chip`
+   anchor. Because Astro renders `undefined` attributes as absent, chips
+   without `serviceId` stay generic — that is intended.
 5. Diagnostic-call chip: add `data-book-call` and
    `data-track-loc="services_shapes"` to the same `shape-chip` anchor
    conditionally — since all chips share one markup block, gate it on the
@@ -210,6 +210,12 @@ In the same file:
    `data-book-call={s.bookCall ? '' : undefined}` and
    `data-track-loc={s.bookCall ? 'services_shapes' : undefined}`. This fixes
    an untracked Calendly CTA that exists today.
+   **The engage gate in item 4 is load-bearing**: the click handler checks
+   `data-service-engage` first and returns (product-analytics.js:334-337); an
+   ungated engage attribute on the service-less Diagnostic chip would swallow
+   the click and no-op (`missing_params`), so `book_call` would never fire.
+   With the gate, the Diagnostic chip falls through to the `data-book-call`
+   branch and emits `book_call { cta_location: 'services_shapes' }`.
 
 **Verify**: `grep -c "data-service-engage" src/components/ServicesSection.astro` → 2;
 `grep -c "data-portfolio-click" src/components/ServicesSection.astro` → 2;
@@ -225,11 +231,14 @@ In `src/components/ArticleCta.astro`:
    the top CTA anchor (line 42).
 3. Bottom variant (lines 46–60): add `data-service-id={serviceId}` to the
    wrapper `<div class="card-glass article-cta reveal">` (line 48),
-   `data-service-engage` to the bottom CTA anchor (line 54), and
-   `data-service-engage` to the alt service link (line 57).
+   `data-service-engage` to the bottom CTA anchor (line 54), and both
+   `data-service-id={serviceId}` and `data-service-engage` to the alt service
+   link (line 57). The alt link lives in `<p class="article-alt">`, a sibling
+   of the scoped `<div>`, so it needs its own scope (Element.closest includes
+   the element itself).
 
 **Verify**: `grep -c "data-service-engage" src/components/ArticleCta.astro` → 3;
-`grep -c "data-service-id" src/components/ArticleCta.astro` → 2.
+`grep -c "data-service-id" src/components/ArticleCta.astro` → 3.
 
 ### Step 4: Pass the id from the three guides
 
@@ -247,8 +256,10 @@ file reports `2`.
 
 ### Step 5: Extend the test wiring
 
-In `tests/run.js`, add a new group directly after the existing S0 group
-(ends at line 1305), following the same `read()`/`assert()` style:
+In `tests/run.js`, add a new group **immediately after the `EM` group**
+(added by plan 039; it spans lines 1317–1331 and ends just before the
+`// ─── Summary` comment at line 1332), following the same `read()`/`assert()`
+style:
 
 ```js
 group('S0b · Home service cards and guide CTAs carry canonical service context', () => {
@@ -261,9 +272,10 @@ group('S0b · Home service cards and guide CTAs carry canonical service context'
   assert('card CTAs + chips engage the service', (servicesSection.match(/data-service-engage/g) || []).length === 2, 'engage stamps');
   assert('example badges count as outbound portfolio clicks', (servicesSection.match(/data-portfolio-click/g) || []).length === 2, 'badge stamps');
   assert('calendly chip books a call', servicesSection.includes('data-book-call={s.bookCall'), 'chip book-call missing');
+  assert('service-less chip is not swallowed by the engage branch', servicesSection.includes("data-service-engage={s.serviceId ? '' : undefined}"), 'chip engage gate missing');
 
   const articleCta = read('src/components/ArticleCta.astro') || '';
-  assert('ArticleCta carries a service scope', articleCta.includes('serviceId?: string') && articleCta.includes('data-service-id={serviceId}'), 'ArticleCta scope missing');
+  assert('ArticleCta carries a service scope on section, card, and alt link', articleCta.includes('serviceId?: string') && (articleCta.match(/data-service-id=\{serviceId\}/g) || []).length === 3, 'ArticleCta scope missing');
   assert('ArticleCta anchors engage the service', (articleCta.match(/data-service-engage/g) || []).length === 3, 'ArticleCta engage stamps');
 
   for (const rel of [
@@ -277,8 +289,9 @@ group('S0b · Home service cards and guide CTAs carry canonical service context'
 });
 ```
 
-Then in the `if (BUILT)` block (starts line 787), after the existing home
-checks, add:
+Then in the `if (BUILT)` block (starts line 787), after the two `[built]`
+résumé assertions plan 039 added (they follow the cookies assertions near
+line 906), add:
 
 ```js
 assert(
@@ -354,7 +367,7 @@ Machine-checkable. ALL must hold:
 - [ ] `node test-behavioral.mjs` exits 0
 - [ ] `grep -c "data-service-engage" src/components/ServicesSection.astro src/components/ArticleCta.astro` reports 2 and 3
 - [ ] No new canonical event name appears in `public/assets/js/product-analytics.js` (`git diff --name-only` must not list it)
-- [ ] `git diff --name-only 1508fa2...HEAD` lists only the seven in-scope files
+- [ ] `git diff --name-only 26d8529...HEAD` lists only the seven in-scope files
 - [ ] `plans/README.md` status row updated
 
 ## STOP conditions

@@ -244,32 +244,32 @@ no `TODO` rows; plans 024–033 archived.
 
 Progress (audit series): 11/11 DONE.
 
-## Direction series — "next" audit (035–040)
+## Direction series — "next" audit (035–040, closed)
 
 Planned 2026-09-23 against `1508fa2`. Source: direction-only audit. Status
-authority is `plans/README.md`; plan files live in `plans/` and are archived
-under `plans/archive/` only once DONE.
+authority is `plans/README.md`; **all six plans are DONE and archived under
+`plans/archive/`**.
 
-| Plan | Entry point | Branch | Note |
-|------|-------------|--------|------|
-| 035 — Live-host production verification | `plans/035-production-verification.md` | `advisor/035-production-check` | New script + separate scheduled workflow; never gates deploy |
-| 036 — Docs re-baseline | `plans/036-rebaseline-strategy-docs.md` | `advisor/036-rebaseline-docs` | Docs only; run first |
-| 037 — Content measurement loop | `plans/037-content-measurement-loop.md` | `advisor/037-content-measurement` | Operator runbook; day-60 checkpoint `2026-11-15` |
-| 038 — Analytics coverage | `plans/038-analytics-coverage.md` | `advisor/038-analytics-coverage` | No new events/dimensions |
-| 039 — Real EN/ES résumés | `plans/039-employer-route-placeholder.md` | `advisor/039-employer-route` | Replaces placeholder with the real EN PDF; adds ES PDF; locale-aware links; P1 |
-| 040 — Home proof dedup | `plans/040-home-proof-dedup.md` | `advisor/040-home-proof-dedup` | Hero copy + `D6` test only |
+| Plan | Entry point | Landed as | Note |
+|------|-------------|-----------|------|
+| 035 — Live-host production verification | `plans/archive/035-production-verification.md` | `30e93e3` | New script + separate scheduled workflow; never gates deploy |
+| 036 — Docs re-baseline | `plans/archive/036-rebaseline-strategy-docs.md` | `408cfd1` | Docs only; ran first |
+| 037 — Content measurement loop | `plans/archive/037-content-measurement-loop.md` | `d673512` | Operator runbook; day-60 checkpoint `2026-11-15` |
+| 038 — Analytics coverage | `plans/archive/038-analytics-coverage.md` | `c51eabd` | No new events/dimensions |
+| 039 — Real EN/ES résumés | `plans/archive/039-employer-route-placeholder.md` | `fae35af` | Replaced placeholder with real EN PDF; added ES PDF; locale-aware links |
+| 040 — Home proof dedup | `plans/archive/040-home-proof-dedup.md` | `3ee99dd` | Hero copy + `D6b` test only |
 
-Goto:
+Goto (post-close verification):
 
 ```
 node tests/run.js && npm run check
 npm run build && node tests/run.js --built && node test-behavioral.mjs
-npm run check:prod        # after 035 lands
+npm run check:prod
 ```
 
-Exit gate: all six DONE; weekly production check green; strategy/refresh docs
-reconciled; content-review runbook scheduled; home cards and guide CTAs
-stamped; real EN/ES résumés wired per locale; `D6` green.
+Exit gate: met 2026-09-23 — 6/6 DONE; weekly production check green; strategy/
+refresh docs reconciled; content-review runbook scheduled; home cards and
+guide CTAs stamped; real EN/ES résumés wired per locale; `D6b` green.
 
 ## Backlog (accepted, not yet planned)
 

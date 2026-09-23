@@ -91,7 +91,7 @@ Waves: 0 = 024 (done); 1 = 025, 026, 028 (done); 2 = 027, 029, 031
 2026-09-23 — 11/11.** Full wave view, goto commands, and exit gates in
 `plans/ROADMAP.md`.
 
-## Direction series — "next" audit (planned 2026-09-23, against `1508fa2`)
+## Direction series — "next" audit (closed 2026-09-23, against `1508fa2`)
 
 Source: direction-only audit (`improve next`) — recon + direction category,
 grounded in the strategy execution plan, the refresh backlog, the ES keyword
@@ -102,14 +102,17 @@ finding: production was serving a **placeholder résumé PDF**
 2026-09-23 (verified: 2 pages each, `carlos@tooltician.com`, no placeholder
 text) and plan 039 wires them per locale.
 
+**Progress (direction series): 6/6 DONE — all six plans landed and are
+archived under `plans/archive/` (see the table's "landed as" commits).**
+
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 035 | Live-host production verification (script + scheduled workflow) | P1 | M | — | DONE (branch `advisor/035-production-check` @ `30e93e3`, pending operator merge; reviewer-verified 2026-09-23: live check PASS — 29/29 URLs, headers, CSP hash, fixed paths; negative control exit 1; YAML OK; 209/209 src) |
-| 036 | Re-baseline strategy/refresh/audit-map docs to shipped state | P1 | S | — | DONE (branch `advisor/036-rebaseline-docs` @ `408cfd1`, pending operator merge; reviewer-verified 2026-09-23: 3 reconciliation headings present, 17 §7 + 7 §5 + 8 §6 status cells replaced, zero code diff, scope exactly 3 docs) |
-| 037 | Content measurement loop (Search Console runbook + day-60 pilot review) | P1 | S | 036 (done) | DONE (branch `advisor/037-content-measurement` @ `d673512`, pending operator merge; reviewer-verified 2026-09-23: runbook 7 sections + 3 guide URLs + `2026-11-15` checkpoint, checklist item 7 + dated row, keyword pointer, zero code diff) |
-| 038 | Analytics coverage: home service cards + guide CTAs | P2 | M | — | DONE (branch `advisor/038-analytics-coverage` @ `c51eabd`, pending operator merge; reviewer-verified 2026-09-23 after one REVISE round — chip engage gated so the Calendly chip emits `book_call`, guide alt link self-scoped; built output confirms; 220/220 src, 249/249 built, 77/77 analytics, behavioral PASS; `product-analytics.js` untouched) |
+| 035 | Live-host production verification (script + scheduled workflow) | P1 | M | — | DONE (landed as `30e93e3`; reviewer-verified 2026-09-23: live check PASS — 29/29 URLs, headers, CSP hash, fixed paths; negative control exit 1; YAML OK; 209/209 src) |
+| 036 | Re-baseline strategy/refresh/audit-map docs to shipped state | P1 | S | — | DONE (landed as `408cfd1`; reviewer-verified 2026-09-23: 3 reconciliation headings present, 17 §7 + 7 §5 + 8 §6 status cells replaced, zero code diff, scope exactly 3 docs) |
+| 037 | Content measurement loop (Search Console runbook + day-60 pilot review) | P1 | S | 036 (done) | DONE (landed as `d673512`; reviewer-verified 2026-09-23: runbook 7 sections + 3 guide URLs + `2026-11-15` checkpoint, checklist item 7 + dated row, keyword pointer, zero code diff) |
+| 038 | Analytics coverage: home service cards + guide CTAs | P2 | M | — | DONE (landed as `c51eabd`; reviewer-verified 2026-09-23 after one REVISE round — chip engage gated so the Calendly chip emits `book_call`, guide alt link self-scoped; built output confirms; 220/220 src, 249/249 built, 77/77 analytics, behavioral PASS; `product-analytics.js` untouched) |
 | 039 | Wire real EN/ES résumés per locale (retire placeholder) | P1 | M | — | DONE (landed as `fae35af`; reviewer-verified 2026-09-23: committed blob hashes == sources, 0 placeholder text, EN page→EN only / ES page→ES only in `dist/`, 209/209 src, 236/236 built, behavioral PASS, links 0/0/0) |
-| 040 | Home proof dedup (Ébano hero/band) | P3 | S | 036 (done) | DONE (branch `advisor/040-home-proof-dedup` @ `3ee99dd`, pending operator merge; reviewer-verified 2026-09-23: hero Ébano count 4, `100+ SKUs` 0 in hero, band stats intact, `D6b` green, 223/223 src + 252/252 built, behavioral PASS, both locales' new detail strings in `dist/`) |
+| 040 | Home proof dedup (Ébano hero/band) | P3 | S | 036 (done) | DONE (landed as `3ee99dd`; reviewer-verified 2026-09-23: hero Ébano count 4, `100+ SKUs` 0 in hero, band stats intact, `D6b` green, 223/223 src + 252/252 built, behavioral PASS, both locales' new detail strings in `dist/`) |
 
 Direction findings deferred or rejected this run (do not re-audit without new
 evidence):

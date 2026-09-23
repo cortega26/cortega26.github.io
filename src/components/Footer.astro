@@ -35,6 +35,10 @@ const copy = {
   },
 };
 const c = copy[lang];
+const cvHref =
+  lang === 'en'
+    ? '/assets/docs/carlos-ortega-resume.pdf'
+    : '/assets/docs/carlos-ortega-resume-es.pdf';
 const switchHref = langHref ?? c.langHref;
 const policyPrefix = lang === 'en' ? '/en' : '/es';
 const legalLinks = [
@@ -77,7 +81,7 @@ const legalLinks = [
           <a href={switchHref} hreflang={lang === 'en' ? 'es' : 'en'} data-language-preference={lang === 'en' ? 'es' : 'en'}>{c.lang}</a>
           {lang === 'es' && <a href="/es/guias/">Guías</a>}
           <a href="/llms.txt">{c.llms}</a>
-          <a href="/assets/docs/carlos-ortega-resume.pdf" target="_blank" rel="noopener noreferrer" data-track="cta_download_cv" data-track-loc="footer" data-cv-download>{c.cv}</a>
+          <a href={cvHref} target="_blank" rel="noopener noreferrer" data-track="cta_download_cv" data-track-loc="footer" data-cv-download>{c.cv}</a>
         </div>
         <div class="footer__legal-links">
           {legalLinks.map((link) => (

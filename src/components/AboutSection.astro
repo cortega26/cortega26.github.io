@@ -31,6 +31,10 @@ const es = {
 };
 
 const c = lang === 'en' ? en : es;
+const cvHref =
+  lang === 'en'
+    ? '/assets/docs/carlos-ortega-resume.pdf'
+    : '/assets/docs/carlos-ortega-resume-es.pdf';
 ---
 <section class="section section--alt" id="about">
   <div class="container">
@@ -53,7 +57,7 @@ const c = lang === 'en' ? en : es;
       ))}
     </div>
     <div class="about-cta reveal">
-      <a class="btn btn-ghost" href="/assets/docs/carlos-ortega-resume.pdf" target="_blank" rel="noopener noreferrer" data-track="cta_download_cv" data-track-loc="about" data-cv-download>{c.cvLabel}</a>
+      <a class="btn btn-ghost" href={cvHref} target="_blank" rel="noopener noreferrer" data-track="cta_download_cv" data-track-loc="about" data-cv-download>{c.cvLabel}</a>
     </div>
   </div>
 </section>

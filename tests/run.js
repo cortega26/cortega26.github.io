@@ -906,6 +906,16 @@ if (BUILT) {
     distCookiesES.includes('almacenamiento local') && distCookiesES.includes('Calendly'),
     'Built ES cookies page is missing expected browser-storage disclosures'
   );
+  assert(
+    '[built] EN page links the EN résumé and not the ES one',
+    distEN.includes('/assets/docs/carlos-ortega-resume.pdf') && !distEN.includes('carlos-ortega-resume-es.pdf'),
+    'EN locale CV href wrong'
+  );
+  assert(
+    '[built] ES page links the ES résumé',
+    distES.includes('/assets/docs/carlos-ortega-resume-es.pdf'),
+    'ES locale CV href wrong'
+  );
 }
 
 group('H-04 · Staged pricing labels on home, services, and HTW', () => {
@@ -1302,6 +1312,21 @@ group('S0 · Service registry, transport, and declarative wiring', () => {
   assert('HTW pages stamp htw scope', htwEN.includes('data-service-id="htw"') && htwES.includes('data-service-id="htw"'), 'HTW scope missing');
   const gateway = read('src/pages/index.astro') || '';
   assert('gateway loads analytics + tracks language choice', gateway.includes('/assets/js/product-analytics.js') && gateway.includes('data-language-select'), 'Gateway wiring missing');
+});
+
+group('EM · Résumés wired per locale', () => {
+  const about = read('src/components/AboutSection.astro') || '';
+  const footer = read('src/components/Footer.astro') || '';
+  assert(
+    'About resolves the CV per locale',
+    about.includes('carlos-ortega-resume.pdf') && about.includes('carlos-ortega-resume-es.pdf') && about.includes('lang === \'en\''),
+    'About CV href not locale-aware'
+  );
+  assert(
+    'Footer resolves the CV per locale',
+    footer.includes('carlos-ortega-resume.pdf') && footer.includes('carlos-ortega-resume-es.pdf') && footer.includes('lang === \'en\''),
+    'Footer CV href not locale-aware'
+  );
 });
 
 // ─── Summary ──────────────────────────────────────────────────────────────

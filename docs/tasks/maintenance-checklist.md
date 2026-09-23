@@ -25,6 +25,9 @@ For each month/year/count claim found, confirm it is still true or reword it
 to be evergreen. Lesson: plans `013`/`018` decay-proofing — never leave a
 stale date, count, or percentage in copy.
 
+Also check the résumé PDFs — they carry dated numbers:
+`pdftotext public/assets/docs/carlos-ortega-resume.pdf - | grep -Ei "as of|[0-9]{4}"` (and the same for `carlos-ortega-resume-es.pdf`). If a claim is stale, refresh per `docs/tasks/resume-refresh-runbook.md`.
+
 ## 2. A+ security posture
 
 Where: live site vs `docs/cloudflare-security-headers.md`.

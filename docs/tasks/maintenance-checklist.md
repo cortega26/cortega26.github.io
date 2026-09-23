@@ -33,15 +33,17 @@ Also check the résumé PDFs — they carry dated numbers:
 Where: live site vs `docs/cloudflare-security-headers.md`.
 How:
 
-1. Re-run `SecurityHeaders.com` and Mozilla Observatory against the
+1. Run `npm run check:prod` (also runs weekly in CI). If it reports FAIL,
+   treat it as a header/CSP regression and diff live headers next.
+2. Re-run `SecurityHeaders.com` and Mozilla Observatory against the
    production host.
-2. On any grade drop, diff live headers vs the doc first:
+3. On any grade drop, diff live headers vs the doc first:
 
 ```sh
 curl -sSI https://tooltician.com | head -n 30
 ```
 
-3. Fix the Cloudflare rule first (`Rules` → `Transform Rules` →
+4. Fix the Cloudflare rule first (`Rules` → `Transform Rules` →
    `Modify Response Header`), then re-scan until A+ is restored.
 
 ## 3. OG card

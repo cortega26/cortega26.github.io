@@ -1,0 +1,19 @@
+name: Production verification
+on:
+  workflow_dispatch:
+  schedule:
+    # Mondays 06:30 UTC — after the daily 06:00 rebuild has had time to deploy.
+    - cron: '30 6 * * 1'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@900f2210b1d28bbbd0bd22d17926b9e224e8f231 # v6
+      - uses: actions/setup-node@ad1b57eb8159e2fd3cc753317dd4a4016287218f # v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/check-production.mjs

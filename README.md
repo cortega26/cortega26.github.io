@@ -66,6 +66,9 @@ npm run preview  # serve the production build locally
 - `npm run check` — Astro typecheck
 - `npm run test:htw` — HTW snapshot test
 - `npm run test:links` — link & SEO audit (informational, hits the network)
+- `npm run check:prod` — live-host verification (HTTP codes, hreflang,
+  security headers, CSP stub) against `https://tooltician.com`; also runs
+  weekly via the `Production verification` workflow.
 
 CI (`master` → GitHub Pages) runs four blocking gates — Source tests → Build → Built tests → HTW snapshot — plus a non-blocking Link & SEO audit whose report is uploaded as an artifact.
 

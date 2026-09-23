@@ -1,6 +1,11 @@
+/**
+ * Root landing behavior (Plan 031): the root is a real bilingual x-default
+ * landing, so only returning visitors who already chose a language are
+ * forwarded. First-time visitors stay on the landing and choose explicitly —
+ * the old browser-language auto-redirect is gone by design.
+ */
 (() => {
   const preferenceKey = 'tooltician-language';
-  const firstVisitKey = 'tooltician-language-autoredirect';
 
   const normalizeLanguage = (value) => {
     if (typeof value !== 'string') return null;
@@ -13,21 +18,10 @@
 
   try {
     const storedPreference = normalizeLanguage(window.localStorage.getItem(preferenceKey));
-    const autoRedirected = window.localStorage.getItem(firstVisitKey) === '1';
-    const browserPreference = [...(navigator.languages ?? []), navigator.language ?? '']
-      .map(normalizeLanguage)
-      .find(Boolean) ?? 'en';
-    const target = storedPreference ?? (autoRedirected ? null : browserPreference);
-
-    if (!storedPreference && !autoRedirected) {
-      window.localStorage.setItem(firstVisitKey, '1');
-    }
-
-    if (target) {
-      window.location.replace(`/${target}/`);
+    if (storedPreference) {
+      window.location.replace(`/${storedPreference}/`);
     }
   } catch {
-    // Fall back to showing the language gateway.
+    // Storage blocked — keep the landing usable.
   }
 })();
-

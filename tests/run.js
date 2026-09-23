@@ -43,6 +43,7 @@ function group(label, fn) {
 
 const hero       = () => read('src/components/HeroSection.astro') || '';
 const portfolio  = () => read('src/components/PortfolioSection.astro') || '';
+const caseStudies = () => read('src/data/caseStudies.ts') || '';
 const services   = () => read('src/components/ServicesSection.astro') || '';
 const about      = () => read('src/components/AboutSection.astro') || '';
 const proof      = () => read('src/components/ProofSection.astro') || '';
@@ -303,7 +304,7 @@ group('D3 · PDF Text Analyzer removed', () => {
 });
 
 group('D4 · Portfolio project order', () => {
-  const src = portfolio();
+  const src = caseStudies();
   const positions = {
     ebano: src.indexOf("id: 'ebano'"),
     portfolioManager: src.indexOf("id: 'portfolio-manager-unified'"),
@@ -354,7 +355,7 @@ group('D4 · Portfolio project order', () => {
 });
 
 group('D5 · Noticiencias 580M+ removed', () => {
-  const src = portfolio();
+  const src = caseStudies();
   assert(
     'No 580M in PortfolioSection',
     !src.includes('580M'),
@@ -363,7 +364,7 @@ group('D5 · Noticiencias 580M+ removed', () => {
 });
 
 group('D6 · Ébano description rewritten', () => {
-  const src = portfolio();
+  const src = caseStudies();
   assert(
     'Ébano desc contains "This is not a demo"',
     src.includes('This is not a demo') || src.includes('Esto no es una demo'),
@@ -372,7 +373,7 @@ group('D6 · Ébano description rewritten', () => {
 });
 
 group('D7 · Conciliador description rewritten', () => {
-  const src = portfolio();
+  const src = caseStudies();
   assert(
     'Conciliador desc contains "silently"',
     src.includes('silently') || src.includes('silenciosamente'),
@@ -381,7 +382,7 @@ group('D7 · Conciliador description rewritten', () => {
 });
 
 group('D8 · Monedario description rewritten', () => {
-  const src = portfolio();
+  const src = caseStudies();
   assert(
     'Monedario desc contains "without advertising"',
     src.includes('without advertising') || src.includes('sin publicidad'),
@@ -409,10 +410,11 @@ group('D10 · Portfolio title updated', () => {
 
 group('TT-004 · Portfolio filtering removes cards from layout', () => {
   const src = portfolio();
+  const dataSrc = caseStudies();
   const filterJs = portfolioFiltersJs();
   assert(
     'Projects define explicit filter categories',
-    src.includes('filters: [') && src.includes('data-categories={proj.filters.join'),
+    dataSrc.includes('filters: [') && src.includes('data-categories={proj.filters.join'),
     'Expected per-project filter categories in PortfolioSection'
   );
   assert(
@@ -429,9 +431,10 @@ group('TT-004 · Portfolio filtering removes cards from layout', () => {
 
 group('TT-015 · Portfolio cards are structured for scanability', () => {
   const src = portfolio();
+  const dataSrc = caseStudies();
   assert(
     'Project data includes problem / solution / proof fields',
-    src.includes('problem:') && src.includes('solution:') && src.includes('proof:'),
+    dataSrc.includes('problem:') && dataSrc.includes('solution:') && dataSrc.includes('proof:'),
     'Expected problem/solution/proof fields in project data'
   );
   assert(
@@ -441,15 +444,16 @@ group('TT-015 · Portfolio cards are structured for scanability', () => {
   );
   assert(
     'Bilingual point labels exist',
-    src.includes("problem: 'Why it mattered'") && src.includes("solution: 'Built'") && src.includes("proof: 'Verified result'") &&
-    src.includes("problem: 'Por qué importó'") && src.includes("solution: 'Construido'") && src.includes("proof: 'Resultado verificable'"),
+    dataSrc.includes("problem: 'Why it mattered'") && dataSrc.includes("solution: 'Built'") && dataSrc.includes("proof: 'Verified result'") &&
+    dataSrc.includes("problem: 'Por qué importó'") && dataSrc.includes("solution: 'Construido'") && dataSrc.includes("proof: 'Resultado verificable'"),
     'Expected EN and ES labels for the portfolio scan sections'
   );
 });
 
 group('TT-016 · Anchor projects are visually prioritized', () => {
   const src = portfolio();
-  const featuredCount = (src.match(/featured:\s*true/g) || []).length;
+  const dataSrc = caseStudies();
+  const featuredCount = (dataSrc.match(/featured:\s*true/g) || []).length;
   assert(
     'At least two projects are marked featured',
     featuredCount >= 2,
@@ -463,7 +467,7 @@ group('TT-016 · Anchor projects are visually prioritized', () => {
 });
 
 group('TT-009 · Small external links read as actions', () => {
-  const portfolioSrc = portfolio();
+  const portfolioSrc = caseStudies();
   const proofSrc = proof();
   assert(
     'Portfolio uses explicit action labels',
@@ -573,7 +577,7 @@ group('H1 · Proof section retains core proof layout', () => {
 });
 
 group('H2 · Portfolio Manager and LinkedIn extension are included in public work surfaces', () => {
-  const portfolioSrc = portfolio();
+  const portfolioSrc = caseStudies();
   const proofSrc = proof();
 
   assert(
@@ -631,9 +635,9 @@ group('I2 · Title tag format updated', () => {
     'EN title should include Tooltician brand'
   );
   assert(
-    'EN title uses em dash separator',
-    en.includes('—'),
-    'EN title should use em dash (—)'
+    'EN title keeps a brand separator',
+    /title="[^"]*[|—][^"]*Tooltician"/.test(en),
+    'EN title should keep the Tooltician brand after a separator'
   );
   assert(
     'ES title contains "Tooltician"',
@@ -657,12 +661,22 @@ group('I3 · Meta description updated', () => {
   );
 });
 
-group('I4 · Root redirect page improved', () => {
+group('I4 · Root is a bilingual x-default landing', () => {
   const src = indexAstro();
   assert(
-    'src/pages/index.astro has meta http-equiv refresh',
-    src.includes('http-equiv') && src.includes('refresh'),
-    'Missing meta refresh in root redirect page'
+    'src/pages/index.astro has no meta refresh',
+    !/http-equiv=["']?refresh/.test(src),
+    'Root landing must not meta-refresh'
+  );
+  assert(
+    'src/pages/index.astro is a real landing',
+    src.includes('<h1') && src.includes('data-language-select') && src.includes('/en/#contact') && src.includes('/es/#contact'),
+    'Root landing is missing its H1, language cards, or locale CTAs'
+  );
+  assert(
+    'src/pages/index.astro consumes the shared route registry',
+    src.includes("alternatesFor('home')"),
+    'Root must consume alternatesFor(home) instead of hardcoded alternates'
   );
 });
 
@@ -692,9 +706,9 @@ group('I7 · BaseLayout includes Open Graph image metadata', () => {
 group('I8 · JSON-LD extended with structured data', () => {
   const en = pageEN();
   assert(
-    'EN JSON-LD contains itemListElement or makesOffer',
-    en.includes('itemListElement') || en.includes('makesOffer') || en.includes('SoftwareApplication'),
-    'JSON-LD not extended with project or service structured data'
+    'EN page consumes the shared JSON-LD builders',
+    en.includes('buildPortfolioItemList') && en.includes('buildProfessionalService'),
+    'EN page should build its structured data through src/data/jsonld.ts'
   );
 });
 
@@ -893,6 +907,349 @@ if (BUILT) {
     'Built ES cookies page is missing expected browser-storage disclosures'
   );
 }
+
+group('H-04 · Staged pricing labels on home, services, and HTW', () => {
+  const esHome = read('dist/es/index.html');
+  const enHome = read('dist/en/index.html');
+  if (!esHome || !enHome) {
+    assert('[built] H-04 pricing checks (skipped — run --built)', true);
+    return;
+  }
+  const esService = read('dist/es/servicios/automatizacion-python/index.html') || '';
+  const enService = read('dist/en/services/python-automation/index.html') || '';
+  const esHtw = read('dist/es/servicios/higiene-tecnica-web/index.html') || '';
+  const enHtw = read('dist/en/services/web-technical-hygiene/index.html') || '';
+
+  // True when some occurrence of `amount` has `stage` within ±240 chars.
+  const pairs = (html, amount, stage) => {
+    let from = 0;
+    while (true) {
+      const idx = html.indexOf(amount, from);
+      if (idx === -1) return false;
+      const window = html.slice(Math.max(0, idx - 240), idx + 240).toLowerCase();
+      if (window.includes(stage.toLowerCase())) return true;
+      from = idx + amount.length;
+    }
+  };
+
+  assert(
+    'H-04 ES home shows staged amounts (Diagnóstico + Construcción)',
+    esHome.includes('Diagnóstico') && esHome.includes('Construcción'),
+    'ES home is missing a stage label'
+  );
+  assert(
+    'H-04 EN home shows staged amounts (Diagnostic + Build)',
+    enHome.includes('Diagnostic') && enHome.includes('Build'),
+    'EN home is missing a stage label'
+  );
+  assert('H-04 ES service pairs 3 UF with Diagnóstico', pairs(esService, '3 UF', 'Diagnóstico'));
+  assert('H-04 ES service pairs 30 UF with Construcción', pairs(esService, '30 UF', 'Construcción'));
+  assert('H-04 EN service pairs $290 with Diagnostic', pairs(enService, '$290', 'Diagnostic'));
+  assert('H-04 EN service pairs $1,500 with Build', pairs(enService, '$1,500', 'Build'));
+  assert('H-04 ES HTW pairs 1 UF with Diagnóstico', pairs(esHtw, '1 UF', 'Diagnóstico'));
+  assert('H-04 EN HTW pairs $69 with Diagnostic', pairs(enHtw, '$69', 'Diagnostic'));
+});
+
+group('H-10 · Accessible per-field errors in the intake form', () => {
+  const src = intakeForm();
+  const js = read('public/assets/js/intake-form.js') || '';
+  assert(
+    'H-10 IntakeForm ships per-field error elements and a summary',
+    src.includes('form-group__error') && src.includes('intake-form__summary') && src.includes('data-summary-template'),
+    'Missing field error elements, summary, or summary template'
+  );
+  assert(
+    'H-10 controls carry localized error messages',
+    src.includes('data-error-required=') && src.includes('data-error-type='),
+    'Expected data-error-required / data-error-type attributes on controls'
+  );
+  assert(
+    'H-10 markup no longer forces novalidate (JS owns progressive enhancement)',
+    !src.includes('novalidate'),
+    'novalidate should be set by intake-form.js at init, not hardcoded in the form'
+  );
+  assert(
+    'H-10 JS sets novalidate at init and manages aria state',
+    js.includes("setAttribute('novalidate'") && js.includes('aria-invalid') && js.includes('aria-describedby'),
+    'Expected novalidate-at-init plus aria-invalid / aria-describedby wiring'
+  );
+  assert(
+    'H-10 JS no longer relies on native reportValidity bubbles',
+    !js.includes('reportValidity('),
+    'reportValidity() should be replaced by the custom accessible layer'
+  );
+  assert(
+    'H-10 submit button keeps its localized pending label',
+    src.includes('data-sending={c.submitSending}')
+  );
+});
+
+group('H-03 · Service CTAs carry unique accessible names', () => {
+  const src = services();
+  assert(
+    'H-03 ServicesSection qualifies the CTA with the service title',
+    src.includes('visually-hidden') && src.includes('{svc.title}'),
+    'Expected a visually-hidden service name inside the CTA link'
+  );
+  assert(
+    'H-03 visually-hidden utility exists in global.css',
+    globalCss().includes('.visually-hidden'),
+    'Missing .visually-hidden utility'
+  );
+
+  const enHome = read('dist/en/index.html');
+  const esHome = read('dist/es/index.html');
+  if (!enHome || !esHome) {
+    assert('[built] H-03 accessible-name checks (skipped — run --built)', true);
+    return;
+  }
+  const accessibleNames = (html, prefix) => {
+    const names = [];
+    const re = /<a[^>]*class="[^"]*svc-inline-cta[^"]*"[^>]*>([\s\S]*?)<\/a>/g;
+    for (const match of html.matchAll(re)) {
+      const text = match[1].replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+      names.push(`${prefix}: ${text}`);
+    }
+    return names;
+  };
+  const enNames = accessibleNames(enHome, 'en');
+  const esNames = accessibleNames(esHome, 'es');
+  assert('H-03 EN home renders six service CTAs', enNames.length === 6, `Got ${enNames.length}`);
+  assert('H-03 ES home renders six service CTAs', esNames.length === 6, `Got ${esNames.length}`);
+  const unique = (list) => new Set(list).size === list.length;
+  assert('H-03 EN CTA names are unique', unique(enNames), JSON.stringify(enNames));
+  assert('H-03 ES CTA names are unique', unique(esNames), JSON.stringify(esNames));
+  assert(
+    'H-03 each CTA names its service',
+    enNames.every((name) => name.length > 'en: View service: '.length + 2) &&
+      esNames.every((name) => name.length > 'es: Ver servicio: '.length + 2),
+    JSON.stringify({ enNames, esNames })
+  );
+});
+
+group('H-12 · Guides expose a contextual CTA at the start and end', () => {
+  const guideSlugs = [
+    'auditoria-tecnica-web-negocios-pequenos',
+    'automatizar-reportes-excel-python',
+    'pagina-web-estatica-cuando-conviene',
+  ];
+  for (const slug of guideSlugs) {
+    const src = read(`src/pages/es/guias/${slug}/index.astro`) || '';
+    assert(`H-12 ${slug} imports ArticleCta`, src.includes('import ArticleCta'), 'Missing ArticleCta import');
+    assert(
+      `H-12 ${slug} renders both variants`,
+      src.includes('variant="top"') && src.includes('variant="bottom"'),
+      'Expected a top and a bottom ArticleCta'
+    );
+  }
+  const built = guideSlugs.map((slug) => read(`dist/es/guias/${slug}/index.html`));
+  if (built.every((html) => Boolean(html))) {
+    built.forEach((html, index) => {
+      const count = (html.match(/article-cta/g) || []).length;
+      assert(`H-12 built ${guideSlugs[index]} has two CTAs`, count >= 2, `Found ${count} article-cta occurrences`);
+    });
+  } else {
+    assert('[built] H-12 guide CTA checks (skipped — run --built)', true);
+  }
+});
+
+group('H-06 · Case studies carry role, verification date, and a per-case CTA', () => {
+  const src = caseStudies();
+  const count = (re) => (src.match(re) || []).length;
+  assert('H-06 every case declares a role', count(/role: '/g) >= 20, `Found ${count(/role: '/g)}`);
+  assert('H-06 every case declares a verification month', count(/verifiedAt: '/g) >= 20, `Found ${count(/verifiedAt: '/g)}`);
+  assert('H-06 every case belongs to a group', count(/group: '/g) >= 20, `Found ${count(/group: '/g)}`);
+  assert('H-06 every case links its service', count(/serviceHref: '/g) >= 20, `Found ${count(/serviceHref: '/g)}`);
+  assert('H-06 no placeholder verification dates', !/verifiedAt: '(TBD|TODO)/.test(src), 'Replace placeholders with a real month');
+
+  const enWork = read('dist/en/work/index.html');
+  const esWork = read('dist/es/trabajo/index.html');
+  if (!enWork || !esWork) {
+    assert('[built] H-06 work-page evidence checks (skipped — run --built)', true);
+    return;
+  }
+  const metaCount = (html) => (html.match(/class="project-meta"/g) || []).length;
+  const ctaCount = (html) => (html.match(/data-track-loc="work_/g) || []).length;
+  assert('H-06 EN work renders 10 role/date metas', metaCount(enWork) >= 10, `Found ${metaCount(enWork)}`);
+  assert('H-06 ES work renders 10 role/date metas', metaCount(esWork) >= 10, `Found ${metaCount(esWork)}`);
+  assert('H-06 EN work renders 10 per-case CTAs', ctaCount(enWork) >= 10, `Found ${ctaCount(enWork)}`);
+  assert('H-06 ES work renders 10 per-case CTAs', ctaCount(esWork) >= 10, `Found ${ctaCount(esWork)}`);
+  assert(
+    'H-06 EN work states the public-evidence note',
+    enWork.includes('Ten public projects, each with verifiable evidence.')
+  );
+  assert(
+    'H-06 ES work states the public-evidence note',
+    esWork.includes('Diez proyectos públicos, cada uno con evidencia verificable.')
+  );
+});
+
+group('H-05 · Root renders as a bilingual x-default landing', () => {
+  const root = read('dist/index.html');
+  if (!root) {
+    assert('[built] H-05 root landing checks (skipped — run --built)', true);
+    return;
+  }
+  const h1s = (root.match(/<h1/g) || []).length;
+  assert('H-05 root has exactly one H1', h1s === 1, `Found ${h1s}`);
+  assert('H-05 root links both locale briefs', root.includes('/en/#contact') && root.includes('/es/#contact'));
+  assert('H-05 root has no meta refresh', !/http-equiv=["']?refresh/.test(root));
+
+  const blocks = [...root.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((match) => { try { return JSON.parse(match[1]); } catch { return null; } })
+    .filter(Boolean);
+  assert('H-05 root JSON-LD parses with WebSite', blocks.some((block) => block['@type'] === 'WebSite'));
+  assert('H-05 root JSON-LD parses with Organization', blocks.some((block) => block['@type'] === 'Organization'));
+
+  const alternates = [...root.matchAll(/<link[^>]*rel="alternate"[^>]*hreflang="([^"]+)"[^>]*href="([^"]+)"/g)]
+    .map(([, lang, href]) => `${lang}=${href}`)
+    .sort();
+  const expected = [
+    'en=https://tooltician.com/en/',
+    'es=https://tooltician.com/es/',
+    'x-default=https://tooltician.com/',
+  ].sort();
+  assert(
+    'H-05 root alternates are en/es/x-default',
+    JSON.stringify(alternates) === JSON.stringify(expected),
+    JSON.stringify(alternates)
+  );
+});
+
+group('H-09 · Work pages group projects under thematic H2 headings', () => {
+  const pages = [
+    { file: 'dist/en/work/index.html', labels: ['Python & Data', 'Web & Apps', 'CLI & Tools', 'Products & Extensions'] },
+    { file: 'dist/es/trabajo/index.html', labels: ['Python y Datos', 'Web y Apps', 'CLI y Herramientas', 'Productos y Extensiones'] },
+  ];
+  const built = pages.map((page) => ({ ...page, html: read(page.file) }));
+  if (!built.every((page) => page.html)) {
+    assert('[built] H-09 heading outline checks (skipped — run --built)', true);
+    return;
+  }
+  built.forEach((page) => {
+    const html = page.html;
+    const h1 = (html.match(/<h1/g) || []).length;
+    const h2 = (html.match(/<h2/g) || []).length;
+    const h3 = (html.match(/<h3/g) || []).length;
+    const firstH1 = html.indexOf('<h1');
+    const firstH2 = html.indexOf('<h2');
+    const firstH3 = html.indexOf('<h3');
+    assert(
+      `H-09 ${page.file} has 1 H1, 4 H2, 10 H3`,
+      h1 === 1 && h2 === 4 && h3 === 10,
+      `h1=${h1} h2=${h2} h3=${h3}`
+    );
+    assert(
+      `H-09 ${page.file} order is H1 → H2 → H3`,
+      firstH1 > -1 && firstH1 < firstH2 && firstH2 < firstH3,
+      `h1=${firstH1} h2=${firstH2} h3=${firstH3}`
+    );
+    assert(
+      `H-09 ${page.file} shows the four group labels`,
+      page.labels.every((label) => html.includes(label.replace(/&/g, '&amp;'))),
+      JSON.stringify(page.labels.filter((label) => !html.includes(label.replace(/&/g, '&amp;'))))
+    );
+  });
+});
+
+group('H-08 · Guides hub, internal links, and contextual CTAs', () => {
+  const hubSrc = read('src/pages/es/guias/index.astro') || '';
+  const resourcesSrc = read('src/components/ResourcesSection.astro') || '';
+  const guidesSrc = read('src/data/guides.ts') || '';
+  const esHomeSrc = pageES();
+  assert(
+    'H-08 guide index lists the three guides',
+    guidesSrc.includes('/es/guias/auditoria-tecnica-web-negocios-pequenos/') &&
+      guidesSrc.includes('/es/guias/automatizar-reportes-excel-python/') &&
+      guidesSrc.includes('/es/guias/pagina-web-estatica-cuando-conviene/'),
+    'src/data/guides.ts is missing one of the three guide entries'
+  );
+  assert('H-08 hub consumes the shared guide index', hubSrc.includes("from '../../../data/guides'"));
+  assert('H-08 home resources strip links the hub', resourcesSrc.includes('/es/guias/'));
+  assert('H-08 ES home renders the resources strip', esHomeSrc.includes('<ResourcesSection'));
+
+  const hub = read('dist/es/guias/index.html');
+  const esHome = read('dist/es/index.html');
+  if (!hub || !esHome) {
+    assert('[built] H-08 hub checks (skipped — run --built)', true);
+    return;
+  }
+  const blocks = [...hub.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+    .map((match) => { try { return JSON.parse(match[1]); } catch { return null; } })
+    .filter(Boolean);
+  assert('H-08 hub JSON-LD has CollectionPage', blocks.some((block) => block['@type'] === 'CollectionPage'));
+  assert('H-08 hub links the three guides', ['auditoria-tecnica-web-negocios-pequenos', 'automatizar-reportes-excel-python', 'pagina-web-estatica-cuando-conviene'].every((slug) => hub.includes(`/es/guias/${slug}/`)));
+  assert('H-08 ES home links the hub', esHome.includes('/es/guias/'));
+  const sitemap = read('dist/sitemap-0.xml') || '';
+  assert('H-08 sitemap includes the hub', sitemap.includes('https://tooltician.com/es/guias/'));
+  for (const slug of ['auditoria-tecnica-web-negocios-pequenos', 'automatizar-reportes-excel-python', 'pagina-web-estatica-cuando-conviene']) {
+    const guide = read(`dist/es/guias/${slug}/index.html`) || '';
+    assert(`H-08 ${slug} links back to the hub`, guide.includes('/es/guias/'));
+    const ctaCount = (guide.match(/article-cta/g) || []).length;
+    assert(`H-08 ${slug} has top and bottom CTAs`, ctaCount >= 2, `Found ${ctaCount}`);
+  }
+});
+
+// Generic routes decision (Plans 024/033): /pricing, /docs, /login, and /demo
+// stay 404, unlinked, and out of the sitemap — they do not represent a real
+// capability. Recorded here so future audits do not "fix" the 404s by
+// inventing pages that the offer cannot back.
+group('H-11 · Structured-data parity across home, work, and root', () => {
+  const parse = (html) =>
+    [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+      .map((match) => { try { return JSON.parse(match[1]); } catch { return null; } })
+      .filter(Boolean);
+
+  const workPages = ['dist/en/work/index.html', 'dist/es/trabajo/index.html'];
+  const built = workPages.map((file) => ({ file, html: read(file) }));
+  if (!built.every((page) => page.html)) {
+    assert('[built] H-11 schema checks (skipped — run --built)', true);
+    return;
+  }
+  built.forEach((page) => {
+    const blocks = parse(page.html);
+    const collection = blocks.find((block) => block['@type'] === 'CollectionPage');
+    const breadcrumb = blocks.find((block) => block['@type'] === 'BreadcrumbList');
+    const itemList = blocks.find((block) => block['@type'] === 'ItemList');
+    assert(
+      `H-11 ${page.file} has CollectionPage + BreadcrumbList + ItemList`,
+      Boolean(collection) && Boolean(breadcrumb) && Boolean(itemList),
+      JSON.stringify(blocks.map((block) => block['@type']))
+    );
+    if (!itemList) return;
+    assert(
+      `H-11 ${page.file} ItemList has 10 entries`,
+      itemList.itemListElement.length === 10,
+      `Found ${itemList.itemListElement.length}`
+    );
+    const titles = [...page.html.matchAll(/<h3 class="project-title"[^>]*>([^<]*)</g)].map((match) =>
+      match[1].replace(/&amp;/g, '&')
+    );
+    const names = itemList.itemListElement.map((entry) => entry.item.name);
+    assert(
+      `H-11 ${page.file} ItemList names match rendered H3s`,
+      JSON.stringify(names) === JSON.stringify(titles),
+      `names=${JSON.stringify(names)} titles=${JSON.stringify(titles)}`
+    );
+  });
+
+  const root = read('dist/index.html');
+  if (root) {
+    const blocks = parse(root);
+    const website = blocks.find((block) => block['@type'] === 'WebSite');
+    const organization = blocks.find((block) => block['@type'] === 'Organization');
+    assert(
+      'H-11 root WebSite declares both locales',
+      Boolean(website) && Array.isArray(website.inLanguage) && website.inLanguage.includes('en') && website.inLanguage.includes('es')
+    );
+    assert(
+      'H-11 root Organization carries sameAs',
+      Boolean(organization) && Array.isArray(organization.sameAs) && organization.sameAs.length >= 2
+    );
+  } else {
+    assert('[built] H-11 root schema checks (skipped — run --built)', true);
+  }
+});
 
 // ─── Sprint 0 (corrected) · Service/lead analytics wiring ───────────────────
 

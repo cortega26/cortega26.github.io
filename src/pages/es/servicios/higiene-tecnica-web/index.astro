@@ -4,14 +4,11 @@ import Navbar from '../../../../components/Navbar.astro';
 import Footer from '../../../../components/Footer.astro';
 import IntakeForm from '../../../../components/IntakeForm.astro';
 import { pricing } from '../../../../data/pricing';
+import { alternatesFor } from '../../../../data/routes';
 import '../../../../styles/global.css';
 
 const canonical = 'https://tooltician.com/es/servicios/higiene-tecnica-web/';
-const alternates = [
-  { hreflang: 'es', href: canonical },
-  { hreflang: 'en', href: 'https://tooltician.com/en/services/web-technical-hygiene/' },
-  { hreflang: 'x-default', href: canonical },
-];
+const alternates = alternatesFor('service:htw');
 
 const navItems = [
   { href: '#problema', label: 'Problema' },

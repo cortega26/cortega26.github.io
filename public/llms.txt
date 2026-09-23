@@ -6,6 +6,13 @@ Tooltician provides operations teams, founders, and finance teams with high-reli
 - **Sitemap Index:** [sitemap-index.xml](https://tooltician.com/sitemap-index.xml)
 - **Full Content & Detail Spec:** [llms-full.txt](https://tooltician.com/llms-full.txt)
 - **Language Support:** English (default at `/en/`), Spanish (at `/es/`)
+- **Root (x-default landing):** [tooltician.com](https://tooltician.com)
+  - Bilingual entry point with public proof, service links, and brief CTAs. Only returning visitors with a stored language preference are forwarded; there is no browser-language auto-redirect.
+
+## Pricing Model
+
+- Every service follows the same staged pricing model: **diagnostic → scoped build → optional retainer**. No amount is published without its stage label.
+- Chile/LATAM engagements are quoted in UF (Unidades de Fomento); international engagements are delivered in English and quoted in USD.
 
 ## Primary Offerings & Pages
 
@@ -37,6 +44,15 @@ Tooltician provides operations teams, founders, and finance teams with high-reli
   - High-performance, lightweight, SEO-friendly static layouts (Astro) that rank and load instantly.
   - EN: [Static Sites & Front Ends](https://tooltician.com/en/services/static-sites/)
   - ES: [Sitios Estáticos y Frontends](https://tooltician.com/es/servicios/sitios-web/)
+
+## Production Work & Guides
+
+- **Production work:** [English](https://tooltician.com/en/work/) · [Español](https://tooltician.com/es/trabajo/)
+  - Ten public projects grouped by theme, each with the role Tooltician played, a verification date, and linked evidence (live site, repository, package, or store).
+- **Guides hub (Spanish):** [tooltician.com/es/guias](https://tooltician.com/es/guias/)
+  - [Auditoría técnica web para negocios pequeños](https://tooltician.com/es/guias/auditoria-tecnica-web-negocios-pequenos/)
+  - [Automatizar reportes de Excel con Python](https://tooltician.com/es/guias/automatizar-reportes-excel-python/)
+  - [Qué es una página web estática y cuándo conviene](https://tooltician.com/es/guias/pagina-web-estatica-cuando-conviene/)
 
 ## Legal & Operational Documents
 

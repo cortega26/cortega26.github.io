@@ -9,6 +9,7 @@ import {
   type SiteDocumentKey,
   type SiteLocale,
 } from '../../data/siteDocuments';
+import { alternatesFor } from '../../data/routes';
 
 export function getStaticPaths() {
   const locales: SiteLocale[] = ['en', 'es'];
@@ -37,11 +38,7 @@ const switchLang = lang === 'en' ? 'es' : 'en';
 const switchHref = `/${switchLang}/${documentKey}/`;
 const contactHref = `/${lang}/#contact`;
 const canonical = `https://tooltician.com/${lang}/${documentKey}/`;
-const alternates = [
-  { hreflang: 'en', href: `https://tooltician.com/en/${documentKey}/` },
-  { hreflang: 'es', href: `https://tooltician.com/es/${documentKey}/` },
-  { hreflang: 'x-default', href: `https://tooltician.com/en/${documentKey}/` },
-];
+const alternates = alternatesFor('doc:' + documentKey);
 
 const pageJsonLd = {
   '@context': 'https://schema.org',

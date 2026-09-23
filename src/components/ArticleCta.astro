@@ -1,0 +1,124 @@
+---
+// Shared contextual CTA for guide articles (Plan 027).
+// `top` renders a compact band right after the article hero; `bottom` is the
+// full closing card. Both point at the same service contact anchor, so the
+// conversion route is visible at the start and the end of every guide.
+interface Props {
+  variant: 'top' | 'bottom';
+  eyebrow: string;
+  title: string;
+  body: string;
+  /** One-sentence version for the top band; falls back to `body`. */
+  topBody?: string;
+  ctaLabel: string;
+  ctaHref: string;
+  detailPrefix: string;
+  serviceLabel: string;
+  serviceHref: string;
+}
+const {
+  variant,
+  eyebrow,
+  title,
+  body,
+  topBody,
+  ctaLabel,
+  ctaHref,
+  detailPrefix,
+  serviceLabel,
+  serviceHref,
+} = Astro.props;
+---
+
+{variant === 'top' ? (
+  <section class="article-cta-band">
+    <div class="container">
+      <div class="article-cta article-cta--top card-glass reveal">
+        <div>
+          <p class="article-cta__eyebrow">{eyebrow}</p>
+          <p class="article-cta__top-title"><strong>{title}</strong></p>
+          <p class="article-cta__top-body">{topBody ?? body}</p>
+        </div>
+        <a class="btn btn-primary" href={ctaHref}>{ctaLabel}</a>
+      </div>
+    </div>
+  </section>
+) : (
+  <>
+    <div class="card-glass article-cta reveal">
+      <div>
+        <p class="article-cta__eyebrow">{eyebrow}</p>
+        <h3 class="card-title">{title}</h3>
+        <p class="body-copy">{body}</p>
+      </div>
+      <a class="btn btn-primary" href={ctaHref}>{ctaLabel}</a>
+    </div>
+    <p class="body-copy article-alt">
+      {detailPrefix}{' '}<a href={serviceHref}>{serviceLabel}</a>.
+    </p>
+  </>
+)}
+
+<style>
+.article-cta-band {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.article-cta {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+
+.article-cta:not(.article-cta--top) > .btn {
+  justify-self: start;
+}
+
+.article-cta--top {
+  margin: 0;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.article-cta__eyebrow {
+  font-family: var(--ff-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-text-faint);
+  margin-bottom: 0.5rem;
+}
+
+.article-cta__top-title {
+  margin: 0 0 0.25rem;
+  font-family: var(--ff-heading);
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+}
+
+.article-cta__top-body {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--clr-text-muted);
+}
+
+.article-alt {
+  font-size: 0.9rem;
+}
+
+.article-alt a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .article-cta--top {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

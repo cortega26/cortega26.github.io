@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import ArticleCta from '../../../components/ArticleCta.astro';
+import { alternatesFor } from '../../../data/routes';
+import { guides } from '../../../data/guides';
+import '../../../styles/global.css';
+
+const canonical = 'https://tooltician.com/es/guias/';
+const alternates = alternatesFor('guides-hub');
+
+const navItems = [
+  { href: '#guias', label: 'Guías' },
+  { href: '/es/#services', label: 'Servicios' },
+  { href: '/es/trabajo/', label: 'Trabajo' },
+  { href: '/es/#contact', label: 'Contacto' },
+];
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Guías para decidir con criterio',
+  url: canonical,
+  inLanguage: 'es',
+  isPartOf: { '@type': 'WebSite', name: 'Tooltician', url: 'https://tooltician.com/' },
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: guides.length,
+    itemListElement: guides.map((guide, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Article',
+        name: guide.title,
+        url: `https://tooltician.com${guide.href}`,
+        description: guide.description,
+      },
+    })),
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/es/' },
+    { '@type': 'ListItem', position: 2, name: 'Guías', item: canonical },
+  ],
+};
+---
+<BaseLayout
+  title="Guías para decidir con criterio | Tooltician"
+  description="Guías prácticas sobre auditoría técnica web, automatización de reportes con Python y sitios estáticos: cuándo conviene cada decisión y cómo evaluarla sin alarmismo."
+  lang="es"
+  canonical={canonical}
+  alternates={alternates}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(collectionJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
+  <Navbar lang="es" items={navItems} ctaHref="/es/#contact" />
+
+  <main id="main">
+    <section class="guides-hero" id="hero">
+      <div class="container">
+        <span class="section-eyebrow reveal">Guías</span>
+        <h1 class="section-title reveal reveal-delay-1">Guías para decidir con criterio</h1>
+        <div class="divider reveal"></div>
+        <p class="section-subtitle reveal reveal-delay-2">
+          Criterios prácticos para decidir cuándo automatizar, cuándo revisar lo técnico de un sitio
+          y cuándo conviene una página estática. Sin alarmismo y sin promesas que no se puedan
+          verificar.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="guias">
+      <div class="container">
+        <div class="guides-grid">
+          {guides.map((guide, index) => (
+            <article class={`card-glass guide-card reveal reveal-delay-${(index % 2) + 1}`}>
+              <h2 class="card-title"><a href={guide.href}>{guide.title}</a></h2>
+              <p class="guide-card__summary">{guide.description}</p>
+              <p class="guide-card__service">
+                Servicio relacionado: <a href={guide.serviceHref}>{guide.serviceLabel}</a>
+              </p>
+              <a class="btn btn-ghost btn-sm guide-card__cta" href={guide.href}>Leer guía</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="siguiente-paso">
+      <div class="container">
+        <ArticleCta
+          variant="bottom"
+          eyebrow="Siguiente paso"
+          title="¿No sabes por dónde partir?"
+          body="Si el problema operativo ya está identificado, el camino más corto es un brief breve: cuéntame el flujo, el cuello de botella y quién lo va a operar, y te respondo con un sí/no directo de encaje."
+          ctaLabel="Enviar brief"
+          ctaHref="/es/#contact"
+          detailPrefix="El detalle de cada servicio está en la"
+          serviceLabel="página principal"
+          serviceHref="/es/#services"
+        />
+      </div>
+    </section>
+  </main>
+
+  <Footer lang="es" />
+</BaseLayout>
+
+<style>
+  .guides-hero {
+    padding-top: calc(var(--nav-height) + 5rem);
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  .guides-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+
+  .guide-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .guide-card .card-title {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  .guide-card .card-title a {
+    color: var(--clr-text);
+    text-decoration: none;
+  }
+
+  .guide-card .card-title a:hover {
+    color: var(--clr-accent);
+  }
+
+  .guide-card__summary {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: var(--clr-text-muted);
+    flex: 1;
+  }
+
+  .guide-card__service {
+    font-size: 0.8rem;
+    color: var(--clr-text-faint);
+  }
+
+  .guide-card__service a {
+    color: var(--clr-accent);
+    font-weight: 600;
+  }
+
+  .guide-card__cta {
+    align-self: flex-start;
+  }
+
+  @media (max-width: 980px) {
+    .guides-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .guides-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

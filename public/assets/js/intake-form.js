@@ -79,6 +79,75 @@
     const pageField = form.querySelector('[data-fill="page"]');
     if (pageField) pageField.value = window.location.pathname;
 
+    // Progressive enhancement (Plan 028): without JS the form keeps native
+    // validation; with JS we own an accessible per-field error layer.
+    form.setAttribute('novalidate', '');
+
+    const controls = Array.from(form.querySelectorAll('input, select, textarea'));
+    const summary = form.querySelector('.intake-form__summary');
+    const summaryText = form.querySelector('[data-summary-text]');
+
+    /** Message for an invalid control, chosen from its validity state. */
+    const errorFor = (control) => {
+      if (control.validity.valueMissing) return control.dataset.errorRequired || '';
+      if (control.validity.typeMismatch) return control.dataset.errorType || '';
+      return '';
+    };
+
+    const setFieldError = (control, message) => {
+      const errorEl = control.id ? document.getElementById(`${control.id}-error`) : null;
+      if (!errorEl) return;
+      if (message) {
+        errorEl.textContent = message;
+        errorEl.hidden = false;
+        control.setAttribute('aria-invalid', 'true');
+        control.setAttribute('aria-describedby', errorEl.id);
+      } else {
+        errorEl.hidden = true;
+        control.removeAttribute('aria-invalid');
+        control.removeAttribute('aria-describedby');
+      }
+    };
+
+    const labelFor = (control) => {
+      const label = control.id ? form.querySelector(`label[for="${control.id}"]`) : null;
+      return label ? (label.textContent || '').trim() : control.name;
+    };
+
+    /** Validate every control, render errors + summary, focus the first invalid. */
+    const validateForm = () => {
+      const invalid = [];
+      controls.forEach((control) => {
+        if (control.checkValidity()) {
+          setFieldError(control, '');
+        } else {
+          invalid.push(control);
+          setFieldError(control, errorFor(control));
+        }
+      });
+      if (invalid.length > 0) {
+        if (summary && summaryText) {
+          const template = summary.getAttribute('data-summary-template') || '{fields}';
+          summaryText.textContent = template.replace('{fields}', invalid.map(labelFor).join(', '));
+          summary.hidden = false;
+        }
+        invalid[0].focus();
+      } else if (summary) {
+        summary.hidden = true;
+      }
+      return invalid;
+    };
+
+    /** Clear a field's error as soon as it becomes valid; hide a stale summary. */
+    const onFieldSettled = (event) => {
+      const target = event.target;
+      if (!controls.includes(target)) return;
+      if (target.checkValidity()) setFieldError(target, '');
+      if (summary && controls.every((control) => control.checkValidity())) summary.hidden = true;
+    };
+    form.addEventListener('input', onFieldSettled);
+    form.addEventListener('change', onFieldSettled);
+
     // Fire form_start once per form on first meaningful interaction.
     let started = false;
     form.addEventListener(
@@ -97,9 +166,9 @@
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (!form.checkValidity()) {
+      const invalidControls = validateForm();
+      if (invalidControls.length > 0) {
         funnel('briefError', serviceIdForForm(ctx, form), 'validation');
-        form.reportValidity();
         return;
       }
       funnel('briefSubmit', serviceIdForForm(ctx, form));
@@ -120,6 +189,8 @@
         });
         if (response.ok) {
           form.reset();
+          controls.forEach((control) => setFieldError(control, ''));
+          if (summary) summary.hidden = true;
           successEl && successEl.classList.add('show');
           revealFeedback(successEl);
           track('form_submit_success', { location: ctx });

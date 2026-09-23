@@ -55,6 +55,8 @@ jobs:
           PUBLIC_GA4_MEASUREMENT_ID: ${{ vars.PUBLIC_GA4_MEASUREMENT_ID }}
       - name: Built output tests
         run: node tests/run.js --built
+      - name: Sitemap i18n check
+        run: node tests/sitemap-i18n.mjs
       - name: Install Playwright browser
         # test-htw-snapshot.mjs launches real Chromium, whose binary is not
         # present on a fresh runner (npm ci installs the npm package only).

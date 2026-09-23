@@ -9,7 +9,7 @@ import AboutSection from '../../components/AboutSection.astro';
 import ContactSection from '../../components/ContactSection.astro';
 import FaqSection from '../../components/FaqSection.astro';
 import ResultsBand from '../../components/ResultsBand.astro';
-import { pricing } from '../../data/pricing';
+import { buildBreadcrumb, buildPortfolioItemList, buildProfessionalService } from '../../data/jsonld';
 import '../../styles/global.css';
 
 const navItems = [
@@ -21,71 +21,12 @@ const navItems = [
   { href: '#contact',      label: 'Brief' },
 ];
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': ['Person', 'ProfessionalService'],
-  name: 'Carlos Ortega Gonzalez',
-  alternateName: 'Tooltician',
-  url: 'https://tooltician.com/',
-  sameAs: ['https://github.com/cortega26', 'https://www.linkedin.com/in/cortega26'],
-  jobTitle: 'Operational Systems & Python Automation Consultant',
-  description: 'Reliable operational systems across Python automation, recurring data collection, internal tools, financial controls, focused front ends, and web technical hygiene — scoped and documented for handoff.',
-  areaServed: ['CL', 'Worldwide'],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Santiago',
-    addressCountry: 'CL',
-  },
-  makesOffer: [
-    { '@type': 'Offer', name: 'Python Automation & Data Pipelines', description: 'Scheduled, reproducible workflows for recurring reports, ETL, and structured data delivery.', url: 'https://tooltician.com/en/services/python-automation/' },
-    { '@type': 'Offer', name: 'Recurring Data Collection', description: 'Resilient scraping and acquisition flows for public or authorized sources.', url: 'https://tooltician.com/en/services/recurring-data-collection/' },
-    { '@type': 'Offer', name: 'Internal Tools & APIs', description: 'Documented CLIs, internal APIs, and guided interfaces for known operational workflows.', url: 'https://tooltician.com/en/services/internal-tools/' },
-    { '@type': 'Offer', name: 'Financial & Audit Systems', description: 'Fail-closed reconciliation and control workflows with deterministic audit artifacts.', url: 'https://tooltician.com/en/services/financial-tooling/' },
-    { '@type': 'Offer', name: 'Static Sites & Focused Front Ends', description: 'Fast, maintainable public surfaces with SEO, performance, and handoff documentation.', url: 'https://tooltician.com/en/services/static-sites/' },
-    { '@type': 'Offer', name: 'Web Technical Hygiene', description: `Security headers, HTTPS, DNS, forms, Search Console, and lightweight monitoring for live sites with no internal technical owner. Diagnostic from ${pricing.webHygiene.en.diagnostic}.`, url: 'https://tooltician.com/en/services/web-technical-hygiene/' },
-  ],
-  knowsAbout: [
-    'Python Automation', 'ETL Pipelines', 'Data Engineering',
-    'Web Scraping', 'Internal APIs', 'Reporting Automation',
-    'Static Sites', 'Financial Tooling', 'Web Technical Hygiene',
-    'Security Headers', 'DNS Configuration', 'Search Console',
-  ],
-  hasOccupation: {
-    '@type': 'Occupation',
-    name: 'Python Automation Consultant',
-    description: 'Scoped implementation of ETL pipelines, scrapers, internal APIs, and reporting workflows with CI, documentation, and handoff-ready systems.',
-    skills: 'Python, SQL, FastAPI, Selenium, BeautifulSoup, Pandas, Astro, GitHub Actions, CI/CD',
-  },
-};
-
-const portfolioJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Tooltician portfolio',
-  itemListOrder: 'https://schema.org/ItemListOrderAscending',
-  numberOfItems: 10,
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, item: { '@type': 'SoftwareApplication', name: 'El Rincón de Ébano', url: 'https://elrincondeebano.com', description: 'Live e-commerce storefront for a private residential community, actively operated.' } },
-    { '@type': 'ListItem', position: 2, item: { '@type': 'SoftwareApplication', name: 'Portfolio Manager', url: 'https://github.com/cortega26/portfolio-manager-server', description: 'Desktop-first Electron portfolio tracker with Fastify, SQLite, deterministic finance math, and local-only persistence.' } },
-    { '@type': 'ListItem', position: 3, item: { '@type': 'SoftwareApplication', name: 'chile-hub', url: 'https://github.com/cortega26/chile-hub', description: 'Curated data registry for Chile with automated ETL, statistical schema validation, and multi-format outputs.' } },
-    { '@type': 'ListItem', position: 4, item: { '@type': 'SoftwareApplication', name: 'Monedario', url: 'https://monedario.cl', description: 'Personal finance platform for Chile with real-time economic indicators and interactive calculators.' } },
-    { '@type': 'ListItem', position: 5, item: { '@type': 'SoftwareApplication', name: 'LinkedIn Spam Blocker', url: 'https://github.com/cortega26/stop-spam-linkedin', description: 'Privacy-first Chrome and Firefox extension that hides LinkedIn engagement-bait spam locally in the browser.' } },
-    { '@type': 'ListItem', position: 6, item: { '@type': 'SoftwareApplication', name: 'Conciliador Bancario', url: 'https://pypi.org/project/bankrecon/', description: 'Fail-closed bank reconciliation tool published on PyPI with audit-grade output.' } },
-    { '@type': 'ListItem', position: 7, item: { '@type': 'SoftwareApplication', name: 'Rutificador', url: 'https://pypi.org/project/rutificador/', description: 'Published PyPI library for validating and normalizing Chilean RUT numbers.' } },
-    { '@type': 'ListItem', position: 8, item: { '@type': 'WebSite', name: 'Noticiencias', url: 'https://noticiencias.com', description: 'Spanish-language science media site covering 8 disciplines.' } },
-    { '@type': 'ListItem', position: 9, item: { '@type': 'SoftwareApplication', name: 'DNSpect', url: 'https://github.com/cortega26/DNSpect', description: 'Percentile-based DNS benchmarking stack with a TypeScript CLI, FastAPI backend, and React dashboard.' } },
-    { '@type': 'ListItem', position: 10, item: { '@type': 'SoftwareApplication', name: 'Jackpot Data Pipeline', url: 'https://github.com/cortega26/polla', description: 'Recurring scrape-to-sheets production pipeline for normalized lottery results.' } },
-  ],
-};
-
-const breadcrumbJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/' },
-    { '@type': 'ListItem', position: 2, name: 'English', item: 'https://tooltician.com/en/' },
-  ],
-};
+const jsonLd = buildProfessionalService('en');
+const portfolioJsonLd = buildPortfolioItemList('en');
+const breadcrumbJsonLd = buildBreadcrumb([
+  { name: 'Tooltician', item: 'https://tooltician.com/' },
+  { name: 'English', item: 'https://tooltician.com/en/' },
+]);
 ---
 <BaseLayout
   title="Python Automation & Internal Tools | Tooltician"

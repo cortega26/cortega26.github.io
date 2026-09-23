@@ -17,6 +17,14 @@
       if (match) card.classList.add('visible');
     });
 
+    // A thematic group whose cards are all filtered out disappears with them
+    // (Plan 030) — no empty headings left behind.
+    document.querySelectorAll('.work-group').forEach((group) => {
+      const anyVisible = group.querySelector('.project-card:not([hidden])') !== null;
+      group.hidden = !anyVisible;
+      group.setAttribute('aria-hidden', String(!anyVisible));
+    });
+
     const focused = document.activeElement;
     if (focused instanceof HTMLElement && focused.hidden) {
       const firstLink = document.querySelector('.project-card:not([hidden]) .project-link');

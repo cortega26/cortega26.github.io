@@ -11,7 +11,7 @@
     "build": "node scripts/fetch-github-stats.js && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "node tests/run.js && node tests/analytics-service-funnel.mjs && node tests/analytics-guard.mjs && node tests/run.js --built && node test-htw-snapshot.mjs && node test-behavioral.mjs",
+    "test": "node tests/run.js && node tests/analytics-service-funnel.mjs && node tests/analytics-guard.mjs && node tests/run.js --built && node tests/sitemap-i18n.mjs && node test-htw-snapshot.mjs && node test-behavioral.mjs",
     "test:htw": "node test-htw-snapshot.mjs",
     "test:links": "node scripts/check-links-seo.js",
     "astro": "astro"

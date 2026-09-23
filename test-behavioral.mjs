@@ -109,6 +109,109 @@ async function fillIntakeForm(page) {
   return goalValue;
 }
 
+async function testValidationErrors(browser) {
+  const label = 'invalid submit shows per-field errors, an error summary, and focuses the first invalid field';
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const pageErrors = [];
+  const consoleErrors = [];
+  page.on('pageerror', (err) => pageErrors.push(err.message));
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') consoleErrors.push(msg.text());
+  });
+
+  const { getPostAttempts } = await mockGtagAndFormspree(page);
+  await page.goto(`${BASE}/en/`, { waitUntil: 'networkidle' });
+
+  // 1) Empty submit: no POST, focus on the first invalid field, per-field
+  //    error wired via aria-describedby, summary visible, no banners.
+  await page.locator('#contact-form button[type="submit"]').click();
+  await page.waitForTimeout(200);
+  const empty = await page.evaluate(() => {
+    const name = document.querySelector('#contact-name');
+    const errorId = name ? name.getAttribute('aria-describedby') : null;
+    const errorEl = errorId ? document.getElementById(errorId) : null;
+    const summary = document.querySelector('#contact-form .intake-form__summary');
+    return {
+      focusedId: document.activeElement ? document.activeElement.id : null,
+      nameInvalid: name ? name.getAttribute('aria-invalid') : null,
+      errorVisible: errorEl ? !errorEl.hidden && errorEl.offsetParent !== null : false,
+      errorText: errorEl ? errorEl.textContent.trim() : '',
+      summaryVisible: summary ? !summary.hidden : false,
+      successShown: document.querySelectorAll('#contact-form .intake-form__success.show').length,
+      errorBannerShown: document.querySelectorAll('#contact-form .intake-form__error.show').length,
+    };
+  });
+  const postsAfterEmpty = getPostAttempts();
+
+  // 2) Invalid email: the email field gets its own message and the focus.
+  await page.locator('#contact-name').fill('Behavioral Test');
+  await page.locator('#contact-email').fill('not-an-email');
+  await page.locator('#contact-message').fill('brief');
+  const goalValue = await page.locator('#contact-goal option').evaluateAll((opts) => {
+    const found = opts.map((o) => o.value).find((v) => v && v.trim() !== '');
+    return found || null;
+  });
+  if (goalValue) await page.locator('#contact-goal').selectOption({ value: goalValue });
+  await page.locator('#contact-form button[type="submit"]').click();
+  await page.waitForTimeout(200);
+  const emailState = await page.evaluate(() => {
+    const email = document.querySelector('#contact-email');
+    const errorId = email ? email.getAttribute('aria-describedby') : null;
+    const errorEl = errorId ? document.getElementById(errorId) : null;
+    return {
+      focusedId: document.activeElement ? document.activeElement.id : null,
+      emailInvalid: email ? email.getAttribute('aria-invalid') : null,
+      errorVisible: errorEl ? !errorEl.hidden && errorEl.offsetParent !== null : false,
+      errorText: errorEl ? errorEl.textContent.trim() : '',
+    };
+  });
+  const postsAfterInvalidEmail = getPostAttempts();
+
+  // 3) A valid submit still sends exactly one POST and shows success.
+  if (!(await fillIntakeForm(page))) {
+    fail(label, '#contact-goal has no real (non-empty) option');
+    await context.close();
+    return;
+  }
+  await page.locator('#contact-form button[type="submit"]').click();
+  let successVisible = false;
+  try {
+    await page.locator('#contact-form .intake-form__success.show').waitFor({ state: 'visible', timeout: 5000 });
+    successVisible = true;
+  } catch {
+    successVisible = false;
+  }
+  const postAttempts = getPostAttempts();
+
+  if (postsAfterEmpty !== 0) {
+    fail(label, `empty submit sent ${postsAfterEmpty} POST(s); expected 0`);
+  } else if (empty.focusedId !== 'contact-name') {
+    fail(label, `focus after empty submit was ${JSON.stringify(empty.focusedId)}; expected contact-name`);
+  } else if (empty.nameInvalid !== 'true' || !empty.errorVisible || !empty.errorText) {
+    fail(label, `name field not wired for accessibility: ${JSON.stringify(empty)}`);
+  } else if (!empty.summaryVisible) {
+    fail(label, 'error summary did not become visible after an empty submit');
+  } else if (empty.successShown > 0 || empty.errorBannerShown > 0) {
+    fail(label, 'validation failure incorrectly showed a submit-result banner');
+  } else if (postsAfterInvalidEmail !== 0) {
+    fail(label, `invalid-email submit sent ${postsAfterInvalidEmail} POST(s); expected 0`);
+  } else if (emailState.focusedId !== 'contact-email') {
+    fail(label, `focus after invalid email was ${JSON.stringify(emailState.focusedId)}; expected contact-email`);
+  } else if (emailState.emailInvalid !== 'true' || !emailState.errorVisible || !/valid email/i.test(emailState.errorText)) {
+    fail(label, `email field error not accessible: ${JSON.stringify(emailState)}`);
+  } else if (postAttempts !== 1) {
+    fail(label, `valid submit sent ${postAttempts} POST(s); expected exactly 1`);
+  } else if (!successVisible) {
+    fail(label, 'valid submit after validation errors never showed the success banner');
+  } else if (pageErrors.length > 0 || consoleErrors.length > 0) {
+    fail(label, `page errors: [${pageErrors.join('; ')}] console errors: [${consoleErrors.join('; ')}]`);
+  } else {
+    ok(`${label} (0 POSTs while invalid, focus + aria wiring verified, 1 POST when valid, 0 errors)`);
+  }
+  await context.close();
+}
+
 async function testSingleSubmit(browser) {
   const label = 'single-submit sends exactly 1 POST, shows success, and fires the GA4 lifecycle with no PII';
   const context = await browser.newContext();
@@ -421,6 +524,27 @@ async function testFiltersOnPage(browser, path) {
 
   await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });
 
+  // Heading outline (Plan 030): 1 H1 → thematic H2s → project H3s, in order.
+  const outline = await page.evaluate(() => {
+    const main = document.querySelector('main');
+    return Array.from((main || document).querySelectorAll('h1, h2, h3')).map((h) => h.tagName);
+  });
+  const h1Count = outline.filter((tag) => tag === 'H1').length;
+  const h2Count = outline.filter((tag) => tag === 'H2').length;
+  let seenH2 = false;
+  const h3BeforeH2 = outline.some((tag) => {
+    if (tag === 'H2') {
+      seenH2 = true;
+      return false;
+    }
+    return tag === 'H3' && !seenH2;
+  });
+  if (h1Count !== 1 || h2Count < 2 || h3BeforeH2) {
+    fail(`outline ${path}`, `h1=${h1Count} h2=${h2Count} h3BeforeH2=${h3BeforeH2} (${outline.join(',')})`);
+  } else {
+    ok(`outline ${path}: 1 H1, ${h2Count} H2, ${outline.filter((tag) => tag === 'H3').length} H3 in order`);
+  }
+
   const filters = await page.locator('button[data-filter]').evaluateAll((els) =>
     els.map((el) => el.getAttribute('data-filter')).filter(Boolean)
   );
@@ -450,12 +574,23 @@ async function testFiltersOnPage(browser, path) {
     const activeOnes = pressed.filter((p) => p.pressed === 'true');
     const exclusive = activeOnes.length === 1 && activeOnes[0].filter === filter;
 
+    const groupState = await page.evaluate(() =>
+      Array.from(document.querySelectorAll('.work-group')).map((group) => ({
+        group: group.dataset.group,
+        hidden: group.hidden,
+        visibleCards: group.querySelectorAll('.project-card:not([hidden])').length,
+      }))
+    );
+    const badGroup = groupState.find((group) => group.hidden !== (group.visibleCards === 0));
+
     if (visible !== expected) {
       fail(`filters ${path} [${filter}]`, `visible ${visible} != expected ${expected} from data-categories`);
     } else if (!exclusive) {
       fail(`filters ${path} [${filter}]`, `aria-pressed not exclusive: ${JSON.stringify(pressed)}`);
+    } else if (badGroup) {
+      fail(`filters ${path} [${filter}]`, `group visibility mismatch: ${JSON.stringify(badGroup)} in ${JSON.stringify(groupState)}`);
     } else {
-      ok(`filters ${path} [${filter}]: ${visible}/${expected} visible, aria-pressed exclusive`);
+      ok(`filters ${path} [${filter}]: ${visible}/${expected} visible, groups consistent, aria-pressed exclusive`);
       checked++;
     }
   }
@@ -475,6 +610,7 @@ try {
   preview = await startPreview();
   console.log(`preview up at ${BASE}`);
   browser = await chromium.launch({ headless: true });
+  await testValidationErrors(browser);
   await testSingleSubmit(browser);
   await testDoubleClickProtection(browser);
   await testErrorPath(browser);

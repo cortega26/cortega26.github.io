@@ -1,16 +1,13 @@
 ---
 import ServicePage from '../../../../components/ServicePage.astro';
 import { services } from '../../../../data/services';
+import { alternatesFor } from '../../../../data/routes';
 import '../../../../styles/global.css';
 
 const def = services['financial-tooling'];
 const canonical = 'https://tooltician.com/en/services/financial-tooling/';
 const crossLocaleHref = '/es/servicios/herramientas-financieras/';
-const alternates = [
-  { hreflang: 'en', href: canonical },
-  { hreflang: 'es', href: 'https://tooltician.com' + crossLocaleHref },
-  { hreflang: 'x-default', href: canonical },
-];
+const alternates = alternatesFor('service:' + def.serviceKey);
 ---
 <ServicePage
   lang="en"

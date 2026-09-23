@@ -2,13 +2,12 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Navbar from '../../../../components/Navbar.astro';
 import Footer from '../../../../components/Footer.astro';
+import ArticleCta from '../../../../components/ArticleCta.astro';
+import { alternatesFor } from '../../../../data/routes';
 import '../../../../styles/global.css';
 
 const canonical = 'https://tooltician.com/es/guias/auditoria-tecnica-web-negocios-pequenos/';
-const alternates = [
-  { hreflang: 'es', href: canonical },
-  { hreflang: 'x-default', href: canonical },
-];
+const alternates = alternatesFor('guide:auditoria-tecnica-web-negocios-pequenos');
 
 const serviceHref = '/es/servicios/higiene-tecnica-web/';
 const serviceContactHref = '/es/servicios/higiene-tecnica-web/#brief';
@@ -111,6 +110,19 @@ const breadcrumbJsonLd = {
       </div>
     </section>
 
+    <ArticleCta
+      variant="top"
+      eyebrow="Servicio relacionado"
+      title="¿Nadie está cuidando lo técnico de tu sitio?"
+      body="El servicio de higiene técnica web revisa lo básico, separa señales reales de ruido automático y deja evidencia con una recomendación clara. Sin alarmismo y sin promesas de seguridad total."
+      topBody="El servicio de higiene técnica web revisa lo básico, separa señales reales de ruido automático y deja evidencia con una recomendación clara."
+      ctaLabel="Solicitar diagnóstico"
+      ctaHref={serviceContactHref}
+      detailPrefix="Más detalle sobre planes, entregables y preguntas comunes en la"
+      serviceLabel="página del servicio de higiene técnica web"
+      serviceHref={serviceHref}
+    />
+
     <section class="section" id="senales">
       <div class="container article-block">
         <h2 class="section-title">Señales de que tu sitio necesita una revisión</h2>
@@ -211,22 +223,17 @@ const breadcrumbJsonLd = {
           con evidencia, y eso también tiene valor —saber que lo básico está bien antes de cambiar de
           hosting, lanzar una campaña o delegar el sitio evita gastos peores.
         </p>
-        <div class="card-glass article-cta reveal">
-          <div>
-            <p class="article-cta__eyebrow">Servicio relacionado</p>
-            <h3 class="card-title">¿Nadie está cuidando lo técnico de tu sitio?</h3>
-            <p class="body-copy">
-              El servicio de higiene técnica web revisa lo básico, separa señales reales de ruido
-              automático y deja evidencia con una recomendación clara. Sin alarmismo y sin promesas de
-              seguridad total.
-            </p>
-          </div>
-          <a class="btn btn-primary" href={serviceContactHref}>Solicitar diagnóstico</a>
-        </div>
-        <p class="body-copy article-alt">
-          Más detalle sobre planes, entregables y preguntas comunes en la
-          <a href={serviceHref}>página del servicio de higiene técnica web</a>.
-        </p>
+        <ArticleCta
+          variant="bottom"
+          eyebrow="Servicio relacionado"
+          title="¿Nadie está cuidando lo técnico de tu sitio?"
+          body="El servicio de higiene técnica web revisa lo básico, separa señales reales de ruido automático y deja evidencia con una recomendación clara. Sin alarmismo y sin promesas de seguridad total."
+          ctaLabel="Solicitar diagnóstico"
+          ctaHref={serviceContactHref}
+          detailPrefix="Más detalle sobre planes, entregables y preguntas comunes en la"
+          serviceLabel="página del servicio de higiene técnica web"
+          serviceHref={serviceHref}
+        />
       </div>
     </section>
 
@@ -279,29 +286,6 @@ const breadcrumbJsonLd = {
 .body-copy {
   color: var(--clr-text-muted);
   line-height: 1.75;
-}
-.article-cta {
-  display: grid;
-  gap: 1rem;
-  align-items: start;
-  margin-top: 0.5rem;
-}
-.article-cta__eyebrow {
-  font-family: var(--ff-label);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--clr-text-faint);
-  margin-bottom: 0.5rem;
-}
-.article-alt {
-  font-size: 0.9rem;
-}
-.article-alt a {
-  color: var(--clr-accent);
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 .faq-accordion {
   display: grid;

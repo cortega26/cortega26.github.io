@@ -139,6 +139,111 @@ Protective tests + ES-first organic engine (pilot with kill switch).
 
 Progress (growth): 3/3 DONE.
 
+## Content audit 2026-09-23 series (024–034)
+
+Source: `docs/content-audit/audits/audit-20260923.md`. Reconciliation and the
+finding→plan matrix: `docs/content-audit/audits/audit-20260923-response.md`.
+All 024–034 plans are archived under `plans/archive/`. Status authority is
+`plans/README.md`.
+
+### Wave 0 — Reconcile (DONE)
+
+| Plan | Entry point | Branch | Note |
+|------|-------------|--------|------|
+| 024 — Audit reconciliation + response doc | `plans/archive/024-audit-reconciliation.md` | `advisor/024-audit-reconciliation` | Executed during plan authoring: live H-01/H-07 stale, four decisions locked, response doc written |
+
+Exit gate: response doc exists; every finding maps to a plan or a documented
+no-action. Holds.
+
+### Wave 1 — Clarity spine (DONE 2026-09-23)
+
+| Plan | Entry point | Branch | Note |
+|------|-------------|--------|------|
+| 025 — i18n registry + sitemap hreflang | `plans/archive/025-i18n-routes-sitemap.md` | `advisor/025-i18n-routes-sitemap` | Only plan touching `package.json` + `deploy.yml` |
+| 026 — Staged pricing pattern | `plans/archive/026-pricing-pattern.md` | `advisor/026-pricing-pattern` | HTW snapshot may be regenerated |
+| 028 — Accessible intake errors | `plans/archive/028-accessible-intake-errors.md` | `advisor/028-accessible-intake-errors` | External JS only (CSP-safe) |
+
+Goto:
+```
+node tests/run.js
+npm run build && node tests/run.js --built && node tests/sitemap-i18n.mjs
+node test-htw-snapshot.mjs && node test-behavioral.mjs
+```
+Exit gate: all three DONE; sitemap validator green; no duplicate `en` on `/`;
+every amount carries a stage label; empty submit focuses the first invalid
+field with `aria-invalid`. Holds (verified 2026-09-23: `npm test` green end
+to end — 144/144 src, 169/169 built, sitemap PASS, HTW no drift, behavioral
+PASS).
+
+### Wave 2 — Evidence & entry (DONE 2026-09-23)
+
+| Plan | Entry point | Branch | Note |
+|------|-------------|--------|------|
+| 027 — Accessible service CTAs | `plans/archive/027-accessible-service-ctas.md` | `advisor/027-accessible-service-ctas` | Requires 026 DONE (same file) |
+| 029 — Case-study evidence model | `plans/archive/029-case-study-evidence.md` | `advisor/029-case-study-evidence` | Repoints existing `tests/run.js` groups |
+| 031 — Root x-default landing | `plans/archive/031-root-x-default-landing.md` | `advisor/031-root-x-default-landing` | Requires 025; keep GA4 stub byte-identical |
+
+Goto:
+```
+npm run check && node tests/run.js && node tests/run.js --built
+node scripts/check-csp-hashes.mjs   # expect MATCH (031)
+node test-behavioral.mjs            # filters unaffected by 029
+```
+Exit gate: six unique CTA names; work cards show role + verified date + CTA;
+root renders the landing with `WebSite`/`Organization` and no auto-redirect.
+Holds (verified 2026-09-23: `npm test` green end to end — 179/179 src,
+204/204 built, sitemap PASS, HTW no drift, behavioral PASS; CSP MATCH).
+
+### Wave 3 — Discovery & schema (DONE 2026-09-23)
+
+| Plan | Entry point | Branch | Note |
+|------|-------------|--------|------|
+| 030 — Work H2 groups | `plans/archive/030-work-heading-groups.md` | `advisor/030-work-heading-groups` | Requires 029; updates filter JS + behavioral test |
+| 032 — Guides hub + internal links | `plans/archive/032-guides-hub-internal-links.md` | `advisor/032-guides-hub-internal-links` | Requires 025 + 027 |
+| 033 — Structured-data parity | `plans/archive/033-structured-data-parity.md` | `advisor/033-structured-data-parity` | Requires 025 + 029 |
+
+Goto:
+```
+npm run build && node tests/run.js --built && node tests/sitemap-i18n.mjs
+node test-behavioral.mjs && node scripts/check-links-seo.js
+```
+Exit gate: work pages 1 H1 → 4 H2 → 10 H3; hub in sitemap with `es` +
+`x-default`; work JSON-LD names equal rendered H3s. Holds (verified
+2026-09-23: `npm test` green — 207/207 src, 232/232 built, sitemap PASS,
+HTW no drift, behavioral PASS; link checker 0/0/0; CSP MATCH).
+
+### Wave 4 — Closeout (DONE 2026-09-23)
+
+| Plan | Entry point | Branch | Note |
+|------|-------------|--------|------|
+| 034 — Audit closeout | `plans/archive/034-audit-verification-closeout.md` | `advisor/034-audit-verification-closeout` | Requires 025–033 DONE; docs + verification only |
+
+Goto:
+```
+npm test
+node scripts/check-links-seo.js && node scripts/check-csp-hashes.mjs
+```
+Exit gate: all 12 audit §8 criteria verified and recorded; response doc has
+no `TODO` rows; plans 024–033 archived.
+
+## Scoreboard
+
+| Plan | Wave | Pri | Eff | Status | Verified by |
+|------|------|-----|-----|--------|-------------|
+| 024 | 0 | P1 | S | DONE | live H-01/H-07 re-verified via curl; response doc + locked decisions (2026-09-23) |
+| 025 | 1 | P1 | M | DONE | `tests/sitemap-i18n.mjs` PASS (28 URLs, HTML↔XML parity); red-then-green proven; 144/144 src, 169/169 built |
+| 026 | 1 | P1 | M | DONE | `H-04` 8/8 green; home shapes + 6 services staged; HTW snapshot no drift |
+| 027 | 2 | P1 | S | DONE | H-03 (6 unique names EN/ES) + H-12 (2 CTAs per guide) green; 179/179 src, 204/204 built |
+| 028 | 1 | P1 | M | DONE | behavioral validation case green (0 POST invalid, focus + aria, 1 POST valid); negative control proven |
+| 029 | 2 | P1 | M | DONE | `caseStudies.ts` + 10 role/date metas + 10 CTAs per work page; H-06 green; existing groups repointed |
+| 030 | 3 | P1 | S | DONE | H-09 (1/4/10 headings) + behavioral outline/group checks green |
+| 031 | 2 | P1 | M | DONE | H-05 green; root landing + WebSite/Organization; CSP MATCH; 0 broken links |
+| 032 | 3 | P2 | M | DONE | H-08 green; hub in sitemap (es + x-default); link checker 0/0/0 |
+| 033 | 3 | P2 | S | DONE | H-11 green (CollectionPage + ItemList names == rendered H3 order); root schema via builders |
+| 034 | 4 | P2 | M | DONE | 12 criterios §8 verificados; `llms.txt`/`llms-full.txt` actualizados; response doc cerrado; planes archivados |
+
+Progress (audit series): 11/11 DONE.
+
 ## Backlog (accepted, not yet planned)
 
 Sourced from the `**Deferred:**` lines in the plans and the audit's

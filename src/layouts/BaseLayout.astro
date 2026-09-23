@@ -1,4 +1,6 @@
 ---
+import { alternatesFor } from '../data/routes';
+
 interface Props {
   title: string;
   description: string;
@@ -9,11 +11,7 @@ interface Props {
   alternates?: { hreflang: string; href: string }[];
 }
 
-const defaultAlternates = [
-  { hreflang: 'en', href: 'https://tooltician.com/en/' },
-  { hreflang: 'es', href: 'https://tooltician.com/es/' },
-  { hreflang: 'x-default', href: 'https://tooltician.com/' },
-];
+const defaultAlternates = alternatesFor('home');
 
 const {
   title,

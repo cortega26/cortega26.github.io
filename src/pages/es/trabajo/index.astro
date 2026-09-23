@@ -3,7 +3,18 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Navbar from '../../../components/Navbar.astro';
 import Footer from '../../../components/Footer.astro';
 import PortfolioSection from '../../../components/PortfolioSection.astro';
+import { alternatesFor } from '../../../data/routes';
+import { buildBreadcrumb, buildPortfolioItemList, buildWorkCollection } from '../../../data/jsonld';
+import { orderedCasesForWork } from '../../../data/caseStudies';
 import '../../../styles/global.css';
+
+const canonical = 'https://tooltician.com/es/trabajo/';
+const workJsonLd = buildWorkCollection('es', canonical);
+const portfolioJsonLd = buildPortfolioItemList('es', orderedCasesForWork('es'));
+const breadcrumbJsonLd = buildBreadcrumb([
+  { name: 'Tooltician', item: 'https://tooltician.com/es/' },
+  { name: 'Trabajo', item: canonical },
+]);
 
 const navItems = [
   { href: '/es/#proof', label: 'Evidencia' },
@@ -17,12 +28,14 @@ const navItems = [
   description="Diez proyectos en producción: automatización Python, pipelines de datos, herramientas internas, controles financieros, extensiones y frontends acotados."
   lang="es"
   canonical="https://tooltician.com/es/trabajo/"
-  alternates={[
-    { hreflang: 'en', href: 'https://tooltician.com/en/work/' },
-    { hreflang: 'es', href: 'https://tooltician.com/es/trabajo/' },
-    { hreflang: 'x-default', href: 'https://tooltician.com/en/work/' },
-  ]}
+  alternates={alternatesFor('work')}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(workJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(portfolioJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+
   <Navbar lang="es" items={navItems} ctaHref="/es/#contact" switchHref="/en/work/" />
   <main id="main" class="portfolio-page">
     <PortfolioSection lang="es" full />

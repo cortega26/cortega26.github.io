@@ -8,7 +8,9 @@ import PortfolioSection from '../../components/PortfolioSection.astro';
 import AboutSection from '../../components/AboutSection.astro';
 import ContactSection from '../../components/ContactSection.astro';
 import FaqSection from '../../components/FaqSection.astro';
+import ResourcesSection from '../../components/ResourcesSection.astro';
 import ResultsBand from '../../components/ResultsBand.astro';
+import { buildBreadcrumb, buildPortfolioItemList, buildProfessionalService } from '../../data/jsonld';
 import '../../styles/global.css';
 
 const navItems = [
@@ -20,71 +22,12 @@ const navItems = [
   { href: '#contact',      label: 'Contacto' },
 ];
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': ['Person', 'ProfessionalService'],
-  name: 'Carlos Ortega Gonzalez',
-  alternateName: 'Tooltician',
-  url: 'https://tooltician.com/es/',
-  sameAs: ['https://github.com/cortega26', 'https://www.linkedin.com/in/cortega26'],
-  jobTitle: 'Consultor de Sistemas Operacionales y Automatización Python',
-  description: 'Construyo sistemas confiables para operaciones: automatización Python, recolección recurrente, herramientas internas, controles financieros, frontends acotados e higiene técnica web, con alcance definido y traspaso documentado.',
-  areaServed: ['CL', 'Worldwide'],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Santiago',
-    addressCountry: 'CL',
-  },
-  makesOffer: [
-    { '@type': 'Offer', name: 'Automatización Python y Pipelines de Datos', description: 'Flujos programados y reproducibles para reportes recurrentes, ETL y entrega estructurada de datos.', url: 'https://tooltician.com/es/servicios/automatizacion-python/' },
-    { '@type': 'Offer', name: 'Recolección Recurrente de Datos', description: 'Flujos resilientes de scraping y adquisición para fuentes públicas o autorizadas.', url: 'https://tooltician.com/es/servicios/recoleccion-recurrente-datos/' },
-    { '@type': 'Offer', name: 'Herramientas Internas y APIs', description: 'CLIs, APIs internas e interfaces guiadas para flujos operativos conocidos.', url: 'https://tooltician.com/es/servicios/herramientas-internas/' },
-    { '@type': 'Offer', name: 'Sistemas Financieros y de Auditoría', description: 'Flujos de conciliación y control fail-closed con artefactos de auditoría deterministas.', url: 'https://tooltician.com/es/servicios/herramientas-financieras/' },
-    { '@type': 'Offer', name: 'Sitios Estáticos y Frontends Acotados', description: 'Superficies públicas rápidas y mantenibles, con SEO, rendimiento y documentación de traspaso.', url: 'https://tooltician.com/es/servicios/sitios-web/' },
-    { '@type': 'Offer', name: 'Higiene Técnica Web', description: 'Headers de seguridad, HTTPS, DNS, formularios, Search Console y monitoreo liviano para sitios publicados sin responsable técnico interno.', url: 'https://tooltician.com/es/servicios/higiene-tecnica-web/' },
-  ],
-  knowsAbout: [
-    'Automatización Python', 'Pipelines ETL', 'Data Engineering',
-    'Web Scraping', 'APIs Internas', 'Automatización de Reportes',
-    'Sitios Estáticos', 'Herramientas Financieras',
-    'Higiene Técnica Web', 'Headers de Seguridad', 'DNS', 'Search Console',
-  ],
-  hasOccupation: {
-    '@type': 'Occupation',
-    name: 'Consultor de Automatización Python',
-    description: 'Implementación acotada de pipelines ETL, scrapers, APIs internas y flujos de reportes con CI, documentación y sistemas listos para traspaso.',
-    skills: 'Python, SQL, FastAPI, Selenium, BeautifulSoup, Pandas, Astro, GitHub Actions, CI/CD',
-  },
-};
-
-const portfolioJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Tooltician portfolio',
-  itemListOrder: 'https://schema.org/ItemListOrderAscending',
-  numberOfItems: 10,
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, item: { '@type': 'SoftwareApplication', name: 'El Rincón de Ébano', url: 'https://elrincondeebano.com', description: 'Tienda e-commerce para comunidad residencial privada, operada activamente.' } },
-    { '@type': 'ListItem', position: 2, item: { '@type': 'SoftwareApplication', name: 'Portfolio Manager', url: 'https://github.com/cortega26/portfolio-manager-server', description: 'Gestor de portafolio desktop-first en Electron con Fastify, SQLite, matemática financiera determinista y persistencia local.' } },
-    { '@type': 'ListItem', position: 3, item: { '@type': 'SoftwareApplication', name: 'chile-hub', url: 'https://github.com/cortega26/chile-hub', description: 'Registro de datos curados para Chile con builds ETL automatizados, validación de esquemas y descargas multiformato.' } },
-    { '@type': 'ListItem', position: 4, item: { '@type': 'SoftwareApplication', name: 'Monedario', url: 'https://monedario.cl', description: 'Plataforma de finanzas personales para Chile con calculadoras y datos en tiempo real.' } },
-    { '@type': 'ListItem', position: 5, item: { '@type': 'SoftwareApplication', name: 'LinkedIn Spam Blocker', url: 'https://github.com/cortega26/stop-spam-linkedin', description: 'Extensión para Chrome y Firefox centrada en privacidad que oculta spam de engagement-bait en LinkedIn de forma local en el navegador.' } },
-    { '@type': 'ListItem', position: 6, item: { '@type': 'SoftwareApplication', name: 'Conciliador Bancario', url: 'https://pypi.org/project/bankrecon/', description: 'Herramienta de conciliación bancaria fail-closed publicada en PyPI.' } },
-    { '@type': 'ListItem', position: 7, item: { '@type': 'SoftwareApplication', name: 'Rutificador', url: 'https://pypi.org/project/rutificador/', description: 'Librería Python publicada en PyPI para validar y normalizar RUTs chilenos.' } },
-    { '@type': 'ListItem', position: 8, item: { '@type': 'WebSite', name: 'Noticiencias', url: 'https://noticiencias.com', description: 'Sitio de divulgación científica en español, 8 disciplinas.' } },
-    { '@type': 'ListItem', position: 9, item: { '@type': 'SoftwareApplication', name: 'DNSpect', url: 'https://github.com/cortega26/DNSpect', description: 'Stack de benchmarking DNS basado en percentiles con CLI TypeScript, backend FastAPI y dashboard React.' } },
-    { '@type': 'ListItem', position: 10, item: { '@type': 'SoftwareApplication', name: 'Pipeline de Datos de Lotería', url: 'https://github.com/cortega26/polla', description: 'Pipeline recurrente de scraping a Google Sheets para resultados normalizados de lotería.' } },
-  ],
-};
-
-const breadcrumbJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Español', item: 'https://tooltician.com/es/' },
-  ],
-};
+const jsonLd = buildProfessionalService('es');
+const portfolioJsonLd = buildPortfolioItemList('es');
+const breadcrumbJsonLd = buildBreadcrumb([
+  { name: 'Tooltician', item: 'https://tooltician.com/' },
+  { name: 'Español', item: 'https://tooltician.com/es/' },
+]);
 ---
 <BaseLayout
   title="Automatización Python y Sistemas Internos | Tooltician"
@@ -107,6 +50,7 @@ const breadcrumbJsonLd = {
     <PortfolioSection lang="es" />
     <AboutSection lang="es" />
     <FaqSection lang="es" />
+    <ResourcesSection />
     <ContactSection lang="es" />
   </main>
 

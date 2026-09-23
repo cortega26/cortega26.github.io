@@ -1,5 +1,21 @@
 ---
+import serviceRegistry from '../data/service-registry.json';
+import { alternatesFor } from '../data/routes';
+import { buildOrganization, buildWebSite } from '../data/jsonld';
+
 const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
+
+const services = serviceRegistry.services;
+
+const websiteJsonLd = buildWebSite();
+const organizationJsonLd = buildOrganization();
+
+const proofLinks = [
+  { label: 'elrincondeebano.com', href: 'https://elrincondeebano.com', detail: 'live store · daily orders' },
+  { label: 'monedario.cl', href: 'https://monedario.cl', detail: 'public finance product' },
+  { label: 'bankrecon on PyPI', href: 'https://pypi.org/project/bankrecon/', detail: 'fail-closed reconciliation' },
+  { label: 'chile-hub on GitHub', href: 'https://github.com/cortega26/chile-hub', detail: 'data pipelines & CLI' },
+];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -7,22 +23,22 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tooltician — Python Automation Consultant | English / Español</title>
-  <meta name="description" content="Tooltician automates reporting, ETL, and internal workflows that survive handoff. Select English or Spanish to view live production work and open a project brief." />
+  <meta name="description" content="Tooltician automates reporting, ETL, and internal workflows that survive handoff. English and Spanish services, public production evidence, and a direct project brief." />
   <link rel="canonical" href="https://tooltician.com/" />
-  <link rel="alternate" hreflang="es" href="https://tooltician.com/es/" />
-  <link rel="alternate" hreflang="en" href="https://tooltician.com/en/" />
-  <link rel="alternate" hreflang="x-default" href="https://tooltician.com/" />
+  {alternatesFor('home').map((alternate) => (
+    <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+  ))}
   <meta name="robots" content="index, follow" />
-  <noscript><meta http-equiv="refresh" content="0; url=/en/" /></noscript>
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tooltician" />
   <meta property="og:title" content="Tooltician — Python Automation Consultant | English / Español" />
-  <meta property="og:description" content="Tooltician automates reporting, ETL, and internal workflows that survive handoff. Select English or Spanish." />
+  <meta property="og:description" content="Automation, data pipelines, internal tools, and web hygiene. English and Spanish services with public production evidence." />
   <meta property="og:url" content="https://tooltician.com/" />
   <meta property="og:image" content="https://tooltician.com/assets/images/og-card.png" />
   <meta property="og:image:alt" content="Tooltician preview card" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Tooltician — Python Automation Consultant | English / Español" />
-  <meta name="twitter:description" content="Tooltician automates reporting, ETL, and internal workflows that survive handoff. Select English or Spanish." />
+  <meta name="twitter:description" content="Automation, data pipelines, internal tools, and web hygiene. English and Spanish services with public production evidence." />
   <meta name="twitter:image" content="https://tooltician.com/assets/images/og-card.png" />
   <meta name="twitter:image:alt" content="Tooltician preview card" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -39,6 +55,8 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
       <link rel="preconnect" href="https://www.google-analytics.com" />
     </>
   )}
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(websiteJsonLd)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(organizationJsonLd)} />
   <script is:inline src="/assets/js/root-language-redirect.js"></script>
   <style>
     :root {
@@ -79,9 +97,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
       font-family: var(--ff-body);
       color: var(--text);
       background: var(--bg);
-      display: grid;
-      place-items: center;
-      padding: 1.5rem;
+      padding: 2.5rem 1.5rem 3rem;
     }
 
     ::selection {
@@ -89,37 +105,31 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
       color: var(--text);
     }
 
-    .gateway-panel {
-      width: min(100%, 520px);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: var(--surface);
-      overflow: hidden;
+    .landing {
+      width: min(100%, 980px);
+      margin: 0 auto;
+      display: grid;
+      gap: 2.25rem;
     }
 
-    .gateway-panel__body {
-      padding: 2.5rem 2rem 2rem;
-    }
-
-    .gateway-panel__logo-area {
+    .landing__header {
       display: flex;
       align-items: center;
       gap: 0.85rem;
-      margin-bottom: 2rem;
     }
 
-    .gateway-panel__logo {
+    .landing__logo {
       width: 40px;
       height: 40px;
       flex-shrink: 0;
     }
 
-    .gateway-panel__brand {
+    .landing__brand {
       display: grid;
       gap: 0.1rem;
     }
 
-    .gateway-panel__brand-name {
+    .landing__brand-name {
       font-family: var(--ff-heading);
       font-size: 1.25rem;
       font-weight: 700;
@@ -127,7 +137,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
       line-height: 1;
     }
 
-    .gateway-panel__brand-tag {
+    .landing__brand-tag {
       font-family: var(--ff-label);
       font-size: 0.6rem;
       letter-spacing: 0.12em;
@@ -136,48 +146,57 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
       opacity: 0.7;
     }
 
-    .gateway-panel__title {
-      margin: 0 0 0.75rem;
+    .landing__title {
+      margin: 0;
       font-family: var(--ff-heading);
-      font-size: clamp(1.5rem, 4vw, 2rem);
-      line-height: 0.92;
-      letter-spacing: -0.03em;
+      font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
     }
 
-    .gateway-panel__copy {
-      margin: 0 0 2rem;
+    .landing__title span {
+      display: block;
+    }
+
+    .landing__title span + span {
       color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.65;
+      font-size: 0.68em;
+      margin-top: 0.35rem;
     }
 
-    .gateway-panel__options {
+    .landing__lede {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 68ch;
+    }
+
+    .landing__langs {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 0.75rem;
     }
 
-    .gateway-panel__card {
+    .lang-card {
       display: block;
       padding: 1.1rem 1.25rem;
       border: 1px solid var(--border);
       border-radius: 6px;
+      background: var(--surface);
       color: inherit;
       text-decoration: none;
       transition: border-color 200ms, background 200ms;
     }
 
-    .gateway-panel__card:hover,
-    .gateway-panel__card:focus-visible {
+    .lang-card:hover,
+    .lang-card:focus-visible {
       border-color: rgba(196, 160, 74, 0.25);
       background: rgba(196, 160, 74, 0.04);
       outline: none;
     }
 
-    .gateway-panel__card:active {
-      background: rgba(196, 160, 74, 0.08);
-    }
-
-    .gateway-panel__card strong {
+    .lang-card strong {
       display: block;
       margin-bottom: 0.35rem;
       font-family: var(--ff-heading);
@@ -185,99 +204,236 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
       font-weight: 700;
     }
 
-    .gateway-panel__card strong::after {
-      content: ' →';
-      opacity: 0;
-      transition: opacity 200ms, margin-left 200ms;
-    }
-
-    .gateway-panel__card:hover strong::after,
-    .gateway-panel__card:focus-visible strong::after {
-      opacity: 1;
-      margin-left: 0.25rem;
-    }
-
-    .gateway-panel__card span {
+    .lang-card span {
       color: var(--muted);
       line-height: 1.55;
       font-size: 0.85rem;
       display: block;
     }
 
-    .gateway-panel__footer {
-      padding: 1rem 2rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .landing__section {
+      display: grid;
+      gap: 0.85rem;
     }
 
-    .gateway-panel__footer-note {
+    .landing__section-title {
       margin: 0;
+      font-family: var(--ff-label);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .proof-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .proof-list a {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.45rem;
+      padding: 0.45rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: border-color 150ms, background 150ms;
+    }
+
+    .proof-list a:hover {
+      border-color: rgba(196, 160, 74, 0.3);
+      background: rgba(196, 160, 74, 0.05);
+    }
+
+    .proof-list a span {
       color: var(--faint);
       font-family: var(--ff-label);
-      font-size: 0.6rem;
+      font-size: 0.66rem;
       letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
-    .gateway-panel__cursor {
-      display: inline-block;
-      width: 6px;
-      height: 12px;
+    .services-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .service-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.45rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      padding: 1rem 1.15rem;
+    }
+
+    .service-list__lang {
+      font-family: var(--ff-label);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.75;
+      margin-bottom: 0.15rem;
+    }
+
+    .service-list a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      transition: color 150ms;
+    }
+
+    .service-list a:hover {
+      color: var(--text);
+    }
+
+    .landing__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.15rem;
+      border-radius: 6px;
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 150ms, border-color 150ms, color 150ms;
+    }
+
+    .btn--primary {
       background: var(--accent);
-      opacity: 0.5;
-      animation: blink 1s step-end infinite;
+      color: #0b1121;
     }
 
-    @keyframes blink {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 0; }
+    .btn--primary:hover {
+      background: #d4b25c;
+    }
+
+    .btn--ghost {
+      border-color: var(--border);
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .btn--ghost:hover {
+      border-color: rgba(196, 160, 74, 0.3);
+    }
+
+    .landing__footer {
+      color: var(--faint);
+      font-family: var(--ff-label);
+      font-size: 0.66rem;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
     }
 
     @media (max-width: 700px) {
-      .gateway-panel__body {
-        padding: 1.5rem 1.25rem;
-      }
-      .gateway-panel__footer {
-        padding: 1rem 1.25rem;
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: flex-start;
+      .landing__langs,
+      .services-columns {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <div class="gateway-panel">
-    <div class="gateway-panel__body">
-      <div class="gateway-panel__logo-area">
-        <img class="gateway-panel__logo" src="/assets/images/tooltician-logo-128.webp" alt="" width="40" height="40" decoding="async">
-        <div class="gateway-panel__brand">
-          <span class="gateway-panel__brand-name">Tooltician</span>
-          <span class="gateway-panel__brand-tag">Automation systems</span>
-        </div>
+  <main class="landing">
+    <header class="landing__header">
+      <img class="landing__logo" src="/assets/images/tooltician-logo-128.webp" alt="" width="40" height="40" decoding="async">
+      <div class="landing__brand">
+        <span class="landing__brand-name">Tooltician</span>
+        <span class="landing__brand-tag">Automation systems</span>
       </div>
+    </header>
 
-      <h1 class="gateway-panel__title">English / Español</h1>
-      <p class="gateway-panel__copy">First visits are auto-routed from browser language. Choose once below and the site will remember your preference.</p>
+    <h1 class="landing__title">
+      <span lang="en">Reliable operational systems.</span>
+      <span lang="es">Sistemas operativos confiables.</span>
+    </h1>
 
-      <div class="gateway-panel__options">
-        <a class="gateway-panel__card" href="/en/" data-language-preference="en" data-language-select>
-          <strong>English</strong>
-          <span>Proof, production work, and a direct project brief.</span>
-        </a>
-        <a class="gateway-panel__card" href="/es/" data-language-preference="es" data-language-select>
-          <strong>Español</strong>
-          <span>Evidencia pública, trabajo en producción y brief directo.</span>
-        </a>
-      </div>
+    <p class="landing__lede" lang="en">
+      I replace recurring manual work, fragile data flows, and hard-to-own internal processes
+      with systems your team can run, inspect, and hand off.
+    </p>
+    <p class="landing__lede" lang="es">
+      Reemplazo trabajo manual recurrente, flujos de datos frágiles y procesos internos difíciles
+      de mantener por sistemas que tu equipo puede operar, revisar y traspasar.
+    </p>
+
+    <div class="landing__langs">
+      <a class="lang-card" href="/en/" data-language-preference="en" data-language-select>
+        <strong>English</strong>
+        <span>Proof, production work, and a direct project brief.</span>
+      </a>
+      <a class="lang-card" href="/es/" data-language-preference="es" data-language-select>
+        <strong>Español</strong>
+        <span>Evidencia pública, trabajo en producción y brief directo.</span>
+      </a>
     </div>
 
-    <div class="gateway-panel__footer">
-      <p class="gateway-panel__footer-note">Your choice is remembered for future visits.</p>
-      <span class="gateway-panel__cursor"></span>
+    <section class="landing__section" aria-labelledby="landing-proof">
+      <h2 class="landing__section-title" id="landing-proof">Public proof / Evidencia pública</h2>
+      <ul class="proof-list">
+        {proofLinks.map((link) => (
+          <li>
+            <a href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.label} <span>{link.detail}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="landing__section" aria-labelledby="landing-services">
+      <h2 class="landing__section-title" id="landing-services">Services / Servicios</h2>
+      <div class="services-columns">
+        <ul class="service-list" lang="en">
+          <li class="service-list__lang">English</li>
+          {services.map((service) => (
+            <li><a href={service.route_en}>{service.public_name}</a></li>
+          ))}
+        </ul>
+        <ul class="service-list" lang="es">
+          <li class="service-list__lang">Español</li>
+          {services.map((service) => (
+            <li><a href={service.route_es}>{service.public_name_es}</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <div class="landing__ctas">
+      <a class="btn btn--primary" href="/en/#contact" data-track="cta_send_brief" data-track-loc="root_landing">Send a written brief</a>
+      <a class="btn btn--primary" href="/es/#contact" data-track="cta_send_brief" data-track-loc="root_landing">Enviar brief</a>
+      <a class="btn btn--ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="root_landing" data-book-call>Book a 15-min call</a>
     </div>
-  </div>
+
+    <p class="landing__footer">
+      Santiago, Chile · EN / ES · Fixed-scope engagements with documented handoff.
+    </p>
+  </main>
   <script is:inline src="/assets/js/root-language-picker.js" defer></script>
   <script is:inline src="/assets/js/track.js" defer></script>
   <script is:inline src="/assets/js/product-analytics.js" defer></script>

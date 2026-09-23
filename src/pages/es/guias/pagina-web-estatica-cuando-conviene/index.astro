@@ -2,13 +2,12 @@
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Navbar from '../../../../components/Navbar.astro';
 import Footer from '../../../../components/Footer.astro';
+import ArticleCta from '../../../../components/ArticleCta.astro';
+import { alternatesFor } from '../../../../data/routes';
 import '../../../../styles/global.css';
 
 const canonical = 'https://tooltician.com/es/guias/pagina-web-estatica-cuando-conviene/';
-const alternates = [
-  { hreflang: 'es', href: canonical },
-  { hreflang: 'x-default', href: canonical },
-];
+const alternates = alternatesFor('guide:pagina-web-estatica-cuando-conviene');
 
 const serviceHref = '/es/servicios/sitios-web/';
 const serviceContactHref = '/es/servicios/sitios-web/#contact';
@@ -111,6 +110,19 @@ const breadcrumbJsonLd = {
       </div>
     </section>
 
+    <ArticleCta
+      variant="top"
+      eyebrow="Servicio relacionado"
+      title="¿Tu sitio es lento o imposible de editar?"
+      body="El servicio de sitios web construye superficies rápidas e indexables con SEO y rendimiento integrados, bilingües donde lo necesites, y un traspaso documentado. Alcance fijo, sin horas abiertas."
+      topBody="El servicio de sitios web construye superficies rápidas e indexables con traspaso documentado."
+      ctaLabel="Acotar mi sitio"
+      ctaHref={serviceContactHref}
+      detailPrefix="Más detalle sobre el proceso, los planes y las preguntas comunes en la"
+      serviceLabel="página del servicio de sitios web"
+      serviceHref={serviceHref}
+    />
+
     <section class="section" id="definicion">
       <div class="container article-block">
         <h2 class="section-title">Qué significa que un sitio sea estático</h2>
@@ -206,22 +218,17 @@ const breadcrumbJsonLd = {
           sino costo total: velocidad y posicionamiento sostenidos, ediciones que tu propio equipo puede
           hacer y un traspaso que no te deja afuera de tu propio sitio.
         </p>
-        <div class="card-glass article-cta reveal">
-          <div>
-            <p class="article-cta__eyebrow">Servicio relacionado</p>
-            <h3 class="card-title">¿Tu sitio es lento o imposible de editar?</h3>
-            <p class="body-copy">
-              El servicio de sitios web construye superficies rápidas e indexables con SEO y rendimiento
-              integrados, bilingües donde lo necesites, y un traspaso documentado. Alcance fijo, sin
-              horas abiertas.
-            </p>
-          </div>
-          <a class="btn btn-primary" href={serviceContactHref}>Acotar mi sitio</a>
-        </div>
-        <p class="body-copy article-alt">
-          Más detalle sobre el proceso, los planes y las preguntas comunes en la
-          <a href={serviceHref}>página del servicio de sitios web</a>.
-        </p>
+        <ArticleCta
+          variant="bottom"
+          eyebrow="Servicio relacionado"
+          title="¿Tu sitio es lento o imposible de editar?"
+          body="El servicio de sitios web construye superficies rápidas e indexables con SEO y rendimiento integrados, bilingües donde lo necesites, y un traspaso documentado. Alcance fijo, sin horas abiertas."
+          ctaLabel="Acotar mi sitio"
+          ctaHref={serviceContactHref}
+          detailPrefix="Más detalle sobre el proceso, los planes y las preguntas comunes en la"
+          serviceLabel="página del servicio de sitios web"
+          serviceHref={serviceHref}
+        />
       </div>
     </section>
 
@@ -274,29 +281,6 @@ const breadcrumbJsonLd = {
 .body-copy {
   color: var(--clr-text-muted);
   line-height: 1.75;
-}
-.article-cta {
-  display: grid;
-  gap: 1rem;
-  align-items: start;
-  margin-top: 0.5rem;
-}
-.article-cta__eyebrow {
-  font-family: var(--ff-label);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--clr-text-faint);
-  margin-bottom: 0.5rem;
-}
-.article-alt {
-  font-size: 0.9rem;
-}
-.article-alt a {
-  color: var(--clr-accent);
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 .faq-accordion {
   display: grid;

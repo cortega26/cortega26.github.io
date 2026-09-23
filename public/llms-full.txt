@@ -31,7 +31,7 @@ All software, scripts, and sites delivered by Tooltician must meet strict qualit
 
 ## 3. Service Detail Breakdown
 
-Tooltician offers six distinct service lines, priced in USD (for English-language delivery internationally) or UF (Unidades de Fomento, for Spanish-language delivery in Chile/LATAM).
+Tooltician offers six distinct service lines, priced in USD (for English-language delivery internationally) or UF (Unidades de Fomento, for Spanish-language delivery in Chile/LATAM). Every service follows the same staged pricing model — **diagnostic → scoped build → optional retainer** — and no amount is published without its stage label.
 
 ### Service 1: Python Automation & Data Pipelines
 *Robust, automated workflows that replace manual data entry and fragile, undocumented scripts.*
@@ -136,17 +136,28 @@ All content on tooltician.com is provided for informational purposes. Users may 
 
 ## 6. Site Structure & URL Directory
 
-The root URL (`/`) automatically detects browser locale settings using client-side JavaScript (`/assets/js/root-language-redirect.js`), routing users to `/en/` or `/es/` accordingly and saving the selection in `localStorage`.
+The root URL (`/`) is a bilingual x-default landing with public proof, service links, and brief CTAs in both languages. Only returning visitors with a language preference already stored in `localStorage` are forwarded to `/en/` or `/es/`; there is no browser-language auto-redirect.
 
 | Section | English (EN) URL | Spanish (ES) URL |
 | :--- | :--- | :--- |
+| **Root landing (x-default)** | https://tooltician.com/ | https://tooltician.com/ |
 | **Homepage** | https://tooltician.com/en/ | https://tooltician.com/es/ |
+| **Production Work** | https://tooltician.com/en/work/ | https://tooltician.com/es/trabajo/ |
 | **Python Automation** | https://tooltician.com/en/services/python-automation/ | https://tooltician.com/es/servicios/automatizacion-python/ |
+| **Recurring Data Collection** | https://tooltician.com/en/services/recurring-data-collection/ | https://tooltician.com/es/servicios/recoleccion-recurrente-datos/ |
 | **Internal Tools** | https://tooltician.com/en/services/internal-tools/ | https://tooltician.com/es/servicios/herramientas-internas/ |
 | **Financial Tooling** | https://tooltician.com/en/services/financial-tooling/ | https://tooltician.com/es/servicios/herramientas-financieras/ |
 | **Static Sites** | https://tooltician.com/en/services/static-sites/ | https://tooltician.com/es/servicios/sitios-web/ |
 | **Web Technical Hygiene**| https://tooltician.com/en/services/web-technical-hygiene/ | https://tooltician.com/es/servicios/higiene-tecnica-web/ |
+| **Guides Hub (ES)** | — | https://tooltician.com/es/guias/ |
+| **Guide: Web technical audit (ES)** | — | https://tooltician.com/es/guias/auditoria-tecnica-web-negocios-pequenos/ |
+| **Guide: Excel reports with Python (ES)** | — | https://tooltician.com/es/guias/automatizar-reportes-excel-python/ |
+| **Guide: Static websites (ES)** | — | https://tooltician.com/es/guias/pagina-web-estatica-cuando-conviene/ |
 | **Engagement Terms** | https://tooltician.com/en/engagement/ | https://tooltician.com/es/engagement/ |
 | **Privacy Policy** | https://tooltician.com/en/privacy/ | https://tooltician.com/es/privacy/ |
 | **Terms of Use** | https://tooltician.com/en/terms/ | https://tooltician.com/es/terms/ |
 | **Cookie Notice** | https://tooltician.com/en/cookies/ | https://tooltician.com/es/cookies/ |
+
+### Production Work
+
+The work pages list ten public projects grouped by theme (Python & Data, Web & Apps, CLI & Tools, Products & Extensions). Each case states the role Tooltician played, a verification date, and linked evidence; clients under confidentiality are not listed.

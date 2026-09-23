@@ -63,6 +63,34 @@ dropped for lack of logs). 019 takes the template route (no client data).
 
 021+022 are file-disjoint — parallel-safe. 023 needs 022's table.
 
+## Content audit 2026-09-23 series (planned 2026-09-23, against `2a10c13`)
+
+Source: `docs/content-audit/audits/audit-20260923.md` (live audit, score
+78/100, findings H-01…H-12). Reconciliation, locked decisions, and the
+finding→plan matrix live in
+`docs/content-audit/audits/audit-20260923-response.md`. H-01 and H-07 are
+stale as written (live site already shows 10 projects and USD ranges); their
+residual work is owned by 029 and 026 respectively.
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 024 | Audit reconciliation + response doc | P1 | S | — | DONE (executed 2026-09-23 during plan authoring: live evidence re-verified, decisions locked, response doc written) |
+| 025 | i18n route registry + normalized sitemap hreflang | P1 | M | — | DONE (registry + serialize; validator green incl. red-then-green; 144/144 src, 169/169 built) |
+| 026 | Staged pricing pattern (diagnostic/build/retainer) | P1 | M | — | DONE (staged labels on home + 6 services; H-04 green; HTW snapshot no drift) |
+| 027 | Accessible service CTAs + shared guide CTA component | P1 | S | 026 | DONE (6 unique CTA names EN/ES; ArticleCta top+bottom in 3 guides; H-03/H-12 green) |
+| 028 | Accessible per-field errors in the intake form | P1 | M | — | DONE (per-field errors + summary + focus; behavioral case green incl. negative control) |
+| 029 | Case-study evidence model (role/date/CTA) | P1 | M | — | DONE (caseStudies.ts; 10 role/date metas + 10 CTAs per work page; H-06 green; D4–D10/TT/H2 repointed) |
+| 030 | Thematic H2 sections on the work pages | P1 | S | 029 | DONE (1 H1 → 4 H2 → 10 H3; filter hides empty groups; behavioral outline + group checks green) |
+| 031 | Root as a real bilingual x-default landing | P1 | M | 025 | DONE (landing + WebSite/Organization + stored-preference-only redirect; H-05 green; CSP MATCH) |
+| 032 | Guides hub + internal linking + contextual CTAs | P2 | M | 025, 027 | DONE (`/es/guias/` hub + ResourcesSection + footer link; H-08 green; sitemap + link checker clean) |
+| 033 | Structured-data parity (shared helpers, work/root schema) | P2 | S | 025, 029 | DONE (`jsonld.ts` builders; work CollectionPage+Breadcrumb+ItemList matching H3 order; H-11 green) |
+| 034 | Audit closeout (full verification, llms.txt, response doc) | P2 | M | 025–033 | DONE (12 §8 criteria verified; llms corpus updated; response doc closed; plans archived) |
+
+Waves: 0 = 024 (done); 1 = 025, 026, 028 (done); 2 = 027, 029, 031
+(done); 3 = 030, 032, 033 (done); 4 = 034 (done). **Audit series closed
+2026-09-23 — 11/11.** Full wave view, goto commands, and exit gates in
+`plans/ROADMAP.md`.
+
 ## Dependency notes
 
 - 008 and 007 first (small, user-facing correctness; independent of each other).
@@ -77,6 +105,27 @@ dropped for lack of logs). 019 takes the template route (no client data).
 - 010 and 015 both edit `.github/workflows/deploy.yml`: whoever lands second
   inserts adjacent to the first following the established step style (both plans state this).
 - 016 documents the final CI step list: read `deploy.yml` live at execution.
+
+Audit series (024–034) dependency notes:
+
+- 024 is done: it created the response doc and locked four decisions (root
+  landing, ES-only guides, role/date case evidence, generic routes stay 404).
+- 025 creates `src/data/routes.ts`; 031 (root), 032 (hub), and 033 (schema
+  URLs) consume it — never hardcode route pairs again.
+- 027 requires 026: both edit `src/components/ServicesSection.astro` (pricing
+  chips first, CTA names second).
+- 029 creates `src/data/caseStudies.ts`; 030 (H2 groups) and 033 (ItemList)
+  consume it.
+- 032 requires 025 (route group) and 027 (`ArticleCta`).
+- 025, 026, 029, 030, 031, 033 all append a group to `tests/run.js`: when two
+  land in the same wave (029+031, 030+033), whoever lands second appends at
+  the end following the established style.
+- 025 alone touches `package.json` and `.github/workflows/deploy.yml` (new
+  blocking sitemap step); no other plan in this series touches CI.
+- 031 must keep the inline GA4 stub byte-identical (CSP hash check); 033
+  refactors its JSON-LD afterwards.
+- 034 is the integration gate: no new code, only verification, llms corpus,
+  and index/status closure.
 
 ## Prior series (unchanged history)
 

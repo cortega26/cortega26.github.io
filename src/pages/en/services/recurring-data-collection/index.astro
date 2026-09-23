@@ -1,15 +1,12 @@
 ---
 import ServicePage from '../../../../components/ServicePage.astro';
 import { services } from '../../../../data/services';
+import { alternatesFor } from '../../../../data/routes';
 import '../../../../styles/global.css';
 
 const def = services['recurring-data'];
 const canonical = 'https://tooltician.com/en/services/recurring-data-collection/';
 const crossLocaleHref = '/es/servicios/recoleccion-recurrente-datos/';
-const alternates = [
-  { hreflang: 'en', href: canonical },
-  { hreflang: 'es', href: 'https://tooltician.com' + crossLocaleHref },
-  { hreflang: 'x-default', href: canonical },
-];
+const alternates = alternatesFor('service:' + def.serviceKey);
 ---
 <ServicePage lang="en" content={def.en} slug={def.slugEn} serviceKey={def.serviceKey} canonical={canonical} alternates={alternates} crossLocaleHref={crossLocaleHref} areaServed={def.areaServed} />

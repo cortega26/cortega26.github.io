@@ -1,5 +1,5 @@
 ---
-import { engagementSummary } from '../data/pricing';
+import { engagementCompact, engagementStages, retainerLine } from '../data/pricing';
 
 interface Props { lang: 'en' | 'es'; }
 const { lang } = Astro.props;
@@ -36,9 +36,9 @@ const en = {
   ],
   shapesLabel: 'Engagement shapes',
   shapes: [
-    { name: 'Scoped automation', range: engagementSummary.en.automation, note: 'international delivery', href: '/en/services/python-automation/' },
-    { name: 'Stabilization retainer', range: engagementSummary.en.retainer, note: 'optional, no lock-in', href: '/en/services/python-automation/#plans' },
-    { name: 'Web hygiene', range: engagementSummary.en.webDiagnostic, note: 'already priced', href: '/en/services/web-technical-hygiene/' },
+    { name: 'Scoped automation', range: engagementCompact('en', 'automation'), note: 'international delivery', href: '/en/services/python-automation/' },
+    { name: 'Stabilization retainer', range: retainerLine('en', 'automation'), note: 'optional, no lock-in', href: '/en/services/python-automation/#plans' },
+    { name: 'Web hygiene', range: `Diagnostic ${engagementStages('en', 'webHygiene').diagnostic}`, note: 'already priced', href: '/en/services/web-technical-hygiene/' },
     { name: 'Diagnostic call', range: 'free', note: '15 min', href: 'https://calendly.com/ciortega26' },
   ],
 };
@@ -68,9 +68,9 @@ const es = {
   ],
   shapesLabel: 'Modalidades de trabajo',
   shapes: [
-    { name: 'Automatización acotada', range: engagementSummary.es.automation, note: 'tarifa Chile / LATAM', href: '/es/servicios/automatizacion-python/' },
-    { name: 'Retainer de estabilización', range: engagementSummary.es.retainer, note: 'opcional, sin permanencia', href: '/es/servicios/automatizacion-python/#plans' },
-    { name: 'Higiene técnica web', range: engagementSummary.es.webDiagnostic, note: 'ya con precio', href: '/es/servicios/higiene-tecnica-web/' },
+    { name: 'Automatización acotada', range: engagementCompact('es', 'automation'), note: 'tarifa Chile / LATAM', href: '/es/servicios/automatizacion-python/' },
+    { name: 'Retainer de estabilización', range: retainerLine('es', 'automation'), note: 'opcional, sin permanencia', href: '/es/servicios/automatizacion-python/#plans' },
+    { name: 'Higiene técnica web', range: `Diagnóstico ${engagementStages('es', 'webHygiene').diagnostic}`, note: 'ya con precio', href: '/es/servicios/higiene-tecnica-web/' },
     { name: 'Llamada de diagnóstico', range: 'gratis', note: '15 min', href: 'https://calendly.com/ciortega26' },
   ],
   termsLabel: 'Condiciones de trabajo →',
@@ -118,7 +118,9 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
             <p class="svc-result"><span>{resultLabel}</span> {serviceResults[svc.title]}</p>
           )}
           {svc.href && (
-            <a class="btn btn-ghost btn-sm svc-inline-cta" href={svc.href}>{c.ctaLabel}</a>
+            <a class="btn btn-ghost btn-sm svc-inline-cta" href={svc.href}>
+              {c.ctaLabel}<span class="visually-hidden">: {svc.title}</span>
+            </a>
           )}
           <p class="svc-examples-label svc-desktop-detail">{c.examplesLabel}</p>
           <div class="svc-examples svc-desktop-detail">

@@ -101,6 +101,15 @@ const en = {
   privacyHref: '/en/privacy/',
   cookiesHref: '/en/cookies/',
   required: 'required',
+  fieldErrors: {
+    nameRequired: 'Enter your name.',
+    emailRequired: 'Enter your email address.',
+    emailType: 'Enter a valid email address.',
+    urlType: 'Enter a valid URL, including https://',
+    goalRequired: 'Choose an option.',
+    messageRequired: 'Add a short brief.',
+  },
+  summaryTemplate: 'Please fix: {fields}',
 };
 
 const es = {
@@ -165,6 +174,15 @@ const es = {
   privacyHref: '/es/privacy/',
   cookiesHref: '/es/cookies/',
   required: 'obligatorio',
+  fieldErrors: {
+    nameRequired: 'Ingresa tu nombre.',
+    emailRequired: 'Ingresa tu correo.',
+    emailType: 'Ingresa un correo válido.',
+    urlType: 'Ingresa una URL válida, con https://',
+    goalRequired: 'Elige una opción.',
+    messageRequired: 'Agrega un brief breve.',
+  },
+  summaryTemplate: 'Corrige: {fields}',
 };
 
 const c = lang === 'en' ? en : es;
@@ -191,8 +209,12 @@ const introCopy = c.intro[service];
   action={action}
   method="POST"
   data-track-form={`intake_${service}`}
-  novalidate
 >
+  <div class="intake-form__summary" role="alert" tabindex="-1" hidden data-summary-template={c.summaryTemplate}>
+    <span class="intake-form__summary-icon" aria-hidden="true" set:html={SVG_ALERT_TRIANGLE} />
+    <span data-summary-text></span>
+  </div>
+
   {c.heading && (
     <div class="intake-form__heading">
       <h3>{c.heading}</h3>
@@ -207,26 +229,30 @@ const introCopy = c.intro[service];
   <div class="intake-form__row">
     <div class="form-group">
       <label for={id('name')}>{c.nameLabel}</label>
-      <input type="text" id={id('name')} name="name" placeholder={c.namePh} required autocomplete="name" />
+      <input type="text" id={id('name')} name="name" placeholder={c.namePh} required autocomplete="name" data-error-required={c.fieldErrors.nameRequired} />
+      <p class="form-group__error" id={id('name-error')} hidden>{c.fieldErrors.nameRequired}</p>
     </div>
     <div class="form-group">
       <label for={id('email')}>{c.emailLabel}</label>
-      <input type="email" id={id('email')} name="email" placeholder={c.emailPh} required autocomplete="email" />
+      <input type="email" id={id('email')} name="email" placeholder={c.emailPh} required autocomplete="email" data-error-required={c.fieldErrors.emailRequired} data-error-type={c.fieldErrors.emailType} />
+      <p class="form-group__error" id={id('email-error')} hidden>{c.fieldErrors.emailRequired}</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for={id('url')}>{urlLabel}</label>
-    <input type="url" id={id('url')} name="site_url" placeholder={urlPh} inputmode="url" autocomplete="url" />
+    <input type="url" id={id('url')} name="site_url" placeholder={urlPh} inputmode="url" autocomplete="url" data-error-type={c.fieldErrors.urlType} />
+    <p class="form-group__error" id={id('url-error')} hidden>{c.fieldErrors.urlType}</p>
   </div>
 
   <div class="intake-form__row">
     <div class="form-group">
       <label for={id('goal')}>{c.goalLabel}</label>
-      <select id={id('goal')} name="goal" required>
+      <select id={id('goal')} name="goal" required data-error-required={c.fieldErrors.goalRequired}>
         <option value="" disabled selected>—</option>
         {goalOptions.map(o => <option value={o}>{o}</option>)}
       </select>
+      <p class="form-group__error" id={id('goal-error')} hidden>{c.fieldErrors.goalRequired}</p>
     </div>
     <div class="form-group">
       <label for={id('budget')}>{c.budgetLabel}</label>
@@ -247,7 +273,8 @@ const introCopy = c.intro[service];
 
   <div class="form-group">
     <label for={id('message')}>{c.messageLabel}</label>
-    <textarea id={id('message')} name="message" rows={4} placeholder={messagePh} required></textarea>
+    <textarea id={id('message')} name="message" rows={4} placeholder={messagePh} required data-error-required={c.fieldErrors.messageRequired}></textarea>
+    <p class="form-group__error" id={id('message-error')} hidden>{c.fieldErrors.messageRequired}</p>
   </div>
 
   <div class="intake-form__submit">
@@ -376,6 +403,52 @@ const introCopy = c.intro[service];
   .form-group input::placeholder,
   .form-group textarea::placeholder {
     color: var(--clr-text-faint);
+  }
+
+  .form-group input[aria-invalid='true'],
+  .form-group select[aria-invalid='true'],
+  .form-group textarea[aria-invalid='true'] {
+    border-color: #f87171;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.12);
+  }
+
+  .form-group__error {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #f87171;
+  }
+
+  .intake-form__summary {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radius-sm);
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    border-left: 3px solid #f87171;
+  }
+
+  .intake-form__summary[hidden] {
+    display: none;
+  }
+
+  .intake-form__summary-icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin-top: 0.1rem;
+  }
+
+  .intake-form__summary-icon :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .intake-form__submit {

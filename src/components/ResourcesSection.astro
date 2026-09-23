@@ -1,0 +1,93 @@
+---
+// ES-only resources strip for the home page (Plan 032): surfaces the three
+// published guides and links the /es/guias/ hub. Guide metadata comes from
+// src/data/guides.ts so the hub and this strip cannot drift.
+import { guides } from '../data/guides';
+---
+
+<section class="section" id="recursos">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="section-eyebrow reveal">Recursos</span>
+      <h2 class="section-title reveal">Guías para decidir con criterio</h2>
+      <div class="divider reveal"></div>
+      <p class="section-subtitle reveal">
+        Criterios prácticos para decidir cuándo automatizar, cuándo revisar lo técnico de un sitio
+        y cuándo conviene una página estática.
+      </p>
+    </div>
+
+    <div class="resources-grid">
+      {guides.map((guide, index) => (
+        <a class={`card-glass resource-card reveal reveal-delay-${(index % 2) + 1}`} href={guide.href}>
+          <h3 class="card-title">{guide.title}</h3>
+          <p class="resource-card__summary">{guide.description}</p>
+          <span class="resource-card__cta">Leer guía →</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="resources-all reveal">
+      <a class="btn btn-ghost" href="/es/guias/">Ver todas las guías →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+
+  .resource-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    text-decoration: none;
+  }
+
+  .resource-card .card-title {
+    font-size: 1rem;
+    line-height: 1.35;
+    color: var(--clr-text);
+  }
+
+  .resource-card__summary {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--clr-text-muted);
+    flex: 1;
+  }
+
+  .resource-card__cta {
+    font-family: var(--ff-label);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--clr-accent);
+  }
+
+  .resource-card:hover .card-title {
+    color: var(--clr-accent);
+  }
+
+  .resources-all {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 980px) {
+    .resources-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .resources-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

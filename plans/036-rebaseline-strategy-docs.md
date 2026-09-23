@@ -8,7 +8,7 @@
 > `plans/README.md` — unless a reviewer dispatched you and told you they
 > maintain the index.
 >
-> **Drift check (run first)**: `git diff --stat 1508fa2..HEAD -- docs/tasks/tooltician-strategy-execution-plan.md docs/tasks/tooltician-refresh-backlog.md docs/content-audit/map.md`
+> **Drift check (run first)**: `git diff --stat 7a9cc1b..HEAD -- docs/tasks/tooltician-strategy-execution-plan.md docs/tasks/tooltician-refresh-backlog.md docs/content-audit/map.md`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live files before proceeding; on a
 > mismatch, treat it as a STOP condition.
@@ -18,9 +18,9 @@
 - **Priority**: P1
 - **Effort**: S
 - **Risk**: LOW
-- **Depends on**: none (plans 037–040 reference the state this plan records; run it first)
+- **Depends on**: none (plans 037, 038, and 040 reference the state this plan records; run it first)
 - **Category**: direction (docs / roadmap truth)
-- **Planned at**: commit `1508fa2`, 2026-09-23
+- **Planned at**: commit `7a9cc1b`, 2026-09-23 (reconciled after plans 039/035; the three in-scope docs are unchanged since `1508fa2`, only the execution base moved)
 
 ## Why this matters
 
@@ -35,7 +35,7 @@ machine-scannable status cells, without deleting history. It changes no code.
 ## Current state
 
 Facts the executor needs, inlined (all verified by the advisor on 2026-09-23
-against commit `1508fa2`):
+against commit `7a9cc1b`):
 
 **`docs/tasks/tooltician-strategy-execution-plan.md`** (424 lines, last
 touched 2026-08-21 by the GA4 migration):
@@ -47,8 +47,9 @@ touched 2026-08-21 by the GA4 migration):
   `contact_intent`; `tests/analytics-service-funnel.mjs` (77 tests) and the
   `S0` group in `tests/run.js:1256-1305` verify the wiring.
 - TS-006 (line 170, §7 line 245) is `Pendiente` ("Enlazar el CV"), but the CV
-  is linked at `src/components/AboutSection.astro:56` and
-  `src/components/Footer.astro:80` with `data-track="cta_download_cv"`.
+  is linked at `src/components/AboutSection.astro:60` and
+  `src/components/Footer.astro:84` with `data-track="cta_download_cv"` (real
+  EN/ES PDFs per locale since plan 039).
 - §6 Fase 2 (lines 180–188) names `ResultsBand`, `PortfolioSection`,
   `ProofSection`, `ServiceSpotlight` as the home's sections. The current home
   imports only `HeroSection`, `ResultsBand`, `ServicesSection`,
@@ -99,8 +100,8 @@ artifact, not a current map.
 
 | Purpose | Command | Provenance | Expected on success |
 |---------|---------|------------|---------------------|
-| Docs-only diff | `git diff --name-only 1508fa2...HEAD` | executed (advisor ran git on the clean tree) | exactly the three in-scope files |
-| Confirm no code touched | `git diff --stat 1508fa2...HEAD -- src public scripts tests` | executed | empty output |
+| Docs-only diff | `git diff --name-only 7a9cc1b...HEAD` | declared (base refreshed in reconciliation; the advisor ran the equivalent command against the earlier base) | exactly the three in-scope files |
+| Confirm no code touched | `git diff --stat 7a9cc1b...HEAD -- src public scripts tests` | declared (base refreshed in reconciliation) | empty output |
 | Reconciliation heading present | `grep -c "Reconciliación de estado (2026-09-23)" docs/tasks/tooltician-strategy-execution-plan.md` | declared (heading absent from the file as read by the advisor) | `1` |
 | Refresh reconciliation present | `grep -c "Reconciliation (2026-09-23)" docs/tasks/tooltician-refresh-backlog.md` | declared (absent as read) | `1` |
 | Map banner present | `grep -c "Historical document" docs/content-audit/map.md` | declared (absent as read) | `1` |
@@ -135,7 +136,7 @@ artifact, not a current map.
 
 Run the two `git diff` commands from the table on the unmodified checkout.
 Expect the first to list nothing before you start (clean tree relative to
-`1508fa2`) and the second to be empty.
+`7a9cc1b`) and the second to be empty.
 
 **Verify**: both commands behave as above; `git status --short` shows a clean
 tree.
@@ -150,8 +151,8 @@ section verbatim (keep the blank line spacing style of the file):
 ## 0. Reconciliación de estado (2026-09-23)
 
 Este documento es la dirección, no el estado. El estado verificado contra
-`1508fa2` está abajo; las tablas §5–§7 se corrigen en consecuencia. Fuentes:
-`plans/README.md` (series 007–034), `docs/analytics-sprint-0.md` (Sprint 0),
+`7a9cc1b` está abajo; las tablas §5–§7 se corrigen en consecuencia. Fuentes:
+`plans/README.md` (series 007–040), `docs/analytics-sprint-0.md` (Sprint 0),
 y `docs/content-audit/audits/audit-20260923-response.md`.
 
 | Tarea | Estado real | Evidencia |
@@ -159,9 +160,9 @@ y `docs/content-audit/audits/audit-20260923-response.md`.
 | TS-003 CTAs comerciales | Parcial — superseded por Sprint 0 | `product-analytics.js` + `ServicePage.astro:111`; residual en plan 038 |
 | TS-004 enlaces salientes | Hecho (parcial) | `portfolio_click`/`proof_click` canónicos; `ProofSection` ya no se renderiza |
 | TS-005 test de instrumentación | Hecho | `tests/analytics-service-funnel.mjs`, `analytics-guard.mjs`, grupo S0 |
-| TS-006 CV enlazado | Hecho (Plan 017 + 039) | `AboutSection.astro:56`, `Footer.astro:80`; PDF real EN/ES por locale (plan 039) |
-| TS-007 trayectoria | Pendiente | Bloqueado por hechos de carrera; plan 039 |
-| TS-008 perfiles trackeados | Pendiente | Plan 039 |
+| TS-006 CV enlazado | Hecho (Plan 017 + 039) | `AboutSection.astro:60`, `Footer.astro:84`; PDF real EN/ES por locale (plan 039) |
+| TS-007 trayectoria | Pendiente | Diferido; hechos verificables ya en el CV (plan 039); requiere decisión del mantenedor |
+| TS-008 perfiles trackeados | Pendiente | Sin plan activo; GitHub/LinkedIn ya presentes en Footer |
 | TS-009/010/011 home | Hecho (parcial, `79b5347`) | Home consolidada; residual de prueba duplicada → plan 040 |
 | TS-012/013/014 casos | Parcial | Rol/fecha/CTA (Plan 029); métricas cuantificadas aparcadas |
 | TS-015 back-links | Pendiente | Recon/plantilla hechos (Plan 019); ejecución externa del operador |
@@ -189,8 +190,8 @@ text is quoted exactly; new text is what you write:
 | TS-004 | `Pendiente` | `` `Hecho (parcial)` — `portfolio_click`/`proof_click` canónicos `` |
 | TS-005 | `Pendiente` | `` `Hecho` — `tests/analytics-service-funnel.mjs` + grupo S0 `` |
 | TS-006 | `Pendiente` | `` `Hecho` (Plan 017 + 039) — CV EN/ES reales por locale `` |
-| TS-007 | `Pendiente` | `` `Pendiente` — bloqueado por hechos de carrera; plan 039 `` |
-| TS-008 | `Pendiente` | `` `Pendiente` — plan 039 `` |
+| TS-007 | `Pendiente` | `` `Pendiente` — diferido; hechos en el CV (plan 039), requiere decisión `` |
+| TS-008 | `Pendiente` | `` `Pendiente` — sin plan activo; GitHub/LinkedIn en Footer `` |
 | TS-009 | `Pendiente` | `` `Hecho` (`79b5347`) `` |
 | TS-010 | `Pendiente` | `` `Hecho (parcial)` (`79b5347`) — residual en plan 040 `` |
 | TS-011 | `Pendiente` | `` `Hecho` (`79b5347`) `` |
@@ -212,7 +213,7 @@ these rows:
 |---|---|
 | Eventos de conversión capturados | `` `Hecho` — Sprint 0 canónico (2026-09-16) `` |
 | Panel de analítica de eventos | `` `Hecho` — GA4 + 6 dimensiones (2026-09-16) `` |
-| Ruta de empleador | `` `Parcial` — CV enlazado (Plan 017); PDF placeholder, plan 039 `` |
+| Ruta de empleador | `` `Parcial` — CV real EN/ES enlazado (Planes 017 + 039); trayectoria pendiente `` |
 | Redundancia de prueba en home | `` `Hecho (parcial)` — consolidación `79b5347`; residual plan 040 `` |
 | Casos de estudio reales | `` `Parcial` — evidencia rol/fecha (Plan 029) `` |
 | JSON-LD de servicios | `` `Parcial` — builders/paridad (Plan 033); Rich Results externo `` |
@@ -234,7 +235,7 @@ Leave `Back-links desde productos propios` as `Pendiente`.
    dated row:
 
    ```markdown
-   | `2026-09-23` | `Reconciliación` | `— (docs)` | `Pass` | `n/a` | Sprint 0 cerrado | `ninguno` | `Ejecutar planes 035–040` |
+   | `2026-09-23` | `Reconciliación` | `— (docs)` | `Pass` | `n/a` | Sprint 0 cerrado; 035 y 039 aterrizados | `ninguno` | `Ejecutar planes 036–038 y 040` |
    ```
 
 **Verify**: `grep -c "2026-09-23" docs/tasks/tooltician-strategy-execution-plan.md` → at least 3.
@@ -247,7 +248,7 @@ Leave `Back-links desde productos propios` as `Pendiente`.
    ```markdown
    ## 0. Reconciliation (2026-09-23)
 
-   Verified against commit `1508fa2`. The wave scoreboards below are
+   Verified against commit `7a9cc1b`. The wave scoreboards below are
    historical; the master backlog §6 cells were corrected where the work has
    shipped. Details: `plans/README.md`.
 
@@ -304,8 +305,8 @@ Do not modify the existing table rows.
 Run:
 
 ```sh
-git diff --name-only 1508fa2...HEAD
-git diff --stat 1508fa2...HEAD -- src public scripts tests
+git diff --name-only 7a9cc1b...HEAD
+git diff --stat 7a9cc1b...HEAD -- src public scripts tests
 ```
 
 **Verify**: first command lists exactly the three in-scope files; second prints
@@ -323,15 +324,15 @@ Machine-checkable. ALL must hold:
 - [ ] `grep -c "Reconciliación de estado (2026-09-23)" docs/tasks/tooltician-strategy-execution-plan.md` → `1`
 - [ ] `grep -c "Reconciliation (2026-09-23)" docs/tasks/tooltician-refresh-backlog.md` → `1`
 - [ ] `grep -c "Historical document" docs/content-audit/map.md` → `1`
-- [ ] `git diff --stat 1508fa2...HEAD -- src public scripts tests` prints nothing
-- [ ] `git diff --name-only 1508fa2...HEAD` lists exactly the three in-scope files
+- [ ] `git diff --stat 7a9cc1b...HEAD -- src public scripts tests` prints nothing
+- [ ] `git diff --name-only 7a9cc1b...HEAD` lists exactly the three in-scope files
 - [ ] `plans/README.md` status row updated
 
 ## STOP conditions
 
 Stop and report back (do not improvise) if:
 
-- The drift check shows any in-scope file changed since `1508fa2` and the
+- The drift check shows any in-scope file changed since `7a9cc1b` and the
   excerpts in "Current state" no longer match.
 - A status cell quoted above is not found verbatim in the target table row
   (someone already edited it) — report which row, do not guess a replacement.
@@ -343,7 +344,7 @@ Stop and report back (do not improvise) if:
 
 For the human/agent who owns this code after the change lands:
 
-- This reconciliation is a snapshot at `1508fa2`; the next audit should append
+- This reconciliation is a snapshot at `7a9cc1b`; the next audit should append
   a new dated section rather than editing this one.
 - Plans 037–040 each reference the state recorded here. If one of them is
   rejected, update the corresponding row in the §0 table with a dated note.

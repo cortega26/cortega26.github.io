@@ -104,7 +104,7 @@ text) and plan 039 wires them per locale.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 035 | Live-host production verification (script + scheduled workflow) | P1 | M | — | TODO |
+| 035 | Live-host production verification (script + scheduled workflow) | P1 | M | — | DONE (branch `advisor/035-production-check` @ `30e93e3`, pending operator merge; reviewer-verified 2026-09-23: live check PASS — 29/29 URLs, headers, CSP hash, fixed paths; negative control exit 1; YAML OK; 209/209 src) |
 | 036 | Re-baseline strategy/refresh/audit-map docs to shipped state | P1 | S | — | TODO |
 | 037 | Content measurement loop (Search Console runbook + day-60 pilot review) | P1 | S | 036 (soft) | TODO |
 | 038 | Analytics coverage: home service cards + guide CTAs | P2 | M | — | TODO |

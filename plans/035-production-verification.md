@@ -7,7 +7,7 @@
 > in `plans/README.md` — unless a reviewer dispatched you and told you they
 > maintain the index.
 >
-> **Drift check (run first)**: `git diff --stat 1508fa2..HEAD -- scripts/check-production.mjs .github/workflows/production-check.yml package.json README.md docs/tasks/maintenance-checklist.md`
+> **Drift check (run first)**: `git diff --stat 720521f..HEAD -- scripts/check-production.mjs .github/workflows/production-check.yml package.json README.md docs/tasks/maintenance-checklist.md`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition.
@@ -19,7 +19,7 @@
 - **Risk**: LOW
 - **Depends on**: none
 - **Category**: direction (production verification / operations)
-- **Planned at**: commit `1508fa2`, 2026-09-23
+- **Planned at**: commit `720521f`, 2026-09-23 (reconciled after plan 039; the only in-scope change since `1508fa2` is an additive paragraph in `maintenance-checklist.md` item 1 — item 2, the excerpt below, is unchanged)
 
 ## Why this matters
 
@@ -72,8 +72,9 @@ Facts the executor needs, inlined:
   (paso 5 del plan 034).
   ```
 
-- `docs/tasks/maintenance-checklist.md:28-42` — the A+ posture is re-checked
-  by hand:
+- `docs/tasks/maintenance-checklist.md:31-45` — the A+ posture is re-checked
+  by hand (line numbers shifted +3 when plan 039 appended a résumé paragraph
+  to item 1; item 2's content below is unchanged):
 
   ```markdown
   ## 2. A+ security posture
@@ -329,7 +330,7 @@ Machine-checkable. ALL must hold:
 - [ ] YAML parse of `.github/workflows/production-check.yml` prints `YAML OK`
 - [ ] `grep -n "check:prod" README.md docs/tasks/maintenance-checklist.md` returns one hit each
 - [ ] `npm run check` exits 0 and `node tests/run.js` exits 0
-- [ ] `git diff --name-only 1508fa2...HEAD` lists only the five in-scope files
+- [ ] `git diff --name-only 720521f...HEAD` lists only the five in-scope files
       (three dots — merge-base comparison)
 - [ ] `plans/README.md` status row updated
 

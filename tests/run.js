@@ -1366,7 +1366,7 @@ group('S0b · Home service cards and guide CTAs carry canonical service context'
   }
 });
 
-group('D6 · Home proof division of labor', () => {
+group('D6b · Home proof division of labor', () => {
   const hero = read('src/components/HeroSection.astro') || '';
   const band = read('src/components/ResultsBand.astro') || '';
   assert(

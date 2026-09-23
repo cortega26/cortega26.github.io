@@ -1366,6 +1366,18 @@ group('S0b · Home service cards and guide CTAs carry canonical service context'
   }
 });
 
+group('D6 · Home proof division of labor', () => {
+  const hero = read('src/components/HeroSection.astro') || '';
+  const band = read('src/components/ResultsBand.astro') || '';
+  assert(
+    'hero names the live store exactly once per locale (text + href)',
+    (hero.match(/elrincondeebano/g) || []).length === 4,
+    `elrincondeebano occurrences: ${(hero.match(/elrincondeebano/g) || []).length}`
+  );
+  assert('hero does not repeat the quantified band stats', !hero.includes('100+ SKUs'), 'Hero still repeats the SKU count');
+  assert('proof band owns the quantified stats', band.includes("value: '100+'") && band.includes("unit: 'SKUs'"), 'ResultsBand stats missing');
+});
+
 // ─── Summary ──────────────────────────────────────────────────────────────
 
 const total = passed + failed;

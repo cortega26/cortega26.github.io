@@ -113,10 +113,10 @@ built EN/ES pages show live star counts; no CTA points at `#contact-form`.
 
 Progress: 10/10 DONE (all waves complete).
 
-## Follow-up series — trust transfer (017–020, all TODO)
+## Follow-up series — trust transfer (017–020, all DONE)
 
-Wave 5, all scopes file-disjoint (parallel-safe). Entry points use
-`plans/<file>` until archived.
+Wave 5, all scopes file-disjoint (parallel-safe). Archived under
+`plans/archive/`.
 
 | Plan | Title | Pri | Eff | Status |
 |------|-------|-----|-----|--------|
@@ -127,7 +127,7 @@ Wave 5, all scopes file-disjoint (parallel-safe). Entry points use
 
 Progress (follow-up): 4/4 DONE.
 
-## Growth series (021–023, all TODO)
+## Growth series (021–023, all DONE)
 
 Protective tests + ES-first organic engine (pilot with kill switch).
 
@@ -251,15 +251,15 @@ direction notes. Verdicts reviewed with the maintainer 2026-09-16: one item
 is next-series candidate, two are opportunistic/data-gated, two moved to
 Rejected below, two parked. Do NOT silently absorb these into past waves.
 
-- [ ] **Behavioral form/filter tests** (from 008/009) — NEXT-SERIES
-  CANDIDATE. Playwright submit-count test (exactly one POST per brief) +
-  filter-interaction test. Effort M. Infra cost already sunk (Playwright is
-  a devDependency and CI installs the browser for the HTW step). The
-  double-submit bug class has no automated coverage today.
+- [x] **Behavioral form/filter tests** (from 008/009) — DONE via Plan 021
+  (submit-count + filter interaction) and extended by Plan 028 (accessible
+  validation case). No open work remains.
 - [ ] **Case-study depth** (direction D3) — PARKED as personal habit, not
   code work. Blocked on a willing client. Action: add a testimonial/case
   ask to the project closeout habit; the quarterly runbook review is the
-  trigger. Effort M when unblocked (design/spike, not a build).
+  trigger. Effort M when unblocked (design/spike, not a build). Plan 029
+  shipped the role/verification-date layer; quantified results remain
+  data-gated.
 - [ ] **Per-service IntakeForm options** (from 007) — DATA-GATED. Revisit
   only after ~30 days of per-service GA4 data (now collected via 007+011):
   tailor a service's options only if its briefs prove unqualified. Effort S.
@@ -276,7 +276,11 @@ Rejected below, two parked. Do NOT silently absorb these into past waves.
 - HTW bespoke pages → `ServicePage` migration (HIGH risk / L effort; gated
   behind the 003 snapshot net, which holds).
 - Performance optimization pass (no architectural win found).
-- Dependency migration (`npm audit` clean, Astro 7 current).
+- Dependency migration as a project (superseded 2026-09-23: Dependabot
+  advisories on dev dependencies were fixed with a lockfile-only
+  `npm audit fix` — Astro 7.3.4, sharp 0.35.4, svgo 4.1.0, smol-toml 1.9.0;
+  `npm audit` back to 0 and the full suite green. Reopen only if a major
+  upgrade is required by a real constraint).
 - Making the link audit or CSP check CI-blocking (flake rate must be
   addressed first — see 010/015 maintenance notes).
 - Server-side analytics fallback (rejected 2026-09-16: needs an owned

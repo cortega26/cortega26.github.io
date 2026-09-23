@@ -185,8 +185,10 @@ Carried over from the previous index (still valid, not re-audited):
   `ServiceContent` type is extended to model the bespoke content.
 - **Performance optimization pass** — no algorithmic/architectural win found;
   not worth a plan (onlyKnob: sequential stats fetch, owned by Plan 012).
-- **Dependency migration** — `npm audit` clean, Dependabot active, Astro 7
-  current line; no case for any migration plan.
+- **Dependency migration** — superseded 2026-09-23: Dependabot advisories on
+  dev dependencies (sharp, svgo, smol-toml, Astro transitive tree) were fixed
+  with a lockfile-only `npm audit fix`; `npm audit` is back to 0 and the full
+  suite is green. No framework migration is planned.
 - **Credential/secret exposure** — `.env` untracked + gitignored,
   `.env.example` names-only, Formspree endpoint public by design, GA4
   measurement ID public by design. No finding.

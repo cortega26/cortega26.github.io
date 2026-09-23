@@ -113,7 +113,7 @@ resolved (service page scope or service-qualified brief form).
 | Event | Real action → trigger | Params |
 |---|---|---|
 | `service_view` | A service page becomes available (`<main data-service-id>` at load); once per service per page load | `service_id`, `service_category` |
-| `service_engage` | First meaningful interaction showing interest in a service: intent-chip click, or first input into that service's brief form. Never page load; once per service per page load | `service_id`, `service_category` |
+| `service_engage` | First meaningful interaction showing interest in a service: intent-chip click, service-card CTA / price-chip click (home), guide CTA click, or first input into that service's brief form. Never page load; once per service per page load | `service_id`, `service_category` |
 | `brief_start` | First input into any brief form; once per form context per page load | `service_id`?, `service_category`? |
 | `brief_submit` | Brief submit attempted (after native validation passes); every attempt counts | `service_id`?, `service_category`? |
 | `brief_success` | Formspree `response.ok` — the primary qualified-lead signal | `service_id`?, `service_category`? |
@@ -121,7 +121,7 @@ resolved (service page scope or service-qualified brief form).
 | `book_call` | Calendly CTA clicked — call-booking intent, economically distinct from a brief | `cta_location`, `service_id`?, `service_category`? |
 | `email_copy` | Email address successfully copied to clipboard | `service_id`?, `service_category`? |
 | `proof_click` | Outbound verification click: ResultsBand "check it yourself" links, service evidence badges | `service_id`?, `service_category`? |
-| `portfolio_click` | Portfolio project link clicked (repo, live site, store, CI) | `service_id`?, `service_category`? |
+| `portfolio_click` | Portfolio project link clicked (repo, live site, store, CI); also service example badges on the home cards | `service_id`?, `service_category`? |
 | `cv_download` | CV PDF link clicked | — |
 | `template_open` | Scoping-template document opened (evaluation depth) | `service_id`?, `service_category`? |
 | `language_select` | Gateway language card chosen | — |
@@ -157,7 +157,7 @@ service_view → book_call / email_copy / contact_intent (contact paths)
    `service_id` for generic content.
 2. Stamp the page scope: `<main data-service-id="<service_id>">` →
    `service_view` is automatic.
-3. Interest signals: `data-service-engage` (fires `service_engage`, deduped).
+3. Interest signals: `data-service-engage` (fires `service_engage`, deduped). Home service cards stamp data-service-id on the card and data-service-engage on the CTA/chip; example badges use data-portfolio-click; guide CTAs pass serviceId to ArticleCta.
 4. Brief forms work automatically via `intake-form.js` (scope resolves from the
    nearest `[data-service-id]` first, then the `intake_<service>` form name).
 5. Commercially distinct actions get explicit attributes: `data-book-call`,
@@ -346,11 +346,11 @@ CF visits / GA4 sessions:  Notes/anomalies:
 ## 14. Known gaps / non-goals
 
 - No scroll-depth or time-on-page instrumentation (scope kept minimal).
-- Guide pages and work pages carry no `service_id` (correct per §3);
-  per-article granularity is future work — GA4 page dimensions cover volume.
-- ProofSection card links and ServicesSection example badges have no canonical
-  event yet (candidate: extend `proof_click` stamping — needs per-card service
-  mapping first).
+- Guide/work page granularity: resolved (plan 038) — guide CTAs are
+  service-scoped; work-page case CTAs and project links already emit
+  canonical events.
+- Home service cards, example badges, and price chips: resolved (plan 038).
+  ProofSection was removed from the home in `79b5347`; its file is orphaned.
 - Legacy events still flow on localhost/dev and ignore DNT; only the canonical
   layer suppresses. Canonical is the reporting source of truth.
 - No server-side event validation (static site; GA4 filters apply).

@@ -916,6 +916,17 @@ if (BUILT) {
     distES.includes('/assets/docs/carlos-ortega-resume-es.pdf'),
     'ES locale CV href wrong'
   );
+  assert(
+    '[built] home cards carry service scope + engage stamps',
+    distEN.includes('data-service-id="automation"') && distEN.includes('data-service-engage') && distES.includes('data-service-id="automation"'),
+    'home service stamps missing from dist'
+  );
+  const distGuide = read('dist/es/guias/automatizar-reportes-excel-python/index.html') || '';
+  assert(
+    '[built] guide carries service scope + engage stamps',
+    distGuide.includes('data-service-id="automation"') && distGuide.includes('data-service-engage'),
+    'guide stamps missing from dist'
+  );
 }
 
 group('H-04 · Staged pricing labels on home, services, and HTW', () => {
@@ -1327,6 +1338,31 @@ group('EM · Résumés wired per locale', () => {
     footer.includes('carlos-ortega-resume.pdf') && footer.includes('carlos-ortega-resume-es.pdf') && footer.includes('lang === \'en\''),
     'Footer CV href not locale-aware'
   );
+});
+
+group('S0b · Home service cards and guide CTAs carry canonical service context', () => {
+  const servicesSection = read('src/components/ServicesSection.astro') || '';
+  const registry = JSON.parse(read('src/data/service-registry.json'));
+  const registryIds = registry.services.map((s) => s.service_id).sort();
+  const stampedIds = [...servicesSection.matchAll(/serviceId: '([^']+)'/g)].map((m) => m[1]);
+  assert('every card/chip serviceId exists in the registry', stampedIds.every((id) => registryIds.includes(id)), JSON.stringify(stampedIds));
+  assert('cards are stamped with data-service-id', servicesSection.includes('data-service-id={svc.serviceId}'), 'missing card scope');
+  assert('card CTAs + chips engage the service', (servicesSection.match(/data-service-engage/g) || []).length === 2, 'engage stamps');
+  assert('example badges count as outbound portfolio clicks', (servicesSection.match(/data-portfolio-click/g) || []).length === 2, 'badge stamps');
+  assert('calendly chip books a call', servicesSection.includes('data-book-call={s.bookCall'), 'chip book-call missing');
+
+  const articleCta = read('src/components/ArticleCta.astro') || '';
+  assert('ArticleCta carries a service scope', articleCta.includes('serviceId?: string') && articleCta.includes('data-service-id={serviceId}'), 'ArticleCta scope missing');
+  assert('ArticleCta anchors engage the service', (articleCta.match(/data-service-engage/g) || []).length === 3, 'ArticleCta engage stamps');
+
+  for (const rel of [
+    'src/pages/es/guias/auditoria-tecnica-web-negocios-pequenos/index.astro',
+    'src/pages/es/guias/automatizar-reportes-excel-python/index.astro',
+    'src/pages/es/guias/pagina-web-estatica-cuando-conviene/index.astro',
+  ]) {
+    const src = read(rel) || '';
+    assert(`${rel} passes serviceId twice`, (src.match(/serviceId=/g) || []).length === 2, 'ArticleCta props');
+  }
 });
 
 // ─── Summary ──────────────────────────────────────────────────────────────

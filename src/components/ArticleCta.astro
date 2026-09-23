@@ -15,6 +15,7 @@ interface Props {
   detailPrefix: string;
   serviceLabel: string;
   serviceHref: string;
+  serviceId?: string;
 }
 const {
   variant,
@@ -27,11 +28,12 @@ const {
   detailPrefix,
   serviceLabel,
   serviceHref,
+  serviceId,
 } = Astro.props;
 ---
 
 {variant === 'top' ? (
-  <section class="article-cta-band">
+  <section class="article-cta-band" data-service-id={serviceId}>
     <div class="container">
       <div class="article-cta article-cta--top card-glass reveal">
         <div>
@@ -39,22 +41,22 @@ const {
           <p class="article-cta__top-title"><strong>{title}</strong></p>
           <p class="article-cta__top-body">{topBody ?? body}</p>
         </div>
-        <a class="btn btn-primary" href={ctaHref}>{ctaLabel}</a>
+        <a class="btn btn-primary" data-service-engage href={ctaHref}>{ctaLabel}</a>
       </div>
     </div>
   </section>
 ) : (
   <>
-    <div class="card-glass article-cta reveal">
+    <div class="card-glass article-cta reveal" data-service-id={serviceId}>
       <div>
         <p class="article-cta__eyebrow">{eyebrow}</p>
         <h3 class="card-title">{title}</h3>
         <p class="body-copy">{body}</p>
       </div>
-      <a class="btn btn-primary" href={ctaHref}>{ctaLabel}</a>
+      <a class="btn btn-primary" data-service-engage href={ctaHref}>{ctaLabel}</a>
     </div>
     <p class="body-copy article-alt">
-      {detailPrefix}{' '}<a href={serviceHref}>{serviceLabel}</a>.
+      {detailPrefix}{' '}<a data-service-engage href={serviceHref}>{serviceLabel}</a>.
     </p>
   </>
 )}

@@ -11,6 +11,11 @@ row is an informational article that converts THROUGH exactly one mapped service
 page (its CTA). Kill criterion per row: impressions window is 60 days post-publish
 unless the row says otherwise.
 
+> **Review checkpoint:** the pilot guides' day-60 review, Search Console
+> setup, and the next-batch rule live in
+> [`content-pilot-review.md`](content-pilot-review.md). Do not publish the
+> remaining NEW rows (#5, #6, #8, #9) before that review passes.
+
 ## Indexable-URL inventory (no-cannibalization basis, verified 2026-09-16)
 
 Source: `src/pages` walk (no `dist/` in worktree; drift confirmed CLEAN against

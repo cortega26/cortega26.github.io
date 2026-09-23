@@ -10,6 +10,7 @@ Record every run here (newest first):
 
 | Date | Item | Result |
 |---|---|---|
+| `2026-09-23` | 7. Content pilot review scheduled | `Pending` — day-60 checkpoint `2026-11-15`; Search Console not yet verified |
 | `YYYY-MM-DD` | Full quarterly pass (items 1–6) | `Pending` |
 
 ## 1. Time-bound claims
@@ -96,3 +97,11 @@ sitemap integration in `astro.config.mjs`.
 How: after any offering/service-list change, confirm both `llms.txt` files
 describe the current services and that the sitemap still covers the current
 routes. Rebuild if needed (`npm run build`) and re-check the built output.
+
+## 7. Content pilot review
+
+Where: `docs/tasks/content-pilot-review.md`.
+How: at each review date (first: `2026-11-15`), run the Search Console review
+and apply the decision matrix. If Search Console is still not verified, record
+`BLOCKED` with the date — never estimate impressions.
+

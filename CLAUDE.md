@@ -28,7 +28,6 @@ Astro config (`astro.config.mjs`) uses `@astrojs/sitemap` with i18n config — d
 Each section component receives a `lang: 'en' | 'es'` prop and defines inline `en`/`es` copy objects:
 - `Navbar.astro` — Sticky nav with lang switch and CTA
 - `HeroSection.astro` — Title, routes panel, highlights, proof signals, operating notes
-- `ProofSection.astro` — Delivery signals with track + catalog layout
 - `PortfolioSection.astro` — Project cards with client-side filter buttons (Python/Web/CLI/Data)
 - `ServicesSection.astro` — 6 service cards with SVG icons
 - `AboutSection.astro` — Who, what, preferred stack

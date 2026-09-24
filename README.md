@@ -39,7 +39,7 @@ It is intentionally lightweight and focused on:
 Astro static site (`output: 'static'`, config in `astro.config.mjs`):
 
 - `src/pages/` — routes: `index.astro` language gateway, `en/` + `es/` homepages, `en/services/*` + `es/servicios/*` service pages, `en/work/` + `es/trabajo/`, `[lang]/[document].astro` legal pages
-- `src/components/` — section components (`Navbar`, `HeroSection`, `ServicesSection`, `PortfolioSection`, `ProofSection`, `AboutSection`, `ContactSection`, `Footer`, …)
+- `src/components/` — section components (`Navbar`, `HeroSection`, `ServicesSection`, `PortfolioSection`, `AboutSection`, `ContactSection`, `Footer`, …)
 - `src/layouts/` — `BaseLayout.astro` HTML shell (SEO meta, Open Graph, JSON-LD, fonts, nav)
 - `src/data/` — single-source content (`services.ts`, `pricing.ts`, `siteDocuments.ts`)
 - `src/styles/` — `global.css` design system

@@ -909,18 +909,6 @@ group('H-04 · Staged pricing labels on home, services, and HTW', () => {
   const esHtw = read('dist/es/servicios/higiene-tecnica-web/index.html') || '';
   const enHtw = read('dist/en/services/web-technical-hygiene/index.html') || '';
 
-  // True when some occurrence of `amount` has `stage` within ±240 chars.
-  const pairs = (html, amount, stage) => {
-    let from = 0;
-    while (true) {
-      const idx = html.indexOf(amount, from);
-      if (idx === -1) return false;
-      const window = html.slice(Math.max(0, idx - 240), idx + 240).toLowerCase();
-      if (window.includes(stage.toLowerCase())) return true;
-      from = idx + amount.length;
-    }
-  };
-
   assert(
     'H-04 ES home shows staged amounts (Diagnóstico + Construcción)',
     esHome.includes('Diagnóstico') && esHome.includes('Construcción'),
@@ -931,12 +919,59 @@ group('H-04 · Staged pricing labels on home, services, and HTW', () => {
     enHome.includes('Diagnostic') && enHome.includes('Build'),
     'EN home is missing a stage label'
   );
-  assert('H-04 ES service pairs 3 UF with Diagnóstico', pairs(esService, '3 UF', 'Diagnóstico'));
-  assert('H-04 ES service pairs 30 UF with Construcción', pairs(esService, '30 UF', 'Construcción'));
-  assert('H-04 EN service pairs $290 with Diagnostic', pairs(enService, '$290', 'Diagnostic'));
-  assert('H-04 EN service pairs $1,500 with Build', pairs(enService, '$1,500', 'Build'));
-  assert('H-04 ES HTW pairs 1 UF with Diagnóstico', pairs(esHtw, '1 UF', 'Diagnóstico'));
-  assert('H-04 EN HTW pairs $69 with Diagnostic', pairs(enHtw, '$69', 'Diagnostic'));
+  assert('H-04 ES HTW pairs 1 UF with Diagnóstico', esHtw.includes('Diagnóstico 1 UF'), 'ES HTW is missing its exact diagnostic pair');
+  assert('H-04 EN HTW pairs $69 with Diagnostic', enHtw.includes('Diagnostic ($69, credited toward implementation)'), 'EN HTW is missing its exact diagnostic pair');
+});
+
+group('PRICING · Exact stage/amount pairs per service and locale', () => {
+  const enPages = {
+    automation: 'dist/en/services/python-automation/index.html',
+    'recurring-data': 'dist/en/services/recurring-data-collection/index.html',
+    'internal-tools': 'dist/en/services/internal-tools/index.html',
+    financial: 'dist/en/services/financial-tooling/index.html',
+    web: 'dist/en/services/static-sites/index.html',
+  };
+  const esPages = {
+    automation: 'dist/es/servicios/automatizacion-python/index.html',
+    'recurring-data': 'dist/es/servicios/recoleccion-recurrente-datos/index.html',
+    'internal-tools': 'dist/es/servicios/herramientas-internas/index.html',
+    financial: 'dist/es/servicios/herramientas-financieras/index.html',
+    web: 'dist/es/servicios/sitios-web/index.html',
+  };
+  const amounts = {
+    automation:     { en: ['$290', '$1,500', '$3,200', '$290/mo'],  es: ['3 UF', '30 UF', '60 UF', '6 UF/mes'] },
+    // recurring-data reuses the automation price band by design (see services.ts); values equal automation's.
+    'recurring-data': { en: ['$290', '$1,500', '$3,200', '$290/mo'],  es: ['3 UF', '30 UF', '60 UF', '6 UF/mes'] },
+    'internal-tools': { en: ['$290', '$1,800', '$3,600', '$290/mo'], es: ['3 UF', '35 UF', '70 UF', '6 UF/mes'] },
+    financial:      { en: ['$390', '$2,400', '$4,800', '$390/mo'],  es: ['4 UF', '45 UF', '90 UF', '8 UF/mes'] },
+    web:            { en: ['$190', '$1,200', '$2,600', '$150/mo'],  es: ['2 UF', '25 UF', '50 UF', '3 UF/mes'] },
+  };
+  const enPatterns = (a) => [
+    `Diagnostic from ${a[0]}`,
+    `From ${a[1]} (one-time)`,
+    `From ${a[2]} (one-time)`,
+    `From ${a[3]} (per month)`,
+  ];
+  const esPatterns = (a) => [
+    `Diagnóstico desde ${a[0]}`,
+    `Desde ${a[1]} (por proyecto)`,
+    `Desde ${a[2]} (por proyecto)`,
+    `Desde ${a[3]} (por mes)`,
+  ];
+  for (const [key, path] of Object.entries(enPages)) {
+    const html = read(path);
+    if (!html) { assert(`[built] ${key} EN page (skipped — run --built)`, true); continue; }
+    enPatterns(amounts[key].en).forEach((pattern) => {
+      assert(`EN ${key}: contains "${pattern}"`, html.includes(pattern), `Missing exact pair in ${path}`);
+    });
+  }
+  for (const [key, path] of Object.entries(esPages)) {
+    const html = read(path);
+    if (!html) { assert(`[built] ${key} ES page (skipped — run --built)`, true); continue; }
+    esPatterns(amounts[key].es).forEach((pattern) => {
+      assert(`ES ${key}: contains "${pattern}"`, html.includes(pattern), `Missing exact pair in ${path}`);
+    });
+  }
 });
 
 group('H-13 · Recurring-data pages carry collection copy, not automation copy', () => {

@@ -1379,6 +1379,36 @@ group('D6b · Home proof division of labor', () => {
   assert('proof band owns the quantified stats', band.includes("value: '100+'") && band.includes("unit: 'SKUs'"), 'ResultsBand stats missing');
 });
 
+group('H-14 · Legal pages emit ISO-8601 dates in schema and OG meta', () => {
+  const pages = [
+    { rel: 'dist/en/privacy/index.html', iso: '2026-09-01' },
+    { rel: 'dist/es/privacy/index.html', iso: '2026-09-01' },
+    { rel: 'dist/en/cookies/index.html', iso: '2026-08-21' },
+    { rel: 'dist/es/cookies/index.html', iso: '2026-08-21' },
+    { rel: 'dist/en/terms/index.html', iso: '2026-05-17' },
+    { rel: 'dist/es/terms/index.html', iso: '2026-05-17' },
+    { rel: 'dist/en/engagement/index.html', iso: '2026-05-27' },
+    { rel: 'dist/es/engagement/index.html', iso: '2026-05-27' },
+  ];
+  const first = read(pages[0].rel);
+  if (!first) {
+    assert('[built] H-14 ISO date checks (skipped — run --built)', true);
+    return;
+  }
+  const isoRe = /^\d{4}-\d{2}-\d{2}$/;
+  for (const { rel, iso } of pages) {
+    const html = read(rel) || '';
+    const jsonLd = (html.match(/"datePublished":"([^"]*)"/) || [])[1] || '';
+    const og = (html.match(/article:published_time" content="([^"]*)"/) || [])[1] || '';
+    assert(`${rel} JSON-LD datePublished is ISO ${iso}`, jsonLd === iso && isoRe.test(jsonLd), `got ${JSON.stringify(jsonLd)}`);
+    assert(`${rel} OG article:published_time is ISO ${iso}`, og === iso && isoRe.test(og), `got ${JSON.stringify(og)}`);
+  }
+  const enPrivacy = read('dist/en/privacy/index.html') || '';
+  const esPrivacy = read('dist/es/privacy/index.html') || '';
+  assert('H-14 EN privacy still shows the human date', enPrivacy.includes('Last updated') && enPrivacy.includes('1 Sep 2026'), 'visible EN label changed');
+  assert('H-14 ES privacy still shows the human date', esPrivacy.includes('Última actualización') && esPrivacy.includes('1 de septiembre de 2026'), 'visible ES label changed');
+});
+
 // ─── Summary ──────────────────────────────────────────────────────────────
 
 const total = passed + failed;

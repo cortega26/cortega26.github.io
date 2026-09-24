@@ -52,8 +52,8 @@ const pageJsonLd = {
     name: 'Tooltician',
     url: 'https://tooltician.com/',
   },
-  datePublished: content.updatedAt,
-  dateModified: content.updatedAt,
+  datePublished: content.updatedAtIso,
+  dateModified: content.updatedAtIso,
 };
 
 const navItems = lang === 'en'
@@ -79,8 +79,8 @@ const navItems = lang === 'en'
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(pageJsonLd)} />
-    <meta property="article:published_time" content={content.updatedAt} />
-    <meta property="article:modified_time" content={content.updatedAt} />
+    <meta property="article:published_time" content={content.updatedAtIso} />
+    <meta property="article:modified_time" content={content.updatedAtIso} />
   </Fragment>
 
   <Navbar lang={lang} items={navItems} ctaHref={contactHref} switchHref={switchHref} />

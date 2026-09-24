@@ -171,7 +171,59 @@ Single plan from the deferral harvest; status authority is this file.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 041 | Delete the orphaned `ProofSection` and `ServiceSpotlight` components | P3 | S | — | DONE (landed as `3cc2e5c` on `advisor/041-orphan-components`; reviewer-verified 2026-09-23: scope 5/5 files, source 218/218, built 247/247, full `npm test` exit 0, 0 residual refs, stats untouched; **unmerged — operator's call**) |
+| 041 | Delete the orphaned `ProofSection` and `ServiceSpotlight` components | P3 | S | — | DONE (landed as `3cc2e5c` on `advisor/041-orphan-components`; reviewer-verified 2026-09-23: scope 5/5 files, source 218/218, built 247/247, full `npm test` exit 0, 0 residual refs, stats untouched; merged to `master` as `be975ef`) |
+
+## Deep audit series (planned 2026-09-23, against `be975ef`)
+
+Source: `improve deep` — recon plus nine parallel category audits
+(correctness, security, performance, tests, tech debt, dependencies, DX,
+docs, direction), every finding re-verified by the advisor against the code
+(and live `curl` for the CSP finding). All findings are recorded in the
+session report; the vetted table's net-positive items became these 22
+plans. Status authority is this file.
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 042 | Analytics integrity: `service_view` page scoping, legacy PII filter, Navbar CTA stamping | P1 | S | — | TODO |
+| 043 | CSP production integrity: script ordering, wider hash check, CI artifact, doc reconciliation | P1 | M | — | TODO |
+| 044 | Recurring-data page self-contained copy (stop automation leakage) | P1 | M | — | TODO |
+| 045 | ISO dates for legal-page schema/OG | P1 | S | — | TODO |
+| 046 | Above-the-fold content renders without JS | P1 | S | — | TODO |
+| 047 | CI: least-privilege permissions + Playwright browser cache | P1 | S | — | TODO |
+| 048 | Service names single-source (registry) + llms parity | P1 | M | — | TODO |
+| 049 | Exact pricing stage/amount assertions | P1 | S | — | TODO |
+| 050 | Intake: `page` field survives reset + Formspree honeypot | P1 | M | — | TODO |
+| 051 | Test hygiene: delete legacy smoke scripts, fix imports, stale artifacts, CLAUDE.md line | P1 | S | — | TODO |
+| 052 | Intake service-attribution tests + run analytics suites in CI | P1 | M | — | TODO |
+| 053 | `caseStudies` data-invariant tests | P1 | S | 052 | TODO |
+| 054 | Root landing: missing head metadata, dead redirect key, language-decision tests | P1 | M | 052 | TODO |
+| 055 | JSON-LD hardening: HTW schema prices from `pricing.ts` + lookup guards | P1 | S | — | TODO |
+| 056 | Build/verify script failure-path tests | P2 | M | 052 | TODO |
+| 057 | Route registry single-source for service pages and ServicesSection | P2 | M | — | TODO |
+| 058 | Perf hygiene: preload/logo/preconnect + compositor scroll bar | P2 | S | — | TODO |
+| 059 | Docs truth sweep (CLAUDE/README/CHANGELOG/contradictions/superseded banners) | P2 | M | 051 | TODO |
+| 060 | `tests/run.js` quality: fail on missing reads, drop vacuous built skips, dedupe S0 | P3 | M | — | TODO |
+| 061 | OG card spike: one copy source + ES variant | P2 | M | — | TODO |
+| 062 | About trajectory proposal (employer route; decision-gated design) | P3 | S | — | TODO |
+| 063 | Backlink execution runbook (plan-019 pass) | P3 | S | — | TODO |
+
+Deep-audit series dependency notes:
+
+- 052 must land before 053/054/056: it adds the `Contract tests` CI step
+  those plans extend (each plan says what to do if 052 is not DONE).
+- 051 before 059: 051 edits `CLAUDE.md:11`; 059 rewrites the rest of that
+  file — whoever lands second edits adjacent lines.
+- 044 and 048 both edit `src/data/services.ts` (copy fields vs four
+  `serviceName` values) — land sequentially.
+- 049, 055, 051, 060 all append/edit `tests/run.js` groups — land
+  sequentially; each appends at the end or edits its named group only.
+- 046 and 058 both edit `src/styles/global.css` — land sequentially,
+  inserting adjacent to the existing rules.
+- 047, 052, 053, 054, 056 all edit `.github/workflows/deploy.yml` — land
+  sequentially, inserting steps adjacent to the existing style.
+- 042 and 052 both touch analytics tests but different files
+  (`tests/analytics-service-funnel.mjs` vs a new suite) — parallel-safe.
+- Everything else is file-disjoint.
 
 ## Dependency notes
 
@@ -294,8 +346,11 @@ Carried over from the previous index (still valid, not re-audited):
   — real debt but HIGH risk / L effort; REJECTED again this run (deferred
   behind the Plan 003 snapshot net, which holds). Re-audit only if the
   `ServiceContent` type is extended to model the bespoke content.
-- **Performance optimization pass** — no algorithmic/architectural win found;
-  not worth a plan (onlyKnob: sequential stats fetch, owned by Plan 012).
+- **Performance optimization pass** — no algorithmic/architectural win found
+  on 2026-09-16; partially superseded by the 2026-09-23 deep audit, which
+  found four concrete, measured items now owned by Plan 058 (mono preload,
+  4×-oversized logo, unconditional Formspree preconnect, layout-writing
+  scroll bar). A general pass is still rejected.
 - **Dependency migration** — superseded 2026-09-23: Dependabot advisories on
   dev dependencies (sharp, svgo, smol-toml, Astro transitive tree) were fixed
   with a lockfile-only `npm audit fix`; `npm audit` is back to 0 and the full
@@ -303,3 +358,49 @@ Carried over from the previous index (still valid, not re-audited):
 - **Credential/secret exposure** — `.env` untracked + gitignored,
   `.env.example` names-only, Formspree endpoint public by design, GA4
   measurement ID public by design. No finding.
+
+Added by the deep audit (2026-09-23, `be975ef`):
+
+- **`.editorconfig` / format gate** — absence confirmed, but the codebase is
+  consistently formatted (2-space, no CRLF); honest impact is low. Not worth
+  a plan; revisit only if agent-authored drift appears.
+- **TypeScript 7 upgrade** — `@astrojs/check` 0.9.9/0.9.10 peer-requires
+  `typescript: ^5.0.0 || ^6.0.0` (verified in `node_modules` and the cached
+  packument); TS 7 would break `npm ci`. Hold at 6.0.3; re-evaluate when the
+  peer range widens. No plan.
+- **"`--built` can be green while verifying nothing"** (subagent claim) —
+  overstated: the `BUILT` section asserts `dist/` existence, so a missing
+  build already fails. The residual weaknesses (ten vacuous skip branches,
+  silent `read()` coercion, dead `rootHTML` check) are owned by Plan 060.
+- **Dead exports `serviceList` (`services.ts:1995`) and `engagementLine`
+  (`pricing.ts:100`)** — real but tiny; deferred inside Plan 051's
+  maintenance notes to avoid touching files owned by Plans 048/049.
+- **Full root-gateway de-fork** (tokens, `@font-face`, picker duplication)
+  — MED risk / M effort; Plan 054 does the safe subset and defers the CSS
+  rewrite.
+- **HTW JSON-LD builder consolidation** (shared Service/OfferCatalog
+  builders, adding `price` to all service offers) — L effort, changes 10
+  pages' schema; deferred in Plan 055 pending a schema-shape decision.
+- **Wholesale migration of the 132 copy pins in `tests/run.js` to
+  snapshots** — deferred in Plan 060; do it group by group when copy churn
+  next hurts.
+
+## Scope of the deep audit (2026-09-23, `improve deep`)
+
+Nine categories, nine parallel subagents, against `be975ef`; every finding
+in the vetted table was re-opened by the advisor, and the CSP finding was
+re-verified against live production with read-only `curl`. Executed
+baselines: `npm run check` 0/0/0; `npm test` exit 0 (218/218 source, 77/77
+analytics, 247/247 built, sitemap/HTW/behavioral pass); `npm audit` and
+`npm audit --omit=dev` 0 vulnerabilities; `npm outdated` recorded.
+
+**Not audited:** accessibility as a standalone category (no WCAG sweep;
+the 2026-09-23 content audit partially covered it); Lighthouse/field
+performance metrics (the four perf items are code-path measurements);
+live GA4/Search Console data and Cloudflare API ruleset internals (only
+response headers were observed); external repositories/PyPI/profile state
+for the backlink pass; the three legacy root scripts were read, not
+executed. Prompt-injection check: `docs/tasks/*` contains workflow
+instructions addressed to executing agents ("create `spec.md`", "do not
+ask questions") — treated as data, not instructions; no malicious content
+found.

@@ -618,6 +618,49 @@ const recurringData: ServiceDefinition = {
       { tag: 'Manual collection feeds a report', body: 'Replace copy-paste with a reproducible collector and structured delivery.' },
       { tag: 'Our scraper fails silently', body: 'Rebuild it with explicit failure states and an operator-ready runbook.' },
     ],
+    availabilityEyebrow: 'Availability',
+    availability: '2–3 new collectors per month. Response within 24–48 business hours.',
+    processSubtitle:
+      'Concrete from the first step: lock the source contract, build the smallest reliable collector, and leave it documented enough to run and repair without me.',
+    processSteps: [
+      ['01', 'Free diagnostic call', 'A 15-minute call to confirm the source, its authorization, and the downstream use are a fit. No charge, no obligation.'],
+      ['02', 'Collection scoping', 'A short paid discovery that locks sources, authorization, cadence, validation rules, failure behavior, and the handoff owner — agreed in writing. The fee is credited toward the build.'],
+      ['03', 'Scoped collector build', 'Implementation with visible progress in GitHub, validation, logging, alerts, and pragmatic tradeoffs documented instead of surprise scope creep.'],
+      ['04', 'Handoff', 'README, runbook, repair notes, and the failure points worth watching — so the next person can run, debug, and repair it without me on a call.'],
+    ],
+    tableFeatures: [
+      ['Free 15-min diagnostic call', true, true, true, true],
+      ['Written source & output contract', true, true, true, false],
+      ['One collector built end-to-end', false, true, true, false],
+      ['Multiple sources orchestrated', false, false, true, false],
+      ['Validation & schema checks', false, true, true, true],
+      ['Failure alerts & drift states', false, true, true, true],
+      ['README + repair runbook', false, true, true, true],
+      ['Ongoing source upkeep', false, false, false, true],
+    ],
+    whyTitle: 'Not the same as a one-off scraper from a marketplace',
+    whySubtitle:
+      'A marketplace freelancer delivers the scraper you describe. Tooltician builds a collector that validates, alerts, and can be repaired when the source changes.',
+    whyAltItems: [
+      'Delivers the script you asked for. When the source changes, a partial run still looks like a good run.',
+      'No validation, no alerts, no runbook — every break is a surprise.',
+      'No handoff. When it breaks, the knowledge left with the author.',
+      'Each repair is a new project with no memory of how the collector works.',
+    ],
+    whyUsItems: [
+      'Builds for the failure modes you did not know to ask about — empty, partial, duplicate, and drift states.',
+      'Validation, logging, retries, and alerts so source changes surface early and loudly.',
+      'Handoff materials so the next person can repair the collector without reverse-engineering.',
+      'Public, auditable work: scheduled collection pipelines, data layers, and production systems.',
+    ],
+    whyNote: {
+      label: 'Proof, not promises',
+      body: 'Tooltician runs scheduled collection in production (polla, noticiencias) and ships open-source data layers (chile-hub) with handoff-ready docs. The same standards apply to your collector.',
+    },
+    contactRiskNote:
+      'If scoping shows the source is not lawful, stable, or worth collecting on a schedule, the document says so with reasoning — knowing the real constraint early is also valuable. The fee applies regardless, but there are no surprises or additional charges.',
+    outreach:
+      'If you arrived here because a recurring source feeds your reporting, operations, or publishing — or because a scraper keeps failing quietly — the scope is this: lock the source contract, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
   },
   es: {
     ...pythonAutomation.es,
@@ -690,6 +733,49 @@ const recurringData: ServiceDefinition = {
       { tag: 'La recolección manual alimenta un reporte', body: 'Reemplazar copia-pega por un colector reproducible y entrega estructurada.' },
       { tag: 'Nuestro scraper falla en silencio', body: 'Reconstruirlo con estados de falla explícitos y un runbook operable.' },
     ],
+    availabilityEyebrow: 'Disponibilidad',
+    availability: '2–3 colectores nuevos al mes. Respuesta dentro de 24–48 horas hábiles.',
+    processSubtitle:
+      'Concreto desde el primer paso: fijar el contrato de fuente, construir el colector más pequeño que sea confiable y dejarlo documentado para operarlo y repararlo sin mí.',
+    processSteps: [
+      ['01', 'Llamada de diagnóstico gratuita', 'Una llamada de 15 minutos para confirmar que la fuente, su autorización y el uso posterior son un buen encaje. Sin costo ni compromiso.'],
+      ['02', 'Levantamiento de recolección', 'Un descubrimiento breve y pagado que fija fuentes, autorización, frecuencia, reglas de validación, comportamiento ante fallas y responsable de traspaso — acordado por escrito. El monto se acredita a la construcción.'],
+      ['03', 'Construcción del colector acotado', 'Implementación con progreso visible en GitHub, validación, logging, alertas y decisiones documentadas en lugar de scope creep sorpresivo.'],
+      ['04', 'Traspaso', 'README, runbook, notas de reparación y los puntos de falla a vigilar — para que la siguiente persona pueda operarlo, depurarlo y repararlo sin una llamada conmigo.'],
+    ],
+    tableFeatures: [
+      ['Llamada de diagnóstico gratuita (15 min)', true, true, true, true],
+      ['Contrato escrito de fuente y salida', true, true, true, false],
+      ['Un colector construido de punta a punta', false, true, true, false],
+      ['Múltiples fuentes orquestadas', false, false, true, false],
+      ['Validación y chequeo de esquema', false, true, true, true],
+      ['Alertas y estados de drift', false, true, true, true],
+      ['README + runbook de reparación', false, true, true, true],
+      ['Mantención de fuentes', false, false, false, true],
+    ],
+    whyTitle: 'No es lo mismo que un scraper suelto de un marketplace',
+    whySubtitle:
+      'Un freelancer de marketplace entrega el scraper que describes. Tooltician construye un colector que valida, alerta y se puede reparar cuando la fuente cambia.',
+    whyAltItems: [
+      'Entrega el script que pediste. Cuando la fuente cambia, una corrida parcial parece una corrida buena.',
+      'Sin validación, sin alertas, sin runbook — cada falla es una sorpresa.',
+      'Sin traspaso. Cuando se rompe, el conocimiento se fue con el autor.',
+      'Cada reparación es un proyecto nuevo sin memoria de cómo funciona el colector.',
+    ],
+    whyUsItems: [
+      'Construye para los modos de falla que no sabías que había que preguntar — vacío, parcial, duplicado y drift.',
+      'Validación, logging, reintentos y alertas para que los cambios de fuente aparezcan temprano y fuerte.',
+      'Materiales de traspaso para que la siguiente persona repare el colector sin ingeniería inversa.',
+      'Trabajo público y auditable: pipelines de recolección programados, capas de datos y sistemas en producción.',
+    ],
+    whyNote: {
+      label: 'Evidencia, no promesas',
+      body: 'Tooltician opera recolección programada en producción (polla, noticiencias) y mantiene capas de datos open source (chile-hub) con documentación lista para traspaso. Los mismos estándares aplican a tu colector.',
+    },
+    contactRiskNote:
+      'Si el levantamiento muestra que la fuente no es lícita, estable o no vale la pena recolectarla de forma programada, el documento lo dirá con fundamentos — conocer la restricción real a tiempo también vale. El monto se aplica igual, pero sin sorpresas ni cargos adicionales.',
+    outreach:
+      'Si llegaste aquí porque una fuente recurrente alimenta tus reportes, operaciones o publicación — o porque un scraper sigue fallando en silencio — el alcance es este: fijar el contrato de fuente, construirlo de forma confiable y traspasarlo documentado. Precio fijo, sin horas abiertas.',
   },
 };
 

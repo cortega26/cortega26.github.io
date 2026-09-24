@@ -939,6 +939,37 @@ group('H-04 · Staged pricing labels on home, services, and HTW', () => {
   assert('H-04 EN HTW pairs $69 with Diagnostic', pairs(enHtw, '$69', 'Diagnostic'));
 });
 
+group('H-13 · Recurring-data pages carry collection copy, not automation copy', () => {
+  const enRecurring = read('dist/en/services/recurring-data-collection/index.html');
+  const esRecurring = read('dist/es/servicios/recoleccion-recurrente-datos/index.html');
+  if (!enRecurring || !esRecurring) {
+    assert('[built] H-13 recurring-data copy checks (skipped — run --built)', true);
+    return;
+  }
+  const enAutomation = read('dist/en/services/python-automation/index.html') || '';
+  const esAutomation = read('dist/es/servicios/automatizacion-python/index.html') || '';
+
+  assert('H-13 EN recurring page has no bankrecon leak', !enRecurring.includes('bankrecon'), 'automation whyNote proof leaked');
+  assert('H-13 EN recurring page has no rutificador leak', !enRecurring.includes('rutificador'), 'automation whyNote proof leaked');
+  assert('H-13 EN recurring page has no automation availability', !enRecurring.includes('2–3 new builds per month'), 'automation availability leaked');
+  assert('H-13 EN recurring page has no automation process step', !enRecurring.includes('Automation scoping'), 'automation process copy leaked');
+  assert('H-13 ES recurring page has no bankrecon leak', !esRecurring.includes('bankrecon'), 'automation whyNote proof leaked');
+  assert('H-13 ES recurring page has no rutificador leak', !esRecurring.includes('rutificador'), 'automation whyNote proof leaked');
+  assert('H-13 ES recurring page has no automation availability', !esRecurring.includes('2–3 proyectos nuevos al mes'), 'automation availability leaked');
+  assert('H-13 ES recurring page has no automation process step', !esRecurring.includes('Diagnóstico de automatización'), 'automation process copy leaked');
+  assert('H-13 EN recurring page carries collection availability', enRecurring.includes('2–3 new collectors per month'), 'collection availability missing');
+  assert('H-13 ES recurring page carries collection availability', esRecurring.includes('2–3 colectores nuevos al mes'), 'collection availability missing');
+
+  assert('H-13 EN automation page still carries its availability marker', enAutomation.includes('2–3 new builds per month'), 'automation marker changed — update H-13');
+  assert('H-13 EN automation page still carries its process marker', enAutomation.includes('Automation scoping'), 'automation marker changed — update H-13');
+  assert('H-13 EN automation page still cites bankrecon', enAutomation.includes('bankrecon'), 'automation marker changed — update H-13');
+  assert('H-13 EN automation page still cites rutificador', enAutomation.includes('rutificador'), 'automation marker changed — update H-13');
+  assert('H-13 ES automation page still carries its availability marker', esAutomation.includes('2–3 proyectos nuevos al mes'), 'automation marker changed — update H-13');
+  assert('H-13 ES automation page still carries its process marker', esAutomation.includes('Diagnóstico de automatización'), 'automation marker changed — update H-13');
+  assert('H-13 ES automation page still cites bankrecon', esAutomation.includes('bankrecon'), 'automation marker changed — update H-13');
+  assert('H-13 ES automation page still cites rutificador', esAutomation.includes('rutificador'), 'automation marker changed — update H-13');
+});
+
 group('H-10 · Accessible per-field errors in the intake form', () => {
   const src = intakeForm();
   const js = read('public/assets/js/intake-form.js') || '';

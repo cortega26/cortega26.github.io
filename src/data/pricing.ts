@@ -29,6 +29,11 @@ export const pricing = {
   },
 } as const;
 
+/** Numeric amount for schema.org price fields: "$69" → "69", "1 UF" → "1", "$279/mo" → "279". */
+export function priceAmount(value: string): string {
+  return value.replace(/[^0-9.]/g, '');
+}
+
 export type PricingLang = 'en' | 'es';
 export type PricingServiceKey = 'automation' | 'internalTools' | 'financial' | 'staticSites' | 'webHygiene';
 

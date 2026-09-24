@@ -1444,6 +1444,84 @@ group('H-14 · Legal pages emit ISO-8601 dates in schema and OG meta', () => {
   assert('H-14 ES privacy still shows the human date', esPrivacy.includes('Última actualización') && esPrivacy.includes('1 de septiembre de 2026'), 'visible ES label changed');
 });
 
+group('055 · JSON-LD guards and HTW schema price parity', () => {
+  const parse = (html) =>
+    [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+      .map((match) => { try { return JSON.parse(match[1]); } catch { return null; } })
+      .filter(Boolean);
+
+  const enHome = read('dist/en/index.html');
+  const esHome = read('dist/es/index.html');
+  const enWork = read('dist/en/work/index.html');
+  const esWork = read('dist/es/trabajo/index.html');
+  const enHtw = read('dist/en/services/web-technical-hygiene/index.html');
+  const esHtw = read('dist/es/servicios/higiene-tecnica-web/index.html');
+  if (!enHome || !esHome || !enWork || !esWork || !enHtw || !esHtw) {
+    assert('[built] 055 JSON-LD guard checks (skipped — run --built)', true);
+    return;
+  }
+
+  for (const [label, html] of [['dist/en/index.html', enHome], ['dist/es/index.html', esHome]]) {
+    const blocks = parse(html);
+    const person = blocks.find((b) => Array.isArray(b['@type']) && b['@type'].includes('Person'));
+    assert(`055 ${label} Person makesOffer exists`, !!person && Array.isArray(person.makesOffer), 'Person block or makesOffer missing');
+    if (!person || !Array.isArray(person.makesOffer)) continue;
+    person.makesOffer.forEach((offer, i) => {
+      assert(
+        `055 ${label} offer[${i}] has a non-empty description`,
+        typeof offer.description === 'string' && offer.description.length > 0,
+        `offer[${i}] (${offer.name || 'unnamed'}) is missing its description`
+      );
+      assert(
+        `055 ${label} offer[${i}] url starts with https://tooltician.com/`,
+        typeof offer.url === 'string' && offer.url.startsWith('https://tooltician.com/'),
+        `offer[${i}] url was ${JSON.stringify(offer.url)}`
+      );
+    });
+  }
+
+  for (const [label, html] of [['dist/en/work/index.html', enWork], ['dist/es/trabajo/index.html', esWork]]) {
+    const blocks = parse(html);
+    const itemList = blocks.find((b) => b['@type'] === 'ItemList');
+    assert(`055 ${label} ItemList exists`, !!itemList && Array.isArray(itemList.itemListElement), 'ItemList missing');
+    if (!itemList || !Array.isArray(itemList.itemListElement)) continue;
+    itemList.itemListElement.forEach((entry, i) => {
+      const item = entry.item || {};
+      assert(
+        `055 ${label} item[${i}] has a non-empty name`,
+        typeof item.name === 'string' && item.name.length > 0,
+        `item[${i}] is missing its name`
+      );
+      if ('url' in item) {
+        assert(
+          `055 ${label} item[${i}] url is non-empty and starts with http`,
+          typeof item.url === 'string' && item.url.length > 0 && item.url.startsWith('http'),
+          `item[${i}] url was ${JSON.stringify(item.url)}`
+        );
+      } else {
+        assert(`055 ${label} item[${i}] omits empty url instead of emitting ""`, true);
+      }
+    });
+  }
+
+  const htwPrices = (html) => {
+    const blocks = parse(html);
+    const service = blocks.find((b) => b['@type'] === 'Service');
+    const offers = service?.hasOfferCatalog?.itemListElement || [];
+    return offers.map((o) => o.price);
+  };
+  assert(
+    '055 EN HTW JSON-LD prices match pricing.ts bands',
+    JSON.stringify(htwPrices(enHtw)) === JSON.stringify(['69', '499', '899', '999', '279']),
+    `Got ${JSON.stringify(htwPrices(enHtw))}`
+  );
+  assert(
+    '055 ES HTW JSON-LD prices match pricing.ts bands',
+    JSON.stringify(htwPrices(esHtw)) === JSON.stringify(['1', '7', '13', '15', '4']),
+    `Got ${JSON.stringify(htwPrices(esHtw))}`
+  );
+});
+
 // ─── Summary ──────────────────────────────────────────────────────────────
 
 const total = passed + failed;

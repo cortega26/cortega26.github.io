@@ -311,7 +311,7 @@
     if (!doc || typeof doc.addEventListener !== 'function') return;
     // service_view: a service page stamps its identity on <main data-service-id>.
     try {
-      const scope = doc.querySelector('[data-service-id]');
+      const scope = doc.querySelector('main[data-service-id]');
       if (scope) serviceView(scope.getAttribute('data-service-id'));
     } catch (_) {
       /* never break the page */

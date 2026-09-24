@@ -74,7 +74,7 @@ const resolvedSwitchHref = switchHref ?? (lang === 'en' ? '/es/' : '/en/');
           >{switchLabel}</a>
         </li>
         <li>
-          <a class="navbar__cta" href={resolvedCtaHref}>
+          <a class="navbar__cta" href={resolvedCtaHref} data-track="cta_send_brief" data-track-loc="navbar" data-contact-intent="send_brief">
             {ctaLabel}
           </a>
         </li>

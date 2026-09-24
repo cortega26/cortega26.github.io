@@ -83,7 +83,7 @@ function loadAnalytics(opts = {}) {
     navigator: { doNotTrack: opts.dnt, globalPrivacyControl: opts.gpc },
     document: {
       readyState: 'complete',
-      querySelector: (sel) => (sel === '[data-service-id]' ? scopeEl : null),
+      querySelector: (sel) => (sel === 'main[data-service-id]' ? scopeEl : null),
       addEventListener: (name, fn) => {
         listeners[name] = listeners[name] || [];
         listeners[name].push(fn);
@@ -296,6 +296,32 @@ group('S8 · Declarative bindings', () => {
   assert('unstamped outbound link ignored (no generic open)', calls.length === 7, `${calls.length}`);
 });
 
+group('S8b · service_view page scoping (main-only)', () => {
+  const cardCalls = [];
+  const cardEl = { getAttribute: (n) => (n === 'data-service-id' ? 'automation' : null) };
+  const cardSandbox = {
+    console,
+    URL,
+    Element: FakeElement,
+    navigator: {},
+    document: {
+      readyState: 'complete',
+      querySelector: (sel) => (sel === '[data-service-id]' ? cardEl : sel === 'main[data-service-id]' ? null : null),
+      addEventListener: () => {},
+    },
+  };
+  cardSandbox.window = {
+    location: { hostname: 'tooltician.com', protocol: 'https:', origin: 'https://tooltician.com' },
+    ttTrack: (name, params) => cardCalls.push({ name, params }),
+  };
+  cardSandbox.globalThis = cardSandbox;
+  vm.createContext(cardSandbox);
+  vm.runInContext(read('public/assets/js/product-analytics.js'), cardSandbox, { filename: 'product-analytics.js' });
+  assert('card-only [data-service-id] emits no service_view', cardCalls.length === 0, JSON.stringify(cardCalls));
+  const main = loadAnalytics({ serviceScope: 'web' });
+  assert('main[data-service-id] emits exactly one service_view', main.calls.length === 1 && main.calls[0].name === 'service_view' && main.calls[0].params.service_id === 'web', JSON.stringify(main.calls));
+});
+
 group('S9 · track.js transport (legacy intact, truthful pass-through)', () => {
   const gtagCalls = [];
   const sandbox = { console, document: { addEventListener: () => {} }, window: {} };
@@ -313,6 +339,12 @@ group('S9 · track.js transport (legacy intact, truthful pass-through)', () => {
   assert('service params pass through', gtagCalls[1][2].service_id === 'automation' && gtagCalls[1][2].service_category === 'automation', JSON.stringify(gtagCalls[1]));
   sandbox.ttTrack('brief_success', { service_id: 'automation', tool_id: 'x', page_path: '/y', action_type: 'z', sneaky: 1 });
   assert('tool_*/page_path/action_type/non-strings dropped', !('tool_id' in gtagCalls[2][2]) && !('page_path' in gtagCalls[2][2]) && !('action_type' in gtagCalls[2][2]) && !('sneaky' in gtagCalls[2][2]), JSON.stringify(gtagCalls[2]));
+  sandbox.ttTrack('form_start', { label: 'user@example.com' });
+  assert('legacy email-like label dropped', !('tt_label' in gtagCalls[3][2]), JSON.stringify(gtagCalls[3]));
+  sandbox.ttTrack('form_start', { location: 'api_key=SECRET' });
+  assert('legacy secret-like location dropped', !('tt_location' in gtagCalls[4][2]), JSON.stringify(gtagCalls[4]));
+  sandbox.ttTrack('form_start', { label: 'hero' });
+  assert('legacy clean label passes', gtagCalls[5][2].tt_label === 'hero', JSON.stringify(gtagCalls[5]));
 });
 
 group('S10 · Static privacy guards', () => {

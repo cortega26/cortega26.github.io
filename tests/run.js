@@ -1291,6 +1291,8 @@ group('S0 · Service registry, transport, and declarative wiring', () => {
   assert('HTW pages stamp htw scope', htwEN.includes('data-service-id="htw"') && htwES.includes('data-service-id="htw"'), 'HTW scope missing');
   const gateway = read('src/pages/index.astro') || '';
   assert('gateway loads analytics + tracks language choice', gateway.includes('/assets/js/product-analytics.js') && gateway.includes('data-language-select'), 'Gateway wiring missing');
+  const navbarSrc = read('src/components/Navbar.astro') || '';
+  assert('Navbar CTA carries brief intent with navbar placement', navbarSrc.includes('data-contact-intent="send_brief"') && navbarSrc.includes('data-track-loc="navbar"'), 'Navbar CTA stamp missing');
 });
 
 group('EM · Résumés wired per locale', () => {

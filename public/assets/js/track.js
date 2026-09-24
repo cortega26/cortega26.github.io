@@ -30,12 +30,15 @@
     'error_stage',
   ];
   const MAX_PARAM_LEN = 100;
+  const SECRET_PATTERN = /api[_-]?key|secret|token|passwd|password|bearer|session|cookie|auth|credential|private[_-]?key/i;
+  const EMAIL_PATTERN = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 
   /** @param {unknown} value */
   function sanitizeParam(value) {
     if (typeof value !== 'string') return undefined;
     const trimmed = value.trim();
     if (!trimmed) return undefined;
+    if (SECRET_PATTERN.test(trimmed) || EMAIL_PATTERN.test(trimmed)) return undefined;
     return trimmed.slice(0, MAX_PARAM_LEN);
   }
 
@@ -47,9 +50,12 @@
       if (typeof typedWindow.gtag === 'function') {
         /** @type {Record<string, unknown>} */
         const params = {};
-        if (payload.location !== undefined) params.tt_location = payload.location;
-        if (payload.label !== undefined) params.tt_label = payload.label;
-        if (payload.status !== undefined) params.tt_status = payload.status;
+        const cleanLocation = sanitizeParam(payload.location);
+        if (cleanLocation !== undefined) params.tt_location = cleanLocation;
+        const cleanLabel = sanitizeParam(payload.label);
+        if (cleanLabel !== undefined) params.tt_label = cleanLabel;
+        const cleanStatus = sanitizeParam(payload.status);
+        if (cleanStatus !== undefined) params.tt_status = cleanStatus;
         for (const key of CANONICAL_PARAMS) {
           const clean = sanitizeParam(payload[key]);
           if (clean !== undefined) params[key] = clean;

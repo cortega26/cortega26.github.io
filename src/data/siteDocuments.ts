@@ -14,6 +14,8 @@ export interface SiteDocumentContent {
   intro: string;
   updatedLabel: string;
   updatedAt: string;
+  /** Machine-readable ISO-8601 date (YYYY-MM-DD) for schema/OG; `updatedAt` stays the display string. */
+  updatedAtIso: string;
   sections: SiteDocumentSection[];
   closing: string;
   ctaLabel: string;
@@ -30,6 +32,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         'This page explains what this site collects, why it is collected, and which third-party services are involved when you contact me or schedule a call.',
       updatedLabel: 'Last updated',
       updatedAt: '1 Sep 2026',
+      updatedAtIso: '2026-09-01',
       sections: [
         {
           heading: 'What this site collects',
@@ -86,6 +89,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         'Esta página explica qué recopila este sitio, por qué se recopila y qué servicios de terceros intervienen cuando contactas o agendas una llamada.',
       updatedLabel: 'Última actualización',
       updatedAt: '1 de septiembre de 2026',
+      updatedAtIso: '2026-09-01',
       sections: [
         {
           heading: 'Qué recopila este sitio',
@@ -144,6 +148,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         'This site keeps browser storage to a minimum, but some local preferences and third-party services still rely on technical storage to work correctly.',
       updatedLabel: 'Last updated',
       updatedAt: '21 Aug 2026',
+      updatedAtIso: '2026-08-21',
       sections: [
         {
           heading: 'What is used directly on this site',
@@ -180,6 +185,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         'Este sitio mantiene el almacenamiento del navegador al mínimo, pero algunas preferencias locales y servicios de terceros dependen de almacenamiento técnico para funcionar bien.',
       updatedLabel: 'Última actualización',
       updatedAt: '21 de agosto de 2026',
+      updatedAtIso: '2026-08-21',
       sections: [
         {
           heading: 'Qué usa directamente este sitio',
@@ -218,6 +224,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         'These terms set a practical baseline for using this public portfolio site and its contact routes. They are intentionally narrow and tied to how the site actually works today.',
       updatedLabel: 'Last updated',
       updatedAt: '17 May 2026',
+      updatedAtIso: '2026-05-17',
       sections: [
         {
           heading: 'Site purpose',
@@ -260,6 +267,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
         'Estos términos fijan una base práctica para usar este portafolio público y sus rutas de contacto. Son intencionalmente acotados y corresponden a cómo opera hoy el sitio.',
       updatedLabel: 'Última actualización',
       updatedAt: '17 de mayo de 2026',
+      updatedAtIso: '2026-05-17',
       sections: [
         {
           heading: 'Propósito del sitio',
@@ -303,6 +311,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       intro: 'A good project runs on clear expectations, not assumptions. These terms set out what each side commits to, how ownership and confidentiality work, and what happens if circumstances change — so both parties can stay focused on the work itself. They apply to every scoped engagement unless a separately signed written agreement takes precedence.',
       updatedLabel: 'Last updated',
       updatedAt: '27 May 2026',
+      updatedAtIso: '2026-05-27',
       sections: [
         {
           heading: 'My commitments',
@@ -371,6 +380,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
       intro: 'Un buen proyecto funciona con expectativas claras, no con suposiciones. Estas condiciones definen a qué se compromete cada parte, cómo funcionan la titularidad y la confidencialidad, y qué ocurre si las circunstancias cambian — para que ambas partes puedan enfocarse en el trabajo. Aplican a todo proyecto acotado salvo que un acuerdo escrito firmado por ambas partes las reemplace.',
       updatedLabel: 'Última actualización',
       updatedAt: '27 de mayo de 2026',
+      updatedAtIso: '2026-05-27',
       sections: [
         {
           heading: 'Mis compromisos',

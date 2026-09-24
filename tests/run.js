@@ -909,18 +909,6 @@ group('H-04 · Staged pricing labels on home, services, and HTW', () => {
   const esHtw = read('dist/es/servicios/higiene-tecnica-web/index.html') || '';
   const enHtw = read('dist/en/services/web-technical-hygiene/index.html') || '';
 
-  // True when some occurrence of `amount` has `stage` within ±240 chars.
-  const pairs = (html, amount, stage) => {
-    let from = 0;
-    while (true) {
-      const idx = html.indexOf(amount, from);
-      if (idx === -1) return false;
-      const window = html.slice(Math.max(0, idx - 240), idx + 240).toLowerCase();
-      if (window.includes(stage.toLowerCase())) return true;
-      from = idx + amount.length;
-    }
-  };
-
   assert(
     'H-04 ES home shows staged amounts (Diagnóstico + Construcción)',
     esHome.includes('Diagnóstico') && esHome.includes('Construcción'),
@@ -931,12 +919,90 @@ group('H-04 · Staged pricing labels on home, services, and HTW', () => {
     enHome.includes('Diagnostic') && enHome.includes('Build'),
     'EN home is missing a stage label'
   );
-  assert('H-04 ES service pairs 3 UF with Diagnóstico', pairs(esService, '3 UF', 'Diagnóstico'));
-  assert('H-04 ES service pairs 30 UF with Construcción', pairs(esService, '30 UF', 'Construcción'));
-  assert('H-04 EN service pairs $290 with Diagnostic', pairs(enService, '$290', 'Diagnostic'));
-  assert('H-04 EN service pairs $1,500 with Build', pairs(enService, '$1,500', 'Build'));
-  assert('H-04 ES HTW pairs 1 UF with Diagnóstico', pairs(esHtw, '1 UF', 'Diagnóstico'));
-  assert('H-04 EN HTW pairs $69 with Diagnostic', pairs(enHtw, '$69', 'Diagnostic'));
+  assert('H-04 ES HTW pairs 1 UF with Diagnóstico', esHtw.includes('Diagnóstico 1 UF'), 'ES HTW is missing its exact diagnostic pair');
+  assert('H-04 EN HTW pairs $69 with Diagnostic', enHtw.includes('Diagnostic ($69, credited toward implementation)'), 'EN HTW is missing its exact diagnostic pair');
+});
+
+group('PRICING · Exact stage/amount pairs per service and locale', () => {
+  const enPages = {
+    automation: 'dist/en/services/python-automation/index.html',
+    'recurring-data': 'dist/en/services/recurring-data-collection/index.html',
+    'internal-tools': 'dist/en/services/internal-tools/index.html',
+    financial: 'dist/en/services/financial-tooling/index.html',
+    web: 'dist/en/services/static-sites/index.html',
+  };
+  const esPages = {
+    automation: 'dist/es/servicios/automatizacion-python/index.html',
+    'recurring-data': 'dist/es/servicios/recoleccion-recurrente-datos/index.html',
+    'internal-tools': 'dist/es/servicios/herramientas-internas/index.html',
+    financial: 'dist/es/servicios/herramientas-financieras/index.html',
+    web: 'dist/es/servicios/sitios-web/index.html',
+  };
+  const amounts = {
+    automation:     { en: ['$290', '$1,500', '$3,200', '$290/mo'],  es: ['3 UF', '30 UF', '60 UF', '6 UF/mes'] },
+    // recurring-data reuses the automation price band by design (see services.ts); values equal automation's.
+    'recurring-data': { en: ['$290', '$1,500', '$3,200', '$290/mo'],  es: ['3 UF', '30 UF', '60 UF', '6 UF/mes'] },
+    'internal-tools': { en: ['$290', '$1,800', '$3,600', '$290/mo'], es: ['3 UF', '35 UF', '70 UF', '6 UF/mes'] },
+    financial:      { en: ['$390', '$2,400', '$4,800', '$390/mo'],  es: ['4 UF', '45 UF', '90 UF', '8 UF/mes'] },
+    web:            { en: ['$190', '$1,200', '$2,600', '$150/mo'],  es: ['2 UF', '25 UF', '50 UF', '3 UF/mes'] },
+  };
+  const enPatterns = (a) => [
+    `Diagnostic from ${a[0]}`,
+    `From ${a[1]} (one-time)`,
+    `From ${a[2]} (one-time)`,
+    `From ${a[3]} (per month)`,
+  ];
+  const esPatterns = (a) => [
+    `Diagnóstico desde ${a[0]}`,
+    `Desde ${a[1]} (por proyecto)`,
+    `Desde ${a[2]} (por proyecto)`,
+    `Desde ${a[3]} (por mes)`,
+  ];
+  for (const [key, path] of Object.entries(enPages)) {
+    const html = read(path);
+    if (!html) { assert(`[built] ${key} EN page (skipped — run --built)`, true); continue; }
+    enPatterns(amounts[key].en).forEach((pattern) => {
+      assert(`EN ${key}: contains "${pattern}"`, html.includes(pattern), `Missing exact pair in ${path}`);
+    });
+  }
+  for (const [key, path] of Object.entries(esPages)) {
+    const html = read(path);
+    if (!html) { assert(`[built] ${key} ES page (skipped — run --built)`, true); continue; }
+    esPatterns(amounts[key].es).forEach((pattern) => {
+      assert(`ES ${key}: contains "${pattern}"`, html.includes(pattern), `Missing exact pair in ${path}`);
+    });
+  }
+});
+
+group('H-13 · Recurring-data pages carry collection copy, not automation copy', () => {
+  const enRecurring = read('dist/en/services/recurring-data-collection/index.html');
+  const esRecurring = read('dist/es/servicios/recoleccion-recurrente-datos/index.html');
+  if (!enRecurring || !esRecurring) {
+    assert('[built] H-13 recurring-data copy checks (skipped — run --built)', true);
+    return;
+  }
+  const enAutomation = read('dist/en/services/python-automation/index.html') || '';
+  const esAutomation = read('dist/es/servicios/automatizacion-python/index.html') || '';
+
+  assert('H-13 EN recurring page has no bankrecon leak', !enRecurring.includes('bankrecon'), 'automation whyNote proof leaked');
+  assert('H-13 EN recurring page has no rutificador leak', !enRecurring.includes('rutificador'), 'automation whyNote proof leaked');
+  assert('H-13 EN recurring page has no automation availability', !enRecurring.includes('2–3 new builds per month'), 'automation availability leaked');
+  assert('H-13 EN recurring page has no automation process step', !enRecurring.includes('Automation scoping'), 'automation process copy leaked');
+  assert('H-13 ES recurring page has no bankrecon leak', !esRecurring.includes('bankrecon'), 'automation whyNote proof leaked');
+  assert('H-13 ES recurring page has no rutificador leak', !esRecurring.includes('rutificador'), 'automation whyNote proof leaked');
+  assert('H-13 ES recurring page has no automation availability', !esRecurring.includes('2–3 proyectos nuevos al mes'), 'automation availability leaked');
+  assert('H-13 ES recurring page has no automation process step', !esRecurring.includes('Diagnóstico de automatización'), 'automation process copy leaked');
+  assert('H-13 EN recurring page carries collection availability', enRecurring.includes('2–3 new collectors per month'), 'collection availability missing');
+  assert('H-13 ES recurring page carries collection availability', esRecurring.includes('2–3 colectores nuevos al mes'), 'collection availability missing');
+
+  assert('H-13 EN automation page still carries its availability marker', enAutomation.includes('2–3 new builds per month'), 'automation marker changed — update H-13');
+  assert('H-13 EN automation page still carries its process marker', enAutomation.includes('Automation scoping'), 'automation marker changed — update H-13');
+  assert('H-13 EN automation page still cites bankrecon', enAutomation.includes('bankrecon'), 'automation marker changed — update H-13');
+  assert('H-13 EN automation page still cites rutificador', enAutomation.includes('rutificador'), 'automation marker changed — update H-13');
+  assert('H-13 ES automation page still carries its availability marker', esAutomation.includes('2–3 proyectos nuevos al mes'), 'automation marker changed — update H-13');
+  assert('H-13 ES automation page still carries its process marker', esAutomation.includes('Diagnóstico de automatización'), 'automation marker changed — update H-13');
+  assert('H-13 ES automation page still cites bankrecon', esAutomation.includes('bankrecon'), 'automation marker changed — update H-13');
+  assert('H-13 ES automation page still cites rutificador', esAutomation.includes('rutificador'), 'automation marker changed — update H-13');
 });
 
 group('H-10 · Accessible per-field errors in the intake form', () => {
@@ -1291,6 +1357,8 @@ group('S0 · Service registry, transport, and declarative wiring', () => {
   assert('HTW pages stamp htw scope', htwEN.includes('data-service-id="htw"') && htwES.includes('data-service-id="htw"'), 'HTW scope missing');
   const gateway = read('src/pages/index.astro') || '';
   assert('gateway loads analytics + tracks language choice', gateway.includes('/assets/js/product-analytics.js') && gateway.includes('data-language-select'), 'Gateway wiring missing');
+  const navbarSrc = read('src/components/Navbar.astro') || '';
+  assert('Navbar CTA carries brief intent with navbar placement', navbarSrc.includes('data-contact-intent="send_brief"') && navbarSrc.includes('data-track-loc="navbar"'), 'Navbar CTA stamp missing');
 });
 
 group('EM · Résumés wired per locale', () => {
@@ -1344,6 +1412,114 @@ group('D6b · Home proof division of labor', () => {
   );
   assert('hero does not repeat the quantified band stats', !hero.includes('100+ SKUs'), 'Hero still repeats the SKU count');
   assert('proof band owns the quantified stats', band.includes("value: '100+'") && band.includes("unit: 'SKUs'"), 'ResultsBand stats missing');
+});
+
+group('H-14 · Legal pages emit ISO-8601 dates in schema and OG meta', () => {
+  const pages = [
+    { rel: 'dist/en/privacy/index.html', iso: '2026-09-01' },
+    { rel: 'dist/es/privacy/index.html', iso: '2026-09-01' },
+    { rel: 'dist/en/cookies/index.html', iso: '2026-08-21' },
+    { rel: 'dist/es/cookies/index.html', iso: '2026-08-21' },
+    { rel: 'dist/en/terms/index.html', iso: '2026-05-17' },
+    { rel: 'dist/es/terms/index.html', iso: '2026-05-17' },
+    { rel: 'dist/en/engagement/index.html', iso: '2026-05-27' },
+    { rel: 'dist/es/engagement/index.html', iso: '2026-05-27' },
+  ];
+  const first = read(pages[0].rel);
+  if (!first) {
+    assert('[built] H-14 ISO date checks (skipped — run --built)', true);
+    return;
+  }
+  const isoRe = /^\d{4}-\d{2}-\d{2}$/;
+  for (const { rel, iso } of pages) {
+    const html = read(rel) || '';
+    const jsonLd = (html.match(/"datePublished":"([^"]*)"/) || [])[1] || '';
+    const og = (html.match(/article:published_time" content="([^"]*)"/) || [])[1] || '';
+    assert(`${rel} JSON-LD datePublished is ISO ${iso}`, jsonLd === iso && isoRe.test(jsonLd), `got ${JSON.stringify(jsonLd)}`);
+    assert(`${rel} OG article:published_time is ISO ${iso}`, og === iso && isoRe.test(og), `got ${JSON.stringify(og)}`);
+  }
+  const enPrivacy = read('dist/en/privacy/index.html') || '';
+  const esPrivacy = read('dist/es/privacy/index.html') || '';
+  assert('H-14 EN privacy still shows the human date', enPrivacy.includes('Last updated') && enPrivacy.includes('1 Sep 2026'), 'visible EN label changed');
+  assert('H-14 ES privacy still shows the human date', esPrivacy.includes('Última actualización') && esPrivacy.includes('1 de septiembre de 2026'), 'visible ES label changed');
+});
+
+group('055 · JSON-LD guards and HTW schema price parity', () => {
+  const parse = (html) =>
+    [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+      .map((match) => { try { return JSON.parse(match[1]); } catch { return null; } })
+      .filter(Boolean);
+
+  const enHome = read('dist/en/index.html');
+  const esHome = read('dist/es/index.html');
+  const enWork = read('dist/en/work/index.html');
+  const esWork = read('dist/es/trabajo/index.html');
+  const enHtw = read('dist/en/services/web-technical-hygiene/index.html');
+  const esHtw = read('dist/es/servicios/higiene-tecnica-web/index.html');
+  if (!enHome || !esHome || !enWork || !esWork || !enHtw || !esHtw) {
+    assert('[built] 055 JSON-LD guard checks (skipped — run --built)', true);
+    return;
+  }
+
+  for (const [label, html] of [['dist/en/index.html', enHome], ['dist/es/index.html', esHome]]) {
+    const blocks = parse(html);
+    const person = blocks.find((b) => Array.isArray(b['@type']) && b['@type'].includes('Person'));
+    assert(`055 ${label} Person makesOffer exists`, !!person && Array.isArray(person.makesOffer), 'Person block or makesOffer missing');
+    if (!person || !Array.isArray(person.makesOffer)) continue;
+    person.makesOffer.forEach((offer, i) => {
+      assert(
+        `055 ${label} offer[${i}] has a non-empty description`,
+        typeof offer.description === 'string' && offer.description.length > 0,
+        `offer[${i}] (${offer.name || 'unnamed'}) is missing its description`
+      );
+      assert(
+        `055 ${label} offer[${i}] url starts with https://tooltician.com/`,
+        typeof offer.url === 'string' && offer.url.startsWith('https://tooltician.com/'),
+        `offer[${i}] url was ${JSON.stringify(offer.url)}`
+      );
+    });
+  }
+
+  for (const [label, html] of [['dist/en/work/index.html', enWork], ['dist/es/trabajo/index.html', esWork]]) {
+    const blocks = parse(html);
+    const itemList = blocks.find((b) => b['@type'] === 'ItemList');
+    assert(`055 ${label} ItemList exists`, !!itemList && Array.isArray(itemList.itemListElement), 'ItemList missing');
+    if (!itemList || !Array.isArray(itemList.itemListElement)) continue;
+    itemList.itemListElement.forEach((entry, i) => {
+      const item = entry.item || {};
+      assert(
+        `055 ${label} item[${i}] has a non-empty name`,
+        typeof item.name === 'string' && item.name.length > 0,
+        `item[${i}] is missing its name`
+      );
+      if ('url' in item) {
+        assert(
+          `055 ${label} item[${i}] url is non-empty and starts with http`,
+          typeof item.url === 'string' && item.url.length > 0 && item.url.startsWith('http'),
+          `item[${i}] url was ${JSON.stringify(item.url)}`
+        );
+      } else {
+        assert(`055 ${label} item[${i}] omits empty url instead of emitting ""`, true);
+      }
+    });
+  }
+
+  const htwPrices = (html) => {
+    const blocks = parse(html);
+    const service = blocks.find((b) => b['@type'] === 'Service');
+    const offers = service?.hasOfferCatalog?.itemListElement || [];
+    return offers.map((o) => o.price);
+  };
+  assert(
+    '055 EN HTW JSON-LD prices match pricing.ts bands',
+    JSON.stringify(htwPrices(enHtw)) === JSON.stringify(['69', '499', '899', '999', '279']),
+    `Got ${JSON.stringify(htwPrices(enHtw))}`
+  );
+  assert(
+    '055 ES HTW JSON-LD prices match pricing.ts bands',
+    JSON.stringify(htwPrices(esHtw)) === JSON.stringify(['1', '7', '13', '15', '4']),
+    `Got ${JSON.stringify(htwPrices(esHtw))}`
+  );
 });
 
 // ─── Summary ──────────────────────────────────────────────────────────────

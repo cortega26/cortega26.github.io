@@ -97,7 +97,7 @@ export function buildProfessionalService(lang: JsonLdLocale) {
     makesOffer: serviceRegistry.services.map((service) => ({
       '@type': 'Offer',
       name: lang === 'en' ? service.public_name : service.public_name_es,
-      description: offerDescriptions[lang][service.service_id],
+      description: offerDescriptions[lang][service.service_id] ?? service.public_name,
       url: `${SITE_ORIGIN}${lang === 'en' ? service.route_en : service.route_es}`,
     })),
     knowsAbout: data.knowsAbout,
@@ -117,16 +117,19 @@ export function buildPortfolioItemList(lang: JsonLdLocale, cases: CaseStudy[] = 
     name: 'Tooltician portfolio',
     itemListOrder: 'https://schema.org/ItemListOrderAscending',
     numberOfItems: cases.length,
-    itemListElement: cases.map((project, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      item: {
-        '@type': project.id === 'noticiencias' ? 'WebSite' : 'SoftwareApplication',
-        name: project.title,
-        url: project.evidence?.find((chip) => chip.type === 'pypi' && chip.href)?.href ?? project.links[0]?.href ?? '',
-        description: project.summary,
-      },
-    })),
+    itemListElement: cases.map((project, index) => {
+      const url = project.evidence?.find((chip) => chip.type === 'pypi' && chip.href)?.href ?? project.links[0]?.href;
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': project.id === 'noticiencias' ? 'WebSite' : 'SoftwareApplication',
+          name: project.title,
+          ...(url ? { url } : {}),
+          description: project.summary,
+        },
+      };
+    }),
   };
 }
 

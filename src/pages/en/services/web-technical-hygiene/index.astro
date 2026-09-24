@@ -3,7 +3,7 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import Navbar from '../../../../components/Navbar.astro';
 import Footer from '../../../../components/Footer.astro';
 import IntakeForm from '../../../../components/IntakeForm.astro';
-import { pricing } from '../../../../data/pricing';
+import { pricing, priceAmount } from '../../../../data/pricing';
 import { alternatesFor } from '../../../../data/routes';
 import '../../../../styles/global.css';
 
@@ -66,7 +66,7 @@ const plans = [
     name: 'Web Technical Diagnostic',
     priceLabel: pricing.webHygiene.en.diagnostic,
     priceApprox: 'one-time',
-    priceValue: '69',
+    priceValue: priceAmount(pricing.webHygiene.en.diagnostic),
     note: 'Applied as a credit toward any implementation plan.',
     intro: 'To know exactly what is technically neglected before paying for fixes.',
     items: [
@@ -80,7 +80,7 @@ const plans = [
     name: 'Basic Web Hardening',
     priceLabel: `From ${pricing.webHygiene.en.essentials}`,
     priceApprox: 'one-time',
-    priceValue: '499',
+    priceValue: priceAmount(pricing.webHygiene.en.essentials),
     note: 'For simple or corporate sites with no executive deliverable requirement.',
     intro: 'To fix the obvious and leave the site technically cleaner, with a verifiable record for the administrator.',
     items: [
@@ -94,7 +94,7 @@ const plans = [
     name: 'Operational Review & Hardening',
     priceLabel: `From ${pricing.webHygiene.en.operational}`,
     priceApprox: 'one-time',
-    priceValue: '899',
+    priceValue: priceAmount(pricing.webHygiene.en.operational),
     note: 'Covers the technical. No executive report or follow-up roadmap.',
     intro: 'For sites that need full hardening and operational review, with no deliverable required for management.',
     items: [
@@ -108,7 +108,7 @@ const plans = [
     name: 'Full Review with Executive Report',
     priceLabel: `From ${pricing.webHygiene.en.integral}`,
     priceApprox: 'one-time',
-    priceValue: '999',
+    priceValue: priceAmount(pricing.webHygiene.en.integral),
     note: 'Recommended for sites that drive leads, reputation, or sales.',
     intro: 'When the result needs to be presentable to non-technical stakeholders without translation, with full evidence and a roadmap for the next month.',
     recommended: true,
@@ -123,7 +123,7 @@ const plans = [
     name: 'Monthly Technical Web Support',
     priceLabel: `From ${pricing.webHygiene.en.retainer}`,
     priceApprox: 'per month',
-    priceValue: '279',
+    priceValue: priceAmount(pricing.webHygiene.en.retainer),
     note: 'Natural continuation of the Full Review. No in-house hiring needed.',
     intro: 'To maintain what was fixed and have external technical judgment reviewing the basics regularly.',
     items: [

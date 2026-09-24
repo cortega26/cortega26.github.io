@@ -243,11 +243,11 @@ counts), not prose.
 
 | # | Plan | Wave | Pri | Eff | Status | Verified by |
 |---|------|------|-----|-----|--------|-------------|
-| 042 | Analytics integrity | 1 | P1 | S | TODO | |
-| 044 | Recurring-data copy | 1 | P1 | M | TODO | |
-| 045 | Legal ISO dates | 1 | P1 | S | TODO | |
-| 049 | Pricing assertions | 1 | P1 | S | TODO | |
-| 055 | JSON-LD hardening | 1 | P1 | S | TODO | |
+| 042 | Analytics integrity | 1 | P1 | S | DONE | check 0/0/0, analytics 82/82, src 219/219, built 248/248, npm test 0 |
+| 044 | Recurring-data copy | 1 | P1 | M | DONE | check 0/0/0, src 237/237, built 266/266, npm test 0; 0 automation markers on recurring pages |
+| 045 | Legal ISO dates | 1 | P1 | S | DONE | check 0/0/0, src 255/255, built 284/284, npm test 0; ISO schema/OG, labels intact |
+| 049 | Pricing assertions | 1 | P1 | S | DONE | src 291/291, built 320/320, npm test 0; red-then-green on corrupted price proven by reviewer |
+| 055 | JSON-LD hardening | 1 | P1 | S | DONE | check 0/0/0, src 361/361, built 390/390, npm test 0; HTW schema prices correct |
 | 046 | Above-fold reveal | 2 | P1 | S | TODO | |
 | 050 | Intake hardening | 2 | P1 | M | TODO | |
 | 058 | Perf hygiene | 2 | P2 | S | TODO | |
@@ -266,7 +266,7 @@ counts), not prose.
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **0/22 DONE** · 0 IN PROGRESS · 0 BLOCKED.
+Progress: **5/22 DONE** · 0 IN PROGRESS · 0 BLOCKED.
 
 ## Cross-wave dependency notes
 

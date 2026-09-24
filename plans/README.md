@@ -184,20 +184,20 @@ plans. Status authority is this file.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 042 | Analytics integrity: `service_view` page scoping, legacy PII filter, Navbar CTA stamping | P1 | S | — | TODO |
+| 042 | Analytics integrity: `service_view` page scoping, legacy PII filter, Navbar CTA stamping | P1 | S | — | DONE (landed as `fcce896` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, analytics 82/82, source 219/219, built 248/248, `npm test` exit 0, stats untouched; unmerged — wave 1 in progress) |
 | 043 | CSP production integrity: script ordering, wider hash check, CI artifact, doc reconciliation | P1 | M | — | TODO |
-| 044 | Recurring-data page self-contained copy (stop automation leakage) | P1 | M | — | TODO |
-| 045 | ISO dates for legal-page schema/OG | P1 | S | — | TODO |
+| 044 | Recurring-data page self-contained copy (stop automation leakage) | P1 | M | — | DONE (landed as `f2547f1` on `advisor/wave-1`; reviewer-verified: scope 2/2 files, check 0/0/0, source 237/237, built 266/266, `npm test` exit 0, 0 automation markers on recurring pages, markers intact on automation, spread intact, stats untouched; unmerged — wave 1 in progress) |
+| 045 | ISO dates for legal-page schema/OG | P1 | S | — | DONE (landed as `d3e72c6` on `advisor/wave-1`; reviewer-verified: scope 3/3 files, check 0/0/0, source 255/255, built 284/284, `npm test` exit 0, ISO output correct, human labels intact, stats untouched; unmerged — wave 1 in progress) |
 | 046 | Above-the-fold content renders without JS | P1 | S | — | TODO |
 | 047 | CI: least-privilege permissions + Playwright browser cache | P1 | S | — | TODO |
 | 048 | Service names single-source (registry) + llms parity | P1 | M | — | TODO |
-| 049 | Exact pricing stage/amount assertions | P1 | S | — | TODO |
+| 049 | Exact pricing stage/amount assertions | P1 | S | — | DONE (landed as `f848674` on `advisor/wave-1`; reviewer-verified: scope 1/1 files, source 291/291, built 320/320, `npm test` exit 0; old heuristic proven weak, new group fails on a corrupted price and passes restored; HTW assertions converted to exact strings with plan-intent preserved; unmerged — wave 1 in progress) |
 | 050 | Intake: `page` field survives reset + Formspree honeypot | P1 | M | — | TODO |
 | 051 | Test hygiene: delete legacy smoke scripts, fix imports, stale artifacts, CLAUDE.md line | P1 | S | — | TODO |
 | 052 | Intake service-attribution tests + run analytics suites in CI | P1 | M | — | TODO |
 | 053 | `caseStudies` data-invariant tests | P1 | S | 052 | TODO |
 | 054 | Root landing: missing head metadata, dead redirect key, language-decision tests | P1 | M | 052 | TODO |
-| 055 | JSON-LD hardening: HTW schema prices from `pricing.ts` + lookup guards | P1 | S | — | TODO |
+| 055 | JSON-LD hardening: HTW schema prices from `pricing.ts` + lookup guards | P1 | S | — | DONE (landed as `a03ab54` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, source 361/361, built 390/390, `npm test` exit 0, HTW schema prices correct in both locales, stats untouched; unmerged — wave 1 complete) |
 | 056 | Build/verify script failure-path tests | P2 | M | 052 | TODO |
 | 057 | Route registry single-source for service pages and ServicesSection | P2 | M | — | TODO |
 | 058 | Perf hygiene: preload/logo/preconnect + compositor scroll bar | P2 | S | — | TODO |

@@ -131,6 +131,48 @@ evidence):
   real dead code (~450 lines, zero references) but tech-debt, not direction;
   deferred with a named owner note in plan 036's maintenance section.
 
+## Reconcile log
+
+### 2026-09-23 (HEAD `8bbd56c`)
+
+All plans in every series are DONE; no TODO, BLOCKED, or IN PROGRESS rows.
+Re-verified on HEAD: source suite 223/223; built suite 252/252 after a fresh
+`npx --no-install astro build` (the first run failed 3 `[built]` checks
+against a stale `dist/`); `D6b` / `EM` / `S0b` groups green. Two stale
+executor branches (`worktree-agent-*`) exist and are fully merged into
+`master` — safe to delete.
+
+Deferral harvest (from archived plans' maintenance notes):
+
+- **Executable now — orphaned component cleanup** (036, re-noted by 040):
+  no page imports `ProofSection.astro` or `ServiceSpotlight.astro`, but
+  `tests/run.js` still pins `ProofSection` content (group `H1`, one
+  assertion in `TT-009`, and three assertions in group `H2`), so the cleanup
+  must retire those assertions too and refresh the docs mentions
+  (`README.md:42`, `CLAUDE.md:31`). **Resolved by 041** (executed and
+  reviewer-verified 2026-09-23; see the harvest table below).
+- **Resolved by 038:** 037's "GA4-side content attribution for guides" —
+  `ArticleCta` now carries service scope + engage stamps (`S0b` green).
+- **Resolved by 021/028:** 008/009's behavioral submit-count + filter tests.
+- **Still blocked:** per-service IntakeForm options (data gate ~mid-October
+  2026); Search Console export automation (after the `2026-11-15` review);
+  About trajectory block and work-page case-CTA stamping (maintainer
+  decisions); portrait photo (maintainer approval); per-service sample
+  (needs a redactable engagement); auto-issue on weekly-check failure (needs
+  one proven-actionable red run).
+- **Parked unless triggered:** stats cross-build caching, `aria-describedby`
+  form→note wiring, README/CLAUDE.md/AGENTS.md lane split, visual regression,
+  third-party security-grade assertion, guides-hub card events, CV "updated"
+  note, TT-017 broader home dedup (satisfied for the home by 040).
+
+## Harvest plan — 2026-09-23 reconcile
+
+Single plan from the deferral harvest; status authority is this file.
+
+| Plan | Title | Priority | Effort | Depends on | Status |
+|------|-------|----------|--------|------------|--------|
+| 041 | Delete the orphaned `ProofSection` and `ServiceSpotlight` components | P3 | S | — | DONE (landed as `3cc2e5c` on `advisor/041-orphan-components`; reviewer-verified 2026-09-23: scope 5/5 files, source 218/218, built 247/247, full `npm test` exit 0, 0 residual refs, stats untouched; **unmerged — operator's call**) |
+
 ## Dependency notes
 
 - 008 and 007 first (small, user-facing correctness; independent of each other).

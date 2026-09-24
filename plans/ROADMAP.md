@@ -281,6 +281,11 @@ Rejected below, two parked. Do NOT silently absorb these into past waves.
 - [x] **Behavioral form/filter tests** (from 008/009) — DONE via Plan 021
   (submit-count + filter interaction) and extended by Plan 028 (accessible
   validation case). No open work remains.
+- [x] **Orphaned component cleanup** (from 036, re-noted by 040; added by
+  the 2026-09-23 reconcile harvest) — DONE via plan 041 (landed as
+  `3cc2e5c` on `advisor/041-orphan-components`, reviewer-verified
+  2026-09-23: ~450 lines removed, 5 stale assertions retired, docs refreshed,
+  full suite green at 218/218 + 247/247; **unmerged — operator's call**).
 - [ ] **Case-study depth** (direction D3) — PARKED as personal habit, not
   code work. Blocked on a willing client. Action: add a testimonial/case
   ask to the project closeout habit; the quarterly runbook review is the

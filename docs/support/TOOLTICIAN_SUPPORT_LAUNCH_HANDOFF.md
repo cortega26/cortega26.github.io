@@ -1943,6 +1943,77 @@ rule»). El archivo es compacto e internamente consistente; insertar líneas en
 blanco selectivamente lo haría **menos** consistente. Cosmético, sin señal de
 defecto, y se deja visible a propósito.
 
+## 29.8 Resultado medido
+
+Cuatro corridas successive de Codacy sobre este PR:
+
+| HEAD | nuevos | conclusion | anotaciones visibles | warning | notice |
+|---|---:|---|---:|---:|---:|
+| `bbab67b` | **181** | `action_required` | 50 | 13 | 37 |
+| `fcb9d1a` | 175 | `action_required` | 50 | 13 | 37 |
+| `4668d68` | 174 | `action_required` | 50 | 8 | 42 |
+| `91f95c4` | **174** | `action_required` | 50 | **2** | 48 |
+
+Hallazgos de **código** visibles, de 19 a **4**:
+
+| archivo | antes | después |
+|---|---:|---:|
+| `src/client.ts` | 5 | **0** |
+| `src/lib/analytics.ts` | 4 | **0** |
+| `src/lib/contact.ts` | 2 | **0** |
+| `release-check.ts` | 2 | **0** |
+| `generate-og.mjs` | 2 | 1 |
+| `styles.css` | 4 | 3 |
+| `src/config.ts` | 0 | 0 |
+
+Los 4 que quedan son, exactamente:
+
+- 1 falso positivo documentado (`generate-og.mjs`, tabla de entidades HTML);
+- 3 avisos cosméticos de stylelint en `styles.css`.
+
+De los 50 avisos visibles en la corrida final, **46 son Markdown**. El contador
+sigue en 174 casi íntegramente por prosa.
+
+**Advertencia sobre el tope de 50.** GitHub expone como máximo 50 anotaciones por
+check run. Como el Markdown va creciendo y ocupa esa ventana, que un archivo no
+aparezca en la lista **no prueba** que esté limpio. La única cifra fiable es la
+que Codacy reporta: 174.
+
+## 29.9 `.codacy.yml` está presente pero inerte
+
+El archivo está correcto y en la rama, pero **no está surtiendo efecto**: en la
+corrida `4668d68` los cuatro archivos que el config excluye siguieron anotándose,
+y `master-plan.md` pasó de 21 a 32.
+
+Causa: **Codacy Cloud lee `.codacy.yml` desde la rama por defecto**, y
+`origin/master` no lo tiene. Sólo lo tiene esta rama.
+
+```text
+$ git ls-tree origin/master --name-only | grep -i 'codacy'
+.codacy                      # directorio preexistente, no es el config
+```
+
+Esto es un deadlock de proceso, no de código: el merge que llevaría el config a
+`master` está bloqueado por el propio check que el config pretendeurgentemente
+silenciar. **Requiere decisión humana** en la UI de Codacy (Ignorar archivos a
+nivel de repositorio, o conceder acceso a la app). Ver §29.10.
+
+## 29.10 Decisión humana pendiente
+
+Ninguna de estas se puede resolver desde el repositorio:
+
+1. **`action_required` es un estado de autorización de la GitHub App, no un
+   fallo de análisis.** Codacy terminó y está pidiendo una acción. Resolverlo es
+   cuenta del propietario, no código.
+2. **Los 4 archivos Markdown** hay que excluirlos en la UI de Codacy, o aceptar
+   el config en cuanto se integre a `master`.
+3. **`hardLaunchIssues` con complejidad 9** (límite 8): se acepta
+   deliberadamente. Es el gate de producción y su valor es ser una checklist
+   legible. Subir el límite o refactorizar son decisiones del proyecto, no
+   correcciones.
+4. **WebKit no corre en esta máquina** por `libavif16` ausente; en CI sí, con
+   `playwright install --with-deps`. No es un defecto del proyecto.
+
 ---
 
 # 30. Fin del handoff

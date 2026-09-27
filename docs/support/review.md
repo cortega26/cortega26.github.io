@@ -62,6 +62,17 @@ de navegador temporales ya no estaban disponibles; las capturas previas se conse
 No se ha cambiado DNS, publicado anuncios, enviado mensajes, creado reseñas ni
 modificado el deployment del sitio principal.
 
+## Actualización tras abrir PR #72
+
+GitHub Actions verificó correctamente el workflow completo del portafolio sobre
+el commit `4e53d38ffcd5e59d7713896be6bd3de730da9983` (run `36317996900`).
+Esto resuelve la limitación de validación local del sitio principal indicada arriba.
+El workflow de soporte pasó build, typecheck, pruebas unitarias, Chromium y Firefox.
+WebKit falló al seleccionar un servicio en el servidor HTTP de pruebas (run
+`36317996873`). Se ajusta exclusivamente el CSP servido por ese arnés local para
+no convertir sus assets de loopback a HTTPS; la cabecera de producción conserva
+`upgrade-insecure-requests`. La nueva ejecución debe confirmar la corrección.
+
 ## Navegación de la entrega
 
 - `implementation.md`: decisiones y configuración.

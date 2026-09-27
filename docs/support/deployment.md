@@ -4,6 +4,31 @@ Destino propuesto: proyecto Cloudflare Pages separado conectado al mismo repo.
 El proyecto actual de GitHub Pages conserva configuración, dominio y salida.
 No cambiar `public/CNAME` ni sustituir el workflow de despliegue del portafolio.
 
+## Configuración recuperada del repositorio
+
+Revisada el 27-09-2026. No es necesario pedir estos datos al propietario:
+
+- `.github/workflows/deploy.yml`: GitHub Pages, rama `master`, Node 24,
+  `npm ci`, build Astro, artefacto `dist/`. En pull requests verifica sin publicar.
+- `public/CNAME`: `tooltician.com`.
+- `docs/cloudflare-security-headers.md`: Cloudflare como proxy y cabeceras
+  mediante Transform Rules con expresiones específicas de host/ruta.
+- `scripts/cloudflare-csp-rules.sh`: aplicación de CSP para el host principal;
+  obtiene el token de `CF_API_TOKEN` o entrada interactiva, no del repositorio.
+- `docs/analytics-sprint-0.md`: propiedad Tooltician `551059139`, stream
+  `15478383962`, identificador público `G-2HK4GHK7GR`. La CI lo lee de
+  `vars.PUBLIC_GA4_MEASUREMENT_ID`. Hay validaciones previas documentadas.
+
+El repositorio no contiene un proyecto Pages/Workers para el subdominio soporte
+ni credenciales de administración de Cloudflare. Conocer la configuración del
+host principal no implica que el deployment independiente ya exista. Mantener
+Cloudflare Pages como propuesta de despliegue separado hasta configurarlo.
+
+La decisión de reutilizar el stream GA4 debe verificar primero sus opciones de
+Enhanced Measurement: cambiarlas afecta también al portafolio. Si no puede
+garantizarse aislamiento de formularios y enlaces de WhatsApp, crear otro stream
+dentro de la propiedad existente. El ID conocido no se activa en previews.
+
 ## Previo al lanzamiento
 
 1. Completar `support/src/config.ts` con datos reales y confirmados.

@@ -22,7 +22,11 @@ try {
   }
   assert.ok(ready, "preview server started");
   const headersText = await readFile("support/public/_headers", "utf8");
-  const csp = headersText.match(/Content-Security-Policy: (.+)/)?.[1];
+  // This harness serves HTTP loopback. WebKit upgrades its asset requests to
+  // HTTPS when this transport-only directive is present, unlike Chromium.
+  // Production keeps the full CSP; HTTPS/redirects are checked after deployment.
+  const csp = headersText.match(/Content-Security-Policy: (.+)/)?.[1]
+    ?.replace(/;\s*upgrade-insecure-requests\b/, '');
   for (const [name, engine] of [
     ["chromium", chromium],
     ["firefox", firefox],

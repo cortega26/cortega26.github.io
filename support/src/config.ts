@@ -20,30 +20,31 @@ export const business = {
   photo: "src/assets/carlos-ortega.jpeg",
   reviewUrl: "",
   availability: "Atención previa coordinación",
-  payment: "Transferencia, efectivo o tarjeta (recargo propuesto del 3%, pendiente de validar con el proveedor de cobro)",
+  payment: "Transferencia, efectivo o tarjeta. Mismo precio.",
   taxDocument: "",
-  providenciaSectors: "",
+  retention:
+    "Las consultas que no terminan en servicio se conservan por un máximo de 90 días. De los servicios realizados se mantiene un registro operativo mínimo por hasta 12 meses para seguimiento, soporte y resolución de reclamos. La dirección exacta se elimina cuando deja de ser necesaria para coordinar o prestar el servicio. No se almacenan contraseñas y las copias temporales de archivos se eliminan al completar el propósito acordado. Los registros sujetos a obligaciones legales se conservan durante el plazo aplicable.",
   visitMinutes: 45,
   remoteMinutes: 45,
   notebookMaintenancePrice: 40000,
   areas: [
     { id: "macul", name: "Macul", price: 25000 },
     { id: "nunoa", name: "Ñuñoa", price: 25000 },
-    { id: "providencia", name: "Sectores de Providencia", price: 30000 },
+    { id: "providencia", name: "Providencia", price: 30000 },
   ],
-  // Proposed policy: visit is credited against labor on the same intervention.
+  // Confirmed: additional work in the same visit is charged as the greater of
+  // visit and service, plus authorized parts, licenses and extras.
   visitCredit: true,
   macOS: false,
   offsite: false,
   analyticsId: "",
-  retention: "",
   confirmed: {
     prices: true,
-    coverage: false,
-    scope: false,
+    coverage: true,
+    scope: true,
     tax: false,
-    terms: false,
-    privacy: false,
+    terms: true,
+    privacy: true,
   },
   // portrait is verified by evidence in the repo: the asset exists, the build
   // optimizes it and tests/artifact.test.ts asserts it renders with its alt
@@ -138,7 +139,6 @@ export function hardLaunchIssues(config = business): string[] {
   for (const key of [
     "payment",
     "taxDocument",
-    "providenciaSectors",
     "retention",
     "photo",
   ] as const) {

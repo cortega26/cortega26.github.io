@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { serve } from "./server.mjs";
@@ -13,6 +13,7 @@ import {
 } from "../src/lib/contact.ts";
 import { attribution, safeDimensions } from "../src/lib/analytics.ts";
 import {
+  basePrice,
   business,
   hardLaunchIssues,
   softLaunchIssues,
@@ -94,8 +95,6 @@ const complete = {
   email: "test@example.com",
   payment: "Test",
   taxDocument: "Test",
-  providenciaSectors: "Test",
-  retention: "Test",
   photo: "src/assets/test.webp",
   analyticsId: "G-TEST123",
   reviewUrl: "https://example.com/r",
@@ -110,7 +109,10 @@ const complete = {
   verified: { realPhone: true, analytics: true, portrait: true },
 };
 test("unconfirmed business facts cannot be released", () => {
-  assert.ok(hardLaunchIssues().length > 5);
+  assert.ok(
+    hardLaunchIssues().length > 0,
+    "the real configuration is still not releasable",
+  );
   assert.deepEqual(hardLaunchIssues(complete), []);
   assert.deepEqual(softLaunchIssues(complete), []);
   assert.ok(
@@ -118,6 +120,83 @@ test("unconfirmed business facts cannot be released", () => {
       ...complete,
       confirmed: { ...complete.confirmed, prices: false },
     }).includes("Confirmar prices"),
+  );
+});
+test("coverage is exactly the three confirmed communes at the confirmed visit rates", () => {
+  assert.deepEqual(
+    business.areas.map((area) => area.name),
+    ["Macul", "Ñuñoa", "Providencia"],
+  );
+  assert.deepEqual(
+    Object.fromEntries(business.areas.map((area) => [area.id, area.price])),
+    { macul: 25000, nunoa: 25000, providencia: 30000 },
+  );
+  assert.equal(basePrice(), 25000);
+  assert.equal(
+    business.areas.some((area) => /sector/i.test(area.name)),
+    false,
+    "coverage is not sector-conditional",
+  );
+});
+test("payment carries no surcharge and the visit credit policy stays active", () => {
+  assert.match(business.payment, /transferencia/i);
+  assert.match(business.payment, /efectivo/i);
+  assert.match(business.payment, /tarjeta/i);
+  assert.doesNotMatch(business.payment, /[0-9]+\s*%|recargo|comisi[oó]n/i);
+  assert.equal(business.visitCredit, true);
+});
+test("retention states the confirmed windows and never stores passwords", () => {
+  assert.match(business.retention, /90 d[ií]as/);
+  assert.match(business.retention, /12 meses/);
+  assert.match(business.retention, /contraseñas/i);
+  assert.match(business.retention, /obligaciones? legales/i);
+  const triage = readFileSync(
+    join(import.meta.dirname, "..", "src", "client.ts"),
+    "utf8",
+  );
+  assert.doesNotMatch(
+    triage,
+    /localStorage|sessionStorage|indexedDB|document\.cookie/,
+    "the browser keeps no trace of the customer's data",
+  );
+});
+test("only tax and the real phone test still block a release", () => {
+  const hard = hardLaunchIssues();
+  assert.deepEqual(hard, ["taxDocument", "Confirmar tax", "Verificar realPhone (prueba desde un teléfono real)"]);
+  for (const resolved of [
+    "payment",
+    "retention",
+    "providenciaSectors",
+    "Confirmar coverage",
+    "Confirmar scope",
+    "Confirmar terms",
+    "Confirmar privacy",
+  ])
+    assert.ok(
+      !hard.some((issue) => issue.includes(resolved)),
+      `${resolved} must no longer block`,
+    );
+  const withoutTax = hardLaunchIssues({ ...complete, taxDocument: "" });
+  assert.ok(withoutTax.includes("taxDocument"), "empty taxDocument blocks");
+  assert.deepEqual(
+    hardLaunchIssues({
+      ...complete,
+      taxDocument: "",
+      confirmed: { ...complete.confirmed, tax: false },
+    }),
+    ["taxDocument", "Confirmar tax"],
+    "release cannot go green while tax is unresolved",
+  );
+  assert.ok(
+    hardLaunchIssues({
+      ...complete,
+      verified: { ...complete.verified, realPhone: false },
+    }).length > 0,
+    "an unverified phone must block",
+  );
+  assert.ok(
+    !hardLaunchIssues({ ...complete, analyticsId: "" }).length,
+    "GA4 stays soft",
   );
 });
 test("measurement never blocks a release, legal and contact facts always do", () => {

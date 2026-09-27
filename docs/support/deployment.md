@@ -31,22 +31,42 @@ Enhanced Measurement: cambiarlas afecta también al portafolio. Si no puede
 garantizarse aislamiento de formularios y enlaces de WhatsApp, crear otro stream
 dentro de la propiedad existente. El ID conocido no se activa en previews.
 
+## Decisiones ya resueltas por el propietario
+
+- **Cobertura**: Macul, Ñuñoa y Providencia completas. La coordinación horaria,
+  el acceso y el estacionamiento afectan la disponibilidad, no la cobertura.
+- **Precios y visita**: $25.000 en Macul y Ñuñoa, $30.000 en Providencia, hasta 45
+  minutos. Se cobra aunque el cliente no continúe con la reparación.
+- **Visita y mano de obra**: en la misma visita se cobra el mayor valor entre visita
+  y servicio, más repuestos, licencias y extras autorizados. No se suman ambos.
+- **Segunda visita**: se informa alcance y precio antes, y requiere acuerdo previo.
+- **Repuestos**: el cliente puede comprar sus componentes; si los compra
+  Tooltician, se acuerda y se paga previamente, con comprobante. Sin inventario
+  financiado ni márgenes sobre hardware.
+- **Pagos**: transferencia, efectivo o tarjeta, al mismo precio. El costo del medio
+  de pago es operativo y no se traslada al cliente.
+- **Privacidad y retención**: 90 días para consultas no convertidas, hasta 12 meses
+  de registro operativo mínimo del servicio realizado, dirección exacta eliminada
+  cuando deja de ser necesaria, sin contraseñas, con eliminación de copias
+  temporales y respeto a plazos legales aplicables.
+- **Alcance V1**: diagnóstico, escritorio, notebooks, Windows, SSD/RAM,
+  mantenimiento, respaldo, Wi-Fi, impresoras y remoto. Fuera: microsoldadura,
+  reparación electrónica de placas, recuperación avanzada, celulares, consolas,
+  líquidos que requieran reparación especializada, baterías hinchadas, trabajos
+  eléctricos peligrosos, emergencias y retiro de equipos. macOS fuera de alcance.
+- **Condiciones**: autorización expresa para cualquier acción destructiva, precios
+  visibles de mano de obra, sin licencias pirateadas y sin renuncia a derechos del
+  consumidor.
+
 ## Decisiones humanas pendientes antes de producción
 
-Los hard blockers de `npm run support:release-check` se resuelven con estas cinco
-decisiones. Ninguna se puede marcar desde el repositorio.
+Sólo dos siguen bloqueando. Ninguna se puede marcar desde el repositorio.
 
 1. **Documento tributario** (`taxDocument`, `Confirmar tax`): qué documento se
-   emite por cada visita y quién lo emite.
-2. **Cobertura de Providencia** (`providenciaSectors`, `Confirmar coverage`):
-   sectores exactos que se pueden atender con traslado razonable.
-3. **Retención y privacidad** (`retention`, `Confirmar privacy`): cuánto se
-   conserva la referencia de consulta y redacción final de la política.
-4. **Condiciones y alcance** (`Confirmar scope`, `Confirmar terms`): validar la
-   política de abono de visita, el recargo del 3% pendiente con el proveedor y el
-   alcance final que se puede cobrar.
-5. **Prueba real de WhatsApp y medio de pago** (`Verificar realPhone`,
-   `payment`): envío y recepción desde un teléfono real con el número publicado.
+   emite por cada visita y quién lo emite. Sigue vacío a propósito.
+2. **Prueba real de WhatsApp** (`Verificar realPhone`): abrir el flujo desde un
+   dispositivo real, enviar un mensaje y comprobar recepción efectiva en el
+   número publicado. Conocer el número no es verificarlo.
 
 ## Proyecto Pages
 

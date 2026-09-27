@@ -5,7 +5,7 @@ este repositorio público. No registrar contraseñas ni datos bancarios.
 
 ## Admisión y reserva
 
-- Referencia TS, fecha, origen declarado, comuna/sector, equipo/modelo.
+- Referencia TS, fecha, origen declarado, comuna, equipo/modelo.
 - Síntoma, si enciende, fecha de inicio, caída/líquido/evento eléctrico.
 - Importancia de los datos y respaldo disponible.
 - Clasificación: domicilio / diagnóstico y cotización / remoto / derivación.
@@ -66,7 +66,7 @@ comprobar que no quedó acceso desatendido.
 ## Respuestas rápidas
 
 **Primera respuesta:** Hola, soy Carlos. Para confirmar si puedo ayudarte, ¿en qué
-comuna/sector estás, qué equipo tienes y qué ocurre? Dime también si enciende y si
+comuna estás, qué equipo tienes y qué ocurre? Dime también si enciende y si
 hay archivos importantes sin respaldo. No envíes contraseñas.
 
 **Visita:** La visita cuesta [valor confirmado] e incluye hasta [minutos] de

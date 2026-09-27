@@ -20,7 +20,7 @@ export const business = {
   photo: "",
   reviewUrl: "",
   availability: "Atención previa coordinación",
-  payment: "Transferencia, efectivo o tarjeta (recargo pendiente de definir y validar)",
+  payment: "Transferencia, efectivo o tarjeta (recargo propuesto del 3%, pendiente de validar con el proveedor de cobro)",
   taxDocument: "",
   providenciaSectors: "",
   visitMinutes: 45,

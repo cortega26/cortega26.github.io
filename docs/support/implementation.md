@@ -45,9 +45,14 @@ bloquea rastreo, no se genera sitemap y no se ofrecen reservas reales.
 Esto evita indexación accidental; NO equivale a control de acceso. La revisión
 debe realizarse en local o en un preview privado si el contenido no debe ser público.
 
-`SUPPORT_RELEASE=1` falla si la configuración no tiene todos los datos y
-confirmaciones requeridas. Nunca se completan con números o identidades ficticias.
-`npm run support:release-check` muestra la lista pendiente y comprueba el retrato.
+`SUPPORT_RELEASE=1` falla solo por hard blockers: contacto alcanzable, medio de
+pago, documento tributario, cobertura, retención, retrato, confirmaciones
+comerciales y prueba real de WhatsApp. Nunca se completan con números o
+identidades ficticias. GA4, analytics, Search Console y reseñas son soft: se
+informan como advertencia y no bloquean la publicación.
+
+`npm run support:release-check` separa ambos grupos: sale con código 1 solo si
+quedan hard blockers, y siempre imprime los pendientes de post-lanzamiento.
 
 Comandos desde la raíz:
 

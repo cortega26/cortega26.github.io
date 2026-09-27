@@ -29,24 +29,31 @@ Enhanced Measurement: cambiarlas afecta también al portafolio. Si no puede
 garantizarse aislamiento de formularios y enlaces de WhatsApp, crear otro stream
 dentro de la propiedad existente. El ID conocido no se activa en previews.
 
-## Previo al lanzamiento
+## Decisiones humanas pendientes antes de producción
 
-1. Completar `support/src/config.ts` con datos reales y confirmados.
-2. Confirmar el retrato real de `support/src/assets/carlos-ortega.jpeg` y la ruta
-   en `support/src/config.ts`. La imagen se optimiza en el build.
-3. Confirmar documentación tributaria, precios finales, medios de pago, cobertura,
-   contacto para derechos de datos/reclamos y política real de conservación.
-4. Ejecutar las pruebas del sitio principal y soporte. Revisar las capturas a
-   360, 390, 412, 768 y 1440 px y probar WhatsApp en el teléfono real.
-5. Configurar/verificar GA4 como indica implementation.md, inicialmente en un
-   entorno de revisión con identificador real. Las confirmaciones representan
-   comprobaciones humanas y no deben activarse solo para superar el build.
-6. Registrar SHA aprobado y versión previa de deployment para revertir.
+Los hard blockers de `npm run support:release-check` se resuelven con estas cinco
+decisiones. Ninguna se puede marcar desde el repositorio.
+
+1. **Documento tributario** (`taxDocument`, `Confirmar tax`): qué documento se
+   emite por cada visita y quién lo emite.
+2. **Cobertura de Providencia** (`providenciaSectors`, `Confirmar coverage`):
+   sectores exactos que se pueden atender con traslado razonable.
+3. **Retención y privacidad** (`retention`, `Confirmar privacy`): cuánto se
+   conserva la referencia de consulta y redacción final de la política.
+4. **Condiciones y alcance** (`Confirmar scope`, `Confirmar terms`): validar la
+   política de abono de visita, el recargo del 3% pendiente con el proveedor y el
+   alcance final que se puede cobrar.
+5. **Prueba real de WhatsApp y medio de pago** (`Verificar realPhone`,
+   `payment`): envío y recepción desde un teléfono real con el número publicado.
 
 ## Proyecto Pages
 
 - Directorio raíz: raíz del repositorio (necesita lockfile y fuentes compartidas).
-- Node: 24.
+- Node: 24. Fijar `NODE_VERSION=24` en el panel; `.node-version` y `.nvmrc` ya
+  lo declaran, pero la variable es la que garantiza el build.
+- Dependencias: `.npmrc` incluye `include=dev`. Pages inyecta
+  `NODE_ENV=production`, que haría que `npm ci` omita las devDependencies y el
+  build fallaría por no encontrar `astro`, que es una devDependency.
 - Comando preview: `npm run support:build`.
 - Comando de producción: `npm run support:release-check && npm run support:build`.
 - Variable solo de producción: `SUPPORT_RELEASE=1`.
@@ -54,6 +61,32 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
 - Rama de producción: master, solo después de integrar el PR revisado.
 - Evitar builds por cambios ajenos mediante build watch paths cuando se configure.
 - No hay tokens de Cloudflare ni secretos en código/frontend.
+
+### Preview (sin publicar producción)
+
+Sin `SUPPORT_RELEASE` (ausente o distinto de `1`) el build no exige datos de
+lanzamiento y produce un sitio de revisión:
+
+- `<meta name="robots" content="noindex, nofollow">` y `robots.txt` con
+  `Disallow: /`; no se genera sitemap.
+- Sin enlace saliente a `wa.me` ni número de WhatsApp: el formulario prepara el
+  mensaje en el navegador y no envía nada.
+- Sin GA4: sin `analyticsId` no se inyecta googletagmanager y no se envía ningún
+  evento. El banner "Vista previa" permanece visible.
+- El retrato sí se optimiza y se muestra; es la única foto real publicada.
+
+Valores exactos para el panel de Cloudflare Pages:
+
+| Campo | Valor |
+| --- | --- |
+| Framework preset | None |
+| Root directory | `/` |
+| Build command | `npm run support:build` |
+| Build output directory | `support/dist` |
+| Root directory (variables) | `/` |
+| `NODE_VERSION` | `24` |
+| `SUPPORT_RELEASE` | sin definir (previews y producción por separado) |
+| `NODE_ENV` | sin tocar; `.npmrc` ya fuerza la instalación de devDependencies |
 
 El deploy real requiere acceso a la cuenta/proyecto Cloudflare y DNS. No está
 automatizado ni ejecutado por este cambio. Añadir `soporte.tooltician.com` como

@@ -8,9 +8,14 @@ const { chromium } = await import(
   process.env.SUPPORT_PLAYWRIGHT_MODULE || "playwright"
 );
 const root = "output/support-fixture";
+// The real portrait is the one fact the fixture must not invent: the page
+// imports it through astro:assets, so the fixture build needs a real image.
+const portrait = "src/assets/carlos-ortega.jpeg";
 await rm(root, { recursive: true, force: true });
 await mkdir(root, { recursive: true });
 await cp("support/src", `${root}/src`, { recursive: true });
+await mkdir(`${root}/src/assets`, { recursive: true });
+await cp(`support/${portrait}`, `${root}/${portrait}`);
 await cp("support/public", `${root}/public`, { recursive: true });
 await cp("public/fonts", "output/public/fonts", { recursive: true });
 await cp("support/astro.config.ts", `${root}/astro.config.ts`);
@@ -20,7 +25,7 @@ await writeFile(
   (await readFile(`${root}/src/config.ts`, "utf8")) +
     `
 Object.assign(business, {
-  whatsapp: '56912345678', email: 'fixture@example.com', photo: '/favicon.svg',
+  whatsapp: '56912345678', email: 'fixture@example.com', photo: '${portrait}',
   payment: 'Fixture', taxDocument: 'Fixture', providenciaSectors: 'Fixture', retention: 'Fixture', analyticsId: 'G-FIXTURE123',
   confirmed: { prices:true, coverage:true, scope:true, tax:true, terms:true, privacy:true },
   verified: { realPhone:true, analytics:true, portrait:true }
@@ -34,6 +39,11 @@ execFileSync(
 const html = await readFile(`${root}/dist/index.html`, "utf8");
 assert.match(html, /index, follow/);
 assert.doesNotMatch(html, /noindex/);
+assert.match(
+  html,
+  /alt="Carlos Ortega, responsable de Tooltician Soporte"/,
+  "Release build ships the real portrait",
+);
 assert.match(
   await readFile(`${root}/dist/robots.txt`, "utf8"),
   /sitemap-index.xml/,

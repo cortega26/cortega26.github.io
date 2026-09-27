@@ -21,6 +21,12 @@ test("preview output stays unindexed and has no live outbound WhatsApp", { skip:
   assert.doesNotMatch(html, /href="https:\/\/wa.me\//);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
   assert.match(readFileSync(join(dist, "robots.txt"), "utf8"), /Disallow: \//);
+  assert.match(html, /Vista previa/);
+  assert.doesNotMatch(
+    html,
+    /googletagmanager|google-analytics|G-[A-Z0-9]{6,}/,
+    "Preview ships no real measurement",
+  );
 });
 
 test("built page ships the optimized portrait with sober alt text and no placeholder", { skip: requiresBuild }, () => {

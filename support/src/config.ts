@@ -45,7 +45,10 @@ export const business = {
     terms: false,
     privacy: false,
   },
-  verified: { realPhone: false, analytics: false, portrait: false },
+  // portrait is verified by evidence in the repo: the asset exists, the build
+  // optimizes it and tests/artifact.test.ts asserts it renders with its alt
+  // text. realPhone and analytics still need real-world checks.
+  verified: { realPhone: false, analytics: false, portrait: true },
 };
 
 export const services: Service[] = [
@@ -121,7 +124,12 @@ export const money = (value: number) =>
   }).format(value);
 export const basePrice = () => Math.min(...business.areas.map((a) => a.price));
 
-export function launchIssues(config = business): string[] {
+/**
+ * Hard blockers: without these the service cannot be responsibly offered or
+ * charged (reachable contact, priceable scope, fiscal document, privacy terms).
+ * Measurement and discovery tooling never belongs here.
+ */
+export function hardLaunchIssues(config = business): string[] {
   const issues: string[] = [];
   if (!/^569\d{8}$/.test(config.whatsapp))
     issues.push("WhatsApp chileno verificado (569 + 8 dígitos)");
@@ -136,11 +144,24 @@ export function launchIssues(config = business): string[] {
   ] as const) {
     if (!config[key].trim()) issues.push(key);
   }
-  if (!/^G-[A-Z0-9]+$/.test(config.analyticsId))
-    issues.push("Identificador GA4");
   for (const [key, done] of Object.entries(config.confirmed))
     if (!done) issues.push(`Confirmar ${key}`);
-  for (const [key, done] of Object.entries(config.verified))
-    if (!done) issues.push(`Verificar ${key}`);
+  if (!config.verified.realPhone)
+    issues.push("Verificar realPhone (prueba desde un teléfono real)");
+  if (!config.verified.portrait) issues.push("Verificar portrait");
+  return issues;
+}
+
+/**
+ * Soft / post-launch: analytics, Search Console, Business Profile and public
+ * reviews. Reported as warnings, never blocking a publication.
+ */
+export function softLaunchIssues(config = business): string[] {
+  const issues: string[] = [];
+  if (!/^G-[A-Z0-9]+$/.test(config.analyticsId))
+    issues.push("Identificador GA4");
+  if (!config.verified.analytics)
+    issues.push("Verificar analytics (eventos recibidos en GA4)");
+  if (!config.reviewUrl.trim()) issues.push("reviewUrl");
   return issues;
 }

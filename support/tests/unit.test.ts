@@ -1,5 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import {
   buildMessage,
   leadReference,
@@ -8,7 +10,11 @@ import {
   type Intake,
 } from "../src/lib/contact.ts";
 import { attribution, safeDimensions } from "../src/lib/analytics.ts";
-import { business, launchIssues } from "../src/config.ts";
+import {
+  business,
+  hardLaunchIssues,
+  softLaunchIssues,
+} from "../src/config.ts";
 const valid: Intake = {
   area: "nunoa",
   device: "Notebook",
@@ -80,33 +86,76 @@ test("attribution retains only known categories and strips arbitrary PII", () =>
     { location: "hero", service: "windows", source: "google" },
   );
 });
+const complete = {
+  ...business,
+  whatsapp: "56912345678",
+  email: "test@example.com",
+  payment: "Test",
+  taxDocument: "Test",
+  providenciaSectors: "Test",
+  retention: "Test",
+  photo: "src/assets/test.webp",
+  analyticsId: "G-TEST123",
+  reviewUrl: "https://example.com/r",
+  confirmed: {
+    prices: true,
+    coverage: true,
+    scope: true,
+    tax: true,
+    terms: true,
+    privacy: true,
+  },
+  verified: { realPhone: true, analytics: true, portrait: true },
+};
 test("unconfirmed business facts cannot be released", () => {
-  assert.ok(launchIssues().length > 5);
-  const complete = {
-    ...business,
-    whatsapp: "56912345678",
-    email: "test@example.com",
-    payment: "Test",
-    taxDocument: "Test",
-    providenciaSectors: "Test",
-    retention: "Test",
-    photo: "/test.webp",
-    analyticsId: "G-TEST123",
-    confirmed: {
-      prices: true,
-      coverage: true,
-      scope: true,
-      tax: true,
-      terms: true,
-      privacy: true,
-    },
-    verified: { realPhone: true, analytics: true, portrait: true },
-  };
-  assert.deepEqual(launchIssues(complete), []);
+  assert.ok(hardLaunchIssues().length > 5);
+  assert.deepEqual(hardLaunchIssues(complete), []);
+  assert.deepEqual(softLaunchIssues(complete), []);
   assert.ok(
-    launchIssues({
+    hardLaunchIssues({
       ...complete,
       confirmed: { ...complete.confirmed, prices: false },
     }).includes("Confirmar prices"),
+  );
+});
+test("measurement never blocks a release, legal and contact facts always do", () => {
+  const unmeasured = {
+    ...complete,
+    analyticsId: "",
+    reviewUrl: "",
+    verified: { ...complete.verified, analytics: false },
+  };
+
+  assert.deepEqual(hardLaunchIssues(unmeasured), []);
+  assert.deepEqual(softLaunchIssues(unmeasured), [
+    "Identificador GA4",
+    "Verificar analytics (eventos recibidos en GA4)",
+    "reviewUrl",
+  ]);
+  assert.deepEqual(hardLaunchIssues({ ...complete, analyticsId: "G-ANY" }), []);
+  for (const [key, value] of [
+    ["taxDocument", ""],
+    ["retention", ""],
+    ["payment", ""],
+    ["email", ""],
+    ["whatsapp", "569"],
+    ["reviewUrl", ""],
+  ] as const) {
+    const config = { ...complete, [key]: value };
+    const issues = hardLaunchIssues(config);
+    if (key === "reviewUrl") assert.deepEqual(issues, [], "reviewUrl is soft");
+    else assert.ok(issues.length > 0, `${key} stays a hard blocker`);
+  }
+  assert.ok(
+    hardLaunchIssues({ ...complete, verified: { ...complete.verified, realPhone: false } }).includes(
+      "Verificar realPhone (prueba desde un teléfono real)",
+    ),
+  );
+});
+test("the verified portrait flag is backed by the declared asset", () => {
+  assert.equal(business.verified.portrait, true);
+  assert.ok(
+    existsSync(join(import.meta.dirname, "..", business.photo)),
+    `${business.photo} must exist to count as verified`,
   );
 });

@@ -249,6 +249,42 @@ pre:focus-visible {
   color: var(--muted);
   margin-top: 19px;
 }
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid #dbe2d6;
+  max-width: 510px;
+}
+.hero-trust img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+.hero-trust p {
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.hero-trust-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 5px;
+  font-size: 0.76rem;
+}
+.hero-trust-links a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid #c6d2c0;
+}
+.hero-trust-links a:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
 .visit-card {
   background: #e9eee5;
   border: 1px solid #dbe2d6;
@@ -506,6 +542,13 @@ pre:focus-visible {
   font-size: 0.84rem;
   color: #d2ded7;
   margin-top: 23px;
+}
+.price-explainer .payment-note {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(226, 236, 228, 0.22);
+  color: #efd395;
+  font-size: 0.8rem;
 }
 .price-explainer .button {
   background: #e4c279;

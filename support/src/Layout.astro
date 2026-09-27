@@ -5,7 +5,42 @@ interface Props { title: string; description: string; }
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, business.origin).href;
 const released = __SUPPORT_RELEASE__;
-const schema = { '@context': 'https://schema.org', '@type': 'Organization', name: business.name, url: business.origin, founder: { '@type': 'Person', name: business.owner }, areaServed: business.areas.map(a => ({ '@type': 'AdministrativeArea', name: a.name })), sameAs: [business.parent, business.github, business.linkedin] };
+const phone = `+${business.whatsapp}`;
+const socialImage = `${business.origin}/og-card.png`;
+// Organization on purpose: the service is delivered at the customer's home, so
+// there is no public address to declare. No address, no ratings, no reviews.
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: business.name,
+  description,
+  url: business.origin,
+  logo: `${business.origin}/favicon.svg`,
+  image: socialImage,
+  email: business.email,
+  telephone: phone,
+  founder: {
+    '@type': 'Person',
+    name: business.owner,
+    jobTitle: 'Soporte técnico a domicilio',
+    sameAs: [business.parent, business.github, business.linkedin],
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: phone,
+      email: business.email,
+      availableLanguage: 'es-CL',
+      areaServed: business.areas.map((area) => area.name),
+    },
+  ],
+  areaServed: business.areas.map((area) => ({
+    '@type': 'AdministrativeArea',
+    name: area.name,
+  })),
+  sameAs: [business.parent, business.github, business.linkedin],
+};
 ---
 <!doctype html>
 <html lang="es-CL">
@@ -16,14 +51,20 @@ const schema = { '@context': 'https://schema.org', '@type': 'Organization', name
     <meta name="robots" content={released ? 'index, follow' : 'noindex, nofollow'} />
     <meta name="theme-color" content="#172b29" />
     <meta property="og:type" content="website" /><meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content={business.name} />
     <meta property="og:title" content={title} /><meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} /><meta property="og:image" content={`${business.origin}/og-card.png`} />
+    <meta property="og:url" content={canonical} /><meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${business.name}: servicio técnico de computadores a domicilio en Macul, Ñuñoa y Providencia.`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={`${business.name}: servicio técnico de computadores a domicilio en Macul, Ñuñoa y Providencia.`} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   </head>
   <body>
     <a class="skip" href="#main">Ir al contenido</a>
-    {!released && <div class="preview-notice">Vista previa · Precios propuestos · Aún no se reciben reservas</div>}
+    {!released && <div class="preview-notice">Vista previa · Servicio aún no abierto a reservas</div>}
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="/" aria-label="Tooltician Soporte a domicilio, inicio"><span class="brand-mark" aria-hidden="true">t.</span><span>tooltician<span class="brand-sub">SOPORTE A DOMICILIO</span></span></a>

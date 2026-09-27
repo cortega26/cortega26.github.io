@@ -1040,6 +1040,13 @@ Required:
 - Search Console registration/verification;
 - URL inspection after launch.
 
+**Páginas por comuna pendientes de decisión.** No se crean páginas `/macul`,
+`/nunoa` ni `/providencia`. Requerirían contenido local único y genuino, no clones
+de la misma landing, para no ser páginas de puerta. Es un experimento futuro: sólo
+considerarlo si Search Console muestra volumen suficiente de búsquedas por comuna
+o si hay material local real que publicar. Sin listas de barrios inventadas ni
+bloques de keywords.
+
 ## 15.4 Structured data
 
 Important privacy constraint:

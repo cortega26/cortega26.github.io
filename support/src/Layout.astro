@@ -1,0 +1,62 @@
+---
+import './styles.css';
+import { business } from './config';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, business.origin).href;
+const released = __SUPPORT_RELEASE__;
+const schema = { '@context': 'https://schema.org', '@type': 'Organization', name: business.name, url: business.origin, founder: { '@type': 'Person', name: business.owner }, areaServed: business.areas.map(a => ({ '@type': 'AdministrativeArea', name: a.name })), sameAs: [business.parent, business.github, business.linkedin] };
+---
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title><meta name="description" content={description} />
+    <link rel="canonical" href={canonical} /><link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="robots" content={released ? 'index, follow' : 'noindex, nofollow'} />
+    <meta name="theme-color" content="#172b29" />
+    <meta property="og:type" content="website" /><meta property="og:locale" content="es_CL" />
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} /><meta property="og:image" content={`${business.origin}/og-card.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Ir al contenido</a>
+    {!released && <div class="preview-notice">Vista previa · Precios propuestos · Aún no se reciben reservas</div>}
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="Tooltician Soporte a domicilio, inicio"><span class="brand-mark" aria-hidden="true">t.</span><span>tooltician<span class="brand-sub">SOPORTE A DOMICILIO</span></span></a>
+        <nav aria-label="Principal"><a href="/#servicios">Servicios</a><a href="/#precios">Precios</a><a href="/#cobertura">Cobertura</a></nav>
+        <a class="button small header-cta" href="/#consulta" data-cta="header">Consultar <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer"><div class="container footer-grid">
+      <div><a class="brand footer-brand" href="/">tooltician <span>soporte</span></a><p>Tecnología que vuelve a acompañarte.</p><p>{business.availability}</p></div>
+      <div><a href="/privacidad/">Privacidad y datos</a><a href="/condiciones-del-servicio/">Condiciones del servicio</a><a href={business.parent}>Conoce Tooltician ↗</a>{business.email && <a href={`mailto:${business.email}`}>{business.email}</a>}</div>
+      <p class="footer-note">© {new Date().getFullYear()} {business.name}<br />Macul · Ñuñoa · sectores de Providencia</p>
+    </div></footer>
+    {business.analyticsId && <aside class="consent container" aria-label="Medición opcional">
+      <p>Medición opcional para saber qué secciones ayudan. No incluye lo que escribas en tu consulta. <a href="/privacidad/">Privacidad y medición</a></p>
+      <div><button type="button" data-consent="yes">Permitir medición</button><button type="button" data-consent="no">Sin medición</button></div>
+      <p id="consent-status" role="status"></p>
+    </aside>}
+    <script>
+      import { enableAnalytics, disableAnalytics } from './lib/analytics';
+      const key = 'support-analytics-consent-v1';
+      let choice: string | null = null;
+      try { choice = localStorage.getItem(key); } catch { /* Consent defaults to off. */ }
+      if (choice === 'yes') enableAnalytics();
+      document.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach(button => button.addEventListener('click', () => {
+        const next = button.dataset['consent'] ?? 'no';
+        let saved = false;
+        try { localStorage.setItem(key, next); saved = true; } catch { /* Still support this page. */ }
+        if (next === 'yes') enableAnalytics();
+        else { disableAnalytics(); if (saved) location.reload(); }
+        const status = document.querySelector('#consent-status');
+        if (status) status.textContent = next === 'yes' ? 'Medición activada. Puedes desactivarla aquí.' : 'Medición desactivada.';
+      }));
+    </script>
+  </body>
+</html>

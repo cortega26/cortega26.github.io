@@ -15,7 +15,15 @@
     "test": "node tests/run.js && node tests/analytics-service-funnel.mjs && node tests/analytics-guard.mjs && node tests/run.js --built && node tests/sitemap-i18n.mjs && node test-htw-snapshot.mjs && node test-behavioral.mjs",
     "test:htw": "node test-htw-snapshot.mjs",
     "test:links": "node scripts/check-links-seo.js",
-    "astro": "astro"
+    "astro": "astro",
+    "support:dev": "astro dev --root support",
+    "support:build": "astro build --root support",
+    "support:check": "astro check --root support",
+    "support:test": "node --test support/tests/*.test.ts",
+    "support:preview": "astro preview --root support --port 4331",
+    "support:e2e": "node support/tests/browser.mjs",
+    "support:release-check": "node support/release-check.ts",
+    "support:e2e:release": "node support/tests/release-browser.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",

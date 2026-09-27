@@ -1,0 +1,28 @@
+name: Support app checks
+on:
+  pull_request:
+    paths: ['support/**', 'package.json', 'package-lock.json', '.github/workflows/support-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@900f2210b1d28bbbd0bd22d17926b9e224e8f231
+      - uses: actions/setup-node@ad1b57eb8159e2fd3cc753317dd4a4016287218f
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run support:check
+      - run: npm run support:build
+      - run: npm run support:test
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run support:e2e
+      - run: npm run support:e2e:release
+      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4
+        if: always()
+        with:
+          name: support-review
+          path: output/support

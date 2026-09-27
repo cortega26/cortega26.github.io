@@ -2001,9 +2001,58 @@ estaba bloqueado por el propio check que el config pretendería silenciar.
 **Estado actual — RESUELTO.** PR #73 llegó a `master` con el config válido y esta
 rama lo incorporó por merge. La exclusión de `markdownlint` sobre los cuatro
 archivos está ahora vigente desde la rama por defecto. La verificación con
-números está en §29.11.
+números está en §29.10.
 
-## 29.10 Decisión humana pendiente
+## 29.10 Verificación tras integrar el config desde `master`
+
+Corrida de Codacy sobre `7a0c825`, ya con el config vigente desde la rama por
+defecto:
+
+| | antes (`91f95c4`) | después (`7a0c825`) |
+|---|---:|---:|
+| nuevos issues | 174 | **106** |
+| conclusion | `action_required` | `action_required` |
+| anotaciones visibles | 50 | 50 |
+| warning / notice (visibles) | 2 / 48 | 9 / 41 |
+
+Los cuatro archivos con exclusión, uno por uno:
+
+| archivo | antes | después |
+|---|---:|---:|
+| `docs/support/master-plan.md` | 17 | **0** |
+| `docs/support/operations.md` | 5 | **0** |
+| `docs/support/implementation.md` | 2 | **0** |
+| `docs/support/acquisition-drafts.md` | 2 | **0** |
+
+**La exclusión está realmente aplicada, no sólo bien formada.** Y es estrecha:
+`docs/support/TOOLTICIAN_SUPPORT_LAUNCH_HANDOFF.md` sigue con 37 anotaciones, o
+sea el lint de Markdown continúa activo en el resto de la documentación.
+
+### Dos lecturas honestas de ese número
+
+1. **Los 106 restantes son casi todos prosa**, y 37 de las 50 anotaciones
+   visibles son del propio handoff. El gate ya no está dominado por los cuatro
+   documentos históricos, pero el Markdown sigue siendo la mayor fuente de
+   ruido. Acotar el handoff requeriría una decisión aparte y **no** se hizo aquí:
+   el objetivo de este sprint eran cuatro archivos concretos.
+2. **Los hallazgos de código visibles pasaron de 4 a 13, y eso no es una
+   regresión.** Al liberarse la ventana de 50 anotaciones, Codacy pudo mostrar
+   hallazgos que antes quedaban tapados por el Markdown: los cuatro falsos
+   positivos ya documentados (`analytics.ts` ×2, `contact.ts` ×2) y la
+   complejidad de `hardLaunchIssues` reaparecen porque por fin caben en la
+   ventana.
+
+De los 13 visibles, **uno sí lo introdujo el refactor de `paintErrors`**:
+`client.ts:13`, «non-serializable expression must be wrapped with $(...)», que
+marca una función flecha con nombre asignada a una constante. Es la misma clase
+de falso positivo ya documentada en `contact.ts:20` y `generate-og.mjs:13` — la
+regla pide envolver en `$()` expresiones de plantilla, no declaraciones
+TypeScript. **No se deshizo el helper para silenciarla**: inlinear el bucle
+haría el código peor a cambio de callar una regla que no aplica.
+
+El único blocker funcional sigue siendo el municipal.
+
+## 29.11 Decisión humana pendiente
 
 1. **`action_required` es un estado de autorización de la GitHub App, no un
    fallo de análisis.** Codacy terminó y está pidiendo una acción. Resolverlo es

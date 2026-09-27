@@ -5,8 +5,24 @@ import {
   validateIntake,
   whatsappUrl,
   type Intake,
+  type IntakeErrors,
 } from "./lib/contact";
 import { track, type EventName, eventNames } from "./lib/analytics";
+
+/** Paint validation state onto the form: aria-invalid plus the error text. */
+const paintErrors = (
+  form: HTMLFormElement,
+  fields: readonly (keyof Intake)[],
+  errors: IntakeErrors,
+) => {
+  for (const field of fields) {
+    const element = form.elements.namedItem(field);
+    if (element instanceof HTMLElement)
+      element.setAttribute("aria-invalid", String(Boolean(errors[field])));
+    const error = document.getElementById(`${field}-error`);
+    if (error) error.textContent = errors[field] ?? "";
+  }
+};
 
 const form = document.querySelector<HTMLFormElement>("#triage");
 const result = document.querySelector<HTMLElement>("#message-result");
@@ -50,13 +66,7 @@ form?.addEventListener("submit", (event) => {
     fields.map((key) => [key, String(data.get(key) ?? "")]),
   ) as unknown as Intake;
   const errors = validateIntake(input);
-  for (const field of fields) {
-    const element = form.elements.namedItem(field);
-    if (element instanceof HTMLElement)
-      element.setAttribute("aria-invalid", String(Boolean(errors[field])));
-    const error = document.getElementById(`${field}-error`);
-    if (error) error.textContent = errors[field] ?? "";
-  }
+  paintErrors(form, fields, errors);
   const first = fields.find((field) => errors[field]);
   if (first) {
     if (result) result.hidden = true;

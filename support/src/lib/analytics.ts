@@ -87,12 +87,13 @@ export function enableAnalytics() {
   started = true;
   source = attribution(location.search);
   const w = window as AnalyticsWindow;
-  const dataLayer: unknown[] = (w.dataLayer = w.dataLayer ?? []);
-  // Canonical gtag shim: the arguments object is pushed as-is, which is what
-  // the Google snippet does. A local reference keeps the invariant explicit
-  // instead of asserting `w.dataLayer` is still set further down.
-  w.gtag = function () {
-    dataLayer.push(arguments);
+  const dataLayer: unknown[] = w.dataLayer ?? [];
+  w.dataLayer = dataLayer;
+  // Canonical gtag shim. A local reference keeps the "queue is initialised"
+  // invariant explicit instead of asserting `w.dataLayer` further down, and the
+  // rest array is what gets queued, which is what gtag consumers expect.
+  w.gtag = function (...args: unknown[]) {
+    dataLayer.push(args);
   };
   w.gtag("js", new Date());
   w.gtag("config", business.analyticsId, {

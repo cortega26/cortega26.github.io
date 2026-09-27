@@ -1828,7 +1828,8 @@ El número 181 es aritmética de líneas nuevas, no 181 defectos: `support/` es
 | Markdown en `operations.md` | 6 | notice | no arreglar — ruido |
 | Markdown en `implementation.md` + `acquisition-drafts.md` | 4 | notice | no arreglar — ruido |
 | CSS whitespace en `styles.css` | 4 | notice | no arreglar — cosmético |
-| **`analytics.ts` non-null assertion + `arguments`/rest contradictorio** | **2** | warning | **corregido** |
+| **`analytics.ts` non-null assertion** | **1** | warning | **corregido** |
+| **`analytics.ts` `arguments` en vez de rest** | **1** | warning | **corregido** (ver nota) |
 | **`client.ts` `forEach` con callback que retorna valor** | **2** | warning | **corregido** |
 | `client.ts` notación de punto | 3 | warning | corregido |
 | `release-check.ts` template literals | 2 | notice | corregido |
@@ -1839,6 +1840,26 @@ El número 181 es aritmética de líneas nuevas, no 181 defectos: `support/` es
 | `generate-og.mjs` lookup object en `.replace()` | 1 | warning | **falso positivo — no tocar** |
 
 **62% de los hallazgos visibles es formato de prosa Markdown.**
+
+### Nota: un fix de este lote se corrigió a sí mismo
+
+La primera versión del cambio en `analytics.ts` quitaba la aserción no-nula pero
+dejaba el shim usando `arguments`, y de paso introducía una asignación dentro de
+una expresión. El resultado fue **cero mejora neta** en ese archivo: se resolvió
+un hallazgo, y además dos nuevos. La forma final separa las tres cosas:
+
+```ts
+const dataLayer: unknown[] = w.dataLayer ?? [];
+w.dataLayer = dataLayer;
+w.gtag = function (...args: unknown[]) {
+  dataLayer.push(args);
+};
+```
+
+Sin aserción no-nula, sin `arguments`, sin asignación en expresión, y
+`window.dataLayer` sigue siendo la misma referencia que `dataLayer`, que es lo
+que comprueba el fixture de release. Queda registrado para que nadie repita el
+intento fallido.
 
 ## 29.3 El hallazgo que Codacy no detectó
 

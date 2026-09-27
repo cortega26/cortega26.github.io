@@ -2,7 +2,15 @@
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { resolve, extname, sep } from "node:path";
-export async function serve(root, port = 4331) {
+
+/**
+ * `loopbackHarness` is only for the E2E harness, which serves plain HTTP on
+ * loopback: WebKit upgrades its asset requests to HTTPS when
+ * `upgrade-insecure-requests` is present, unlike Chromium and Firefox. Only
+ * that transport directive is dropped, and only on request, so the default
+ * server keeps the production headers byte for byte.
+ */
+export async function serve(root, port = 4331, { loopbackHarness = false } = {}) {
   const directory = resolve(root);
   const headers = {};
   try {
@@ -13,6 +21,11 @@ export async function serve(root, port = 4331) {
       if (match) headers[match[1]] = match[2];
     }
   } catch {}
+  if (loopbackHarness && headers["Content-Security-Policy"])
+    headers["Content-Security-Policy"] = headers["Content-Security-Policy"].replace(
+      /;\s*upgrade-insecure-requests\b/,
+      "",
+    );
   const mime = {
     ".html": "text/html; charset=utf-8",
     ".js": "text/javascript",

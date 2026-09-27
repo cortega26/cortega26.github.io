@@ -2,10 +2,14 @@ import { serve } from "./server.mjs";
 const { chromium, firefox, webkit } = await import(
   process.env.SUPPORT_PLAYWRIGHT_MODULE || "playwright"
 );
-import { mkdir, readFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import assert from "node:assert/strict";
 const base = "http://127.0.0.1:4331";
-const server = await serve("support/dist");
+// The loopback harness drops only `upgrade-insecure-requests` from the served
+// CSP so WebKit stops upgrading asset requests to HTTPS. Nothing is proxied:
+// same-origin responses come straight from the server, which keeps the real
+// production CSP intact and leaves no request in flight when the browser closes.
+const server = await serve("support/dist", 4331, { loopbackHarness: true });
 const output = "output/support";
 await mkdir(output, { recursive: true });
 let browser;
@@ -21,12 +25,6 @@ try {
     await new Promise((r) => setTimeout(r, 100));
   }
   assert.ok(ready, "preview server started");
-  const headersText = await readFile("support/public/_headers", "utf8");
-  // This harness serves HTTP loopback. WebKit upgrades its asset requests to
-  // HTTPS when this transport-only directive is present, unlike Chromium.
-  // Production keeps the full CSP; HTTPS/redirects are checked after deployment.
-  const csp = headersText.match(/Content-Security-Policy: (.+)/)?.[1]
-    ?.replace(/;\s*upgrade-insecure-requests\b/, '');
   for (const [name, engine] of [
     ["chromium", chromium],
     ["firefox", firefox],
@@ -43,20 +41,29 @@ try {
     const external = [];
     const page = await context.newPage();
     page.on("pageerror", (e) => errors.push(e.message));
-    await context.route("**/*", async (route) => {
+    await context.route("**/*", (route) => {
       if (!route.request().url().startsWith(base)) {
         external.push(route.request().url());
         return route.abort();
       }
-      const response = await route.fetch();
-      await route.fulfill({
-        response,
-        headers: { ...response.headers(), "content-security-policy": csp },
-      });
+      return route.continue();
     });
     await page.goto(
       `${base}/?utm_source=secret@example.com&problem=DO-NOT-LEAK`,
     );
+    const servedCsp = await page.evaluate(async () => {
+      const response = await fetch(location.href);
+      return response.headers.get("content-security-policy");
+    });
+    assert.ok(servedCsp, "CSP served to the browser");
+    assert.doesNotMatch(servedCsp, /upgrade-insecure-requests/);
+    for (const directive of [
+      "default-src 'self'",
+      "frame-ancestors 'none'",
+      "object-src 'none'",
+      "form-action 'none'",
+    ])
+      assert.ok(servedCsp.includes(directive), `CSP keeps ${directive}`);
     if (name === "chromium") {
       for (const width of [360, 390, 412, 768, 1440]) {
         await page.setViewportSize({ width, height: 950 });
@@ -108,6 +115,18 @@ try {
       [],
       "no external network, analytics or form submissions before consent",
     );
+    // Positive control: routing stays armed. This URL is allowed by the CSP
+    // `connect-src`, so only the harness can stop it: the request must be
+    // recorded and aborted without ever leaving the machine.
+    const probe = "https://www.googletagmanager.com/gtag/js?id=G-HARNESS-PROBE";
+    assert.equal(
+      await page.evaluate(
+        (url) => fetch(url).then(() => "reached").catch(() => "blocked"),
+        probe,
+      ),
+      "blocked",
+    );
+    assert.ok(external.includes(probe), "outbound request detected and blocked");
     assert.equal(
       await page.evaluate(() => localStorage.length),
       0,

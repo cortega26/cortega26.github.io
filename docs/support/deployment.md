@@ -19,10 +19,12 @@ Revisada el 27-09-2026. No es necesario pedir estos datos al propietario:
   `15478383962`, identificador público `G-2HK4GHK7GR`. La CI lo lee de
   `vars.PUBLIC_GA4_MEASUREMENT_ID`. Hay validaciones previas documentadas.
 
-El repositorio no contiene un proyecto Pages/Workers para el subdominio soporte
-ni credenciales de administración de Cloudflare. Conocer la configuración del
-host principal no implica que el deployment independiente ya exista. Mantener
-Cloudflare Pages como propuesta de despliegue separado hasta configurarlo.
+El repositorio no contiene credenciales de administración de Cloudflare ni
+configuración de Pages; el proyecto se administra por CLI con la sesión
+personal del propietario. El proyecto `tooltician-support` ya existe en la
+cuenta y sirve previews de rama (ver "Preview desplegado"); el subdominio
+`soporte.tooltician.com` sigue sin asociar. Conocer la configuración del host
+principal no implica que el deployment de producción exista.
 
 La decisión de reutilizar el stream GA4 debe verificar primero sus opciones de
 Enhanced Measurement: cambiarlas afecta también al portafolio. Si no puede
@@ -88,9 +90,63 @@ Valores exactos para el panel de Cloudflare Pages:
 | `SUPPORT_RELEASE` | sin definir (previews y producción por separado) |
 | `NODE_ENV` | sin tocar; `.npmrc` ya fuerza la instalación de devDependencies |
 
-El deploy real requiere acceso a la cuenta/proyecto Cloudflare y DNS. No está
-automatizado ni ejecutado por este cambio. Añadir `soporte.tooltician.com` como
-dominio personalizado en Pages y usar el DNS que indique el proveedor.
+El deploy de producción requiere todavía resolver DNS y el dominio propio. Añadir
+`soporte.tooltician.com` como dominio personalizado en Pages solo cuando el
+lanzamiento esté autorizado.
+
+## Preview desplegado (2026-09-27)
+
+Existe un preview real y público. PRODUCCIÓN sigue sin desplegarse.
+
+- Proyecto Pages: `tooltician-support` (`tooltician-support.pages.dev`).
+- Rama de producción del proyecto: `master`. No se ha desplegado producción, por
+  eso `https://tooltician-support.pages.dev/` responde 404.
+- Deployment: `68334ce6-f0ce-44fa-ae68-55bb1ae87e73`, environment `Preview`,
+  rama `feat/tooltician-support-v1`, commit `54ad7cf`.
+- URL del deployment:
+  `https://68334ce6.tooltician-support.pages.dev`
+- Alias estable de la rama:
+  `https://feat-tooltician-support-v1.tooltician-support.pages.dev`
+- Método (Wrangler 4.142.0, build local, sin Git integration):
+
+```bash
+rm -rf support/dist
+npm run support:verify
+npx wrangler pages deploy support/dist \
+  --project-name tooltician-support \
+  --branch feat/tooltician-support-v1 \
+  --commit-hash "$(git rev-parse HEAD)"
+```
+
+El proyecto se creó con `npx wrangler pages project create tooltician-support
+--production-branch master --force`; `--force` solo es necesario en la creación
+porque esa versión de Wrangler delega el comando a Pages sobre Workers.
+
+### Verificado contra la URL remota
+
+- HTTP 200 en `/`, `/privacidad/`, `/condiciones-del-servicio/`, `/robots.txt`,
+  `/favicon.svg` y `/og-card.png`; 404 en ruta inexistente, en
+  `/sitemap-index.xml` y en `/sitemap-0.xml`.
+- `noindex, nofollow` en el HTML y `x-robots-tag: noindex` añadido por Cloudflare.
+- `robots.txt` responde `User-agent: *` / `Disallow: /`.
+- Sin `wa.me` en el HTML, sin googletagmanager y sin ningún ID `G-` en los
+  bundles; el banner "Vista previa" visible.
+- Retrato optimizado en WebP, `alt="Carlos Ortega, responsable de Tooltician
+  Soporte"`, 320x320 en móvil y 363x363 en escritorio, sin requests externos ni
+  errores de consola.
+- Cabeceras de `support/public/_headers` aplicadas: CSP, `X-Content-Type-Options`,
+  `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options` y HSTS.
+- HTTP→HTTPS 301 y certificado válido (`CN=tooltician-support.pages.dev`,
+  Let's Encrypt, `Verify return code: 0`).
+
+Capturas en `output/support-preview/` (390 px y 1440 px), fuera del repositorio.
+
+### No hecho
+
+- Sin dominio personalizado, sin `soporte.tooltician.com`, sin cambios de DNS.
+- Sin `SUPPORT_RELEASE=1`, sin sitemap de producción, sin reservas reales.
+- Sin GA4, sin Search Console y sin Google Business Profile.
+- TLS y cabeceras verificados solo en el hostname `*.pages.dev` del preview.
 
 ## Dominio y seguridad
 

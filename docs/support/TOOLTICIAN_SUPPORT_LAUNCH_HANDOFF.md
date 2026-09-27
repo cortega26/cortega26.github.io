@@ -1927,14 +1927,24 @@ sería degradar legibilidad a cambio de nada.
 
 ## 29.6 Configuración de Codacy
 
-Se añadió `.codacy.yml` con **una sola** exclusión, que acota `remark-lint` a los
-cuatro archivos que efectivamente produjeron ruido. No excluye ningún archivo de
-código, no baja severidades y no desactiva analizadores. `support/` sigue
-analizándose por completo. Justificación completa dentro del propio archivo.
+`.codacy.yml` acota **`markdownlint`** a los cuatro archivos que efectivamente
+produjeron ruido. No excluye ningún archivo de código, no baja severidades y no
+desactiva analizadores. `support/` sigue analizándose por completo. Justificación
+completa dentro del propio archivo.
 
-Pendiente de decisión humana: según la documentación de Codacy, **Codacy Cloud
-lee `.codacy.yml` desde la rama por defecto** (`master`). Este PR apunta a
-`master`, así que la config puede no tener efecto hasta que se integre.
+> **Corrección de historial.** La primera versión de este config usaba
+> `remark-lint` como clave de motor. Era **inválida para estos hallazgos**:
+> Codacy acepta tanto `remark-lint` como `markdownlint`, pero los mensajes
+> observados son textuales de markdownlint y con sus números de línea exactos
+> (`acquisition-drafts.md` 17 y 32, `implementation.md` 99 y 101). Acotar
+> `remark-lint` habría sido un no-op silencioso. Se corrigió a `markdownlint` y se
+> verificó ejecutando markdownlint sobre los cuatro archivos.
+
+**Origen:** la configuración válida está en `master`, integrada como PR #73
+(merge `e8f1708`), y se incorporó a esta rama por merge de `master`
+(`13ae4d3`), no por copia. `.codacy.yml` en esta rama es **byte a byte idéntico**
+al de `master`. Eso importa porque Codacy Cloud lee el config desde la rama por
+defecto: mientras estuvo sólo en la rama de feature fue **inerte**.
 
 ## 29.7 Ruido aceptado, no suprimido
 
@@ -1945,7 +1955,7 @@ defecto, y se deja visible a propósito.
 
 ## 29.8 Resultado medido
 
-Cuatro corridas successive de Codacy sobre este PR:
+Cuatro corridas sucesivas de Codacy sobre este PR:
 
 | HEAD | nuevos | conclusion | anotaciones visibles | warning | notice |
 |---|---:|---|---:|---:|---:|
@@ -1979,39 +1989,30 @@ check run. Como el Markdown va creciendo y ocupa esa ventana, que un archivo no
 aparezca en la lista **no prueba** que esté limpio. La única cifra fiable es la
 que Codacy reporta: 174.
 
-## 29.9 `.codacy.yml` está presente pero inerte
+## 29.9 `.codacy.yml` estuvo inerte y ya no lo está
 
-El archivo está correcto y en la rama, pero **no está surtiendo efecto**: en la
-corrida `4668d68` los cuatro archivos que el config excluye siguieron anotándose,
-y `master-plan.md` pasó de 21 a 32.
+**Estado anterior — RESUELTO.** El config vivía sólo en la rama de feature y no
+surtía efecto: en la corrida `4668d68` los cuatro archivos que el config excluye
+siguieron anotándose, y `master-plan.md` pasó de 21 a 32. La causa era que
+**Codacy Cloud lee `.codacy.yml` desde la rama por defecto** y `origin/master` no
+lo tenía. Era un deadlock de proceso: el merge que llevaría el config a `master`
+estaba bloqueado por el propio check que el config pretendería silenciar.
 
-Causa: **Codacy Cloud lee `.codacy.yml` desde la rama por defecto**, y
-`origin/master` no lo tiene. Sólo lo tiene esta rama.
-
-```text
-$ git ls-tree origin/master --name-only | grep -i 'codacy'
-.codacy                      # directorio preexistente, no es el config
-```
-
-Esto es un deadlock de proceso, no de código: el merge que llevaría el config a
-`master` está bloqueado por el propio check que el config pretendeurgentemente
-silenciar. **Requiere decisión humana** en la UI de Codacy (Ignorar archivos a
-nivel de repositorio, o conceder acceso a la app). Ver §29.10.
+**Estado actual — RESUELTO.** PR #73 llegó a `master` con el config válido y esta
+rama lo incorporó por merge. La exclusión de `markdownlint` sobre los cuatro
+archivos está ahora vigente desde la rama por defecto. La verificación con
+números está en §29.11.
 
 ## 29.10 Decisión humana pendiente
-
-Ninguna de estas se puede resolver desde el repositorio:
 
 1. **`action_required` es un estado de autorización de la GitHub App, no un
    fallo de análisis.** Codacy terminó y está pidiendo una acción. Resolverlo es
    cuenta del propietario, no código.
-2. **Los 4 archivos Markdown** hay que excluirlos en la UI de Codacy, o aceptar
-   el config en cuanto se integre a `master`.
-3. **`hardLaunchIssues` con complejidad 9** (límite 8): se acepta
+2. **`hardLaunchIssues` con complejidad 9** (límite 8): se acepta
    deliberadamente. Es el gate de producción y su valor es ser una checklist
    legible. Subir el límite o refactorizar son decisiones del proyecto, no
    correcciones.
-4. **WebKit no corre en esta máquina** por `libavif16` ausente; en CI sí, con
+3. **WebKit no corre en esta máquina** por `libavif16` ausente; en CI sí, con
    `playwright install --with-deps`. No es un defecto del proyecto.
 
 ---

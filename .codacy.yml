@@ -1,6 +1,9 @@
 ---
 # Codacy configuration.
 #
+# Purpose: keep the quality gate focused on code defects instead of on prose
+# formatting in long-form documentation.
+#
 # Scope rule for this file: it may only ever *narrow noise that has been
 # observed and measured*. It must never exclude a code path, lower a
 # severity, or disable an analyzer for source files. `support/` is fully
@@ -9,8 +12,7 @@
 # Justification for the single exclusion below
 # --------------------------------------------
 # In the Codacy analysis of PR #72, 31 of the 50 exposed annotations (62%)
-# were markdown prose-formatting notices raised by remark-lint, on four
-# documentation files:
+# were markdown prose-formatting notices, on four documentation files:
 #
 #   docs/support/master-plan.md          21  (1,988-line historical spec)
 #   docs/support/operations.md            6
@@ -28,26 +30,36 @@
 # Why they carry no signal here: this repository keeps long-form prose
 # specifications and Spanish-language operational documents. A numbered
 # strategy document is *expected* to have several `#` top-level headings, and
-# an operational template is *expected* to have tight `Field: ___
-# Other: ___` lines. Satisfying MD025/MD032/MD037 would mean rewriting a
-# 1,988-line historical product spec for formatting alone, with real risk of
-# altering its meaning and zero defect reduction.
+# an operational template is *expected* to have tight `Field: ___` lines.
+# Satisfying MD025/MD032/MD037 would mean rewriting a 1,988-line historical
+# product spec for formatting alone, with real risk of altering its meaning
+# and zero defect reduction.
 #
 # Minimum viable scope, deliberately:
-#   - only the `remark-lint` engine is scoped, so every code analyzer
-#     (sonarscharp, stylelint, eslint, duplication, metric) still runs on
-#     these and on every other path;
+#   - only the `markdownlint` engine is scoped, so every code analyzer
+#     (sonarcsharp, stylelint, eslint, lizard, duplication, metric, trivy)
+#     still runs on these files and on every other path;
 #   - only the four files that actually produced findings are listed, so
 #     markdown linting stays active on all other documentation, including
-#     the launch handoff;
+#     the launch handoff and every Markdown file already on master;
 #   - no severity threshold is lowered and no analyzer is disabled.
 #
-# Known and deliberately NOT suppressed: 4 stylelint `notice`s in
+# Engine key: `markdownlint` was confirmed empirically, not assumed. Running
+# markdownlint against the four files reproduces Codacy's messages verbatim
+# and its line numbers exactly (acquisition-drafts.md 17 and 32,
+# implementation.md 99 and 101). `remark-lint` is also a valid Codacy engine
+# name, but it is a different tool and scoping it would have been a no-op.
+#
+# Sequencing note: these four paths arrive with PR #72. Landing this file on
+# master first means the exclusion is already active when that PR is analysed,
+# instead of the noise being baked into the baseline.
+#
+# Known and deliberately NOT suppressed: stylelint `notice`s in
 # support/src/styles.css ("expected empty line before rule"). The file is
 # internally consistent and compact; inserting blank lines selectively would
 # make it less consistent. Cosmetic, zero defect signal, left visible.
 engines:
-  remark-lint:
+  markdownlint:
     exclude_paths:
       - "docs/support/master-plan.md"
       - "docs/support/operations.md"

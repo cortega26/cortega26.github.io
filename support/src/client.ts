@@ -15,17 +15,17 @@ let reference = "";
 let started = false;
 let completed = false;
 let clicked = false;
-document.querySelectorAll<HTMLAnchorElement>("[data-cta]").forEach((link) =>
+document.querySelectorAll<HTMLAnchorElement>("[data-cta]").forEach((link) => {
   link.addEventListener("click", () => {
-    const service = link.dataset["service"];
+    const service = link.dataset.service;
     const select = form?.elements.namedItem("service");
     if (service && select instanceof HTMLSelectElement) {
       select.value = service;
       if (result) result.hidden = true;
     }
-    track("support_cta_click", { location: link.dataset["cta"], service });
-  }),
-);
+    track("support_cta_click", { location: link.dataset.cta, service });
+  });
+});
 form?.addEventListener("focusin", () => {
   if (!started) {
     track("support_triage_start");
@@ -92,15 +92,14 @@ if ("IntersectionObserver" in window) {
     (entries) =>
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        const name = (entry.target as HTMLElement).dataset[
-          "sectionEvent"
-        ] as EventName;
+        const name = (entry.target as HTMLElement).dataset
+          .sectionEvent as EventName;
         if (eventNames.includes(name)) track(name);
         observer.unobserve(entry.target);
       }),
     { threshold: 0.15 },
   );
-  document
-    .querySelectorAll("[data-section-event]")
-    .forEach((section) => observer.observe(section));
+  document.querySelectorAll("[data-section-event]").forEach((section) => {
+    observer.observe(section);
+  });
 }

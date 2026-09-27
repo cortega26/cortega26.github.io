@@ -1,0 +1,55 @@
+---
+# Codacy configuration.
+#
+# Scope rule for this file: it may only ever *narrow noise that has been
+# observed and measured*. It must never exclude a code path, lower a
+# severity, or disable an analyzer for source files. `support/` is fully
+# analysed and always will be.
+#
+# Justification for the single exclusion below
+# --------------------------------------------
+# In the Codacy analysis of PR #72, 31 of the 50 exposed annotations (62%)
+# were markdown prose-formatting notices raised by remark-lint, on four
+# documentation files:
+#
+#   docs/support/master-plan.md          21  (1,988-line historical spec)
+#   docs/support/operations.md            6
+#   docs/support/implementation.md         2
+#   docs/support/acquisition-drafts.md     2
+#
+# The rules firing, all of them `notice`, none of them defects:
+#   MD025  Multiple top-level headings in the same document
+#   MD001  Expected: 1; Actual: 0; Below            (heading increment)
+#   MD032  Lists should be surrounded by blank lines
+#   MD036  Emphasis used instead of a heading
+#   MD034  Bare URL used
+#   MD037  Spaces inside emphasis markers
+#
+# Why they carry no signal here: this repository keeps long-form prose
+# specifications and Spanish-language operational documents. A numbered
+# strategy document is *expected* to have several `#` top-level headings, and
+# an operational template is *expected* to have tight `Field: ___
+# Other: ___` lines. Satisfying MD025/MD032/MD037 would mean rewriting a
+# 1,988-line historical product spec for formatting alone, with real risk of
+# altering its meaning and zero defect reduction.
+#
+# Minimum viable scope, deliberately:
+#   - only the `remark-lint` engine is scoped, so every code analyzer
+#     (sonarscharp, stylelint, eslint, duplication, metric) still runs on
+#     these and on every other path;
+#   - only the four files that actually produced findings are listed, so
+#     markdown linting stays active on all other documentation, including
+#     the launch handoff;
+#   - no severity threshold is lowered and no analyzer is disabled.
+#
+# Known and deliberately NOT suppressed: 4 stylelint `notice`s in
+# support/src/styles.css ("expected empty line before rule"). The file is
+# internally consistent and compact; inserting blank lines selectively would
+# make it less consistent. Cosmetic, zero defect signal, left visible.
+engines:
+  remark-lint:
+    exclude_paths:
+      - "docs/support/master-plan.md"
+      - "docs/support/operations.md"
+      - "docs/support/implementation.md"
+      - "docs/support/acquisition-drafts.md"

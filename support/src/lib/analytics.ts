@@ -87,9 +87,12 @@ export function enableAnalytics() {
   started = true;
   source = attribution(location.search);
   const w = window as AnalyticsWindow;
-  w.dataLayer = w.dataLayer ?? [];
-  w.gtag = function (..._args: unknown[]) {
-    w.dataLayer!.push(arguments);
+  const dataLayer: unknown[] = (w.dataLayer = w.dataLayer ?? []);
+  // Canonical gtag shim: the arguments object is pushed as-is, which is what
+  // the Google snippet does. A local reference keeps the invariant explicit
+  // instead of asserting `w.dataLayer` is still set further down.
+  w.gtag = function () {
+    dataLayer.push(arguments);
   };
   w.gtag("js", new Date());
   w.gtag("config", business.analyticsId, {

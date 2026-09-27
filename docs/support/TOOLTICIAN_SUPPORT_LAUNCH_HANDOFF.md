@@ -1792,7 +1792,139 @@ interpretar
 
 ---
 
-## Fin del handoff
+# 29. Calidad — triage de Codacy
+
+> **Estado: DONE para los hallazgos reales.** El resto es ruido medido y
+> documentado. Único blocker sigue siendo el municipal.
+
+## 29.1 Qué es y qué no es el check
+
+El check se llama `Codacy Static Code Analysis` y su conclusión es
+`action_required`, no `failure`. Eso significa que Codacy terminó el análisis y
+está pidiendo una decisión, no que el análisis haya fallado. El título del run es:
+
+```text
+181 new issues (0 max.) of at least minor severity.
+```
+
+De las **50 anotaciones que GitHub expone** (GitHub las topa en 50), la
+distribución por severidad es:
+
+| Severidad | Cantidad |
+|---|---|
+| `error` | **0** |
+| `warning` | 13 |
+| `notice` | 37 |
+
+**No hay un solo hallazgo de severidad error, ni de seguridad, ni de privacidad.**
+El número 181 es aritmética de líneas nuevas, no 181 defectos: `support/` es
+íntegramente nuevo en este PR, así que todo su contenido cuenta como «nuevo».
+
+## 29.2 Clasificación de las 50 anotaciones
+
+| categoría | count | severidad | acción |
+|---|---:|---|---|
+| Markdown en `master-plan.md` | 21 | notice | no arreglar — ruido |
+| Markdown en `operations.md` | 6 | notice | no arreglar — ruido |
+| Markdown en `implementation.md` + `acquisition-drafts.md` | 4 | notice | no arreglar — ruido |
+| CSS whitespace en `styles.css` | 4 | notice | no arreglar — cosmético |
+| **`analytics.ts` non-null assertion + `arguments`/rest contradictorio** | **2** | warning | **corregido** |
+| **`client.ts` `forEach` con callback que retorna valor** | **2** | warning | **corregido** |
+| `client.ts` notación de punto | 3 | warning | corregido |
+| `release-check.ts` template literals | 2 | notice | corregido |
+| `generate-og.mjs` sombreado de `escape` | 1 | warning | corregido |
+| `analytics.ts` `document.cookie` | 2 | warning | **falso positivo — no tocar** |
+| `contact.ts` control chars en regex | 1 | warning | **falso positivo — no tocar** |
+| `contact.ts` `.replaceAll("-", "")` | 1 | warning | **falso positivo — no tocar** |
+| `generate-og.mjs` lookup object en `.replace()` | 1 | warning | **falso positivo — no tocar** |
+
+**62% de los hallazgos visibles es formato de prosa Markdown.**
+
+## 29.3 El hallazgo que Codacy no detectó
+
+Leyendo `generate-og.mjs` para el aviso de sombreado apareció un defecto real
+que el linter no marca:
+
+`support/generate-og.mjs` renderizaba la imagen de compartir con
+**`ÑUÑOA · SECTORES DE PROVIDENCIA`**. Esa imagen **se publica**: es
+`og:image` en todas las páginas, vía `Layout.astro`.
+
+Contradecía la decisión de cobertura confirmada: `config.ts` tiene Providencia
+completa, `unit.test.ts` afirma que la cobertura **no** es sectorial, y `dd1d1f6`
+quitó el texto «sectores de Providencia» a propósito — pero **nunca tocó
+`generate-og.mjs` ni el PNG**. Ese commit se lo saltó.
+
+Efecto: cada compartir en redes anunciaba Providencia sectorial, en desacuerdo
+con la página viva. **Corregido**: el texto ahora es `PROVIDENCIA` y la imagen se
+regeneró.
+
+## 29.4 Los cuatro falsos positivos, y por qué no se tocan
+
+1. **`analytics.ts` — «Direct assigning to document.cookie is not recommended»**
+   (2 ocurrencias). Es el código que **borra** las cookies `_ga*` al retirar el
+   consentimiento. Asignar `Max-Age=0` es la **única** forma de borrar una
+   cookie. El código ya cubre `Path=/` y `Domain=hostname`. «Recomendado» aquí
+   significaría no borrar, y eso rompería la garantía de privacidad.
+
+2. **`contact.ts:21` — «Unexpected control character in a regular expression»**.
+   El regex es `/[\u0000-\u001f\u007f]/g`: el **sanitizador** que elimina
+   caracteres de control del texto del cliente. Escrito con escapes, es correcto
+   y es una medida de seguridad. La regla apunta a literales de control.
+
+3. **`contact.ts:20` — «Non-serializable expression»** sobre
+   `.replaceAll("-", "")`. Es un primitivo de cadena. La regla apunta a regex y
+   funciones dentro de `.replace()`.
+
+4. **`generate-og.mjs:13` — «Non-serializable expression»**. Es una tabla de
+   búsqueda `{ "&": "&amp;", ... }[c]` dentro de un reemplazo de entidad HTML.
+   Es el escape correcto.
+
+## 29.5 Complejidad: los números no son deuda real
+
+Codacy reporta «complexity increasing» como suma, porque todo `support/` es
+nuevo. Al medir complejidad ciclomática real y longitud de función:
+
+| archivo | loc | ciclomático | función más larga | Codacy |
+|---|---:|---:|---:|---:|
+| `src/client.ts` | 106 | 30 | — (código de módulo) | 35 |
+| `src/config.ts` | 177 | 13 | 16 | 17 |
+| `src/lib/analytics.ts` | 124 | 12 | **30** | 22 |
+| `src/lib/contact.ts` | 66 | 16 | 16 | 20 |
+| `tests/browser.mjs` | 159 | 12 | — | 13 |
+| `tests/release-browser.mjs` | 137 | **5** | — | 13 |
+| `tests/server.mjs` | 68 | 13 | 1 | 13 |
+| `tests/unit.test.ts` | 332 | 14 | 3 | 31 |
+
+La función más larga de todo el código de producción tiene **30 líneas**.
+`config.ts` es 99% datos declarativos. `release-browser.mjs` tiene complejidad 5
+en 137 líneas porque es una secuencia lineal de aserciones. Los archivos de tests
+tienen complejidad aditiva por naturaleza, y esa complejidad **no es riesgo de
+defecto**.
+
+**No se refactorizó nada para subir una métrica.** Fragmentar funciones simples
+sería degradar legibilidad a cambio de nada.
+
+## 29.6 Configuración de Codacy
+
+Se añadió `.codacy.yml` con **una sola** exclusión, que acota `remark-lint` a los
+cuatro archivos que efectivamente produjeron ruido. No excluye ningún archivo de
+código, no baja severidades y no desactiva analizadores. `support/` sigue
+analizándose por completo. Justificación completa dentro del propio archivo.
+
+Pendiente de decisión humana: según la documentación de Codacy, **Codacy Cloud
+lee `.codacy.yml` desde la rama por defecto** (`master`). Este PR apunta a
+`master`, así que la config puede no tener efecto hasta que se integre.
+
+## 29.7 Ruido aceptado, no suprimido
+
+4 avisos de stylelint en `support/src/styles.css` («expected empty line before
+rule»). El archivo es compacto e internamente consistente; insertar líneas en
+blanco selectivamente lo haría **menos** consistente. Cosmético, sin señal de
+defecto, y se deja visible a propósito.
+
+---
+
+# 30. Fin del handoff
 
 Actualizar este documento en cada cambio material de:
 

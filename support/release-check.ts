@@ -5,9 +5,9 @@ const hard = hardLaunchIssues();
 const soft = softLaunchIssues();
 if (business.photo && !existsSync(resolve(import.meta.dirname, business.photo)))
   hard.push(`El retrato debe existir en el repositorio: ${business.photo}`);
-if (soft.length) console.warn("POST-LANZAMIENTO (no bloquea)\n- " + soft.join("\n- "));
+if (soft.length) console.warn(`POST-LANZAMIENTO (no bloquea)\n- ${soft.join("\n- ")}`);
 if (hard.length) {
-  console.error("PUBLICACIÓN BLOQUEADA\n- " + hard.join("\n- "));
+  console.error(`PUBLICACIÓN BLOQUEADA\n- ${hard.join("\n- ")}`);
   process.exitCode = 1;
 } else
   console.log(

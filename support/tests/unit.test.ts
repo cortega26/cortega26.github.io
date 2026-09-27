@@ -1,6 +1,5 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import {
   buildMessage,
   leadReference,
@@ -110,12 +109,4 @@ test("unconfirmed business facts cannot be released", () => {
       confirmed: { ...complete.confirmed, prices: false },
     }).includes("Confirmar prices"),
   );
-});
-test("preview output stays unindexed and has no live outbound WhatsApp", () => {
-  const html = readFileSync("support/dist/index.html", "utf8");
-  assert.match(html, /noindex, nofollow/);
-  assert.match(html, /https:\/\/soporte.tooltician.com\//);
-  assert.doesNotMatch(html, /href="https:\/\/wa.me\//);
-  assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
-  assert.match(readFileSync("support/dist/robots.txt", "utf8"), /Disallow: \//);
 });

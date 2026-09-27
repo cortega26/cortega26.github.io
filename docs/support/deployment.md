@@ -32,7 +32,8 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
 ## Previo al lanzamiento
 
 1. Completar `support/src/config.ts` con datos reales y confirmados.
-2. Añadir foto real optimizada en `support/public`, configurar la ruta y revisar.
+2. Confirmar el retrato real de `support/src/assets/carlos-ortega.jpeg` y la ruta
+   en `support/src/config.ts`. La imagen se optimiza en el build.
 3. Confirmar documentación tributaria, precios finales, medios de pago, cobertura,
    contacto para derechos de datos/reclamos y política real de conservación.
 4. Ejecutar las pruebas del sitio principal y soporte. Revisar las capturas a

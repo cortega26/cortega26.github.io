@@ -19,7 +19,9 @@ la identidad usa una variante clara, verde y dorada de Tooltician.
 - Salida: `support/dist/`, distinta de `dist/` del portafolio.
 - Rutas: `/`, `/privacidad/`, `/condiciones-del-servicio/`, 404 y robots.
 - Sin backend, base de datos, gestor de citas, pagos ni librerías UI adicionales.
-- La ilustración del computador es CSS; las iniciales no pretenden ser un retrato.
+- La ilustración del computador es CSS. El retrato es la fotografía real de
+  `support/src/assets/`, procesada por `astro:assets` (WebP y `srcset`); no lleva
+  filtros ni deformaciones y se recorta en 1:1 con `object-fit: cover`.
 - Formularios: validación local, revisión del mensaje y apertura explícita de WhatsApp.
 - El mensaje no se guarda; una edición invalida la vista preparada.
 - La referencia aleatoria permite registrar la consulta en una hoja privada. No se
@@ -51,13 +53,16 @@ Comandos desde la raíz:
 
 ```bash
 npm ci
-npm run support:check
-npm run support:build
-npm run support:test
+npm run support:verify
 npx playwright install --with-deps chromium firefox webkit
 npm run support:e2e
 npm run support:dev
 ```
+
+`support:verify` es el orden obligatorio: `support:check` → `support:test:unit`
+(lógica pura, sin build) → `support:build` → `support:test:dist` (lee
+`support/dist`). Los tests de artefacto declaran esa dependencia: si falta el
+build se marcan como omitidos con el motivo, nunca lo generan por su cuenta.
 
 La CI de soporte solo verifica y guarda capturas; no despliega. Las pruebas nuevas
 comprueban Unicode/inyección en WhatsApp, validación, privacidad, bloqueos de

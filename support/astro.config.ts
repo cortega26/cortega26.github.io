@@ -6,12 +6,8 @@ import { existsSync } from "node:fs";
 const release = process.env.SUPPORT_RELEASE === "1";
 if (release && launchIssues().length)
   throw new Error(`Support launch blocked:\n${launchIssues().join("\n")}`);
-if (
-  release &&
-  (!business.photo.startsWith("/") ||
-    !existsSync(new URL(`./public${business.photo}`, import.meta.url)))
-)
-  throw new Error("Support launch blocked: portrait file missing");
+if (release && business.photo && !existsSync(new URL(business.photo, import.meta.url)))
+  throw new Error(`Support launch blocked: portrait file missing (${business.photo})`);
 
 export default defineConfig({
   site: business.origin,

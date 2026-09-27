@@ -35,8 +35,16 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
 
 - **Cobertura**: Macul, Ñuñoa y Providencia completas. La coordinación horaria,
   el acceso y el estacionamiento afectan la disponibilidad, no la cobertura.
-- **Precios y visita**: $25.000 en Macul y Ñuñoa, $30.000 en Providencia, hasta 45
-  minutos. Se cobra aunque el cliente no continúe con la reparación.
+- **Precios finales de lanzamiento**: visita $30.000 en Macul y Ñuñoa, $35.000 en
+  Providencia, hasta 45 minutos. Se mantienen altos a propósito para no producir
+  una discontinuidad cuando se migre desde el Registro de Subsistencia a un
+  régimen afecto a IVA. Son precios finales al consumidor: no se agrega IVA ni
+  ningún concepto, y no se afirma que incluyan IVA mientras rija el registro.
+  Servicios: mantención desktop desde $40.000 y notebook desde $45.000; SSD/RAM
+  desde $30.000; Windows desde $40.000; respaldo y Wi-Fi desde $35.000; remoto
+  $25.000. Se cobra la visita aunque el cliente no continúe con la reparación.
+- **WhatsApp verificado**: envío y recepción probados por el propietario con
+  +56 9 5111 8901. `verified.realPhone` es true y ya no bloquea.
 - **Visita y mano de obra**: en la misma visita se cobra el mayor valor entre visita
   y servicio, más repuestos, licencias y extras autorizados. No se suman ambos.
 - **Segunda visita**: se informa alcance y precio antes, y requiere acuerdo previo.
@@ -60,18 +68,19 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
 
 ## Decisiones humanas pendientes antes de producción
 
-Sólo una sigue bloqueando. No se puede marcar desde el repositorio.
+Queda una sola, y es externa: ningún cambio de código puede resolverla.
 
-1. **Prueba real de WhatsApp** (`Verificar realPhone`): abrir el flujo desde un
-   dispositivo real, enviar un mensaje y comprobar recepción efectiva en el
-   número publicado. Conocer el número no es verificarlo.
+1. **Autorización municipal** (`Confirmar municipalPermit`): consultar al
+   Departamento de Rentas de la Municipalidad de Macul qué patente o autorización
+   corresponde a un prestador inscrito en Registro de Subsistencia que trabaja
+   sólo a domicilio del cliente y no atiende público en su residencia. Está
+   registrado en `operations.md` y no se afirma ningún tipo de permiso mientras no
+   exista respuesta escrita.
 
-Pendiente operativo que **no** bloquea el código pero sí el ejercicio del
-servicio: confirmar con la Municipalidad de Macul qué patente o autorización
-corresponde a un prestador inscrito en Registro de Subsistencia que trabaja sólo
-a domicilio del cliente y no atiende público en su residencia. Está registrado en
-`operations.md` y no se afirma ningún tipo de permiso mientras no exista respuesta
-escrita.
+Tributario y WhatsApp ya no bloquean: `confirmed.tax` y `verified.realPhone` son
+true. GA4, analytics y reviewUrl son soft. El gate técnico queda en un único
+punto, deliberadamente externo: sin la respuesta municipal no debe abrirse el
+servicio aunque el resto del código esté listo.
 
 ## Régimen tributario
 

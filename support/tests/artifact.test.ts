@@ -37,3 +37,21 @@ test("built page ships the optimized portrait with sober alt text and no placeho
   assert.match(html, /width="400" height="400"/);
   assert.doesNotMatch(html, /identity-monogram/);
 });
+
+test("published prices are final and never promise or add tax", { skip: requiresBuild }, () => {
+  const conditions = readFileSync(join(dist, "condiciones-del-servicio", "index.html"), "utf8");
+  assert.match(conditions, /Registro de Personas Naturales que desarrollan Actividades de Subsistencia del SII/);
+  assert.match(conditions, /lo libera de emitir boletas y del IVA/);
+  for (const page of ["index.html", join("privacidad", "index.html"), join("condiciones-del-servicio", "index.html")]) {
+    const html = readFileSync(join(dist, page), "utf8");
+    assert.doesNotMatch(
+      html,
+      /m[áa]s\s+IVA|\+\s*IVA|IVA\s+incluido|impuestos aplicables/i,
+      `${page} must not add or promise tax`,
+    );
+    assert.doesNotMatch(html, /documento tributario pendiente/i);
+  }
+  const home = readFileSync(join(dist, "index.html"), "utf8");
+  for (const price of ["$30.000", "$35.000", "$40.000", "$45.000", "$25.000"])
+    assert.ok(home.includes(price), `home lists ${price}`);
+});

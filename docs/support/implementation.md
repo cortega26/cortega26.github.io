@@ -29,7 +29,9 @@ la identidad usa una variante clara, verde y dorada de Tooltician.
 
 ## Decisiones propuestas que requieren confirmación
 
-Visita de 45 minutos: $25.000 Macul/Ñuñoa, $30.000 Providencia según sector.
+Visita de 45 minutos: $30.000 Macul/Ñuñoa, $35.000 Providencia. Precios finales al
+consumidor, sin IVA agregado mientras rija el Registro de Actividades de
+Subsistencia.
 La visita se abona a la mano de obra en una misma intervención. Se cobra el mayor
 de ambos importes; piezas y extras se suman con autorización. No se suma visita
 más mano de obra completa por defecto. Confirmar esta política con los precios.

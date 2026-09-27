@@ -16,6 +16,7 @@ import {
   basePrice,
   business,
   hardLaunchIssues,
+  services,
   softLaunchIssues,
 } from "../src/config.ts";
 const valid: Intake = {
@@ -105,6 +106,7 @@ const complete = {
     tax: true,
     terms: true,
     privacy: true,
+    municipalPermit: true,
   },
   verified: { realPhone: true, analytics: true, portrait: true },
 };
@@ -129,9 +131,9 @@ test("coverage is exactly the three confirmed communes at the confirmed visit ra
   );
   assert.deepEqual(
     Object.fromEntries(business.areas.map((area) => [area.id, area.price])),
-    { macul: 25000, nunoa: 25000, providencia: 30000 },
+    { macul: 30000, nunoa: 30000, providencia: 35000 },
   );
-  assert.equal(basePrice(), 25000);
+  assert.equal(basePrice(), 30000);
   assert.equal(
     business.areas.some((area) => /sector/i.test(area.name)),
     false,
@@ -160,10 +162,14 @@ test("retention states the confirmed windows and never stores passwords", () => 
     "the browser keeps no trace of the customer's data",
   );
 });
-test("only the real phone test still blocks a release", () => {
-  assert.deepEqual(hardLaunchIssues(), [
-    "Verificar realPhone (prueba desde un teléfono real)",
-  ]);
+test("the tax regime and the real phone test no longer block a release", () => {
+  assert.equal(business.confirmed.tax, true);
+  assert.equal(business.verified.realPhone, true);
+  assert.deepEqual(
+    hardLaunchIssues(),
+    ["Confirmar municipalPermit"],
+    "only the external municipal answer is still pending",
+  );
   for (const resolved of [
     "payment",
     "retention",
@@ -173,15 +179,19 @@ test("only the real phone test still blocks a release", () => {
     "Confirmar scope",
     "Confirmar terms",
     "Confirmar privacy",
+    "Verificar realPhone",
   ])
     assert.ok(
       !hardLaunchIssues().some((issue) => issue.includes(resolved)),
       `${resolved} must no longer block`,
     );
   assert.deepEqual(
-    hardLaunchIssues({ ...complete, verified: { ...complete.verified, realPhone: true } }),
+    hardLaunchIssues({
+      ...complete,
+      confirmed: { ...complete.confirmed, municipalPermit: true },
+    }),
     [],
-    "a verified phone leaves nothing hard",
+    "once the municipal answer arrives nothing hard remains",
   );
   assert.ok(
     hardLaunchIssues({
@@ -191,7 +201,11 @@ test("only the real phone test still blocks a release", () => {
     "an unverified phone must block",
   );
   assert.ok(
-    !hardLaunchIssues({ ...complete, analyticsId: "" }).length,
+    !hardLaunchIssues({
+      ...complete,
+      confirmed: { ...complete.confirmed, municipalPermit: true },
+      analyticsId: "",
+    }).length,
     "GA4 stays soft",
   );
   assert.ok(
@@ -212,9 +226,23 @@ test("the tax status states the subsistence registry without inventing a documen
   );
   assert.deepEqual(
     business.areas.map((area) => area.price),
-    [25000, 25000, 30000],
-    "the regime adds no tax to the visit prices",
+    [30000, 30000, 35000],
+    "final consumer prices, no tax added on top",
   );
+  assert.deepEqual(
+    Object.fromEntries(services.map((s) => [s.id, s.price])),
+    {
+      diagnostico: 30000,
+      mantencion: 40000,
+      upgrade: 30000,
+      windows: 40000,
+      respaldo: 35000,
+      wifi: 35000,
+      remoto: 25000,
+    },
+    "service prices are the final launch prices",
+  );
+  assert.equal(business.notebookMaintenancePrice, 45000);
 });
 test("measurement never blocks a release, legal and contact facts always do", () => {
   const unmeasured = {

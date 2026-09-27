@@ -33,14 +33,17 @@ atención al público.
 
 ## Pendiente operativo municipal
 
-> Confirmar con la Municipalidad de Macul qué patente o autorización corresponde a
-> un prestador inscrito en el Registro de Subsistencia que trabaja exclusivamente
-> a domicilio del cliente y no atiende público en su residencia.
+> Consultar al Departamento de Rentas de la Municipalidad de Macul qué patente o
+> autorización corresponde a un prestador inscrito en Registro de Subsistencia que
+> trabaja exclusivamente a domicilio del cliente y no atiende público en su
+> residencia.
 
-Es una consulta por confirmar. **No** es una afirmación legal sobre qué patente
-aplica, y el tipo de permiso no se inventa ni se publica hasta tener la respuesta
-por escrito. Mientras tanto el sitio no anuncia atención al público en una
-dirección.
+Es una consulta **externa** en curso, no una afirmación legal. No se inventa ni se
+publica el tipo de permiso mientras no exista respuesta escrita. Se registra como
+`confirmed.municipalPermit = false` porque bloquea el ejercicio del servicio y
+ningún cambio de código puede resolverlo. Mientras tanto el sitio no anuncia
+atención al público en una dirección.
+
 
 ## Admisión y reserva
 
@@ -82,7 +85,7 @@ Mano de obra: ___ · Abono de visita: ___ · Repuestos: ___
 
 Repuesto nuevo/reacondicionado, modelo, vendedor/comprobante: ___
 
-Extras aprobados: ___ · Total final con impuestos aplicables: ___
+Extras aprobados: ___ · Total final (los precios publicados son finales): ___
 
 Vigencia/condiciones: ___ · Autorización explícita: ___
 

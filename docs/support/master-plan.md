@@ -636,7 +636,7 @@ Consultar por WhatsApp
 Ver servicios y precios
 
 Trust microcopy:
-- Visita técnica desde $25.000
+- Visita técnica desde $30.000
 - Atención previa coordinación
 - Soporte remoto disponible según el problema
 

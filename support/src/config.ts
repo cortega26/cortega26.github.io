@@ -31,11 +31,14 @@ export const business = {
     "Las consultas que no terminan en servicio se conservan por un máximo de 90 días. De los servicios realizados se mantiene un registro operativo mínimo por hasta 12 meses para seguimiento, soporte y resolución de reclamos. La dirección exacta se elimina cuando deja de ser necesaria para coordinar o prestar el servicio. No se almacenan contraseñas y las copias temporales de archivos se eliminan al completar el propósito acordado. Los registros sujetos a obligaciones legales se conservan durante el plazo aplicable.",
   visitMinutes: 45,
   remoteMinutes: 45,
-  notebookMaintenancePrice: 40000,
+  notebookMaintenancePrice: 45000,
+  // Final consumer prices. They already absorb the cost of the payment method
+  // and the expected future migration out of the subsistence registry, so no
+  // tax is added on top. No "más IVA" wording while the registry is in force.
   areas: [
-    { id: "macul", name: "Macul", price: 25000 },
-    { id: "nunoa", name: "Ñuñoa", price: 25000 },
-    { id: "providencia", name: "Providencia", price: 30000 },
+    { id: "macul", name: "Macul", price: 30000 },
+    { id: "nunoa", name: "Ñuñoa", price: 30000 },
+    { id: "providencia", name: "Providencia", price: 35000 },
   ],
   // Confirmed: additional work in the same visit is charged as the greater of
   // visit and service, plus authorized parts, licenses and extras.
@@ -43,6 +46,9 @@ export const business = {
   macOS: false,
   offsite: false,
   analyticsId: "",
+  // municipalPermit is an external answer (Municipalidad de Macul, Departamento
+  // de Rentas) that no code can supply, so it stays a hard blocker until the
+  // owner comes back with it written.
   confirmed: {
     prices: true,
     coverage: true,
@@ -50,11 +56,13 @@ export const business = {
     tax: true,
     terms: true,
     privacy: true,
+    municipalPermit: false,
   },
   // portrait is verified by evidence in the repo: the asset exists, the build
   // optimizes it and tests/artifact.test.ts asserts it renders with its alt
-  // text. realPhone and analytics still need real-world checks.
-  verified: { realPhone: false, analytics: false, portrait: true },
+  // text. realPhone was verified by a human send/receive test on the published
+  // number. analytics still needs a real reception check in GA4.
+  verified: { realPhone: true, analytics: false, portrait: true },
 };
 
 export const services: Service[] = [
@@ -73,7 +81,7 @@ export const services: Service[] = [
     problem: "Se calienta o hace mucho ruido",
     description:
       "Limpieza interna, revisión de ventilación y pasta térmica cuando corresponda.",
-    price: 35000,
+    price: 40000,
     detail: `Mano de obra para PC de escritorio. Notebook desde $${business.notebookMaintenancePrice.toLocaleString("es-CL")}; según modelo.`,
   },
   {
@@ -81,7 +89,7 @@ export const services: Service[] = [
     title: "Instalación de SSD o RAM",
     problem: "Quiero un computador más ágil",
     description: "Compatibilidad, instalación y comprobación del componente.",
-    price: 25000,
+    price: 30000,
     detail: "Mano de obra. Repuestos y migración se cotizan por separado.",
   },
   {
@@ -90,7 +98,7 @@ export const services: Service[] = [
     problem: "No inicia o muestra errores",
     description:
       "Diagnóstico de software, instalación y configuración según el caso.",
-    price: 35000,
+    price: 40000,
     detail: "Respaldo y licencia, si se necesitan, se acuerdan por separado.",
   },
   {
@@ -99,7 +107,7 @@ export const services: Service[] = [
     problem: "Quiero cuidar o trasladar mis archivos",
     description:
       "Copia acordada de archivos y ayuda para pasar a un equipo nuevo.",
-    price: 30000,
+    price: 35000,
     detail: "Según volumen y estado del disco. No es recuperación avanzada.",
   },
   {
@@ -108,7 +116,7 @@ export const services: Service[] = [
     problem: "La conexión no funciona bien",
     description:
       "Revisión de conectividad y configuración de router, red o impresora.",
-    price: 30000,
+    price: 35000,
     detail: "Equipos adicionales y cableado no incluidos.",
   },
   {
@@ -117,7 +125,7 @@ export const services: Service[] = [
     problem: "Necesito ayuda con una configuración",
     description:
       "Soporte para problemas que no requieren revisar físicamente el equipo.",
-    price: 20000,
+    price: 25000,
     detail: `Hasta ${business.remoteMinutes} minutos, sujeto a evaluación. Sin acceso desatendido permanente.`,
   },
 ];
@@ -132,7 +140,8 @@ export const basePrice = () => Math.min(...business.areas.map((a) => a.price));
 
 /**
  * Hard blockers: without these the service cannot be responsibly offered or
- * charged (reachable contact, stated tax regime, privacy terms, real phone).
+ * charged (reachable contact, stated tax regime, privacy terms, a real phone
+ * test, and the municipal authorization answer that only the owner can obtain).
  * Measurement and discovery tooling never belongs here.
  */
 export function hardLaunchIssues(config = business): string[] {

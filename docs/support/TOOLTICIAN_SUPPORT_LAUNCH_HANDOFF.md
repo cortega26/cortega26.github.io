@@ -220,8 +220,9 @@ En el HEAD `56d5667`:
 - E2E WebKit: PASS;
 - release fixture: PASS;
 - CI `Support app checks`: SUCCESS;
-- run verificado: `36336869351` (2026-09-27, `headSha` `56d5667`, 1m43s, los
-  nueve pasos en `success`, incluidos `support:e2e` y `support:e2e:release`).
+- run verificado: `36336869351` (2026-09-27, `headSha` `56d5667`, 1m43s, todos
+  los pasos en `success`, incluidos `support:verify`, `support:e2e` y
+  `support:e2e:release`).
 
 El run `36334228951` que citaba la primera versión de este handoff corresponde a
 `ae94465` y también fue exitoso; queda citado sólo como historial.
@@ -246,7 +247,7 @@ No es un único interruptor. Conviene conocer ambos antes de tocar nada:
    `hardLaunchIssues()` no está vacío, **lanza `Error` al cargar la config**, así
    que el build no arranca. Además verifica que el retrato exista en disco.
 
-Consecuencia práctica, verificada el 2026-09-27: el paso 8 de §20
+Consecuencia práctica, verificada el 2026-09-27: el paso 9 de §20
 (`SUPPORT_RELEASE=1 npm run support:build`) **falla hoy** con
 
 ```text

@@ -92,7 +92,7 @@ export function enableAnalytics() {
   // Canonical gtag shim. A local reference keeps the "queue is initialised"
   // invariant explicit instead of asserting `w.dataLayer` further down, and the
   // rest array is what gets queued, which is what gtag consumers expect.
-  w.gtag = function (...args: unknown[]) {
+  w.gtag = (...args: unknown[]) => {
     dataLayer.push(args);
   };
   w.gtag("js", new Date());

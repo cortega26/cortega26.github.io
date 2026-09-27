@@ -20,7 +20,7 @@ export const business = {
   photo: "",
   reviewUrl: "",
   availability: "Atención previa coordinación",
-  payment: "",
+  payment: "Transferencia, efectivo o tarjeta (recargo pendiente de definir y validar)",
   taxDocument: "",
   providenciaSectors: "",
   visitMinutes: 45,
@@ -38,7 +38,7 @@ export const business = {
   analyticsId: "",
   retention: "",
   confirmed: {
-    prices: false,
+    prices: true,
     coverage: false,
     scope: false,
     tax: false,

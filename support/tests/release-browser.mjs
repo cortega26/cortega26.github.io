@@ -26,7 +26,7 @@ await writeFile(
     `
 Object.assign(business, {
   whatsapp: '56912345678', email: 'fixture@example.com', photo: '${portrait}',
-  payment: 'Fixture', taxDocument: 'Fixture', retention: 'Fixture', analyticsId: 'G-FIXTURE123',
+  payment: 'Fixture', taxRegime: 'Fixture', retention: 'Fixture', analyticsId: 'G-FIXTURE123',
   confirmed: { prices:true, coverage:true, scope:true, tax:true, terms:true, privacy:true },
   verified: { realPhone:true, analytics:true, portrait:true }
 });\n`,

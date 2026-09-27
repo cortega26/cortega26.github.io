@@ -21,7 +21,12 @@ export const business = {
   reviewUrl: "",
   availability: "Atención previa coordinación",
   payment: "Transferencia, efectivo o tarjeta. Mismo precio.",
-  taxDocument: "",
+  // Registro de Personas Naturales que desarrollan Actividades de Subsistencia
+  // (Resolución Ex. SII N°193/2025). Mientras la inscripción esté vigente no
+  // requiere Inicio de Actividades, está exonerado de IVA y liberado de emitir
+  // boletas por estas prestaciones. No sustituye permisos municipales.
+  taxRegime:
+    "Inscrito en el Registro de Actividades de Subsistencia del SII. Exonerado de IVA y liberado de emitir boletas mientras se mantengan los requisitos del régimen.",
   retention:
     "Las consultas que no terminan en servicio se conservan por un máximo de 90 días. De los servicios realizados se mantiene un registro operativo mínimo por hasta 12 meses para seguimiento, soporte y resolución de reclamos. La dirección exacta se elimina cuando deja de ser necesaria para coordinar o prestar el servicio. No se almacenan contraseñas y las copias temporales de archivos se eliminan al completar el propósito acordado. Los registros sujetos a obligaciones legales se conservan durante el plazo aplicable.",
   visitMinutes: 45,
@@ -42,7 +47,7 @@ export const business = {
     prices: true,
     coverage: true,
     scope: true,
-    tax: false,
+    tax: true,
     terms: true,
     privacy: true,
   },
@@ -127,7 +132,7 @@ export const basePrice = () => Math.min(...business.areas.map((a) => a.price));
 
 /**
  * Hard blockers: without these the service cannot be responsibly offered or
- * charged (reachable contact, priceable scope, fiscal document, privacy terms).
+ * charged (reachable contact, stated tax regime, privacy terms, real phone).
  * Measurement and discovery tooling never belongs here.
  */
 export function hardLaunchIssues(config = business): string[] {
@@ -136,12 +141,7 @@ export function hardLaunchIssues(config = business): string[] {
     issues.push("WhatsApp chileno verificado (569 + 8 dígitos)");
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(config.email))
     issues.push("Correo público para privacidad y reclamos");
-  for (const key of [
-    "payment",
-    "taxDocument",
-    "retention",
-    "photo",
-  ] as const) {
+  for (const key of ["payment", "taxRegime", "retention", "photo"] as const) {
     if (!config[key].trim()) issues.push(key);
   }
   for (const [key, done] of Object.entries(config.confirmed))

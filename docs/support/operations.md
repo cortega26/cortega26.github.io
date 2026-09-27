@@ -3,12 +3,53 @@
 Guardar registros reales en un sistema privado con acceso restringido, nunca en
 este repositorio público. No registrar contraseñas ni datos bancarios.
 
+## Régimen tributario: Registro de Actividades de Subsistencia
+
+Inscripción en el Registro de Personas Naturales que desarrollan Actividades de
+Subsistencia del SII (Resolución Ex. SII N°193/2025), vigente desde el 27-09-2026.
+Mientras se mantenga vigente: no requiere Inicio de Actividades, está exonerado de
+IVA y liberado de emitir boletas por estas prestaciones.
+
+Controles internos obligatorios:
+
+- **Sólo consumidores finales.** No atender empresas, organizaciones ni
+  solicitantes de factura bajo este régimen. Si el cliente es una empresa, no se
+  acepta el trabajo y se deriva.
+- **Controlar ingresos.** Registrar en el sistema privado el total cobrado por
+  visitas, mano de obra y repuestos, y comparar contra el promedio máximo mensual
+  de 5 UTM.
+- **Alertar antes de acercarse al límite.** Alerte sobre 4 UTM de promedio
+  mensual, no al superarlo. El valor de la UTM se actualiza cada año: verificar el
+  vigente antes de fijar umbrales, no usar un valor supuesto.
+- **Transición obligatoria.** Si deja de cumplir los requisitos, corresponde
+  migrar al régimen tributario que aplique antes de seguir operando bajo el
+  registro. El estado tributario no se deduce del volumen: se revisa.
+- Este control es interno. **No** se implementa como analítica pública, no se
+  publica ningún indicador de facturación y no se almacenan datos personales más
+  allá del registro operativo mínimo ya definido en privacidad.
+
+La inscripción **no sustituye permisos municipales** y no autoriza por sí sola la
+atención al público.
+
+## Pendiente operativo municipal
+
+> Confirmar con la Municipalidad de Macul qué patente o autorización corresponde a
+> un prestador inscrito en el Registro de Subsistencia que trabaja exclusivamente
+> a domicilio del cliente y no atiende público en su residencia.
+
+Es una consulta por confirmar. **No** es una afirmación legal sobre qué patente
+aplica, y el tipo de permiso no se inventa ni se publica hasta tener la respuesta
+por escrito. Mientras tanto el sitio no anuncia atención al público en una
+dirección.
+
 ## Admisión y reserva
 
 - Referencia TS, fecha, origen declarado, comuna, equipo/modelo.
 - Síntoma, si enciende, fecha de inicio, caída/líquido/evento eléctrico.
 - Importancia de los datos y respaldo disponible.
 - Clasificación: domicilio / diagnóstico y cotización / remoto / derivación.
+- Destinatario: consumidor final ___ (si es empresa u organización: no se acepta
+  bajo el régimen de subsistence, se deriva).
 - Alcance, valor base, fecha/franja, duración, acceso/estacionamiento, forma de pago.
 - Dirección solo al coordinar; no en analítica ni URLs públicas.
 

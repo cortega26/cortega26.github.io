@@ -94,7 +94,7 @@ const complete = {
   whatsapp: "56912345678",
   email: "test@example.com",
   payment: "Test",
-  taxDocument: "Test",
+  taxRegime: "Test",
   photo: "src/assets/test.webp",
   analyticsId: "G-TEST123",
   reviewUrl: "https://example.com/r",
@@ -160,32 +160,28 @@ test("retention states the confirmed windows and never stores passwords", () => 
     "the browser keeps no trace of the customer's data",
   );
 });
-test("only tax and the real phone test still block a release", () => {
-  const hard = hardLaunchIssues();
-  assert.deepEqual(hard, ["taxDocument", "Confirmar tax", "Verificar realPhone (prueba desde un teléfono real)"]);
+test("only the real phone test still blocks a release", () => {
+  assert.deepEqual(hardLaunchIssues(), [
+    "Verificar realPhone (prueba desde un teléfono real)",
+  ]);
   for (const resolved of [
     "payment",
     "retention",
-    "providenciaSectors",
+    "taxRegime",
+    "Confirmar tax",
     "Confirmar coverage",
     "Confirmar scope",
     "Confirmar terms",
     "Confirmar privacy",
   ])
     assert.ok(
-      !hard.some((issue) => issue.includes(resolved)),
+      !hardLaunchIssues().some((issue) => issue.includes(resolved)),
       `${resolved} must no longer block`,
     );
-  const withoutTax = hardLaunchIssues({ ...complete, taxDocument: "" });
-  assert.ok(withoutTax.includes("taxDocument"), "empty taxDocument blocks");
   assert.deepEqual(
-    hardLaunchIssues({
-      ...complete,
-      taxDocument: "",
-      confirmed: { ...complete.confirmed, tax: false },
-    }),
-    ["taxDocument", "Confirmar tax"],
-    "release cannot go green while tax is unresolved",
+    hardLaunchIssues({ ...complete, verified: { ...complete.verified, realPhone: true } }),
+    [],
+    "a verified phone leaves nothing hard",
   );
   assert.ok(
     hardLaunchIssues({
@@ -197,6 +193,27 @@ test("only tax and the real phone test still block a release", () => {
   assert.ok(
     !hardLaunchIssues({ ...complete, analyticsId: "" }).length,
     "GA4 stays soft",
+  );
+  assert.ok(
+    hardLaunchIssues({ ...complete, taxRegime: "" }).includes("taxRegime"),
+    "an unstated tax regime still blocks",
+  );
+});
+test("the tax status states the subsistence registry without inventing a document", () => {
+  assert.equal(business.confirmed.tax, true);
+  assert.match(business.taxRegime, /Registro de Actividades de Subsistencia del SII/);
+  assert.match(business.taxRegime, /[Ee]xonerado de IVA/);
+  assert.match(business.taxRegime, /liberado de emitir boletas/);
+  assert.doesNotMatch(business.taxRegime, /pendiente/i);
+  assert.doesNotMatch(
+    `${business.taxRegime} ${business.payment}`,
+    /factura|\d+\s*%|\+\s*IVA/i,
+    "no invoice or VAT surcharge may be implied",
+  );
+  assert.deepEqual(
+    business.areas.map((area) => area.price),
+    [25000, 25000, 30000],
+    "the regime adds no tax to the visit prices",
   );
 });
 test("measurement never blocks a release, legal and contact facts always do", () => {
@@ -215,7 +232,7 @@ test("measurement never blocks a release, legal and contact facts always do", ()
   ]);
   assert.deepEqual(hardLaunchIssues({ ...complete, analyticsId: "G-ANY" }), []);
   for (const [key, value] of [
-    ["taxDocument", ""],
+    ["taxRegime", ""],
     ["retention", ""],
     ["payment", ""],
     ["email", ""],

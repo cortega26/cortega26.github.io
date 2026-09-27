@@ -60,13 +60,29 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
 
 ## Decisiones humanas pendientes antes de producción
 
-Sólo dos siguen bloqueando. Ninguna se puede marcar desde el repositorio.
+Sólo una sigue bloqueando. No se puede marcar desde el repositorio.
 
-1. **Documento tributario** (`taxDocument`, `Confirmar tax`): qué documento se
-   emite por cada visita y quién lo emite. Sigue vacío a propósito.
-2. **Prueba real de WhatsApp** (`Verificar realPhone`): abrir el flujo desde un
+1. **Prueba real de WhatsApp** (`Verificar realPhone`): abrir el flujo desde un
    dispositivo real, enviar un mensaje y comprobar recepción efectiva en el
    número publicado. Conocer el número no es verificarlo.
+
+Pendiente operativo que **no** bloquea el código pero sí el ejercicio del
+servicio: confirmar con la Municipalidad de Macul qué patente o autorización
+corresponde a un prestador inscrito en Registro de Subsistencia que trabaja sólo
+a domicilio del cliente y no atiende público en su residencia. Está registrado en
+`operations.md` y no se afirma ningún tipo de permiso mientras no exista respuesta
+escrita.
+
+## Régimen tributario
+
+Inscrito en el Registro de Personas Naturales que desarrollan Actividades de
+Subsistencia del SII (Resolución Ex. SII N°193/2025). `business.taxRegime`
+declara el estado; `confirmed.tax` es true y el régimen ya no es hard blocker.
+Mientras la inscripción esté vigente no requiere Inicio de Actividades, está
+exonerado de IVA y liberado de emitir boletas, y se atende sólo a consumidores
+finales dentro del promedio máximo de 5 UTM mensuales. La inscripción no sustituye
+permisos municipales y el sitio no anuncia atención al público. Controles
+internos y umbral de alerta en `operations.md`.
 
 ## Proyecto Pages
 

@@ -12,8 +12,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -59,6 +57,13 @@ jobs:
         run: node tests/run.js --built
       - name: Sitemap i18n check
         run: node tests/sitemap-i18n.mjs
+      - name: Cache Playwright browsers
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
       - name: Install Playwright browser
         # test-htw-snapshot.mjs launches real Chromium, whose binary is not
         # present on a fresh runner (npm ci installs the npm package only).
@@ -94,6 +99,9 @@ jobs:
   deploy:
     # PR runs verify only — never deploy from a pull request.
     if: github.event_name != 'pull_request'
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

@@ -1043,7 +1043,7 @@ group('H-03 · Service CTAs carry unique accessible names', () => {
   const src = services();
   assert(
     'H-03 ServicesSection qualifies the CTA with the service title',
-    src.includes('visually-hidden') && src.includes('{svc.title}'),
+    src.includes('visually-hidden') && src.includes('{displayName(svc.serviceId)}'),
     'Expected a visually-hidden service name inside the CTA link'
   );
   assert(
@@ -1550,6 +1550,49 @@ group('046 · Above-the-fold content renders without JS (enter-now)', () => {
   const css = read('src/styles/global.css') || '';
   assert('global.css defines .enter-now', css.includes('.enter-now'), 'missing .enter-now rule');
   assert('global.css enter-now has a reduced-motion override', css.includes('.enter-now { animation: none; }'), 'missing prefers-reduced-motion guard');
+});
+
+group('048 · Service display names single-sourced from the registry', () => {
+  const registry = JSON.parse(read('src/data/service-registry.json'));
+  const llms = read('public/llms.txt') || '';
+  const servicesTs = read('src/data/services.ts') || '';
+  for (const service of registry.services) {
+    assert(
+      `048 llms.txt names ${service.service_id} as "${service.public_name}"`,
+      llms.includes(service.public_name),
+      `public_name ${JSON.stringify(service.public_name)} missing from public/llms.txt`
+    );
+    for (const route of [service.route_en, service.route_es]) {
+      assert(
+        `048 llms.txt links ${service.service_id} route ${route}`,
+        llms.includes(route),
+        `route ${JSON.stringify(route)} missing from public/llms.txt`
+      );
+    }
+  }
+  const componentized = registry.services.filter((service) => service.service_id !== 'htw');
+  assert('048 registry lists five componentized services besides htw', componentized.length === 5, `got ${componentized.length}`);
+  for (const service of componentized) {
+    for (const name of [service.public_name, service.public_name_es]) {
+      assert(
+        `048 services.ts names ${service.service_id} as "${name}"`,
+        servicesTs.includes(`serviceName: '${name}'`),
+        `serviceName ${JSON.stringify(name)} missing from src/data/services.ts`
+      );
+    }
+  }
+  const servicePage = read('src/components/ServicePage.astro') || '';
+  assert(
+    '048 ServicePage.astro derives the category from the registry',
+    servicePage.includes('service.service_id === serviceKey'),
+    'hand-mapped serviceCategories is back'
+  );
+  const servicesSection = read('src/components/ServicesSection.astro') || '';
+  assert(
+    '048 ServicesSection.astro keys serviceResults by serviceId',
+    servicesSection.includes('serviceResults[svc.serviceId]'),
+    'serviceResults is keyed by title string again'
+  );
 });
 
 // ─── Summary ──────────────────────────────────────────────────────────────

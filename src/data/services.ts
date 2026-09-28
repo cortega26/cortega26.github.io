@@ -332,7 +332,7 @@ const pythonAutomation: ServiceDefinition = {
     title: 'Automatización Python y Pipelines | Tooltician',
     description:
       'Automatización Python programada y reproducible: pipelines ETL, scrapers y reportes acotados, documentados y listos para seguir funcionando.',
-    serviceName: 'Automatización en Python y Pipelines de Datos',
+    serviceName: 'Automatización Python y Pipelines de Datos',
     serviceType: ['Automatización en Python', 'Desarrollo de pipelines ETL', 'Web scraping', 'Automatización de reportes'],
     eyebrow: 'Automatización en Python · Tooltician',
     h1: 'Automatización en Python que sigue funcionando cuando dejas de vigilarla',
@@ -1217,7 +1217,7 @@ const financialTooling: ServiceDefinition = {
     title: 'Financial & Audit Tooling | Tooltician',
     description:
       'Reconciliation and finance workflows that stop on mismatches and preserve audit traces. Fail-closed by design, with deterministic audit artifacts.',
-    serviceName: 'Financial & Audit Tooling',
+    serviceName: 'Financial & Audit Systems',
     serviceType: ['Bank reconciliation automation', 'Financial reconciliation software', 'Audit tooling', 'Fail-closed controls'],
     eyebrow: 'Financial & Audit Tooling · Tooltician',
     h1: 'Reconciliation that stops on a mismatch instead of hiding it',
@@ -1428,7 +1428,7 @@ const financialTooling: ServiceDefinition = {
     title: 'Herramientas Financieras y Auditoría | Tooltician',
     description:
       'Conciliaciones y flujos financieros que se detienen ante diferencias y conservan trazas de auditoría. Diseñadas para auditorías y revisiones simples.',
-    serviceName: 'Herramientas Financieras y de Auditoría',
+    serviceName: 'Sistemas Financieros y de Auditoría',
     serviceType: ['Automatización de conciliación bancaria', 'Software de conciliación financiera', 'Tooling de auditoría', 'Controles fail-closed'],
     eyebrow: 'Herramientas Financieras y de Auditoría · Tooltician',
     h1: 'Conciliación que se detiene ante una diferencia en vez de esconderla',
@@ -1646,7 +1646,7 @@ const staticSites: ServiceDefinition = {
     title: 'Static Sites & Front Ends | Tooltician',
     description:
       'Lean Astro and static web sites with SEO, speed, bilingual support, and clean deploy pipelines. Built to be readable and easily maintained.',
-    serviceName: 'Static Sites & Front Ends',
+    serviceName: 'Static Sites & Focused Front Ends',
     serviceType: ['Astro development', 'Static site development', 'Frontend development', 'Bilingual website development'],
     eyebrow: 'Static Sites & Front Ends · Tooltician',
     h1: 'A fast, indexable site that explains the system — not decoration',
@@ -1857,7 +1857,7 @@ const staticSites: ServiceDefinition = {
     title: 'Sitios Web y Frontends | Tooltician',
     description:
       'Sitios web y frontends en Astro y estáticos con SEO, velocidad y soporte bilingüe. Construidos para ser mantenibles y con código limpio.',
-    serviceName: 'Sitios Web y Frontends',
+    serviceName: 'Sitios Estáticos y Frontends Acotados',
     serviceType: ['Desarrollo Astro', 'Desarrollo de sitios estáticos', 'Desarrollo frontend', 'Desarrollo de sitios bilingües'],
     eyebrow: 'Sitios Web y Frontends · Tooltician',
     h1: 'Un sitio rápido e indexable que explica el sistema — no decoración',

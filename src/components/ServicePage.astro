@@ -4,6 +4,7 @@ import Navbar from './Navbar.astro';
 import Footer from './Footer.astro';
 import IntakeForm, { type IntakeService } from './IntakeForm.astro';
 import type { ServiceContent } from '../data/services';
+import serviceRegistry from '../data/service-registry.json';
 
 interface Props {
   lang: 'en' | 'es';
@@ -41,16 +42,9 @@ const ui =
     ? { recommended: 'Recommended', serviceLabel: 'Services', proofEyebrow: 'Own technical proof' }
     : { recommended: 'Recomendado', serviceLabel: 'Servicios', proofEyebrow: 'Evidencia técnica propia' };
 
-// Sprint 0: stable service category per serviceKey (mirrors src/data/service-registry.json).
-const serviceCategories: Record<string, string> = {
-  automation: 'automation',
-  'recurring-data': 'data-collection',
-  'internal-tools': 'internal-tools',
-  financial: 'financial',
-  web: 'web',
-  htw: 'hygiene',
-};
-const serviceCategory = serviceCategories[serviceKey] ?? 'site';
+// Sprint 0: service category comes from the canonical registry.
+const serviceCategory =
+  serviceRegistry.services.find((service) => service.service_id === serviceKey)?.service_category ?? 'site';
 
 const jsonLd = {
   '@context': 'https://schema.org',

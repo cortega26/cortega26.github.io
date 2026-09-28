@@ -257,7 +257,7 @@ counts), not prose.
 | 043 | CSP production integrity | 3 | P1 | M | DONE (archived) | hash 30/30, check 0/0/0, src 361/361, built 390/390, npm test 0; merged as `af2f47b`, live Step 7 applied |
 | 047 | CI hardening | 3 | P1 | S | TODO | |
 | 051 | Test hygiene | 3 | P1 | S | DONE (archived) | drift clean, src 361/361, built 390/390, funnel 82/82; merged as `097e03f` |
-| 052 | Intake attribution + CI | 3 | P1 | M | TODO | |
+| 052 | Intake attribution + CI | 3 | P1 | M | DONE | new suite 16/16, check 0, src 361/361, built 390/390, funnel 82/82, npm test 0 |
 | 053 | caseStudies invariants | 3 | P1 | S | TODO | |
 | 054 | Root landing | 3 | P1 | M | TODO | |
 | 056 | Script guard tests | 3 | P2 | M | TODO | |

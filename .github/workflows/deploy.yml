@@ -43,6 +43,8 @@ jobs:
         run: npm run check
       - name: Source tests
         run: node tests/run.js
+      - name: Analytics contract tests
+        run: node tests/analytics-service-funnel.mjs && node tests/analytics-guard.mjs && node tests/analytics-intake-attribution.mjs
       - name: Build Astro
         run: npm run build
         env:

@@ -5,9 +5,11 @@ rejected findings). This file is the operational view: how to execute the
 active series efficiently, in what order, with which gates, and where each
 plan stands.
 
-- **Active series:** deep audit 2026-09-23, plans **042–063**, planned
-  against `be975ef`.
-- **Completed history (001–041):** DONE and archived — see
+- **Active series:** deep audit 2026-09-23, planned against `be975ef`.
+  Wave 1 (**042, 044, 045, 049, 055**) is DONE and archived; **17 plans
+  remain TODO in `plans/`** — 046, 043, 047, 048, 050, 051, 052, 053, 054,
+  056, 057, 058, 059, 060, 061, 062, 063.
+- **Completed history (001–041 + wave 1):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
 ## How to use this file
@@ -243,11 +245,11 @@ counts), not prose.
 
 | # | Plan | Wave | Pri | Eff | Status | Verified by |
 |---|------|------|-----|-----|--------|-------------|
-| 042 | Analytics integrity | 1 | P1 | S | DONE | check 0/0/0, analytics 82/82, src 219/219, built 248/248, npm test 0 |
-| 044 | Recurring-data copy | 1 | P1 | M | DONE | check 0/0/0, src 237/237, built 266/266, npm test 0; 0 automation markers on recurring pages |
-| 045 | Legal ISO dates | 1 | P1 | S | DONE | check 0/0/0, src 255/255, built 284/284, npm test 0; ISO schema/OG, labels intact |
-| 049 | Pricing assertions | 1 | P1 | S | DONE | src 291/291, built 320/320, npm test 0; red-then-green on corrupted price proven by reviewer |
-| 055 | JSON-LD hardening | 1 | P1 | S | DONE | check 0/0/0, src 361/361, built 390/390, npm test 0; HTW schema prices correct |
+| 042 | Analytics integrity | 1 | P1 | S | DONE (archived) | check 0/0/0, analytics 82/82, src 219/219, built 248/248, npm test 0; merged as `df877ab` |
+| 044 | Recurring-data copy | 1 | P1 | M | DONE (archived) | check 0/0/0, src 237/237, built 266/266, npm test 0; 0 automation markers on recurring pages; merged as `df877ab` |
+| 045 | Legal ISO dates | 1 | P1 | S | DONE (archived) | check 0/0/0, src 255/255, built 284/284, npm test 0; ISO schema/OG, labels intact; merged as `df877ab` |
+| 049 | Pricing assertions | 1 | P1 | S | DONE (archived) | src 291/291, built 320/320, npm test 0; red-then-green on corrupted price proven by reviewer; merged as `df877ab` |
+| 055 | JSON-LD hardening | 1 | P1 | S | DONE (archived) | check 0/0/0, src 361/361, built 390/390, npm test 0; HTW schema prices correct; merged as `df877ab` |
 | 046 | Above-fold reveal | 2 | P1 | S | TODO | |
 | 050 | Intake hardening | 2 | P1 | M | TODO | |
 | 058 | Perf hygiene | 2 | P2 | S | TODO | |
@@ -266,7 +268,9 @@ counts), not prose.
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **5/22 DONE** · 0 IN PROGRESS · 0 BLOCKED.
+Progress: **6/23 DONE** (5 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **17 TODO**, all in `plans/`.
+DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes
 

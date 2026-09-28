@@ -133,6 +133,41 @@ evidence):
 
 ## Reconcile log
 
+### 2026-09-28 (HEAD `25fd78f`, branch `feat/tooltician-support-v1`)
+
+Reconcile of the 17 TODO plans against HEAD (drift-check base `be975ef`).
+All drift attributed: **wave-1 (`df877ab`) everywhere, except `package.json`,
+which drifted only via the support branch** (+11 `support:*` script keys;
+the `test` chain byte-identical). `.github/workflows/deploy.yml` unchanged
+since `be975ef`; support work touched only `support/` + `package.json`.
+
+| Plan | Verdict | Note |
+|------|---------|------|
+| 043 | PROCEED | clean |
+| 046 | PROCEED-WITH-NOTE | Step 3 anchor moved: `S0` group `tests/run.js:1243` → `:1311` |
+| 047 | PROCEED | clean |
+| 048 | PROCEED-WITH-NOTE | `services.ts` Current-state lines shifted +86 by 044; locate the four `serviceName` values by string, not by line |
+| 050 | PROCEED | drift is appended groups only; no cited anchor moved |
+| 051 | PROCEED | clean |
+| 052 | PROCEED-WITH-NOTE | Step 0 baseline "77 passed" → HEAD prints "82 passed" (verified by execution); `package.json:15` edit is a token splice inside the `test` string, disjoint from `support:*` keys |
+| 053 | PROCEED | `package.json:15` edit key-wise safe; all quoted excerpts intact |
+| 054 | PROCEED | same `package.json` safety as 053; all excerpts intact |
+| 056 | PROCEED | same `package.json` safety as 053; refactor targets match HEAD bytes |
+| 057 | PROCEED-WITH-NOTE | steps accurate; if 048 lands first, skip re-adding the registry import in `ServicesSection.astro` (second-lander rebase) |
+| 058 | PROCEED-WITH-NOTE | steps accurate; land sequentially with 046 (`global.css`) and 054 (`site-layout.js`, `index.astro` head), not in parallel |
+| 059 | PROCEED | clean |
+| 060 | **REWRITTEN 2026-09-28 — executable as written** (was NEEDS-REWRITE: skip enumeration refreshed 10→15 with per-shape templates — return-guard ×11, if/else ×2, per-page `continue` ×2 — S0 delete located by assertion name, Step 0/1/4 arithmetic re-baselined to measured 361/390, funnel 82; see the plan's Reconciled block) |
+| 061 | PROCEED | OG group byte-intact |
+| 062 | PROCEED | clean |
+| 063 | PROCEED | clean |
+
+Sequencing reconfirmed: 052→053/054/056 (pre-existing naming wrinkle —
+052 calls the step `Analytics contract tests`, extenders look for
+`Contract tests` — reinforces 052→053 before 054/056; not drift-caused).
+043 first per 2026-09-28 prioritization. The four `package.json` editors
+(052/053/054/056) must run **after PR #72 merges** so the `support:*`
+scripts they must not touch are on `master`.
+
 ### 2026-09-23 (HEAD `8bbd56c`)
 
 All plans in every series are DONE; no TODO, BLOCKED, or IN PROGRESS rows.
@@ -169,9 +204,12 @@ Deferral harvest (from archived plans' maintenance notes):
 
 Single plan from the deferral harvest; status authority is this file.
 
+**Progress (harvest plan): 1/1 DONE — landed and archived under
+`plans/archive/`.**
+
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 041 | Delete the orphaned `ProofSection` and `ServiceSpotlight` components | P3 | S | — | DONE (landed as `3cc2e5c` on `advisor/041-orphan-components`; reviewer-verified 2026-09-23: scope 5/5 files, source 218/218, built 247/247, full `npm test` exit 0, 0 residual refs, stats untouched; merged to `master` as `be975ef`) |
+| 041 | Delete the orphaned `ProofSection` and `ServiceSpotlight` components | P3 | S | — | DONE (landed as `3cc2e5c` on `advisor/041-orphan-components`; reviewer-verified 2026-09-23: scope 5/5 files, source 218/218, built 247/247, full `npm test` exit 0, 0 residual refs, stats untouched; merged to `master` as `be975ef`; archived to `plans/archive/041-orphan-components.md`) |
 
 ## Deep audit series (planned 2026-09-23, against `be975ef`)
 
@@ -182,22 +220,27 @@ docs, direction), every finding re-verified by the advisor against the code
 session report; the vetted table's net-positive items became these 22
 plans. Status authority is this file.
 
+**Progress (deep audit series): 6/22 DONE — 042, 044, 045, 049 and 055
+landed (wave 1, merged to `master` as `df877ab`) and are archived under
+`plans/archive/`; 041 came from the harvest plan above. The remaining 17
+plans stay in `plans/`.**
+
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 042 | Analytics integrity: `service_view` page scoping, legacy PII filter, Navbar CTA stamping | P1 | S | — | DONE (landed as `fcce896` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, analytics 82/82, source 219/219, built 248/248, `npm test` exit 0, stats untouched; unmerged — wave 1 in progress) |
+| 042 | Analytics integrity: `service_view` page scoping, legacy PII filter, Navbar CTA stamping | P1 | S | — | DONE (landed as `fcce896` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, analytics 82/82, source 219/219, built 248/248, `npm test` exit 0, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/042-analytics-integrity.md`) |
 | 043 | CSP production integrity: script ordering, wider hash check, CI artifact, doc reconciliation | P1 | M | — | TODO |
-| 044 | Recurring-data page self-contained copy (stop automation leakage) | P1 | M | — | DONE (landed as `f2547f1` on `advisor/wave-1`; reviewer-verified: scope 2/2 files, check 0/0/0, source 237/237, built 266/266, `npm test` exit 0, 0 automation markers on recurring pages, markers intact on automation, spread intact, stats untouched; unmerged — wave 1 in progress) |
-| 045 | ISO dates for legal-page schema/OG | P1 | S | — | DONE (landed as `d3e72c6` on `advisor/wave-1`; reviewer-verified: scope 3/3 files, check 0/0/0, source 255/255, built 284/284, `npm test` exit 0, ISO output correct, human labels intact, stats untouched; unmerged — wave 1 in progress) |
+| 044 | Recurring-data page self-contained copy (stop automation leakage) | P1 | M | — | DONE (landed as `f2547f1` on `advisor/wave-1`; reviewer-verified: scope 2/2 files, check 0/0/0, source 237/237, built 266/266, `npm test` exit 0, 0 automation markers on recurring pages, markers intact on automation, spread intact, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/044-recurring-data-copy.md`) |
+| 045 | ISO dates for legal-page schema/OG | P1 | S | — | DONE (landed as `d3e72c6` on `advisor/wave-1`; reviewer-verified: scope 3/3 files, check 0/0/0, source 255/255, built 284/284, `npm test` exit 0, ISO output correct, human labels intact, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/045-legal-iso-dates.md`) |
 | 046 | Above-the-fold content renders without JS | P1 | S | — | TODO |
 | 047 | CI: least-privilege permissions + Playwright browser cache | P1 | S | — | TODO |
 | 048 | Service names single-source (registry) + llms parity | P1 | M | — | TODO |
-| 049 | Exact pricing stage/amount assertions | P1 | S | — | DONE (landed as `f848674` on `advisor/wave-1`; reviewer-verified: scope 1/1 files, source 291/291, built 320/320, `npm test` exit 0; old heuristic proven weak, new group fails on a corrupted price and passes restored; HTW assertions converted to exact strings with plan-intent preserved; unmerged — wave 1 in progress) |
+| 049 | Exact pricing stage/amount assertions | P1 | S | — | DONE (landed as `f848674` on `advisor/wave-1`; reviewer-verified: scope 1/1 files, source 291/291, built 320/320, `npm test` exit 0; old heuristic proven weak, new group fails on a corrupted price and passes restored; HTW assertions converted to exact strings with plan-intent preserved; merged to `master` as `df877ab`; archived to `plans/archive/049-pricing-assertions.md`) |
 | 050 | Intake: `page` field survives reset + Formspree honeypot | P1 | M | — | TODO |
 | 051 | Test hygiene: delete legacy smoke scripts, fix imports, stale artifacts, CLAUDE.md line | P1 | S | — | TODO |
 | 052 | Intake service-attribution tests + run analytics suites in CI | P1 | M | — | TODO |
 | 053 | `caseStudies` data-invariant tests | P1 | S | 052 | TODO |
 | 054 | Root landing: missing head metadata, dead redirect key, language-decision tests | P1 | M | 052 | TODO |
-| 055 | JSON-LD hardening: HTW schema prices from `pricing.ts` + lookup guards | P1 | S | — | DONE (landed as `a03ab54` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, source 361/361, built 390/390, `npm test` exit 0, HTW schema prices correct in both locales, stats untouched; unmerged — wave 1 complete) |
+| 055 | JSON-LD hardening: HTW schema prices from `pricing.ts` + lookup guards | P1 | S | — | DONE (landed as `a03ab54` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, source 361/361, built 390/390, `npm test` exit 0, HTW schema prices correct in both locales, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/055-jsonld-hardening.md`) |
 | 056 | Build/verify script failure-path tests | P2 | M | 052 | TODO |
 | 057 | Route registry single-source for service pages and ServicesSection | P2 | M | — | TODO |
 | 058 | Perf hygiene: preload/logo/preconnect + compositor scroll bar | P2 | S | — | TODO |

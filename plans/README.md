@@ -220,11 +220,12 @@ docs, direction), every finding re-verified by the advisor against the code
 session report; the vetted table's net-positive items became these 22
 plans. Status authority is this file.
 
-**Progress (deep audit series): 9/22 DONE — wave 1 (042, 044, 045, 049,
+**Progress (deep audit series): 11/22 DONE — wave 1 (042, 044, 045, 049,
 055, merged as `df877ab`), 043 (merged as `af2f47b`, live Step 7 applied
-2026-09-28), 051 (merged as `097e03f`), 052 (merged as `dc0bebc`) and 059
-(merged as `89b4b0f`), all archived under `plans/archive/`; 041 came from
-the harvest plan above. The remaining 13 plans stay in `plans/`.**
+2026-09-28), 046 (merged as `4ba60a6`), 047 (merged as `c6e513c`), 051
+(merged as `097e03f`), 052 (merged as `dc0bebc`) and 059 (merged as
+`89b4b0f`), all archived under `plans/archive/`; 041 came from the harvest
+plan above. The remaining 11 plans stay in `plans/`.**
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
@@ -232,8 +233,8 @@ the harvest plan above. The remaining 13 plans stay in `plans/`.**
 | 043 | CSP production integrity: script ordering, wider hash check, CI artifact, doc reconciliation | P1 | M | — | DONE (executed 2026-09-28 on `advisor/043-csp-production-integrity`; verified: scope 4/4 files, bash -n + dry-run exit 0, hash check 30/30 exit 0, check 0/0/0, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0; live re-verified + Step 7 applied — ruleset reordered [polla, base, site, hub], Insights 1 on site paths / 0 on /polla/, production check PASS; merged to `master` as `af2f47b`; archived to `plans/archive/043-csp-production-integrity.md`) |
 | 044 | Recurring-data page self-contained copy (stop automation leakage) | P1 | M | — | DONE (landed as `f2547f1` on `advisor/wave-1`; reviewer-verified: scope 2/2 files, check 0/0/0, source 237/237, built 266/266, `npm test` exit 0, 0 automation markers on recurring pages, markers intact on automation, spread intact, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/044-recurring-data-copy.md`) |
 | 045 | ISO dates for legal-page schema/OG | P1 | S | — | DONE (landed as `d3e72c6` on `advisor/wave-1`; reviewer-verified: scope 3/3 files, check 0/0/0, source 255/255, built 284/284, `npm test` exit 0, ISO output correct, human labels intact, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/045-legal-iso-dates.md`) |
-| 046 | Above-the-fold content renders without JS | P1 | S | — | DONE (executed 2026-09-28 on `advisor/046-above-fold`; verified: scope 12/12 files, check 0/0/0, src 401/401, built 430/430, funnel 82/82, HTW no diff both locales, behavioral PASS, `npm test` exit 0) |
-| 047 | CI: least-privilege permissions + Playwright browser cache | P1 | S | — | DONE (executed 2026-09-28 on `advisor/047-ci-hardening`, base `367a244`; verified: permissions OK, cache OK, check 0/0/0, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0) |
+| 046 | Above-the-fold content renders without JS | P1 | S | — | DONE (executed 2026-09-28 on `advisor/046-above-fold`; verified: scope 12/12 files, check 0/0/0, src 401/401, built 430/430, funnel 82/82, HTW no diff both locales, behavioral PASS, `npm test` exit 0; merged to `master` as `4ba60a6`; archived to `plans/archive/046-above-fold-reveal.md`) |
+| 047 | CI: least-privilege permissions + Playwright browser cache | P1 | S | — | DONE (executed 2026-09-28 on `advisor/047-ci-hardening`, base `367a244`; verified: permissions OK, cache OK, check 0/0/0, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0; merged to `master` as `c6e513c`; archived to `plans/archive/047-ci-hardening.md`) |
 | 048 | Service names single-source (registry) + llms parity | P1 | M | — | TODO |
 | 049 | Exact pricing stage/amount assertions | P1 | S | — | DONE (landed as `f848674` on `advisor/wave-1`; reviewer-verified: scope 1/1 files, source 291/291, built 320/320, `npm test` exit 0; old heuristic proven weak, new group fails on a corrupted price and passes restored; HTW assertions converted to exact strings with plan-intent preserved; merged to `master` as `df877ab`; archived to `plans/archive/049-pricing-assertions.md`) |
 | 050 | Intake: `page` field survives reset + Formspree honeypot | P1 | M | — | TODO |

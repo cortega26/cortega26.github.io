@@ -8,9 +8,10 @@ plan stands.
 - **Active series:** deep audit 2026-09-23, planned against `be975ef`.
   Wave 1 (**042, 044, 045, 049, 055**) is DONE and archived; **043** (merged
   as `af2f47b`, live Step 7 applied), **051** (merged as `097e03f`),
-  **052** (merged as `dc0bebc`) and **059** (merged as `89b4b0f`) are DONE
-  and archived; **13 plans remain TODO in `plans/`** — 046, 047, 048, 050,
-  053, 054, 056, 057, 058, 060, 061, 062, 063.
+  **052** (merged as `dc0bebc`), **059** (merged as `89b4b0f`),
+  **046** (merged as `4ba60a6`) and **047** (merged as `c6e513c`) are DONE
+  and archived; **11 plans remain TODO in `plans/`** — 048, 050, 053, 054,
+  056, 057, 058, 060, 061, 062, 063.
 - **Completed history (001–041 + wave 1 + 043 + 051 + 052 + 059):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
@@ -252,11 +253,11 @@ counts), not prose.
 | 045 | Legal ISO dates | 1 | P1 | S | DONE (archived) | check 0/0/0, src 255/255, built 284/284, npm test 0; ISO schema/OG, labels intact; merged as `df877ab` |
 | 049 | Pricing assertions | 1 | P1 | S | DONE (archived) | src 291/291, built 320/320, npm test 0; red-then-green on corrupted price proven by reviewer; merged as `df877ab` |
 | 055 | JSON-LD hardening | 1 | P1 | S | DONE (archived) | check 0/0/0, src 361/361, built 390/390, npm test 0; HTW schema prices correct; merged as `df877ab` |
-| 046 | Above-fold reveal | 2 | P1 | S | TODO | |
+| 046 | Above-fold reveal | 2 | P1 | S | DONE (archived) | src 401/401, built 430/430; merged as `4ba60a6` |
 | 050 | Intake hardening | 2 | P1 | M | TODO | |
 | 058 | Perf hygiene | 2 | P2 | S | TODO | |
 | 043 | CSP production integrity | 3 | P1 | M | DONE (archived) | hash 30/30, check 0/0/0, src 361/361, built 390/390, npm test 0; merged as `af2f47b`, live Step 7 applied |
-| 047 | CI hardening | 3 | P1 | S | TODO | |
+| 047 | CI hardening | 3 | P1 | S | DONE (archived) | perms+cache, src 361/361; merged as `c6e513c` |
 | 051 | Test hygiene | 3 | P1 | S | DONE (archived) | drift clean, src 361/361, built 390/390, funnel 82/82; merged as `097e03f` |
 | 052 | Intake attribution + CI | 3 | P1 | M | DONE (archived) | new suite 16/16, src 361/361, built 390/390, funnel 82/82; merged as `dc0bebc` |
 | 053 | caseStudies invariants | 3 | P1 | S | TODO | |
@@ -270,8 +271,8 @@ counts), not prose.
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **10/23 DONE** (9 archived from this series + `041` from the
-harvest series) · 0 IN PROGRESS · 0 BLOCKED · **13 TODO**, all in `plans/`.
+Progress: **12/23 DONE** (11 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **11 TODO**, all in `plans/`.
 DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes

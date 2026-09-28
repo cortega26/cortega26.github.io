@@ -6,10 +6,11 @@ active series efficiently, in what order, with which gates, and where each
 plan stands.
 
 - **Active series:** deep audit 2026-09-23, planned against `be975ef`.
-  Wave 1 (**042, 044, 045, 049, 055**) is DONE and archived; **17 plans
-  remain TODO in `plans/`** — 046, 043, 047, 048, 050, 051, 052, 053, 054,
-  056, 057, 058, 059, 060, 061, 062, 063.
-- **Completed history (001–041 + wave 1):** DONE and archived — see
+  Wave 1 (**042, 044, 045, 049, 055**) is DONE and archived; **043** (merged
+  as `af2f47b`, live Step 7 applied) and **051** (merged as `097e03f`) are
+  DONE and archived; **15 plans remain TODO in `plans/`** — 046, 047, 048,
+  050, 052, 053, 054, 056, 057, 058, 059, 060, 061, 062, 063.
+- **Completed history (001–041 + wave 1 + 043 + 051):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
 ## How to use this file
@@ -253,9 +254,9 @@ counts), not prose.
 | 046 | Above-fold reveal | 2 | P1 | S | TODO | |
 | 050 | Intake hardening | 2 | P1 | M | TODO | |
 | 058 | Perf hygiene | 2 | P2 | S | TODO | |
-| 043 | CSP production integrity | 3 | P1 | M | DONE (executed 2026-09-28, unmerged) | hash 30/30, check 0/0/0, src 361/361, built 390/390, npm test 0; live re-verified |
+| 043 | CSP production integrity | 3 | P1 | M | DONE (archived) | hash 30/30, check 0/0/0, src 361/361, built 390/390, npm test 0; merged as `af2f47b`, live Step 7 applied |
 | 047 | CI hardening | 3 | P1 | S | TODO | |
-| 051 | Test hygiene | 3 | P1 | S | TODO | |
+| 051 | Test hygiene | 3 | P1 | S | DONE (archived) | drift clean, src 361/361, built 390/390, funnel 82/82; merged as `097e03f` |
 | 052 | Intake attribution + CI | 3 | P1 | M | TODO | |
 | 053 | caseStudies invariants | 3 | P1 | S | TODO | |
 | 054 | Root landing | 3 | P1 | M | TODO | |
@@ -268,8 +269,8 @@ counts), not prose.
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **6/23 DONE** (5 archived from this series + `041` from the
-harvest series) · 0 IN PROGRESS · 0 BLOCKED · **17 TODO**, all in `plans/`.
+Progress: **8/23 DONE** (7 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **15 TODO**, all in `plans/`.
 DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes

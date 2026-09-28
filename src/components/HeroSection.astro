@@ -104,29 +104,29 @@ const c = lang === 'en' ? en : es;
   <div class="container">
     <div class="hero__content">
       <div class="hero__main">
-        <div class="hero__meta reveal">
+        <div class="hero__meta enter-now">
           <span>{c.meta}</span>
           <span class="hero__meta-divider" aria-hidden="true">·</span>
           <span>{c.availability}</span>
         </div>
-        <h1 class="hero__title reveal reveal-delay-1">{c.title}</h1>
-        <a class="hero__featured-outcome reveal reveal-delay-1" href={c.featuredOutcome.href} target="_blank" rel="noopener noreferrer">
+        <h1 class="hero__title enter-now enter-now--delay-1">{c.title}</h1>
+        <a class="hero__featured-outcome enter-now enter-now--delay-1" href={c.featuredOutcome.href} target="_blank" rel="noopener noreferrer">
           <span class="hero__featured-name">{c.featuredOutcome.text}</span>
           <span class="hero__featured-detail">{c.featuredOutcome.detail}</span>
         </a>
-        <p class="hero__summary reveal reveal-delay-2">{c.summary}</p>
-        <p class="hero__support reveal reveal-delay-2">{c.support}</p>
+        <p class="hero__summary enter-now enter-now--delay-2">{c.summary}</p>
+        <p class="hero__support enter-now enter-now--delay-2">{c.support}</p>
         {c.serviceLine && (
-          <p class="hero__service-note reveal reveal-delay-2">
+          <p class="hero__service-note enter-now enter-now--delay-2">
             <span>{c.serviceLine}</span>
             <a href={c.serviceHref}>{c.serviceCta}</a>
           </p>
         )}
-        <div class="hero__actions reveal reveal-delay-2">
+        <div class="hero__actions enter-now enter-now--delay-2">
           <a class="btn btn-primary" href={c.ctaPrimaryHref} target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="hero" data-book-call>{c.ctaPrimary}</a>
           <a class="btn btn-ghost" href={c.ctaSecondaryHref} data-track="cta_send_brief" data-track-loc="hero" data-contact-intent="send_brief">{c.ctaSecondary}</a>
         </div>
-        <p class="hero__cta-note reveal reveal-delay-2">
+        <p class="hero__cta-note enter-now enter-now--delay-2">
           <a href={c.ctaNoteLinkHref}>{c.ctaNoteLink} →</a>
         </p>
       </div>

@@ -1522,6 +1522,36 @@ group('055 · JSON-LD guards and HTW schema price parity', () => {
   );
 });
 
+group('046 · Above-the-fold content renders without JS (enter-now)', () => {
+  const h1Lines = (src) => src.split('\n').filter((l) => l.includes('<h1'));
+  for (const rel of [
+    'src/components/HeroSection.astro',
+    'src/components/ServicePage.astro',
+    'src/components/PortfolioSection.astro',
+    'src/pages/en/services/web-technical-hygiene/index.astro',
+    'src/pages/es/servicios/higiene-tecnica-web/index.astro',
+    'src/pages/es/guias/index.astro',
+    'src/pages/es/guias/auditoria-tecnica-web-negocios-pequenos/index.astro',
+    'src/pages/es/guias/automatizar-reportes-excel-python/index.astro',
+    'src/pages/es/guias/pagina-web-estatica-cuando-conviene/index.astro',
+  ]) {
+    const src = read(rel) || '';
+    assert(`${rel} uses enter-now`, src.includes('enter-now'), 'missing enter-now class');
+    const h1s = h1Lines(src);
+    assert(`${rel} has an H1 line`, h1s.length > 0, 'no <h1 found');
+    h1s.forEach((line) => {
+      assert(`${rel} H1 has no reveal gate`, !line.includes('reveal'), line.trim().slice(0, 120));
+      assert(`${rel} H1 uses enter-now`, line.includes('enter-now'), line.trim().slice(0, 120));
+    });
+  }
+  const document = read('src/pages/[lang]/[document].astro') || '';
+  assert('[document] header wrapper uses enter-now', document.includes('policy-page__header enter-now'), 'wrapper still reveal-gated');
+  assert('[document] header wrapper has no reveal gate', !document.includes('policy-page__header reveal'), 'wrapper still reveal-gated');
+  const css = read('src/styles/global.css') || '';
+  assert('global.css defines .enter-now', css.includes('.enter-now'), 'missing .enter-now rule');
+  assert('global.css enter-now has a reduced-motion override', css.includes('.enter-now { animation: none; }'), 'missing prefers-reduced-motion guard');
+});
+
 // ─── Summary ──────────────────────────────────────────────────────────────
 
 const total = passed + failed;

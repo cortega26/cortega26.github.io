@@ -236,7 +236,7 @@ plans stay in `plans/`.**
 | 048 | Service names single-source (registry) + llms parity | P1 | M | — | TODO |
 | 049 | Exact pricing stage/amount assertions | P1 | S | — | DONE (landed as `f848674` on `advisor/wave-1`; reviewer-verified: scope 1/1 files, source 291/291, built 320/320, `npm test` exit 0; old heuristic proven weak, new group fails on a corrupted price and passes restored; HTW assertions converted to exact strings with plan-intent preserved; merged to `master` as `df877ab`; archived to `plans/archive/049-pricing-assertions.md`) |
 | 050 | Intake: `page` field survives reset + Formspree honeypot | P1 | M | — | TODO |
-| 051 | Test hygiene: delete legacy smoke scripts, fix imports, stale artifacts, CLAUDE.md line | P1 | S | — | TODO |
+| 051 | Test hygiene: delete legacy smoke scripts, fix imports, stale artifacts, CLAUDE.md line | P1 | S | — | DONE (executed 2026-09-28 on `advisor/051-test-hygiene`; verified: drift clean, scope 8/8 files, HTW no diff both locales, behavioral PASS 0 failures, check 0/0/0, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0; unmerged) |
 | 052 | Intake service-attribution tests + run analytics suites in CI | P1 | M | — | TODO |
 | 053 | `caseStudies` data-invariant tests | P1 | S | 052 | TODO |
 | 054 | Root landing: missing head metadata, dead redirect key, language-decision tests | P1 | M | 052 | TODO |

@@ -31,6 +31,7 @@ Thumbs.db
 .github/instructions/codacy.instructions.md
 
 #Test results
+test-results/
 .playwright-cli/
 output/
 

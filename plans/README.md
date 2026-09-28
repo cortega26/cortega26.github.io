@@ -220,12 +220,13 @@ docs, direction), every finding re-verified by the advisor against the code
 session report; the vetted table's net-positive items became these 22
 plans. Status authority is this file.
 
-**Progress (deep audit series): 11/22 DONE — wave 1 (042, 044, 045, 049,
+**Progress (deep audit series): 13/22 DONE — wave 1 (042, 044, 045, 049,
 055, merged as `df877ab`), 043 (merged as `af2f47b`, live Step 7 applied
-2026-09-28), 046 (merged as `4ba60a6`), 047 (merged as `c6e513c`), 051
-(merged as `097e03f`), 052 (merged as `dc0bebc`) and 059 (merged as
-`89b4b0f`), all archived under `plans/archive/`; 041 came from the harvest
-plan above. The remaining 11 plans stay in `plans/`.**
+2026-09-28), 046 (merged as `4ba60a6`), 047 (merged as `c6e513c`), 048
+(merged as `9bdfcf3`), 051 (merged as `097e03f`), 052 (merged as `dc0bebc`),
+053 (merged as `1768dc0`) and 059 (merged as `89b4b0f`), all archived under
+`plans/archive/`; 041 came from the harvest plan above. The remaining 9
+plans stay in `plans/`.**
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
@@ -235,12 +236,12 @@ plan above. The remaining 11 plans stay in `plans/`.**
 | 045 | ISO dates for legal-page schema/OG | P1 | S | — | DONE (landed as `d3e72c6` on `advisor/wave-1`; reviewer-verified: scope 3/3 files, check 0/0/0, source 255/255, built 284/284, `npm test` exit 0, ISO output correct, human labels intact, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/045-legal-iso-dates.md`) |
 | 046 | Above-the-fold content renders without JS | P1 | S | — | DONE (executed 2026-09-28 on `advisor/046-above-fold`; verified: scope 12/12 files, check 0/0/0, src 401/401, built 430/430, funnel 82/82, HTW no diff both locales, behavioral PASS, `npm test` exit 0; merged to `master` as `4ba60a6`; archived to `plans/archive/046-above-fold-reveal.md`) |
 | 047 | CI: least-privilege permissions + Playwright browser cache | P1 | S | — | DONE (executed 2026-09-28 on `advisor/047-ci-hardening`, base `367a244`; verified: permissions OK, cache OK, check 0/0/0, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0; merged to `master` as `c6e513c`; archived to `plans/archive/047-ci-hardening.md`) |
-| 048 | Service names single-source (registry) + llms parity | P1 | M | — | DONE (executed 2026-09-28 on `advisor/048-service-names`, base `07610f3`; verified: scope 6/6 files + README row, check 0/0/0, src 432/432, built 461/461, funnel 82/82, HTW no diff both locales, behavioral PASS, `npm test` exit 0, stats untouched; deviations: authorized 5th `serviceName` fix — automation ES pre-existing omission at `be975ef:335` — plus same-class `llms-full.txt` Service-4 heading fix and one-line H-03 assert update forced by Step 3; PR vs `master`, unmerged) |
+| 048 | Service names single-source (registry) + llms parity | P1 | M | — | DONE (executed 2026-09-28 on `advisor/048-service-names`, base `07610f3`; verified: scope 6/6 files + README row, check 0/0/0, src 432/432, built 461/461, funnel 82/82, HTW no diff both locales, behavioral PASS, `npm test` exit 0, stats untouched; deviations: authorized 5th `serviceName` fix (automation ES) + same-class `llms-full.txt` heading fix + H-03 one-liner; merged to `master` as `9bdfcf3`; archived to `plans/archive/048-service-names-single-source.md`) |
 | 049 | Exact pricing stage/amount assertions | P1 | S | — | DONE (landed as `f848674` on `advisor/wave-1`; reviewer-verified: scope 1/1 files, source 291/291, built 320/320, `npm test` exit 0; old heuristic proven weak, new group fails on a corrupted price and passes restored; HTW assertions converted to exact strings with plan-intent preserved; merged to `master` as `df877ab`; archived to `plans/archive/049-pricing-assertions.md`) |
 | 050 | Intake: `page` field survives reset + Formspree honeypot | P1 | M | — | TODO |
 | 051 | Test hygiene: delete legacy smoke scripts, fix imports, stale artifacts, CLAUDE.md line | P1 | S | — | DONE (executed 2026-09-28 on `advisor/051-test-hygiene`; verified: drift clean, scope 8/8 files, HTW no diff both locales, behavioral PASS 0 failures, check 0/0/0, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0; merged to `master` as `097e03f`; archived to `plans/archive/051-test-hygiene.md`) |
 | 052 | Intake service-attribution tests + run analytics suites in CI | P1 | M | — | DONE (executed 2026-09-28 on `advisor/052-intake-attribution`; verified: new suite 16/16 incl. mutation red-then-green, check 0 errors, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0, CI step OK; merged to `master` as `dc0bebc`; archived to `plans/archive/052-intake-attribution-tests.md`) |
-| 053 | `caseStudies` data-invariant tests | P1 | S | 052 | DONE (executed 2026-09-28 on `advisor/053-casestudies`; verified: new suite 85/85, check 0/0/0, src 401/401, built 430/430, funnel 82/82, intake 16/16, `npm test` exit 0, CI step OK; authorized deviation: plan's `repoMap`-keys assertion was wrong-sided vs `PortfolioSection.astro:19-23` — replaced with two-sided keys==caseIds + values==statsKeys; CI step kept 052's `Analytics contract tests` name) |
+| 053 | `caseStudies` data-invariant tests | P1 | S | 052 | DONE (executed 2026-09-28 on `advisor/053-casestudies`; verified: new suite 85/85, check 0/0/0, src 401/401, built 430/430, funnel 82/82, intake 16/16, `npm test` exit 0, CI step OK; deviations: two-sided repoMap assertion (plan text wrong-sided), kept 052's `Analytics contract tests` step name (054/056 must match it, not `Contract tests`); merged to `master` as `1768dc0`; archived to `plans/archive/053-casestudies-invariants.md`) |
 | 054 | Root landing: missing head metadata, dead redirect key, language-decision tests | P1 | M | 052 | TODO |
 | 055 | JSON-LD hardening: HTW schema prices from `pricing.ts` + lookup guards | P1 | S | — | DONE (landed as `a03ab54` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, source 361/361, built 390/390, `npm test` exit 0, HTW schema prices correct in both locales, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/055-jsonld-hardening.md`) |
 | 056 | Build/verify script failure-path tests | P2 | M | 052 | TODO |

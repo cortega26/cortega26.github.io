@@ -3,6 +3,9 @@
 #
 #   ./scripts/cloudflare-csp-rules.sh --dry-run   # solo muestra lo que enviaría (no necesita token)
 #   ./scripts/cloudflare-csp-rules.sh             # aplica (pide el token sin mostrarlo)
+#   ./scripts/cloudflare-csp-rules.sh --fix-order # como aplica, pero además
+#     re-POSTea forzadas las reglas de ruta aunque sus valores ya coincidan
+#     (repara un orden heredado donde la base quedó última; ver regla de orden)
 #
 # Token: permisos "Zone > Transform Rules > Edit" y "Zone > Zone > Read", limitado a tooltician.com.
 # Idempotente: hace upsert por expresión. Nota API (verificado 2026-09-21):
@@ -11,13 +14,18 @@
 # + DELETE de las anteriores. Seguro ante fallos: si el POST falla, la regla
 # vieja sigue intacta; la nueva siempre queda última, que es la que gana
 # ("last rule wins") entre expresiones no solapadas.
+# Regla de orden (plan 043): cualquier re-POST de la base DEBE ir seguido de
+# un re-POST forzado de las reglas de ruta; si no, la base queda última y las
+# reglas de ruta pierden ("last rule wins"). Ver `base_changed` abajo.
 set -euo pipefail
 
 DOMAIN="tooltician.com"
 CF="https://api.cloudflare.com/client/v4"
 DOC="$(cd "$(dirname "$0")/.." && pwd)/docs/cloudflare-security-headers.md"
 DRY_RUN=0
+FIX_ORDER=0
 [[ "${1:-}" == "--dry-run" ]] && DRY_RUN=1
+[[ "${1:-}" == "--fix-order" ]] && FIX_ORDER=1
 
 command -v jq >/dev/null   || { echo "Falta jq (sudo apt install jq)"; exit 1; }
 command -v curl >/dev/null || { echo "Falta curl"; exit 1; }
@@ -75,15 +83,16 @@ echo "$R" | jq -r '.result.rules[]? | "   existente: \(.description // "(sin des
 jq -e '[.result.rules[]? | select((.expression // "") | contains("tooltician.com"))] | length > 0' >/dev/null <<<"$R" \
   || { echo "No veo la regla base de tooltician.com; abortando por seguridad."; exit 1; }
 
-upsert_rule() { # $1 descripción, $2 expresión, $3 CSP
+upsert_rule() { # $1 descripción, $2 expresión, $3 CSP, $4 force (opcional)
   # Match por expresión (estable aunque cambie la descripción, p. ej. al
   # retirar un origen). POST crea al final (= la que gana); después se
   # borran las anteriores con la misma expresión, si las hay.
   local out del
   local -a old_ids
   mapfile -t old_ids < <(jq -r --arg e "$2" '.result.rules[]? | select(.expression == $e) | .id' <<<"$R")
-  # Si ya existe con el mismo valor, no hay nada que hacer (idempotente).
-  if jq -e --arg e "$2" --arg c "$3" '[.result.rules[]? | select(.expression == $e and (.action_parameters.headers."Content-Security-Policy".value // "") == $c)] | length > 0' >/dev/null <<<"$R"; then
+  # Si ya existe con el mismo valor, no hay nada que hacer (idempotente),
+  # salvo que el llamante pida "force" (ver regla de orden en la cabecera).
+  if [[ "${4:-}" != "force" ]] && jq -e --arg e "$2" --arg c "$3" '[.result.rules[]? | select(.expression == $e and (.action_parameters.headers."Content-Security-Policy".value // "") == $c)] | length > 0' >/dev/null <<<"$R"; then
     echo "   sin cambios: $1"; return
   fi
   out=$(rule_json "$1" "$2" "$3" | api -X POST --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules")
@@ -100,16 +109,22 @@ echo "4) Creando/actualizando reglas (al final, debajo de la base)…"
 # ...): solo se reemplaza su valor CSP, preservando el resto byte a byte.
 base_cur=$(jq -c --arg e "$EXPR_BASE" '[.result.rules[]? | select(.expression == $e)][0] // empty' <<<"$R")
 [[ -n "$base_cur" ]] || { echo "No veo la regla base de tooltician.com; abortando por seguridad."; exit 1; }
+base_changed=0
 if [[ $(jq -r '.action_parameters.headers."Content-Security-Policy".value // ""' <<<"$base_cur") == "$CSP_BASE" ]]; then
   echo "   sin cambios: CSP (base)"
 else
+  base_changed=1
   out=$(jq --arg c "$CSP_BASE" '.description = "CSP" | {action, description, expression, enabled, action_parameters: (.action_parameters | .headers."Content-Security-Policy".value = $c)}' <<<"$base_cur" | api -X POST --data @- "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules")
   need_ok "$out"; echo "   creada: CSP (base, CSP estrechada)"
   out=$(api -X DELETE "$CF/zones/$ZONE_ID/rulesets/$RULESET_ID/rules/$(jq -r '.id' <<<"$base_cur")")
   need_ok "$out"; echo "   retirada anterior: $(jq -r '.id' <<<"$base_cur")"
 fi
-upsert_rule "$DESC_SITE" "$EXPR_SITE" "$CSP_SITE"
-upsert_rule "$DESC_HUB"  "$EXPR_HUB"  "$CSP_HUB"
+# Regla de orden: si la base se re-POSTeó (quedó última), las reglas de ruta
+# se re-POSTean forzadas después para que vuelvan a ganar. --fix-order fuerza
+# ese re-POST aunque los valores ya coincidan (repara un orden heredado).
+[[ $FIX_ORDER -eq 1 ]] && base_changed=1
+upsert_rule "$DESC_SITE" "$EXPR_SITE" "$CSP_SITE" "$([[ $base_changed -eq 1 ]] && echo force)"
+upsert_rule "$DESC_HUB"  "$EXPR_HUB"  "$CSP_HUB"  "$([[ $base_changed -eq 1 ]] && echo force)"
 
 echo "5) Verificando (espera 10 s a la propagación)…"
 sleep 10
@@ -123,4 +138,10 @@ curl -sSI "https://$DOMAIN/chile-hub/" | grep -i '^content-security-policy' | gr
   && { echo "   /chile-hub/ permite el contador retirado: FALLA"; FAIL=1; } || echo "   /chile-hub/ sin contador: OK"
 curl -sSI "https://$DOMAIN/polla/" | grep -i '^content-security-policy' | grep -qi 'cloudflareinsights\|goatcounter\|zgo\.at' \
   && { echo "   /polla/ permite analítica: FALLA"; FAIL=1; } || echo "   /polla/ sin analítica: OK"
+# Aserción de efecto (plan 043): no basta con que cada ruta tenga UNA CSP;
+# las rutas del sitio deben servir la política CON los orígenes de Insights.
+for p in / /en/ /es/ /chile-hub/; do
+  curl -sSI "https://$DOMAIN$p" | grep -i '^content-security-policy' | grep -q 'static.cloudflareinsights.com' \
+    || { echo "   $p sin orígenes de Cloudflare Insights: FALLA"; FAIL=1; }
+done
 [[ $FAIL -eq 0 ]] && echo "Listo." || { echo "Revisa las FALLAS (ver 'Verify the rules override' en el doc)."; exit 1; }

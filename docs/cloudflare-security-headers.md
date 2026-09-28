@@ -30,6 +30,11 @@ default-src 'self'; base-uri 'self'; form-action 'self' https://formspree.io; fr
 DENY
 ```
 
+> **Not currently set** (live-verified 2026-09-23, re-verified 2026-09-28:
+> no `x-frame-options` header served). Clickjacking is covered by
+> `frame-ancestors 'none'` in the CSP above. Keep `DENY` as the target
+> value if the header is ever added via the Cloudflare dashboard.
+
 ### `X-Content-Type-Options`
 
 ```txt
@@ -54,11 +59,21 @@ accelerometer=(), autoplay=(), camera=(), display-capture=(), fullscreen=(self),
 same-origin
 ```
 
+> **Not currently set** (live-verified 2026-09-23, re-verified 2026-09-28:
+> no `cross-origin-opener-policy` header served). Setting it requires a
+> base-rule change in the Cloudflare dashboard — see the deferred note in
+> plan 043's maintenance notes.
+
 ### `Cross-Origin-Resource-Policy`
 
 ```txt
 same-origin
 ```
+
+> **Not currently set** (live-verified 2026-09-23, re-verified 2026-09-28:
+> no `cross-origin-resource-policy` header served). Setting it requires a
+> base-rule change in the Cloudflare dashboard — see the deferred note in
+> plan 043's maintenance notes.
 
 ## Why this policy fits the current site
 
@@ -71,6 +86,13 @@ same-origin
 - The site does not need framing by other sites.
 
 ## Path-scoped CSP for analytics (remediation 2026-09-20)
+
+### Production state (verified 2026-09-23)
+
+Every path served the base policy (no Cloudflare Insights origins) — the
+path-scoped rules were not in effect, because a base-only change re-POSTs
+the base rule after them. `scripts/cloudflare-csp-rules.sh` now forces the
+path rules last; re-run it and verify before trusting this document.
 
 **Why paths, not the host.** The rule above is host-wide: the same header is served on
 `/`, `/en/`, `/es/`, `/chile-hub/`, `/polla/`, `/rutificador/` (verified with `curl -I`).
@@ -118,14 +140,21 @@ The inline GA4 bootstrap hash is unchanged, because the environment guard
 
 "Last rule wins" is what Cloudflare documents for `Set static`, but if the rules ever *stack*, the browser sends two
 `Content-Security-Policy` headers and enforces their **intersection**: the new hosts stay blocked and it looks like the rule "did nothing".
+Counting headers is not enough: a base-only policy prints 1 everywhere while the path rules stay inactive.
+Assert the effect, not just the count:
 
 ```bash
-# must print 1 (not 2) for every path
+# must print 1 (not 0, not 2) for every path
 for p in / /en/ /es/ /chile-hub/ /polla/; do
   printf '%s -> ' "$p"; curl -sSI "https://tooltician.com$p" | grep -ci '^content-security-policy'
 done
-curl -sSI https://tooltician.com/chile-hub/ | grep -i '^content-security-policy' | grep -c 'goatcounter\|zgo\.at'   # must print 0 (ADR-020: counter origins removed from every rule)
+# must print >= 1 (Insights origins present) on the site paths…
+for p in / /en/ /es/ /chile-hub/; do
+  printf '%s -> ' "$p"; curl -sSI "https://tooltician.com$p" | grep -i '^content-security-policy' | grep -c 'static.cloudflareinsights.com'
+done
+# …and 0 on /polla/
 curl -sSI https://tooltician.com/polla/     | grep -i '^content-security-policy' | grep -c 'cloudflareinsights\|goatcounter\|zgo\.at'  # must print 0
+curl -sSI https://tooltician.com/chile-hub/ | grep -i '^content-security-policy' | grep -c 'goatcounter\|zgo\.at'   # must print 0 (ADR-020: counter origins removed from every rule)
 ```
 
 If a path prints 2, the rules are stacking. Fallback: keep one rule per path group and narrow the **base** rule so it excludes the scoped paths:

@@ -38,15 +38,17 @@ esa capa.
 
 ## 1. Contexto estratégico (resumen autocontenido)
 
+> **Superseded 2026-09-23** — this section predates the GA4 migration (Plan 006) and the 2026-09 content refresh; see §0, §11, and `plans/README.md` for the shipped state.
+
 **Tesis.** Tooltician.com ya **es** una plataforma de servicios técnicos productizados sobre una marca personal, con el portfolio como prueba de capacidad. No es un portfolio, ni un CV, ni un hub de productos. Esta dirección está construida en el código (5 landings de servicio con precios UF/USD, funnel de scoping pagado, Calendly + Formspree) y documentada en decisiones previas (`docs/tooltician-repositioning-audit.md`, `docs/tasks/services-catalog-proposal.md`).
 
 **Decisión.** No se cambia el rumbo. Se **consolida y se hace medible**.
 
 **Las tres fugas que este plan cierra:**
 
-1. **🔴 La conversión no se mide.** `public/assets/js/track.js` es un *no-op*: reenvía eventos a `window.plausible` y `window.dataLayer`, que no existen. La analítica instalada (Ahrefs, en `src/layouts/BaseLayout.astro`) solo cuenta páginas vistas. Todos los eventos `data-track` ya instrumentados (CTAs, formularios) **van al vacío**. Hoy es imposible saber qué convierte.
-2. **🟠 La ruta de empleador está abandonada a medias.** Existe `public/assets/docs/carlos-ortega-resume.pdf` pero **no está enlazado en ningún componente**. No hay trayectoria ni señal para reclutadores.
-3. **🟠 La home repite la misma prueba.** `ResultsBand`, `Portfolio`, `Proof` y `ServiceSpotlight` muestran las mismas señales (Ébano, bankrecon, A+ headers). El backlog previo ya marca `TT-017` como pendiente.
+1. **🔴 La conversión no se mide.** `public/assets/js/track.js` es un *no-op*: reenvía eventos a `window.plausible` y `window.dataLayer`, que no existen. La analítica instalada (Ahrefs, en `src/layouts/BaseLayout.astro`) solo cuenta páginas vistas. Todos los eventos `data-track` ya instrumentados (CTAs, formularios) **van al vacío**. Hoy es imposible saber qué convierte. *(Superseded 2026-09-23: GA4 direct (Plan 006) is the installed analytics; `track.js` maps to `gtag`; see §0 and `docs/analytics-sprint-0.md`.)*
+2. **🟠 La ruta de empleador está abandonada a medias.** Existe `public/assets/docs/carlos-ortega-resume.pdf` pero **no está enlazado en ningún componente**. No hay trayectoria ni señal para reclutadores. *(Superseded 2026-09-23: real EN/ES résumés are linked per locale (Plans 017 + 039); trajectory still needs a maintainer decision — see §0.)*
+3. **🟠 La home repite la misma prueba.** `ResultsBand`, `Portfolio`, `Proof` y `ServiceSpotlight` muestran las mismas señales (Ébano, bankrecon, A+ headers). El backlog previo ya marca `TT-017` como pendiente. *(Superseded 2026-09-23: home was consolidated in `79b5347` and deduped further in Plan 040; `ProofSection.astro` and `ServiceSpotlight.astro` were deleted in Plan 041 — see §0.)*
 
 **Lo que NO se hace (decisiones cerradas, ver §11):** no blog, no hub de productos, no subdominios, no CV como eje, no nuevos servicios, no rediseño visual, no tocar precios sin datos.
 
@@ -117,6 +119,8 @@ Cada fase debe cumplir todo esto antes de la siguiente:
 
 ## 4. Catálogo de eventos (especificación de instrumentación)
 
+> **Superseded 2026-09-23** — this section predates the GA4 migration (Plan 006) and the 2026-09 content refresh; see §0, §11, and `plans/README.md` for the shipped state.
+
 Esta es la **fuente única de verdad** de la analítica. Nomenclatura: `snake_case`, con `location` (de `data-track-loc`) para segmentar. El objetivo es que el panel pueda responder *qué CTA, en qué sección, en qué idioma* genera contacto.
 
 | Evento | Disparador | `location` esperados | Estado actual | Acción |
@@ -174,7 +178,7 @@ Objetivo: que cada evento del catálogo §4 se registre en un panel consultable.
 >
 > **Decisión de proveedor:** el usuario no decidió proveedor en el momento de ejecutar esta tarea; se usó Plausible Cloud por ser la recomendación del plan (cookieless, sin banner, ya referenciado en `track.js`/CHANGELOG). Si se opta por self-hosted u otro proveedor, ajustar el `src`/`data-domain` en `BaseLayout.astro` y la CSP correspondiente.
 >
-> **Nota `TS-001` (2026-08-21) — Plan 006 supersede Plausible → GA4:** Plausible retirado. `BaseLayout.astro` ahora inyecta GA4 directo `G-2HK4GHK7GR` vía `PUBLIC_GA4_MEASUREMENT_ID` (frontmatter `ga4Id`, `define:vars={{ga4Id}}` stub síncrono `window.dataLayer`/`gtag`/`gtag('config')` **antes** de `async gtag/js`). `track.js` mapea `ttTrack({location,label,status})` → `gtag('event', {tt_location,tt_label,tt_status})` sin `dataLayer.push` adicional (cola oficial `function gtag(){dataLayer.push(arguments)}`). Ahrefs conservado. CSP actualizada con `googletagmanager.com`/`google-analytics.com`/`region1` + `sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=` (stub inline). Pendiente manual externo: aplicar CSP §5 en Cloudflare y crear dimensiones `tt_location`/`tt_label`/`tt_status` en GA4. Ver `plans/006-plausible-to-ga4-migration.md`.
+> **Nota `TS-001` (2026-08-21) — Plan 006 supersede Plausible → GA4:** Plausible retirado. `BaseLayout.astro` ahora inyecta GA4 directo `G-2HK4GHK7GR` vía `PUBLIC_GA4_MEASUREMENT_ID` (frontmatter `ga4Id`, `define:vars={{ga4Id}}` stub síncrono `window.dataLayer`/`gtag`/`gtag('config')` **antes** de `async gtag/js`). `track.js` mapea `ttTrack({location,label,status})` → `gtag('event', {tt_location,tt_label,tt_status})` sin `dataLayer.push` adicional (cola oficial `function gtag(){dataLayer.push(arguments)}`). Ahrefs conservado. CSP actualizada con `googletagmanager.com`/`google-analytics.com`/`region1` + `sha256-BZJxfeK/xslBDpYiGCWMd7N9XoSnojTl/uxahqkTpwQ=` (stub inline). Pendiente manual externo: aplicar CSP §5 en Cloudflare y crear dimensiones `tt_location`/`tt_label`/`tt_status` en GA4. Ver `plans/archive/006-plausible-to-ga4-migration.md`.
 >
 > **Nota `TS-002` (2026-06-30):** baseline confirmado — `astro.config.mjs` ya genera `https://tooltician.com/sitemap-index.xml` (referencia a `sitemap-0.xml`) con alternates `en`/`es` correctos; no requirió ningún cambio de código. El usuario eligió verificación de dominio por **registro TXT en DNS** (cubre todos los subdominios/protocolos, no toca el repo). Esta tarea es **100% manual, fuera del alcance del agente** (no hay acceso a la cuenta de Google ni al panel DNS/Cloudflare del usuario). Pasos pendientes para el usuario:
 > 1. En [Google Search Console](https://search.google.com/search-console) → Agregar propiedad → tipo **Dominio** → `tooltician.com`.
@@ -307,6 +311,8 @@ Objetivo: tomar con datos las decisiones que hoy serían adivinanzas.
 
 ## 9. Protocolo de validación y comandos
 
+> **Superseded 2026-09-23** — this section predates the GA4 migration (Plan 006) and the 2026-09 content refresh; see §0, §11, and `plans/README.md` for the shipped state.
+
 ### 9.1 Breakpoints requeridos
 
 `360x800`, `390x844` (o `414x896`), `768x1024`, `1366x900`, `1920x1080`.
@@ -382,9 +388,11 @@ Una tarea está hecha solo si:
 
 ## 12. Mapa de archivos (referencia rápida)
 
+> **Superseded 2026-09-23** — this section predates the GA4 migration (Plan 006) and the 2026-09 content refresh; see §0, §11, and `plans/README.md` for the shipped state.
+
 | Área | Archivo |
 |---|---|
-| Tracking (no-op a conectar) | `public/assets/js/track.js` |
+| Tracking (GA4 direct since Plan 006; former no-op) | `public/assets/js/track.js` |
 | Shell SEO/analytics | `src/layouts/BaseLayout.astro` |
 | Home (rutas) | `src/pages/en/index.astro`, `src/pages/es/index.astro` |
 | Hero / CTAs principales | `src/components/HeroSection.astro` |
@@ -396,7 +404,7 @@ Una tarea está hecha solo si:
 | Contacto | `src/components/ContactSection.astro` |
 | About / ruta empleador | `src/components/AboutSection.astro` |
 | Footer (legal, social, CV) | `src/components/Footer.astro` |
-| CV (huérfano) | `public/assets/docs/carlos-ortega-resume.pdf` |
+| CV (linked per locale since Plans 017 + 039) | `public/assets/docs/carlos-ortega-resume.pdf` |
 | GEO | `public/llms.txt`, `public/llms-full.txt` |
 | Legal/engagement (dinámico) | `src/pages/[lang]/[document].astro` + `src/data/siteDocuments.ts` |
 
@@ -441,6 +449,8 @@ Una tarea está hecha solo si:
 ---
 
 ## 16. Autoalineación (para ejecución por agente)
+
+> **Superseded 2026-09-23** — this section predates the GA4 migration (Plan 006) and the 2026-09 content refresh; see §0, §11, and `plans/README.md` for the shipped state.
 
 Antes de empezar a ejecutar este plan:
 

@@ -345,12 +345,14 @@ CF visits / GA4 sessions:  Notes/anomalies:
 
 ## 14. Known gaps / non-goals
 
+> **Correction 2026-09-23** — work-page case CTAs are **not** canonical (deferred, plan 038), and the orphaned home proof component was deleted in plan 041.
+
 - No scroll-depth or time-on-page instrumentation (scope kept minimal).
 - Guide/work page granularity: resolved (plan 038) — guide CTAs are
-  service-scoped; work-page case CTAs and project links already emit
-  canonical events.
+  service-scoped; work-page case CTAs are **not** canonical (deferred, plan
+  038); project links emit canonical events.
 - Home service cards, example badges, and price chips: resolved (plan 038).
-  ProofSection was removed from the home in `79b5347`; its file is orphaned.
+  `ProofSection.astro` was deleted in plan 041.
 - Legacy events still flow on localhost/dev and ignore DNT; only the canonical
   layer suppresses. Canonical is the reporting source of truth.
 - No server-side event validation (static site; GA4 filters apply).

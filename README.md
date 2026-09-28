@@ -61,7 +61,7 @@ npm run preview  # serve the production build locally
 
 ## Verification
 
-- `npm test` — full gate: source tests, built-output tests, HTW snapshot
+- `npm test` — full gate: source tests, analytics contract suites, built-output tests, sitemap i18n, HTW snapshot, behavioral tests
 - `node tests/run.js` — source checks (`--built` variant runs against `dist/`, needs a build first)
 - `npm run check` — Astro typecheck
 - `npm run test:htw` — HTW snapshot test
@@ -70,7 +70,7 @@ npm run preview  # serve the production build locally
   security headers, CSP stub) against `https://tooltician.com`; also runs
   weekly via the `Production verification` workflow.
 
-CI (`master` → GitHub Pages) runs four blocking gates — Source tests → Build → Built tests → HTW snapshot — plus a non-blocking Link & SEO audit whose report is uploaded as an artifact.
+CI (`master` → GitHub Pages) runs seven blocking gates — Type check → Source tests → Build → Built tests → Sitemap i18n → HTW snapshot → Behavioral — plus non-blocking Link & SEO and CSP checks.
 
 ## Environment
 

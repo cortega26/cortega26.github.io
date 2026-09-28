@@ -17,25 +17,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Astro config (`astro.config.mjs`) uses `@astrojs/sitemap` with i18n config — default locale `en`, locales `en` and `es`.
 
 ### Routes (src/pages/)
-- `/index.astro` — Language gateway with auto-redirect from browser language + localStorage persistence
-- `/en/index.astro` — English portfolio page
-- `/es/index.astro` — Spanish portfolio page
+Routes live in `src/pages/` (23 pages: root gateway, EN/ES homes, 6 EN + 6 ES service pages, EN/ES work pages, ES guides hub + 3 guides, legal pages, 404). See `src/data/routes.ts` for the canonical route registry. The root is a language gateway; returning visitors with a stored preference are forwarded, first-time visitors choose explicitly (Plan 031).
 
 ### Layout
 - `src/layouts/BaseLayout.astro` — HTML shell with SEO meta, Open Graph, JSON-LD schema, fonts, scroll progress bar, skip link, back to top, mobile nav toggle, reveal-on-scroll intersection observer, nav-open body lock
 
 ### Components (src/components/)
-Each section component receives a `lang: 'en' | 'es'` prop and defines inline `en`/`es` copy objects:
+13 section components in `src/components/` (each takes `lang: 'en' | 'es'`):
 - `Navbar.astro` — Sticky nav with lang switch and CTA
 - `HeroSection.astro` — Title, routes panel, highlights, proof signals, operating notes
-- `PortfolioSection.astro` — Project cards with client-side filter buttons (Python/Web/CLI/Data)
-- `ServicesSection.astro` — 6 service cards with SVG icons
+- `PortfolioSection.astro` — Project cards with client-side filter buttons
+- `ServicesSection.astro` — 6 service cards with SVG icons and staged pricing
+- `ServicePage.astro` — Shared template for the 12 service landings
 - `AboutSection.astro` — Who, what, preferred stack
-- `ContactSection.astro` — Form (Formspree), copy email, Calendly, LinkedIn
+- `ContactSection.astro` — Project-brief section hosting the intake form
+- `IntakeForm.astro` — Reusable qualifying form (Formspree) with per-field errors
+- `ResultsBand.astro` — High-contrast quantified-proof band
+- `FaqSection.astro` — Service FAQ fed by pricing data
+- `ResourcesSection.astro` — ES home guides strip fed by `guides.ts`
+- `ArticleCta.astro` — Shared contextual CTA for guide articles
 - `Footer.astro` — Brand, social, copyright, lang switch
 
 ### Data (src/data/)
+9 files in `src/data/`:
+- `services.ts` — Typed bilingual content for the 12 service landings
+- `pricing.ts` — Staged pricing (diagnostic/build/retainer) single source
+- `routes.ts` — Canonical i18n route registry + hreflang alternates
+- `guides.ts` — Index of the published ES guides for hub and strips
+- `caseStudies.ts` — Case-study evidence model (role/date/CTA) for work surfaces
+- `jsonld.ts` — Shared JSON-LD builders (home/work/root schema)
 - `siteDocuments.ts` — Typed content for legal pages (privacy, cookies, terms) with `SiteDocumentKey`/`SiteLocale` types, bilingual content records per document. This is the single source of truth for legal copy.
+- `service-registry.json` — Canonical service registry for analytics (`service_id`)
+- `github-stats.json` — Build-time GitHub stats cache
 
 ### Static assets (public/)
 - `CNAME` — GitHub Pages custom domain binding
@@ -57,7 +70,7 @@ Single `src/styles/global.css` with CSS custom properties for the dark theme des
 - PortfolioSection has its own filter script
 
 ## Testing
-Playwright scripts in `./test-*.mjs` are ad-hoc browser smoke tests run directly with `node` (no Playwright test runner). Start a preview server first (`npm run preview` or `npx serve dist`), then run the test script. Tests check filter functionality, page load errors, and card reveal behavior.
+Wired browser suites: `test-htw-snapshot.mjs` and `test-behavioral.mjs` (self-spawns its preview server); run via `npm test`.
 
 ## Documentation (docs/)
 - `CHANGELOG.md` — Site change log

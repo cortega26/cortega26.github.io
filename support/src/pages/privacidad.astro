@@ -1,0 +1,17 @@
+---
+import Layout from '../Layout.astro';
+import { business } from '../config';
+---
+<Layout title="Privacidad y cuidado de datos | Tooltician Soporte" description="Cómo se prepara tu consulta y cómo se manejan los datos durante el soporte técnico.">
+<article class="section container legal"><p class="eyebrow">TOOLTICIAN SOPORTE · 27 SEPTIEMBRE 2026</p><h1>Privacidad y cuidado de tus datos.</h1>
+<p>El responsable del servicio es {business.owner}, bajo la marca {business.name}. {business.email ? `Para consultas, acceso, rectificación o eliminación de tus datos: ${business.email}.` : 'El canal de contacto para ejercer derechos se confirmará antes de abrir las reservas.'}</p>
+<h2>Al preparar una consulta</h2><p>El formulario funciona en tu navegador. No sube el texto a un servidor de Tooltician ni lo guarda en el almacenamiento del sitio. Al abrir WhatsApp, los datos que acabas de revisar se transmiten a ese servicio mediante el enlace. Puedes editar el mensaje allí antes de enviarlo. WhatsApp aplica sus propias condiciones de privacidad.</p>
+<p>Indica solo comuna, equipo, modelo y síntomas. No incluyas contraseñas, documentos de identidad, datos bancarios ni tu dirección exacta. La dirección necesaria para la visita se solicita al coordinarla, no antes, y se elimina cuando deja de ser necesaria para coordinar o prestar el servicio.</p>
+<h2>Durante el servicio</h2><p>Solo se accede a los datos necesarios para el trabajo autorizado. Tú ingresas tus contraseñas cuando sea posible; no se almacenan. No se mantienen accesos remotos desatendidos. Cualquier copia temporal de archivos requiere acordar qué se copia, dónde se guarda y cuándo se elimina, y se elimina al completar el propósito acordado.</p>
+<h2>Plazos de conservación</h2><p>{business.retention || 'Los plazos operativos de conservación se publicarán antes de recibir solicitudes.'}</p>
+<p>Los archivos que entregues para una tarea autorizada, sus copias y cualquier material derivado se eliminan al completar el propósito acordado. No se envían archivos privados a herramientas de inteligencia artificial.</p>
+<h2>Medición opcional</h2><p>Si habilitas la medición, Google Analytics recibe eventos de navegación y categorías de adquisición limitadas a valores predefinidos. No enviamos el texto de tu problema, nombres, direcciones, teléfonos, la dirección exacta de la visita ni el mensaje de WhatsApp. Tampoco enviamos parámetros libres de la URL ni la dirección de la página desde la que llegaste.</p>
+<p>La medición permanece apagada hasta que la permitas. Puedes cambiar la elección al pie de la página. La preferencia se guarda localmente; las cookies de analítica se configuran por 90 días y para este subdominio. Tu consulta funciona igual si rechazas la medición.</p>
+<h2>Proveedores y seguridad</h2><p>El alojamiento puede procesar datos técnicos de conexión, como la dirección IP, para servir y proteger el sitio. WhatsApp procesa los mensajes que decidas abrir o enviar; Google procesa la medición si la activas. No vendemos tu información ni la usamos para campañas sin una autorización separada.</p>
+<h2>Actualizaciones</h2><p>Esta política se revisa ante cambios del servicio o de la normativa. La Ley 21.719 tiene entrada en vigencia prevista para el 1 de diciembre de 2026, por lo que los procedimientos se ajustarán a la fecha efectiva de operación.</p><p><a href="/">Volver al inicio</a></p></article>
+</Layout>

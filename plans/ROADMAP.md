@@ -9,9 +9,10 @@ plan stands.
   Wave 1 (**042, 044, 045, 049, 055**) is DONE and archived; **043** (merged
   as `af2f47b`, live Step 7 applied), **051** (merged as `097e03f`),
   **052** (merged as `dc0bebc`), **059** (merged as `89b4b0f`),
-  **046** (merged as `4ba60a6`) and **047** (merged as `c6e513c`) are DONE
-  and archived; **11 plans remain TODO in `plans/`** — 048, 050, 053, 054,
-  056, 057, 058, 060, 061, 062, 063.
+  **046** (merged as `4ba60a6`), **047** (merged as `c6e513c`),
+  **048** (merged as `9bdfcf3`) and **053** (merged as `1768dc0`) are DONE
+  and archived; **9 plans remain TODO in `plans/`** — 050, 054, 056, 057,
+  058, 060, 061, 062, 063.
 - **Completed history (001–041 + wave 1 + 043 + 051 + 052 + 059):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
@@ -260,10 +261,10 @@ counts), not prose.
 | 047 | CI hardening | 3 | P1 | S | DONE (archived) | perms+cache, src 361/361; merged as `c6e513c` |
 | 051 | Test hygiene | 3 | P1 | S | DONE (archived) | drift clean, src 361/361, built 390/390, funnel 82/82; merged as `097e03f` |
 | 052 | Intake attribution + CI | 3 | P1 | M | DONE (archived) | new suite 16/16, src 361/361, built 390/390, funnel 82/82; merged as `dc0bebc` |
-| 053 | caseStudies invariants | 3 | P1 | S | TODO | |
+| 053 | caseStudies invariants | 3 | P1 | S | DONE (archived) | suite 85/85; merged as `1768dc0` |
 | 054 | Root landing | 3 | P1 | M | TODO | |
 | 056 | Script guard tests | 3 | P2 | M | TODO | |
-| 048 | Names single-source | 4 | P1 | M | TODO | |
+| 048 | Names single-source | 4 | P1 | M | DONE (archived) | 10/10 pairs, src 432/432; merged as `9bdfcf3` |
 | 057 | Routes single-source | 4 | P2 | M | TODO | |
 | 059 | Docs truth sweep | 5 | P2 | M | DONE (archived) | 006-links 0, superseded 8+2, npm test 0; merged as `89b4b0f` |
 | 060 | run.js quality | 5 | P3 | M | TODO | |
@@ -271,8 +272,8 @@ counts), not prose.
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **12/23 DONE** (11 archived from this series + `041` from the
-harvest series) · 0 IN PROGRESS · 0 BLOCKED · **11 TODO**, all in `plans/`.
+Progress: **14/23 DONE** (13 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **9 TODO**, all in `plans/`.
 DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes

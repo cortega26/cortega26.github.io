@@ -7,10 +7,11 @@ plan stands.
 
 - **Active series:** deep audit 2026-09-23, planned against `be975ef`.
   Wave 1 (**042, 044, 045, 049, 055**) is DONE and archived; **043** (merged
-  as `af2f47b`, live Step 7 applied) and **051** (merged as `097e03f`) are
-  DONE and archived; **15 plans remain TODO in `plans/`** — 046, 047, 048,
-  050, 052, 053, 054, 056, 057, 058, 059, 060, 061, 062, 063.
-- **Completed history (001–041 + wave 1 + 043 + 051):** DONE and archived — see
+  as `af2f47b`, live Step 7 applied), **051** (merged as `097e03f`),
+  **052** (merged as `dc0bebc`) and **059** (merged as `89b4b0f`) are DONE
+  and archived; **13 plans remain TODO in `plans/`** — 046, 047, 048, 050,
+  053, 054, 056, 057, 058, 060, 061, 062, 063.
+- **Completed history (001–041 + wave 1 + 043 + 051 + 052 + 059):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
 ## How to use this file
@@ -257,20 +258,20 @@ counts), not prose.
 | 043 | CSP production integrity | 3 | P1 | M | DONE (archived) | hash 30/30, check 0/0/0, src 361/361, built 390/390, npm test 0; merged as `af2f47b`, live Step 7 applied |
 | 047 | CI hardening | 3 | P1 | S | TODO | |
 | 051 | Test hygiene | 3 | P1 | S | DONE (archived) | drift clean, src 361/361, built 390/390, funnel 82/82; merged as `097e03f` |
-| 052 | Intake attribution + CI | 3 | P1 | M | DONE | new suite 16/16, check 0, src 361/361, built 390/390, funnel 82/82, npm test 0 |
+| 052 | Intake attribution + CI | 3 | P1 | M | DONE (archived) | new suite 16/16, src 361/361, built 390/390, funnel 82/82; merged as `dc0bebc` |
 | 053 | caseStudies invariants | 3 | P1 | S | TODO | |
 | 054 | Root landing | 3 | P1 | M | TODO | |
 | 056 | Script guard tests | 3 | P2 | M | TODO | |
 | 048 | Names single-source | 4 | P1 | M | TODO | |
 | 057 | Routes single-source | 4 | P2 | M | TODO | |
-| 059 | Docs truth sweep | 5 | P2 | M | DONE | |
+| 059 | Docs truth sweep | 5 | P2 | M | DONE (archived) | 006-links 0, superseded 8+2, npm test 0; merged as `89b4b0f` |
 | 060 | run.js quality | 5 | P3 | M | TODO | |
 | 061 | OG card spike | 6 | P2 | M | TODO | |
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **8/23 DONE** (7 archived from this series + `041` from the
-harvest series) · 0 IN PROGRESS · 0 BLOCKED · **15 TODO**, all in `plans/`.
+Progress: **10/23 DONE** (9 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **13 TODO**, all in `plans/`.
 DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes

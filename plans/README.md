@@ -220,11 +220,11 @@ docs, direction), every finding re-verified by the advisor against the code
 session report; the vetted table's net-positive items became these 22
 plans. Status authority is this file.
 
-**Progress (deep audit series): 8/22 DONE — 042, 044, 045, 049 and 055
-landed (wave 1, merged to `master` as `df877ab`), plus 043 (merged as
-`af2f47b`, live Step 7 applied 2026-09-28) and 051 (merged as `097e03f`),
-all archived under `plans/archive/`; 041 came from the harvest plan above.
-The remaining 15 plans stay in `plans/`.**
+**Progress (deep audit series): 9/22 DONE — wave 1 (042, 044, 045, 049,
+055, merged as `df877ab`), 043 (merged as `af2f47b`, live Step 7 applied
+2026-09-28), 051 (merged as `097e03f`), 052 (merged as `dc0bebc`) and 059
+(merged as `89b4b0f`), all archived under `plans/archive/`; 041 came from
+the harvest plan above. The remaining 13 plans stay in `plans/`.**
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
@@ -238,14 +238,14 @@ The remaining 15 plans stay in `plans/`.**
 | 049 | Exact pricing stage/amount assertions | P1 | S | — | DONE (landed as `f848674` on `advisor/wave-1`; reviewer-verified: scope 1/1 files, source 291/291, built 320/320, `npm test` exit 0; old heuristic proven weak, new group fails on a corrupted price and passes restored; HTW assertions converted to exact strings with plan-intent preserved; merged to `master` as `df877ab`; archived to `plans/archive/049-pricing-assertions.md`) |
 | 050 | Intake: `page` field survives reset + Formspree honeypot | P1 | M | — | TODO |
 | 051 | Test hygiene: delete legacy smoke scripts, fix imports, stale artifacts, CLAUDE.md line | P1 | S | — | DONE (executed 2026-09-28 on `advisor/051-test-hygiene`; verified: drift clean, scope 8/8 files, HTW no diff both locales, behavioral PASS 0 failures, check 0/0/0, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0; merged to `master` as `097e03f`; archived to `plans/archive/051-test-hygiene.md`) |
-| 052 | Intake service-attribution tests + run analytics suites in CI | P1 | M | — | DONE (executed 2026-09-28 on `advisor/052-intake-attribution`; verified: new suite 16/16 incl. mutation red-then-green, check 0 errors, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0, CI step OK) |
+| 052 | Intake service-attribution tests + run analytics suites in CI | P1 | M | — | DONE (executed 2026-09-28 on `advisor/052-intake-attribution`; verified: new suite 16/16 incl. mutation red-then-green, check 0 errors, src 361/361, built 390/390, funnel 82/82, `npm test` exit 0, CI step OK; merged to `master` as `dc0bebc`; archived to `plans/archive/052-intake-attribution-tests.md`) |
 | 053 | `caseStudies` data-invariant tests | P1 | S | 052 | TODO |
 | 054 | Root landing: missing head metadata, dead redirect key, language-decision tests | P1 | M | 052 | TODO |
 | 055 | JSON-LD hardening: HTW schema prices from `pricing.ts` + lookup guards | P1 | S | — | DONE (landed as `a03ab54` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, source 361/361, built 390/390, `npm test` exit 0, HTW schema prices correct in both locales, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/055-jsonld-hardening.md`) |
 | 056 | Build/verify script failure-path tests | P2 | M | 052 | TODO |
 | 057 | Route registry single-source for service pages and ServicesSection | P2 | M | — | TODO |
 | 058 | Perf hygiene: preload/logo/preconnect + compositor scroll bar | P2 | S | — | TODO |
-| 059 | Docs truth sweep (CLAUDE/README/CHANGELOG/contradictions/superseded banners) | P2 | M | 051 | DONE (executed on `advisor/059-docs-sweep`; verified: 006-links 0/0/0, superseded 8+2, ProofSection 1, CHANGELOG dated entry, `npm test` exit 0) |
+| 059 | Docs truth sweep (CLAUDE/README/CHANGELOG/contradictions/superseded banners) | P2 | M | 051 | DONE (executed 2026-09-28 on `advisor/059-docs-sweep`; verified: 006-links 0/0/0, superseded 8+2, ProofSection 1, CHANGELOG dated entry, `npm test` exit 0; merged to `master` as `89b4b0f`; archived to `plans/archive/059-docs-truth-sweep.md`) |
 | 060 | `tests/run.js` quality: fail on missing reads, drop vacuous built skips, dedupe S0 | P3 | M | — | TODO |
 | 061 | OG card spike: one copy source + ES variant | P2 | M | — | TODO |
 | 062 | About trajectory proposal (employer route; decision-gated design) | P3 | S | — | TODO |

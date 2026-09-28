@@ -79,8 +79,10 @@ function startPreview() {
 // lifecycle fired — no real network call to googletagmanager.com required.
 async function mockGtagAndFormspree(page, { formspreeStatus = 200 } = {}) {
   let postAttempts = 0;
+  const postBodies = [];
   await page.route('**/formspree.io/**', async (route) => {
     postAttempts++;
+    postBodies.push(route.request().postData() || '');
     await route.fulfill({
       status: formspreeStatus,
       contentType: 'application/json',
@@ -92,7 +94,7 @@ async function mockGtagAndFormspree(page, { formspreeStatus = 200 } = {}) {
     await route.fulfill({ status: 200, contentType: 'application/javascript', body: '' });
   });
   const getPost = () => postAttempts;
-  return { getPostAttempts: getPost };
+  return { getPostAttempts: getPost, getPostBodies: () => postBodies };
 }
 
 async function fillIntakeForm(page) {
@@ -302,6 +304,76 @@ async function testSingleSubmit(browser) {
     fail(label, `page errors: [${pageErrors.join('; ')}] console errors: [${consoleErrors.join('; ')}]`);
   } else {
     ok(`${label} (1 POST, success shown, legacy form_submit_success fired, canonical correctly suppressed on localhost, no PII, 0 errors)`);
+  }
+  await context.close();
+}
+
+async function testSecondSubmitKeepsPage(browser) {
+  const label = 'second submit from the same page still carries the page path (page survives reset)';
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const pageErrors = [];
+  const consoleErrors = [];
+  page.on('pageerror', (err) => pageErrors.push(err.message));
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') consoleErrors.push(msg.text());
+  });
+
+  const { getPostAttempts, getPostBodies } = await mockGtagAndFormspree(page);
+
+  await page.goto(`${BASE}/en/`, { waitUntil: 'networkidle' });
+
+  const formCount = await page.locator('#contact-form').count();
+  if (formCount !== 1) {
+    fail(label, `expected 1 #contact-form on /en/, found ${formCount}`);
+    await context.close();
+    return;
+  }
+
+  if (!(await fillIntakeForm(page))) {
+    fail(label, '#contact-goal has no real (non-empty) option');
+    await context.close();
+    return;
+  }
+
+  await page.locator('#contact-form button[type="submit"]').click();
+  try {
+    await page.locator('#contact-form .intake-form__success.show').waitFor({ state: 'visible', timeout: 5000 });
+  } catch {
+    fail(label, 'first submit: .intake-form__success.show never became visible');
+    await context.close();
+    return;
+  }
+
+  // Fill and submit a second brief from the same page without reloading.
+  if (!(await fillIntakeForm(page))) {
+    fail(label, 'second fill: #contact-goal has no real (non-empty) option');
+    await context.close();
+    return;
+  }
+
+  await page.locator('#contact-form button[type="submit"]').click();
+  try {
+    await page.locator('#contact-form .intake-form__success.show').waitFor({ state: 'visible', timeout: 5000 });
+  } catch {
+    fail(label, 'second submit: .intake-form__success.show never became visible');
+    await context.close();
+    return;
+  }
+
+  const pagePart = (body) => (/name="page"\s*\r?\n\r?\n([^\r\n]*)/.exec(body) || [])[1] || '';
+  const bodies = getPostBodies();
+  const postAttempts = getPostAttempts();
+  if (postAttempts !== 2) {
+    fail(label, `expected exactly 2 POSTs to formspree.io, observed ${postAttempts}`);
+  } else if (pagePart(bodies[0]) !== '/en/') {
+    fail(label, `first POST carried page=${JSON.stringify(pagePart(bodies[0]))}, expected "/en/"`);
+  } else if (pagePart(bodies[1]) !== '/en/') {
+    fail(label, `second POST carried page=${JSON.stringify(pagePart(bodies[1]))}, expected "/en/" (page lost across reset)`);
+  } else if (pageErrors.length > 0 || consoleErrors.length > 0) {
+    fail(label, `page errors: [${pageErrors.join('; ')}] console errors: [${consoleErrors.join('; ')}]`);
+  } else {
+    ok(`${label} (2 POSTs, both carry page="/en/", 0 errors)`);
   }
   await context.close();
 }
@@ -612,6 +684,7 @@ try {
   browser = await chromium.launch({ headless: true });
   await testValidationErrors(browser);
   await testSingleSubmit(browser);
+  await testSecondSubmitKeepsPage(browser);
   await testDoubleClickProtection(browser);
   await testErrorPath(browser);
   await testMobileSuccessVisibility(browser);

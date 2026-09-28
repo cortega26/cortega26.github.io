@@ -8,7 +8,7 @@
 //
 //   node test-htw-snapshot.mjs --update   # regenerate baseline
 //   node test-htw-snapshot.mjs            # fail (exit 1) on any drift
-import { chromium } from 'playwright';
+import { chromium } from '@playwright/test';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 import { pathToFileURL } from 'url';

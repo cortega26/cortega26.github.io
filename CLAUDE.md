@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` — Static build to `dist/`
 - `npm run preview` — Preview the production build locally
 - `node scripts/generate-og.mjs` — Generate OG image (`public/assets/images/og-card.png`)
-- Playwright smoke tests: `node test-filters.mjs`, `node test-prod.mjs`, `node test-visual.mjs` (run against a local server — `npm run preview` or `npx serve dist`)
+- Browser suites (Playwright): `node test-htw-snapshot.mjs` (heading snapshot) and `node test-behavioral.mjs` (form + filters; starts its own preview server)
 
 ## Architecture
 

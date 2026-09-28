@@ -9,7 +9,7 @@
 //
 // Never assumes a server is already running and never leaves one behind.
 // Formspree is ALWAYS intercepted and mocked — this script never hits prod.
-import { chromium } from 'playwright';
+import { chromium } from '@playwright/test';
 import { spawn } from 'child_process';
 
 const PORT = 4322;

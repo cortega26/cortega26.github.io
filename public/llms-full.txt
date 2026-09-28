@@ -63,7 +63,7 @@ Tooltician offers six distinct service lines, priced in USD (for English-languag
   - **Team Platform (Plataforma de Equipo):** From $3,600 / Desde 70 UF (one-time). Multi-role API or CLI system integrating multiple databases or files.
   - **Stabilization Retainer (Soporte Mensual):** From $290/mo / Desde 6 UF/mes. Basic support, library security patches, and minor enhancements.
 
-### Service 4: Financial & Audit Tooling
+### Service 4: Financial & Audit Systems
 *Ledger, payment, and reconciliation workflows built fail-closed to stop on mismatches and leave clear audit artifacts.*
 - **Ideal Fit:** Finance and operations teams where manual bank/ledger matching is slow and error-prone, or founders preparing for external financial audits.
 - **Key Deliverables:** Custom reconciliation engines, deterministic ledger-matching algorithms, and automated audit report generators.
@@ -74,7 +74,7 @@ Tooltician offers six distinct service lines, priced in USD (for English-languag
   - **Financial Control System (Sistema de Controles):** From $4,800 / Desde 90 UF (one-time). Multiple-source reconciliation system with versioned rules.
   - **Stabilization Retainer (Soporte Mensual):** From $390/mo / Desde 8 UF/mes. Rule updates, source modifications, and priority audit support.
 
-### Service 5: Static Sites & Front Ends
+### Service 5: Static Sites & Focused Front Ends
 *High-performance, search-indexable, accessible public surfaces built to load instantly and stay maintainable.*
 - **Ideal Fit:** Founders seeking professional marketing sites without the bloating and security risks of heavy visual page-builders, or companies needing clean, multilingual sites.
 - **Key Deliverables:** Astro static site builds, semantic HTML pages, self-hosted fonts, automated build/deploy scripts, and developer-friendly content files.
@@ -85,7 +85,7 @@ Tooltician offers six distinct service lines, priced in USD (for English-languag
   - **Full Bilingual Site (Sitio Bilingüe Completo):** From $2,600 / Desde 50 UF (one-time). Full multi-page layout with hreflang structures.
   - **Maintenance Retainer (Soporte Mensual):** From $150/mo / Desde 3 UF/mes. Performance monitoring, security checks, and minor layout adjustments.
 
-### Service 6: Web Technical Hygiene & Hardening
+### Service 6: Web Technical Hygiene
 *Diagnostics and hardening for published sites (WordPress, Jamstack, static) that are online but technically neglected.*
 - **Ideal Fit:** Companies without an in-house technical web owner, B2B companies whose form submissions must never fail, or agencies outsourcing technical site maintenance.
 - **Key Deliverables:** Browser security hardening, DNS validation, form testing, response header sanitization, and site diagnostic logs.

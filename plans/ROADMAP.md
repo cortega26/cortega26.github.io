@@ -253,7 +253,7 @@ counts), not prose.
 | 046 | Above-fold reveal | 2 | P1 | S | TODO | |
 | 050 | Intake hardening | 2 | P1 | M | TODO | |
 | 058 | Perf hygiene | 2 | P2 | S | TODO | |
-| 043 | CSP production integrity | 3 | P1 | M | TODO | |
+| 043 | CSP production integrity | 3 | P1 | M | DONE (executed 2026-09-28, unmerged) | hash 30/30, check 0/0/0, src 361/361, built 390/390, npm test 0; live re-verified |
 | 047 | CI hardening | 3 | P1 | S | TODO | |
 | 051 | Test hygiene | 3 | P1 | S | TODO | |
 | 052 | Intake attribution + CI | 3 | P1 | M | TODO | |

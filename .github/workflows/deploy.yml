@@ -76,8 +76,14 @@ jobs:
           name: seo-audit-report
           path: output/seo-audit-report.md
       - name: CSP hash check (informational)
-        run: node scripts/check-csp-hashes.mjs
+        run: node scripts/check-csp-hashes.mjs 2>&1 | tee output/csp-hash-report.txt
         continue-on-error: true
+      - name: Upload CSP hash report
+        if: always()
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
+        with:
+          name: csp-hash-report
+          path: output/csp-hash-report.txt
       - name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:

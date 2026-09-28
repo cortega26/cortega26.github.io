@@ -263,7 +263,7 @@ counts), not prose.
 | 056 | Script guard tests | 3 | P2 | M | TODO | |
 | 048 | Names single-source | 4 | P1 | M | TODO | |
 | 057 | Routes single-source | 4 | P2 | M | TODO | |
-| 059 | Docs truth sweep | 5 | P2 | M | TODO | |
+| 059 | Docs truth sweep | 5 | P2 | M | DONE | |
 | 060 | run.js quality | 5 | P3 | M | TODO | |
 | 061 | OG card spike | 6 | P2 | M | TODO | |
 | 062 | About trajectory | 6 | P3 | S | TODO | |

@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-09-23 — Content/measurement refresh (plans 024–041)
+
+### Added
+- i18n route registry (`src/data/routes.ts`) + sitemap hreflang normalization.
+- Staged pricing (diagnostic/build/retainer) across home, services, and intake.
+- Accessible CTAs (`ArticleCta`, unique service CTA names) and per-field intake errors.
+- Case-study evidence model (`caseStudies.ts`: role/date/CTA) + thematic work H2 groups.
+- Root x-default landing (stored-preference-only redirect) with WebSite/Organization schema.
+- Guides hub (`/es/guias/`) + internal linking + contextual CTAs.
+- Structured-data parity via shared `jsonld.ts` builders.
+- Real EN/ES résumés wired per locale (placeholder retired).
+- Analytics coverage (home service cards, guide CTAs, funnel suites).
+
+### Removed
+- Orphan components `ProofSection.astro` and `ServiceSpotlight.astro` (plan 041).
+
 ## 2026-09-20 — Analytics remediation #1
 
 ### Added
@@ -16,7 +32,7 @@
 
 ### Added
 - GA4 direct (`gtag.js`, `G-2HK4GHK7GR`) in `src/layouts/BaseLayout.astro`:
-  synchronous inline bootstrap (`window.dataLayer`/`window.gtag`/`gtag('js')`/`gtag('config', {cookie_expires: 60*60*24*395})` via `define:vars={{ga4Id}}` from `PUBLIC_GA4_MEASUREMENT_ID`) **before** async `https://www.googletagmanager.com/gtag/js`. Retains Ahrefs (`analytics.ahrefs.com`) 30–60d. CSP updated with `sha256-` (recalculated after cookie_expires) and GA4 hosts (`googletagmanager.com`, `google-analytics.com`, `region1`). `track.js` now maps `ttTrack({location,label,status})` → `gtag('event', name, {tt_location, tt_label, tt_status})` with no `dataLayer.push` duplication. Privacy/Cookie docs updated for GA4 cookies `_ga/_ga_*` (395 days ≈13 months, 34128000s). See `plans/006-plausible-to-ga4-migration.md` and `docs/cloudflare-security-headers.md`.
+  synchronous inline bootstrap (`window.dataLayer`/`window.gtag`/`gtag('js')`/`gtag('config', {cookie_expires: 60*60*24*395})` via `define:vars={{ga4Id}}` from `PUBLIC_GA4_MEASUREMENT_ID`) **before** async `https://www.googletagmanager.com/gtag/js`. Retains Ahrefs (`analytics.ahrefs.com`) 30–60d. CSP updated with `sha256-` (recalculated after cookie_expires) and GA4 hosts (`googletagmanager.com`, `google-analytics.com`, `region1`). `track.js` now maps `ttTrack({location,label,status})` → `gtag('event', name, {tt_location, tt_label, tt_status})` with no `dataLayer.push` duplication. Privacy/Cookie docs updated for GA4 cookies `_ga/_ga_*` (395 days ≈13 months, 34128000s). See `plans/archive/006-plausible-to-ga4-migration.md` and `docs/cloudflare-security-headers.md`.
 
 ### Removed
 - Plausible (`https://plausible.io`) stub and script removed from `BaseLayout.astro`; `track.js` no longer forwards to `window.plausible`; docs updated. Cloudflare CSP no longer allows `plausible.io` (remove after GA4 validation).

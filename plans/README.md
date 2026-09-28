@@ -245,7 +245,7 @@ The remaining 15 plans stay in `plans/`.**
 | 056 | Build/verify script failure-path tests | P2 | M | 052 | TODO |
 | 057 | Route registry single-source for service pages and ServicesSection | P2 | M | — | TODO |
 | 058 | Perf hygiene: preload/logo/preconnect + compositor scroll bar | P2 | S | — | TODO |
-| 059 | Docs truth sweep (CLAUDE/README/CHANGELOG/contradictions/superseded banners) | P2 | M | 051 | TODO |
+| 059 | Docs truth sweep (CLAUDE/README/CHANGELOG/contradictions/superseded banners) | P2 | M | 051 | DONE (executed on `advisor/059-docs-sweep`; verified: 006-links 0/0/0, superseded 8+2, ProofSection 1, CHANGELOG dated entry, `npm test` exit 0) |
 | 060 | `tests/run.js` quality: fail on missing reads, drop vacuous built skips, dedupe S0 | P3 | M | — | TODO |
 | 061 | OG card spike: one copy source + ES variant | P2 | M | — | TODO |
 | 062 | About trajectory proposal (employer route; decision-gated design) | P3 | S | — | TODO |

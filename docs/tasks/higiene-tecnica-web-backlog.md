@@ -287,6 +287,8 @@ Tasks removed from original list after honest evaluation (not implemented and no
 
 ## 8. Remaining Open Items & Priority Order
 
+> **Superseded 2026-09-23** — analytics is GA4-only (Plan 006); Plausible/Ahrefs are not installed. See `docs/analytics-sprint-0.md`.
+
 All sessions complete. Composite score: **4.4 / 5.0** (target met).
 
 ### Blocked (1 item)
@@ -343,7 +345,6 @@ A task is only done when all relevant conditions are true:
 |---|---|
 | `src/pages/es/servicios/higiene-tecnica-web/index.astro` | Service landing page — primary audit target |
 | `src/pages/en/services/web-technical-hygiene/index.astro` | EN landing page — created Session D |
-| `src/components/ServiceSpotlight.astro` | Featured service callout on ES home |
 | `src/components/ServicesSection.astro` | Services grid — both EN and ES versions |
 | `src/components/HeroSection.astro` | ES hero service-note callout |
 | `src/pages/es/index.astro` | ES main portfolio page |

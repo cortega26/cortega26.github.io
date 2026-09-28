@@ -123,6 +123,8 @@ Recommended governance cadence:
 
 ## 4. Program Scoreboard
 
+> **Superseded 2026-09-23** — the `Pending` cells below are historical; `plans/README.md` is the status authority.
+
 Use this table as the top-level control panel.
 
 | Dimension | Baseline | Target | Current status | Owner | Notes |
@@ -455,6 +457,8 @@ A task is only done when all relevant conditions are true:
 - if the task touches copy, both `EN` and `ES` were considered
 
 ## 13. Immediate Recommendation
+
+> **Superseded 2026-09-23** — the Wave 1 batch below is historical; `plans/README.md` is the status authority.
 
 Start with `Wave 1` and do not split focus.
 

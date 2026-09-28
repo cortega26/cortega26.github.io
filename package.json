@@ -12,7 +12,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "check:prod": "node scripts/check-production.mjs",
-    "test": "node tests/run.js && node tests/analytics-service-funnel.mjs && node tests/analytics-guard.mjs && node tests/analytics-intake-attribution.mjs && node tests/run.js --built && node tests/sitemap-i18n.mjs && node test-htw-snapshot.mjs && node test-behavioral.mjs",
+    "test": "node tests/run.js && node tests/analytics-service-funnel.mjs && node tests/analytics-guard.mjs && node tests/analytics-intake-attribution.mjs && node tests/case-studies-invariants.mjs && node tests/run.js --built && node tests/sitemap-i18n.mjs && node test-htw-snapshot.mjs && node test-behavioral.mjs",
     "test:htw": "node test-htw-snapshot.mjs",
     "test:links": "node scripts/check-links-seo.js",
     "astro": "astro",

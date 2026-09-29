@@ -1617,6 +1617,54 @@ group('048 · Service display names single-sourced from the registry', () => {
   );
 });
 
+group('050 · Intake page attribution survives reset + Formspree honeypot', () => {
+  const intakeForm = read('src/components/IntakeForm.astro') || '';
+  assert(
+    '050 IntakeForm.astro contains the honeypot field and its off-screen rule',
+    intakeForm.includes('name="_gotcha"') && intakeForm.includes('.intake-form__gotcha') && intakeForm.includes('left: -9999px'),
+    'honeypot input or CSS rule missing'
+  );
+  const intakeJs = read('public/assets/js/intake-form.js') || '';
+  assert(
+    '050 intake-form.js preserves page attribution across resets',
+    intakeJs.includes('pageField.defaultValue = window.location.pathname'),
+    'defaultValue fill missing'
+  );
+});
+
+group('057 · Service pages and ServicesSection derive routes from the registry', () => {
+  const servicePages = [
+    'src/pages/en/services/python-automation/index.astro',
+    'src/pages/en/services/recurring-data-collection/index.astro',
+    'src/pages/en/services/internal-tools/index.astro',
+    'src/pages/en/services/financial-tooling/index.astro',
+    'src/pages/en/services/static-sites/index.astro',
+    'src/pages/en/services/web-technical-hygiene/index.astro',
+    'src/pages/es/servicios/automatizacion-python/index.astro',
+    'src/pages/es/servicios/recoleccion-recurrente-datos/index.astro',
+    'src/pages/es/servicios/herramientas-internas/index.astro',
+    'src/pages/es/servicios/herramientas-financieras/index.astro',
+    'src/pages/es/servicios/sitios-web/index.astro',
+    'src/pages/es/servicios/higiene-tecnica-web/index.astro',
+  ];
+  for (const page of servicePages) {
+    const source = read(page) || '';
+    assert(
+      `057 ${page} derives canonical from the route registry`,
+      source.includes("routeGroup('service:") && !source.includes("const canonical = 'https://tooltician.com"),
+      'hardcoded canonical or missing routeGroup'
+    );
+  }
+  const servicesSection = read('src/components/ServicesSection.astro') || '';
+  assert(
+    '057 ServicesSection.astro derives service hrefs and termsHref from the registry',
+    !servicesSection.includes("href: '/en/services/") &&
+      !servicesSection.includes("href: '/es/servicios/") &&
+      !servicesSection.includes("termsHref: '/"),
+    'hardcoded service href or termsHref remains'
+  );
+});
+
 // ─── Summary ──────────────────────────────────────────────────────────────
 
 const total = passed + failed;

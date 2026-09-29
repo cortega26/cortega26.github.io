@@ -225,6 +225,14 @@ const introCopy = c.intro[service];
   <input type="hidden" name="_subject" value={subjectMap[service]} />
   <input type="hidden" name="service" value={service} />
   <input type="hidden" name="page" value="" data-fill="page" />
+  <input
+    type="text"
+    name="_gotcha"
+    class="intake-form__gotcha"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+  />
 
   <div class="intake-form__row">
     <div class="form-group">
@@ -534,6 +542,14 @@ const introCopy = c.intro[service];
   .intake-form__policy a {
     color: var(--clr-accent);
     font-weight: 600;
+  }
+
+  .intake-form__gotcha {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   @media (max-width: 540px) {

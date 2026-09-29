@@ -213,6 +213,8 @@ group('S5 · Sanitization (behavior, not content)', () => {
   assert('secret-like cta_location dropped → rejected', calls.length === before, JSON.stringify(calls));
   api.contactIntent('email', 'user@example.com', undefined);
   assert('email-like value dropped → rejected', calls.length === before, JSON.stringify(calls));
+  const badNetwork = api.profileClick('myspace');
+  assert('unknown profile network rejected', badNetwork.sent === false && badNetwork.reason === 'missing_params', JSON.stringify(badNetwork));
   api.bookCall(undefined, 'x'.repeat(500));
   assert('long values truncated to 100', calls[calls.length - 1].params.cta_location.length === 100);
   const r = api.serviceView('nonexistent');
@@ -292,8 +294,12 @@ group('S8 · Declarative bindings', () => {
   assert('CV link → cv_download', calls[5].name === 'cv_download', JSON.stringify(calls[5]));
   fireClick(listeners, new FakeElement({ tag: 'A', attrs: { href: '/en/', 'data-language-select': '' } }));
   assert('gateway choice → language_select', calls[6].name === 'language_select', JSON.stringify(calls[6]));
+  fireClick(listeners, new FakeElement({ tag: 'A', attrs: { href: 'https://github.com/cortega26', 'data-profile-link': 'github' } }));
+  assert('profile link → profile_click github', calls[7].name === 'profile_click' && calls[7].params.profile_network === 'github', JSON.stringify(calls[7]));
+  fireClick(listeners, new FakeElement({ tag: 'A', attrs: { href: 'https://www.linkedin.com/in/cortega26', 'data-profile-link': 'linkedin' } }));
+  assert('profile link → profile_click linkedin', calls[8].name === 'profile_click' && calls[8].params.profile_network === 'linkedin', JSON.stringify(calls[8]));
   fireClick(listeners, new FakeElement({ tag: 'A', attrs: { href: 'https://github.com/x', } }));
-  assert('unstamped outbound link ignored (no generic open)', calls.length === 7, `${calls.length}`);
+  assert('unstamped outbound link ignored (no generic open)', calls.length === 9, `${calls.length}`);
 });
 
 group('S8b · service_view page scoping (main-only)', () => {

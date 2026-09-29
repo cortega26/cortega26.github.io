@@ -1387,6 +1387,31 @@ group('EM · Résumés wired per locale', () => {
   );
 });
 
+group('062 · About trajectory block and tracked profile links', () => {
+  const about = read('src/components/AboutSection.astro') || '';
+  const footer = read('src/components/Footer.astro') || '';
+  assert(
+    '062 About renders the trajectory milestones in both locales',
+    about.includes('trajectoryLabel') && (about.match(/milestones: \[/g) || []).length === 2,
+    'trajectory block missing or not bilingual'
+  );
+  assert(
+    '062 Footer profile links carry data-profile-link stamps',
+    footer.includes('data-profile-link="github"') && footer.includes('data-profile-link="linkedin"'),
+    'profile links are untracked'
+  );
+  if (BUILT) {
+    const enHome = read('dist/en/index.html') || '';
+    const esHome = read('dist/es/index.html') || '';
+    assert(
+      '[built] EN/ES About renders the trajectory milestones',
+      enHome.includes('2021–present · Independent software developer') &&
+        esHome.includes('2021–actualidad · Desarrollador de software independiente'),
+      'milestones missing from the built home pages'
+    );
+  }
+});
+
 group('S0b · Home service cards and guide CTAs carry canonical service context', () => {
   const servicesSection = read('src/components/ServicesSection.astro') || '';
   const registry = JSON.parse(read('src/data/service-registry.json'));

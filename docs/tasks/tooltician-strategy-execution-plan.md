@@ -21,8 +21,8 @@ y `docs/content-audit/audits/audit-20260923-response.md`.
 | TS-004 enlaces salientes | Hecho (parcial) | `portfolio_click`/`proof_click` canónicos; `ProofSection` ya no se renderiza |
 | TS-005 test de instrumentación | Hecho | `tests/analytics-service-funnel.mjs`, `analytics-guard.mjs`, grupo S0 |
 | TS-006 CV enlazado | Hecho (Plan 017 + 039) | `AboutSection.astro:60`, `Footer.astro:84`; PDF real EN/ES por locale (plan 039) |
-| TS-007 trayectoria | Pendiente | Diferido; hechos verificables ya en el CV (plan 039); requiere decisión del mantenedor |
-| TS-008 perfiles trackeados | Pendiente | Sin plan activo; GitHub/LinkedIn ya presentes en Footer |
+| TS-007 trayectoria | Hecho (Plan 062) | Bloque "Trayectoria" (3 hitos verificables) en About, EN/ES; propuesta y decisión: `docs/tasks/about-trajectory-proposal.md` |
+| TS-008 perfiles trackeados | Hecho (Plan 062) | GitHub/LinkedIn en Footer con `data-profile-link`; evento canónico `profile_click` (github/linkedin) |
 | TS-009/010/011 home | Hecho (parcial, `79b5347`) | Home consolidada; residual de prueba duplicada → plan 040 |
 | TS-012/013/014 casos | Parcial | Rol/fecha/CTA (Plan 029); métricas cuantificadas aparcadas |
 | TS-015 back-links | Pendiente | Recon/plantilla hechos (Plan 019); ejecución externa del operador |
@@ -47,7 +47,7 @@ esa capa.
 **Las tres fugas que este plan cierra:**
 
 1. **🔴 La conversión no se mide.** `public/assets/js/track.js` es un *no-op*: reenvía eventos a `window.plausible` y `window.dataLayer`, que no existen. La analítica instalada (Ahrefs, en `src/layouts/BaseLayout.astro`) solo cuenta páginas vistas. Todos los eventos `data-track` ya instrumentados (CTAs, formularios) **van al vacío**. Hoy es imposible saber qué convierte. *(Superseded 2026-09-23: GA4 direct (Plan 006) is the installed analytics; `track.js` maps to `gtag`; see §0 and `docs/analytics-sprint-0.md`.)*
-2. **🟠 La ruta de empleador está abandonada a medias.** Existe `public/assets/docs/carlos-ortega-resume.pdf` pero **no está enlazado en ningún componente**. No hay trayectoria ni señal para reclutadores. *(Superseded 2026-09-23: real EN/ES résumés are linked per locale (Plans 017 + 039); trajectory still needs a maintainer decision — see §0.)*
+2. **🟠 La ruta de empleador está abandonada a medias.** Existe `public/assets/docs/carlos-ortega-resume.pdf` pero **no está enlazado en ningún componente**. No hay trayectoria ni señal para reclutadores. *(Superseded 2026-09-23: real EN/ES résumés are linked per locale (Plans 017 + 039); 2026-09-28: trajectory block + tracked profile links shipped (Plan 062) — see §0.)*
 3. **🟠 La home repite la misma prueba.** `ResultsBand`, `Portfolio`, `Proof` y `ServiceSpotlight` muestran las mismas señales (Ébano, bankrecon, A+ headers). El backlog previo ya marca `TT-017` como pendiente. *(Superseded 2026-09-23: home was consolidated in `79b5347` and deduped further in Plan 040; `ProofSection.astro` and `ServiceSpotlight.astro` were deleted in Plan 041 — see §0.)*
 
 **Lo que NO se hace (decisiones cerradas, ver §11):** no blog, no hub de productos, no subdominios, no CV como eje, no nuevos servicios, no rediseño visual, no tocar precios sin datos.
@@ -149,7 +149,7 @@ Esta es la **fuente única de verdad** de la analítica. Nomenclatura: `snake_ca
 |---|---|---|---|---|
 | Eventos de conversión capturados | `0` (no-op) | `100% del catálogo §4` | `Hecho` — Sprint 0 canónico (2026-09-16) | Fase 0 |
 | Panel de analítica de eventos | `ninguno` (solo Ahrefs pageviews) | `1 panel cookieless` | `Hecho` — GA4 + 6 dimensiones (2026-09-16) | Fase 0 |
-| Ruta de empleador | `inexistente` (CV huérfano) | `CV enlazado + trayectoria` | `Parcial` — CV real EN/ES enlazado (Planes 017 + 039); trayectoria pendiente | Fase 1 |
+| Ruta de empleador | `inexistente` (CV huérfano) | `CV enlazado + trayectoria` | `Hecho` — CV real EN/ES enlazado (Planes 017 + 039) + trayectoria en About y perfiles trackeados (Plan 062) | Fase 1 |
 | Redundancia de prueba en home | `alta` (4 secciones repiten) | `cada sección aporta prueba única` | `Hecho (parcial)` — consolidación `79b5347`; residual plan 040 | Fase 2 (cierra TT-017) |
 | Casos de estudio reales | `0` ("aún no hay testimonios") | `≥1` | `Parcial` — evidencia rol/fecha (Plan 029) | Fase 3 |
 | Back-links desde productos propios | `0` medibles | `3 con UTM` | `Pendiente` | Fase 4 |
@@ -198,8 +198,8 @@ Objetivo: abrir **una sola** ruta de baja fricción para reclutadores sin contam
 | ID | Tarea | P | Esf. | Archivos | Cambio mínimo | Criterio de aceptación | Verificación | Estado |
 |---|---|---|---|---|---|---|---|---|
 | `TS-006` | Enlazar el CV con tracking | `P1` | `S` | `src/components/AboutSection.astro`, `src/components/Footer.astro`, `public/assets/docs/carlos-ortega-resume.pdf` | Botón "Descargar CV" en About y enlace en Footer, con `data-track="cta_download_cv"` | El CV es accesible desde la home en ≤2 clicks y la descarga emite evento | Click → descarga + evento; EN y ES | `Pendiente` |
-| `TS-007` | Bloque "Trayectoria" comprimido en About | `P2` | `M` | `src/components/AboutSection.astro` | Añadir 3–4 hitos verificables (rol, periodo, resultado) como subnarrativa, sin convertir About en CV literal | Un reclutador entiende experiencia y profundidad sin salir de la home | Revisión visual EN/ES; no rompe layout de las 3 cards | `Pendiente` |
-| `TS-008` | Reforzar enlaces a GitHub/LinkedIn como señal de empleo | `P3` | `S` | `src/components/AboutSection.astro`/`Footer.astro` | Asegurar que GitHub/LinkedIn estén presentes y trackeados desde la zona de trayectoria | Clicks a perfiles medibles | Click → evento | `Pendiente` |
+| `TS-007` | Bloque "Trayectoria" comprimido en About | `P2` | `M` | `src/components/AboutSection.astro` | Añadir 3–4 hitos verificables (rol, periodo, resultado) como subnarrativa, sin convertir About en CV literal | Un reclutador entiende experiencia y profundidad sin salir de la home | Revisión visual EN/ES; no rompe layout de las 3 cards | `Hecho (Plan 062)` |
+| `TS-008` | Reforzar enlaces a GitHub/LinkedIn como señal de empleo | `P3` | `S` | `src/components/AboutSection.astro`/`Footer.astro` | Asegurar que GitHub/LinkedIn estén presentes y trackeados desde la zona de trayectoria | Clicks a perfiles medibles | Click → evento | `Hecho (Plan 062)` |
 
 **Exit gate Fase 1:** CV descargable y medido en EN/ES; trayectoria visible sin romper el eje comercial; el H1 del hero **no** se modificó (la ruta de empleador es secundaria, no primaria).
 
@@ -273,8 +273,8 @@ Objetivo: tomar con datos las decisiones que hoy serían adivinanzas.
 | `TS-004` | 0 | Medición | Instrumentar enlaces salientes de evidencia | `P2` | medio | `M` | `Hecho (parcial)` — `portfolio_click`/`proof_click` canónicos |
 | `TS-005` | 0 | QA | Test de humo de instrumentación | `P2` | medio | `M` | `Hecho` — `tests/analytics-service-funnel.mjs` + grupo S0 |
 | `TS-006` | 1 | Empleador | Enlazar CV con tracking | `P1` | alto | `S` | `Hecho` (Plan 017 + 039) — CV EN/ES reales por locale |
-| `TS-007` | 1 | Empleador | Bloque "Trayectoria" en About | `P2` | alto | `M` | `Pendiente` — diferido; hechos en el CV (plan 039), requiere decisión |
-| `TS-008` | 1 | Empleador | Reforzar GitHub/LinkedIn trackeados | `P3` | bajo | `S` | `Pendiente` — sin plan activo; GitHub/LinkedIn en Footer |
+| `TS-007` | 1 | Empleador | Bloque "Trayectoria" en About | `P2` | alto | `M` | `Hecho (Plan 062)` — 3 hitos verificables EN/ES |
+| `TS-008` | 1 | Empleador | Reforzar GitHub/LinkedIn trackeados | `P3` | bajo | `S` | `Hecho (Plan 062)` — `profile_click` (github/linkedin) desde Footer |
 | `TS-009` | 2 | Contenido | Mapear solapamientos de prueba | `P1` | medio | `S` | `Hecho` (`79b5347`) |
 | `TS-010` | 2 | Contenido | Rol único por sección | `P1` | alto | `M` | `Hecho (parcial)` (`79b5347`) — residual en plan 040 |
 | `TS-011` | 2 | IA | Revisar densidad/orden de home | `P2` | medio | `M` | `Hecho` (`79b5347`) |

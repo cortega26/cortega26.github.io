@@ -1610,6 +1610,39 @@ group('050 · Intake page attribution survives reset + Formspree honeypot', () =
   );
 });
 
+group('057 · Service pages and ServicesSection derive routes from the registry', () => {
+  const servicePages = [
+    'src/pages/en/services/python-automation/index.astro',
+    'src/pages/en/services/recurring-data-collection/index.astro',
+    'src/pages/en/services/internal-tools/index.astro',
+    'src/pages/en/services/financial-tooling/index.astro',
+    'src/pages/en/services/static-sites/index.astro',
+    'src/pages/en/services/web-technical-hygiene/index.astro',
+    'src/pages/es/servicios/automatizacion-python/index.astro',
+    'src/pages/es/servicios/recoleccion-recurrente-datos/index.astro',
+    'src/pages/es/servicios/herramientas-internas/index.astro',
+    'src/pages/es/servicios/herramientas-financieras/index.astro',
+    'src/pages/es/servicios/sitios-web/index.astro',
+    'src/pages/es/servicios/higiene-tecnica-web/index.astro',
+  ];
+  for (const page of servicePages) {
+    const source = read(page) || '';
+    assert(
+      `057 ${page} derives canonical from the route registry`,
+      source.includes("routeGroup('service:") && !source.includes("const canonical = 'https://tooltician.com"),
+      'hardcoded canonical or missing routeGroup'
+    );
+  }
+  const servicesSection = read('src/components/ServicesSection.astro') || '';
+  assert(
+    '057 ServicesSection.astro derives service hrefs and termsHref from the registry',
+    !servicesSection.includes("href: '/en/services/") &&
+      !servicesSection.includes("href: '/es/servicios/") &&
+      !servicesSection.includes("termsHref: '/"),
+    'hardcoded service href or termsHref remains'
+  );
+});
+
 // ─── Summary ──────────────────────────────────────────────────────────────
 
 const total = passed + failed;

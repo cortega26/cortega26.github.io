@@ -4,17 +4,31 @@
 // the pre-008 double-POST (two submit handlers on #contact-form both firing).
 // These tests run against a real preview server with a real browser.
 //
-//   node test-behavioral.mjs   # spawns `npm run preview -- --port 4322` itself,
-//                             # polls to 200 (max ~30s), runs, kills in finally.
+//   node test-behavioral.mjs   # starts its own preview daemon on a per-run
+//                             # port, polls until it serves this worktree's
+//                             # dist byte-for-byte, runs, stops the daemon.
 //
 // Never assumes a server is already running and never leaves one behind.
 // Formspree is ALWAYS intercepted and mocked — this script never hits prod.
 import { chromium } from '@playwright/test';
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
+import { existsSync, readFileSync } from 'fs';
+import { resolve as resolvePath } from 'path';
 
-const PORT = 4322;
+// Astro's `preview` command spawns a detached daemon (one per project) and the
+// launcher exits immediately. A fixed port can therefore be answered by a
+// stale daemon or by another worktree's server, silently testing the wrong
+// build. Each run uses its own port, clears any leftover daemon for this
+// project first, and refuses to run against a server whose /en/ body does not
+// byte-match this worktree's dist/en/index.html.
+const PORT = 4400 + Math.floor(Math.random() * 500);
 const BASE = `http://localhost:${PORT}`;
 const START_TIMEOUT_MS = 30000;
+const NPM = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+
+function stopPreviewDaemon() {
+  spawnSync(NPM, ['run', 'preview', '--', 'stop'], { stdio: 'ignore' });
+}
 
 const failures = [];
 const fail = (name, detail = '') => {
@@ -25,9 +39,14 @@ const ok = (name) => console.log(`✓ ${name}`);
 
 function startPreview() {
   return new Promise((resolve, reject) => {
-    // detached:true so SIGTERM to the group also kills the `astro preview`
-    // grandchild (plain child.kill only kills the npm wrapper and orphans it).
-    const child = spawn('npm', ['run', 'preview', '--', '--port', String(PORT)], {
+    stopPreviewDaemon();
+    const indexPath = resolvePath('dist/en/index.html');
+    if (!existsSync(indexPath)) {
+      reject(new Error(`dist/en/index.html missing — run 'npx --no-install astro build' first`));
+      return;
+    }
+    const expectedBody = readFileSync(indexPath, 'utf8');
+    const child = spawn(NPM, ['run', 'preview', '--', '--port', String(PORT)], {
       stdio: ['ignore', 'pipe', 'pipe'],
       detached: process.platform !== 'win32',
     });
@@ -41,12 +60,25 @@ function startPreview() {
         reject(new Error(`preview spawn failed: ${err.message}`));
       }
     });
-    // Poll BASE/en/ to 200.
+    // Poll BASE/en/ until it serves this worktree's dist byte-for-byte.
     const deadline = Date.now() + START_TIMEOUT_MS;
     const poll = async () => {
       try {
         const res = await fetch(`${BASE}/en/`);
         if (res.ok) {
+          const body = await res.text();
+          if (body !== expectedBody) {
+            if (!settled) {
+              settled = true;
+              stopPreviewDaemon();
+              reject(new Error(
+                `a preview server on port ${PORT} is serving a different build ` +
+                `(stale or foreign daemon). Expected this worktree's dist/en/index.html — ` +
+                `stop that server and re-run.`
+              ));
+            }
+            return;
+          }
           if (!settled) {
             settled = true;
             resolve(child);
@@ -63,6 +95,7 @@ function startPreview() {
             if (process.platform !== 'win32' && child.pid) process.kill(-child.pid, 'SIGTERM');
             else child.kill('SIGTERM');
           } catch { /* already dead */ }
+          stopPreviewDaemon();
           reject(new Error(`preview did not serve ${BASE}/en/ within ${START_TIMEOUT_MS / 1000}s. Output:\n${out.join('').slice(-2000)}`));
         }
         return;
@@ -698,27 +731,32 @@ try {
 } finally {
   if (browser) await browser.close().catch(() => {});
   if (preview) {
-    // Kill the whole process group (npm wrapper + astro grandchild).
+    // The launcher normally exits immediately after spawning Astro's detached
+    // preview daemon; kill any surviving launcher group, then stop the daemon.
+    const exited = () => preview.exitCode !== null || preview.signalCode !== null;
     try {
       if (process.platform !== 'win32' && preview.pid) process.kill(-preview.pid, 'SIGTERM');
       else preview.kill('SIGTERM');
     } catch {
       try { preview.kill('SIGTERM'); } catch { /* already dead */ }
     }
-    await new Promise((resolve) => {
-      const t = setTimeout(resolve, 3000);
-      preview.on('exit', () => {
-        clearTimeout(t);
-        resolve();
+    if (!exited()) {
+      await new Promise((resolve) => {
+        const t = setTimeout(resolve, 3000);
+        preview.on('exit', () => {
+          clearTimeout(t);
+          resolve();
+        });
       });
-    });
+    }
     // Escalate if the group survived.
     try {
-      if (preview.exitCode === null && preview.signalCode === null) {
+      if (!exited()) {
         if (process.platform !== 'win32' && preview.pid) process.kill(-preview.pid, 'SIGKILL');
         else preview.kill('SIGKILL');
       }
     } catch { /* already dead */ }
+    stopPreviewDaemon();
   }
 }
 

@@ -220,15 +220,15 @@ docs, direction), every finding re-verified by the advisor against the code
 session report; the vetted table's net-positive items became these 22
 plans. Status authority is this file.
 
-**Progress (deep audit series): 19/22 DONE — wave 1 (042, 044, 045, 049,
+**Progress (deep audit series): 20/22 DONE — wave 1 (042, 044, 045, 049,
 055, merged as `df877ab`), 043 (merged as `af2f47b`, live Step 7 applied
 2026-09-28), 046 (merged as `4ba60a6`), 047 (merged as `c6e513c`), 048
 (merged as `9bdfcf3`), 050 (merged as `34b9bec`), 051 (merged as `097e03f`),
 052 (merged as `dc0bebc`), 053 (merged as `1768dc0`), 054 (merged as
 `b21c589`), 056 (merged as `6683f0d`), 057 (merged as `bd2f979`), 058
-(merged as `08f997a`), 059 (merged as `89b4b0f`) and 061 (merged as
-`a4350d8`), all archived under `plans/archive/`; 041 came from the harvest
-plan above. The remaining 3 plans stay in `plans/`.**
+(merged as `08f997a`), 059 (merged as `89b4b0f`), 060 (merged as `6a589e7`)
+and 061 (merged as `a4350d8`), all archived under `plans/archive/`; 041 came
+from the harvest plan above. The remaining 2 plans stay in `plans/`.**
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
@@ -250,7 +250,7 @@ plan above. The remaining 3 plans stay in `plans/`.**
 | 057 | Route registry single-source for service pages and ServicesSection | P2 | M | — | DONE (executed 2026-09-28 on `advisor/057-routes-single-source`, base `e145471`; verified: scope 15/15 files + README row, drift attributed to landed 048 — registry import already present, re-add skipped per reconcile note; check 0/0/0, src 445/445 (+13 guard assertions), built 474/474, funnel 82/82, intake 16/16, caseStudies 85/85, sitemap PASS, links 0/0/0, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched; merged as `bd2f979` (PR #85); archived to `plans/archive/057-routes-single-source.md`) |
 | 058 | Perf hygiene: preload/logo/preconnect + compositor scroll bar | P2 | S | — | DONE (executed 2026-09-28 on `advisor/058-perf-hygiene`, base `e4c1763`; verified: scope 11/11 files + README row, check 0/0/0, src 456/456, built 490/490, funnel 82/82, intake 16/16, caseStudies 85/85, HTW no diff both locales, behavioral PASS 0 failures, CSP MATCH, `npm test` exit 0, stats untouched; deviation: `src/pages/index.astro` keeps its `@font-face` mono reference — only the preload was removed, so Step 1's "0 for both files" grep counts the font-face URL; merged as `08f997a` (PR #87); archived to `plans/archive/058-perf-hygiene.md`) |
 | 059 | Docs truth sweep (CLAUDE/README/CHANGELOG/contradictions/superseded banners) | P2 | M | 051 | DONE (executed 2026-09-28 on `advisor/059-docs-sweep`; verified: 006-links 0/0/0, superseded 8+2, ProofSection 1, CHANGELOG dated entry, `npm test` exit 0; merged to `master` as `89b4b0f`; archived to `plans/archive/059-docs-truth-sweep.md`) |
-| 060 | `tests/run.js` quality: fail on missing reads, drop vacuous built skips, dedupe S0 | P3 | M | — | DONE (executed 2026-09-28 on `advisor/060-runjs-quality`, base `e350d13`; verified: 15 vacuous skips converted — 0 remain; `--built` red without `dist/` (61 failures) and green with it; `readRequired` on 17 helpers (Footer rename → non-zero, "Required source file missing"); dead `rootHTML`/J1 entry removed; 6 duplicated S0 pins dropped (post-Step-3 source 254 → 248; Navbar CTA pin kept; funnel 82/82 still proves them); check 0/0/0, src 248/248, built 516/516, caseStudies 85/85, script-guards 9/9, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched; drift note: appended groups from landed 050/057/058/061 accounted for, no cited anchor moved; awaiting merge) |
+| 060 | `tests/run.js` quality: fail on missing reads, drop vacuous built skips, dedupe S0 | P3 | M | — | DONE (executed 2026-09-28 on `advisor/060-runjs-quality`, base `e350d13`; verified: 15 vacuous skips converted — 0 remain; `--built` red without `dist/` (61 failures) and green with it; `readRequired` on 17 helpers (Footer rename → non-zero, "Required source file missing"); dead `rootHTML`/J1 entry removed; 6 duplicated S0 pins dropped (post-Step-3 source 254 → 248; Navbar CTA pin kept; funnel 82/82 still proves them); check 0/0/0, src 248/248, built 516/516, caseStudies 85/85, script-guards 9/9, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched; drift note: appended groups from landed 050/057/058/061 accounted for, no cited anchor moved; merged as `6a589e7` (PR #89); archived to `plans/archive/060-runjs-quality.md`) |
 | 061 | OG card spike: one copy source + ES variant | P2 | M | — | DONE (executed 2026-09-28 on `advisor/061-og-card`, base `e145471`; spike + maintainer checkpoint approved in session: canonical positioning kept, ES mirrors EN layout, per-locale asset shipped; verified: check 0/0/0, src 436/436, built 467/467, funnel 82/82, intake 16/16, caseStudies 85/85, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, built EN/ES og:image correct per locale, stats untouched; deviations: new `docs/tasks/og-card-decision.md` (in scope) records the inventory/decision, and the generator gained the 9 Spanish glyphs with `--lang=en|es`; merged as `a4350d8` (PR #86); archived to `plans/archive/061-og-card-refresh.md`) |
 | 062 | About trajectory proposal (employer route; decision-gated design) | P3 | S | — | TODO |
 | 063 | Backlink execution runbook (plan-019 pass) | P3 | S | — | TODO |

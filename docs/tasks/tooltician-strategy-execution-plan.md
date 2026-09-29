@@ -25,7 +25,7 @@ y `docs/content-audit/audits/audit-20260923-response.md`.
 | TS-008 perfiles trackeados | Hecho (Plan 062) | GitHub/LinkedIn en Footer con `data-profile-link`; evento canónico `profile_click` (github/linkedin) |
 | TS-009/010/011 home | Hecho (parcial, `79b5347`) | Home consolidada; residual de prueba duplicada → plan 040 |
 | TS-012/013/014 casos | Parcial | Rol/fecha/CTA (Plan 029); métricas cuantificadas aparcadas |
-| TS-015 back-links | Pendiente | Recon/plantilla hechos (Plan 019); ejecución externa del operador |
+| TS-015 back-links | Pendiente | Recon/plantilla hechos (Plan 019); ejecución externa del operador. Runbook: `docs/tasks/backlink-execution-2026-09.md` — operator pass pending; do not mark done until ≥1 attributed referral is recorded |
 | TS-016 JSON-LD | Parcial | `jsonld.ts` + paridad (Plan 033); Rich Results externo pendiente |
 | TS-017 llms/OG | Hecho (Plan 034) | `llms.txt`/`llms-full.txt`; `BaseLayout.astro:21,59-63` |
 | TS-018/019/020 | Bloqueado | Sin datos (Search Console); runbook en plan 037 |

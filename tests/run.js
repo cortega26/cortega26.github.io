@@ -1595,6 +1595,21 @@ group('048 · Service display names single-sourced from the registry', () => {
   );
 });
 
+group('050 · Intake page attribution survives reset + Formspree honeypot', () => {
+  const intakeForm = read('src/components/IntakeForm.astro') || '';
+  assert(
+    '050 IntakeForm.astro contains the honeypot field and its off-screen rule',
+    intakeForm.includes('name="_gotcha"') && intakeForm.includes('.intake-form__gotcha') && intakeForm.includes('left: -9999px'),
+    'honeypot input or CSS rule missing'
+  );
+  const intakeJs = read('public/assets/js/intake-form.js') || '';
+  assert(
+    '050 intake-form.js preserves page attribution across resets',
+    intakeJs.includes('pageField.defaultValue = window.location.pathname'),
+    'defaultValue fill missing'
+  );
+});
+
 group('057 · Service pages and ServicesSection derive routes from the registry', () => {
   const servicePages = [
     'src/pages/en/services/python-automation/index.astro',

@@ -4,17 +4,31 @@
 // the pre-008 double-POST (two submit handlers on #contact-form both firing).
 // These tests run against a real preview server with a real browser.
 //
-//   node test-behavioral.mjs   # spawns `npm run preview -- --port 4322` itself,
-//                             # polls to 200 (max ~30s), runs, kills in finally.
+//   node test-behavioral.mjs   # starts its own preview daemon on a per-run
+//                             # port, polls until it serves this worktree's
+//                             # dist byte-for-byte, runs, stops the daemon.
 //
 // Never assumes a server is already running and never leaves one behind.
 // Formspree is ALWAYS intercepted and mocked — this script never hits prod.
 import { chromium } from '@playwright/test';
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
+import { existsSync, readFileSync } from 'fs';
+import { resolve as resolvePath } from 'path';
 
-const PORT = 4322;
+// Astro's `preview` command spawns a detached daemon (one per project) and the
+// launcher exits immediately. A fixed port can therefore be answered by a
+// stale daemon or by another worktree's server, silently testing the wrong
+// build. Each run uses its own port, clears any leftover daemon for this
+// project first, and refuses to run against a server whose /en/ body does not
+// byte-match this worktree's dist/en/index.html.
+const PORT = 4400 + Math.floor(Math.random() * 500);
 const BASE = `http://localhost:${PORT}`;
 const START_TIMEOUT_MS = 30000;
+const NPM = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+
+function stopPreviewDaemon() {
+  spawnSync(NPM, ['run', 'preview', '--', 'stop'], { stdio: 'ignore' });
+}
 
 const failures = [];
 const fail = (name, detail = '') => {
@@ -25,9 +39,14 @@ const ok = (name) => console.log(`✓ ${name}`);
 
 function startPreview() {
   return new Promise((resolve, reject) => {
-    // detached:true so SIGTERM to the group also kills the `astro preview`
-    // grandchild (plain child.kill only kills the npm wrapper and orphans it).
-    const child = spawn('npm', ['run', 'preview', '--', '--port', String(PORT)], {
+    stopPreviewDaemon();
+    const indexPath = resolvePath('dist/en/index.html');
+    if (!existsSync(indexPath)) {
+      reject(new Error(`dist/en/index.html missing — run 'npx --no-install astro build' first`));
+      return;
+    }
+    const expectedBody = readFileSync(indexPath, 'utf8');
+    const child = spawn(NPM, ['run', 'preview', '--', '--port', String(PORT)], {
       stdio: ['ignore', 'pipe', 'pipe'],
       detached: process.platform !== 'win32',
     });
@@ -41,12 +60,25 @@ function startPreview() {
         reject(new Error(`preview spawn failed: ${err.message}`));
       }
     });
-    // Poll BASE/en/ to 200.
+    // Poll BASE/en/ until it serves this worktree's dist byte-for-byte.
     const deadline = Date.now() + START_TIMEOUT_MS;
     const poll = async () => {
       try {
         const res = await fetch(`${BASE}/en/`);
         if (res.ok) {
+          const body = await res.text();
+          if (body !== expectedBody) {
+            if (!settled) {
+              settled = true;
+              stopPreviewDaemon();
+              reject(new Error(
+                `a preview server on port ${PORT} is serving a different build ` +
+                `(stale or foreign daemon). Expected this worktree's dist/en/index.html — ` +
+                `stop that server and re-run.`
+              ));
+            }
+            return;
+          }
           if (!settled) {
             settled = true;
             resolve(child);
@@ -63,6 +95,7 @@ function startPreview() {
             if (process.platform !== 'win32' && child.pid) process.kill(-child.pid, 'SIGTERM');
             else child.kill('SIGTERM');
           } catch { /* already dead */ }
+          stopPreviewDaemon();
           reject(new Error(`preview did not serve ${BASE}/en/ within ${START_TIMEOUT_MS / 1000}s. Output:\n${out.join('').slice(-2000)}`));
         }
         return;
@@ -79,8 +112,10 @@ function startPreview() {
 // lifecycle fired — no real network call to googletagmanager.com required.
 async function mockGtagAndFormspree(page, { formspreeStatus = 200 } = {}) {
   let postAttempts = 0;
+  const postBodies = [];
   await page.route('**/formspree.io/**', async (route) => {
     postAttempts++;
+    postBodies.push(route.request().postData() || '');
     await route.fulfill({
       status: formspreeStatus,
       contentType: 'application/json',
@@ -92,7 +127,7 @@ async function mockGtagAndFormspree(page, { formspreeStatus = 200 } = {}) {
     await route.fulfill({ status: 200, contentType: 'application/javascript', body: '' });
   });
   const getPost = () => postAttempts;
-  return { getPostAttempts: getPost };
+  return { getPostAttempts: getPost, getPostBodies: () => postBodies };
 }
 
 async function fillIntakeForm(page) {
@@ -302,6 +337,76 @@ async function testSingleSubmit(browser) {
     fail(label, `page errors: [${pageErrors.join('; ')}] console errors: [${consoleErrors.join('; ')}]`);
   } else {
     ok(`${label} (1 POST, success shown, legacy form_submit_success fired, canonical correctly suppressed on localhost, no PII, 0 errors)`);
+  }
+  await context.close();
+}
+
+async function testSecondSubmitKeepsPage(browser) {
+  const label = 'second submit from the same page still carries the page path (page survives reset)';
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  const pageErrors = [];
+  const consoleErrors = [];
+  page.on('pageerror', (err) => pageErrors.push(err.message));
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') consoleErrors.push(msg.text());
+  });
+
+  const { getPostAttempts, getPostBodies } = await mockGtagAndFormspree(page);
+
+  await page.goto(`${BASE}/en/`, { waitUntil: 'networkidle' });
+
+  const formCount = await page.locator('#contact-form').count();
+  if (formCount !== 1) {
+    fail(label, `expected 1 #contact-form on /en/, found ${formCount}`);
+    await context.close();
+    return;
+  }
+
+  if (!(await fillIntakeForm(page))) {
+    fail(label, '#contact-goal has no real (non-empty) option');
+    await context.close();
+    return;
+  }
+
+  await page.locator('#contact-form button[type="submit"]').click();
+  try {
+    await page.locator('#contact-form .intake-form__success.show').waitFor({ state: 'visible', timeout: 5000 });
+  } catch {
+    fail(label, 'first submit: .intake-form__success.show never became visible');
+    await context.close();
+    return;
+  }
+
+  // Fill and submit a second brief from the same page without reloading.
+  if (!(await fillIntakeForm(page))) {
+    fail(label, 'second fill: #contact-goal has no real (non-empty) option');
+    await context.close();
+    return;
+  }
+
+  await page.locator('#contact-form button[type="submit"]').click();
+  try {
+    await page.locator('#contact-form .intake-form__success.show').waitFor({ state: 'visible', timeout: 5000 });
+  } catch {
+    fail(label, 'second submit: .intake-form__success.show never became visible');
+    await context.close();
+    return;
+  }
+
+  const pagePart = (body) => (/name="page"\s*\r?\n\r?\n([^\r\n]*)/.exec(body) || [])[1] || '';
+  const bodies = getPostBodies();
+  const postAttempts = getPostAttempts();
+  if (postAttempts !== 2) {
+    fail(label, `expected exactly 2 POSTs to formspree.io, observed ${postAttempts}`);
+  } else if (pagePart(bodies[0]) !== '/en/') {
+    fail(label, `first POST carried page=${JSON.stringify(pagePart(bodies[0]))}, expected "/en/"`);
+  } else if (pagePart(bodies[1]) !== '/en/') {
+    fail(label, `second POST carried page=${JSON.stringify(pagePart(bodies[1]))}, expected "/en/" (page lost across reset)`);
+  } else if (pageErrors.length > 0 || consoleErrors.length > 0) {
+    fail(label, `page errors: [${pageErrors.join('; ')}] console errors: [${consoleErrors.join('; ')}]`);
+  } else {
+    ok(`${label} (2 POSTs, both carry page="/en/", 0 errors)`);
   }
   await context.close();
 }
@@ -612,6 +717,7 @@ try {
   browser = await chromium.launch({ headless: true });
   await testValidationErrors(browser);
   await testSingleSubmit(browser);
+  await testSecondSubmitKeepsPage(browser);
   await testDoubleClickProtection(browser);
   await testErrorPath(browser);
   await testMobileSuccessVisibility(browser);
@@ -625,27 +731,32 @@ try {
 } finally {
   if (browser) await browser.close().catch(() => {});
   if (preview) {
-    // Kill the whole process group (npm wrapper + astro grandchild).
+    // The launcher normally exits immediately after spawning Astro's detached
+    // preview daemon; kill any surviving launcher group, then stop the daemon.
+    const exited = () => preview.exitCode !== null || preview.signalCode !== null;
     try {
       if (process.platform !== 'win32' && preview.pid) process.kill(-preview.pid, 'SIGTERM');
       else preview.kill('SIGTERM');
     } catch {
       try { preview.kill('SIGTERM'); } catch { /* already dead */ }
     }
-    await new Promise((resolve) => {
-      const t = setTimeout(resolve, 3000);
-      preview.on('exit', () => {
-        clearTimeout(t);
-        resolve();
+    if (!exited()) {
+      await new Promise((resolve) => {
+        const t = setTimeout(resolve, 3000);
+        preview.on('exit', () => {
+          clearTimeout(t);
+          resolve();
+        });
       });
-    });
+    }
     // Escalate if the group survived.
     try {
-      if (preview.exitCode === null && preview.signalCode === null) {
+      if (!exited()) {
         if (process.platform !== 'win32' && preview.pid) process.kill(-preview.pid, 'SIGKILL');
         else preview.kill('SIGKILL');
       }
     } catch { /* already dead */ }
+    stopPreviewDaemon();
   }
 }
 

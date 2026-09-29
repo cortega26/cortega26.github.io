@@ -77,7 +77,10 @@
     const successEl = form.querySelector('.intake-form__success');
     const errorEl = form.querySelector('.intake-form__error');
     const pageField = form.querySelector('[data-fill="page"]');
-    if (pageField) pageField.value = window.location.pathname;
+    if (pageField) {
+      pageField.value = window.location.pathname;
+      pageField.defaultValue = window.location.pathname;
+    }
 
     // Progressive enhancement (Plan 028): without JS the form keeps native
     // validation; with JS we own an accessible per-field error layer.

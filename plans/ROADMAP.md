@@ -10,10 +10,10 @@ plan stands.
   as `af2f47b`, live Step 7 applied), **046** (merged as `4ba60a6`), **047**
   (merged as `c6e513c`), **048** (merged as `9bdfcf3`), **050** (merged as
   `34b9bec`), **051** (merged as `097e03f`), **052** (merged as `dc0bebc`),
-  **053** (merged as `1768dc0`), **054** (merged as `b21c589`), **057**
-  (merged as `bd2f979`), **058** (merged as `08f997a`), **059** (merged as
-  `89b4b0f`) and **061** (merged as `a4350d8`) are DONE and archived;
-  **4 plans remain TODO in `plans/`** — 056, 060, 062, 063.
+  **053** (merged as `1768dc0`), **054** (merged as `b21c589`), **056**
+  (merged as `6683f0d`), **057** (merged as `bd2f979`), **058** (merged as
+  `08f997a`), **059** (merged as `89b4b0f`) and **061** (merged as `a4350d8`)
+  are DONE and archived; **3 plans remain TODO in `plans/`** — 060, 062, 063.
 - **Completed history (001–041 + wave 1 + 043 + 051 + 052 + 059):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
@@ -264,7 +264,7 @@ counts), not prose.
 | 052 | Intake attribution + CI | 3 | P1 | M | DONE (archived) | new suite 16/16, src 361/361, built 390/390, funnel 82/82; merged as `dc0bebc` |
 | 053 | caseStudies invariants | 3 | P1 | S | DONE (archived) | suite 85/85; merged as `1768dc0` |
 | 054 | Root landing | 3 | P1 | M | DONE (archived) | new suite 20/20, check 0/0/0, src 432/432, built 461/461, funnel 82/82, CSP MATCH, npm test 0; merged as `b21c589` |
-| 056 | Script guard tests | 3 | P2 | M | TODO | |
+| 056 | Script guard tests | 3 | P2 | M | DONE (archived) | new suite 9/9 + mutation proof, check 0/0/0, src 456/456, built 490/490, npm test 0; CSP skip now fails; merged as `6683f0d` |
 | 048 | Names single-source | 4 | P1 | M | DONE (archived) | 10/10 pairs, src 432/432; merged as `9bdfcf3` |
 | 057 | Routes single-source | 4 | P2 | M | DONE (archived) | check 0/0/0, src 447/447, built 476/476, sitemap PASS, links 0/0/0, HTW no diff, npm test 0; merged as `bd2f979` |
 | 059 | Docs truth sweep | 5 | P2 | M | DONE (archived) | 006-links 0, superseded 8+2, npm test 0; merged as `89b4b0f` |
@@ -273,8 +273,8 @@ counts), not prose.
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **19/23 DONE** (18 archived from this series + `041` from the
-harvest series) · 0 IN PROGRESS · 0 BLOCKED · **4 TODO**, all in `plans/`.
+Progress: **20/23 DONE** (19 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **3 TODO**, all in `plans/`.
 DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes

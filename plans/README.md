@@ -220,15 +220,15 @@ docs, direction), every finding re-verified by the advisor against the code
 session report; the vetted table's net-positive items became these 22
 plans. Status authority is this file.
 
-**Progress (deep audit series): 18/22 DONE — wave 1 (042, 044, 045, 049,
+**Progress (deep audit series): 19/22 DONE — wave 1 (042, 044, 045, 049,
 055, merged as `df877ab`), 043 (merged as `af2f47b`, live Step 7 applied
 2026-09-28), 046 (merged as `4ba60a6`), 047 (merged as `c6e513c`), 048
 (merged as `9bdfcf3`), 050 (merged as `34b9bec`), 051 (merged as `097e03f`),
 052 (merged as `dc0bebc`), 053 (merged as `1768dc0`), 054 (merged as
-`b21c589`), 057 (merged as `bd2f979`), 058 (merged as `08f997a`), 059
-(merged as `89b4b0f`) and 061 (merged as `a4350d8`), all archived under
-`plans/archive/`; 041 came from the harvest plan above. The remaining 4
-plans stay in `plans/`.**
+`b21c589`), 056 (merged as `6683f0d`), 057 (merged as `bd2f979`), 058
+(merged as `08f997a`), 059 (merged as `89b4b0f`) and 061 (merged as
+`a4350d8`), all archived under `plans/archive/`; 041 came from the harvest
+plan above. The remaining 3 plans stay in `plans/`.**
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
@@ -246,7 +246,7 @@ plans stay in `plans/`.**
 | 053 | `caseStudies` data-invariant tests | P1 | S | 052 | DONE (executed 2026-09-28 on `advisor/053-casestudies`; verified: new suite 85/85, check 0/0/0, src 401/401, built 430/430, funnel 82/82, intake 16/16, `npm test` exit 0, CI step OK; deviations: two-sided repoMap assertion (plan text wrong-sided), kept 052's `Analytics contract tests` step name (054/056 must match it, not `Contract tests`); merged to `master` as `1768dc0`; archived to `plans/archive/053-casestudies-invariants.md`) |
 | 054 | Root landing: missing head metadata, dead redirect key, language-decision tests | P1 | M | 052 | DONE (executed 2026-09-28 on `advisor/054-root-landing`, base `e145471`; verified: new suite 20/20, check 0/0/0, src 432/432, built 461/461, funnel 82/82, `npm test` exit 0, CSP MATCH, CI step OK; deviations: kept 052's `Analytics contract tests` step name — plan text says `Contract tests` — and built with `PUBLIC_GA4_MEASUREMENT_ID` set for the CSP stub; merged as `b21c589` (PR #82); archived to `plans/archive/054-root-landing.md`) |
 | 055 | JSON-LD hardening: HTW schema prices from `pricing.ts` + lookup guards | P1 | S | — | DONE (landed as `a03ab54` on `advisor/wave-1`; reviewer-verified: scope 5/5 files, check 0/0/0, source 361/361, built 390/390, `npm test` exit 0, HTW schema prices correct in both locales, stats untouched; merged to `master` as `df877ab`; archived to `plans/archive/055-jsonld-hardening.md`) |
-| 056 | Build/verify script failure-path tests | P2 | M | 052 | DONE (executed 2026-09-28 on `advisor/056-script-guards`, base `a56773a`; verified: new suite 9/9 incl. mutation red-then-green for both scripts, check 0/0/0, src 456/456, built 490/490, funnel 82/82, intake 16/16, caseStudies 85/85, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched (real run's chile-hub drift restored); deviations: extended the actual CI step `Analytics contract tests` — 053 kept 052's name; plan text says `Contract tests` — and a fresh worktree needs an `astro build` before `npm test`; awaiting merge) |
+| 056 | Build/verify script failure-path tests | P2 | M | 052 | DONE (executed 2026-09-28 on `advisor/056-script-guards`, base `a56773a`; verified: new suite 9/9 incl. mutation red-then-green for both scripts, check 0/0/0, src 456/456, built 490/490, funnel 82/82, intake 16/16, caseStudies 85/85, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched (real run's chile-hub drift restored); deviations: extended the actual CI step `Analytics contract tests` — 053 kept 052's name; plan text says `Contract tests` — and a fresh worktree needs an `astro build` before `npm test`; merged as `6683f0d` (PR #88); archived to `plans/archive/056-script-guard-tests.md`) |
 | 057 | Route registry single-source for service pages and ServicesSection | P2 | M | — | DONE (executed 2026-09-28 on `advisor/057-routes-single-source`, base `e145471`; verified: scope 15/15 files + README row, drift attributed to landed 048 — registry import already present, re-add skipped per reconcile note; check 0/0/0, src 445/445 (+13 guard assertions), built 474/474, funnel 82/82, intake 16/16, caseStudies 85/85, sitemap PASS, links 0/0/0, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched; merged as `bd2f979` (PR #85); archived to `plans/archive/057-routes-single-source.md`) |
 | 058 | Perf hygiene: preload/logo/preconnect + compositor scroll bar | P2 | S | — | DONE (executed 2026-09-28 on `advisor/058-perf-hygiene`, base `e4c1763`; verified: scope 11/11 files + README row, check 0/0/0, src 456/456, built 490/490, funnel 82/82, intake 16/16, caseStudies 85/85, HTW no diff both locales, behavioral PASS 0 failures, CSP MATCH, `npm test` exit 0, stats untouched; deviation: `src/pages/index.astro` keeps its `@font-face` mono reference — only the preload was removed, so Step 1's "0 for both files" grep counts the font-face URL; merged as `08f997a` (PR #87); archived to `plans/archive/058-perf-hygiene.md`) |
 | 059 | Docs truth sweep (CLAUDE/README/CHANGELOG/contradictions/superseded banners) | P2 | M | 051 | DONE (executed 2026-09-28 on `advisor/059-docs-sweep`; verified: 006-links 0/0/0, superseded 8+2, ProofSection 1, CHANGELOG dated entry, `npm test` exit 0; merged to `master` as `89b4b0f`; archived to `plans/archive/059-docs-truth-sweep.md`) |

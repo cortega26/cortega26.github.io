@@ -27,6 +27,8 @@ No test framework: each suite is a standalone Node script, so run one with `node
 2. Build-output checks: `tests/run.js --built` and `tests/sitemap-i18n.mjs`. These read `dist/`, so run `npm run build` first.
 3. Playwright: `tests/htw-snapshot.mjs` (heading snapshot, baselines in `tests/snapshots/`) and `tests/behavioral.mjs` (form + filters; starts its own preview server).
 
+Worktree builds: copy the gitignored `.env` (`PUBLIC_GA4_MEASUREMENT_ID`) into the worktree before building — without it the build omits the inline GA4 stub and the two legacy `form_*` behavioral cases fail.
+
 ## Architecture
 
 - **Routes:** `src/pages/`. `src/data/routes.ts` is the canonical route registry and the source of the hreflang alternates. Add new pages there too. The root `/` is a language gateway: returning visitors with a stored preference are forwarded, and first-time visitors choose a language.

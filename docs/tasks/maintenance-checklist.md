@@ -108,3 +108,12 @@ How: at each review date (first: `2026-11-15`), run the Search Console review
 and apply the decision matrix. If Search Console is still not verified, record
 `BLOCKED` with the date — never estimate impressions.
 
+## 8. Formspree abuse controls (operator)
+
+Mark: `OPERATOR`. Where: Formspree dashboard → the intake form's project
+settings. How: keep provider-side spam controls enabled — the `_gotcha`
+honeypot is already shipped in `IntakeForm.astro`; add rate limiting and/or
+duplicate suppression in the provider UI. The repo deliberately implements no
+server-side rate limiting (it belongs to the provider). Review quarterly or
+after any spam wave.
+

@@ -93,7 +93,7 @@ const breadcrumbJsonLd = {
   ],
 };
 ---
-<BaseLayout title={c.title} description={c.description} lang={lang} canonical={canonical} alternates={alternates}>
+<BaseLayout title={c.title} description={c.description} lang={lang} canonical={canonical} alternates={alternates} hasForm>
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />

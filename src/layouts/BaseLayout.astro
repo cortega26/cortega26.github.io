@@ -9,6 +9,7 @@ interface Props {
   ogImage?: string;
   robots?: string;
   alternates?: { hreflang: string; href: string }[];
+  hasForm?: boolean;
 }
 
 const defaultAlternates = alternatesFor('home');
@@ -23,6 +24,7 @@ const {
     : 'https://tooltician.com/assets/images/og-card.png',
   robots = 'index, follow',
   alternates = defaultAlternates,
+  hasForm = false,
 } = Astro.props;
 
 const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
@@ -46,9 +48,8 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
   <!-- Mobile browser chrome -->
   <meta name="theme-color" content="#0b1121" />
 
-  <!-- Self-hosted fonts — preload critical files first (Archivo 700 = H1/LCP element) -->
+  <!-- Self-hosted fonts — preload only the LCP font (Archivo 700 = H1/LCP element); JetBrains Mono is discovered from CSS (font-display: swap) -->
   <link rel="preload" href="/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="/fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -82,7 +83,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
   <link rel="me" href="https://www.linkedin.com/in/cortega26" />
 
   <!-- Third-party preconnects -->
-  <link rel="preconnect" href="https://formspree.io" />
+  {hasForm && <link rel="preconnect" href="https://formspree.io" />}
   {ga4Id && <script is:inline src="/assets/js/analytics-guard.js" data-ga4-id={ga4Id}></script>}
   {ga4Id && (
     <>

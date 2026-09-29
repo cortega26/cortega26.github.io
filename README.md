@@ -45,7 +45,7 @@ Astro static site (`output: 'static'`, config in `astro.config.mjs`):
 - `src/styles/` — `global.css` design system
 - `public/` — static assets: favicons, `fonts/`, `assets/js`, `assets/images`, `llms.txt`, `CNAME` (custom-domain binding)
 - `scripts/` — `fetch-github-stats.js` (build-time stats), `check-links-seo.js` (link/SEO audit), `generate-og.mjs`
-- `tests/` — `run.js` source + built-output checks; `test-htw-snapshot.mjs` snapshot test at the repo root
+- `tests/` — `run.js` source + built-output checks; `tests/htw-snapshot.mjs` snapshot test at the repo root
 - `dist/` — build output, gitignored (what gets published)
 
 ## Local development

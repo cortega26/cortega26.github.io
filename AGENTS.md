@@ -25,7 +25,7 @@ Static Astro 7 site (`output: 'static'`), bilingual EN/ES, published at `tooltic
 No test framework: each suite is a standalone Node script, so run one with `node <file>`. `npm test` chains them with `&&` and stops at the first failure:
 1. Source checks: `tests/run.js`, then `tests/*.mjs` (analytics guard/funnel/intake attribution, case-study invariants, root language decision, script guards).
 2. Build-output checks: `tests/run.js --built` and `tests/sitemap-i18n.mjs`. These read `dist/`, so run `npm run build` first.
-3. Playwright: `test-htw-snapshot.mjs` (heading snapshot, baselines in `tests/snapshots/`) and `test-behavioral.mjs` (form + filters; starts its own preview server).
+3. Playwright: `tests/htw-snapshot.mjs` (heading snapshot, baselines in `tests/snapshots/`) and `tests/behavioral.mjs` (form + filters; starts its own preview server).
 
 ## Architecture
 
@@ -42,11 +42,17 @@ GitHub Pages can't set response headers, so the CSP and other security headers a
 
 ## `support/` subproject
 
-`support/` is a separate Astro app that shares the root `package.json`. Use the `support:*` scripts (`support:dev`, `support:verify`, `support:e2e`, …), which pass `--root support`. It is not covered by `npm test`.
+`support/` is a separate Astro app that shares the root `package.json`. Use the `support:*` scripts (`support:dev`, `support:verify`, `support:e2e`, …), which pass `--root support`. It is not covered by `npm test`, and has its own `support/generate-og.mjs` (distinct from `scripts/generate-og.mjs`).
+
+## Non-obvious files (do not delete as orphans)
+
+- `public/badge*.svg` + `scripts/update-badges.sh`: "Part of Tooltician" badges embedded by other repositories.
+- `public/google*.html`: Search Console verification.
+- `.agents/skills/` (symlinked from `.claude/skills/`) is locked by `skills-lock.json`; `.mcp.json` and `.vscode/mcp.json` configure the same CodeGraph server for different clients.
 
 ## Docs
 
-`docs/CHANGELOG.md`; `docs/content-audit/` (nomenclature enforces canonical product names; check it before writing copy); `docs/tasks/` (backlog, scorecards, maintenance checklist).
+`docs/CHANGELOG.md`; `docs/analytics-sprint-0.md` (canonical analytics event schema); `docs/cloudflare-security-headers.md`; `docs/content-audit/` (nomenclature enforces canonical product names; check it before writing copy); `docs/tasks/` (backlog, scorecards, maintenance checklist); `docs/archive/` (historical, don't update). Plans live in `plans/` (`plans/archive/` for landed ones).
 
 ## Code exploration
 

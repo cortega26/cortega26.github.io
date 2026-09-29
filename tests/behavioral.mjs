@@ -4,7 +4,7 @@
 // the pre-008 double-POST (two submit handlers on #contact-form both firing).
 // These tests run against a real preview server with a real browser.
 //
-//   node test-behavioral.mjs   # starts its own preview daemon on a per-run
+//   node tests/behavioral.mjs   # starts its own preview daemon on a per-run
 //                             # port, polls until it serves this worktree's
 //                             # dist byte-for-byte, runs, stops the daemon.
 //

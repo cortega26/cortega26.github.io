@@ -10,7 +10,7 @@ commands), see `plans/ROADMAP.md`.
 > **⚠️ Working-tree state at audit time.** Branch `advisor/b1-test-wiring`
 > (not `master`) with uncommitted changes: a one-line README link fix and a
 > `test` script addition in `package.json` (`node tests/run.js && node
-> tests/run.js --built && node test-htw-snapshot.mjs`), plus untracked
+> tests/run.js --built && node tests/htw-snapshot.mjs`), plus untracked
 > `.codex/`, `.env.example`, `plans/archive/006-ga4-migration-P1P2-fixes-report-2026-08-21.md`.
 > Plans below invoke the `node` entrypoints directly so they work with or
 > without the uncommitted `test` script. The `test` script itself is NOT part

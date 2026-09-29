@@ -6,10 +6,15 @@
  * Run: node scripts/generate-og.mjs [--lang=en|es]
  *   en (default) → public/assets/images/og-card.png
  *   es           → public/assets/images/og-card-es.png
+ *
+ * Add --check to verify the rendered pixels match the committed hash in
+ * tests/snapshots/ (CI drift guard: fails when the COPY table changed but the
+ * card was not regenerated).
  */
 
 import { deflateSync } from 'zlib';
-import { writeFileSync, mkdirSync } from 'fs';
+import { createHash } from 'crypto';
+import { writeFileSync, readFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -265,6 +270,31 @@ for (let i = 0; i < 6; i++) {
   fillRect(W - 80 + i * 12, H - 50, 6, 6, ...ACCENT1);
 }
 
+// ── Pixel hash + --check drift guard ─────────────────────────────────────────
+
+const pixelHash = createHash('sha256').update(pixels).digest('hex');
+const HASH_PATH = join(ROOT, `tests/snapshots/og-card${LANG === 'es' ? '-es' : ''}.sha256`);
+
+if (process.argv.includes('--check')) {
+  let stored = '';
+  try {
+    stored = readFileSync(HASH_PATH, 'utf8').trim();
+  } catch {
+    /* missing hash file */
+  }
+  if (!stored) {
+    console.error(`✗ ${HASH_PATH} missing — run: node scripts/generate-og.mjs --lang=${LANG}`);
+    process.exit(1);
+  }
+  if (stored !== pixelHash) {
+    console.error(`✗ OG card (${LANG}) drifted: rendered pixels differ from the committed hash.`);
+    console.error(`  Re-run: node scripts/generate-og.mjs --lang=${LANG} and commit the PNG + hash.`);
+    process.exit(1);
+  }
+  console.log(`✓ OG card (${LANG}) pixels match the committed hash`);
+  process.exit(0);
+}
+
 // ── PNG encode ────────────────────────────────────────────────────────────────
 
 function crc32(buf) {
@@ -326,4 +356,6 @@ const png = Buffer.concat([
 
 mkdirSync(join(ROOT, 'public/assets/images'), { recursive: true });
 writeFileSync(OUT, png);
+mkdirSync(dirname(HASH_PATH), { recursive: true });
+writeFileSync(HASH_PATH, `${pixelHash}\n`);
 console.log(`✓ OG card written: ${OUT} (${(png.length / 1024).toFixed(1)} KB)`);

@@ -1,8 +1,8 @@
 # Build output
 dist/
 .astro/
-.agents/
-.claude/
+.claude/*
+!.claude/skills/
 .codex/
 .continue/
 
@@ -34,9 +34,7 @@ Thumbs.db
 test-results/
 .playwright-cli/
 output/
+.wrangler/
 
 # Local AI indexing
 .codegraph/
-
-#Internal
-Tooltician-audit.html

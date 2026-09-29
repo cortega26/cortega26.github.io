@@ -12,9 +12,9 @@ plan stands.
   `34b9bec`), **051** (merged as `097e03f`), **052** (merged as `dc0bebc`),
   **053** (merged as `1768dc0`), **054** (merged as `b21c589`), **056**
   (merged as `6683f0d`), **057** (merged as `bd2f979`), **058** (merged as
-  `08f997a`), **059** (merged as `89b4b0f`), **060** (merged as `6a589e7`)
-  and **061** (merged as `a4350d8`) are DONE and archived; **2 plans remain
-  TODO in `plans/`** — 062, 063.
+  `08f997a`), **059** (merged as `89b4b0f`), **060** (merged as `6a589e7`),
+  **061** (merged as `a4350d8`) and **062** (merged as `d8df508`) are DONE
+  and archived; **1 plan remains TODO in `plans/`** — 063.
 - **Completed history (001–041 + wave 1 + 043 + 051 + 052 + 059):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
@@ -271,11 +271,11 @@ counts), not prose.
 | 059 | Docs truth sweep | 5 | P2 | M | DONE (archived) | 006-links 0, superseded 8+2, npm test 0; merged as `89b4b0f` |
 | 060 | run.js quality | 5 | P3 | M | DONE (archived) | 15 skips converted, readRequired, S0 dedupe; src 248/248, built 516/516, npm test 0; merged as `6a589e7` |
 | 061 | OG card spike | 6 | P2 | M | DONE (archived) | checkpoint approved; ES card + 9 glyphs, src 451/451, built 482/482, og:image per locale, npm test 0; merged as `a4350d8` |
-| 062 | About trajectory | 6 | P3 | S | TODO | |
+| 062 | About trajectory | 6 | P3 | S | DONE (archived) | checkpoint approved; 3 PDF-sourced milestones + `profile_click`; src 250/250, built 519/519, vm 85/85, npm test 0; merged as `d8df508` |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **21/23 DONE** (20 archived from this series + `041` from the
-harvest series) · 0 IN PROGRESS · 0 BLOCKED · **2 TODO**, all in `plans/`.
+Progress: **22/23 DONE** (21 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **1 TODO**, in `plans/`.
 DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes

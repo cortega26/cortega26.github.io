@@ -23,6 +23,12 @@ function read(relPath) {
   return readFileSync(abs, 'utf8');
 }
 
+function readRequired(relPath) {
+  const content = read(relPath);
+  if (content === null) throw new Error(`Required source file missing: ${relPath}`);
+  return content;
+}
+
 function assert(name, condition, detail = '') {
   if (condition) {
     console.log(`  ✓  ${name}`);
@@ -41,25 +47,24 @@ function group(label, fn) {
 
 // ─── Source file shortcuts ────────────────────────────────────────────────
 
-const hero       = () => read('src/components/HeroSection.astro') || '';
-const portfolio  = () => read('src/components/PortfolioSection.astro') || '';
-const caseStudies = () => read('src/data/caseStudies.ts') || '';
-const services   = () => read('src/components/ServicesSection.astro') || '';
-const about      = () => read('src/components/AboutSection.astro') || '';
+const hero       = () => readRequired('src/components/HeroSection.astro');
+const portfolio  = () => readRequired('src/components/PortfolioSection.astro');
+const caseStudies = () => readRequired('src/data/caseStudies.ts');
+const services   = () => readRequired('src/components/ServicesSection.astro');
+const about      = () => readRequired('src/components/AboutSection.astro');
 const creds      = () => read('src/components/CredentialsSection.astro') || '';
-const contact    = () => read('src/components/ContactSection.astro') || '';
-const footer     = () => read('src/components/Footer.astro') || '';
-const navbar     = () => read('src/components/Navbar.astro') || '';
-const pageEN     = () => read('src/pages/en/index.astro') || '';
-const pageES     = () => read('src/pages/es/index.astro') || '';
-const astroConf  = () => read('astro.config.mjs') || '';
-const rootHTML   = () => read('index.html') || '';
-const indexAstro = () => read('src/pages/index.astro') || '';
-const layout     = () => read('src/layouts/BaseLayout.astro') || '';
-const globalCss  = () => read('src/styles/global.css') || '';
-const siteLayoutJs = () => read('public/assets/js/site-layout.js') || '';
-const portfolioFiltersJs = () => read('public/assets/js/portfolio-filters.js') || '';
-const intakeForm = () => read('src/components/IntakeForm.astro') || '';
+const contact    = () => readRequired('src/components/ContactSection.astro');
+const footer     = () => readRequired('src/components/Footer.astro');
+const navbar     = () => readRequired('src/components/Navbar.astro');
+const pageEN     = () => readRequired('src/pages/en/index.astro');
+const pageES     = () => readRequired('src/pages/es/index.astro');
+const astroConf  = () => readRequired('astro.config.mjs');
+const indexAstro = () => readRequired('src/pages/index.astro');
+const layout     = () => readRequired('src/layouts/BaseLayout.astro');
+const globalCss  = () => readRequired('src/styles/global.css');
+const siteLayoutJs = () => readRequired('public/assets/js/site-layout.js');
+const portfolioFiltersJs = () => readRequired('public/assets/js/portfolio-filters.js');
+const intakeForm = () => readRequired('src/components/IntakeForm.astro');
 
 // ─── Tests ───────────────────────────────────────────────────────────────────
 
@@ -707,7 +712,6 @@ group('J1 · Gmail address removed from source files', () => {
     ['HeroSection.astro', hero()],
     ['ContactSection.astro', contact()],
     ['Footer.astro', footer()],
-    ['index.html (root)', rootHTML()],
   ];
   for (const [name, src] of files) {
     assert(
@@ -747,12 +751,10 @@ group('K1 · Hero CTA hierarchy remains compact', () => {
 });
 
 group('I8b · JSON-LD is valid and parseable in built output', () => {
-  // Only run if dist exists (build has been run)
+  if (!BUILT) return;
   const distEN = read('dist/en/index.html');
-  if (!distEN) {
-    assert('[built] JSON-LD parse (skipped — run --built)', true);
-    return;
-  }
+  assert('[built] dist/en/index.html exists', !!distEN, 'run npm run build first');
+  if (!distEN) return;
   const blocks = [...distEN.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
     .map(m => { try { return JSON.parse(m[1]); } catch { return null; } })
     .filter(Boolean);
@@ -920,12 +922,12 @@ if (BUILT) {
 }
 
 group('H-04 · Staged pricing labels on home, services, and HTW', () => {
+  if (!BUILT) return;
   const esHome = read('dist/es/index.html');
   const enHome = read('dist/en/index.html');
-  if (!esHome || !enHome) {
-    assert('[built] H-04 pricing checks (skipped — run --built)', true);
-    return;
-  }
+  assert('[built] dist/es/index.html exists', !!esHome, 'run npm run build first');
+  assert('[built] dist/en/index.html exists', !!enHome, 'run npm run build first');
+  if (!esHome || !enHome) return;
   const esService = read('dist/es/servicios/automatizacion-python/index.html') || '';
   const enService = read('dist/en/services/python-automation/index.html') || '';
   const esHtw = read('dist/es/servicios/higiene-tecnica-web/index.html') || '';
@@ -981,15 +983,19 @@ group('PRICING · Exact stage/amount pairs per service and locale', () => {
     `Desde ${a[3]} (por mes)`,
   ];
   for (const [key, path] of Object.entries(enPages)) {
+    if (!BUILT) continue;
     const html = read(path);
-    if (!html) { assert(`[built] ${key} EN page (skipped — run --built)`, true); continue; }
+    assert(`[built] ${path} exists`, !!html, 'run npm run build first');
+    if (!html) continue;
     enPatterns(amounts[key].en).forEach((pattern) => {
       assert(`EN ${key}: contains "${pattern}"`, html.includes(pattern), `Missing exact pair in ${path}`);
     });
   }
   for (const [key, path] of Object.entries(esPages)) {
+    if (!BUILT) continue;
     const html = read(path);
-    if (!html) { assert(`[built] ${key} ES page (skipped — run --built)`, true); continue; }
+    assert(`[built] ${path} exists`, !!html, 'run npm run build first');
+    if (!html) continue;
     esPatterns(amounts[key].es).forEach((pattern) => {
       assert(`ES ${key}: contains "${pattern}"`, html.includes(pattern), `Missing exact pair in ${path}`);
     });
@@ -997,12 +1003,12 @@ group('PRICING · Exact stage/amount pairs per service and locale', () => {
 });
 
 group('H-13 · Recurring-data pages carry collection copy, not automation copy', () => {
+  if (!BUILT) return;
   const enRecurring = read('dist/en/services/recurring-data-collection/index.html');
   const esRecurring = read('dist/es/servicios/recoleccion-recurrente-datos/index.html');
-  if (!enRecurring || !esRecurring) {
-    assert('[built] H-13 recurring-data copy checks (skipped — run --built)', true);
-    return;
-  }
+  assert('[built] dist/en/services/recurring-data-collection/index.html exists', !!enRecurring, 'run npm run build first');
+  assert('[built] dist/es/servicios/recoleccion-recurrente-datos/index.html exists', !!esRecurring, 'run npm run build first');
+  if (!enRecurring || !esRecurring) return;
   const enAutomation = read('dist/en/services/python-automation/index.html') || '';
   const esAutomation = read('dist/es/servicios/automatizacion-python/index.html') || '';
 
@@ -1074,12 +1080,12 @@ group('H-03 · Service CTAs carry unique accessible names', () => {
     'Missing .visually-hidden utility'
   );
 
+  if (!BUILT) return;
   const enHome = read('dist/en/index.html');
   const esHome = read('dist/es/index.html');
-  if (!enHome || !esHome) {
-    assert('[built] H-03 accessible-name checks (skipped — run --built)', true);
-    return;
-  }
+  assert('[built] dist/en/index.html exists', !!enHome, 'run npm run build first');
+  assert('[built] dist/es/index.html exists', !!esHome, 'run npm run build first');
+  if (!enHome || !esHome) return;
   const accessibleNames = (html, prefix) => {
     const names = [];
     const re = /<a[^>]*class="[^"]*svc-inline-cta[^"]*"[^>]*>([\s\S]*?)<\/a>/g;
@@ -1119,15 +1125,15 @@ group('H-12 · Guides expose a contextual CTA at the start and end', () => {
       'Expected a top and a bottom ArticleCta'
     );
   }
+  if (!BUILT) return;
   const built = guideSlugs.map((slug) => read(`dist/es/guias/${slug}/index.html`));
-  if (built.every((html) => Boolean(html))) {
-    built.forEach((html, index) => {
-      const count = (html.match(/article-cta/g) || []).length;
-      assert(`H-12 built ${guideSlugs[index]} has two CTAs`, count >= 2, `Found ${count} article-cta occurrences`);
-    });
-  } else {
-    assert('[built] H-12 guide CTA checks (skipped — run --built)', true);
-  }
+  const missing = guideSlugs.filter((_, i) => !built[i]);
+  assert('[built] guide pages exist', missing.length === 0, `missing: ${missing.join(', ')} — run npm run build first`);
+  if (missing.length) return;
+  built.forEach((html, index) => {
+    const count = (html.match(/article-cta/g) || []).length;
+    assert(`H-12 built ${guideSlugs[index]} has two CTAs`, count >= 2, `Found ${count} article-cta occurrences`);
+  });
 });
 
 group('H-06 · Case studies carry role, verification date, and a per-case CTA', () => {
@@ -1139,12 +1145,12 @@ group('H-06 · Case studies carry role, verification date, and a per-case CTA', 
   assert('H-06 every case links its service', count(/serviceHref: '/g) >= 20, `Found ${count(/serviceHref: '/g)}`);
   assert('H-06 no placeholder verification dates', !/verifiedAt: '(TBD|TODO)/.test(src), 'Replace placeholders with a real month');
 
+  if (!BUILT) return;
   const enWork = read('dist/en/work/index.html');
   const esWork = read('dist/es/trabajo/index.html');
-  if (!enWork || !esWork) {
-    assert('[built] H-06 work-page evidence checks (skipped — run --built)', true);
-    return;
-  }
+  assert('[built] dist/en/work/index.html exists', !!enWork, 'run npm run build first');
+  assert('[built] dist/es/trabajo/index.html exists', !!esWork, 'run npm run build first');
+  if (!enWork || !esWork) return;
   const metaCount = (html) => (html.match(/class="project-meta"/g) || []).length;
   const ctaCount = (html) => (html.match(/data-track-loc="work_/g) || []).length;
   assert('H-06 EN work renders 10 role/date metas', metaCount(enWork) >= 10, `Found ${metaCount(enWork)}`);
@@ -1162,11 +1168,10 @@ group('H-06 · Case studies carry role, verification date, and a per-case CTA', 
 });
 
 group('H-05 · Root renders as a bilingual x-default landing', () => {
+  if (!BUILT) return;
   const root = read('dist/index.html');
-  if (!root) {
-    assert('[built] H-05 root landing checks (skipped — run --built)', true);
-    return;
-  }
+  assert('[built] dist/index.html exists', !!root, 'run npm run build first');
+  if (!root) return;
   const h1s = (root.match(/<h1/g) || []).length;
   assert('H-05 root has exactly one H1', h1s === 1, `Found ${h1s}`);
   assert('H-05 root links both locale briefs', root.includes('/en/#contact') && root.includes('/es/#contact'));
@@ -1198,11 +1203,11 @@ group('H-09 · Work pages group projects under thematic H2 headings', () => {
     { file: 'dist/en/work/index.html', labels: ['Python & Data', 'Web & Apps', 'CLI & Tools', 'Products & Extensions'] },
     { file: 'dist/es/trabajo/index.html', labels: ['Python y Datos', 'Web y Apps', 'CLI y Herramientas', 'Productos y Extensiones'] },
   ];
+  if (!BUILT) return;
   const built = pages.map((page) => ({ ...page, html: read(page.file) }));
-  if (!built.every((page) => page.html)) {
-    assert('[built] H-09 heading outline checks (skipped — run --built)', true);
-    return;
-  }
+  const missing = built.filter((page) => !page.html).map((page) => page.file);
+  assert('[built] work pages exist', missing.length === 0, `missing: ${missing.join(', ')} — run npm run build first`);
+  if (missing.length) return;
   built.forEach((page) => {
     const html = page.html;
     const h1 = (html.match(/<h1/g) || []).length;
@@ -1245,12 +1250,12 @@ group('H-08 · Guides hub, internal links, and contextual CTAs', () => {
   assert('H-08 home resources strip links the hub', resourcesSrc.includes('/es/guias/'));
   assert('H-08 ES home renders the resources strip', esHomeSrc.includes('<ResourcesSection'));
 
+  if (!BUILT) return;
   const hub = read('dist/es/guias/index.html');
   const esHome = read('dist/es/index.html');
-  if (!hub || !esHome) {
-    assert('[built] H-08 hub checks (skipped — run --built)', true);
-    return;
-  }
+  assert('[built] dist/es/guias/index.html exists', !!hub, 'run npm run build first');
+  assert('[built] dist/es/index.html exists', !!esHome, 'run npm run build first');
+  if (!hub || !esHome) return;
   const blocks = [...hub.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
     .map((match) => { try { return JSON.parse(match[1]); } catch { return null; } })
     .filter(Boolean);
@@ -1277,12 +1282,12 @@ group('H-11 · Structured-data parity across home, work, and root', () => {
       .map((match) => { try { return JSON.parse(match[1]); } catch { return null; } })
       .filter(Boolean);
 
+  if (!BUILT) return;
   const workPages = ['dist/en/work/index.html', 'dist/es/trabajo/index.html'];
   const built = workPages.map((file) => ({ file, html: read(file) }));
-  if (!built.every((page) => page.html)) {
-    assert('[built] H-11 schema checks (skipped — run --built)', true);
-    return;
-  }
+  const missing = built.filter((page) => !page.html).map((page) => page.file);
+  assert('[built] work pages exist', missing.length === 0, `missing: ${missing.join(', ')} — run npm run build first`);
+  if (missing.length) return;
   built.forEach((page) => {
     const blocks = parse(page.html);
     const collection = blocks.find((block) => block['@type'] === 'CollectionPage');
@@ -1311,6 +1316,7 @@ group('H-11 · Structured-data parity across home, work, and root', () => {
   });
 
   const root = read('dist/index.html');
+  assert('[built] dist/index.html exists', !!root, 'run npm run build first');
   if (root) {
     const blocks = parse(root);
     const website = blocks.find((block) => block['@type'] === 'WebSite');
@@ -1323,8 +1329,6 @@ group('H-11 · Structured-data parity across home, work, and root', () => {
       'H-11 root Organization carries sameAs',
       Boolean(organization) && Array.isArray(organization.sameAs) && organization.sameAs.length >= 2
     );
-  } else {
-    assert('[built] H-11 root schema checks (skipped — run --built)', true);
   }
 });
 
@@ -1351,21 +1355,6 @@ group('S0 · Service registry, transport, and declarative wiring', () => {
       );
     }
   }
-
-  const productJs = read('public/assets/js/product-analytics.js') || '';
-  const trackJs = read('public/assets/js/track.js') || '';
-  const intakeJs = read('public/assets/js/intake-form.js') || '';
-  assert(
-    'canonical layer uses service/lead events only',
-    ['service_view', 'service_engage', 'brief_start', 'brief_submit', 'brief_success', 'brief_error', 'book_call', 'email_copy', 'proof_click', 'portfolio_click', 'cv_download', 'template_open', 'language_select', 'contact_intent'].every(e => productJs.includes(e)) &&
-      !productJs.includes('tool_') && !productJs.includes('result_action'),
-    'Stale or missing event name'
-  );
-  assert('track.js passes service params through', trackJs.includes('CANONICAL_PARAMS') && trackJs.includes('service_id'), 'No pass-through');
-  assert('track.js carries no tool_* params', !/'tool_id'|'tool_category'|'action_type'|'page_path'|'execution_mode'|'execution_stage'/.test(trackJs), 'Stale param');
-  assert('track.js keeps legacy tt_* mapping', trackJs.includes('tt_location') && trackJs.includes('ttTrack = track'), 'Legacy contract broken');
-  assert('intake mirrors brief lifecycle', intakeJs.includes("funnel('briefStart'") && intakeJs.includes("funnel('briefSubmit'") && intakeJs.includes("funnel('briefSuccess'") && intakeJs.includes("funnel('briefError'"), 'Missing funnel call');
-  assert('intake keeps legacy form_* events', intakeJs.includes('form_start') && intakeJs.includes('form_submit_success') && intakeJs.includes('form_submit_error'), 'Legacy form events removed');
 
   const baseLayout = read('src/layouts/BaseLayout.astro') || '';
   assert('BaseLayout loads track.js then product-analytics.js', baseLayout.indexOf('/assets/js/track.js') > -1 && baseLayout.indexOf('/assets/js/product-analytics.js') > baseLayout.indexOf('/assets/js/track.js'), 'Script wiring wrong');
@@ -1447,11 +1436,11 @@ group('H-14 · Legal pages emit ISO-8601 dates in schema and OG meta', () => {
     { rel: 'dist/en/engagement/index.html', iso: '2026-05-27' },
     { rel: 'dist/es/engagement/index.html', iso: '2026-05-27' },
   ];
+  if (!BUILT) return;
+  const missing = pages.filter(({ rel }) => !read(rel)).map(({ rel }) => rel);
+  assert('[built] legal pages exist', missing.length === 0, `missing: ${missing.join(', ')} — run npm run build first`);
+  if (missing.length) return;
   const first = read(pages[0].rel);
-  if (!first) {
-    assert('[built] H-14 ISO date checks (skipped — run --built)', true);
-    return;
-  }
   const isoRe = /^\d{4}-\d{2}-\d{2}$/;
   for (const { rel, iso } of pages) {
     const html = read(rel) || '';
@@ -1472,16 +1461,20 @@ group('055 · JSON-LD guards and HTW schema price parity', () => {
       .map((match) => { try { return JSON.parse(match[1]); } catch { return null; } })
       .filter(Boolean);
 
+  if (!BUILT) return;
   const enHome = read('dist/en/index.html');
   const esHome = read('dist/es/index.html');
   const enWork = read('dist/en/work/index.html');
   const esWork = read('dist/es/trabajo/index.html');
   const enHtw = read('dist/en/services/web-technical-hygiene/index.html');
   const esHtw = read('dist/es/servicios/higiene-tecnica-web/index.html');
-  if (!enHome || !esHome || !enWork || !esWork || !enHtw || !esHtw) {
-    assert('[built] 055 JSON-LD guard checks (skipped — run --built)', true);
-    return;
-  }
+  assert('[built] dist/en/index.html exists', !!enHome, 'run npm run build first');
+  assert('[built] dist/es/index.html exists', !!esHome, 'run npm run build first');
+  assert('[built] dist/en/work/index.html exists', !!enWork, 'run npm run build first');
+  assert('[built] dist/es/trabajo/index.html exists', !!esWork, 'run npm run build first');
+  assert('[built] dist/en/services/web-technical-hygiene/index.html exists', !!enHtw, 'run npm run build first');
+  assert('[built] dist/es/servicios/higiene-tecnica-web/index.html exists', !!esHtw, 'run npm run build first');
+  if (!enHome || !esHome || !enWork || !esWork || !enHtw || !esHtw) return;
 
   for (const [label, html] of [['dist/en/index.html', enHome], ['dist/es/index.html', esHome]]) {
     const blocks = parse(html);

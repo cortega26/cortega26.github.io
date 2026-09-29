@@ -5,7 +5,7 @@
  * Run: node tests/run.js --built    (source + dist output checks)
  */
 
-import { readFileSync, existsSync, statSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
@@ -648,16 +648,38 @@ group('I4 · Root is a bilingual x-default landing', () => {
   );
 });
 
-group('I5–I6 · OG card exists', () => {
-  const ogPath = join(ROOT, 'public/assets/images/og-card.png');
-  const exists = existsSync(ogPath);
-  assert('public/assets/images/og-card.png exists', exists);
-  if (exists) {
-    const size = statSync(ogPath).size;
+// Drift note: OG copy lives in scripts/generate-og.mjs (COPY table). Any copy
+// change must be followed by regenerating both cards:
+//   node scripts/generate-og.mjs --lang=en && node scripts/generate-og.mjs --lang=es
+group('I5–I6 · OG cards exist (EN + ES)', () => {
+  for (const file of ['og-card.png', 'og-card-es.png']) {
+    const ogPath = join(ROOT, 'public/assets/images', file);
+    const exists = existsSync(ogPath);
+    assert(`public/assets/images/${file} exists`, exists);
+    if (exists) {
+      const buf = readFileSync(ogPath);
+      const isPng =
+        buf.length > 8 && buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47;
+      assert(`${file} is a PNG`, isPng, 'missing PNG signature');
+      assert(
+        `${file} has meaningful size (> 5000 bytes)`,
+        buf.length > 5000,
+        `File too small: ${buf.length} bytes — may be an empty or corrupt PNG`
+      );
+    }
+  }
+  if (BUILT) {
+    const enHome = read('dist/en/index.html') || '';
+    const esHome = read('dist/es/index.html') || '';
     assert(
-      'og-card.png has meaningful size (> 5000 bytes)',
-      size > 5000,
-      `File too small: ${size} bytes — may be an empty or corrupt PNG`
+      '[built] EN pages reference og-card.png',
+      enHome.includes('assets/images/og-card.png') && !enHome.includes('og-card-es.png'),
+      'EN home does not reference the EN card (or leaks the ES card)'
+    );
+    assert(
+      '[built] ES pages reference og-card-es.png',
+      esHome.includes('assets/images/og-card-es.png'),
+      'ES home does not reference og-card-es.png'
     );
   }
 });

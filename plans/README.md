@@ -249,7 +249,7 @@ plans stay in `plans/`.**
 | 058 | Perf hygiene: preload/logo/preconnect + compositor scroll bar | P2 | S | — | TODO |
 | 059 | Docs truth sweep (CLAUDE/README/CHANGELOG/contradictions/superseded banners) | P2 | M | 051 | DONE (executed 2026-09-28 on `advisor/059-docs-sweep`; verified: 006-links 0/0/0, superseded 8+2, ProofSection 1, CHANGELOG dated entry, `npm test` exit 0; merged to `master` as `89b4b0f`; archived to `plans/archive/059-docs-truth-sweep.md`) |
 | 060 | `tests/run.js` quality: fail on missing reads, drop vacuous built skips, dedupe S0 | P3 | M | — | TODO |
-| 061 | OG card spike: one copy source + ES variant | P2 | M | — | TODO |
+| 061 | OG card spike: one copy source + ES variant | P2 | M | — | DONE (executed 2026-09-28 on `advisor/061-og-card`, base `e145471`; spike + maintainer checkpoint approved in session: canonical positioning kept, ES mirrors EN layout, per-locale asset shipped; verified: check 0/0/0, src 436/436, built 467/467, funnel 82/82, intake 16/16, caseStudies 85/85, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, built EN/ES og:image correct per locale, stats untouched; deviations: new `docs/tasks/og-card-decision.md` (in scope) records the inventory/decision, and the generator gained the 9 Spanish glyphs with `--lang=en|es`; awaiting merge) |
 | 062 | About trajectory proposal (employer route; decision-gated design) | P3 | S | — | TODO |
 | 063 | Backlink execution runbook (plan-019 pass) | P3 | S | — | TODO |
 

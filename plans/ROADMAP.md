@@ -11,9 +11,9 @@ plan stands.
   (merged as `c6e513c`), **048** (merged as `9bdfcf3`), **050** (merged as
   `34b9bec`), **051** (merged as `097e03f`), **052** (merged as `dc0bebc`),
   **053** (merged as `1768dc0`), **054** (merged as `b21c589`), **057**
-  (merged as `bd2f979`), **059** (merged as `89b4b0f`) and **061** (merged as
-  `a4350d8`) are DONE and archived; **5 plans remain TODO in `plans/`** —
-  056, 058, 060, 062, 063.
+  (merged as `bd2f979`), **058** (merged as `08f997a`), **059** (merged as
+  `89b4b0f`) and **061** (merged as `a4350d8`) are DONE and archived;
+  **4 plans remain TODO in `plans/`** — 056, 060, 062, 063.
 - **Completed history (001–041 + wave 1 + 043 + 051 + 052 + 059):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
@@ -257,7 +257,7 @@ counts), not prose.
 | 055 | JSON-LD hardening | 1 | P1 | S | DONE (archived) | check 0/0/0, src 361/361, built 390/390, npm test 0; HTW schema prices correct; merged as `df877ab` |
 | 046 | Above-fold reveal | 2 | P1 | S | DONE (archived) | src 401/401, built 430/430; merged as `4ba60a6` |
 | 050 | Intake hardening | 2 | P1 | M | DONE (archived) | check 0/0/0, src 434/434, built 463/463, funnel 82/82, behavioral PASS 0; deviation: hidden-input premise falsified — `defaultValue` kept as belt-and-braces; merged as `34b9bec` |
-| 058 | Perf hygiene | 2 | P2 | S | TODO | |
+| 058 | Perf hygiene | 2 | P2 | S | DONE (archived) | check 0/0/0, src 456/456, built 490/490, HTW no diff, behavioral PASS, CSP MATCH, npm test 0; merged as `08f997a` |
 | 043 | CSP production integrity | 3 | P1 | M | DONE (archived) | hash 30/30, check 0/0/0, src 361/361, built 390/390, npm test 0; merged as `af2f47b`, live Step 7 applied |
 | 047 | CI hardening | 3 | P1 | S | DONE (archived) | perms+cache, src 361/361; merged as `c6e513c` |
 | 051 | Test hygiene | 3 | P1 | S | DONE (archived) | drift clean, src 361/361, built 390/390, funnel 82/82; merged as `097e03f` |
@@ -273,8 +273,8 @@ counts), not prose.
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **18/23 DONE** (17 archived from this series + `041` from the
-harvest series) · 0 IN PROGRESS · 0 BLOCKED · **5 TODO**, all in `plans/`.
+Progress: **19/23 DONE** (18 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **4 TODO**, all in `plans/`.
 DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes

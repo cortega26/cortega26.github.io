@@ -1,6 +1,5 @@
 (() => {
   const languagePreferenceKey = 'tooltician-language';
-  const firstVisitRedirectKey = 'tooltician-language-autoredirect';
 
   document.querySelectorAll('[data-language-preference]').forEach((link) => {
     link.addEventListener('click', () => {
@@ -9,7 +8,6 @@
 
       try {
         window.localStorage.setItem(languagePreferenceKey, preference);
-        window.localStorage.setItem(firstVisitRedirectKey, '1');
       } catch {
         // Ignore storage failures and keep normal navigation.
       }

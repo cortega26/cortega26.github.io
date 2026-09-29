@@ -7,7 +7,7 @@
  *
  *   service_view / service_engage
  *   brief_start / brief_submit / brief_success / brief_error
- *   book_call / email_copy / proof_click / portfolio_click / cv_download
+ *   book_call / email_copy / proof_click / portfolio_click / profile_click / cv_download
  *   template_open / language_select / contact_intent (generic fallback)
  *
  * Transport stays in track.js (window.ttTrack, queued until gtag is ready).
@@ -37,6 +37,7 @@
   };
 
   const CONTACT_TYPES = ['send_brief', 'email'];
+  const PROFILE_NETWORKS = ['github', 'linkedin'];
   const ERROR_CATEGORIES = ['validation', 'client', 'server', 'network'];
   const ERROR_STAGES = ['validate', 'submit', 'deliver'];
 
@@ -57,6 +58,7 @@
     email_copy: { required: [], optional: ['service_id', 'service_category'] },
     proof_click: { required: [], optional: ['service_id', 'service_category'] },
     portfolio_click: { required: [], optional: ['service_id', 'service_category'] },
+    profile_click: { required: ['profile_network'], optional: [] },
     cv_download: { required: [], optional: [] },
     template_open: { required: [], optional: ['service_id', 'service_category'] },
     language_select: { required: [], optional: [] },
@@ -163,6 +165,7 @@
       // raw caller input for it is ignored so it can never be forged.
       if (key === 'service_category') return undefined;
       if (key === 'contact_type') return CONTACT_TYPES.indexOf(value) !== -1 ? value : undefined;
+      if (key === 'profile_network') return PROFILE_NETWORKS.indexOf(value) !== -1 ? value : undefined;
       if (key === 'error_category') return ERROR_CATEGORIES.indexOf(value) !== -1 ? value : undefined;
       if (key === 'error_stage') return ERROR_STAGES.indexOf(value) !== -1 ? value : undefined;
       return sanitizeString(value);
@@ -277,6 +280,10 @@
     return emit('portfolio_click', withService({}, serviceId));
   }
 
+  function profileClick(network) {
+    return emit('profile_click', { profile_network: network });
+  }
+
   function cvDownload() {
     return emit('cv_download', {});
   }
@@ -324,7 +331,7 @@
           if (!target) return;
           const el = target.closest(
             '[data-service-engage],[data-book-call],[data-contact-intent],' +
-              '[data-proof-click],[data-portfolio-click],[data-cv-download],' +
+              '[data-proof-click],[data-portfolio-click],[data-profile-link],[data-cv-download],' +
               '[data-template-open],[data-language-select]'
           );
           if (!el || el.hasAttribute('data-no-track')) return;
@@ -349,6 +356,10 @@
             if (!link || !isExternalLink(link)) return;
             if (el.hasAttribute('data-proof-click')) proofClick(serviceIdForElement(link));
             else portfolioClick(serviceIdForElement(link));
+            return;
+          }
+          if (el.hasAttribute('data-profile-link')) {
+            profileClick(el.getAttribute('data-profile-link'));
             return;
           }
           if (el.hasAttribute('data-cv-download')) {
@@ -381,6 +392,7 @@
     emailCopy,
     proofClick,
     portfolioClick,
+    profileClick,
     cvDownload,
     templateOpen,
     languageSelect,
@@ -397,6 +409,7 @@
     SERVICE_REGISTRY,
     EVENTS,
     CONTACT_TYPES,
+    PROFILE_NETWORKS,
     ERROR_CATEGORIES,
     ERROR_STAGES,
     buildParams,

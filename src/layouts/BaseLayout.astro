@@ -18,7 +18,9 @@ const {
   description,
   lang,
   canonical,
-  ogImage = 'https://tooltician.com/assets/images/og-card.png',
+  ogImage = lang === 'es'
+    ? 'https://tooltician.com/assets/images/og-card-es.png'
+    : 'https://tooltician.com/assets/images/og-card.png',
   robots = 'index, follow',
   alternates = defaultAlternates,
 } = Astro.props;

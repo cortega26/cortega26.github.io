@@ -49,15 +49,18 @@ curl -sSI https://tooltician.com | head -n 30
 
 ## 3. OG card
 
-Where: `public/assets/images/og-card.png`, source `scripts/generate-og.mjs`.
-How: after any major copy change, regenerate and spot-check the render:
+Where: `public/assets/images/og-card.png` (EN) and
+`public/assets/images/og-card-es.png` (ES); source `scripts/generate-og.mjs`
+(the `COPY` table). How: after any copy change, regenerate both locales and
+spot-check the renders:
 
 ```sh
-node scripts/generate-og.mjs
+node scripts/generate-og.mjs --lang=en
+node scripts/generate-og.mjs --lang=es
 ```
 
-Confirm the output image exists, has meaningful size, and renders the current
-headline correctly.
+Confirm both images exist, have meaningful size, and render the current
+headline correctly (including Spanish accents).
 
 ## 4. Full gates (all green)
 

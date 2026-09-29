@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 /**
- * Generates public/assets/images/og-card.png using only Node.js built-ins.
+ * Generates the OG social cards using only Node.js built-ins.
  * Design: dark bg (#070d1a), purple-to-teal left accent bar, white text.
  *
- * Run: node scripts/generate-og.mjs
+ * Run: node scripts/generate-og.mjs [--lang=en|es]
+ *   en (default) → public/assets/images/og-card.png
+ *   es           → public/assets/images/og-card-es.png
  */
 
 import { deflateSync } from 'zlib';
@@ -13,7 +15,27 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-const OUT  = join(ROOT, 'public/assets/images/og-card.png');
+
+const langArg = process.argv.find((arg) => arg.startsWith('--lang='));
+const LANG = langArg ? langArg.slice('--lang='.length) : 'en';
+if (LANG !== 'en' && LANG !== 'es') {
+  console.error(`Unknown --lang=${LANG} (expected en or es)`);
+  process.exit(1);
+}
+const OUT = join(ROOT, `public/assets/images/og-card${LANG === 'es' ? '-es' : ''}.png`);
+
+const COPY = {
+  en: {
+    role: 'Operational Systems & Python Automation Consultant',
+    tagline: 'Automation · Data · Tools · Finance · Web · Hygiene',
+    location: 'Santiago, Chile  ·  EN / ES',
+  },
+  es: {
+    role: 'Consultor de Sistemas Operacionales y Automatización Python',
+    tagline: 'Automatización · Datos · Herramientas · Finanzas · Web · Higiene',
+    location: 'Santiago, Chile  ·  ES / EN',
+  },
+};
 
 const W = 1200;
 const H = 630;
@@ -152,6 +174,15 @@ const FONT5 = {
   '&': [0x36,0x49,0x55,0x22,0x50],
   "'": [0x00,0x05,0x03,0x00,0x00],
   '·': [0x00,0x18,0x18,0x00,0x00],
+  'á': [0x20,0x56,0x55,0x54,0x78],
+  'é': [0x38,0x56,0x55,0x54,0x18],
+  'í': [0x00,0x46,0x7d,0x40,0x00],
+  'ó': [0x38,0x46,0x45,0x44,0x38],
+  'ú': [0x3c,0x42,0x41,0x20,0x7c],
+  'ñ': [0x7e,0x09,0x05,0x06,0x78],
+  'ü': [0x3c,0x42,0x40,0x22,0x7c],
+  '¿': [0x30,0x48,0x4d,0x40,0x20],
+  '¡': [0x00,0x00,0x7d,0x00,0x00],
 };
 
 function drawChar(ch, px, py, scale, color) {
@@ -214,12 +245,10 @@ const nameW = textWidth(name, 4);
 drawText(name, LEFT, 180, 4, WHITE);
 
 // Role line — scale 3
-const role = 'Python Automation Consultant';
-drawText(role, LEFT, 260, 3, MUTED);
+drawText(COPY[LANG].role, LEFT, 260, 3, MUTED);
 
 // Tagline — scale 2
-const tag = 'ETL · Scraping · APIs · Automation';
-drawText(tag, LEFT, 330, 2, MUTED.map(v => Math.round(v * 0.7)));
+drawText(COPY[LANG].tagline, LEFT, 330, 2, MUTED.map(v => Math.round(v * 0.7)));
 
 // Divider line
 fillRect(LEFT, 395, 280, 2, ...ACCENT1);
@@ -229,8 +258,7 @@ const domain = 'tooltician.com';
 drawText(domain, LEFT, 420, 3, ACCENT2);
 
 // Location small
-const loc = 'Santiago, Chile  ·  EN / ES';
-drawText(loc, LEFT, 490, 2, MUTED.map(v => Math.round(v * 0.6)));
+drawText(COPY[LANG].location, LEFT, 490, 2, MUTED.map(v => Math.round(v * 0.6)));
 
 // ── Decorative corner dots ────────────────────────────────────────────────────
 for (let i = 0; i < 6; i++) {

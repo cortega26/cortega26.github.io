@@ -220,16 +220,16 @@ docs, direction), every finding re-verified by the advisor against the code
 session report; the vetted table's net-positive items became these 22
 plans. Status authority is this file.
 
-**Progress (deep audit series): 21/22 DONE — wave 1 (042, 044, 045, 049,
+**Progress (deep audit series): 22/22 DONE — wave 1 (042, 044, 045, 049,
 055, merged as `df877ab`), 043 (merged as `af2f47b`, live Step 7 applied
 2026-09-28), 046 (merged as `4ba60a6`), 047 (merged as `c6e513c`), 048
 (merged as `9bdfcf3`), 050 (merged as `34b9bec`), 051 (merged as `097e03f`),
 052 (merged as `dc0bebc`), 053 (merged as `1768dc0`), 054 (merged as
 `b21c589`), 056 (merged as `6683f0d`), 057 (merged as `bd2f979`), 058
 (merged as `08f997a`), 059 (merged as `89b4b0f`), 060 (merged as `6a589e7`),
-061 (merged as `a4350d8`) and 062 (merged as `d8df508`), all archived under
-`plans/archive/`; 041 came from the harvest plan above. The remaining 1 plan
-stays in `plans/`.**
+061 (merged as `a4350d8`), 062 (merged as `d8df508`) and 063 (merged as
+`fa3bcb6`), all archived under `plans/archive/`; 041 came from the harvest
+plan above. No plans remain in `plans/`.**
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
@@ -254,7 +254,7 @@ stays in `plans/`.**
 | 060 | `tests/run.js` quality: fail on missing reads, drop vacuous built skips, dedupe S0 | P3 | M | — | DONE (executed 2026-09-28 on `advisor/060-runjs-quality`, base `e350d13`; verified: 15 vacuous skips converted — 0 remain; `--built` red without `dist/` (61 failures) and green with it; `readRequired` on 17 helpers (Footer rename → non-zero, "Required source file missing"); dead `rootHTML`/J1 entry removed; 6 duplicated S0 pins dropped (post-Step-3 source 254 → 248; Navbar CTA pin kept; funnel 82/82 still proves them); check 0/0/0, src 248/248, built 516/516, caseStudies 85/85, script-guards 9/9, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched; drift note: appended groups from landed 050/057/058/061 accounted for, no cited anchor moved; merged as `6a589e7` (PR #89); archived to `plans/archive/060-runjs-quality.md`) |
 | 061 | OG card spike: one copy source + ES variant | P2 | M | — | DONE (executed 2026-09-28 on `advisor/061-og-card`, base `e145471`; spike + maintainer checkpoint approved in session: canonical positioning kept, ES mirrors EN layout, per-locale asset shipped; verified: check 0/0/0, src 436/436, built 467/467, funnel 82/82, intake 16/16, caseStudies 85/85, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, built EN/ES og:image correct per locale, stats untouched; deviations: new `docs/tasks/og-card-decision.md` (in scope) records the inventory/decision, and the generator gained the 9 Spanish glyphs with `--lang=en|es`; merged as `a4350d8` (PR #86); archived to `plans/archive/061-og-card-refresh.md`) |
 | 062 | About trajectory proposal (employer route; decision-gated design) | P3 | S | — | DONE (executed 2026-09-28 on `advisor/062-employer-route-about`, base `4ac626c`; checkpoint approved in session: 3 PDF-sourced milestones inside About, no 4th proof line, Option B tracking; implemented: EN/ES trajectory block, canonical `profile_click` (github/linkedin) bound to `[data-profile-link]`, Footer stamps, vm suite 85/85 (+3), `tests/run.js` group; strategy TS-007/TS-008 → `Hecho`; verified: check 0/0/0, src 250/250, built 519/519, caseStudies 85/85, script-guards 9/9, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched; merged as `d8df508` (PR #90); archived to `plans/archive/062-employer-route-about.md`) |
-| 063 | Backlink execution runbook (plan-019 pass) | P3 | S | — | DONE (executed 2026-09-28 on `advisor/063-backlink-runbook`, base `7f1085a`; runbook `docs/tasks/backlink-execution-2026-09.md`: UTM convention, all 13 plan-019 targets (10 repos + 2 PyPI + 1 profile; 12 actionable, `tuplatainforma` private), verification and recording steps; strategy TS-015 points at the runbook and stays `Pendiente` until ≥1 attributed referral; verified: check 0/0/0, built 519/519, vm 85/85, script-guards 9/9, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched; awaiting merge) |
+| 063 | Backlink execution runbook (plan-019 pass) | P3 | S | — | DONE (executed 2026-09-28 on `advisor/063-backlink-runbook`, base `7f1085a`; runbook `docs/tasks/backlink-execution-2026-09.md`: UTM convention, all 13 plan-019 targets (10 repos + 2 PyPI + 1 profile; 12 actionable, `tuplatainforma` private), verification and recording steps; strategy TS-015 points at the runbook and stays `Pendiente` until ≥1 attributed referral; verified: check 0/0/0, built 519/519, vm 85/85, script-guards 9/9, HTW no diff both locales, behavioral PASS 0 failures, `npm test` exit 0, stats untouched; merged as `fa3bcb6` (PR #92); archived to `plans/archive/063-backlink-runbook.md`) |
 
 Deep-audit series dependency notes:
 

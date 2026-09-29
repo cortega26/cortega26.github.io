@@ -18,21 +18,36 @@
   const backToTop = document.getElementById('back-to-top');
   const navbar = document.querySelector('.navbar');
 
+  let scrollTotal = 0;
+  const measure = () => {
+    scrollTotal = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  };
+  measure();
+  window.addEventListener('resize', measure, { passive: true });
+  if (typeof ResizeObserver === 'function') {
+    new ResizeObserver(measure).observe(document.documentElement);
+  }
+
+  let ticking = false;
   const onScroll = () => {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
-    if (bar) bar.style.width = `${pct}%`;
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      ticking = false;
+      const pct = scrollTotal > 0 ? Math.min(1, window.scrollY / scrollTotal) : 0;
+      if (bar) bar.style.transform = `scaleX(${pct})`;
 
-    if (backToTop) {
-      const show = window.scrollY > 400;
-      backToTop.classList.toggle('visible', show);
-      if (show) backToTop.removeAttribute('tabindex');
-      else backToTop.setAttribute('tabindex', '-1');
-    }
+      if (backToTop) {
+        const show = window.scrollY > 400;
+        backToTop.classList.toggle('visible', show);
+        if (show) backToTop.removeAttribute('tabindex');
+        else backToTop.setAttribute('tabindex', '-1');
+      }
 
-    if (navbar) {
-      navbar.classList.toggle('scrolled', window.scrollY > 10);
-    }
+      if (navbar) {
+        navbar.classList.toggle('scrolled', window.scrollY > 10);
+      }
+    });
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });

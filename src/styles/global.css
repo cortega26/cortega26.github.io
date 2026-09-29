@@ -148,10 +148,12 @@ ul { list-style: none; }
   top: 0;
   left: 0;
   height: 2px;
-  width: 0%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
   background: var(--clr-accent-2);
   z-index: 9999;
-  transition: width 0.1s linear;
+  transition: transform 0.1s linear;
 }
 
 /* ---- Skip Link ---- */

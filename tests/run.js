@@ -1665,6 +1665,59 @@ group('057 · Service pages and ServicesSection derive routes from the registry'
   );
 });
 
+group('058 · Perf hygiene: LCP-only preload, gated preconnect, compositor scroll bar', () => {
+  const base = read('src/layouts/BaseLayout.astro') || '';
+  assert(
+    '058 BaseLayout.astro does not preload the mono font',
+    !base.includes('jetbrains-mono-variable.woff2'),
+    'mono preload is back'
+  );
+  assert(
+    '058 BaseLayout.astro gates the Formspree preconnect behind hasForm',
+    base.includes('hasForm && <link rel="preconnect" href="https://formspree.io"'),
+    'Formspree preconnect is unconditional again'
+  );
+  const navbar = read('src/components/Navbar.astro') || '';
+  assert(
+    '058 Navbar.astro drops the logo fetchpriority',
+    !navbar.includes('fetchpriority'),
+    'fetchpriority is back'
+  );
+  const css = read('src/styles/global.css') || '';
+  assert(
+    '058 global.css animates the scroll bar with transform',
+    css.includes('transform: scaleX(0)') && !css.includes('transition: width 0.1s'),
+    'scroll bar uses width again'
+  );
+  const siteLayout = read('public/assets/js/site-layout.js') || '';
+  assert(
+    '058 site-layout.js throttles scroll work via requestAnimationFrame',
+    siteLayout.includes('requestAnimationFrame') &&
+      siteLayout.includes('scaleX') &&
+      !siteLayout.includes('style.width'),
+    'scroll handler regressed to style.width / unthrottled'
+  );
+  if (BUILT) {
+    const home = read('dist/en/index.html') || '';
+    const work = read('dist/en/work/index.html') || '';
+    assert(
+      '[built] home has the Formspree preconnect',
+      home.includes('rel="preconnect" href="https://formspree.io"'),
+      'home lost the preconnect'
+    );
+    assert(
+      '[built] work page has no Formspree preconnect',
+      !work.includes('rel="preconnect" href="https://formspree.io"'),
+      'formless page still preconnects Formspree'
+    );
+    assert(
+      '[built] no page preloads the mono font',
+      !home.includes('rel="preload" href="/fonts/jetbrains'),
+      'mono preload leaked into the build'
+    );
+  }
+});
+
 // ─── Summary ──────────────────────────────────────────────────────────────
 
 const total = passed + failed;

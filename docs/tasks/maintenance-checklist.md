@@ -60,7 +60,11 @@ node scripts/generate-og.mjs --lang=es
 ```
 
 Confirm both images exist, have meaningful size, and render the current
-headline correctly (including Spanish accents).
+headline correctly (including Spanish accents). CI guards this drift with
+`node scripts/generate-og.mjs --lang=en --check` (and `--lang=es`), comparing
+the rendered pixels against the committed hash in
+`tests/snapshots/og-card*.sha256` — a copy edit without regeneration fails
+the suite.
 
 ## 4. Full gates (all green)
 

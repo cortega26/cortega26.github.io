@@ -7,12 +7,13 @@ plan stands.
 
 - **Active series:** deep audit 2026-09-23, planned against `be975ef`.
   Wave 1 (**042, 044, 045, 049, 055**) is DONE and archived; **043** (merged
-  as `af2f47b`, live Step 7 applied), **051** (merged as `097e03f`),
-  **052** (merged as `dc0bebc`), **059** (merged as `89b4b0f`),
-  **046** (merged as `4ba60a6`), **047** (merged as `c6e513c`),
-  **048** (merged as `9bdfcf3`) and **053** (merged as `1768dc0`) are DONE
-  and archived; **9 plans remain TODO in `plans/`** — 050, 054, 056, 057,
-  058, 060, 061, 062, 063.
+  as `af2f47b`, live Step 7 applied), **046** (merged as `4ba60a6`), **047**
+  (merged as `c6e513c`), **048** (merged as `9bdfcf3`), **050** (merged as
+  `34b9bec`), **051** (merged as `097e03f`), **052** (merged as `dc0bebc`),
+  **053** (merged as `1768dc0`), **054** (merged as `b21c589`), **057**
+  (merged as `bd2f979`), **059** (merged as `89b4b0f`) and **061** (merged as
+  `a4350d8`) are DONE and archived; **5 plans remain TODO in `plans/`** —
+  056, 058, 060, 062, 063.
 - **Completed history (001–041 + wave 1 + 043 + 051 + 052 + 059):** DONE and archived — see
   `plans/README.md` series tables and `plans/archive/`.
 
@@ -255,25 +256,25 @@ counts), not prose.
 | 049 | Pricing assertions | 1 | P1 | S | DONE (archived) | src 291/291, built 320/320, npm test 0; red-then-green on corrupted price proven by reviewer; merged as `df877ab` |
 | 055 | JSON-LD hardening | 1 | P1 | S | DONE (archived) | check 0/0/0, src 361/361, built 390/390, npm test 0; HTW schema prices correct; merged as `df877ab` |
 | 046 | Above-fold reveal | 2 | P1 | S | DONE (archived) | src 401/401, built 430/430; merged as `4ba60a6` |
-| 050 | Intake hardening | 2 | P1 | M | TODO | |
+| 050 | Intake hardening | 2 | P1 | M | DONE (archived) | check 0/0/0, src 434/434, built 463/463, funnel 82/82, behavioral PASS 0; deviation: hidden-input premise falsified — `defaultValue` kept as belt-and-braces; merged as `34b9bec` |
 | 058 | Perf hygiene | 2 | P2 | S | TODO | |
 | 043 | CSP production integrity | 3 | P1 | M | DONE (archived) | hash 30/30, check 0/0/0, src 361/361, built 390/390, npm test 0; merged as `af2f47b`, live Step 7 applied |
 | 047 | CI hardening | 3 | P1 | S | DONE (archived) | perms+cache, src 361/361; merged as `c6e513c` |
 | 051 | Test hygiene | 3 | P1 | S | DONE (archived) | drift clean, src 361/361, built 390/390, funnel 82/82; merged as `097e03f` |
 | 052 | Intake attribution + CI | 3 | P1 | M | DONE (archived) | new suite 16/16, src 361/361, built 390/390, funnel 82/82; merged as `dc0bebc` |
 | 053 | caseStudies invariants | 3 | P1 | S | DONE (archived) | suite 85/85; merged as `1768dc0` |
-| 054 | Root landing | 3 | P1 | M | TODO | |
+| 054 | Root landing | 3 | P1 | M | DONE (archived) | new suite 20/20, check 0/0/0, src 432/432, built 461/461, funnel 82/82, CSP MATCH, npm test 0; merged as `b21c589` |
 | 056 | Script guard tests | 3 | P2 | M | TODO | |
 | 048 | Names single-source | 4 | P1 | M | DONE (archived) | 10/10 pairs, src 432/432; merged as `9bdfcf3` |
-| 057 | Routes single-source | 4 | P2 | M | TODO | |
+| 057 | Routes single-source | 4 | P2 | M | DONE (archived) | check 0/0/0, src 447/447, built 476/476, sitemap PASS, links 0/0/0, HTW no diff, npm test 0; merged as `bd2f979` |
 | 059 | Docs truth sweep | 5 | P2 | M | DONE (archived) | 006-links 0, superseded 8+2, npm test 0; merged as `89b4b0f` |
 | 060 | run.js quality | 5 | P3 | M | TODO | |
-| 061 | OG card spike | 6 | P2 | M | TODO | |
+| 061 | OG card spike | 6 | P2 | M | DONE (archived) | checkpoint approved; ES card + 9 glyphs, src 451/451, built 482/482, og:image per locale, npm test 0; merged as `a4350d8` |
 | 062 | About trajectory | 6 | P3 | S | TODO | |
 | 063 | Backlink runbook | 6 | P3 | S | TODO | |
 
-Progress: **14/23 DONE** (13 archived from this series + `041` from the
-harvest series) · 0 IN PROGRESS · 0 BLOCKED · **9 TODO**, all in `plans/`.
+Progress: **18/23 DONE** (17 archived from this series + `041` from the
+harvest series) · 0 IN PROGRESS · 0 BLOCKED · **5 TODO**, all in `plans/`.
 DONE plans live in `plans/archive/`.
 
 ## Cross-wave dependency notes

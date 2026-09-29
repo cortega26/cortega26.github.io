@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import {
   routeGroups,
   SITE_ORIGIN,
@@ -75,6 +75,16 @@ function extractFirstDataLayerStub(html) {
 
 function sha256Base64(text) {
   return 'sha256-' + createHash('sha256').update(text, 'utf8').digest('base64');
+}
+
+export function verifyCspStub(html, pinnedTokens) {
+  const stub = extractFirstDataLayerStub(html);
+  if (stub === null) return { ok: false, computed: null, reason: 'no inline <script> containing window.dataLayer' };
+  const computed = sha256Base64(stub);
+  if (pinnedTokens.length === 0) return { ok: false, computed, reason: 'no sha256 tokens in pinned doc' };
+  return pinnedTokens.includes(computed)
+    ? { ok: true, computed, reason: 'match' }
+    : { ok: false, computed, reason: `live=${computed} pinned=[${pinnedTokens.join(', ')}]` };
 }
 
 function linkTags(html) {
@@ -246,22 +256,17 @@ async function main() {
   }
 
   if (homeHtml !== null) {
-    const stub = extractFirstDataLayerStub(homeHtml);
-    if (stub === null) {
-      fail('CSP inline stub hash', 'no inline <script> containing window.dataLayer in / HTML');
-    } else {
-      const computed = sha256Base64(stub);
-      let pinned = [];
-      try {
-        const doc = await fs.readFile(CSP_DOC_PATH, 'utf8');
-        pinned = doc.match(/sha256-[A-Za-z0-9+/=]+/g) || [];
-      } catch (error) {
-        fail('CSP inline stub hash', `cannot read ${CSP_DOC_PATH}: ${error.message}`);
-      }
-      if (pinned.length > 0) {
-        if (pinned.includes(computed)) pass('CSP inline stub hash matches pinned doc');
-        else fail('CSP inline stub hash', `live=${computed} pinned=[${pinned.join(', ')}]`);
-      }
+    let pinned = null;
+    try {
+      const doc = await fs.readFile(CSP_DOC_PATH, 'utf8');
+      pinned = doc.match(/sha256-[A-Za-z0-9+/=]+/g) || [];
+    } catch (error) {
+      fail('CSP inline stub hash', `cannot read ${CSP_DOC_PATH}: ${error.message}`);
+    }
+    if (pinned !== null) {
+      const result = verifyCspStub(homeHtml, pinned);
+      if (result.ok) pass('CSP inline stub hash matches pinned doc');
+      else fail('CSP inline stub hash', result.reason);
     }
   }
 
@@ -309,7 +314,9 @@ async function main() {
   console.log('PRODUCTION CHECK: PASS');
 }
 
-main().catch((error) => {
-  console.error(`FAIL: ${error.message}`);
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(`FAIL: ${error.message}`);
+    process.exit(1);
+  });
+}

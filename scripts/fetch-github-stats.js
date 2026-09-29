@@ -1,5 +1,6 @@
 import { writeFileSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { pathToFileURL } from 'url';
 
 const REPOS = [
   'elrincondeebano',
@@ -16,9 +17,14 @@ const REPOS = [
 
 const PRIVATE_REPOS = ['Monedario'];
 
-async function fetchStats() {
+export async function fetchStats({
+  fetchImpl = fetch,
+  writeImpl = writeFileSync,
+  statsFilePath = join(process.cwd(), 'src/data/github-stats.json'),
+  repos = REPOS,
+  token = process.env.GITHUB_TOKEN,
+} = {}) {
   const stats = {};
-  const statsFilePath = join(process.cwd(), 'src/data/github-stats.json');
 
   // Load existing stats as fallback
   let fallback = {};
@@ -28,7 +34,6 @@ async function fetchStats() {
     console.warn('No existing github-stats.json found to use as fallback:', e.message);
   }
 
-  const token = process.env.GITHUB_TOKEN;
   const headers = {
     'User-Agent': 'Tooltician-Portfolio-Builder',
     'Accept': 'application/vnd.github.v3+json'
@@ -40,12 +45,12 @@ async function fetchStats() {
   console.log('Fetching GitHub repository stats...');
   let liveCount = 0;
   let fallbackCount = 0;
-  const results = await Promise.all(REPOS.map(async (repo) => {
+  const results = await Promise.all(repos.map(async (repo) => {
     if (PRIVATE_REPOS.includes(repo) && !token) {
       return { repo, skipped: true };
     }
     try {
-      const res = await fetch(`https://api.github.com/repos/cortega26/${repo}`, { headers, signal: AbortSignal.timeout(10000) });
+      const res = await fetchImpl(`https://api.github.com/repos/cortega26/${repo}`, { headers, signal: AbortSignal.timeout(10000) });
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
@@ -78,9 +83,9 @@ async function fetchStats() {
     }
   }
 
-  console.log(`${liveCount}/${REPOS.length} live, ${fallbackCount}/${REPOS.length} fallback`);
-  if (fallbackCount > REPOS.length / 2 && token) {
-    console.warn(`WARNING: ${fallbackCount} of ${REPOS.length} repos used fallback data despite GITHUB_TOKEN being set — counts may be stale. Build continues with fallback values.`);
+  console.log(`${liveCount}/${repos.length} live, ${fallbackCount}/${repos.length} fallback`);
+  if (fallbackCount > repos.length / 2 && token) {
+    console.warn(`WARNING: ${fallbackCount} of ${repos.length} repos used fallback data despite GITHUB_TOKEN being set — counts may be stale. Build continues with fallback values.`);
   }
 
   if (liveCount === 0) {
@@ -89,11 +94,13 @@ async function fetchStats() {
   }
 
   try {
-    writeFileSync(statsFilePath, JSON.stringify(stats, null, 2), 'utf8');
+    writeImpl(statsFilePath, JSON.stringify(stats, null, 2), 'utf8');
     console.log('Successfully wrote src/data/github-stats.json');
   } catch (e) {
     console.error('Error writing github-stats.json file:', e);
   }
 }
 
-fetchStats();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  fetchStats();
+}

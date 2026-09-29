@@ -48,7 +48,8 @@ async function walkHtml(dir) {
       const sub = await walkHtml(abs);
       if (sub.error) return sub;
       files.push(...sub.files);
-    } else if (entry.name.endsWith('.html')) {
+    } else if (entry.name.endsWith('.html') && !/^google[0-9a-f]+\.html$/.test(entry.name)) {
+      // Search Console verification files are static stubs, not pages.
       files.push(abs);
     }
   }

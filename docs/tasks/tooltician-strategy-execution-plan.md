@@ -40,7 +40,7 @@ esa capa.
 
 > **Superseded 2026-09-23** — this section predates the GA4 migration (Plan 006) and the 2026-09 content refresh; see §0, §11, and `plans/README.md` for the shipped state.
 
-**Tesis.** Tooltician.com ya **es** una plataforma de servicios técnicos productizados sobre una marca personal, con el portfolio como prueba de capacidad. No es un portfolio, ni un CV, ni un hub de productos. Esta dirección está construida en el código (5 landings de servicio con precios UF/USD, funnel de scoping pagado, Calendly + Formspree) y documentada en decisiones previas (`docs/tooltician-repositioning-audit.md`, `docs/tasks/services-catalog-proposal.md`).
+**Tesis.** Tooltician.com ya **es** una plataforma de servicios técnicos productizados sobre una marca personal, con el portfolio como prueba de capacidad. No es un portfolio, ni un CV, ni un hub de productos. Esta dirección está construida en el código (5 landings de servicio con precios UF/USD, funnel de scoping pagado, Calendly + Formspree) y documentada en decisiones previas (`docs/archive/tooltician-repositioning-audit.md`, `docs/tasks/services-catalog-proposal.md`).
 
 **Decisión.** No se cambia el rumbo. Se **consolida y se hace medible**.
 

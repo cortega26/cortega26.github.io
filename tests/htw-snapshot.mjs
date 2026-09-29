@@ -6,8 +6,8 @@
 // fingerprint, so the snapshot is deterministic (JS left enabled). Run with
 // --update to (re)generate the committed baseline; run without it to check drift.
 //
-//   node test-htw-snapshot.mjs --update   # regenerate baseline
-//   node test-htw-snapshot.mjs            # fail (exit 1) on any drift
+//   node tests/htw-snapshot.mjs --update   # regenerate baseline
+//   node tests/htw-snapshot.mjs            # fail (exit 1) on any drift
 import { chromium } from '@playwright/test';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
@@ -67,7 +67,7 @@ for (const { lang, file } of PAGES) {
   }
 
   if (!existsSync(snapPath)) {
-    console.error(`✗ ${lang}: no baseline at ${snapPath}. Run: node test-htw-snapshot.mjs --update`);
+    console.error(`✗ ${lang}: no baseline at ${snapPath}. Run: node tests/htw-snapshot.mjs --update`);
     failures++;
     continue;
   }

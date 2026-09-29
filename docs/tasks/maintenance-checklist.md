@@ -71,12 +71,12 @@ npm run check
 node tests/run.js
 npm run build
 node tests/run.js --built
-node test-htw-snapshot.mjs
+node tests/htw-snapshot.mjs
 node scripts/check-csp-hashes.mjs
 ```
 
 References: snapshots in `tests/snapshots/` (`htw-en.json`, `htw-es.json`);
-HTW snapshot runner at repo-root `test-htw-snapshot.mjs`; CSP hash checker at
+HTW snapshot runner at `tests/htw-snapshot.mjs`; CSP hash checker at
 `scripts/check-csp-hashes.mjs`. All commands must be green before closing the
 run.
 

@@ -65,14 +65,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-playwright-
       - name: Install Playwright browser
-        # test-htw-snapshot.mjs launches real Chromium, whose binary is not
+        # tests/htw-snapshot.mjs launches real Chromium, whose binary is not
         # present on a fresh runner (npm ci installs the npm package only).
         # --with-deps also installs the OS libraries headless Chromium needs.
         run: npx playwright install --with-deps chromium
       - name: HTW snapshot
-        run: node test-htw-snapshot.mjs
+        run: node tests/htw-snapshot.mjs
       - name: Behavioral tests
-        run: node test-behavioral.mjs
+        run: node tests/behavioral.mjs
       - name: Link & SEO audit (informational)
         run: node scripts/check-links-seo.js
         continue-on-error: true

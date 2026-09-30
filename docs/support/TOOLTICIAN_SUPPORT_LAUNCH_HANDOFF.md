@@ -1,5 +1,17 @@
 # Tooltician Soporte — Launch Handoff
 
+## Actualización 2026-09-30
+
+Este handoff contiene historial pre-merge y no debe leerse literalmente como estado actual.
+El PR #72 ya fue mergeado. El Departamento de Rentas de la Municipalidad de Macul
+respondió por escrito el 2026-09-30 y confirmó que la modalidad aplicable es
+**Patente de Domicilio Postal Tributario**. La categoría está resuelta, pero la
+patente todavía no ha sido emitida: `confirmed.municipalPermit` permanece en
+`false` y el release gate sigue bloqueando producción por esa emisión pendiente.
+Para estado operativo vigente, priorizar `support/src/config.ts`,
+`docs/support/operations.md` y `docs/support/deployment.md`.
+
+
 > **Estado:** pre-lanzamiento, bloqueado únicamente por confirmación municipal escrita.
 
 | | |

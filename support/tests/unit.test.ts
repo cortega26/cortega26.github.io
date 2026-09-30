@@ -165,10 +165,17 @@ test("retention states the confirmed windows and never stores passwords", () => 
 test("the tax regime and the real phone test no longer block a release", () => {
   assert.equal(business.confirmed.tax, true);
   assert.equal(business.verified.realPhone, true);
+  assert.equal(
+    business.municipal.permitType,
+    "Patente de Domicilio Postal Tributario",
+  );
+  assert.equal(business.municipal.responseDate, "2026-09-30");
+  assert.equal(business.municipal.status, "application_pending");
+  assert.equal(business.confirmed.municipalPermit, false);
   assert.deepEqual(
     hardLaunchIssues(),
     ["Confirmar municipalPermit"],
-    "only the external municipal answer is still pending",
+    "only issuance of the municipal patent is still pending",
   );
   for (const resolved of [
     "payment",

@@ -31,19 +31,31 @@ Controles internos obligatorios:
 La inscripción **no sustituye permisos municipales** y no autoriza por sí sola la
 atención al público.
 
-## Pendiente operativo municipal
+## Estado municipal - patente de domicilio postal tributario
 
-> Consultar al Departamento de Rentas de la Municipalidad de Macul qué patente o
-> autorización corresponde a un prestador inscrito en Registro de Subsistencia que
-> trabaja exclusivamente a domicilio del cliente y no atiende público en su
-> residencia.
+El 2026-09-30 el Departamento de Rentas de la Municipalidad de Macul respondió por
+escrito que, para el modelo declarado -sin atención presencial de público, bodega,
+propaganda ni alteraciones de la vivienda-, corresponde una **Patente de Domicilio
+Postal Tributario**. La Municipalidad remitió su formulario de solicitud, la
+declaración jurada notarial y la hoja de requisitos, e indicó enviar los documentos
+legibles al Departamento de Rentas.
 
-Es una consulta **externa** en curso, no una afirmación legal. No se inventa ni se
-publica el tipo de permiso mientras no exista respuesta escrita. Se registra como
-`confirmed.municipalPermit = false` porque bloquea el ejercicio del servicio y
-ningún cambio de código puede resolverlo. Mientras tanto el sitio no anuncia
-atención al público en una dirección.
+La categoría municipal ya no está en duda. El estado real es:
 
+- `business.municipal.permitType = "Patente de Domicilio Postal Tributario"`;
+- `business.municipal.status = "application_pending"`;
+- `confirmed.municipalPermit = false` hasta que la patente esté efectivamente
+  otorgada o exista una confirmación municipal equivalente que habilite el inicio;
+- la patente fija domicilio postal y **no habilita** ejecutar la actividad económica
+  en la vivienda;
+- siguen vigentes las restricciones declaradas: sin atención de público, venta,
+  publicidad exterior, bodegaje ni reparación de equipos en el domicilio.
+
+La hoja genérica de requisitos pide Inicio de Actividades. Bajo el régimen de
+subsistencia no existe ese antecedente ordinario; por eso el expediente debe adjuntar
+el certificado vigente del Registro SII y mantener explícita esa excepción. Si Rentas
+exige un documento adicional o rechaza el certificado como sustituto, pedir la
+instrucción por escrito antes de alterar el régimen tributario.
 
 ## Admisión y reserva
 

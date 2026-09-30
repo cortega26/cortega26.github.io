@@ -46,9 +46,15 @@ export const business = {
   macOS: false,
   offsite: false,
   analyticsId: "",
-  // municipalPermit is an external answer (Municipalidad de Macul, Departamento
-  // de Rentas) that no code can supply, so it stays a hard blocker until the
-  // owner comes back with it written.
+  // Written answer received from Municipalidad de Macul on 2026-09-30:
+  // the applicable route is a Patente de Domicilio Postal Tributario. The
+  // category is confirmed; issuance of the patent is still pending.
+  municipal: {
+    authority: "Municipalidad de Macul - Departamento de Rentas Municipales",
+    permitType: "Patente de Domicilio Postal Tributario",
+    responseDate: "2026-09-30",
+    status: "application_pending",
+  },
   confirmed: {
     prices: true,
     coverage: true,

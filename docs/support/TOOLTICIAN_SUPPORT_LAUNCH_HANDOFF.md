@@ -12,21 +12,19 @@ Para estado operativo vigente, priorizar `support/src/config.ts`,
 `docs/support/operations.md` y `docs/support/deployment.md`.
 
 
-> **Estado:** pre-lanzamiento, bloqueado únicamente por confirmación municipal escrita.
+> **Estado:** pre-lanzamiento, bloqueado únicamente por la emisión de la patente municipal.
 
 | | |
 |---|---|
-| **Fecha de corte** | 2026-09-27 |
+| **Fecha de corte** | 2026-09-30 |
 | **Repositorio** | `cortega26/cortega26.github.io` |
-| **Feature branch principal** | `feat/tooltician-support-v1` |
-| **PR principal** | `#72` — `feat: Tooltician Soporte — sitio independiente y controles de lanzamiento` — **DRAFT, sin merge** |
-| **HEAD verificado** | `56d5667` (`feat(support): polish prelaunch SEO trust and UX`) |
-| **Preview estable** | `https://feat-tooltician-support-v1.tooltician-support.pages.dev` |
-| **Deployment de preview vigente** | `5f0f65da-b744-48bd-9697-29be77524cbd` |
-| **CI vigente** | run `36336869351` (`Support app checks`, SUCCESS sobre `56d5667`) |
+| **Código integrado** | PR `#72` mergeado el 2026-09-28; fuente vigente en `master` |
+| **Preview público** | `https://feat-tooltician-support-v1.tooltician-support.pages.dev` — `noindex, nofollow`, formulario sin envío real |
 | **Producción** | **NO desplegada** (`tooltician-support.pages.dev` responde 404) |
-| **Dominio final previsto** | `https://soporte.tooltician.com` — **NO asociado, DNS sin cambios** |
-| **`confirmed.municipalPermit`** | **`false`** |
+| **Dominio final previsto** | `https://soporte.tooltician.com` — **NO asociado** |
+| **Ruta municipal confirmada** | **Patente de Domicilio Postal Tributario** |
+| **Estado municipal** | `application_pending` |
+| **`confirmed.municipalPermit`** | **`false`** hasta emisión efectiva |
 
 > **Alcance de la verificación de este documento:** todas las afirmaciones de
 > estado, precios, copy, cabeceras, rutas y gates de este handoff fueron

@@ -70,17 +70,17 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
 
 Queda una sola, y es externa: ningún cambio de código puede resolverla.
 
-1. **Autorización municipal** (`Confirmar municipalPermit`): consultar al
-   Departamento de Rentas de la Municipalidad de Macul qué patente o autorización
-   corresponde a un prestador inscrito en Registro de Subsistencia que trabaja
-   sólo a domicilio del cliente y no atiende público en su residencia. Está
-   registrado en `operations.md` y no se afirma ningún tipo de permiso mientras no
-   exista respuesta escrita.
+1. **Emisión de la patente municipal** (`Confirmar municipalPermit`). El
+   Departamento de Rentas de la Municipalidad de Macul respondió por escrito el
+   2026-09-30 y confirmó que la modalidad aplicable es **Patente de Domicilio Postal
+   Tributario**. Ya no se espera una definición de categoría: falta presentar el
+   expediente y obtener la patente o una confirmación municipal equivalente que
+   habilite el inicio.
 
-Tributario y WhatsApp ya no bloquean: `confirmed.tax` y `verified.realPhone` son
-true. GA4, analytics y reviewUrl son soft. El gate técnico queda en un único
-punto, deliberadamente externo: sin la respuesta municipal no debe abrirse el
-servicio aunque el resto del código esté listo.
+`business.municipal` conserva la ruta confirmada y el estado
+`application_pending`; `confirmed.municipalPermit` permanece en false hasta la
+emisión efectiva. Tributario y WhatsApp ya no bloquean: `confirmed.tax` y
+`verified.realPhone` son true. GA4, analytics y reviewUrl son soft.
 
 ## Régimen tributario
 

@@ -161,22 +161,30 @@ group('B2 · Mobile hero layout fixed', () => {
   );
 });
 
-group('B3 · Hero lede updated', () => {
+group('CRO-1 · Hero leads with the buyer problem', () => {
   const src = hero();
   assert(
-    'New lede mentions "survive handoff" or "sobrevivir al traspaso"',
-    src.includes('survive handoff') || src.includes('sobrevivir al traspaso'),
-    'Updated lede should reference handoff survival'
+    'EN hero names manual work and person-dependence',
+    src.includes('copy-paste') && src.includes('one person who knows how it works'),
+    'Hero should let an operations buyer recognize the pain before reading technical detail'
   );
   assert(
-    'New lede contains "hand them off" or "traspaso"',
-    src.includes('hand them off') || src.includes('traspaso'),
-    'Updated lede should say "hand them off" instead of "keep working after I leave"'
+    'ES hero names manual work and person-dependence',
+    src.includes('copiar, pegar') && src.includes('única persona que “sabe cómo se hace”'),
+    'El hero ES debe permitir reconocer el problema antes del detalle técnico'
   );
   assert(
-    'Old lede text removed',
-    !src.includes('keep working after I leave'),
-    'Old lede text still present'
+    'Hero says a technical specification is not required',
+    src.includes('You do not need a technical specification') && src.includes('No necesitas llegar con una especificación técnica'),
+    'Expected low-friction problem-first support copy'
+  );
+  assert(
+    'Problem-first CTA is primary and Calendly remains secondary',
+    src.includes("ctaPrimary: 'Tell me the problem'") &&
+      src.includes("ctaPrimary: 'Cuéntame el problema'") &&
+      src.includes("ctaPrimaryHref: '#contact'") &&
+      src.includes("ctaSecondaryHref: 'https://calendly.com/ciortega26'"),
+    'Hero CTA hierarchy drifted from problem-first conversion'
   );
 });
 
@@ -510,44 +518,74 @@ group('TT-018 · Contact labels match action behavior', () => {
   );
 });
 
-group('E1 · Services title updated', () => {
+group('CRO-2 · Services make the primary ICP explicit', () => {
   const src = services();
   assert(
-    "EN title is 'Six scoped services. One delivery standard.'",
-    src.includes("'Six scoped services. One delivery standard.'") || src.includes('"Six scoped services. One delivery standard."'),
-    "Services EN title should be 'Six scoped services. One delivery standard.'"
+    'Services lead with bottleneck rather than technology',
+    src.includes('Start with the bottleneck, not the technology.') &&
+      src.includes('Empieza por el cuello de botella, no por la tecnología.'),
+    'Expected buyer-problem service framing in both locales'
   );
   assert(
-    'Old title "What I Build" is gone',
-    !src.includes("'What I Build'") && !src.includes('"What I Build"'),
-    "Old title 'What I Build' still present"
+    'Operational systems are explicitly the primary focus',
+    src.includes('Operational systems — primary focus') &&
+      src.includes('Sistemas operativos — foco principal') &&
+      src.includes('operations, finance') &&
+      src.includes('operaciones, finanzas'),
+    'Primary operational ICP is not explicit'
+  );
+  assert(
+    'Four core services are separated from two secondary web services',
+    src.includes('c.services.slice(0, 4)') && src.includes('c.services.slice(4)'),
+    'Expected 4+2 service hierarchy'
   );
 });
 
-group('E2 · Services subtitle updated', () => {
-  const src = services();
-  assert(
-    'Services subtitle mentions a concrete operational problem',
-    src.includes('concrete operational problem') || src.includes('problema operativo concreto'),
-    'Services subtitle should mention the concrete operational problem'
-  );
-});
-
-group('F1 · About title updated', () => {
+group('CRO-4 · About makes direct accountability human and explicit', () => {
   const src = about();
   assert(
-    'About title is "Fit and Delivery"',
-    src.includes('Fit and Delivery') || src.includes('Encaje y entrega'),
-    'About title not updated'
+    'About says the buyer works directly with Carlos',
+    src.includes('You work directly with Carlos') && src.includes('Trabajas directamente con Carlos'),
+    'Direct founder accountability must be visible in both locales'
+  );
+  assert(
+    'About rejects anonymous-agency ambiguity',
+    src.includes('not an agency front') && src.includes('no es una fachada de agencia'),
+    'Expected explicit clarification that Carlos personally delivers the work'
+  );
+  assert(
+    'About states personal ownership of scope, build, failure review, and handoff',
+    src.includes('I read the first note') &&
+      src.includes('write the code') &&
+      src.includes('failure modes') &&
+      src.includes('hago las preguntas incómodas de alcance') &&
+      src.includes('escribo el código'),
+    'Human accountability copy lost one of the core delivery responsibilities'
   );
 });
 
-group('F2 · About intro rewritten', () => {
-  const src = about();
+group('CRO-5 · Homepage intake asks only for contact + problem', () => {
+  const src = intakeForm();
   assert(
-    'About intro starts from the workflow',
-    src.includes('starts with the workflow') || src.includes('parte del flujo de trabajo'),
-    'About intro should start from the workflow, not the code'
+    'Generic intake has an explicit low-friction mode',
+    src.includes("const isGeneral = service === 'general'") &&
+      src.includes("generalMessageLabel: 'What is the problem?'") &&
+      src.includes("generalMessageLabel: '¿Cuál es el problema?'"),
+    'Generic intake mode or localized problem label missing'
+  );
+  assert(
+    'Generic intake hides qualification fields while service forms retain them',
+    (src.match(/!isGeneral && \(/g) || []).length >= 3 &&
+      src.includes("name=\"site_url\"") &&
+      src.includes("name=\"goal\"") &&
+      src.includes("name=\"budget\"") &&
+      src.includes("name=\"timeline\""),
+    'Expected homepage-only simplification without weakening service-specific qualification'
+  );
+  assert(
+    'Generic submit asks to send the problem',
+    src.includes("generalSubmit: 'Send the problem'") && src.includes("generalSubmit: 'Enviar el problema'"),
+    'Problem-first submit copy missing'
   );
 });
 
@@ -1438,16 +1476,34 @@ group('S0b · Home service cards and guide CTAs carry canonical service context'
   }
 });
 
-group('D6b · Home proof division of labor', () => {
-  const hero = read('src/components/HeroSection.astro') || '';
+group('CRO-3 · Home proof is outcome-first and non-duplicative', () => {
+  const heroSrc = read('src/components/HeroSection.astro') || '';
   const band = read('src/components/ResultsBand.astro') || '';
   assert(
     'hero names the live store exactly once per locale (text + href)',
-    (hero.match(/elrincondeebano/g) || []).length === 4,
-    `elrincondeebano occurrences: ${(hero.match(/elrincondeebano/g) || []).length}`
+    (heroSrc.match(/elrincondeebano/g) || []).length === 4,
+    `elrincondeebano occurrences: ${(heroSrc.match(/elrincondeebano/g) || []).length}`
   );
-  assert('hero does not repeat the quantified band stats', !hero.includes('100+ SKUs'), 'Hero still repeats the SKU count');
-  assert('proof band owns the quantified stats', band.includes("value: '100+'") && band.includes("unit: 'SKUs'"), 'ResultsBand stats missing');
+  assert(
+    'hero leaves quantified SKU proof to the result band',
+    !heroSrc.includes('100+ SKUs'),
+    'Hero still repeats the quantified store proof'
+  );
+  assert(
+    'proof band carries three problem-to-outcome narratives',
+    band.includes('informally') &&
+      band.includes('fragmented') &&
+      band.includes('reconciliation') &&
+      band.includes('100+ SKUs') &&
+      band.includes('chile-hub') &&
+      band.includes('bankrecon'),
+    'Outcome narratives or their verifiable evidence are missing'
+  );
+  assert(
+    'old vanity/security-header stat is not the lead proof anymore',
+    !band.includes("value: 'A+'") && !band.includes("unit: 'headers'"),
+    'ResultsBand regressed to engineering-first vanity proof'
+  );
 });
 
 group('H-14 · Legal pages emit ISO-8601 dates in schema and OG meta', () => {

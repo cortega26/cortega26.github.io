@@ -42,7 +42,7 @@ const SVG_ALERT_TRIANGLE = '<svg width="18" height="18" viewBox="0 0 24 24" fill
 const en = {
   heading: heading === undefined ? 'Project brief' : heading,
   intro: {
-    general: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
+    general: 'You do not need to know the solution, stack, or budget yet. In one or two sentences, tell me what you do manually today, what keeps breaking, or what you wish would disappear from the workflow.',
     htw: 'Tell me about the live site you want reviewed. No email client needed — fill this in and I reply by email within 24–48 business hours.',
     automation: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
     'recurring-data': 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
@@ -80,7 +80,7 @@ const en = {
   timelineOptions: ['As soon as possible', '2–4 weeks', '1–2 months', 'Exploring / no rush'],
   messageLabel: 'Brief',
   messagePh: {
-    general: 'Current workflow and tools · main bottleneck or failure · who will operate it · deadline or handoff constraint',
+    general: 'Example: Every Friday we copy numbers from three systems into Excel, reconcile them by hand, and only one person knows what to do when they do not match.',
     htw: 'Visible problem or trigger · hosting / CDN provider · available access (DNS, CMS, Search Console) · expected outcome',
     automation: 'Current workflow and tools · main bottleneck or failure · who will operate it · deadline or handoff constraint',
     'recurring-data': 'Current workflow and tools · main bottleneck or failure · who will operate it · deadline or handoff constraint',
@@ -88,6 +88,8 @@ const en = {
     financial: 'Current workflow and tools · main bottleneck or failure · who will operate it · deadline or handoff constraint',
     web: 'Current workflow and tools · main bottleneck or failure · who will operate it · deadline or handoff constraint',
   },
+  generalMessageLabel: 'What is the problem?',
+  generalSubmit: 'Send the problem',
   submit: 'Send brief',
   submitSending: 'Sending…',
   success: 'Brief sent. I’ll reply by email within two business days.',
@@ -115,7 +117,7 @@ const en = {
 const es = {
   heading: heading === undefined ? 'Brief del proyecto' : heading,
   intro: {
-    general: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
+    general: 'No necesitas saber todavía la solución, el stack ni el presupuesto. En una o dos frases, cuéntame qué haces manualmente hoy, qué se rompe seguido o qué parte del flujo te gustaría que desapareciera.',
     htw: 'Cuéntame del sitio publicado que quieres revisar. Sin abrir tu cliente de correo: completa esto y respondo por email en 24–48 horas hábiles.',
     automation: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
     'recurring-data': 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
@@ -153,7 +155,7 @@ const es = {
   timelineOptions: ['Lo antes posible', '2–4 semanas', '1–2 meses', 'Explorando / sin apuro'],
   messageLabel: 'Brief',
   messagePh: {
-    general: 'Flujo actual y herramientas · cuello de botella o falla principal · quién lo va a operar · deadline o restricción de traspaso',
+    general: 'Ejemplo: Cada viernes copiamos números de tres sistemas a Excel, los conciliamos a mano y solo una persona sabe qué hacer cuando no cuadran.',
     htw: 'Problema visible o motivo · proveedor de hosting / CDN · acceso disponible (DNS, CMS, Search Console) · resultado esperado',
     automation: 'Flujo actual y herramientas · cuello de botella o falla principal · quién lo va a operar · deadline o restricción de traspaso',
     'recurring-data': 'Flujo actual y herramientas · cuello de botella o falla principal · quién lo va a operar · deadline o restricción de traspaso',
@@ -161,6 +163,8 @@ const es = {
     financial: 'Flujo actual y herramientas · cuello de botella o falla principal · quién lo va a operar · deadline o restricción de traspaso',
     web: 'Flujo actual y herramientas · cuello de botella o falla principal · quién lo va a operar · deadline o restricción de traspaso',
   },
+  generalMessageLabel: '¿Cuál es el problema?',
+  generalSubmit: 'Enviar el problema',
   submit: 'Enviar brief',
   submitSending: 'Enviando…',
   success: 'Brief enviado. Respondo por correo en dos días hábiles.',
@@ -201,6 +205,9 @@ const urlLabel = c.urlLabel[service];
 const urlPh = c.urlPh[service];
 const messagePh = c.messagePh[service];
 const introCopy = c.intro[service];
+const isGeneral = service === 'general';
+const messageLabel = isGeneral ? c.generalMessageLabel : c.messageLabel;
+const submitLabel = isGeneral ? c.generalSubmit : c.submit;
 ---
 
 <form
@@ -247,46 +254,52 @@ const introCopy = c.intro[service];
     </div>
   </div>
 
-  <div class="form-group">
-    <label for={id('url')}>{urlLabel}</label>
-    <input type="url" id={id('url')} name="site_url" placeholder={urlPh} inputmode="url" autocomplete="url" data-error-type={c.fieldErrors.urlType} />
-    <p class="form-group__error" id={id('url-error')} hidden>{c.fieldErrors.urlType}</p>
-  </div>
-
-  <div class="intake-form__row">
+  {!isGeneral && (
     <div class="form-group">
-      <label for={id('goal')}>{c.goalLabel}</label>
-      <select id={id('goal')} name="goal" required data-error-required={c.fieldErrors.goalRequired}>
-        <option value="" disabled selected>—</option>
-        {goalOptions.map(o => <option value={o}>{o}</option>)}
-      </select>
-      <p class="form-group__error" id={id('goal-error')} hidden>{c.fieldErrors.goalRequired}</p>
+      <label for={id('url')}>{urlLabel}</label>
+      <input type="url" id={id('url')} name="site_url" placeholder={urlPh} inputmode="url" autocomplete="url" data-error-type={c.fieldErrors.urlType} />
+      <p class="form-group__error" id={id('url-error')} hidden>{c.fieldErrors.urlType}</p>
     </div>
+  )}
+
+  {!isGeneral && (
+    <div class="intake-form__row">
+      <div class="form-group">
+        <label for={id('goal')}>{c.goalLabel}</label>
+        <select id={id('goal')} name="goal" required data-error-required={c.fieldErrors.goalRequired}>
+          <option value="" disabled selected>—</option>
+          {goalOptions.map(o => <option value={o}>{o}</option>)}
+        </select>
+        <p class="form-group__error" id={id('goal-error')} hidden>{c.fieldErrors.goalRequired}</p>
+      </div>
+      <div class="form-group">
+        <label for={id('budget')}>{c.budgetLabel}</label>
+        <select id={id('budget')} name="budget">
+          <option value="" selected>—</option>
+          {budgetOptions.map(o => <option value={o}>{o}</option>)}
+        </select>
+      </div>
+    </div>
+  )}
+
+  {!isGeneral && (
     <div class="form-group">
-      <label for={id('budget')}>{c.budgetLabel}</label>
-      <select id={id('budget')} name="budget">
+      <label for={id('timeline')}>{c.timelineLabel}</label>
+      <select id={id('timeline')} name="timeline">
         <option value="" selected>—</option>
-        {budgetOptions.map(o => <option value={o}>{o}</option>)}
+        {c.timelineOptions.map(o => <option value={o}>{o}</option>)}
       </select>
     </div>
-  </div>
+  )}
 
   <div class="form-group">
-    <label for={id('timeline')}>{c.timelineLabel}</label>
-    <select id={id('timeline')} name="timeline">
-      <option value="" selected>—</option>
-      {c.timelineOptions.map(o => <option value={o}>{o}</option>)}
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label for={id('message')}>{c.messageLabel}</label>
+    <label for={id('message')}>{messageLabel}</label>
     <textarea id={id('message')} name="message" rows={4} placeholder={messagePh} required data-error-required={c.fieldErrors.messageRequired}></textarea>
     <p class="form-group__error" id={id('message-error')} hidden>{c.fieldErrors.messageRequired}</p>
   </div>
 
   <div class="intake-form__submit">
-    <button type="submit" class="btn btn-primary" data-sending={c.submitSending}>{c.submit}</button>
+    <button type="submit" class="btn btn-primary" data-sending={c.submitSending}>{submitLabel}</button>
     <p class="intake-form__alt">
       {c.altLabel}{' '}
       <a href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc={`intake_${service}`} data-book-call>{c.altCta}</a>

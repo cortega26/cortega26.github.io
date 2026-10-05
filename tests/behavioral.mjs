@@ -132,16 +132,23 @@ async function mockGtagAndFormspree(page, { formspreeStatus = 200 } = {}) {
 
 async function fillIntakeForm(page) {
   await page.locator('#contact-form').scrollIntoViewIfNeeded();
-  const goalValue = await page.locator('#contact-goal option').evaluateAll((opts) => {
-    const found = opts.map((o) => o.value).find((v) => v && v.trim() !== '');
-    return found || null;
-  });
-  if (!goalValue) return null;
   await page.locator('#contact-name').fill('Behavioral Test');
   await page.locator('#contact-email').fill('test@example.com');
-  await page.locator('#contact-goal').selectOption({ value: goalValue });
-  await page.locator('#contact-message').fill('Current workflow X · bottleneck Y · operator Z · deadline soon');
-  return goalValue;
+  await page.locator('#contact-message').fill('Every Friday we copy numbers from several systems into Excel and reconcile them by hand.');
+
+  // The generic homepage intake intentionally has no qualification select.
+  // Service-specific forms still do, so keep this helper compatible with both
+  // shapes instead of making the E2E contract depend on #contact-goal.
+  const goal = page.locator('#contact-goal');
+  if (await goal.count()) {
+    const goalValue = await goal.locator('option').evaluateAll((opts) => {
+      const found = opts.map((o) => o.value).find((v) => v && v.trim() !== '');
+      return found || null;
+    });
+    if (!goalValue) return false;
+    await goal.selectOption({ value: goalValue });
+  }
+  return true;
 }
 
 async function testValidationErrors(browser) {

@@ -5,11 +5,11 @@ interface Props {
 const { lang } = Astro.props;
 
 const en = {
-  availability: 'Scoped engagements for ops-heavy teams · EN / ES',
+  availability: 'Automation and internal systems for operations-heavy teams · EN / ES',
   meta: 'Tooltician — Carlos Ortega Gonzalez',
-  title: 'Reliable operational systems — scoped, documented, and built to survive handoff.',
-  summary: 'I replace recurring manual work, fragile data flows, and hard-to-own internal processes with reliable systems your team can run, inspect, and maintain.',
-  support: 'Six focused services cover Python automation, recurring data collection, internal tools, financial controls, focused front ends, and web technical hygiene. Start with the closest operational problem.',
+  title: 'If your operation still depends on copy-paste, fragile spreadsheets, or the one person who knows how it works, that is the problem I solve.',
+  summary: 'I turn recurring manual workflows — reports, data collection, reconciliations, internal handoffs, and brittle scripts — into systems your team can run and trust.',
+  support: 'You do not need a technical specification. Tell me what you do today, what breaks, or what keeps consuming time; I will tell you whether it is worth automating and what a sensible scope looks like.',
   routeTitle: 'Quick navigation',
   routes: [
     { label: 'Scoped services', description: 'Six defined offers with fit, boundaries, deliverables, and evidence.', href: '#services', },
@@ -18,19 +18,19 @@ const en = {
   ],
   highlightsTitle: 'What the work replaces',
   highlights: [
-    'Replace recurring copy-paste and spreadsheet glue with repeatable runs.',
-    'Make ETL, scraping, and reporting failures easier to detect before they hurt operations.',
-    'Catch invisible technical issues in live sites — broken forms, misconfigured DNS, absent headers — before they quietly cost leads or trust.',
+    'A recurring process still lives in copy-paste, spreadsheets, or manual handoffs.',
+    'A report, collector, reconciliation, or script breaks often enough that people work around it.',
+    'One person has become the operating manual because only they know the steps and failure modes.',
   ],
-  ctaPrimary: 'Book free diagnostic call',
-  ctaSecondary: 'Send a written brief',
-  ctaPrimaryHref: 'https://calendly.com/ciortega26',
-  ctaSecondaryHref: '#contact',
+  ctaPrimary: 'Tell me the problem',
+  ctaSecondary: 'Book a 15-min call',
+  ctaPrimaryHref: '#contact',
+  ctaSecondaryHref: 'https://calendly.com/ciortega26',
   ctaNoteLink: 'Compare services first',
   ctaNoteLinkHref: '#services',
   featuredOutcome: {
     text: 'elrincondeebano.com',
-    detail: 'live store · in continuous production',
+    detail: 'real business · daily orders · live production',
     href: 'https://elrincondeebano.com',
   },
   proofTitle: 'Visible proof',
@@ -52,11 +52,11 @@ const en = {
 };
 
 const es = {
-  availability: 'Servicios profesionales de automatización · ES / EN',
+  availability: 'Automatización y sistemas internos para equipos operativos · ES / EN',
   meta: 'Tooltician — Carlos Ortega González — Consultor de Automatización Python',
-  title: 'Sistemas confiables para operaciones — acotados, documentados y listos para traspaso.',
-  summary: 'Reemplazo trabajo manual recurrente, flujos de datos frágiles y procesos internos difíciles de mantener por sistemas que tu equipo puede operar, revisar y sostener.',
-  support: 'Seis servicios cubren automatización Python, recolección recurrente, herramientas internas, controles financieros, frontends acotados e higiene técnica web. Parte por el problema operativo más cercano.',
+  title: 'Si tu operación depende de copiar, pegar o de la única persona que “sabe cómo se hace”, ese es el problema que resuelvo.',
+  summary: 'Convierto trabajo manual recurrente — reportes, recolección de datos, conciliaciones, traspasos internos y scripts frágiles — en sistemas que tu equipo puede operar y confiar.',
+  support: 'No necesitas llegar con una especificación técnica. Cuéntame qué haces hoy, qué se rompe o qué te consume tiempo; yo te digo si vale la pena automatizarlo y cuál sería un alcance sensato.',
   serviceLine: 'Los proyectos para Chile y LATAM se cotizan en UF. La versión internacional se entrega en inglés y se cotiza en USD.',
   serviceHref: '/en/#services',
   serviceCta: 'Ver tarifas internacionales',
@@ -68,19 +68,19 @@ const es = {
   ],
   highlightsTitle: 'Qué reemplaza el trabajo',
   highlights: [
-    'Reemplazo copia-pega recurrente y hojas de cálculo frágiles por ejecuciones repetibles.',
-    'Vuelvo más visibles las fallas de ETL, scraping y reporting antes de que golpeen la operación.',
-    'Detecto errores técnicos invisibles en sitios activos — formularios rotos, DNS mal configurado, headers ausentes — antes de que cuesten leads o confianza.',
+    'Un proceso recurrente todavía vive en copia-pega, hojas de cálculo o traspasos manuales.',
+    'Un reporte, colector, conciliación o script falla lo suficiente como para que la gente trabaje alrededor del problema.',
+    'Una persona se convirtió en el manual operativo porque solo ella conoce los pasos y los modos de falla.',
   ],
-  ctaPrimary: 'Agendar llamada de diagnóstico gratis',
-  ctaSecondary: 'Enviar un brief escrito',
-  ctaPrimaryHref: 'https://calendly.com/ciortega26',
-  ctaSecondaryHref: '#contact',
+  ctaPrimary: 'Cuéntame el problema',
+  ctaSecondary: 'Agendar 15 min',
+  ctaPrimaryHref: '#contact',
+  ctaSecondaryHref: 'https://calendly.com/ciortega26',
   ctaNoteLink: 'Comparar servicios primero',
   ctaNoteLinkHref: '#services',
   featuredOutcome: {
     text: 'elrincondeebano.com',
-    detail: 'tienda activa · en producción continua',
+    detail: 'negocio real · pedidos diarios · producción activa',
     href: 'https://elrincondeebano.com',
   },
   proofTitle: 'Prueba visible',
@@ -123,8 +123,8 @@ const c = lang === 'en' ? en : es;
           </p>
         )}
         <div class="hero__actions enter-now enter-now--delay-2">
-          <a class="btn btn-primary" href={c.ctaPrimaryHref} target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="hero" data-book-call>{c.ctaPrimary}</a>
-          <a class="btn btn-ghost" href={c.ctaSecondaryHref} data-track="cta_send_brief" data-track-loc="hero" data-contact-intent="send_brief">{c.ctaSecondary}</a>
+          <a class="btn btn-primary" href={c.ctaPrimaryHref} data-track="cta_send_brief" data-track-loc="hero" data-contact-intent="send_brief">{c.ctaPrimary}</a>
+          <a class="btn btn-ghost" href={c.ctaSecondaryHref} target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="hero" data-book-call>{c.ctaSecondary}</a>
         </div>
         <p class="hero__cta-note enter-now enter-now--delay-2">
           <a href={c.ctaNoteLinkHref}>{c.ctaNoteLink} →</a>

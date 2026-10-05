@@ -15,8 +15,12 @@ const SVG_LAYERS   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none
 const SVG_GLOBE    = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
 const SVG_SHIELD   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
 const en = {
-  eyebrow: 'Services', title: 'Six scoped services. One delivery standard.',
-  subtitle: 'Each service starts with a concrete operational problem, ends with something your team can run, and states what sits outside the engagement. Fixed scope, visible progress, and a documented handoff.',
+  eyebrow: 'Services', title: 'Start with the bottleneck, not the technology.',
+  subtitle: 'Tooltician is primarily for operations, finance, and small technical teams with recurring work that is manual, fragile, or owned by one person. The web services remain available, but they are secondary to that core.',
+  coreTitle: 'Operational systems — primary focus',
+  coreSubtitle: 'Automation, recurring data, internal tools, and financial controls for workflows already affecting day-to-day work.',
+  adjacentTitle: 'Web surfaces — when the bottleneck is public-facing',
+  adjacentSubtitle: 'Focused sites and technical hygiene when the business problem is clarity, reliability, or ownership of a live web surface.',
   fitLabel: 'Best when:',
   scopeLabel: 'Scope:',
   moreLabel: 'Scope & evidence',
@@ -49,8 +53,12 @@ const en = {
 };
 
 const es = {
-  eyebrow: 'Servicios', title: 'Seis servicios acotados. Un mismo estándar de entrega.',
-  subtitle: 'Cada servicio parte de un problema operativo concreto, termina en algo que tu equipo puede operar y deja claro qué queda fuera. Alcance fijo, avance visible y traspaso documentado.',
+  eyebrow: 'Servicios', title: 'Empieza por el cuello de botella, no por la tecnología.',
+  subtitle: 'Tooltician está enfocado primero en equipos de operaciones, finanzas y negocios con trabajo recurrente que sigue siendo manual, frágil o dependiente de una sola persona. Los servicios web siguen disponibles, pero son secundarios a ese foco.',
+  coreTitle: 'Sistemas operativos — foco principal',
+  coreSubtitle: 'Automatización, recolección recurrente, herramientas internas y controles financieros para flujos que ya afectan el trabajo diario.',
+  adjacentTitle: 'Web — cuando el cuello de botella está en la superficie pública',
+  adjacentSubtitle: 'Sitios acotados e higiene técnica cuando el problema comercial es claridad, confiabilidad o ownership de una web activa.',
   fitLabel: 'Encaja cuando:',
   scopeLabel: 'Alcance:',
   moreLabel: 'Alcance y evidencia',
@@ -108,6 +116,10 @@ const serviceResults: Record<string, string> = lang === 'en' ? {
   'htw': 'Un reporte antes/después con correcciones verificadas, prioridades claras y un plan opcional de monitoreo.',
 };
 const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
+const serviceGroups = [
+  { title: c.coreTitle, subtitle: c.coreSubtitle, services: c.services.slice(0, 4) },
+  { title: c.adjacentTitle, subtitle: c.adjacentSubtitle, services: c.services.slice(4) },
+];
 ---
 <section class="section" id="services">
   <div class="container">
@@ -117,41 +129,49 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
       <div class="divider reveal"></div>
       <p class="section-subtitle reveal">{c.subtitle}</p>
     </div>
-    <div class="services-grid">
-      {c.services.map((svc, i) => (
-        <article data-service-id={svc.serviceId} class={`card-glass svc-card ${svc.href ? 'svc-card--linked' : ''} reveal reveal-delay-${(i % 2) + 1}`}>
-          <div class="component-icon" set:html={svc.icon}></div>
-          <h3 class="card-title">{displayName(svc.serviceId)}</h3>
-          <p class="svc-desc">{svc.desc}</p>
-          <p class="svc-fit"><span>{c.fitLabel}</span> {svc.fit}</p>
-          <p class="svc-scope svc-desktop-detail"><span>{c.scopeLabel}</span> {svc.scope}</p>
-          {serviceResults[svc.serviceId] && (
-            <p class="svc-result"><span>{resultLabel}</span> {serviceResults[svc.serviceId]}</p>
-          )}
-          {svc.href && (
-            <a class="btn btn-ghost btn-sm svc-inline-cta" data-service-engage href={svc.href}>
-              {c.ctaLabel}<span class="visually-hidden">: {displayName(svc.serviceId)}</span>
-            </a>
-          )}
-          <p class="svc-examples-label svc-desktop-detail">{c.examplesLabel}</p>
-          <div class="svc-examples svc-desktop-detail">
-            {svc.examples.map(ex => (
-              <a class="badge badge-accent" data-portfolio-click href={ex.href} target="_blank" rel="noopener noreferrer">{ex.name}</a>
-            ))}
-          </div>
-          <details class="svc-mobile-detail">
-            <summary>{c.moreLabel}</summary>
-            <p class="svc-scope"><span>{c.scopeLabel}</span> {svc.scope}</p>
-            <p class="svc-examples-label">{c.examplesLabel}</p>
-            <div class="svc-examples">
-              {svc.examples.map(ex => (
-                <a class="badge badge-accent" data-portfolio-click href={ex.href} target="_blank" rel="noopener noreferrer">{ex.name}</a>
-              ))}
-            </div>
-          </details>
-        </article>
-      ))}
-    </div>
+    {serviceGroups.map((group, groupIndex) => (
+      <div class={`service-group ${groupIndex === 1 ? 'service-group--secondary' : ''}`}>
+        <div class="service-group__header reveal">
+          <h3>{group.title}</h3>
+          <p>{group.subtitle}</p>
+        </div>
+        <div class="services-grid">
+          {group.services.map((svc, i) => (
+            <article data-service-id={svc.serviceId} class={`card-glass svc-card ${svc.href ? 'svc-card--linked' : ''} reveal reveal-delay-${(i % 2) + 1}`}>
+              <div class="component-icon" set:html={svc.icon}></div>
+              <h3 class="card-title">{displayName(svc.serviceId)}</h3>
+              <p class="svc-desc">{svc.desc}</p>
+              <p class="svc-fit"><span>{c.fitLabel}</span> {svc.fit}</p>
+              <p class="svc-scope svc-desktop-detail"><span>{c.scopeLabel}</span> {svc.scope}</p>
+              {serviceResults[svc.serviceId] && (
+                <p class="svc-result"><span>{resultLabel}</span> {serviceResults[svc.serviceId]}</p>
+              )}
+              {svc.href && (
+                <a class="btn btn-ghost btn-sm svc-inline-cta" data-service-engage href={svc.href}>
+                  {c.ctaLabel}<span class="visually-hidden">: {displayName(svc.serviceId)}</span>
+                </a>
+              )}
+              <p class="svc-examples-label svc-desktop-detail">{c.examplesLabel}</p>
+              <div class="svc-examples svc-desktop-detail">
+                {svc.examples.map(ex => (
+                  <a class="badge badge-accent" data-portfolio-click href={ex.href} target="_blank" rel="noopener noreferrer">{ex.name}</a>
+                ))}
+              </div>
+              <details class="svc-mobile-detail">
+                <summary>{c.moreLabel}</summary>
+                <p class="svc-scope"><span>{c.scopeLabel}</span> {svc.scope}</p>
+                <p class="svc-examples-label">{c.examplesLabel}</p>
+                <div class="svc-examples">
+                  {svc.examples.map(ex => (
+                    <a class="badge badge-accent" data-portfolio-click href={ex.href} target="_blank" rel="noopener noreferrer">{ex.name}</a>
+                  ))}
+                </div>
+              </details>
+            </article>
+          ))}
+        </div>
+      </div>
+    ))}
 
     <div class="not-fit-strip reveal">
       <p class="not-fit-title">{c.notFitTitle}</p>
@@ -182,6 +202,28 @@ const resultLabel = lang === 'en' ? 'Deliverable:' : 'Entregable:';
 </section>
 
 <style>
+.service-group + .service-group {
+  margin-top: 2.75rem;
+}
+.service-group__header {
+  max-width: 66ch;
+  margin-bottom: 1.1rem;
+}
+.service-group__header h3 {
+  font-family: var(--ff-heading);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+.service-group__header p {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--clr-text-muted);
+}
+.service-group--secondary {
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--clr-border);
+}
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

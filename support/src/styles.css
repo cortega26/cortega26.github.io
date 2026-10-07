@@ -163,12 +163,9 @@ pre:focus-visible {
 .brand-mark {
   width: 41px;
   height: 41px;
-  background: var(--ink);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
-  font-size: 1.8rem;
+  display: block;
+  object-fit: contain;
+  flex: none;
 }
 .brand-sub {
   display: block;
@@ -326,10 +323,10 @@ pre:focus-visible {
   padding: 15px 20px;
 }
 .screen-brand {
-  font-size: 2.2rem;
-  line-height: 1;
-  color: var(--green);
-  font-weight: 700;
+  width: 36px;
+  height: 36px;
+  display: block;
+  object-fit: contain;
 }
 .screen-line {
   height: 5px;

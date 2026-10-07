@@ -38,6 +38,17 @@ test("built page ships the optimized portrait with sober alt text and no placeho
   assert.doesNotMatch(html, /identity-monogram/);
 });
 
+test("support uses the Tooltician brand mark instead of the provisional t. monogram", { skip: requiresBuild }, () => {
+  const html = readFileSync(join(dist, "index.html"), "utf8");
+  assert.match(html, /tooltician-logo-64\.webp/);
+  assert.match(html, /tooltician-logo-128\.webp/);
+  assert.doesNotMatch(html, /<span class="brand-mark"[^>]*>t\.<\/span>/);
+  assert.doesNotMatch(html, /<span class="screen-brand">t\.<\/span>/);
+  assert.ok(existsSync(join(dist, "tooltician-logo-64.webp")), "64px Tooltician logo ships");
+  assert.ok(existsSync(join(dist, "tooltician-logo-128.webp")), "128px Tooltician logo ships");
+  assert.match(readFileSync(join(dist, "favicon.svg"), "utf8"), /data:image\/webp;base64,/);
+});
+
 test("published prices are final and never promise or add tax", { skip: requiresBuild }, () => {
   const conditions = readFileSync(join(dist, "condiciones-del-servicio", "index.html"), "utf8");
   assert.match(conditions, /Registro de Personas Naturales que desarrollan Actividades de Subsistencia del SII/);

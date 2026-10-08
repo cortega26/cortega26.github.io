@@ -149,7 +149,7 @@ try {
     );
     // Flyer landing: scan URL is safe to view before release, without live booking.
     const flyerResponse = await page.goto(
-      base + "/flyer/?utm_source=flyer&utm_medium=qr&utm_campaign=local&utm_content=building",
+      `${base}/flyer/?utm_source=flyer&utm_medium=qr&utm_campaign=local&utm_content=building`,
     );
     assert.equal(flyerResponse.status(), 200);
     assert.equal(await page.locator("h1").count(), 1);

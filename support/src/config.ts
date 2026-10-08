@@ -136,6 +136,36 @@ export const services: Service[] = [
   },
 ];
 
+export const neighborOffer = {
+  // Evaluation-only variant for residents of the owner's building. It must stay
+  // non-public/non-indexed and without live contact until its residential
+  // operating constraints are explicitly cleared.
+  ready: false,
+  residentsOnly: true,
+  priceReduction: 10000,
+  diagnosticCredit: true,
+  delivery:
+    "Entrega y retiro coordinados en el edificio. La ubicación exacta se comparte por privado.",
+  turnaround:
+    "Sin plazo fijo: se coordina según el equipo y la disponibilidad.",
+  notebookMaintenancePrice: business.notebookMaintenancePrice - 10000,
+} as const;
+
+export const neighborServices: Service[] = services
+  .filter((service) => service.id !== "wifi")
+  .map((service) => ({
+    ...service,
+    title:
+      service.id === "diagnostico" ? "Recepción y diagnóstico" : service.title,
+    price: service.price - neighborOffer.priceReduction,
+    detail:
+      service.id === "diagnostico"
+        ? "Revisión inicial del equipo, explicación del problema y cotización antes de intervenir."
+        : service.id === "mantencion"
+          ? `Mano de obra para PC de escritorio. Notebook desde ${neighborOffer.notebookMaintenancePrice.toLocaleString("es-CL")}; según modelo.`
+          : service.detail,
+  }));
+
 export const money = (value: number) =>
   new Intl.NumberFormat("es-CL", {
     style: "currency",

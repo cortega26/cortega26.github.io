@@ -159,6 +159,10 @@ test("neighbors evaluation page stays private and preserves the agreed offer", {
   const html = readFileSync(join(dist, "vecinos", "index.html"), "utf8");
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
   assert.match(html, /Exclusivo para vecinos del edificio/i);
+  assert.match(html, /alt="Carlos Ortega, responsable de Tooltician Soporte"/);
+  assert.match(html, /sizes="\(max-width: 760px\) 320px, 370px"/);
+  assert.match(html, /960w/);
+  assert.match(html, /800w/);
   assert.match(html, /Tu computador,[\s\S]*revisado por un vecino/i);
   assert.match(html, /\$20\.000/);
   assert.match(html, /\$30\.000/);

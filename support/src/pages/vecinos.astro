@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import portrait from '../assets/carlos-ortega.jpeg';
+import portrait from '../assets/carlos-ortega-hq.webp';
 import Layout from '../Layout.astro';
 import { business, money, neighborOffer, neighborServices } from '../config';
 import { devices, powerStates } from '../lib/neighbor-contact';
@@ -71,7 +71,7 @@ const faqs = [
       </div>
       <p class="hero-footnote">Diagnóstico <strong>{money(diagnostic.price)}</strong> · Se descuenta si autorizas un servicio de mayor valor</p>
       <div class="hero-trust">
-        <Image src={portrait} alt="Retrato de Carlos Ortega" width={52} height={52} loading="lazy" densities={[1, 2]} />
+        <Image src={portrait} alt="Retrato de Carlos Ortega" width={52} height={52} loading="lazy" densities={[1, 2]} format="webp" quality={88} />
         <p><strong>Soy Carlos, vecino del edificio</strong><span class="hero-trust-links"><a href={business.parent}>Tooltician ↗</a><a href={business.github}>GitHub ↗</a><a href={business.linkedin}>LinkedIn ↗</a></span></p>
       </div>
     </div>
@@ -132,7 +132,7 @@ const faqs = [
 
   <section id="quien-te-atiende" class="about section" data-section-event="support_about_view">
     <div class="container about-grid">
-      <div class="identity-card"><Image src={portrait} alt="Carlos Ortega, responsable de Tooltician Soporte" widths={[320, 400]} sizes="(max-width: 760px) 320px, 33vw" loading="lazy" /><p>Un vecino identificable.<br /><strong>Tu equipo no sale del edificio.</strong></p></div>
+      <div class="identity-card"><Image src={portrait} alt="Carlos Ortega, responsable de Tooltician Soporte" widths={[320, 480, 640, 800, 960]} sizes="(max-width: 760px) 320px, 370px" format="webp" quality={88} loading="lazy" /><p>Un vecino identificable.<br /><strong>Tu equipo no sale del edificio.</strong></p></div>
       <div><p class="eyebrow">SABES A QUIÉN SE LO ENTREGAS</p><h2>Soy Carlos Ortega.<br />También vivo aquí.</h2><p>Desarrollo software, automatizaciones y sistemas de datos bajo Tooltician. Esta variante existe por una razón sencilla: entre vecinos puedo recibir el equipo sin cobrar un traslado y trasladar ese ahorro al precio.</p><p>No necesito convertir mi departamento en un taller abierto al público. Coordinamos cada entrega y retiro de forma privada, exclusivamente con residentes.</p><div class="profile-links"><a href={business.parent}>Tooltician ↗</a><a href={business.github}>GitHub ↗</a><a href={business.linkedin}>LinkedIn ↗</a></div></div>
     </div>
   </section>

@@ -1,0 +1,140 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/carlos-ortega-hq.webp';
+import Layout from '../Layout.astro';
+import { business, basePrice, money, services } from '../config';
+import { whatsappUrl } from '../lib/contact';
+
+// A printed flyer must not silently open booking before the general service is released.
+// Informational content can be reviewed in preview; live contact uses the same
+// hard launch gate as the public home page.
+const contactReady =
+  __SUPPORT_RELEASE__ &&
+  business.confirmed.municipalPermit &&
+  /^569\d{8}$/.test(business.whatsapp);
+const leadMessage = [
+  'Hola, vi el flyer de Tooltician Soporte (FLYER-C).',
+  'Quisiera consultar por un computador.',
+  'Comuna: ',
+  'Equipo (PC o notebook): ',
+  'Problema: ',
+].join('\n');
+const contactUrl = contactReady ? whatsappUrl(business.whatsapp, leadMessage) : null;
+const desktopPrice = services.find((service) => service.id === 'mantencion')!.price;
+const benefits = [
+  'PC y notebooks con Windows: lentitud, temperatura, arranque y configuración.',
+  'Instalación de SSD o RAM, respaldos, Wi-Fi e impresoras.',
+  'Diagnóstico explicado, presupuesto previo y trabajo documentado.',
+];
+---
+
+<Layout
+  variant="flyer"
+  title="Soporte técnico a domicilio cerca de ti | Tooltician"
+  description="Servicio técnico de PC y notebooks con Windows en Macul, Ñuñoa y Providencia. Precios claros, diagnóstico explicado y consulta directa por WhatsApp."
+  forceNoindex={true}
+>
+  <section class="flyer-hero container" aria-labelledby="flyer-title">
+    <div class="flyer-lead">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> MACUL · ÑUÑOA · PROVIDENCIA</p>
+      <h1 id="flyer-title">¿Tu computador está <em>lento, falla o no enciende?</em></h1>
+      <p class="flyer-intro">Servicio técnico de PC y notebooks a domicilio. Hablas directamente con la persona que revisará tu equipo.</p>
+      <div class="flyer-price" id="precio">
+        <span class="flyer-price-label">Visita y diagnóstico desde</span>
+        <strong>{money(basePrice())}</strong>
+        <span>Macul y Ñuñoa · {money(business.areas[2]!.price)} en Providencia</span>
+        <small>Hasta {business.visitMinutes} minutos. Incluye revisión, explicación y soluciones simples que puedan resolverse en ese tiempo.</small>
+      </div>
+      <div class="flyer-actions">
+        {contactUrl
+          ? <a class="button flyer-cta" href={contactUrl} target="_blank" rel="noopener noreferrer" data-flyer-whatsapp="hero">Consultar por WhatsApp <span aria-hidden="true">↗</span></a>
+          : <p class="flyer-unavailable" role="status">Estamos preparando la apertura de reservas. Puedes revisar precios y condiciones sin compromiso.</p>}
+        <a class="flyer-link" href="/#servicios">Ver todos los servicios y precios ↗</a>
+      </div>
+      <p class="flyer-note">Atención previa coordinación. Sin emergencias ni retiro de equipos.</p>
+      <div class="flyer-person">
+        <Image src={portrait} alt="Carlos Ortega, responsable de Tooltician Soporte" width={64} height={64} format="webp" loading="eager" quality={85} />
+        <div><strong>Soy Carlos Ortega</strong><span>Atención personal, sin intermediarios. <a href={business.parent}>Conoce mi trabajo ↗</a></span></div>
+      </div>
+    </div>
+
+    <aside class="flyer-facts" aria-label="Antes de consultar">
+      <p class="eyebrow">LO IMPORTANTE, SIN SORPRESAS</p>
+      <h2>Sabes cuánto y qué incluye antes de decidir.</h2>
+      <ul class="flyer-checks">
+        {benefits.map((benefit) => <li><span aria-hidden="true">✓</span>{benefit}</li>)}
+      </ul>
+      <div class="flyer-credit">
+        <strong>No pagas dos veces el diagnóstico.</strong>
+        <p>Si autorizas otro trabajo en la misma visita, se cobra el mayor valor entre la visita y ese servicio. <b>No se suman ambos.</b></p>
+        <p class="flyer-example">Ejemplo: visita {money(basePrice())} + mantención de escritorio {money(desktopPrice)} = <strong>{money(desktopPrice)} de mano de obra total</strong>, no {money(basePrice() + desktopPrice)}.</p>
+      </div>
+      <p class="flyer-fine">Repuestos, licencias, extras y nuevas visitas se cotizan y autorizan por separado. La visita se cobra incluso si decides no continuar con otro trabajo.</p>
+    </aside>
+  </section>
+
+  <section class="flyer-bottom container" aria-labelledby="flyer-next">
+    <div>
+      <p class="eyebrow">EN POCAS PALABRAS</p>
+      <h2 id="flyer-next">Me cuentas qué ocurre. Te digo cómo podemos avanzar.</h2>
+      <p>Al escribir, indica tu comuna, si tienes PC o notebook y qué problema presenta. No envíes contraseñas, dirección exacta ni archivos privados.</p>
+    </div>
+    <div class="flyer-bottom-action">
+      {contactUrl
+        ? <a class="button flyer-cta" href={contactUrl} target="_blank" rel="noopener noreferrer" data-flyer-whatsapp="final">Consultar por WhatsApp <span aria-hidden="true">↗</span></a>
+        : <a class="button flyer-cta" href="/#preguntas">Revisar preguntas frecuentes <span aria-hidden="true">↗</span></a>}
+      <a class="flyer-link" href="/#preguntas">Preguntas frecuentes y condiciones ↗</a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { track } from '../lib/analytics';
+  document.querySelectorAll<HTMLAnchorElement>('[data-flyer-whatsapp]').forEach((link) => {
+    link.addEventListener('click', () => {
+      track('support_whatsapp_click', {
+        location: link.dataset.flyerWhatsapp,
+        variant: 'flyer',
+        mode: 'direct',
+      });
+    });
+  });
+</script>
+
+<style>
+  .flyer-hero { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(300px, .82fr); gap: clamp(26px, 5vw, 70px); align-items: start; padding-block: clamp(32px, 5vw, 66px) 48px; }
+  .flyer-lead h1 { font-size: clamp(2.55rem, 4.4vw, 4.15rem); max-width: 740px; line-height: 1.09; text-wrap: balance; }
+  .flyer-intro { font-size: clamp(1.03rem, 2vw, 1.18rem); line-height: 1.52; max-width: 600px; margin-top: 19px; }
+  .flyer-price { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; border-left: 4px solid var(--green); padding: 15px 0 16px 19px; margin-top: 25px; background: linear-gradient(90deg, #eaf0e8, transparent); }
+  .flyer-price-label { color: var(--muted); font-size: .83rem; font-weight: 600; }
+  .flyer-price strong { font-size: clamp(2.3rem, 5vw, 3.9rem); letter-spacing: -.05em; line-height: 1.12; white-space: nowrap; }
+  .flyer-price > span:not(.flyer-price-label) { font-size: .85rem; font-weight: 600; }
+  .flyer-price small { color: var(--muted); max-width: 470px; line-height: 1.4; font-size: .79rem; margin-top: 6px; }
+  .flyer-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 25px; }
+  .flyer-cta { text-align: center; min-width: 248px; }
+  .flyer-link { font-size: .85rem; font-weight: 600; text-decoration-thickness: 1px; }
+  .flyer-note { margin-top: 19px; font-size: .82rem; color: var(--muted); }
+  .flyer-unavailable { max-width: 540px; padding: 13px 17px; background: #efe7cf; border: 1px solid #dfd0a6; border-radius: 8px; font-size: .89rem; }
+  .flyer-person { display: flex; gap: 15px; align-items: center; margin-top: 25px; padding-top: 19px; border-top: 1px solid var(--line); }
+  .flyer-person :global(img) { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex: none; }
+  .flyer-person div { display: flex; flex-direction: column; gap: 3px; line-height: 1.4; font-size: .84rem; }
+  .flyer-person div span { color: var(--muted); }
+  .flyer-facts { background: #e9eee5; border: 1px solid #dbe2d6; border-radius: var(--radius); padding: clamp(23px, 3vw, 34px); }
+  .flyer-facts .eyebrow { color: var(--green); margin-bottom: 11px; }
+  .flyer-facts h2 { font-size: clamp(1.55rem, 2.6vw, 2.15rem); line-height: 1.17; }
+  .flyer-checks { padding: 0; margin: 19px 0; list-style: none; display: grid; gap: 11px; }
+  .flyer-checks li { display: flex; gap: 11px; line-height: 1.42; font-size: .92rem; }
+  .flyer-checks li span { color: var(--green); font-weight: 800; flex: none; }
+  .flyer-credit { padding: 17px; background: #fff; border-radius: 10px; border: 1px solid var(--line); }
+  .flyer-credit > strong { display: block; font-size: 1.12rem; line-height: 1.23; }
+  .flyer-credit p { font-size: .88rem; line-height: 1.47; margin-top: 9px; }
+  .flyer-credit .flyer-example { padding-top: 11px; margin-top: 11px; border-top: 1px solid var(--line); font-size: .82rem; }
+  .flyer-fine { font-size: .78rem; line-height: 1.55; color: var(--muted); margin-top: 17px; }
+  .flyer-bottom { border-top: 1px solid var(--line); padding-block: 35px 58px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .flyer-bottom .eyebrow { margin-bottom: 12px; }
+  .flyer-bottom h2 { font-size: clamp(1.4rem, 2.3vw, 2.1rem); max-width: 600px; }
+  .flyer-bottom p:not(.eyebrow) { color: var(--muted); font-size: .9rem; max-width: 640px; margin-top: 12px; }
+  .flyer-bottom-action { display: flex; flex-direction: column; gap: 12px; align-items: center; flex: none; }
+  @media (max-width: 850px) { .flyer-hero { grid-template-columns: 1fr; } .flyer-bottom { align-items: flex-start; flex-direction: column; gap: 20px; } .flyer-bottom-action { align-items: flex-start; } }
+  @media (max-width: 460px) { .flyer-lead h1 { font-size: clamp(2.15rem, 10vw, 2.6rem); } .flyer-price strong { font-size: 2.65rem; } .flyer-cta { width: 100%; min-width: 0; } .flyer-actions, .flyer-bottom-action { width: 100%; } .flyer-facts { padding: 20px; } }
+</style>

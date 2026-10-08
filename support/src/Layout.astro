@@ -4,7 +4,7 @@ import { business, neighborOffer } from './config';
 interface Props {
   title: string;
   description: string;
-  variant?: 'default' | 'neighbors';
+  variant?: 'default' | 'neighbors' | 'flyer';
   forceNoindex?: boolean;
 }
 const {
@@ -14,12 +14,13 @@ const {
   forceNoindex = false,
 } = Astro.props;
 const neighbors = variant === 'neighbors';
+const flyer = variant === 'flyer';
 const canonical = new URL(Astro.url.pathname, business.origin).href;
 const released = __SUPPORT_RELEASE__;
 const phone = `+${business.whatsapp}`;
 const socialImage = `${business.origin}/og-card.png`;
 const sectionBase = neighbors ? '/vecinos/' : '/';
-const brandSubtitle = neighbors ? 'SOPORTE PARA VECINOS' : 'SOPORTE A DOMICILIO';
+const brandSubtitle = neighbors ? 'SOPORTE PARA VECINOS' : flyer ? 'SOPORTE EN TU BARRIO' : 'SOPORTE A DOMICILIO';
 const socialAlt = neighbors
   ? `${business.name}: soporte técnico exclusivo para vecinos del edificio.`
   : `${business.name}: servicio técnico de computadores a domicilio en Macul, Ñuñoa y Providencia.`;
@@ -108,8 +109,8 @@ const schema = neighbors
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href={sectionBase} aria-label={neighbors ? 'Tooltician Soporte para vecinos, inicio' : 'Tooltician Soporte a domicilio, inicio'}><img class="brand-mark" src="/tooltician-logo-64.webp" srcset="/tooltician-logo-64.webp 1x, /tooltician-logo-128.webp 2x" alt="" width="41" height="41" decoding="async" /><span>tooltician<span class="brand-sub">{brandSubtitle}</span></span></a>
-        <nav aria-label="Principal"><a href={`${sectionBase}#servicios`}>Servicios</a><a href={`${sectionBase}#precios`}>Precios</a><a href={neighbors ? '/vecinos/#como-funciona' : '/#cobertura'}>{neighbors ? 'Cómo funciona' : 'Cobertura'}</a></nav>
-        <a class="button small header-cta" href={`${sectionBase}#consulta`} data-cta="header">Consultar <span aria-hidden="true">↗</span></a>
+        {!flyer && <nav aria-label="Principal"><a href={`${sectionBase}#servicios`}>Servicios</a><a href={`${sectionBase}#precios`}>Precios</a><a href={neighbors ? '/vecinos/#como-funciona' : '/#cobertura'}>{neighbors ? 'Cómo funciona' : 'Cobertura'}</a></nav>}
+        {!flyer && <a class="button small header-cta" href={`${sectionBase}#consulta`} data-cta="header">Consultar <span aria-hidden="true">↗</span></a>}
       </div>
     </header>
     <main id="main"><slot /></main>

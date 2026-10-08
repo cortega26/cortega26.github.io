@@ -13,7 +13,7 @@ const allowed = {
     "contact-direct",
     "neighbors-form",
   ],
-  variant: ["neighbors"],
+  variant: ["neighbors", "flyer"],
   mode: ["direct", "guided"],
   service: [...services.map((s) => s.id), "otro"],
   source: [
@@ -23,6 +23,7 @@ const allowed = {
     "yapo",
     "referral",
     "tooltician",
+    "flyer",
     "other",
   ],
   medium: ["none", "organic", "social", "classified", "referral", "qr"],

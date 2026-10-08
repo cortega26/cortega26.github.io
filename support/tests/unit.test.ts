@@ -129,6 +129,36 @@ test("neighbor direct-contact event keeps acquisition and emits only allowlisted
   assert.ok(!JSON.stringify(direct).includes("personal@example.com"));
 });
 
+test("flyer QR attribution and clicks keep only approved dimensions", () => {
+  const acquisition = attribution(
+    "?utm_source=flyer&utm_medium=qr&utm_campaign=local&utm_content=building",
+  );
+  assert.deepEqual(acquisition, {
+    source: "flyer",
+    medium: "qr",
+    campaign: "local",
+    content: "building",
+  });
+  const click = eventDimensions(acquisition, {
+    variant: "flyer",
+    mode: "direct",
+    location: "hero",
+    phone: "+56900000000",
+    problem: "private health or work details",
+    email: "person@example.com",
+  });
+  assert.deepEqual(click, {
+    source: "flyer",
+    medium: "qr",
+    campaign: "local",
+    content: "building",
+    variant: "flyer",
+    mode: "direct",
+    location: "hero",
+  });
+  assert.ok(!JSON.stringify(click).includes("example.com"));
+});
+
 const complete = {
   ...business,
   whatsapp: "56912345678",

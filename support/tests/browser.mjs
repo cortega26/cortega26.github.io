@@ -147,6 +147,32 @@ try {
     assert.ok(
       (await page.locator("details").first().getAttribute("open")) !== null,
     );
+    // Flyer landing: scan URL is safe to view before release, without live booking.
+    const flyerResponse = await page.goto(
+      base + "/flyer/?utm_source=flyer&utm_medium=qr&utm_campaign=local&utm_content=building",
+    );
+    assert.equal(flyerResponse.status(), 200);
+    assert.equal(await page.locator("h1").count(), 1);
+    assert.equal(await page.locator('nav[aria-label="Principal"]').count(), 0);
+    assert.ok((await page.locator(".flyer-price").innerText()).includes("30.000"));
+    assert.match(await page.locator(".flyer-credit").innerText(), /No pagas dos veces/i);
+    assert.equal(await page.locator('[data-flyer-whatsapp]').count(), 0);
+    assert.equal(await page.locator("a[href^='https://wa.me/']").count(), 0);
+    if (name === "chromium") {
+      for (const width of [360, 390, 412, 768, 1440]) {
+        await page.setViewportSize({ width, height: 950 });
+        await page.evaluate(() => document.fonts.ready);
+        assert.ok(
+          await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+          `Flyer: no horizontal overflow at ${width}`,
+        );
+        if (width === 390 || width === 1440) {
+          await page.screenshot({ path: `${output}/flyer-${width}.png`, fullPage: true });
+        }
+      }
+      await page.setViewportSize({ width: 390, height: 844 });
+    }
+    assert.deepEqual(errors, [], `${name} flyer browser errors`);
     // Residents preview: no outbound booking, but a usable guided message.
     await page.goto(base + "/vecinos/");
     if (name === "chromium") {

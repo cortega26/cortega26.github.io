@@ -12,6 +12,7 @@ import {
   type Intake,
 } from "../src/lib/contact.ts";
 import { attribution, eventDimensions, safeDimensions } from "../src/lib/analytics.ts";
+import { neighborTestimonials } from "../src/data/neighbor-testimonials.ts";
 import {
   basePrice,
   business,
@@ -290,13 +291,15 @@ test("the tax status states the subsistence registry without inventing a documen
   assert.equal(business.notebookMaintenancePrice, 45000);
 });
 test("neighbors offer is residents-only, discounted by exactly $10.000, and excludes Wi-Fi", () => {
-  assert.equal(neighborOffer.ready, false, "the evaluation variant must not become live implicitly");
+  assert.equal(neighborOffer.ready, false, "consultations are not permission to receive devices");
+  assert.equal(neighborOffer.consultationsOpen, true, "owner opened enquiries only");
+  assert.equal(neighborOffer.initialReviewHours, 24);
   assert.equal(neighborOffer.operatingAuthorizationConfirmed, false, "general municipal clearance must never activate residential repair automatically");
   assert.equal(neighborOffer.residentsOnly, true);
   assert.equal(neighborOffer.priceReduction, 10000);
   assert.equal(neighborOffer.diagnosticCredit, true);
   assert.equal(neighborOffer.notebookMaintenancePrice, 35000);
-  assert.match(neighborOffer.turnaround, /estimación de revisión/);
+  assert.match(neighborOffer.turnaround, /Primera revisión dentro de 24 horas desde la recepción coordinada/);
 
   const publicById = new Map(services.map((service) => [service.id, service]));
   assert.deepEqual(
@@ -314,6 +317,21 @@ test("neighbors offer is residents-only, discounted by exactly $10.000, and excl
       `${service.id} must be exactly $10.000 cheaper`,
     );
   }
+});
+
+test("three testimonial claims are context-labelled and contain no synthetic reviews", () => {
+  assert.deepEqual(neighborTestimonials.map((item) => item.id), [
+    "network-card", "external-disk", "professional",
+  ]);
+  assert.equal(neighborTestimonials.filter((item) => item.type === "soporte").length, 2);
+  assert.equal(neighborTestimonials.filter((item) => item.type === "trayectoria").length, 1);
+  assert.ok(neighborTestimonials.some((item) =>
+    item.author === "Greily Molina" && /2016/.test(item.source)));
+  assert.ok(neighborTestimonials.some((item) =>
+    item.author === "Juan Carlos Ortega Rached" && /no sobre una reparación/.test(item.context)));
+  const serialized = JSON.stringify(neighborTestimonials);
+  assert.doesNotMatch(serialized, /5 estrellas|calificación|garantizamos/i);
+  assert.doesNotMatch(serialized, /\+56\s*9\s*\d{4}|@gmail\.com/i);
 });
 
 test("neighbors intake never asks for apartment or area and identifies the resident flow", () => {

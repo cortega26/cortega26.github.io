@@ -116,10 +116,10 @@ lanzamiento y produce un sitio de revisión:
 
 - `<meta name="robots" content="noindex, nofollow">` y `robots.txt` con
   `Disallow: /`; no se genera sitemap.
-- Sin enlace saliente a `wa.me` ni número de WhatsApp: el formulario prepara el
-  mensaje en el navegador y no envía nada.
+- La portada general continúa sin enlace saliente a `wa.me` hasta habilitar el servicio general.
+- En `/vecinos/`, se permiten **consultas informativas** por WhatsApp aun en preview. Esto **no habilita recepción ni reparación** de equipos: `neighborOffer.ready`, `operatingAuthorizationConfirmed` y `confirmed.municipalPermit` siguen en `false`.
 - Sin GA4: sin `analyticsId` no se inyecta googletagmanager y no se envía ningún
-  evento. El banner "Vista previa" permanece visible.
+  evento. La portada general mantiene el banner "Vista previa"; `/vecinos/` informa que las consultas están abiertas y la recepción exige confirmar condiciones aplicables.
 - El retrato sí se optimiza y se muestra; es la única foto real publicada.
 
 Valores exactos para el panel de Cloudflare Pages:

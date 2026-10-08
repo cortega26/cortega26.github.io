@@ -229,6 +229,35 @@ Las consultas para vecinos están abiertas por decisión del titular, pero el
 repositorio **no** declara obtenida la autorización municipal para recibir
 o reparar computadores en el departamento: los flags de permiso siguen falsos.
 
+### Diagnóstico del error `Cloudflare Authentication error [10000]`
+
+El código 10000 en `/accounts/.../pages/projects/tooltician-support` puede indicar
+un token inválido, un token válido **sin permisos para ese proyecto**, una cuenta
+equivocada o restricciones del propio token. La presencia de dos secrets en GitHub
+no prueba que sean operativos.
+
+El workflow ejecuta `support/scripts/cloudflare-auth-preflight.mjs` **antes** de
+instalar dependencias. Sin imprimir secretos, la verificación:
+1. comprueba el formato del Account ID (32 caracteres hexadecimales) y detecta
+   espacios extra en las credenciales;
+2. consulta el recurso del proyecto Pages existente;
+3. si falla, comprueba el estado del API token en los endpoints oficiales
+   de verificación de token personal o de cuenta;
+4. distingue token activo sin acceso, token no verificable, proyecto inexistente
+   en la cuenta y límites de peticiones, con información concreta en Job Summary.
+
+Si el token es **activo pero sin acceso**, revisa en Cloudflare que incluya
+`Account → Cloudflare Pages → Edit` (en algunas interfaces `Pages → Write`)
+**para la cuenta propietaria de `tooltician-support`**. Comprueba también
+restricciones de IP y, si Wrangler necesita consultar detalles de cuenta,
+`Account Settings → Read`. No agregar permisos de DNS ni de otras zonas.
+Si no es verificable, revisa que el secret contenga el **valor** del API token,
+no el ID del token ni una Global API Key. El Account ID debe ser de la misma
+cuenta donde existe el proyecto, no el Zone ID de un dominio.
+
+Con credenciales correctas, volver a ejecutar el workflow manualmente. Evitar
+rotar el token o cambiar de cuenta sin evidencia de qué comprobación falló.
+
 ## Dominio y seguridad
 
 Confirmar TLS, HTTP→HTTPS, canonical y las cabeceras de `support/public/_headers`.

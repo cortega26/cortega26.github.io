@@ -17,7 +17,7 @@ export const business = {
   linkedin: "https://www.linkedin.com/in/cortega26",
   whatsapp: "56951118901",
   email: "carlos@tooltician.com",
-  photo: "src/assets/carlos-ortega.jpeg",
+  photo: "src/assets/carlos-ortega-hq.webp",
   reviewUrl: "",
   availability: "Atención previa coordinación",
   payment: "Transferencia, efectivo o tarjeta. Mismo precio.",

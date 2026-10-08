@@ -12,6 +12,19 @@
 - CTA móvil que desaparece cuando la sección de consulta es visible; estilo propio para resultado del formulario.
 - Regresiones cubiertas por pruebas de build/artefacto y unidades.
 
+## Consultas y referencias verificadas (2026-10-08)
+
+El titular decidió recibir **consultas informativas por WhatsApp** aun cuando la patente municipal para la reparación en su departamento no está acreditada. Esta opción es deliberadamente distinta de habilitar la recepción de equipos. `neighborOffer.consultationsOpen=true` no modifica `ready=false`, `operatingAuthorizationConfirmed=false` ni `business.confirmed.municipalPermit=false`. No llamar «autorizado» a este servicio por el simple hecho de recibir mensajes.
+
+La primera revisión que el titular afirma poder cumplir es dentro de 24 horas **desde la recepción coordinada**; no constituye un compromiso de reparación completa en 24 horas.
+
+Evidencias proporcionadas mediante capturas por el titular, sin fingir revisión independiente:
+- Mensaje privado de un cliente: satisfacción con el análisis y corrección de un problema de tarjeta de red cuando el PC funcionaba sin cargador. Mostrarlo anónimo; no exponer chat, teléfono ni imagen completa.
+- Recomendación de Greily Molina publicada en LinkedIn el 28-02-2016: agradece un trabajo de recuperación parcial de información en un disco externo. Es histórica, no acredita capacidad de laboratorio ni garantiza recuperación futura.
+- Recomendación de Juan Carlos Ortega Rached sobre desempeño general en TI: **referencia profesional**, no testimonio de reparación.
+
+Antes de usar expresiones de testimonios privados en publicidad, verificar que el uso es compatible con la autorización del cliente. No fabricar fotos, enlaces directos a recomendaciones no obtenidos ni puntuaciones.
+
 ## Bloqueo independiente de la modalidad residencial — P0
 
 `support/src/config.ts` mantiene `neighborOffer.ready=false` y `neighborOffer.operatingAuthorizationConfirmed=false`. La página comprueba **ambos** además de `__SUPPORT_RELEASE__`, `business.confirmed.municipalPermit` y el teléfono válido. La autorización para prestar soporte general no basta para abrir esta variante.

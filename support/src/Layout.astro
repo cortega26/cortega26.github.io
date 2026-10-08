@@ -1,6 +1,6 @@
 ---
 import './styles.css';
-import { business } from './config';
+import { business, neighborOffer } from './config';
 interface Props {
   title: string;
   description: string;
@@ -101,7 +101,9 @@ const schema = neighbors
   <body>
     <a class="skip" href="#main">Ir al contenido</a>
     {neighbors
-      ? <div class="preview-notice">Vista previa · Variante para evaluación, todavía no disponible</div>
+      ? <div class="preview-notice">{neighborOffer.consultationsOpen
+          ? 'Consultas abiertas para vecinos · La recepción de equipos requiere confirmar las condiciones aplicables'
+          : 'Vista previa · Variante para evaluación, todavía no disponible'}</div>
       : !released && <div class="preview-notice">Vista previa · Servicio aún no abierto a reservas</div>}
     <header class="site-header">
       <div class="container header-inner">

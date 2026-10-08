@@ -4,12 +4,11 @@ import portrait from '../assets/carlos-ortega-hq.webp';
 import Layout from '../Layout.astro';
 import { business, money, neighborOffer, neighborServices } from '../config';
 import { devices, powerStates, whatsappUrl } from '../lib/neighbor-contact';
+import { neighborTestimonials } from '../data/neighbor-testimonials';
 
+// Commercial enquiries do not imply permission to receive or repair devices.
 const contactReady =
-  __SUPPORT_RELEASE__ &&
-  business.confirmed.municipalPermit &&
-  neighborOffer.ready &&
-  neighborOffer.operatingAuthorizationConfirmed &&
+  neighborOffer.consultationsOpen &&
   /^569\d{8}$/.test(business.whatsapp);
 
 const neighborDevices = devices.filter(
@@ -40,7 +39,7 @@ const faqs = [
   ],
   [
     '¿Cuánto demora?',
-    'Antes de recibir el equipo confirmamos disponibilidad y una estimación para la revisión inicial. El tiempo de una eventual reparación depende del diagnóstico, los repuestos y tu autorización; te informo antes de continuar.',
+    `La primera revisión se realiza dentro de ${neighborOffer.initialReviewHours} horas desde la recepción coordinada. La reparación puede tomar más tiempo: te explico los plazos y costos antes de intervenir.`,
   ],
   [
     '¿Qué pasa si decido no reparar?',
@@ -84,7 +83,7 @@ const faqs = [
         <a class="button" href={directContactUrl} target={contactReady ? "_blank" : undefined} rel={contactReady ? "noopener noreferrer" : undefined} data-neighbor-direct={contactReady ? "true" : undefined} data-neighbor-cta="hero">{contactReady ? 'Consultar por WhatsApp' : 'Describir mi problema'} <span aria-hidden="true">↗</span></a>
         <a class="text-link" href="#precios">Ver servicios y precios <span aria-hidden="true">↓</span></a>
       </div>
-      <p class="hero-footnote">Diagnóstico inicial <strong>{money(diagnostic.price)}</strong> · Se abona a un servicio de mayor valor si lo autorizas</p>
+      <p class="hero-footnote">Diagnóstico inicial <strong>{money(diagnostic.price)}</strong> · Primera revisión dentro de {neighborOffer.initialReviewHours} horas desde la recepción acordada</p>
       <div class="hero-trust">
         <Image src={portrait} alt="Retrato de Carlos Ortega" width={52} height={52} loading="lazy" densities={[1, 2]} format="webp" quality={88} />
         <p><strong>Soy Carlos, vecino del edificio</strong><span class="hero-trust-links"><a href={business.parent}>Tooltician ↗</a><a href={business.github}>GitHub ↗</a><a href={business.linkedin}>LinkedIn ↗</a></span></p>
@@ -104,7 +103,7 @@ const faqs = [
     </aside>
   </section>
 
-  <div class="trust-strip"><div class="container"><span>✓ Identidad verificable</span><span>✓ Precios publicados</span><span>✓ Tú autorizas</span><span>✓ Trabajo documentado</span></div></div>
+  <div class="trust-strip"><div class="container"><span>✓ Primera revisión en {neighborOffer.initialReviewHours} h</span><span>✓ Precios publicados</span><span>✓ Tú autorizas</span><span>✓ Trabajo documentado</span></div></div>
 
   <section id="servicios" class="section container neighbors-services" data-section-event="support_service_view">
     <div class="section-heading"><div><p class="eyebrow">PROBLEMAS FRECUENTES</p><h2>¿Qué le pasa a tu equipo?</h2></div><p>No necesitas saber el nombre técnico de la falla. Reviso PC y notebooks con Windows; si requiere otra especialidad, te lo indicaré.</p></div>
@@ -118,7 +117,7 @@ const faqs = [
     <div class="container"><p class="eyebrow">CADA PASO, ACORDADO</p><h2>De tu consulta a una respuesta clara.</h2>
       <ol class="steps">
         <li><span>01</span><h3>Me cuentas el problema</h3><p>Qué equipo tienes, qué ocurre y si hay archivos importantes sin respaldo.</p></li>
-        <li><span>02</span><h3>Confirmamos disponibilidad</h3><p>Acordamos si puedo recibirlo, cómo entregarlo y cuándo estimaría revisarlo.</p></li>
+        <li><span>02</span><h3>Coordinamos la recepción</h3><p>Confirmamos las condiciones y la disponibilidad. Si acordamos recibirlo, hago la primera revisión dentro de {neighborOffer.initialReviewHours} horas.</p></li>
         <li><span>03</span><h3>Conoces las opciones</h3><p>Te explico el diagnóstico y el precio antes de intervenir.</p></li>
         <li><span>04</span><h3>Decides y comprobamos</h3><p>Solo realizo lo autorizado. Al terminar, recibes un resumen del resultado.</p></li>
       </ol>
@@ -146,6 +145,24 @@ const faqs = [
     </div>
   </section>
 
+  <section id="experiencias" class="section container neighbor-testimonials" aria-labelledby="neighbor-testimonials-heading">
+    <div class="section-heading">
+      <div><p class="eyebrow">EXPERIENCIAS Y REFERENCIAS REALES</p><h2 id="neighbor-testimonials-heading">Lo que han dicho de mi trabajo.</h2></div>
+      <p>Comentarios de soporte técnico y una recomendación profesional. Cada uno se presenta con su contexto, sin puntuaciones inventadas.</p>
+    </div>
+    <div class="neighbor-testimonials-grid">
+      {neighborTestimonials.map((item) =>
+        <figure class="neighbor-testimonial" data-proof-type={item.type}>
+          <div class="neighbor-proof-label">{item.type === 'soporte' ? 'Experiencia de soporte' : 'Recomendación profesional'}</div>
+          <blockquote>“{item.quote}”</blockquote>
+          <figcaption><strong>{item.author}</strong><span>{item.source}</span></figcaption>
+          <p>{item.context}</p>
+        </figure>
+      )}
+    </div>
+    <p class="neighbor-proof-note">Cada equipo y cada problema son distintos. Estos comentarios no garantizan resultados idénticos en otros casos.</p>
+  </section>
+
   <section id="quien-te-atiende" class="about section" data-section-event="support_about_view">
     <div class="container about-grid">
       <div class="identity-card"><Image src={portrait} alt="Carlos Ortega, responsable de Tooltician Soporte" widths={[320, 480, 640, 800, 960]} sizes="(max-width: 760px) 320px, 370px" format="webp" quality={88} loading="lazy" /><p>Atención personal y verificable.<br /><strong>Sabes quién responde por el servicio.</strong></p></div>
@@ -159,7 +176,7 @@ const faqs = [
       <div><span class="service-index">01</span><h3>Hallazgos</h3><span>Diagnóstico<small>y alternativas</small></span></div>
       <div><span class="service-index">02</span><h3>Trabajo autorizado</h3><span>Detalle<small>de lo realizado</small></span></div>
       <div><span class="service-index">03</span><h3>Comprobaciones</h3><span>Resultado<small>y pendientes</small></span></div>
-      <p>Antes de recibir el equipo se confirma disponibilidad y una estimación para su revisión. El tiempo de reparación se determina caso a caso.</p>
+      <p>La primera revisión se realiza dentro de {neighborOffer.initialReviewHours} horas desde la recepción coordinada. El plazo de reparación depende de cada caso.</p>
     </div>
   </section>
 
@@ -172,7 +189,7 @@ const faqs = [
 
   <section id="consulta" class="contact-section section">
     <div class="container contact-grid">
-      <div><p class="eyebrow">PARTAMOS POR EL PROBLEMA</p><h2>Cuéntame qué<br /><em>necesitas resolver.</em></h2><p>Describe el problema en tus palabras. Puedes preparar un mensaje con los datos útiles; no necesitas saber qué reparación hace falta.</p>{contactReady && <p><a class="text-link" href={directContactUrl} target="_blank" rel="noopener noreferrer" data-neighbor-direct="true" data-neighbor-cta="contact-direct">Prefiero escribir directamente por WhatsApp ↗</a></p>}<p>No incluyas contraseñas ni archivos privados.</p>{!contactReady && <p class="preview-contact">Esta variante está en evaluación. Puedes probar el formulario; todavía no envía consultas.</p>}<p class="muted">La disponibilidad y una estimación de revisión se confirman antes de recibir el equipo. El tiempo de reparación depende del caso.</p></div>
+      <div><p class="eyebrow">PARTAMOS POR EL PROBLEMA</p><h2>Cuéntame qué<br /><em>necesitas resolver.</em></h2><p>Describe el problema en tus palabras. Puedes preparar un mensaje con los datos útiles; no necesitas saber qué reparación hace falta.</p>{contactReady && <p><a class="text-link" href={directContactUrl} target="_blank" rel="noopener noreferrer" data-neighbor-direct="true" data-neighbor-cta="contact-direct">Prefiero escribir directamente por WhatsApp ↗</a></p>}<p>No incluyas contraseñas ni archivos privados.</p>{!contactReady && <p class="preview-contact">Esta variante está en evaluación. Puedes probar el formulario; todavía no envía consultas.</p>}<p class="muted">{neighborOffer.turnaround} La consulta no equivale a una reserva de recepción.</p></div>
       <form id="neighbor-triage" novalidate>
         <div class="form-grid">
           <div class="field"><label for="device">Equipo</label><select id="device" name="device" required aria-describedby="device-error"><option value="">Selecciona</option>{neighborDevices.map((device) => <option>{device}</option>)}</select><span class="field-error" id="device-error"></span></div>

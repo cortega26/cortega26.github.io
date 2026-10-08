@@ -10,7 +10,7 @@ const { chromium } = await import(
 const root = "output/support-fixture";
 // The real portrait is the one fact the fixture must not invent: the page
 // imports it through astro:assets, so the fixture build needs a real image.
-const portrait = "src/assets/carlos-ortega.jpeg";
+const portrait = "src/assets/carlos-ortega-hq.webp";
 await rm(root, { recursive: true, force: true });
 await mkdir(root, { recursive: true });
 await cp("support/src", `${root}/src`, { recursive: true });

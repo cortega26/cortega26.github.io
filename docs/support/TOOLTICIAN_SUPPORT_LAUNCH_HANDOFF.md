@@ -909,7 +909,7 @@ Hechos de contacto y enlaces, todos en `support/src/config.ts` y usados como
 | `linkedin` | `https://www.linkedin.com/in/cortega26` |
 | `whatsapp` | `56951118901` |
 | `email` | `carlos@tooltician.com` |
-| `photo` | `src/assets/carlos-ortega.jpeg` |
+| `photo` | `src/assets/carlos-ortega-hq.webp` |
 | `reviewUrl` | *(vacío — soft blocker)* |
 | `analyticsId` | *(vacío — soft blocker)* |
 | `availability` | `Atención previa coordinación` |
@@ -924,7 +924,7 @@ el CTA del hero y de nuevo en la sección de identidad.
 El retrato real está en:
 
 ```text
-support/src/assets/carlos-ortega.jpeg
+support/src/assets/carlos-ortega-hq.webp
 ```
 
 Procesado por Astro a WebP responsive.

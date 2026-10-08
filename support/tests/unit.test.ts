@@ -341,6 +341,7 @@ test("measurement never blocks a release, legal and contact facts always do", ()
 });
 test("the verified portrait flag is backed by the declared asset", () => {
   assert.equal(business.verified.portrait, true);
+  assert.equal(business.photo, "src/assets/carlos-ortega-hq.webp");
   assert.ok(
     existsSync(join(import.meta.dirname, "..", business.photo)),
     `${business.photo} must exist to count as verified`,

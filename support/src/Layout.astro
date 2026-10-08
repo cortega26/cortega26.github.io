@@ -106,7 +106,7 @@ const schema = neighbors
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href={sectionBase} aria-label={neighbors ? 'Tooltician Soporte para vecinos, inicio' : 'Tooltician Soporte a domicilio, inicio'}><img class="brand-mark" src="/tooltician-logo-64.webp" srcset="/tooltician-logo-64.webp 1x, /tooltician-logo-128.webp 2x" alt="" width="41" height="41" decoding="async" /><span>tooltician<span class="brand-sub">{brandSubtitle}</span></span></a>
-        <nav aria-label="Principal"><a href={`${sectionBase}#servicios`}>Servicios</a><a href={`${sectionBase}#precios`}>Precios</a><a href={`${sectionBase}#como-funciona`}>{neighbors ? 'Cómo funciona' : 'Cobertura'}</a></nav>
+        <nav aria-label="Principal"><a href={`${sectionBase}#servicios`}>Servicios</a><a href={`${sectionBase}#precios`}>Precios</a><a href={neighbors ? '/vecinos/#como-funciona' : '/#cobertura'}>{neighbors ? 'Cómo funciona' : 'Cobertura'}</a></nav>
         <a class="button small header-cta" href={`${sectionBase}#consulta`} data-cta="header">Consultar <span aria-hidden="true">↗</span></a>
       </div>
     </header>

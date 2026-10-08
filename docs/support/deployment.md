@@ -193,6 +193,42 @@ Capturas en `output/support-preview/` (390 px y 1440 px), fuera del repositorio.
 - Sin GA4, sin Search Console y sin Google Business Profile.
 - TLS y cabeceras verificados solo en el hostname `*.pages.dev` del preview.
 
+## Despliegue automático del preview desde GitHub Actions (sin Desktop Commander)
+
+La automatización está en `.github/workflows/support-cloudflare-preview.yml`. Se ejecuta
+al integrar cambios en `support/**`, dependencias o el propio workflow en `master`;
+también permite `workflow_dispatch` manual. No interviene en el sitio principal
+de GitHub Pages, `public/CNAME`, dominio personalizado ni publicación de producción.
+
+Credenciales de la cuenta Cloudflare, configuradas **una sola vez** en el repositorio:
+
+- **Actions secret** `CLOUDFLARE_API_TOKEN`: token con permisos mínimos para editar
+  Cloudflare Pages en la cuenta propietaria del proyecto `tooltician-support`.
+  Guardarlo como secreto; nunca enviarlo por chat, añadirlo a código o logs.
+- **Actions variable** `CLOUDFLARE_ACCOUNT_ID`: identificador de la cuenta de
+  Cloudflare donde ya existe ese proyecto. El ID no es una credencial.
+- No utilizar `CF_API_TOKEN` de scripts personales como sustituto implícito de
+  esta credencial de CI. No compartir una clave de acceso global.
+
+Si falta cualquiera de los dos valores, el job se marca como **omitido**
+en su resumen, sin compilar ni realizar llamadas a Cloudflare. Una vez
+configurados, en GitHub > Actions > **Tooltician Support Cloudflare Preview**
+> **Run workflow** se ejecuta la publicación inicial; los cambios posteriores
+en el subproyecto se despliegan al fusionarse en `master`.
+
+El workflow ejecuta `npm ci`, `npm run support:verify` y un
+`wrangler pages deploy` a la rama de preview fija
+`feat/tooltician-support-v1` del proyecto **existente** `tooltician-support`,
+con `SUPPORT_RELEASE=0`. Evita construir o publicar por accidente el sitio general
+en modo producción. Comprueba luego por HTTP que el alias estable muestra los
+dos testimonios identificados, el plazo de 24 horas, WhatsApp y `noindex`.
+Falla si el contenido remoto no coincide con el commit desplegado.
+
+**Importante:** este mecanismo solo resuelve el despliegue técnico del preview.
+Las consultas para vecinos están abiertas por decisión del titular, pero el
+repositorio **no** declara obtenida la autorización municipal para recibir
+o reparar computadores en el departamento: los flags de permiso siguen falsos.
+
 ## Dominio y seguridad
 
 Confirmar TLS, HTTP→HTTPS, canonical y las cabeceras de `support/public/_headers`.

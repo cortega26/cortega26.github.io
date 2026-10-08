@@ -7,7 +7,9 @@ import { devices, powerStates, whatsappUrl } from '../lib/neighbor-contact';
 
 const contactReady =
   __SUPPORT_RELEASE__ &&
+  business.confirmed.municipalPermit &&
   neighborOffer.ready &&
+  neighborOffer.operatingAuthorizationConfirmed &&
   /^569\d{8}$/.test(business.whatsapp);
 
 const neighborDevices = devices.filter(

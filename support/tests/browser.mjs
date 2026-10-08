@@ -149,6 +149,21 @@ try {
     );
     // Residents preview: no outbound booking, but a usable guided message.
     await page.goto(base + "/vecinos/");
+    if (name === "chromium") {
+      for (const width of [390, 1440]) {
+        await page.setViewportSize({ width, height: 950 });
+        await page.evaluate(() => document.fonts.ready);
+        assert.ok(
+          await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+          `Neighbors: no horizontal overflow at ${width}`,
+        );
+        await page.screenshot({
+          path: `${output}/neighbors-${width}.png`,
+          fullPage: true,
+        });
+      }
+      await page.setViewportSize({ width: 390, height: 844 });
+    }
     assert.match(await page.locator("h1").innerText(), /falla o no enciende/i);
     assert.equal(await page.locator("#neighbor-whatsapp-link").count(), 0);
     await page.locator('[data-neighbor-cta="services"][data-service="upgrade"]').click();

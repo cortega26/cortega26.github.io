@@ -33,16 +33,16 @@ test("flyer preview is informative, focused, private and does not enable booking
   const html = readFileSync(join(dist, "flyer", "index.html"), "utf8");
   assert.match(html, /noindex, nofollow/);
   assert.match(html, /Vista previa/);
-  assert.equal((html.match(/<h1\\b/g) ?? []).length, 1);
-  assert.doesNotMatch(html, /href="https:\\/\\/wa\\.me\\//);
+  assert.equal(html.split("<h1").length - 1, 1);
+  assert.ok(!html.includes('href="https://wa.me/'));
   assert.doesNotMatch(html, /aria-label="Principal"/, "short landing has no competing header navigation");
   assert.match(html, /Visita y diagnóstico desde/);
   for (const city of ["Macul", "Ñuñoa", "Providencia"]) assert.ok(html.includes(city));
   assert.match(html, /No pagas dos veces el diagnóstico/);
   assert.match(html, /No se suman ambos/);
   assert.match(html, /carlos-ortega/);
-  assert.match(html, /href="\\/#servicios"/);
-  assert.match(html, /href="\\/#preguntas"/);
+  assert.ok(html.includes('href="/#servicios"'));
+  assert.ok(html.includes('href="/#preguntas"'));
 });
 
 test("built page ships the optimized portrait with sober alt text and no placeholder", { skip: requiresBuild }, () => {

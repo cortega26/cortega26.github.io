@@ -4,10 +4,10 @@
  * form_submit_success / form_submit_error) via window.ttTrack when present.
  *
  * Sprint 0 (canonical lead funnel): mirrors the same lifecycle as
- * brief_start / brief_submit / brief_success / brief_error — plus
- * service_engage when the form lives in a real service scope — via
+ * brief_start / brief_submit / brief_success / brief_error, plus
+ * service_engage when the form lives in a real service scope, via
  * window.ttAnalytics when present. Legacy event names are unchanged.
- * Only coarse, content-free params are ever emitted — form field values,
+ * Only coarse, content-free params are ever emitted, form field values,
  * messages, and raw responses are never read for analytics.
  */
 (() => {
@@ -56,7 +56,7 @@
    * Show a submit-result banner and bring it into view. On short/mobile
    * viewports the banner sits right after the submit button and can render
    * below the visible viewport with no scroll or focus change (confirmed via
-   * live production inspection at 375x812) — every prior automated check ran
+   * live production inspection at 375x812), every prior automated check ran
    * at desktop height, where the banner was already in view, so this went
    * unnoticed. `aria-live` already announces it to screen readers; this adds
    * the matching visual/keyboard signal for sighted users on a small screen.

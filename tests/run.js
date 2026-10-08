@@ -528,8 +528,8 @@ group('CRO-2 · Services make the primary ICP explicit', () => {
   );
   assert(
     'Operational systems are explicitly the primary focus',
-    src.includes('Operational systems — primary focus') &&
-      src.includes('Sistemas operativos — foco principal') &&
+    src.includes('Operational systems: primary focus') &&
+      src.includes('Sistemas operativos: foco principal') &&
       src.includes('operations, finance') &&
       src.includes('operaciones, finanzas'),
     'Primary operational ICP is not explicit'

@@ -302,7 +302,7 @@ const pythonAutomation: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Questions worth answering precisely',
     faqs: [
-      ['How do you price this: hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
+      ['Is pricing hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
       [`What does the ${pricing.automation.en.scoping} scoping include?`, `A written scope document: inputs, outputs, owner, failure modes, and success criteria, plus a fixed-price quote for the build. If you proceed, the ${pricing.automation.en.scoping} is credited toward the build.`],
       ['Do you need access to our systems?', 'For scoping, usually not. For the build, controlled access to the relevant data sources, repository, or environment is required: scoped to what the work needs and no more.'],
       ['What language and stack do you use?', 'Primarily Python (Pandas, FastAPI, Selenium, BeautifulSoup) with SQL, Bash, GitHub Actions, and reliability-minded packaging. The stack is chosen to fit your environment and handoff, not the other way around.'],
@@ -514,7 +514,7 @@ const pythonAutomation: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
-      ['¿Cómo cobras esto: por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
+      ['¿Cobras por hora o a precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
       [`¿Qué incluye el diagnóstico de ${pricing.automation.es.scoping}?`, `Un documento de alcance: inputs, outputs, responsable, modos de falla y criterios de éxito, más una cotización a precio fijo. Si avanzas, las ${pricing.automation.es.scoping} se acreditan a la construcción.`],
       ['¿Necesitas acceso a nuestros sistemas?', 'Para el diagnóstico, normalmente no. Para la construcción se requiere acceso controlado a las fuentes de datos, el repositorio o el entorno relevante: acotado a lo que el trabajo necesita y nada más.'],
       ['¿Qué lenguaje y stack usas?', 'Principalmente Python (Pandas, FastAPI, Selenium, BeautifulSoup) con SQL, Bash, GitHub Actions y empaquetado orientado a confiabilidad. El stack se elige para encajar con tu entorno y traspaso, no al revés.'],
@@ -660,7 +660,7 @@ const recurringData: ServiceDefinition = {
     contactRiskNote:
       'If scoping shows the source is not lawful, stable, or worth collecting on a schedule, the document says so with reasoning, knowing the real constraint early is also valuable. The fee applies regardless, but there are no surprises or additional charges.',
     outreach:
-      'If you arrived here because a recurring source feeds your reporting, operations, or publishing (or because a scraper keeps failing quietly) the scope is this: lock the source contract, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
+      'If you arrived here because a recurring source feeds your reporting, operations, or publishing (or because a scraper keeps failing quietly), the scope is this: lock the source contract, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
   },
   es: {
     ...pythonAutomation.es,
@@ -739,7 +739,7 @@ const recurringData: ServiceDefinition = {
       'Concreto desde el primer paso: fijar el contrato de fuente, construir el colector más pequeño que sea confiable y dejarlo documentado para operarlo y repararlo sin mí.',
     processSteps: [
       ['01', 'Llamada de diagnóstico gratuita', 'Una llamada de 15 minutos para confirmar que la fuente, su autorización y el uso posterior son un buen encaje. Sin costo ni compromiso.'],
-      ['02', 'Levantamiento de recolección', 'Un descubrimiento breve y pagado que fija fuentes, autorización, frecuencia, reglas de validación, comportamiento ante fallas y responsable de traspaso: acordado por escrito. El monto se acredita a la construcción.'],
+      ['02', 'Levantamiento de recolección', 'Un descubrimiento breve y pagado que fija fuentes, autorización, frecuencia, reglas de validación, comportamiento ante fallas y responsable de traspaso, acordado por escrito. El monto se acredita a la construcción.'],
       ['03', 'Construcción del colector acotado', 'Implementación con progreso visible en GitHub, validación, logging, alertas y decisiones documentadas en lugar de scope creep sorpresivo.'],
       ['04', 'Traspaso', 'README, runbook, notas de reparación y los puntos de falla a vigilar, para que la siguiente persona pueda operarlo, depurarlo y repararlo sin una llamada conmigo.'],
     ],
@@ -775,7 +775,7 @@ const recurringData: ServiceDefinition = {
     contactRiskNote:
       'Si el levantamiento muestra que la fuente no es lícita, estable o no vale la pena recolectarla de forma programada, el documento lo dirá con fundamentos: conocer la restricción real a tiempo también vale. El monto se aplica igual, pero sin sorpresas ni cargos adicionales.',
     outreach:
-      'Si llegaste aquí porque una fuente recurrente alimenta tus reportes, operaciones o publicación (o porque un scraper sigue fallando en silencio) el alcance es este: fijar el contrato de fuente, construirlo de forma confiable y traspasarlo documentado. Precio fijo, sin horas abiertas.',
+      'Si llegaste aquí porque una fuente recurrente alimenta tus reportes, operaciones o publicación (o porque un scraper sigue fallando en silencio), el alcance es este: fijar el contrato de fuente, construirlo de forma confiable y traspasarlo documentado. Precio fijo, sin horas abiertas.',
   },
 };
 
@@ -969,9 +969,9 @@ const internalTools: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Questions worth answering precisely',
     faqs: [
-      ['How do you price this: hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
+      ['Is pricing hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
       [`What does the ${pricing.internalTools.en.scoping} scoping include?`, `A written interface contract: users, valid inputs, access model, and handoff target, plus a fixed-price quote. If you proceed, the ${pricing.internalTools.en.scoping} is credited toward the build.`],
-      ['Can you wrap an existing script we already have?', 'Yes: that is the common case. I wrap existing logic behind a clean interface with validation, tests, and docs, rather than rewriting it from scratch unless the code requires it.'],
+      ['Can you wrap an existing script we already have?', 'Yes. That is the common case. I wrap existing logic behind a clean interface with validation, tests, and docs, rather than rewriting it from scratch unless the code requires it.'],
       ['What stack do you use?', 'Primarily Python and FastAPI for APIs, plus CLIs and lightweight interfaces, with auth, tests, and GitHub Actions. The stack is chosen to fit your environment and handoff.'],
       ['Do you build the frontend too?', 'I build lean, functional interfaces where they help operators. This service is not a design-heavy product UI, if you need that, a Static Sites & Front Ends engagement is the better fit.'],
       ['Why is this priced in USD when the homepage shows UF?', 'This international service is delivered entirely in English with executive-ready documentation, priced in USD for US, UK, and EU clients. The Spanish version is calibrated for the Chilean and Latin American market in UF.'],
@@ -1180,9 +1180,9 @@ const internalTools: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
-      ['¿Cómo cobras esto: por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
+      ['¿Cobras por hora o a precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
       [`¿Qué incluye el diagnóstico de ${pricing.internalTools.es.scoping}?`, `Un contrato de interfaz por escrito: usuarios, inputs válidos, modelo de acceso y objetivo de traspaso, más una cotización a precio fijo. Si avanzas, las ${pricing.internalTools.es.scoping} se acreditan a la construcción.`],
-      ['¿Puedes empaquetar un script que ya tenemos?', 'Sí: es el caso común. Empaqueto la lógica existente detrás de una interfaz limpia con validación, tests y docs, en vez de reescribirla desde cero salvo que el código lo exija.'],
+      ['¿Puedes empaquetar un script que ya tenemos?', 'Sí. Es el caso más común. Empaqueto la lógica existente detrás de una interfaz limpia con validación, tests y docs, en vez de reescribirla desde cero salvo que el código lo exija.'],
       ['¿Qué stack usas?', 'Principalmente Python y FastAPI para APIs, más CLIs e interfaces livianas, con auth, tests y GitHub Actions. El stack se elige para encajar con tu entorno y traspaso.'],
       ['¿También construyes el frontend?', 'Construyo interfaces sobrias y funcionales donde ayudan a los operadores. Este servicio no es una UI de producto cargada de diseño, si necesitas eso, un proyecto de Sitios y Frontends encaja mejor.'],
       ['¿Por qué la versión en inglés se cotiza en USD y aquí en UF?', 'El servicio internacional se entrega completamente en inglés con documentación lista para gerencia, cotizado en USD para clientes de EE. UU., Reino Unido y Europa. La versión en español está calibrada para el mercado chileno y latinoamericano en UF.'],
@@ -1398,7 +1398,7 @@ const financialTooling: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Questions worth answering precisely',
     faqs: [
-      ['How do you price this: hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
+      ['Is pricing hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
       ['Why is this more expensive than the other services?', 'Trust-critical work carries more responsibility: the cost of a silent error is high, so the controls, tests, and audit artifacts are more rigorous. The pricing reflects that rigor.'],
       ['Is this a financial audit?', 'No. I am not a CPA and this is not a certified audit. I build the tooling and controls that make your finance work verifiable and audit-ready: the audit itself stays with your auditor.'],
       ['What does fail-closed mean here?', 'It means the system refuses to produce a confident result when inputs do not agree. It halts and flags instead of returning a number that looks fine but is wrong.'],
@@ -1609,7 +1609,7 @@ const financialTooling: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
-      ['¿Cómo cobras esto: por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
+      ['¿Cobras por hora o a precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
       ['¿Por qué es más caro que los otros servicios?', 'El trabajo crítico para la confianza conlleva más responsabilidad: el costo de un error silencioso es alto, así que los controles, tests y artefactos de auditoría son más rigurosos. El precio refleja ese rigor.'],
       ['¿Es esto una auditoría financiera?', 'No. No soy contador auditor y esto no es una auditoría certificada. Construyo el tooling y los controles que hacen verificable y lista-para-auditoría tu operación financiera: la auditoría en sí queda con tu auditor.'],
       ['¿Qué significa fail-closed aquí?', 'Significa que el sistema se niega a producir un resultado con confianza cuando los inputs no cuadran. Se detiene y marca en vez de devolver un número que se ve bien pero está equivocado.'],
@@ -1827,7 +1827,7 @@ const staticSites: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Questions worth answering precisely',
     faqs: [
-      ['How do you price this: hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
+      ['Is pricing hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
       ['What stack do you use?', 'Primarily Astro and static generation with minimal JavaScript, self-hosted fonts, and a GitHub Actions deploy. The result is fast, accessible, and maintainable.'],
       ['Can my team edit the site afterwards?', 'Yes. Content is structured so non-developers can make safe edits, and the handoff includes documentation for content updates, build, and deploy.'],
       ['Do you do e-commerce or complex web apps?', 'This service is for lean, fast public surfaces. Heavy e-commerce backends and complex web apps are out of scope: though I can advise on the right approach.'],
@@ -2039,7 +2039,7 @@ const staticSites: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
-      ['¿Cómo cobras esto: por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
+      ['¿Cobras por hora o a precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
       ['¿Qué stack usas?', 'Principalmente Astro y generación estática con JavaScript mínimo, fuentes self-hosted y despliegue con GitHub Actions. El resultado es rápido, accesible y mantenible.'],
       ['¿Mi equipo puede editar el sitio después?', 'Sí. El contenido se estructura para que no-desarrolladores editen con seguridad, y el traspaso incluye documentación para actualizar contenido, build y despliegue.'],
       ['¿Haces e-commerce o web apps complejas?', 'Este servicio es para superficies públicas sobrias y rápidas. Backends de e-commerce pesados y web apps complejas quedan fuera de alcance, aunque puedo asesorarte sobre el enfoque correcto.'],

@@ -165,7 +165,9 @@ try {
       await page.setViewportSize({ width: 390, height: 844 });
     }
     assert.match(await page.locator("h1").innerText(), /falla o no enciende/i);
-    assert.equal(await page.locator("#neighbor-whatsapp-link").count(), 0);
+    assert.equal(await page.locator(".neighbor-testimonial").count(), 3);
+    assert.match(await page.locator("#experiencias").innerText(), /Greily Molina/);
+    assert.equal(await page.locator("#neighbor-whatsapp-link").count(), 1);
     await page.locator('[data-neighbor-cta="services"][data-service="upgrade"]').click();
     assert.equal(await page.locator("#neighbor-triage #service").inputValue(), "upgrade");
     await page.locator("#consulta").scrollIntoViewIfNeeded();
@@ -185,7 +187,7 @@ try {
       await page.locator("#neighbor-message-preview").innerText(),
       /soy vecino\/a del edificio/i,
     );
-    assert.equal(await page.locator("#neighbor-whatsapp-link").count(), 0);
+    assert.match(await page.locator("#neighbor-whatsapp-link").getAttribute("href"), /^https:\/\/wa\.me\//);
     await page.fill("#neighbor-triage #problem", "Un síntoma distinto.");
     assert.ok(await page.locator("#neighbor-message-result").isHidden());
     assert.deepEqual(errors, [], `${name} browser errors`);

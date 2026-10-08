@@ -18,7 +18,7 @@
     });
 
     // A thematic group whose cards are all filtered out disappears with them
-    // (Plan 030) — no empty headings left behind.
+    // (Plan 030), no empty headings left behind.
     document.querySelectorAll('.work-group').forEach((group) => {
       const anyVisible = group.querySelector('.project-card:not([hidden])') !== null;
       group.hidden = !anyVisible;

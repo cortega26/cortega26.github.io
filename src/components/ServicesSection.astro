@@ -17,9 +17,9 @@ const SVG_SHIELD   = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none
 const en = {
   eyebrow: 'Services', title: 'Start with the bottleneck, not the technology.',
   subtitle: 'Tooltician is primarily for operations, finance, and small technical teams with recurring work that is manual, fragile, or owned by one person. The web services remain available, but they are secondary to that core.',
-  coreTitle: 'Operational systems — primary focus',
+  coreTitle: 'Operational systems: primary focus',
   coreSubtitle: 'Automation, recurring data, internal tools, and financial controls for workflows already affecting day-to-day work.',
-  adjacentTitle: 'Web surfaces — when the bottleneck is public-facing',
+  adjacentTitle: 'Web surfaces: when the bottleneck is public-facing',
   adjacentSubtitle: 'Focused sites and technical hygiene when the business problem is clarity, reliability, or ownership of a live web surface.',
   fitLabel: 'Best when:',
   scopeLabel: 'Scope:',
@@ -55,9 +55,9 @@ const en = {
 const es = {
   eyebrow: 'Servicios', title: 'Empieza por el cuello de botella, no por la tecnología.',
   subtitle: 'Tooltician está enfocado primero en equipos de operaciones, finanzas y negocios con trabajo recurrente que sigue siendo manual, frágil o dependiente de una sola persona. Los servicios web siguen disponibles, pero son secundarios a ese foco.',
-  coreTitle: 'Sistemas operativos — foco principal',
+  coreTitle: 'Sistemas operativos: foco principal',
   coreSubtitle: 'Automatización, recolección recurrente, herramientas internas y controles financieros para flujos que ya afectan el trabajo diario.',
-  adjacentTitle: 'Web — cuando el cuello de botella está en la superficie pública',
+  adjacentTitle: 'Web: cuando el cuello de botella está en la superficie pública',
   adjacentSubtitle: 'Sitios acotados e higiene técnica cuando el problema comercial es claridad, confiabilidad o ownership de una web activa.',
   fitLabel: 'Encaja cuando:',
   scopeLabel: 'Alcance:',
@@ -98,7 +98,7 @@ const displayName = (id: string) => {
   return service ? (lang === 'en' ? service.public_name : service.public_name_es) : id;
 };
 
-// Concrete deliverable per service — anchors perceived value to a tangible
+// Concrete deliverable per service: anchors perceived value to a tangible
 // outcome rather than an abstract capability. Keyed by registry service_id.
 const serviceResults: Record<string, string> = lang === 'en' ? {
   'automation': 'A tested pipeline with a schedule, logging, alerts, structured outputs, README, and runbook.',

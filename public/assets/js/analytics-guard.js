@@ -1,5 +1,5 @@
 /**
- * Environment guard for GA4 — must run synchronously BEFORE the inline gtag stub.
+ * Environment guard for GA4, must run synchronously BEFORE the inline gtag stub.
  *
  * Only the production hosts may send GA4 hits. On any other host (localhost,
  * LAN preview, file://, forks) it sets GA's documented opt-out flag

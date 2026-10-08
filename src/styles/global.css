@@ -1,5 +1,5 @@
 /* ============================================================
-  TOOLTICIAN — Industrial Design System
+  TOOLTICIAN: Industrial Design System
   Dark theme · Precision · Survives handoff
   ============================================================ */
 
@@ -22,7 +22,7 @@
 
 /* ---- Design Tokens ---- */
 :root {
-  /* Colors — refined dark */
+  /* Colors: refined dark */
   --clr-bg:          #0b1121;
   --clr-bg-card:     #111827;
   --clr-bg-card-hover: #1a2237;
@@ -37,7 +37,7 @@
   --clr-accent-2:    #b8923a;
   --clr-accent-warm: #c4a04a;
   --clr-focus-ring:  rgba(196, 160, 74, 0.3);
-  /* Dedicated success signal — kept separate from --clr-accent (gold, used
+  /* Dedicated success signal: kept separate from --clr-accent (gold, used
      for brand/CTA emphasis) so a completed action reads as unambiguously
      "done" rather than just "notable". Tailwind green-400: ~8:1 contrast
      against the card background, pairs with the existing error red (also a
@@ -48,7 +48,7 @@
   --clr-text-muted:  #94a3b8;
   --clr-text-faint:  #64748b;
 
-  /* Typography — industrial */
+  /* Typography: industrial */
   --ff-heading: 'Archivo', sans-serif;
   --ff-body:    'Archivo', sans-serif;
   --ff-label:   'JetBrains Mono', ui-monospace, monospace;
@@ -669,7 +669,7 @@ ul { list-style: none; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  /* Reveal elements must be immediately visible — they start at opacity:0 */
+  /* Reveal elements must be immediately visible: they start at opacity:0 */
   .reveal {
     opacity: 1 !important;
     transform: none !important;

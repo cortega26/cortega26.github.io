@@ -48,7 +48,7 @@
     "Profesional, consultora o e-commerce pequeño",
     "Preguntas que conviene responder con precisión",
     "Parte por saber qué pasa",
-    "Diagnóstico técnico web — 1 UF",
+    "Diagnóstico técnico web: 1 UF",
     "Solicita tu diagnóstico"
   ],
   "links": [
@@ -253,7 +253,7 @@
           "name": "¿El precio es negociable?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Los valores están fijados en UF para mantener una referencia estable. Para agencias con varios sitios o proyectos de mayor volumen, es posible acordar condiciones distintas en la propuesta — escríbeme con el contexto y lo vemos."
+            "text": "Los valores están fijados en UF para mantener una referencia estable. Para agencias con varios sitios o proyectos de mayor volumen, podemos acordar condiciones distintas. Escríbeme con el contexto y lo vemos."
           }
         },
         {
@@ -261,7 +261,7 @@
           "name": "¿Los precios son los mismos en todos los países?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Los planes en esta versión están cotizados en UF para el mercado chileno, con documentación en español adaptada a ese contexto. Para clientes fuera de Chile, la propuesta se emite en USD o moneda acordada, con ajuste de alcance según idioma de entrega, zona horaria y nivel de documentación requerido. La diferencia no es de calidad — es de contexto operativo."
+            "text": "No. Los planes en esta versión están cotizados en UF para el mercado chileno, con documentación en español adaptada a ese contexto. Para clientes fuera de Chile, la propuesta se emite en USD o moneda acordada, con ajuste de alcance según idioma de entrega, zona horaria y nivel de documentación requerido. La diferencia no es de calidad: es de contexto operativo."
           }
         },
         {
@@ -277,7 +277,7 @@
           "name": "¿El servicio es igual al de la versión en inglés?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "El nivel técnico aplicado es el mismo. Lo que difiere es el alcance del entregable: idioma de la documentación, estándar de presentación y calibración de precio al mercado local. No es una versión de menor calidad — es una versión diseñada para un contexto de operación distinto."
+            "text": "El nivel técnico aplicado es el mismo. Lo que difiere es el alcance del entregable: idioma de la documentación, estándar de presentación y calibración de precio al mercado local. No es una versión de menor calidad, sino una versión diseñada para un contexto de operación distinto."
           }
         }
       ]

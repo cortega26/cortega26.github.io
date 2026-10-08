@@ -24,7 +24,7 @@ const enrichProjects = (projects: CaseStudy[], currentLang: 'en' | 'es'): CaseSt
     if (!stats) return proj;
     const { stars, forks } = stats;
 
-    // 1. Generate impact lines from live stats (single path — no regex).
+    // 1. Generate impact lines from live stats (single path, no regex).
     //    Skip zero-count repos so we never render ★ 0 or 0 forks;
     //    those keep their static impact strings untouched.
     let newImpact = proj.impact;

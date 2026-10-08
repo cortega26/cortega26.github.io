@@ -30,7 +30,7 @@
     "Consultant, professional, or small e-commerce",
     "Questions worth answering precisely",
     "Start with a reasonable diagnostic, not an inflated promise",
-    "Web technical diagnostic — $69",
+    "Web technical diagnostic: $69",
     "Request your diagnostic"
   ],
   "links": [
@@ -211,7 +211,7 @@
           "name": "What if the diagnostic finds nothing relevant?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It can happen, especially with well-maintained sites. In that case the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The diagnostic fee applies regardless, but there are no surprises or additional charges."
+            "text": "It can happen, especially with well-maintained sites. In that case, the report confirms it with evidence. Knowing the basics are solid is valuable before changing hosting, launching a campaign or handing the site to someone else. The diagnostic fee applies regardless, but there are no surprises or additional charges."
           }
         },
         {
@@ -219,7 +219,7 @@
           "name": "Can the scope grow during the review?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. The scope is defined by the contracted plan. If something beyond that scope appears during the review, it is documented in the report with a recommended next step — but not executed without prior agreement."
+            "text": "No. The scope is defined by the contracted plan. If something beyond that scope appears during the review, it is documented in the report with a recommended next step, but not executed without prior agreement."
           }
         },
         {
@@ -227,7 +227,7 @@
           "name": "Why are you less expensive than a local consultant?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A US or EU technical consultant typically bills $100–150/hour. The Full Review at $999 is the equivalent of 7–10 hours — with an executive-ready report delivered, not just a call. All deliverables are in English."
+            "text": "A US or EU technical consultant typically bills $100–150/hour. The Full Review at $999 is the equivalent of 7–10 hours, with an executive-ready report delivered, not just a call. All deliverables are in English."
           }
         },
         {
@@ -235,7 +235,7 @@
           "name": "Why are the prices different from the Spanish version?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The Spanish-language version is calibrated for the Chilean and Latin American market: different currency, different purchasing power, and documentation delivered in Spanish. The international service is priced in USD, delivered entirely in English, and structured to meet the expectations of clients in the US, UK, and European markets — including executive-ready deliverables and formal documentation standards. The technical scope is equivalent; the context of delivery is not."
+            "text": "The Spanish-language version is calibrated for the Chilean and Latin American market: different currency, different purchasing power, and documentation delivered in Spanish. The international service is priced in USD, delivered entirely in English, and structured to meet the expectations of clients in the US, UK, and European markets, including executive-ready deliverables and formal documentation standards. The technical scope is equivalent; the context of delivery is not."
           }
         },
         {
@@ -243,7 +243,7 @@
           "name": "Can I hire you if I prefer to work in Spanish?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. If your site is in English and you need deliverables in English, the international rates apply regardless of your language preference. If you prefer Spanish documentation and local pricing, the Spanish version of this service is the right entry point — same technical scope, calibrated for that market."
+            "text": "Yes. If your site is in English and you need deliverables in English, the international rates apply regardless of your language preference. If you prefer Spanish documentation and local pricing, the Spanish version of this service is the right entry point: same technical scope, calibrated for that market."
           }
         }
       ]

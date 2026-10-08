@@ -1,5 +1,5 @@
 /**
- * Sprint 0 analytics — canonical service/lead event layer for tooltician.com.
+ * Sprint 0 analytics, canonical service/lead event layer for tooltician.com.
  *
  * Tooltician is a consulting/portfolio site with productized services and a
  * lead-generation funnel (NOT a tools platform), so this layer uses the real
@@ -11,7 +11,7 @@
  *   template_open / language_select / contact_intent (generic fallback)
  *
  * Transport stays in track.js (window.ttTrack, queued until gtag is ready).
- * Page identity comes from GA4's built-in page dimensions — this layer sends
+ * Page identity comes from GA4's built-in page dimensions, this layer sends
  * no page_path of its own. service_id/service_category are attached only when
  * a real service context exists; generic surfaces omit them (never faked).
  *
@@ -101,7 +101,7 @@
     return trimmed.slice(0, MAX_LEN);
   }
 
-  /** Registry id or undefined — generic surfaces never fake a service context. */
+  /** Registry id or undefined, generic surfaces never fake a service context. */
   function resolveServiceId(candidate) {
     const clean = sanitizeString(candidate);
     if (clean && Object.prototype.hasOwnProperty.call(SERVICE_REGISTRY, clean)) return clean;
@@ -161,7 +161,7 @@
     const check = (key, value) => {
       if (value === undefined) return undefined;
       if (key === 'service_id') return resolveServiceId(typeof value === 'string' ? value : '');
-      // service_category is always derived from a valid service_id below —
+      // service_category is always derived from a valid service_id below:
       // raw caller input for it is ignored so it can never be forged.
       if (key === 'service_category') return undefined;
       if (key === 'contact_type') return CONTACT_TYPES.indexOf(value) !== -1 ? value : undefined;
@@ -426,6 +426,6 @@
       bindDeclarative();
     }
   } catch (_) {
-    /* timers/DOM unavailable — API remains callable */
+    /* timers/DOM unavailable, API remains callable */
   }
 })();

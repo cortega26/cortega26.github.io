@@ -1,5 +1,5 @@
 /**
- * Conversion instrumentation — GA4 (gtag.js direct).
+ * Conversion instrumentation, GA4 (gtag.js direct).
  *
  * Exposes window.ttTrack(name, props) and auto-binds clicks on any element
  * carrying [data-track]. Public contract preserved: ttTrack(name, {location, label, status}).
@@ -19,7 +19,7 @@
    * Canonical Sprint 0 params passed through verbatim to GA4 (in addition to
    * the legacy tt_* mapping). Allowlisted, string-only, length-capped so the
    * transport can never leak raw user content even if a caller errs.
-   * Page identity uses GA4's built-in page dimensions — no page_path here.
+   * Page identity uses GA4's built-in page dimensions, no page_path here.
    */
   const CANONICAL_PARAMS = [
     'service_id',
@@ -45,7 +45,7 @@
   /** @param {string | null} name @param {TrackingProps} [props] */
   function send(name, payload) {
     try {
-      // GA4 direct — single gtag('event') call, namespaced params (Plan 006).
+      // GA4 direct, single gtag('event') call, namespaced params (Plan 006).
       // gtag() queues via dataLayer internally; no additional dataLayer.push.
       if (typeof typedWindow.gtag === 'function') {
         /** @type {Record<string, unknown>} */
@@ -106,7 +106,7 @@
       }
     }, 500);
   } catch (_) {
-    /* timers unavailable — events stay queued until the next track() call */
+    /* timers unavailable, events stay queued until the next track() call */
   }
 
   // Auto-bind declarative click tracking.

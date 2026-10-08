@@ -49,7 +49,7 @@ const person: Record<JsonLdLocale, {
     url: `${SITE_ORIGIN}/`,
     jobTitle: 'Operational Systems & Python Automation Consultant',
     description:
-      'Reliable operational systems across Python automation, recurring data collection, internal tools, financial controls, focused front ends, and web technical hygiene — scoped and documented for handoff.',
+      'Reliable operational systems across Python automation, recurring data collection, internal tools, financial controls, focused front ends, and web technical hygiene: scoped and documented for handoff.',
     knowsAbout: [
       'Python Automation', 'ETL Pipelines', 'Data Engineering',
       'Web Scraping', 'Internal APIs', 'Reporting Automation',

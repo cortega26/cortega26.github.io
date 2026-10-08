@@ -101,8 +101,8 @@ const breadcrumbJsonLd = {
         <span class="section-eyebrow reveal">Guía · Tooltician</span>
         <h1 class="section-title enter-now enter-now--delay-1">Automatizar reportes de Excel con Python: qué conviene y qué no</h1>
         <p class="article-hero__lede reveal reveal-delay-2">
-          Si cada semana alguien de tu equipo arma el mismo reporte en Excel —abrir archivos, copiar
-          datos, cuadrar totales, dar formato, enviar por correo—, esta guía explica qué partes de ese
+          Si cada semana alguien de tu equipo arma el mismo reporte en Excel (abre archivos, copia
+          datos, cuadra totales, da formato y lo envía por correo), esta guía explica qué partes de ese
           trabajo conviene automatizar con Python, cómo es un pipeline bien construido y qué pedir por
           escrito cuando encargas el trabajo a un tercero.
         </p>
@@ -138,8 +138,8 @@ const breadcrumbJsonLd = {
         <p class="body-copy">
           El problema no es la dedicación del equipo sino el diseño del proceso: un flujo que
           depende de memoria, de copiar y pegar entre archivos y de revisiones visuales no avisa cuando
-          algo sale mal. El costo real —horas repetidas cada mes, números poco confiables, dependencia
-          de una sola persona— rara vez se mide porque está repartido en el trabajo cotidiano.
+          algo sale mal. El costo real (horas repetidas cada mes, números poco confiables, dependencia
+          de una sola persona) rara vez se mide porque está repartido en el trabajo cotidiano.
         </p>
         <p class="body-copy">
           Automatizar no significa eliminar a la persona del proceso. Significa mover su tiempo desde el
@@ -164,15 +164,15 @@ const breadcrumbJsonLd = {
         <p class="body-copy">
           También conviene cuando el costo del error es alto. Un reporte que alimenta facturación,
           remuneraciones o decisiones de compra no puede depender de una revisión visual apurada un
-          viernes en la tarde. La validación automática —que los totales cuadren, que no falten
-          registros— convierte un número frágil en un número confiable.
+          viernes en la tarde. La validación automática (que los totales cuadren y no falten
+          registros) convierte un número frágil en un número confiable.
         </p>
         <p class="body-copy">
           Y hay casos donde lo honesto es esperar. Si el reporte se genera por única vez, si las reglas
           todavía se están inventando o si las fuentes cambian de forma cada semana sin que nadie las
           controle, automatizar ahora es construir sobre arena: el desarrollo cuesta más que hacerlo a mano
           unas veces y el resultado se rompe seguido. En esa situación lo razonable es estabilizar primero
-          el proceso manual —fijar fuentes, formatos y responsables— y automatizar cuando el flujo ya es
+          el proceso manual (fijar fuentes, formatos y responsables) y automatizar cuando el flujo ya es
           repetible. Un buen diagnóstico dice esto de frente en vez de vender una construcción que no se
           justifica.
         </p>
@@ -185,7 +185,7 @@ const breadcrumbJsonLd = {
         <div class="divider"></div>
         <p class="body-copy">
           Un pipeline de reportes tiene cinco piezas, y vale la pena exigirlas todas. La primera es la
-          extracción: leer las fuentes —archivos Excel, CSV, bases de datos o sistemas internos— de forma
+          extracción: leer las fuentes (archivos Excel, CSV, bases de datos o sistemas internos) de forma
           programada y reproducible, sin pasos manuales intermedios. La segunda es la transformación con
           reglas explícitas en código: limpieza, cruces y cálculos que cualquiera puede leer, en lugar de
           fórmulas escondidas en celdas.
@@ -194,7 +194,7 @@ const breadcrumbJsonLd = {
           La tercera pieza es la validación, y es la que separa una automatización confiable de un script
           frágil. Antes de entregar, el sistema revisa que los datos tengan el esquema esperado, que los
           totales cuadren con las fuentes y que no haya vacíos ni duplicados inexplicados. Si algo no
-          cuadra, el pipeline falla de forma visible —con un registro del problema— en vez de publicar un
+          cuadra, el pipeline falla de forma visible (con un registro del problema) en vez de publicar un
           reporte incompleto que parece correcto. Las ejecuciones además son idempotentes: se pueden
           repetir con seguridad sin duplicar resultados.
         </p>
@@ -202,8 +202,8 @@ const breadcrumbJsonLd = {
           La cuarta pieza es la entrega programada al lugar donde el equipo realmente trabaja: el
           archivo Excel en la carpeta compartida, el correo con el adjunto o la planilla actualizada.
           Nada de portales nuevos que nadie abre. Y la quinta es la operación continua: registros de cada
-          ejecución, alertas cuando una fuente cambia o una validación falla, y documentación —un README
-          y un runbook— para que la siguiente persona opere el sistema sin depender del autor original.
+          ejecución, alertas cuando una fuente cambia o una validación falla, y documentación (un README
+          y un runbook) para que la siguiente persona opere el sistema sin depender del autor original.
         </p>
       </div>
     </section>
@@ -215,8 +215,8 @@ const breadcrumbJsonLd = {
         <p class="body-copy">
           Pide alcance fijo por escrito antes de construir: entradas y salidas del flujo, responsable
           de cada fuente, qué es una ejecución correcta y qué debe pasar cuando algo falla. Este paso
-          previo —diagnóstico para confirmar el encaje y documento de alcance con cotización a precio
-          fijo— existe para que sepas el costo antes de empezar.
+          previo (diagnóstico para confirmar el encaje y documento de alcance con cotización a precio
+          fijo) existe para que sepas el costo antes de empezar.
         </p>
         <p class="body-copy">
           Pide también los materiales de traspaso como parte del acuerdo, no como un favor posterior:

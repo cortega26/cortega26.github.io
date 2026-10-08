@@ -16,9 +16,16 @@ import {
   basePrice,
   business,
   hardLaunchIssues,
+  neighborOffer,
+  neighborServices,
   services,
   softLaunchIssues,
 } from "../src/config.ts";
+import {
+  buildNeighborMessage,
+  validateNeighborIntake,
+  type NeighborIntake,
+} from "../src/lib/neighbor-contact.ts";
 const valid: Intake = {
   area: "nunoa",
   device: "Notebook",
@@ -251,6 +258,53 @@ test("the tax status states the subsistence registry without inventing a documen
   );
   assert.equal(business.notebookMaintenancePrice, 45000);
 });
+test("neighbors offer is residents-only, discounted by exactly $10.000, and excludes Wi-Fi", () => {
+  assert.equal(neighborOffer.ready, false, "the evaluation variant must not become live implicitly");
+  assert.equal(neighborOffer.residentsOnly, true);
+  assert.equal(neighborOffer.priceReduction, 10000);
+  assert.equal(neighborOffer.diagnosticCredit, true);
+  assert.equal(neighborOffer.notebookMaintenancePrice, 35000);
+  assert.equal(neighborOffer.turnaround.startsWith("Sin plazo fijo"), true);
+
+  const publicById = new Map(services.map((service) => [service.id, service]));
+  assert.deepEqual(
+    neighborServices.map((service) => service.id),
+    ["diagnostico", "mantencion", "upgrade", "windows", "respaldo", "remoto"],
+  );
+  assert.ok(!neighborServices.some((service) => service.id === "wifi"));
+
+  for (const service of neighborServices) {
+    const original = publicById.get(service.id);
+    assert.ok(original, `missing public counterpart for ${service.id}`);
+    assert.equal(
+      service.price,
+      original.price - 10000,
+      `${service.id} must be exactly $10.000 cheaper`,
+    );
+  }
+});
+
+test("neighbors intake never asks for apartment or area and identifies the resident flow", () => {
+  const validNeighbor: NeighborIntake = {
+    device: "Notebook",
+    power: "Sí",
+    service: "windows",
+    model: "Modelo de prueba",
+    problem: "No inicia después de una actualización.",
+  };
+  assert.deepEqual(validateNeighborIntake(validNeighbor), {});
+  const message = buildNeighborMessage(validNeighbor, "TS-A1B2C3D4E5F6");
+  assert.match(message, /vecino\/a del edificio/);
+  assert.match(message, /Servicio: Windows y configuración/);
+  assert.doesNotMatch(message, /Comuna:|departamento|direcci[oó]n/i);
+  assert.throws(() =>
+    buildNeighborMessage(
+      { ...validNeighbor, service: "wifi" },
+      "TS-A1B2C3D4E5F6",
+    ),
+  );
+});
+
 test("measurement never blocks a release, legal and contact facts always do", () => {
   const unmeasured = {
     ...complete,

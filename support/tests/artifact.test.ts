@@ -8,7 +8,7 @@ import { join } from "node:path";
  * the dependency is declared by support:verify (check -> unit -> build -> artifact).
  */
 const dist = join(import.meta.dirname, "..", "dist");
-const artifacts = ["index.html", "robots.txt"];
+const artifacts = ["index.html", "robots.txt", join("vecinos", "index.html")];
 const missing = artifacts.filter((file) => !existsSync(join(dist, file)));
 const requiresBuild = missing.length
   ? `requiere npm run support:build (falta ${missing.map((f) => `dist/${f}`).join(", ")}); ejecuta npm run support:verify`
@@ -150,4 +150,27 @@ test("preview copy offers consumers only and never claims proposed prices", { sk
     "coverage states customer value, not a legal aside",
   );
   assert.doesNotMatch(html, /No hay atención de público en una dirección particular/);
+});
+
+
+test("neighbors evaluation page stays private and preserves the agreed offer", { skip: requiresBuild }, () => {
+  const html = readFileSync(join(dist, "vecinos", "index.html"), "utf8");
+  assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
+  assert.match(html, /Exclusivo para vecinos del edificio/i);
+  assert.match(html, /Tu computador,[\s\S]*revisado por un vecino/i);
+  assert.match(html, /\$20\.000/);
+  assert.match(html, /\$30\.000/);
+  assert.match(html, /\$35\.000/);
+  assert.match(html, /\$25\.000/);
+  assert.match(html, /\$15\.000/);
+  assert.match(html, /\$10\.000 menos/i);
+  assert.match(html, /diagnóstico se descuenta/i);
+  assert.match(html, /Sin plazo fijo/i);
+  assert.match(html, /Solo vecinos/i);
+  assert.match(html, /ubicación exacta se comparte por privado/i);
+  assert.doesNotMatch(html, /Wi-Fi e impresoras<\/h3>/);
+  assert.doesNotMatch(html, /href="https:\/\/wa\.me\//);
+  assert.doesNotMatch(html, /Macul · Ñuñoa · Providencia/);
+  assert.doesNotMatch(html, /streetAddress|PostalAddress/i);
+  assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
 });

@@ -1,46 +1,82 @@
 ---
 import './styles.css';
 import { business } from './config';
-interface Props { title: string; description: string; }
-const { title, description } = Astro.props;
+interface Props {
+  title: string;
+  description: string;
+  variant?: 'default' | 'neighbors';
+  forceNoindex?: boolean;
+}
+const {
+  title,
+  description,
+  variant = 'default',
+  forceNoindex = false,
+} = Astro.props;
+const neighbors = variant === 'neighbors';
 const canonical = new URL(Astro.url.pathname, business.origin).href;
 const released = __SUPPORT_RELEASE__;
 const phone = `+${business.whatsapp}`;
 const socialImage = `${business.origin}/og-card.png`;
-// Organization on purpose: the service is delivered at the customer's home, so
-// there is no public address to declare. No address, no ratings, no reviews.
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: business.name,
-  description,
-  url: business.origin,
-  logo: `${business.origin}/favicon.svg`,
-  image: socialImage,
-  email: business.email,
-  telephone: phone,
-  founder: {
-    '@type': 'Person',
-    name: business.owner,
-    jobTitle: 'Soporte técnico a domicilio',
-    sameAs: [business.parent, business.github, business.linkedin],
-  },
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      contactType: 'customer service',
-      telephone: phone,
+const sectionBase = neighbors ? '/vecinos/' : '/';
+const brandSubtitle = neighbors ? 'SOPORTE PARA VECINOS' : 'SOPORTE A DOMICILIO';
+const socialAlt = neighbors
+  ? `${business.name}: soporte técnico exclusivo para vecinos del edificio.`
+  : `${business.name}: servicio técnico de computadores a domicilio en Macul, Ñuñoa y Providencia.`;
+// Organization on purpose: neither offer publishes a residential address.
+// The neighbors variant is evaluation-only, so it does not advertise a public
+// service area in structured data.
+const schema = neighbors
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: business.name,
+      description,
+      url: canonical,
+      logo: `${business.origin}/favicon.svg`,
+      image: socialImage,
       email: business.email,
-      availableLanguage: 'es-CL',
-      areaServed: business.areas.map((area) => area.name),
-    },
-  ],
-  areaServed: business.areas.map((area) => ({
-    '@type': 'AdministrativeArea',
-    name: area.name,
-  })),
-  sameAs: [business.parent, business.github, business.linkedin],
-};
+      telephone: phone,
+      founder: {
+        '@type': 'Person',
+        name: business.owner,
+        jobTitle: 'Soporte técnico de computadores',
+        sameAs: [business.parent, business.github, business.linkedin],
+      },
+      sameAs: [business.parent, business.github, business.linkedin],
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: business.name,
+      description,
+      url: business.origin,
+      logo: `${business.origin}/favicon.svg`,
+      image: socialImage,
+      email: business.email,
+      telephone: phone,
+      founder: {
+        '@type': 'Person',
+        name: business.owner,
+        jobTitle: 'Soporte técnico a domicilio',
+        sameAs: [business.parent, business.github, business.linkedin],
+      },
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          contactType: 'customer service',
+          telephone: phone,
+          email: business.email,
+          availableLanguage: 'es-CL',
+          areaServed: business.areas.map((area) => area.name),
+        },
+      ],
+      areaServed: business.areas.map((area) => ({
+        '@type': 'AdministrativeArea',
+        name: area.name,
+      })),
+      sameAs: [business.parent, business.github, business.linkedin],
+    };
 ---
 <!doctype html>
 <html lang="es-CL">
@@ -48,35 +84,37 @@ const schema = {
     <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title><meta name="description" content={description} />
     <link rel="canonical" href={canonical} /><link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="robots" content={released ? 'index, follow' : 'noindex, nofollow'} />
+    <meta name="robots" content={released && !forceNoindex ? 'index, follow' : 'noindex, nofollow'} />
     <meta name="theme-color" content="#172b29" />
     <meta property="og:type" content="website" /><meta property="og:locale" content="es_CL" />
     <meta property="og:site_name" content={business.name} />
     <meta property="og:title" content={title} /><meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} /><meta property="og:image" content={socialImage} />
     <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${business.name}: servicio técnico de computadores a domicilio en Macul, Ñuñoa y Providencia.`} />
+    <meta property="og:image:alt" content={socialAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <meta name="twitter:image:alt" content={`${business.name}: servicio técnico de computadores a domicilio en Macul, Ñuñoa y Providencia.`} />
+    <meta name="twitter:image:alt" content={socialAlt} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   </head>
   <body>
     <a class="skip" href="#main">Ir al contenido</a>
-    {!released && <div class="preview-notice">Vista previa · Servicio aún no abierto a reservas</div>}
+    {neighbors
+      ? <div class="preview-notice">Vista previa · Variante para evaluación, todavía no disponible</div>
+      : !released && <div class="preview-notice">Vista previa · Servicio aún no abierto a reservas</div>}
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/" aria-label="Tooltician Soporte a domicilio, inicio"><img class="brand-mark" src="/tooltician-logo-64.webp" srcset="/tooltician-logo-64.webp 1x, /tooltician-logo-128.webp 2x" alt="" width="41" height="41" decoding="async" /><span>tooltician<span class="brand-sub">SOPORTE A DOMICILIO</span></span></a>
-        <nav aria-label="Principal"><a href="/#servicios">Servicios</a><a href="/#precios">Precios</a><a href="/#cobertura">Cobertura</a></nav>
-        <a class="button small header-cta" href="/#consulta" data-cta="header">Consultar <span aria-hidden="true">↗</span></a>
+        <a class="brand" href={sectionBase} aria-label={neighbors ? 'Tooltician Soporte para vecinos, inicio' : 'Tooltician Soporte a domicilio, inicio'}><img class="brand-mark" src="/tooltician-logo-64.webp" srcset="/tooltician-logo-64.webp 1x, /tooltician-logo-128.webp 2x" alt="" width="41" height="41" decoding="async" /><span>tooltician<span class="brand-sub">{brandSubtitle}</span></span></a>
+        <nav aria-label="Principal"><a href={`${sectionBase}#servicios`}>Servicios</a><a href={`${sectionBase}#precios`}>Precios</a><a href={neighbors ? '/vecinos/#como-funciona' : '/#cobertura'}>{neighbors ? 'Cómo funciona' : 'Cobertura'}</a></nav>
+        <a class="button small header-cta" href={`${sectionBase}#consulta`} data-cta="header">Consultar <span aria-hidden="true">↗</span></a>
       </div>
     </header>
     <main id="main"><slot /></main>
     <footer class="site-footer"><div class="container footer-grid">
       <div><a class="brand footer-brand" href="/">tooltician <span>soporte</span></a><p>Tecnología que vuelve a acompañarte.</p><p>{business.availability}</p></div>
-      <div><a href="/privacidad/">Privacidad y datos</a><a href="/condiciones-del-servicio/">Condiciones del servicio</a><a href={business.parent}>Conoce Tooltician ↗</a>{business.email && <a href={`mailto:${business.email}`}>{business.email}</a>}</div>
-      <p class="footer-note">© {new Date().getFullYear()} {business.name}<br />Macul · Ñuñoa · Providencia</p>
+      <div><a href="/privacidad/">Privacidad y datos</a>{!neighbors && <a href="/condiciones-del-servicio/">Condiciones del servicio</a>}<a href={business.parent}>Conoce Tooltician ↗</a>{business.email && <a href={`mailto:${business.email}`}>{business.email}</a>}</div>
+      <p class="footer-note">© {new Date().getFullYear()} {business.name}<br />{neighbors ? 'Exclusivo para vecinos del edificio' : 'Macul · Ñuñoa · Providencia'}</p>
     </div></footer>
     {business.analyticsId && <aside class="consent container" aria-label="Medición opcional">
       <p>Medición opcional para saber qué secciones ayudan. No incluye lo que escribas en tu consulta. <a href="/privacidad/">Privacidad y medición</a></p>

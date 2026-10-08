@@ -1,0 +1,183 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/carlos-ortega.jpeg';
+import Layout from '../Layout.astro';
+import { business, money, neighborOffer, neighborServices } from '../config';
+import { devices, powerStates } from '../lib/neighbor-contact';
+
+const contactReady =
+  __SUPPORT_RELEASE__ &&
+  neighborOffer.ready &&
+  /^569\d{8}$/.test(business.whatsapp);
+
+const neighborDevices = devices.filter(
+  (device) =>
+    device === 'Notebook' ||
+    device === 'PC de escritorio' ||
+    device === 'Otro',
+);
+
+const diagnostic = neighborServices.find((service) => service.id === 'diagnostico')!;
+const faqs = [
+  [
+    '¿Esto es solo para vecinos del edificio?',
+    'Sí. Esta variante está pensada exclusivamente para residentes del edificio. No se ofrece al público general ni a personas externas.',
+  ],
+  [
+    '¿Dónde entrego el equipo?',
+    'Coordinamos primero por mensaje. La entrega y el retiro se hacen aquí en el edificio y la ubicación exacta se comparte por privado; no publico el número de departamento en la web.',
+  ],
+  [
+    '¿Los $20.000 del diagnóstico se descuentan?',
+    'Sí. Si después del diagnóstico autorizas un servicio de mayor valor, no se suman ambos: pagas el valor del servicio, más los repuestos, licencias o extras que hayas autorizado.',
+  ],
+  [
+    '¿Cuánto demora?',
+    'No prometo un plazo fijo. Al coordinar te digo si puedo recibir el equipo y cómo está mi disponibilidad. Si el diagnóstico muestra que el trabajo tomará más tiempo, te lo explico antes de continuar.',
+  ],
+  [
+    '¿Qué pasa si decido no reparar?',
+    `Pagas solo el diagnóstico de ${money(diagnostic.price)}. Te explico qué encontré y qué opciones tienes; no hago trabajo adicional sin autorización.`,
+  ],
+  [
+    '¿Atiendes Wi-Fi o impresoras?',
+    'No en esta modalidad. Esos problemas suelen requerir revisar la instalación en el departamento donde ocurre la falla, por eso no forman parte de la oferta para vecinos.',
+  ],
+  [
+    '¿Necesitas mis contraseñas?',
+    'Lo ideal es que tú las ingreses cuando haga falta. No solicito claves bancarias ni guardo contraseñas. Si un trabajo puede afectar tus archivos, acordamos antes el respaldo y el alcance.',
+  ],
+  [
+    '¿Qué equipos no recibes?',
+    'No hago microsoldadura, reparación electrónica avanzada de placas, recuperación de datos en laboratorio, celulares ni consolas. Tampoco recibo equipos con baterías hinchadas, daños eléctricos peligrosos o líquidos que requieran reparación especializada.',
+  ],
+];
+---
+<Layout
+  title="Soporte técnico para vecinos | Tooltician"
+  description="Una variante de Tooltician Soporte exclusiva para vecinos del edificio: entrega coordinada del PC o notebook, diagnóstico claro y precios reducidos."
+  variant="neighbors"
+  forceNoindex={true}
+>
+  <section class="hero container">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> EXCLUSIVO PARA VECINOS DEL EDIFICIO</p>
+      <h1>Tu computador,<br class="desktop-break" /> <em>revisado por un vecino.</em></h1>
+      <p class="hero-intro">Sin traslado, sin taller anónimo y con precios especiales para quienes vivimos aquí.</p>
+      <p class="hero-description">Me entregas tu PC o notebook en el edificio, lo reviso, te explico qué encontré y acordamos el costo antes de hacer cualquier trabajo.</p>
+      <div class="actions">
+        <a class="button" href="#consulta" data-neighbor-cta="hero">{contactReady ? 'Consultar por WhatsApp' : 'Preparar mi consulta'} <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href="#precios">Ver precios para vecinos <span aria-hidden="true">↓</span></a>
+      </div>
+      <p class="hero-footnote">Diagnóstico <strong>{money(diagnostic.price)}</strong> · Se descuenta si autorizas un servicio de mayor valor</p>
+      <div class="hero-trust">
+        <Image src={portrait} alt="Retrato de Carlos Ortega" width={52} height={52} loading="lazy" densities={[1, 2]} />
+        <p><strong>Soy Carlos, vecino del edificio</strong><span class="hero-trust-links"><a href={business.parent}>Tooltician ↗</a><a href={business.github}>GitHub ↗</a><a href={business.linkedin}>LinkedIn ↗</a></span></p>
+      </div>
+    </div>
+
+    <aside class="visit-card" aria-labelledby="neighbor-card-title">
+      <div class="card-top"><span class="eyebrow">UNA MODALIDAD MÁS SIMPLE</span><span aria-hidden="true">01 / 04</span></div>
+      <div class="device-illustration" aria-hidden="true">
+        <div class="laptop-screen"><img class="screen-brand" src="/tooltician-logo-64.webp" alt="" width="36" height="36" decoding="async" /><div class="screen-line"></div><div class="screen-line short"></div><span class="screen-check">✓</span></div>
+        <div class="laptop-base"></div>
+        <div class="device-note">ENTREGA COORDINADA EN EL EDIFICIO</div>
+      </div>
+      <h2 id="neighbor-card-title">Lo dejas.<br />Lo reviso.</h2>
+      <p>Te escribo con el diagnóstico y la cotización antes de intervenir.</p>
+      <div class="visit-price"><div><span>Recepción y diagnóstico</span><strong>{money(diagnostic.price)}</strong></div><span class="round-arrow" aria-hidden="true">↗</span></div>
+    </aside>
+  </section>
+
+  <div class="trust-strip"><div class="container"><span>✓ Solo vecinos</span><span>✓ Diagnóstico primero</span><span>✓ Precios reducidos</span><span>✓ Tú autorizas</span></div></div>
+
+  <section id="servicios" class="section container" data-section-event="support_service_view">
+    <div class="section-heading"><div><p class="eyebrow">LO QUE PUEDO RECIBIR</p><h2>PC y notebooks.</h2></div><p>La oferta es deliberadamente acotada. Wi-Fi e impresoras quedan fuera porque requieren revisar el problema donde ocurre.</p></div>
+    <div class="service-grid">
+      {neighborServices.map((service, i) => <article class="service-card"><span class="service-index">0{i + 1}</span><h3>{service.title}</h3><p class="service-problem">{service.problem}</p><p>{service.description}</p><a class="service-link" href="#consulta" data-service={service.id} data-neighbor-cta="services">Consultar este servicio <span aria-hidden="true">↗</span></a></article>)}
+      <article class="service-card scope-card"><p class="eyebrow">UN LÍMITE CLARO</p><h3>Si requiere laboratorio, te lo digo.</h3><p>Sin microsoldadura, recuperación avanzada de datos, celulares ni consolas. No voy a experimentar con tu equipo.</p><a href="#preguntas">Ver preguntas →</a></article>
+    </div>
+  </section>
+
+  <section id="como-funciona" class="process section">
+    <div class="container"><p class="eyebrow">SIN IDAS A UN TALLER</p><h2>Así funciona entre vecinos.</h2>
+      <ol class="steps">
+        <li><span>01</span><h3>Me escribes</h3><p>Me cuentas qué equipo tienes y qué está pasando.</p></li>
+        <li><span>02</span><h3>Coordinamos entrega</h3><p>Acordamos cuándo puedes dejármelo. La ubicación exacta se comparte por privado.</p></li>
+        <li><span>03</span><h3>Reviso y te explico</h3><p>Diagnostico el problema y te envío las opciones y el costo antes de hacer trabajo adicional.</p></li>
+        <li><span>04</span><h3>Tú decides</h3><p>Si autorizas, hago el trabajo. Cuando esté listo coordinamos el retiro y te entrego un resumen.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="precios" class="section container" data-section-event="support_price_view">
+    <div class="section-heading"><div><p class="eyebrow">PRECIO DE VECINO</p><h2>$10.000 menos.</h2></div><p>Cada servicio parte $10.000 por debajo de la oferta general de Tooltician Soporte. Los repuestos, licencias y extras se acuerdan aparte.</p></div>
+    <div class="pricing-layout">
+      <aside class="price-explainer">
+        <h3>Primero saber<br />qué tiene.</h3>
+        <p class="big-price">{money(diagnostic.price)}<span>recepción y diagnóstico</span></p>
+        <p>Si no continúas con la reparación, ese es el total por la revisión y explicación.</p>
+        <p><strong>Si autorizas un servicio mayor, el diagnóstico se descuenta.</strong> No se suman ambos valores.</p>
+        <p class="payment-note">Transferencia, efectivo o tarjeta · mismo precio</p>
+        <a class="button" href="#consulta" data-neighbor-cta="pricing">Consultar mi equipo ↗</a>
+      </aside>
+      <div>
+        <table class="price-table"><caption>Mano de obra para vecinos</caption><thead><tr><th scope="col">Servicio</th><th scope="col">Desde</th></tr></thead><tbody>
+          {neighborServices.filter((service) => service.id !== 'diagnostico').map((service) => <tr><th scope="row">{service.title}<span>{service.detail}</span></th><td>{money(service.price)}</td></tr>)}
+        </tbody></table>
+        <p class="price-note">Mantención de notebook desde {money(neighborOffer.notebookMaintenancePrice)}. El diagnóstico se acredita contra un servicio de mayor valor. Repuestos, licencias y trabajos no previstos requieren autorización antes de sumar cualquier costo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="quien-te-atiende" class="about section" data-section-event="support_about_view">
+    <div class="container about-grid">
+      <div class="identity-card"><Image src={portrait} alt="Carlos Ortega, responsable de Tooltician Soporte" widths={[320, 400]} sizes="(max-width: 760px) 320px, 33vw" loading="lazy" /><p>Un vecino identificable.<br /><strong>Tu equipo no sale del edificio.</strong></p></div>
+      <div><p class="eyebrow">SABES A QUIÉN SE LO ENTREGAS</p><h2>Soy Carlos Ortega.<br />También vivo aquí.</h2><p>Desarrollo software, automatizaciones y sistemas de datos bajo Tooltician. Esta variante existe por una razón sencilla: entre vecinos puedo recibir el equipo sin cobrar un traslado y trasladar ese ahorro al precio.</p><p>No necesito convertir mi departamento en un taller abierto al público. Coordinamos cada entrega y retiro de forma privada, exclusivamente con residentes.</p><div class="profile-links"><a href={business.parent}>Tooltician ↗</a><a href={business.github}>GitHub ↗</a><a href={business.linkedin}>LinkedIn ↗</a></div></div>
+    </div>
+  </section>
+
+  <section class="section container coverage">
+    <div><p class="eyebrow">POR QUÉ CUESTA MENOS</p><h2>El ahorro viene<br />de estar cerca.</h2><p>No hay desplazamiento entre comunas ni tiempo de visita a domicilio. Tú entregas el equipo y yo trabajo sobre él aquí.</p><p>No publico mi número de departamento ni recibo personas sin coordinación previa.</p></div>
+    <div class="area-list">
+      <div><span class="service-index">01</span><h3>Sin traslado</h3><span>$10.000<small>menos por servicio</small></span></div>
+      <div><span class="service-index">02</span><h3>Solo residentes</h3><span>Edificio<small>sin atención abierta</small></span></div>
+      <div><span class="service-index">03</span><h3>Sin plazo artificial</h3><span>Coordinado<small>según disponibilidad</small></span></div>
+      <p>La entrega del equipo no implica autorización para repararlo: primero recibes el diagnóstico y la cotización.</p>
+    </div>
+  </section>
+
+  <section class="privacy-strip"><div class="container"><h2>Tus archivos siguen siendo tuyos.</h2><p>No pido claves bancarias, no guardo contraseñas ni copio archivos sin autorización. Cualquier intervención que pueda afectar tus datos se acuerda antes.</p><a href="/privacidad/">Cómo cuido tus datos ↗</a></div></section>
+
+  <section id="preguntas" class="section container faq">
+    <div><p class="eyebrow">ANTES DE ENTREGARLO</p><h2>Preguntas<br />razonables.</h2><p>Lo importante antes de dejar tu equipo con otra persona.</p></div>
+    <div>{faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</div>
+  </section>
+
+  <section id="consulta" class="contact-section section">
+    <div class="container contact-grid">
+      <div><p class="eyebrow">PARTAMOS POR EL PROBLEMA</p><h2>Cuéntame qué<br /><em>necesitas resolver.</em></h2><p>Completa estos datos para preparar tu mensaje. No necesito tu número de departamento en este formulario.</p><p>No incluyas contraseñas ni archivos privados.</p>{!contactReady && <p class="preview-contact">Esta variante está en evaluación. Puedes probar el formulario; todavía no envía consultas.</p>}<p class="muted">{neighborOffer.turnaround}</p></div>
+      <form id="neighbor-triage" novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="device">Equipo</label><select id="device" name="device" required aria-describedby="device-error"><option value="">Selecciona</option>{neighborDevices.map((device) => <option>{device}</option>)}</select><span class="field-error" id="device-error"></span></div>
+          <div class="field"><label for="power">¿Enciende?</label><select id="power" name="power" required aria-describedby="power-error"><option value="">Selecciona</option>{powerStates.map((state) => <option>{state}</option>)}</select><span class="field-error" id="power-error"></span></div>
+          <div class="field wide"><label for="service">Tipo de ayuda</label><select id="service" name="service" required aria-describedby="service-error"><option value="otro">No lo sé / otro</option>{neighborServices.map((service) => <option value={service.id}>{service.title}</option>)}</select><span class="field-error" id="service-error"></span></div>
+          <div class="field wide"><label for="model">Marca y modelo <span>(opcional)</span></label><input id="model" name="model" maxlength="100" autocomplete="off" aria-describedby="model-error" /><span class="field-error" id="model-error"></span></div>
+          <div class="field wide"><label for="problem">¿Qué ocurre?</label><textarea id="problem" name="problem" rows="4" minlength="5" maxlength="600" required aria-describedby="problem-help problem-error"></textarea><span id="problem-help" class="field-help">Máximo 600 caracteres. No escribas datos privados.</span><span class="field-error" id="problem-error"></span></div>
+        </div>
+        <p id="neighbor-form-status" role="status" aria-live="polite"></p>
+        <button class="button" type="submit">Revisar mi mensaje <span aria-hidden="true">→</span></button>
+        <p class="form-privacy">El formulario prepara el mensaje en tu navegador. <a href="/privacidad/">Privacidad</a></p>
+        <div id="neighbor-message-result" hidden>
+          <h3>Tu consulta, lista para revisar</h3>
+          <pre id="neighbor-message-preview" tabindex="0"></pre>
+          {contactReady ? <a id="neighbor-whatsapp-link" class="button" href="#consulta" target="_blank" rel="noopener noreferrer">Abrir WhatsApp ↗</a> : <p>El contacto estará disponible solo si esta variante se aprueba y abre.</p>}
+          <p>Puedes volver a editar los datos y preparar el mensaje de nuevo.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <a class="mobile-cta button" href="#consulta" data-neighbor-cta="mobile">{contactReady ? 'Consultar por WhatsApp' : 'Preparar consulta'} ↗</a>
+  <script src="../neighbor-client.ts"></script>
+</Layout>

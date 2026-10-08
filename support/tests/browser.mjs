@@ -156,6 +156,7 @@ try {
     await page.locator("#consulta").scrollIntoViewIfNeeded();
     await page.waitForFunction(
       () => getComputedStyle(document.querySelector(".mobile-cta")).display === "none",
+      undefined,
       { timeout: 5000 },
     );
     await page.getByRole("button", { name: "Preparar mensaje para consultar" }).click();

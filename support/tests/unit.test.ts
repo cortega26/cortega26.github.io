@@ -260,11 +260,12 @@ test("the tax status states the subsistence registry without inventing a documen
 });
 test("neighbors offer is residents-only, discounted by exactly $10.000, and excludes Wi-Fi", () => {
   assert.equal(neighborOffer.ready, false, "the evaluation variant must not become live implicitly");
+  assert.equal(neighborOffer.operatingAuthorizationConfirmed, false, "general municipal clearance must never activate residential repair automatically");
   assert.equal(neighborOffer.residentsOnly, true);
   assert.equal(neighborOffer.priceReduction, 10000);
   assert.equal(neighborOffer.diagnosticCredit, true);
   assert.equal(neighborOffer.notebookMaintenancePrice, 35000);
-  assert.equal(neighborOffer.turnaround.startsWith("Sin plazo fijo"), true);
+  assert.match(neighborOffer.turnaround, /estimación de revisión/);
 
   const publicById = new Map(services.map((service) => [service.id, service]));
   assert.deepEqual(

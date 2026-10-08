@@ -157,7 +157,7 @@ const pythonAutomation: ServiceDefinition = {
     problemCards: [
       {
         title: 'What typically happens',
-        body: 'A report is assembled by hand every week, a scraper breaks silently when a page changes, numbers are copied between systems, and the whole thing depends on one person remembering the steps. It works until it doesn't, usually at the worst possible time.',
+        body: 'A report is assembled by hand every week, a scraper breaks silently when a page changes, numbers are copied between systems, and the whole thing depends on one person remembering the steps. It works until it stops working, usually at the worst possible time.',
       },
       {
         title: 'The real asymmetry',
@@ -326,7 +326,7 @@ const pythonAutomation: ServiceDefinition = {
       { tag: 'I want ongoing support', body: 'Light monitoring, small changes, and external judgment without an in-house data hire.' },
     ],
     outreach:
-      'If you arrived here with a specific bottleneck (a manual report, a fragile scraper or copying data between systems), here's the scope: lock it down, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
+      'If you arrived here with a specific bottleneck (a manual report, a fragile scraper or copying data between systems), the scope is clear: lock it down, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
   },
   es: {
     title: 'Automatización Python y Pipelines | Tooltician',

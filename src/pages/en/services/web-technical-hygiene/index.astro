@@ -21,41 +21,41 @@ const navItems = [
 ];
 
 const pricingNote =
-  'Prices in USD for clients in the United States, Canada, the United Kingdom, Europe, and other international markets. All deliverables — reports, checklists, and documentation — are produced in English and structured for direct handoff to non-technical stakeholders. For clients in Chile and Latin America, this service is available in Spanish at local rates (UF/CLP) — see the Spanish version.';
+  'Prices in USD for clients in the United States, Canada, the United Kingdom, Europe, and other international markets. All deliverables (reports, checklists, and documentation) are produced in English and structured for direct handoff to non-technical stakeholders. For clients in Chile and Latin America, this service is available in Spanish at local rates (UF/CLP): see the Spanish version.';
 
 const reviewGroups = [
   {
     title: 'Browser and transport security',
     items: [
-      'Security headers — help browsers apply reasonable restrictions on external loads, iframes, permissions, and unnecessary information exposure.',
-      'HTTPS and redirects — avoid duplicate paths, domain inconsistencies, and technical signals that erode trust.',
-      'HSTS where applicable — enforces consistent HTTPS when the site configuration allows it without operational friction.',
-      'Header exposure and basic performance — identify server responses that add noise, expose more than needed, or make the site less predictable.',
+      'Security headers: help browsers apply reasonable restrictions on external loads, iframes, permissions, and unnecessary information exposure.',
+      'HTTPS and redirects: avoid duplicate paths, domain inconsistencies, and technical signals that erode trust.',
+      'HSTS where applicable: enforces consistent HTTPS when the site configuration allows it without operational friction.',
+      'Header exposure and basic performance: identify server responses that add noise, expose more than needed, or make the site less predictable.',
     ],
   },
   {
     title: 'Email, DNS, and infrastructure',
     items: [
-      'SPF, DKIM, and basic DMARC — reduces technical noise and avoidable misconfiguration signals, without replacing a full email strategy.',
-      'Basic DNS — delegation, critical records, and points where a small error can leave email or the site in a gray zone.',
-      'Backups and recovery points — verify whether a minimum reversibility baseline exists before touching anything important.',
+      'SPF, DKIM, and basic DMARC: reduces technical noise and avoidable misconfiguration signals, without replacing a full email strategy.',
+      'Basic DNS: delegation, critical records, and points where a small error can leave email or the site in a gray zone.',
+      'Backups and recovery points: verify whether a minimum reversibility baseline exists before touching anything important.',
     ],
   },
   {
     title: 'Content, forms, and ongoing operations',
     items: [
-      'Critical forms — a site can look perfect while losing opportunities if the contact form fails quietly.',
-      'Search Console, sitemap, and robots.txt — detect indexing errors, coverage issues, and signals no one checks after launch.',
-      'Relevant 404 errors — fix or prioritize broken links that affect experience, trust, and capture of existing demand.',
-      'WordPress plugins and maintenance — review visible dependencies, update points, and signs of technical neglect.',
-      'Minimal operational documentation — leave it clear what was done, what remains pending, and where to look next time.',
+      'Critical forms: a site can look perfect while losing opportunities if the contact form fails quietly.',
+      'Search Console, sitemap, and robots.txt: detect indexing errors, coverage issues, and signals no one checks after launch.',
+      'Relevant 404 errors: fix or prioritize broken links that affect experience, trust, and capture of existing demand.',
+      'WordPress plugins and maintenance: review visible dependencies, update points, and signs of technical neglect.',
+      'Minimal operational documentation: leave it clear what was done, what remains pending, and where to look next time.',
     ],
   },
 ];
 
 const processSteps = [
   ['01', 'Initial external review', 'I surface visible signals without requesting access: headers, HTTPS, redirects, DNS, sitemap, robots.txt, visible forms, and public tools.'],
-  ['02', 'Prioritized findings', 'I sort findings by operational impact, correction difficulty, and reasonable urgency — avoiding dramatizing automated scores.'],
+  ['02', 'Prioritized findings', 'I sort findings by operational impact, correction difficulty, and reasonable urgency: avoiding dramatizing automated scores.'],
   ['03', 'Correction with controlled access', 'When permissions are available, I apply agreed fixes in hosting, CMS, CDN, DNS, repository, or the relevant provider.'],
   ['04', 'Before/after evidence', 'I leave screenshots, review date, checklist, and technical notes so the change is verifiable and transferable.'],
   ['05', 'Close or monthly support', 'I recommend closing, implementing a second phase, or moving to monthly review based on what the site actually needs.'],
@@ -130,7 +130,7 @@ const plans = [
     items: [
       'Monthly review based on the roadmap delivered in the initial review.',
       'Light monitoring and reasonable alerts.',
-      'Review of plugins and dependencies with documented security alerts — flagging outdated versions with known vulnerabilities against public advisories.',
+      'Review of plugins and dependencies with documented security alerts: flagging outdated versions with known vulnerabilities against public advisories.',
       'Small fixes within an agreed block of hours.',
       'Monthly brief report with status, applied changes, and next steps.',
     ],
@@ -152,7 +152,7 @@ const useCases = [
   ['WordPress SMB site', 'The site works, but no one is regularly checking plugins, forms, headers, backups, or Search Console.'],
   ['Web agency', 'The agency designs and publishes sites but does not want to burden its team with low-margin recurring technical maintenance.'],
   ['B2B company', 'The site receives leads. If the form fails or the technical signal degrades, the loss arrives before anyone notices.'],
-  ['Consultant, professional, or small e-commerce', 'The web presence is part of the reputation or sales channel — a visible technical lapse reduces trust without needing a major incident. Needs HTTPS, forms, errors, DNS, and basic signals checked without adding a full hire.'],
+  ['Consultant, professional, or small e-commerce', 'The web presence is part of the reputation or sales channel. A visible technical lapse reduces trust without needing a major incident. Needs HTTPS, forms, errors, DNS, and basic signals checked without adding a full hire.'],
 ];
 
 const faqs = [
@@ -163,11 +163,11 @@ const faqs = [
   ['Do you work with static sites, Astro, Next, or similar?', 'Yes. In many cases hardening is resolved in hosting, CDN, server rules, or framework headers.'],
   ['Do you need access to the site?', 'For external diagnostic, not necessarily. For corrections, controlled access to hosting, CMS, repository, DNS, or the relevant provider is required.'],
   ['What if you find something serious?', 'I report it with priority, propose a course of action, and if it exceeds the scope, I recommend escalating to a specialist or a deeper audit.'],
-  ['What if the diagnostic finds nothing relevant?', 'It can happen, especially with well-maintained sites. In that case the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The diagnostic fee applies regardless, but there are no surprises or additional charges.'],
-  ['Can the scope grow during the review?', 'No. The scope is defined by the contracted plan. If something beyond that scope appears during the review, it is documented in the report with a recommended next step — but not executed without prior agreement.'],
-  ['Why are you less expensive than a local consultant?', `A US or EU technical consultant typically bills $100–150/hour. The Full Review at ${pricing.webHygiene.en.integral} is the equivalent of 7–10 hours — with an executive-ready report delivered, not just a call. All deliverables are in English.`],
-  ['Why are the prices different from the Spanish version?', 'The Spanish-language version is calibrated for the Chilean and Latin American market: different currency, different purchasing power, and documentation delivered in Spanish. The international service is priced in USD, delivered entirely in English, and structured to meet the expectations of clients in the US, UK, and European markets — including executive-ready deliverables and formal documentation standards. The technical scope is equivalent; the context of delivery is not.'],
-  ['Can I hire you if I prefer to work in Spanish?', 'Yes. If your site is in English and you need deliverables in English, the international rates apply regardless of your language preference. If you prefer Spanish documentation and local pricing, the Spanish version of this service is the right entry point — same technical scope, calibrated for that market.'],
+  ['What if the diagnostic finds nothing relevant?', 'It can happen, especially with well-maintained sites. In that case the report confirms it with evidence, knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The diagnostic fee applies regardless, but there are no surprises or additional charges.'],
+  ['Can the scope grow during the review?', 'No. The scope is defined by the contracted plan. If something beyond that scope appears during the review, it is documented in the report with a recommended next step, but not executed without prior agreement.'],
+  ['Why are you less expensive than a local consultant?', `A US or EU technical consultant typically bills $100–150/hour. The Full Review at ${pricing.webHygiene.en.integral} is the equivalent of 7–10 hours, with an executive-ready report delivered, not just a call. All deliverables are in English.`],
+  ['Why are the prices different from the Spanish version?', 'The Spanish-language version is calibrated for the Chilean and Latin American market: different currency, different purchasing power, and documentation delivered in Spanish. The international service is priced in USD, delivered entirely in English, and structured to meet the expectations of clients in the US, UK, and European markets: including executive-ready deliverables and formal documentation standards. The technical scope is equivalent; the context of delivery is not.'],
+  ['Can I hire you if I prefer to work in Spanish?', 'Yes. If your site is in English and you need deliverables in English, the international rates apply regardless of your language preference. If you prefer Spanish documentation and local pricing, the Spanish version of this service is the right entry point: same technical scope, calibrated for that market.'],
 ];
 
 const jsonLd = {
@@ -258,7 +258,7 @@ const breadcrumbJsonLd = {
             All deliverables are in English. You get the technical depth of a seasoned developer at a fraction of the cost of a local consultant.
           </p>
           <div class="service-hero__actions reveal reveal-delay-2">
-            <a class="btn btn-primary" href="#contact">Review my site — from {pricing.webHygiene.en.diagnostic}</a>
+            <a class="btn btn-primary" href="#contact">Review my site: from {pricing.webHygiene.en.diagnostic}</a>
             <a class="btn btn-ghost" href="#scope">See what's included</a>
           </div>
           <p class="service-hero__microcopy reveal reveal-delay-2">
@@ -309,7 +309,7 @@ const breadcrumbJsonLd = {
           <article class="card-glass brief-card reveal">
             <h3 class="card-title">What typically happens</h3>
             <p class="body-copy">
-              The certificate expires, a form stops sending emails, indexing errors appear, security headers go unconfigured, and the site starts showing signs of technical neglect. It doesn't always justify hiring someone internally to watch it — but leaving it completely unattended isn't a good option either.
+              The certificate expires, a form stops sending emails, indexing errors appear, security headers go unconfigured, and the site starts showing signs of technical neglect. It doesn't always justify hiring someone internally to watch it, but leaving it completely unattended isn't a good option either.
             </p>
           </article>
           <article class="card-glass brief-card reveal reveal-delay-1">
@@ -329,7 +329,7 @@ const breadcrumbJsonLd = {
           <h2 class="section-title reveal">External technical judgment, without the cost of an internal hire</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            Tooltician offers a lightweight layer of review, hardening, documentation, and monitoring for companies that need to keep their site technically sound — but don't have enough volume to justify hiring a developer, web administrator, or internal specialist.
+            Tooltician offers a lightweight layer of review, hardening, documentation, and monitoring for companies that need to keep their site technically sound, but don't have enough volume to justify hiring a developer, web administrator, or internal specialist.
           </p>
         </div>
 
@@ -403,7 +403,7 @@ const breadcrumbJsonLd = {
           <h2 class="section-title reveal">A simple entry point and a clear path to monthly support</h2>
           <div class="divider reveal"></div>
           <p class="section-subtitle reveal">
-            The natural entry point is the Diagnostic ({pricing.webHygiene.en.diagnostic}, credited toward implementation). Most simple sites scale to Basic Hardening. When the site drives leads, reputation, or sales, the Full Review closes better at just {pricing.webHygiene.en.executiveUpgrade} more than the operational plan — and delivers the executive report and roadmap that open the path to monthly support.
+            The natural entry point is the Diagnostic ({pricing.webHygiene.en.diagnostic}, credited toward implementation). Most simple sites scale to Basic Hardening. When the site drives leads, reputation, or sales, the Full Review closes better at just {pricing.webHygiene.en.executiveUpgrade} more than the operational plan, and delivers the executive report and roadmap that open the path to monthly support.
           </p>
         </div>
         <div class="pricing-compare-wrapper">
@@ -427,7 +427,7 @@ const breadcrumbJsonLd = {
                     <td class="pricing-compare__feature">{feature}</td>
                     {checks.map((has) => (
                       <td class={has ? 'pricing-compare__check pricing-compare__check--yes' : 'pricing-compare__check pricing-compare__check--no'}>
-                        {has ? '✓' : '—'}
+                        {has ? '✓' : '✕'}
                       </td>
                     ))}
                   </tr>
@@ -484,14 +484,14 @@ const breadcrumbJsonLd = {
               <li>Reviews the full site, not just the symptom you reported.</li>
               <li>Prioritizes findings by operational impact, not by what's easiest to fix.</li>
               <li>Delivers verifiable before/after evidence and an executive report for management.</li>
-              <li>Builds a technical history of the site — each cycle starts where the previous one left off.</li>
+              <li>Builds a technical history of the site: each cycle starts where the previous one left off.</li>
             </ul>
           </article>
         </div>
         <div class="tools-note reveal">
           <p class="tools-note__label">The real difference</p>
           <p>
-            Tooltician already builds automations, internal APIs, ETL pipelines, and production sites with handoff-ready documentation. This service applies the same logic to the day-to-day technical operation of published sites: judgment, evidence, and continuity — not just task execution.
+            Tooltician already builds automations, internal APIs, ETL pipelines, and production sites with handoff-ready documentation. This service applies the same logic to the day-to-day technical operation of published sites: sound judgment, evidence and continuity, not just task execution.
           </p>
         </div>
 
@@ -569,12 +569,12 @@ const breadcrumbJsonLd = {
         </div>
         <div class="grid-2">
           <article class="card-glass brief-card reveal">
-            <h3 class="card-title">Web technical diagnostic — {pricing.webHygiene.en.diagnostic}</h3>
+            <h3 class="card-title">Web technical diagnostic: {pricing.webHygiene.en.diagnostic}</h3>
             <p class="body-copy">
               Initial external review with a prioritized findings report and a clear next step. The cost is credited toward any implementation plan. No-commitment entry point.
             </p>
             <div class="risk-note">
-              <p>If the diagnostic finds nothing actionable, the report confirms it with evidence — knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The fee applies regardless, but there are no surprises or additional charges.</p>
+              <p>If the diagnostic finds nothing actionable, the report confirms it with evidence, knowing the basics are solid is also valuable before changing hosting, launching a campaign, or delegating the site to a third party. The fee applies regardless, but there are no surprises or additional charges.</p>
             </div>
             <div class="landing-cta-group">
               <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="htw_brief" data-book-call>Schedule a call instead</a>
@@ -600,7 +600,7 @@ const breadcrumbJsonLd = {
 
         <div class="outreach-note reveal">
           <p>
-            If you arrived here from an observation about headers, forms, DNS, Search Console, or visible signs of incomplete maintenance — the scope is this: review, fix what's reasonable, and leave clear evidence. This is not a deep security audit or a promise of total security.
+            If you arrived here from an observation about headers, forms, DNS, Search Console, or visible signs of incomplete maintenance: the scope is this: review, fix what's reasonable, and leave clear evidence. This is not a deep security audit or a promise of total security.
           </p>
         </div>
       </div>

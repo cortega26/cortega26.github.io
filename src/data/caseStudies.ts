@@ -34,7 +34,7 @@ export interface CaseStudy {
   links: CaseLink[];
   evidence?: EvidenceChip[];
   featured?: boolean;
-  /** What Tooltician did on this project — derived from existing copy only. */
+  /** What Tooltician did on this project: derived from existing copy only. */
   role: string;
   /** Month the claim was last re-verified (YYYY-MM). */
   verifiedAt: string;

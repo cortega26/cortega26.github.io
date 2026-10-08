@@ -25,7 +25,7 @@ const pricingNote =
   'Precios de referencia para Chile y LATAM expresados en UF. La cotización fija el alcance y la equivalencia de pago vigente al emitir la propuesta. La versión inglesa muestra la tarifa internacional en USD.';
 
 // Primary CTAs now scroll to the in-page intake form (#brief) instead of
-// opening a mailto — lower friction, qualified capture, and tracked events.
+// opening a mailto: lower friction, qualified capture, and tracked events.
 const diagnosticHref = '#brief';
 const diagnosticCta = `Solicitar diagnóstico de ${pricing.webHygiene.es.diagnostic}`;
 
@@ -60,28 +60,28 @@ const reviewGroups = [
   {
     title: 'Seguridad de navegador y transporte',
     items: [
-      'Headers de seguridad — ayudan a que el navegador aplique restricciones razonables frente a cargas externas, iframes, permisos y exposición innecesaria de información.',
-      'HTTPS y redirecciones — evitan rutas duplicadas, inconsistencias entre dominios y señales técnicas que erosionan confianza.',
-      'HSTS cuando corresponde — refuerza el uso consistente de HTTPS cuando la configuración y el contexto del sitio lo permiten sin fricción operativa.',
-      'Exposición de headers y rendimiento básico — identifico respuestas del servidor que añaden ruido, exponen más de la cuenta o vuelven el sitio menos predecible.',
+      'Headers de seguridad: ayudan a que el navegador aplique restricciones razonables frente a cargas externas, iframes, permisos y exposición innecesaria de información.',
+      'HTTPS y redirecciones: evitan rutas duplicadas, inconsistencias entre dominios y señales técnicas que erosionan confianza.',
+      'HSTS cuando corresponde: refuerza el uso consistente de HTTPS cuando la configuración y el contexto del sitio lo permiten sin fricción operativa.',
+      'Exposición de headers y rendimiento básico: identifico respuestas del servidor que añaden ruido, exponen más de la cuenta o vuelven el sitio menos predecible.',
     ],
   },
   {
     title: 'Correo, DNS e infraestructura',
     items: [
-      'SPF, DKIM y DMARC básico — ayudan a reducir desorden técnico y señales evitables de mala configuración, sin reemplazar una estrategia completa de correo.',
-      'DNS básico — reviso delegación, registros críticos y puntos donde un error pequeño puede dejar correo o sitio en una zona gris.',
-      'Backups y puntos de recuperación — verifico si existe una base mínima de reversibilidad antes de tocar algo importante.',
+      'SPF, DKIM y DMARC básico: ayudan a reducir desorden técnico y señales evitables de mala configuración, sin reemplazar una estrategia completa de correo.',
+      'DNS básico: reviso delegación, registros críticos y puntos donde un error pequeño puede dejar correo o sitio en una zona gris.',
+      'Backups y puntos de recuperación: verifico si existe una base mínima de reversibilidad antes de tocar algo importante.',
     ],
   },
   {
     title: 'Contenido, formularios y operación continua',
     items: [
-      'Formularios críticos — un sitio puede verse perfecto y estar perdiendo oportunidades si el formulario de contacto falla en silencio.',
-      'Search Console, sitemap y robots.txt — detectan errores de indexación, cobertura y señalización técnica que nadie suele mirar después del lanzamiento.',
-      'Errores 404 relevantes — corrijo o priorizo enlaces rotos y rutas visibles que afectan experiencia, confianza y captura de demanda existente.',
-      'Plugins y mantenimiento en WordPress — reviso dependencias visibles, puntos básicos de actualización y señales de abandono técnico.',
-      'Documentación operativa mínima — dejo claro qué se hizo, qué queda pendiente y dónde mirar la próxima vez.',
+      'Formularios críticos: un sitio puede verse perfecto y estar perdiendo oportunidades si el formulario de contacto falla en silencio.',
+      'Search Console, sitemap y robots.txt: detectan errores de indexación, cobertura y señalización técnica que nadie suele mirar después del lanzamiento.',
+      'Errores 404 relevantes: corrijo o priorizo enlaces rotos y rutas visibles que afectan experiencia, confianza y captura de demanda existente.',
+      'Plugins y mantenimiento en WordPress: reviso dependencias visibles, puntos básicos de actualización y señales de abandono técnico.',
+      'Documentación operativa mínima: dejo claro qué se hizo, qué queda pendiente y dónde mirar la próxima vez.',
     ],
   },
 ];
@@ -169,7 +169,7 @@ const plans = [
     items: [
       'Revisión mensual basada en la hoja de ruta entregada en la revisión inicial.',
       'Monitoreo liviano y alertas razonables.',
-      'Revisión de plugins y dependencias con alertas de seguridad documentadas — versiones desactualizadas con vulnerabilidades conocidas según advisories públicos.',
+      'Revisión de plugins y dependencias con alertas de seguridad documentadas: versiones desactualizadas con vulnerabilidades conocidas según advisories públicos.',
       'Pequeñas correcciones dentro de un bloque de horas acordado.',
       'Reporte breve mensual con estado, cambios aplicados y próximos pasos.',
     ],
@@ -180,7 +180,7 @@ const useCases = [
   ['Sitio WordPress de pyme', 'El sitio funciona, pero nadie revisa plugins, formularios, headers, backups ni Search Console con periodicidad.'],
   ['Agencia web', 'La agencia diseña y publica sitios, pero no quiere cargar a su equipo con mantenimiento técnico recurrente de bajo margen.'],
   ['Empresa B2B', 'El sitio recibe leads. Si el formulario falla o la señal técnica se degrada, la pérdida llega antes de que alguien la note.'],
-  ['Profesional, consultora o e-commerce pequeño', 'La presencia web es parte de la reputación o del canal de venta — un descuido técnico visible reduce confianza sin necesidad de un incidente mayor. Necesita revisar HTTPS, formularios, errores, DNS y señales técnicas básicas sin sumar una contratación completa.'],
+  ['Profesional, consultora o e-commerce pequeño', 'La presencia web es parte de la reputación o del canal de venta. Un descuido técnico visible reduce confianza sin necesidad de un incidente mayor. Necesita revisar HTTPS, formularios, errores, DNS y señales técnicas básicas sin sumar una contratación completa.'],
 ];
 
 const tableFeatures = [
@@ -232,10 +232,10 @@ const faqs = [
   ['¿Por qué los precios están en UF?', 'Porque esta versión está orientada al mercado chileno y la UF mantiene mejor el valor de referencia frente a la inflación: expresa el costo del servicio sin que fluctúe semana a semana. La cotización final se emite en CLP según el valor de la UF el día de la propuesta. Para clientes fuera de Chile, la propuesta se cotiza en USD o moneda acordada.'],
   ['¿Qué pasa si el diagnóstico no encuentra nada relevante?', 'Puede ocurrir, especialmente en sitios bien mantenidos. En ese caso el reporte lo confirma con evidencia: saber que lo básico está bien también tiene valor, especialmente antes de cambiar hosting, proveedor o lanzar una campaña. El valor del diagnóstico aplica igual.'],
   ['¿El alcance puede crecer durante la revisión?', 'No. El alcance está definido por el plan contratado. Si durante la revisión aparece algo que excede ese alcance, queda documentado en el reporte con una recomendación de siguiente paso, pero no se ejecuta sin acuerdo previo.'],
-  ['¿El precio es negociable?', 'Los valores están fijados en UF para mantener una referencia estable. Para agencias con varios sitios o proyectos de mayor volumen, es posible acordar condiciones distintas en la propuesta — escríbeme con el contexto y lo vemos.'],
-  ['¿Los precios son los mismos en todos los países?', 'No. Los planes en esta versión están cotizados en UF para el mercado chileno, con documentación en español adaptada a ese contexto. Para clientes fuera de Chile, la propuesta se emite en USD o moneda acordada, con ajuste de alcance según idioma de entrega, zona horaria y nivel de documentación requerido. La diferencia no es de calidad — es de contexto operativo.'],
+  ['¿El precio es negociable?', 'Los valores están fijados en UF para mantener una referencia estable. Para agencias con varios sitios o proyectos de mayor volumen, es posible acordar condiciones distintas en la propuesta: escríbeme con el contexto y lo vemos.'],
+  ['¿Los precios son los mismos en todos los países?', 'No. Los planes en esta versión están cotizados en UF para el mercado chileno, con documentación en español adaptada a ese contexto. Para clientes fuera de Chile, la propuesta se emite en USD o moneda acordada, con ajuste de alcance según idioma de entrega, zona horaria y nivel de documentación requerido. La diferencia no es de calidad: es de contexto operativo.'],
   ['¿Puedo contratar desde Argentina, México o España aunque vea la página en español?', 'Sí. La versión en español está pensada para el mercado hispanohablante en general, no solo para Chile. La propuesta se puede adaptar a tu moneda, zona horaria y contexto específico. Escríbeme con el detalle y lo vemos.'],
-  ['¿El servicio es igual al de la versión en inglés?', 'El nivel técnico aplicado es el mismo. Lo que difiere es el alcance del entregable: idioma de la documentación, estándar de presentación y calibración de precio al mercado local. No es una versión de menor calidad — es una versión diseñada para un contexto de operación distinto.'],
+  ['¿El servicio es igual al de la versión en inglés?', 'El nivel técnico aplicado es el mismo. Lo que difiere es el alcance del entregable: idioma de la documentación, estándar de presentación y calibración de precio al mercado local. No es una versión de menor calidad, sino una versión diseñada para un contexto de operación distinto.'],
 ];
 
 const jsonLd = {
@@ -595,7 +595,7 @@ const breadcrumbJsonLd = {
               <span class="exec-report__status exec-report__status--pending">Próximo ciclo</span>
               <div class="exec-report__finding-body">
                 <p class="exec-report__finding-title">Sin monitoreo activo del sitio</p>
-                <p class="exec-report__finding-impact">Si el sitio cae o el certificado vence, no hay alerta configurada. Primer ítem recomendado en el soporte mensual — sin intervención adicional del equipo interno.</p>
+                <p class="exec-report__finding-impact">Si el sitio cae o vence el certificado, no hay alerta configurada. Conviene incorporarla al soporte mensual, sin exigir más trabajo del equipo interno.</p>
               </div>
             </div>
           </div>
@@ -671,7 +671,7 @@ const breadcrumbJsonLd = {
                     <td class="pricing-compare__feature">{feature}</td>
                     {checks.map((has) => (
                       <td class={has ? 'pricing-compare__check pricing-compare__check--yes' : 'pricing-compare__check pricing-compare__check--no'}>
-                        {has ? '✓' : '—'}
+                        {has ? '✓' : '✕'}
                       </td>
                     ))}
                   </tr>
@@ -732,7 +732,7 @@ const breadcrumbJsonLd = {
               <li>Revisa el sitio completo, no solo el síntoma que reportaste.</li>
               <li>Prioriza hallazgos por impacto operativo, no por lo que es más fácil de corregir.</li>
               <li>Entrega evidencia antes/después verificable y reporte ejecutivo para dirección.</li>
-              <li>Construye historia técnica del sitio — cada ciclo parte de donde quedó el anterior.</li>
+              <li>Construye historia técnica del sitio: cada ciclo parte de donde quedó el anterior.</li>
             </ul>
           </article>
         </div>
@@ -816,12 +816,12 @@ const breadcrumbJsonLd = {
         <div class="final-action final-action--form card-glass reveal">
           <div class="brief-grid">
             <article class="brief-card">
-              <h3 class="card-title">Diagnóstico técnico web — {pricing.webHygiene.es.diagnostic}</h3>
+              <h3 class="card-title">Diagnóstico técnico web: {pricing.webHygiene.es.diagnostic}</h3>
               <p class="body-copy">
                 Revisión externa inicial con reporte de prioridades, evidencia y siguiente paso claro. Es una forma barata de evitar dos errores caros: ignorar algo importante o pagar por algo que no importaba.
               </p>
               <div class="risk-note">
-                <p>Si el diagnóstico no encuentra nada accionable, el reporte lo confirma con evidencia — y eso también tiene valor antes de cambiar hosting, lanzar una campaña o delegar el sitio a un tercero. El costo aplica igual, pero no hay sorpresas ni cobros adicionales.</p>
+                <p>Si el diagnóstico no encuentra nada accionable, el reporte lo confirma con evidencia, y eso también tiene valor antes de cambiar hosting, lanzar una campaña o delegar el sitio a un tercero. El costo aplica igual, pero no hay sorpresas ni cobros adicionales.</p>
               </div>
               <div class="landing-cta-group">
                 <a class="btn btn-ghost" href="https://calendly.com/ciortega26" target="_blank" rel="noopener noreferrer" data-track="cta_book_call" data-track-loc="htw_brief" data-book-call>Agendar revisión en su lugar</a>

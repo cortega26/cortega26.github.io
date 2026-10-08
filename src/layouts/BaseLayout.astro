@@ -48,7 +48,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
   <!-- Mobile browser chrome -->
   <meta name="theme-color" content="#0b1121" />
 
-  <!-- Self-hosted fonts — preload only the LCP font (Archivo 700 = H1/LCP element); JetBrains Mono is discovered from CSS (font-display: swap) -->
+  <!-- Self-hosted fonts: preload only the LCP font (Archivo 700 = H1/LCP element); JetBrains Mono is discovered from CSS (font-display: swap) -->
   <link rel="preload" href="/fonts/archivo-variable.woff2" as="font" type="font/woff2" crossorigin />
 
   <!-- Open Graph -->
@@ -106,7 +106,7 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID as string | undefined;
     </svg>
   </button>
 
-  <!-- GA4 (gtag.js direct — inline stub síncrono ANTES de async gtag.js, Plan 006) -->
+  <!-- GA4 (gtag.js direct: inline stub síncrono ANTES de async gtag.js, Plan 006) -->
   <!-- cookie_expires: 60*60*24*395 = 34128000s = 395 días ≈13 meses (API solo soporta segundos, sin precisión calendárica) -->
   {ga4Id && (
     <script is:inline define:vars={{ ga4Id }}>

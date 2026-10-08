@@ -3,7 +3,7 @@
 //
 // Stage rule (audit 2026-09-23, Plan 026): no amount may render without its
 // stage label (diagnostic / build / retainer). Use engagementLine(),
-// engagementCompact(), diagnosticLine(), or retainerLine() — never paste a
+// engagementCompact(), diagnosticLine(), or retainerLine(): never paste a
 // bare value into copy.
 
 export const pricing = {

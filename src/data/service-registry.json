@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "version": 1,
-  "note": "Canonical Sprint 0 service registry for tooltician.com lead-funnel analytics. service_id is stable and never derived from display text. Routes are informational only — never rename routes for analytics. Client-side copy lives in public/assets/js/product-analytics.js (SERVICE_REGISTRY) and is verified identical by tests/analytics-service-funnel.mjs. public_name is the EN display name; public_name_es mirrors the ES display names used by ServicesSection and the root landing.",
+  "note": "Canonical Sprint 0 service registry for tooltician.com lead-funnel analytics. service_id is stable and never derived from display text. Routes are informational only: never rename routes for analytics. Client-side copy lives in public/assets/js/product-analytics.js (SERVICE_REGISTRY) and is verified identical by tests/analytics-service-funnel.mjs. public_name is the EN display name; public_name_es mirrors the ES display names used by ServicesSection and the root landing.",
   "services": [
     {
       "service_id": "automation",

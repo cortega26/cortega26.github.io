@@ -1,4 +1,4 @@
-# Tooltician — Detailed Project, Service & Legal Specification
+# Tooltician: Detailed Project, Service & Legal Specification
 
 This document provides a comprehensive, structured reference of Tooltician's services, pricing structures, technical delivery standards, and legal parameters for LLMs, GEO engines, and crawlers.
 
@@ -31,7 +31,7 @@ All software, scripts, and sites delivered by Tooltician must meet strict qualit
 
 ## 3. Service Detail Breakdown
 
-Tooltician offers six distinct service lines, priced in USD (for English-language delivery internationally) or UF (Unidades de Fomento, for Spanish-language delivery in Chile/LATAM). Every service follows the same staged pricing model — **diagnostic → scoped build → optional retainer** — and no amount is published without its stage label.
+Tooltician offers six distinct service lines, priced in USD (for English-language delivery internationally) or UF (Unidades de Fomento, for Spanish-language delivery in Chile/LATAM). Every service follows the same staged pricing model (**diagnostic → scoped build → optional retainer**) and no amount is published without its stage label.
 
 ### Service 1: Python Automation & Data Pipelines
 *Robust, automated workflows that replace manual data entry and fragile, undocumented scripts.*
@@ -149,10 +149,10 @@ The root URL (`/`) is a bilingual x-default landing with public proof, service l
 | **Financial Tooling** | https://tooltician.com/en/services/financial-tooling/ | https://tooltician.com/es/servicios/herramientas-financieras/ |
 | **Static Sites** | https://tooltician.com/en/services/static-sites/ | https://tooltician.com/es/servicios/sitios-web/ |
 | **Web Technical Hygiene**| https://tooltician.com/en/services/web-technical-hygiene/ | https://tooltician.com/es/servicios/higiene-tecnica-web/ |
-| **Guides Hub (ES)** | — | https://tooltician.com/es/guias/ |
-| **Guide: Web technical audit (ES)** | — | https://tooltician.com/es/guias/auditoria-tecnica-web-negocios-pequenos/ |
-| **Guide: Excel reports with Python (ES)** | — | https://tooltician.com/es/guias/automatizar-reportes-excel-python/ |
-| **Guide: Static websites (ES)** | — | https://tooltician.com/es/guias/pagina-web-estatica-cuando-conviene/ |
+| **Guides Hub (ES)** |: | https://tooltician.com/es/guias/ |
+| **Guide: Web technical audit (ES)** |: | https://tooltician.com/es/guias/auditoria-tecnica-web-negocios-pequenos/ |
+| **Guide: Excel reports with Python (ES)** |: | https://tooltician.com/es/guias/automatizar-reportes-excel-python/ |
+| **Guide: Static websites (ES)** |: | https://tooltician.com/es/guias/pagina-web-estatica-cuando-conviene/ |
 | **Engagement Terms** | https://tooltician.com/en/engagement/ | https://tooltician.com/es/engagement/ |
 | **Privacy Policy** | https://tooltician.com/en/privacy/ | https://tooltician.com/es/privacy/ |
 | **Terms of Use** | https://tooltician.com/en/terms/ | https://tooltician.com/es/terms/ |

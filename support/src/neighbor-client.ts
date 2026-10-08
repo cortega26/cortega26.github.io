@@ -43,6 +43,13 @@ document.querySelectorAll<HTMLAnchorElement>("[data-neighbor-cta]").forEach((lin
       location: link.dataset.neighborCta,
       service,
     });
+    if (link.dataset.neighborDirect === "true") {
+      track("support_whatsapp_click", {
+        location: link.dataset.neighborCta,
+        source: "neighbors",
+        mode: "direct",
+      });
+    }
   });
 });
 
@@ -127,4 +134,15 @@ if ("IntersectionObserver" in window) {
   document.querySelectorAll("[data-section-event]").forEach((section) => {
     observer.observe(section);
   });
+}
+
+/* The sticky button must not cover the consultation form on small screens. */
+const mobileCta = document.querySelector<HTMLElement>(".mobile-cta");
+const contactSection = document.querySelector<HTMLElement>("#consulta");
+if (mobileCta && contactSection && "IntersectionObserver" in window) {
+  const stickyObserver = new IntersectionObserver(
+    ([entry]) => mobileCta.classList.toggle("is-hidden", Boolean(entry?.isIntersecting)),
+    { threshold: 0 },
+  );
+  stickyObserver.observe(contactSection);
 }

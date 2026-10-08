@@ -154,7 +154,7 @@ try {
     assert.equal(flyerResponse.status(), 200);
     assert.equal(await page.locator("h1").count(), 1);
     assert.equal(await page.locator('nav[aria-label="Principal"]').count(), 0);
-    assert.match(await page.locator(".flyer-price").innerText(), /30\\.000/);
+    assert.ok((await page.locator(".flyer-price").innerText()).includes("30.000"));
     assert.match(await page.locator(".flyer-credit").innerText(), /No pagas dos veces/i);
     assert.equal(await page.locator('[data-flyer-whatsapp]').count(), 0);
     assert.equal(await page.locator("a[href^='https://wa.me/']").count(), 0);

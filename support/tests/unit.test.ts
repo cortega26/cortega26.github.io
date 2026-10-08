@@ -11,7 +11,7 @@ import {
   whatsappUrl,
   type Intake,
 } from "../src/lib/contact.ts";
-import { attribution, safeDimensions } from "../src/lib/analytics.ts";
+import { attribution, eventDimensions, safeDimensions } from "../src/lib/analytics.ts";
 import {
   basePrice,
   business,
@@ -97,6 +97,37 @@ test("attribution retains only known categories and strips arbitrary PII", () =>
     { location: "hero", service: "windows", source: "google" },
   );
 });
+test("neighbor direct-contact event keeps acquisition and emits only allowlisted dimensions", () => {
+  const campaign = attribution("?utm_source=google&utm_medium=organic&utm_campaign=local");
+  const direct = eventDimensions(campaign, {
+    location: "contact-direct",
+    variant: "neighbors",
+    mode: "direct",
+    email: "personal@example.com",
+  });
+  assert.deepEqual(direct, {
+    location: "contact-direct",
+    variant: "neighbors",
+    mode: "direct",
+    source: "google",
+    medium: "organic",
+    campaign: "local",
+    content: "none",
+  });
+  assert.deepEqual(
+    eventDimensions(campaign, { location: "neighbors-form", variant: "neighbors" }),
+    {
+      location: "neighbors-form",
+      variant: "neighbors",
+      source: "google",
+      medium: "organic",
+      campaign: "local",
+      content: "none",
+    },
+  );
+  assert.ok(!JSON.stringify(direct).includes("personal@example.com"));
+});
+
 const complete = {
   ...business,
   whatsapp: "56912345678",

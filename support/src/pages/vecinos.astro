@@ -35,7 +35,7 @@ const faqs = [
     'Coordinamos primero por mensaje. La entrega y el retiro se hacen aquí en el edificio y la ubicación exacta se comparte por privado; no publico el número de departamento en la web.',
   ],
   [
-    '¿Los $20.000 del diagnóstico se descuentan?',
+    `¿Los ${money(diagnostic.price)} del diagnóstico se descuentan?`,
     'Sí. Si después del diagnóstico autorizas un servicio de mayor valor, no se suman ambos: pagas el valor del servicio, más los repuestos, licencias o extras que hayas autorizado.',
   ],
   [
@@ -126,7 +126,7 @@ const faqs = [
   </section>
 
   <section id="precios" class="section container" data-section-event="support_price_view">
-    <div class="section-heading"><div><p class="eyebrow">TARIFAS PARA RESIDENTES</p><h2>Sabes cuánto antes de decidir.</h2></div><p>Tarifas $10.000 menos que la oferta general. Si autorizas un servicio de mayor valor, no pagas dos veces la mano de obra. Repuestos y extras se acuerdan aparte.</p></div>
+    <div class="section-heading"><div><p class="eyebrow">TARIFAS PARA RESIDENTES</p><h2>Sabes cuánto antes de decidir.</h2></div><p>Tarifas {money(neighborOffer.priceReduction)} menos que la oferta general. Si autorizas un servicio de mayor valor, no pagas dos veces la mano de obra. Repuestos y extras se acuerdan aparte.</p></div>
     <div class="pricing-layout">
       <aside class="price-explainer">
         <h3>Un diagnóstico.<br />Una decisión informada.</h3>

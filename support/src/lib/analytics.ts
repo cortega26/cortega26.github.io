@@ -10,7 +10,11 @@ const allowed = {
     "final",
     "mobile",
     "form",
+    "contact-direct",
+    "neighbors-form",
   ],
+  variant: ["neighbors"],
+  mode: ["direct", "guided"],
   service: [...services.map((s) => s.id), "otro"],
   source: [
     "direct",
@@ -46,6 +50,14 @@ export function safeDimensions(input: Record<string, unknown>) {
   }
   return output;
 }
+// Shared serialization path for tracked events. Event-specific dimensions cannot
+// silently erase the acquisition source unless explicitly supplied.
+export function eventDimensions(
+  acquisition: Record<string, unknown>,
+  eventData: Record<string, unknown>,
+) {
+  return safeDimensions({ ...acquisition, ...eventData });
+}
 export function attribution(search: string) {
   const params = new URLSearchParams(search);
   const safe = safeDimensions(
@@ -74,7 +86,7 @@ type AnalyticsWindow = Window & {
 export function track(name: EventName, data: Record<string, unknown> = {}) {
   if (!enabled || !eventNames.includes(name)) return;
   (window as AnalyticsWindow).gtag?.("event", name, {
-    ...safeDimensions({ ...source, ...data }),
+    ...eventDimensions(source, data),
     page_location: `${business.origin}${location.pathname}`,
     page_referrer: "",
     send_to: business.analyticsId,

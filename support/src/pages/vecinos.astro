@@ -21,6 +21,7 @@ const neighborDevices = devices.filter(
 
 const diagnostic = neighborServices.find((service) => service.id === 'diagnostico')!;
 const desktopCleaning = neighborServices.find((service) => service.id === 'mantencion')!;
+const remoteSupport = neighborServices.find((service) => service.id === 'remoto')!;
 const directContactUrl = contactReady
   ? whatsappUrl(business.whatsapp, 'Hola, soy vecino/a del edificio y quisiera consultar por mi computador.')
   : '#consulta';
@@ -59,7 +60,7 @@ const faqs = [
   ],
   [
     '¿Puedo recibir ayuda remota?',
-    'Sí, cuando el problema se pueda resolver sin recibir físicamente el equipo. La sesión tiene un precio desde $15.000, dura hasta 45 minutos y no deja acceso permanente sin supervisión.',
+    `Sí, cuando el problema se pueda resolver sin recibir físicamente el equipo. La sesión parte en ${money(remoteSupport.price)}, dura hasta ${business.remoteMinutes} minutos y no deja acceso permanente sin supervisión.`,
   ],
   [
     '¿Qué equipos no recibes?',

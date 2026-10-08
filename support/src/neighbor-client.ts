@@ -46,7 +46,7 @@ document.querySelectorAll<HTMLAnchorElement>("[data-neighbor-cta]").forEach((lin
     if (link.dataset.neighborDirect === "true") {
       track("support_whatsapp_click", {
         location: link.dataset.neighborCta,
-        source: "neighbors",
+        variant: "neighbors",
         mode: "direct",
       });
     }
@@ -55,7 +55,7 @@ document.querySelectorAll<HTMLAnchorElement>("[data-neighbor-cta]").forEach((lin
 
 form?.addEventListener("focusin", () => {
   if (!started) {
-    track("support_triage_start", { source: "neighbors" });
+    track("support_triage_start", { variant: "neighbors" });
     started = true;
   }
 });
@@ -100,7 +100,7 @@ form?.addEventListener("submit", (event) => {
   if (!completed) {
     track("support_triage_complete", {
       service: input.service,
-      source: "neighbors",
+      variant: "neighbors",
     });
     completed = true;
   }
@@ -112,7 +112,7 @@ document
     if (!clicked) {
       track("support_whatsapp_click", {
         location: "neighbors-form",
-        source: "neighbors",
+        variant: "neighbors",
       });
       clicked = true;
     }
@@ -125,7 +125,7 @@ if ("IntersectionObserver" in window) {
         if (!entry.isIntersecting) return;
         const name = (entry.target as HTMLElement).dataset
           .sectionEvent as EventName;
-        if (eventNames.includes(name)) track(name, { source: "neighbors" });
+        if (eventNames.includes(name)) track(name, { variant: "neighbors" });
         observer.unobserve(entry.target);
       }),
     { threshold: 0.15 },

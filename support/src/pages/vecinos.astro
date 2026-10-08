@@ -105,7 +105,7 @@ const faqs = [
 
   <div class="trust-strip"><div class="container"><span>✓ Identidad verificable</span><span>✓ Precios publicados</span><span>✓ Tú autorizas</span><span>✓ Trabajo documentado</span></div></div>
 
-  <section id="servicios" class="section container" data-section-event="support_service_view">
+  <section id="servicios" class="section container neighbors-services" data-section-event="support_service_view">
     <div class="section-heading"><div><p class="eyebrow">PROBLEMAS FRECUENTES</p><h2>¿Qué le pasa a tu equipo?</h2></div><p>No necesitas saber el nombre técnico de la falla. Reviso PC y notebooks con Windows; si requiere otra especialidad, te lo indicaré.</p></div>
     <div class="service-grid">
       {neighborServices.map((service, i) => <article class="service-card"><span class="service-index">0{i + 1}</span><h3>{service.problem}</h3><p class="service-problem">{service.title}</p><p>{service.description}</p><a class="service-link" href="#consulta" data-service={service.id} data-neighbor-cta="services">Consultar este problema <span aria-hidden="true">↗</span></a></article>)}

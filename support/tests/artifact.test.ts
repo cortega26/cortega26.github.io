@@ -173,7 +173,7 @@ test("neighbors evaluation page stays private and preserves the agreed offer", {
   assert.match(html, /diagnóstico se descuenta/i);
   assert.match(html, /Primera revisión dentro de 24 horas/i);
   assert.match(html, /desde la recepción coordinada/i);
-  assert.match(html, /Identidad verificable/i);
+  assert.match(html, /Primera revisión en 24 h/i);
   assert.match(html, /ubicación exacta se comparte por privado/i);
   assert.match(html, /EJEMPLO CON PRECIOS PUBLICADOS/i);
   assert.match(html, /no \$50\.000/i, "example must explain that diagnosis is credited");

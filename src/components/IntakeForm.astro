@@ -43,12 +43,12 @@ const en = {
   heading: heading === undefined ? 'Project brief' : heading,
   intro: {
     general: 'You do not need to know the solution, stack, or budget yet. In one or two sentences, tell me what you do manually today, what keeps breaking, or what you wish would disappear from the workflow.',
-    htw: 'Tell me about the live site you want reviewed. No email client needed — fill this in and I reply by email within 24–48 business hours.',
-    automation: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
-    'recurring-data': 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
-    'internal-tools': 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
-    financial: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
-    web: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply — a direct yes/no on fit within two business days.',
+    htw: 'Tell me about the live site you want reviewed. No email client needed: fill this in and I reply by email within 24–48 business hours.',
+    automation: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply: a direct yes/no on fit within two business days.',
+    'recurring-data': 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply: a direct yes/no on fit within two business days.',
+    'internal-tools': 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply: a direct yes/no on fit within two business days.',
+    financial: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply: a direct yes/no on fit within two business days.',
+    web: 'A short, structured note is enough. The clearer the scope, the faster and more precise the reply: a direct yes/no on fit within two business days.',
   },
   nameLabel: 'Name',
   namePh: 'Your name',
@@ -119,11 +119,11 @@ const es = {
   intro: {
     general: 'No necesitas saber todavía la solución, el stack ni el presupuesto. En una o dos frases, cuéntame qué haces manualmente hoy, qué se rompe seguido o qué parte del flujo te gustaría que desapareciera.',
     htw: 'Cuéntame del sitio publicado que quieres revisar. Sin abrir tu cliente de correo: completa esto y respondo por email en 24–48 horas hábiles.',
-    automation: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
-    'recurring-data': 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
-    'internal-tools': 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
-    financial: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
-    web: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta — un sí/no directo de encaje en dos días hábiles.',
+    automation: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta: un sí/no directo de encaje en dos días hábiles.',
+    'recurring-data': 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta: un sí/no directo de encaje en dos días hábiles.',
+    'internal-tools': 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta: un sí/no directo de encaje en dos días hábiles.',
+    financial: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta: un sí/no directo de encaje en dos días hábiles.',
+    web: 'Una nota corta y estructurada basta. Mientras más claro el alcance, más rápida y precisa la respuesta: un sí/no directo de encaje en dos días hábiles.',
   },
   nameLabel: 'Nombre',
   namePh: 'Tu nombre',
@@ -192,7 +192,7 @@ const es = {
 const c = lang === 'en' ? en : es;
 const subjectMap: Record<IntakeService, string> = {
   general: lang === 'en' ? 'Project brief from tooltician.com' : 'Brief de proyecto desde tooltician.com',
-  htw: lang === 'en' ? 'Web Technical Hygiene — intake' : 'Higiene Técnica Web — intake',
+  htw: lang === 'en' ? 'Web Technical Hygiene (intake' : 'Higiene Técnica Web) intake',
   automation: lang === 'en' ? 'Automation brief from tooltician.com' : 'Brief (Automatización) desde tooltician.com',
   'recurring-data': lang === 'en' ? 'Recurring data brief from tooltician.com' : 'Brief (Recolección de datos) desde tooltician.com',
   'internal-tools': lang === 'en' ? 'Internal tools brief from tooltician.com' : 'Brief (Herramientas internas) desde tooltician.com',
@@ -267,7 +267,7 @@ const submitLabel = isGeneral ? c.generalSubmit : c.submit;
       <div class="form-group">
         <label for={id('goal')}>{c.goalLabel}</label>
         <select id={id('goal')} name="goal" required data-error-required={c.fieldErrors.goalRequired}>
-          <option value="" disabled selected>—</option>
+          <option value="" disabled selected>{lang === "en" ? "Select" : "Selecciona"}</option>
           {goalOptions.map(o => <option value={o}>{o}</option>)}
         </select>
         <p class="form-group__error" id={id('goal-error')} hidden>{c.fieldErrors.goalRequired}</p>
@@ -275,7 +275,7 @@ const submitLabel = isGeneral ? c.generalSubmit : c.submit;
       <div class="form-group">
         <label for={id('budget')}>{c.budgetLabel}</label>
         <select id={id('budget')} name="budget">
-          <option value="" selected>—</option>
+          <option value="" selected>{lang === "en" ? "Not specified" : "Sin especificar"}</option>
           {budgetOptions.map(o => <option value={o}>{o}</option>)}
         </select>
       </div>
@@ -286,7 +286,7 @@ const submitLabel = isGeneral ? c.generalSubmit : c.submit;
     <div class="form-group">
       <label for={id('timeline')}>{c.timelineLabel}</label>
       <select id={id('timeline')} name="timeline">
-        <option value="" selected>—</option>
+        <option value="" selected>{lang === "en" ? "Not specified" : "Sin especificar"}</option>
         {c.timelineOptions.map(o => <option value={o}>{o}</option>)}
       </select>
     </div>
@@ -406,7 +406,7 @@ const submitLabel = isGeneral ? c.generalSubmit : c.submit;
     box-shadow: 0 0 0 3px rgba(196, 160, 74, 0.1);
   }
 
-  /* Native option list needs a solid background + readable text — the
+  /* Native option list needs a solid background + readable text: the
      translucent control background renders dark-on-dark when expanded. */
   .form-group select option {
     background-color: var(--clr-bg-card);
@@ -497,7 +497,7 @@ const submitLabel = isGeneral ? c.generalSubmit : c.submit;
   /*
    * Submission feedback: restrained but unmistakable. Stronger than ordinary
    * helper text via a left accent border, heavier weight, more internal
-   * padding, and a small semantic icon — success and error also differ in
+   * padding, and a small semantic icon: success and error also differ in
    * icon shape (circle-check vs triangle-alert), not just color, so the two
    * states read apart at a glance without relying on color alone.
    */

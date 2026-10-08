@@ -6,9 +6,9 @@ const { lang } = Astro.props;
 
 const en = {
   availability: 'Automation and internal systems for operations-heavy teams · EN / ES',
-  meta: 'Tooltician — Carlos Ortega Gonzalez',
+  meta: 'Tooltician · Carlos Ortega Gonzalez',
   title: 'If your operation still depends on copy-paste, fragile spreadsheets, or the one person who knows how it works, that is the problem I solve.',
-  summary: 'I turn recurring manual workflows — reports, data collection, reconciliations, internal handoffs, and brittle scripts — into systems your team can run and trust.',
+  summary: 'I turn recurring manual workflows (reports, data collection, reconciliations, internal handoffs, and brittle scripts) into systems your team can run and trust.',
   support: 'You do not need a technical specification. Tell me what you do today, what breaks, or what keeps consuming time; I will tell you whether it is worth automating and what a sensible scope looks like.',
   routeTitle: 'Quick navigation',
   routes: [
@@ -43,7 +43,7 @@ const en = {
   panelItems: [
     { label: 'Scope', value: 'Reporting automation, ETL reliability, scraping, internal data tools, and workflow stabilization.' },
     { label: 'Delivery', value: 'Scoped implementation, direct communication, explicit assumptions, and handoff-ready docs.' },
-    { label: 'Availability', value: 'Open to new scoped engagements. Reply within 48 h with a direct fit or no. Free 15-min diagnostic call — you leave with clear scope direction, not a sales pitch.' },
+    { label: 'Availability', value: 'Open to new scoped engagements. Reply within 48 h with a direct fit or no. Free 15-min diagnostic call. You leave with clear scope direction, not a sales pitch.' },
     { label: 'Location', value: 'Santiago, working EN/ES across LATAM and U.S.-friendly hours.' },
   ],
   serviceLine: 'International engagements are priced in USD. Chile and LATAM pricing is available in UF.',
@@ -53,9 +53,9 @@ const en = {
 
 const es = {
   availability: 'Automatización y sistemas internos para equipos operativos · ES / EN',
-  meta: 'Tooltician — Carlos Ortega González — Consultor de Automatización Python',
+  meta: 'Tooltician (Carlos Ortega González) Consultor de Automatización Python',
   title: 'Si tu operación depende de copiar, pegar o de la única persona que “sabe cómo se hace”, ese es el problema que resuelvo.',
-  summary: 'Convierto trabajo manual recurrente — reportes, recolección de datos, conciliaciones, traspasos internos y scripts frágiles — en sistemas que tu equipo puede operar y confiar.',
+  summary: 'Convierto trabajo manual recurrente (reportes, recolección de datos, conciliaciones, traspasos internos y scripts frágiles) en sistemas que tu equipo puede operar y confiar.',
   support: 'No necesitas llegar con una especificación técnica. Cuéntame qué haces hoy, qué se rompe o qué te consume tiempo; yo te digo si vale la pena automatizarlo y cuál sería un alcance sensato.',
   serviceLine: 'Los proyectos para Chile y LATAM se cotizan en UF. La versión internacional se entrega en inglés y se cotiza en USD.',
   serviceHref: '/en/#services',
@@ -93,7 +93,7 @@ const es = {
   panelItems: [
     { label: 'Alcance', value: 'Automatización de reportes, confiabilidad ETL, scraping, herramientas internas de datos y estabilización de flujos.' },
     { label: 'Entrega', value: 'Implementación acotada, comunicación directa, supuestos explícitos y docs para traspaso.' },
-    { label: 'Disponibilidad', value: 'Disponible para nuevos proyectos acotados. Respuesta en 48 h con encaje directo o no. Llamada de diagnóstico gratis de 15 min — terminas la llamada con dirección de alcance clara, sin pitch de ventas.' },
+    { label: 'Disponibilidad', value: 'Disponible para nuevos proyectos acotados. Respuesta en 48 h con encaje directo o no. Llamada de diagnóstico gratis de 15 min. Terminas la llamada con dirección de alcance clara, sin pitch de ventas.' },
     { label: 'Ubicación', value: 'Santiago, trabajo ES/EN con LATAM y horarios compatibles con EE.UU.' },
   ],
 };
@@ -329,7 +329,7 @@ const c = lang === 'en' ? en : es;
   color: var(--clr-accent-hover);
 }
 
-/* Routes panel — below the fold */
+/* Routes panel: below the fold */
 .hero__summary-panel {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

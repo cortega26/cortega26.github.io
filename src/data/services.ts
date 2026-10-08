@@ -125,10 +125,10 @@ const pythonAutomation: ServiceDefinition = {
     serviceType: ['Python automation', 'ETL pipeline development', 'Web scraping', 'Reporting automation'],
     eyebrow: 'Python Automation · Tooltician',
     h1: 'Python automation that keeps running after you stop watching it',
-    lede: 'I replace recurring manual data work — report assembly, fragile scrapes, copy-paste delivery — with scheduled, reproducible pipelines that emit the same answer every time and are documented for the next person to operate.',
+    lede: 'I replace recurring manual data work (report assembly, fragile scrapes, copy-paste delivery) with scheduled, reproducible pipelines that emit the same answer every time and are documented for the next person to operate.',
     subcopy:
-      'All deliverables are in English. You get a production-minded system with tests, logging, and a runbook — not a script that only the author can run.',
-    ctaPrimary: `Scope my automation — diagnostic from ${pricing.automation.en.scoping}`,
+      'All deliverables are in English. You get a production-minded system with tests, logging, and a runbook, not a script that only the author can run.',
+    ctaPrimary: `Scope my automation: diagnostic from ${pricing.automation.en.scoping}`,
     ctaSecondary: "See what's included",
     microcopy:
       'Fixed scope, not open-ended hours. Every engagement starts with a free 15-minute call to confirm fit before any quote.',
@@ -157,7 +157,7 @@ const pythonAutomation: ServiceDefinition = {
     problemCards: [
       {
         title: 'What typically happens',
-        body: 'A report is assembled by hand every week, a scraper breaks silently when a page changes, numbers are copied between systems, and the whole thing depends on one person remembering the steps. It works — until it does not, usually at the worst possible time.',
+        body: 'A report is assembled by hand every week, a scraper breaks silently when a page changes, numbers are copied between systems, and the whole thing depends on one person remembering the steps. It works until it doesn't, usually at the worst possible time.',
       },
       {
         title: 'The real asymmetry',
@@ -167,7 +167,7 @@ const pythonAutomation: ServiceDefinition = {
     scopeEyebrow: 'Approach',
     scopeTitle: 'Built around the workflow, not just the code',
     scopeSubtitle:
-      'Before anything is written, the engagement goes through a scope pass — inputs, outputs, owner, failure modes, and handoff target. What gets built is a system the next person can run, diagnose, and extend.',
+      'Before anything is written, the engagement goes through a scope pass: inputs, outputs, owner, failure modes, and handoff target. What gets built is a system the next person can run, diagnose, and extend.',
     scopeNote: {
       label: 'What this is not',
       body: 'This is not open-ended product development, real-time streaming infrastructure, a data-warehouse standup, or ML model development. It is scoped, reliable automation of work you already do.',
@@ -207,9 +207,9 @@ const pythonAutomation: ServiceDefinition = {
       'Designed to be concrete from the first step: lock the scope, build the smallest coherent system, and leave it documented enough to run without me.',
     processSteps: [
       ['01', 'Free diagnostic call', 'A 15-minute call to confirm the problem is a fit and worth automating. No charge, no obligation.'],
-      ['02', 'Automation scoping', 'A short paid discovery that locks inputs, outputs, owner, failure modes, and success criteria — agreed in writing. The fee is credited toward the build.'],
+      ['02', 'Automation scoping', 'A short paid discovery that locks inputs, outputs, owner, failure modes, and success criteria, agreed in writing. The fee is credited toward the build.'],
       ['03', 'Scoped build', 'Implementation with visible progress in GitHub, tests, logging, and pragmatic tradeoffs documented instead of surprise scope creep.'],
-      ['04', 'Handoff', 'README, runbook, setup steps, and the failure points worth watching — so the next person can run, debug, and extend it without me on a call.'],
+      ['04', 'Handoff', 'README, runbook, setup steps, and the failure points worth watching, so the next person can run, debug, and extend it without me on a call.'],
     ],
     plansEyebrow: 'Plans & pricing',
     plansTitle: 'A clear scope at each step, from first pipeline to ongoing upkeep',
@@ -268,7 +268,7 @@ const pythonAutomation: ServiceDefinition = {
     whyAltLabel: 'Generic freelancer',
     whyAltItems: [
       'Delivers the script you asked for. If you under-specify, the result is fragile.',
-      'No tests, no logging, no runbook by default — debugging falls back on you.',
+      'Without tests, logging or a runbook, the debugging falls back on you.',
       'No handoff. When it breaks, the knowledge left with the author.',
       'Each fix is a new project with no memory of how the system works.',
     ],
@@ -302,22 +302,22 @@ const pythonAutomation: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Questions worth answering precisely',
     faqs: [
-      ['How do you price this — hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
+      ['How do you price this: hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
       [`What does the ${pricing.automation.en.scoping} scoping include?`, `A written scope document: inputs, outputs, owner, failure modes, and success criteria, plus a fixed-price quote for the build. If you proceed, the ${pricing.automation.en.scoping} is credited toward the build.`],
-      ['Do you need access to our systems?', 'For scoping, usually not. For the build, controlled access to the relevant data sources, repository, or environment is required — scoped to what the work needs and no more.'],
+      ['Do you need access to our systems?', 'For scoping, usually not. For the build, controlled access to the relevant data sources, repository, or environment is required: scoped to what the work needs and no more.'],
       ['What language and stack do you use?', 'Primarily Python (Pandas, FastAPI, Selenium, BeautifulSoup) with SQL, Bash, GitHub Actions, and reliability-minded packaging. The stack is chosen to fit your environment and handoff, not the other way around.'],
-      ['What happens after delivery?', 'You get handoff materials — README, runbook, setup, and failure points — so your team can run and extend it. An optional Stabilization Retainer is available if you want ongoing upkeep, but it is not a lock-in.'],
+      ['What happens after delivery?', 'You get handoff materials (README, runbook, setup, and failure points) so your team can run and extend it. An optional Stabilization Retainer is available if you want ongoing upkeep, but it is not a lock-in.'],
       ['Why is this priced in USD when the homepage shows UF?', 'This international service is delivered entirely in English with executive-ready documentation, priced in USD for US, UK, and EU clients. The Spanish version is calibrated for the Chilean and Latin American market in UF. The technical scope is equivalent; the delivery context is not.'],
     ],
     contactEyebrow: 'Next step',
     contactTitle: 'Start with a scoped problem, not an open-ended retainer',
     contactSubtitle:
       'If a recurring workflow is eating time or quietly creating risk, the right entry point is a short scoping pass that turns it into a fixed-price build.',
-    contactCardTitle: `Automation scoping — from ${pricing.automation.en.scoping}`,
+    contactCardTitle: `Automation scoping: from ${pricing.automation.en.scoping}`,
     contactCardBody:
       'A written scope of the workflow: inputs, outputs, owner, failure modes, and success criteria, plus a fixed-price build quote. The fee is credited toward the build.',
     contactRiskNote:
-      'If scoping shows the work is not worth automating yet, the document says so with reasoning — knowing where the real bottleneck is, is also valuable. The fee applies regardless, but there are no surprises or additional charges.',
+      'If scoping shows the work is not worth automating yet, the document says so with reasoning, knowing where the real bottleneck is, is also valuable. The fee applies regardless, but there are no surprises or additional charges.',
     contactCallLabel: 'Schedule a call instead',
     intakeHeading: 'Tell me about the workflow',
     intents: [
@@ -326,7 +326,7 @@ const pythonAutomation: ServiceDefinition = {
       { tag: 'I want ongoing support', body: 'Light monitoring, small changes, and external judgment without an in-house data hire.' },
     ],
     outreach:
-      'If you arrived here from a specific bottleneck — a manual report, a fragile scrape, copy-paste between systems — the scope is this: lock it down, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
+      'If you arrived here with a specific bottleneck (a manual report, a fragile scraper or copying data between systems), here's the scope: lock it down, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
   },
   es: {
     title: 'Automatización Python y Pipelines | Tooltician',
@@ -336,10 +336,10 @@ const pythonAutomation: ServiceDefinition = {
     serviceType: ['Automatización en Python', 'Desarrollo de pipelines ETL', 'Web scraping', 'Automatización de reportes'],
     eyebrow: 'Automatización en Python · Tooltician',
     h1: 'Automatización en Python que sigue funcionando cuando dejas de vigilarla',
-    lede: 'Reemplazo el trabajo manual recurrente con datos — armado de reportes, scrapes frágiles, copia-pega entre sistemas — por pipelines programados y reproducibles que entregan la misma respuesta cada vez y quedan documentados para que la siguiente persona los opere.',
+    lede: 'Reemplazo el trabajo manual recurrente con datos (armado de reportes, scrapes frágiles, copia-pega entre sistemas) por pipelines programados y reproducibles que entregan la misma respuesta cada vez y quedan documentados para que la siguiente persona los opere.',
     subcopy:
-      'Obtienes un sistema pensado para producción, con tests, logging y un runbook — no un script que solo el autor sabe ejecutar.',
-    ctaPrimary: `Acotar mi automatización — diagnóstico desde ${pricing.automation.es.scoping}`,
+      'Obtienes un sistema pensado para producción, con tests, logging y un runbook, no un script que solo el autor sabe ejecutar.',
+    ctaPrimary: `Acotar mi automatización: diagnóstico desde ${pricing.automation.es.scoping}`,
     ctaSecondary: 'Ver qué incluye',
     microcopy:
       'Alcance fijo, no horas abiertas. Cada proyecto empieza con una llamada gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.',
@@ -368,7 +368,7 @@ const pythonAutomation: ServiceDefinition = {
     problemCards: [
       {
         title: 'Lo que suele pasar',
-        body: 'Un reporte se arma a mano cada semana, un scraper se rompe en silencio cuando cambia una página, los números se copian entre sistemas, y todo depende de que una persona recuerde los pasos. Funciona — hasta que no, normalmente en el peor momento.',
+        body: 'Un reporte se arma a mano cada semana, un scraper se rompe en silencio cuando cambia una página, los números se copian entre sistemas, y todo depende de que una persona recuerde los pasos. Funciona hasta que deja de hacerlo, normalmente en el peor momento.',
       },
       {
         title: 'La asimetría real',
@@ -378,7 +378,7 @@ const pythonAutomation: ServiceDefinition = {
     scopeEyebrow: 'Enfoque',
     scopeTitle: 'Construido en torno al flujo de trabajo, no solo al código',
     scopeSubtitle:
-      'Antes de escribir nada, el proyecto pasa por una revisión de alcance — inputs, outputs, responsable, modos de falla y objetivo de traspaso. Lo que se construye es un sistema que la siguiente persona puede operar, diagnosticar y extender.',
+      'Antes de escribir nada, el proyecto pasa por una revisión de alcance: inputs, outputs, responsable, modos de falla y objetivo de traspaso. Lo que se construye es un sistema que la siguiente persona puede operar, diagnosticar y extender.',
     scopeNote: {
       label: 'Qué no es esto',
       body: 'No es desarrollo de producto abierto, infraestructura de streaming en tiempo real, montaje de un data warehouse ni desarrollo de modelos de ML. Es automatización acotada y confiable de trabajo que ya haces.',
@@ -418,9 +418,9 @@ const pythonAutomation: ServiceDefinition = {
       'Pensado para ser concreto desde el primer paso: fijar el alcance, construir el sistema más pequeño y coherente, y dejarlo documentado lo suficiente para operar sin mí.',
     processSteps: [
       ['01', 'Llamada de diagnóstico gratuita', 'Una llamada de 15 minutos para confirmar que el problema encaja y vale la pena automatizar. Sin costo, sin compromiso.'],
-      ['02', 'Diagnóstico de automatización', 'Un discovery corto y pagado que fija inputs, outputs, responsable, modos de falla y criterios de éxito — acordados por escrito. El valor se acredita a la implementación.'],
+      ['02', 'Diagnóstico de automatización', 'Un discovery corto y pagado que fija inputs, outputs, responsable, modos de falla y criterios de éxito, acordados por escrito. El valor se acredita a la implementación.'],
       ['03', 'Construcción acotada', 'Implementación con progreso visible en GitHub, tests, logging y tradeoffs documentados en lugar de scope creep sorpresa.'],
-      ['04', 'Traspaso', 'README, runbook, pasos de setup y los puntos de falla que conviene vigilar — para que la siguiente persona pueda operar, depurar y extender sin necesitarme en una llamada.'],
+      ['04', 'Traspaso', 'README, runbook, pasos de setup y los puntos de falla que conviene vigilar, para que la siguiente persona pueda operar, depurar y extender sin necesitarme en una llamada.'],
     ],
     plansEyebrow: 'Planes y precios',
     plansTitle: 'Un alcance claro en cada paso, del primer pipeline a la mantención',
@@ -479,7 +479,7 @@ const pythonAutomation: ServiceDefinition = {
     whyAltLabel: 'Freelancer genérico',
     whyAltItems: [
       'Entrega el script que pediste. Si lo especificas mal, el resultado es frágil.',
-      'Sin tests, sin logging, sin runbook por defecto — depurar vuelve a quedar en ti.',
+      'Sin tests, sin logging ni runbook, depurar vuelve a quedar en tus manos.',
       'Sin traspaso. Cuando se rompe, el conocimiento se fue con el autor.',
       'Cada arreglo es un proyecto nuevo sin memoria de cómo funciona el sistema.',
     ],
@@ -514,22 +514,22 @@ const pythonAutomation: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
-      ['¿Cómo cobras esto — por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
+      ['¿Cómo cobras esto: por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
       [`¿Qué incluye el diagnóstico de ${pricing.automation.es.scoping}?`, `Un documento de alcance: inputs, outputs, responsable, modos de falla y criterios de éxito, más una cotización a precio fijo. Si avanzas, las ${pricing.automation.es.scoping} se acreditan a la construcción.`],
-      ['¿Necesitas acceso a nuestros sistemas?', 'Para el diagnóstico, normalmente no. Para la construcción se requiere acceso controlado a las fuentes de datos, el repositorio o el entorno relevante — acotado a lo que el trabajo necesita y nada más.'],
+      ['¿Necesitas acceso a nuestros sistemas?', 'Para el diagnóstico, normalmente no. Para la construcción se requiere acceso controlado a las fuentes de datos, el repositorio o el entorno relevante: acotado a lo que el trabajo necesita y nada más.'],
       ['¿Qué lenguaje y stack usas?', 'Principalmente Python (Pandas, FastAPI, Selenium, BeautifulSoup) con SQL, Bash, GitHub Actions y empaquetado orientado a confiabilidad. El stack se elige para encajar con tu entorno y traspaso, no al revés.'],
-      ['¿Qué pasa después de la entrega?', 'Recibes materiales de traspaso — README, runbook, setup y puntos de falla — para que tu equipo lo opere y extienda. Hay un Retainer de Estabilización opcional si quieres mantención continua, pero no es un amarre.'],
+      ['¿Qué pasa después de la entrega?', 'Recibes materiales de traspaso (README, runbook, setup y puntos de falla) para que tu equipo lo opere y extienda. Hay un Retainer de Estabilización opcional si quieres mantención continua, pero no es un amarre.'],
       ['¿Por qué la versión en inglés se cotiza en USD y aquí en UF?', 'El servicio internacional se entrega completamente en inglés con documentación lista para gerencia, cotizado en USD para clientes de EE. UU., Reino Unido y Europa. La versión en español está calibrada para el mercado chileno y latinoamericano en UF. El alcance técnico es equivalente; el contexto de entrega no.'],
     ],
     contactEyebrow: 'Siguiente paso',
     contactTitle: 'Parte de un problema acotado, no de un retainer abierto',
     contactSubtitle:
       'Si un flujo recurrente está consumiendo tiempo o creando riesgo en silencio, el punto de entrada correcto es un diagnóstico corto que lo convierte en una construcción a precio fijo.',
-    contactCardTitle: `Diagnóstico de automatización — desde ${pricing.automation.es.scoping}`,
+    contactCardTitle: `Diagnóstico de automatización: desde ${pricing.automation.es.scoping}`,
     contactCardBody:
       'Un alcance por escrito del flujo: inputs, outputs, responsable, modos de falla y criterios de éxito, más una cotización a precio fijo. El valor se acredita a la construcción.',
     contactRiskNote:
-      'Si el diagnóstico muestra que aún no vale la pena automatizar, el documento lo dice con argumentos — saber dónde está el cuello de botella real también es valioso. El valor aplica igual, pero no hay sorpresas ni cargos adicionales.',
+      'Si el diagnóstico muestra que aún no vale la pena automatizar, el documento lo dice con argumentos, saber dónde está el cuello de botella real también es valioso. El valor aplica igual, pero no hay sorpresas ni cargos adicionales.',
     contactCallLabel: 'Prefiero agendar una llamada',
     intakeHeading: 'Cuéntame sobre el flujo',
     intents: [
@@ -538,7 +538,7 @@ const pythonAutomation: ServiceDefinition = {
       { tag: 'Quiero soporte continuo', body: 'Monitoreo liviano, cambios pequeños y juicio externo sin contratar a alguien de datos interno.' },
     ],
     outreach:
-      'Si llegaste aquí por un cuello de botella específico — un reporte manual, un scrape frágil, copia-pega entre sistemas — el alcance es este: fijarlo, construirlo de forma confiable y traspasarlo documentado. Precio fijo, sin horas abiertas.',
+      'Si llegaste aquí por un cuello de botella específico (un reporte manual, un scrape frágil o copiar datos entre sistemas), el alcance es este: fijarlo, construirlo de forma confiable y traspasarlo documentado. Precio fijo, sin horas abiertas.',
   },
 };
 
@@ -557,7 +557,7 @@ const recurringData: ServiceDefinition = {
     h1: 'Recurring data collection that fails loudly instead of drifting silently',
     lede: 'I build repeatable collection flows for public or authorized sources, with validation, retries, logs, alerts, and structured outputs your downstream work can trust.',
     subcopy: 'This is for legitimate recurring acquisition with a known operational use. It excludes access-control bypasses, credential abuse, and one-off lead harvesting.',
-    ctaPrimary: `Scope my collector — diagnostic from ${pricing.automation.en.scoping}`,
+    ctaPrimary: `Scope my collector: diagnostic from ${pricing.automation.en.scoping}`,
     fitItems: [
       'A public or authorized source feeds reporting, operations, analysis, or publishing.',
       'Manual collection or a fragile scraper already consumes time or creates silent risk.',
@@ -610,7 +610,7 @@ const recurringData: ServiceDefinition = {
     ],
     contactTitle: 'Start with the source contract, not with a scraping library',
     contactSubtitle: 'Name the source, authorization, cadence, destination, downstream owner, and what a failed or partial run must do.',
-    contactCardTitle: `Collection scoping — from ${pricing.automation.en.scoping}`,
+    contactCardTitle: `Collection scoping: from ${pricing.automation.en.scoping}`,
     contactCardBody: 'A written source and output contract covering authorization, cadence, validation, failure modes, delivery, and ownership. Credited toward the build.',
     intakeHeading: 'Tell me about the recurring source',
     intents: [
@@ -624,9 +624,9 @@ const recurringData: ServiceDefinition = {
       'Concrete from the first step: lock the source contract, build the smallest reliable collector, and leave it documented enough to run and repair without me.',
     processSteps: [
       ['01', 'Free diagnostic call', 'A 15-minute call to confirm the source, its authorization, and the downstream use are a fit. No charge, no obligation.'],
-      ['02', 'Collection scoping', 'A short paid discovery that locks sources, authorization, cadence, validation rules, failure behavior, and the handoff owner — agreed in writing. The fee is credited toward the build.'],
+      ['02', 'Collection scoping', 'A short paid discovery that locks sources, authorization, cadence, validation rules, failure behavior, and the handoff owner, agreed in writing. The fee is credited toward the build.'],
       ['03', 'Scoped collector build', 'Implementation with visible progress in GitHub, validation, logging, alerts, and pragmatic tradeoffs documented instead of surprise scope creep.'],
-      ['04', 'Handoff', 'README, runbook, repair notes, and the failure points worth watching — so the next person can run, debug, and repair it without me on a call.'],
+      ['04', 'Handoff', 'README, runbook, repair notes, and the failure points worth watching, so the next person can run, debug, and repair it without me on a call.'],
     ],
     tableFeatures: [
       ['Free 15-min diagnostic call', true, true, true, true],
@@ -643,12 +643,12 @@ const recurringData: ServiceDefinition = {
       'A marketplace freelancer delivers the scraper you describe. Tooltician builds a collector that validates, alerts, and can be repaired when the source changes.',
     whyAltItems: [
       'Delivers the script you asked for. When the source changes, a partial run still looks like a good run.',
-      'No validation, no alerts, no runbook — every break is a surprise.',
+      'Without validation, alerts or a runbook, every failure is a surprise.',
       'No handoff. When it breaks, the knowledge left with the author.',
       'Each repair is a new project with no memory of how the collector works.',
     ],
     whyUsItems: [
-      'Builds for the failure modes you did not know to ask about — empty, partial, duplicate, and drift states.',
+      'Builds for the failure modes you did not know to ask about: empty, partial, duplicate, and drift states.',
       'Validation, logging, retries, and alerts so source changes surface early and loudly.',
       'Handoff materials so the next person can repair the collector without reverse-engineering.',
       'Public, auditable work: scheduled collection pipelines, data layers, and production systems.',
@@ -658,9 +658,9 @@ const recurringData: ServiceDefinition = {
       body: 'Tooltician runs scheduled collection in production (polla, noticiencias) and ships open-source data layers (chile-hub) with handoff-ready docs. The same standards apply to your collector.',
     },
     contactRiskNote:
-      'If scoping shows the source is not lawful, stable, or worth collecting on a schedule, the document says so with reasoning — knowing the real constraint early is also valuable. The fee applies regardless, but there are no surprises or additional charges.',
+      'If scoping shows the source is not lawful, stable, or worth collecting on a schedule, the document says so with reasoning, knowing the real constraint early is also valuable. The fee applies regardless, but there are no surprises or additional charges.',
     outreach:
-      'If you arrived here because a recurring source feeds your reporting, operations, or publishing — or because a scraper keeps failing quietly — the scope is this: lock the source contract, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
+      'If you arrived here because a recurring source feeds your reporting, operations, or publishing (or because a scraper keeps failing quietly) the scope is this: lock the source contract, build it reliably, and hand it off documented. Fixed price, no open-ended hours.',
   },
   es: {
     ...pythonAutomation.es,
@@ -672,7 +672,7 @@ const recurringData: ServiceDefinition = {
     h1: 'Recolección recurrente que falla de forma visible, no en silencio',
     lede: 'Construyo flujos repetibles para fuentes públicas o autorizadas, con validación, reintentos, logs, alertas y salidas estructuradas en las que tu operación pueda confiar.',
     subcopy: 'Este servicio cubre adquisición legítima y recurrente con un uso operacional conocido. Excluye evadir controles de acceso, abusar credenciales y recolectar leads por única vez.',
-    ctaPrimary: `Acotar mi colector — diagnóstico desde ${pricing.automation.es.scoping}`,
+    ctaPrimary: `Acotar mi colector: diagnóstico desde ${pricing.automation.es.scoping}`,
     fitItems: [
       'Una fuente pública o autorizada alimenta reportes, operaciones, análisis o publicación.',
       'La recolección manual o un scraper frágil ya consume tiempo o crea riesgo silencioso.',
@@ -725,7 +725,7 @@ const recurringData: ServiceDefinition = {
     ],
     contactTitle: 'Parte por el contrato de fuente, no por una librería de scraping',
     contactSubtitle: 'Indica fuente, autorización, frecuencia, destino, responsable aguas abajo y qué debe pasar ante una ejecución fallida o parcial.',
-    contactCardTitle: `Diagnóstico de recolección — desde ${pricing.automation.es.scoping}`,
+    contactCardTitle: `Diagnóstico de recolección: desde ${pricing.automation.es.scoping}`,
     contactCardBody: 'Un contrato escrito de fuente y salida que cubre autorización, frecuencia, validación, fallas, entrega y responsable. Se acredita a la implementación.',
     intakeHeading: 'Cuéntame sobre la fuente recurrente',
     intents: [
@@ -739,9 +739,9 @@ const recurringData: ServiceDefinition = {
       'Concreto desde el primer paso: fijar el contrato de fuente, construir el colector más pequeño que sea confiable y dejarlo documentado para operarlo y repararlo sin mí.',
     processSteps: [
       ['01', 'Llamada de diagnóstico gratuita', 'Una llamada de 15 minutos para confirmar que la fuente, su autorización y el uso posterior son un buen encaje. Sin costo ni compromiso.'],
-      ['02', 'Levantamiento de recolección', 'Un descubrimiento breve y pagado que fija fuentes, autorización, frecuencia, reglas de validación, comportamiento ante fallas y responsable de traspaso — acordado por escrito. El monto se acredita a la construcción.'],
+      ['02', 'Levantamiento de recolección', 'Un descubrimiento breve y pagado que fija fuentes, autorización, frecuencia, reglas de validación, comportamiento ante fallas y responsable de traspaso: acordado por escrito. El monto se acredita a la construcción.'],
       ['03', 'Construcción del colector acotado', 'Implementación con progreso visible en GitHub, validación, logging, alertas y decisiones documentadas en lugar de scope creep sorpresivo.'],
-      ['04', 'Traspaso', 'README, runbook, notas de reparación y los puntos de falla a vigilar — para que la siguiente persona pueda operarlo, depurarlo y repararlo sin una llamada conmigo.'],
+      ['04', 'Traspaso', 'README, runbook, notas de reparación y los puntos de falla a vigilar, para que la siguiente persona pueda operarlo, depurarlo y repararlo sin una llamada conmigo.'],
     ],
     tableFeatures: [
       ['Llamada de diagnóstico gratuita (15 min)', true, true, true, true],
@@ -758,12 +758,12 @@ const recurringData: ServiceDefinition = {
       'Un freelancer de marketplace entrega el scraper que describes. Tooltician construye un colector que valida, alerta y se puede reparar cuando la fuente cambia.',
     whyAltItems: [
       'Entrega el script que pediste. Cuando la fuente cambia, una corrida parcial parece una corrida buena.',
-      'Sin validación, sin alertas, sin runbook — cada falla es una sorpresa.',
+      'Sin validación, alertas ni runbook, cada falla toma por sorpresa.',
       'Sin traspaso. Cuando se rompe, el conocimiento se fue con el autor.',
       'Cada reparación es un proyecto nuevo sin memoria de cómo funciona el colector.',
     ],
     whyUsItems: [
-      'Construye para los modos de falla que no sabías que había que preguntar — vacío, parcial, duplicado y drift.',
+      'Construye para los modos de falla que no sabías que había que preguntar: vacío, parcial, duplicado y drift.',
       'Validación, logging, reintentos y alertas para que los cambios de fuente aparezcan temprano y fuerte.',
       'Materiales de traspaso para que la siguiente persona repare el colector sin ingeniería inversa.',
       'Trabajo público y auditable: pipelines de recolección programados, capas de datos y sistemas en producción.',
@@ -773,9 +773,9 @@ const recurringData: ServiceDefinition = {
       body: 'Tooltician opera recolección programada en producción (polla, noticiencias) y mantiene capas de datos open source (chile-hub) con documentación lista para traspaso. Los mismos estándares aplican a tu colector.',
     },
     contactRiskNote:
-      'Si el levantamiento muestra que la fuente no es lícita, estable o no vale la pena recolectarla de forma programada, el documento lo dirá con fundamentos — conocer la restricción real a tiempo también vale. El monto se aplica igual, pero sin sorpresas ni cargos adicionales.',
+      'Si el levantamiento muestra que la fuente no es lícita, estable o no vale la pena recolectarla de forma programada, el documento lo dirá con fundamentos: conocer la restricción real a tiempo también vale. El monto se aplica igual, pero sin sorpresas ni cargos adicionales.',
     outreach:
-      'Si llegaste aquí porque una fuente recurrente alimenta tus reportes, operaciones o publicación — o porque un scraper sigue fallando en silencio — el alcance es este: fijar el contrato de fuente, construirlo de forma confiable y traspasarlo documentado. Precio fijo, sin horas abiertas.',
+      'Si llegaste aquí porque una fuente recurrente alimenta tus reportes, operaciones o publicación (o porque un scraper sigue fallando en silencio) el alcance es este: fijar el contrato de fuente, construirlo de forma confiable y traspasarlo documentado. Precio fijo, sin horas abiertas.',
   },
 };
 
@@ -792,10 +792,10 @@ const internalTools: ServiceDefinition = {
     serviceType: ['Internal tools development', 'FastAPI development', 'Internal API development', 'Workflow tooling'],
     eyebrow: 'Internal Tools & APIs · Tooltician',
     h1: 'Turn the script only one person can run into a tool your team can use',
-    lede: 'I wrap fragile scripts and one-person workflows behind internal APIs, CLIs, or guided interfaces — with auth, validation, tests, and documentation — so the workflow stays usable when the original builder is on holiday or gone.',
+    lede: 'I wrap fragile scripts and one-person workflows behind internal APIs, CLIs, or guided interfaces (with auth, validation, tests, and documentation) so the workflow stays usable when its original builder is unavailable.',
     subcopy:
       'All deliverables are in English. The result is a maintainable internal tool, not a notebook with tribal knowledge attached.',
-    ctaPrimary: `Scope my internal tool — diagnostic from ${pricing.internalTools.en.scoping}`,
+    ctaPrimary: `Scope my internal tool: diagnostic from ${pricing.internalTools.en.scoping}`,
     ctaSecondary: "See what's included",
     microcopy:
       'Fixed scope, not open-ended hours. Every engagement starts with a free 15-minute call to confirm fit before any quote.',
@@ -828,7 +828,7 @@ const internalTools: ServiceDefinition = {
       },
       {
         title: 'The real asymmetry',
-        body: 'A raw script feels finished because it works for its author. Turning it into a guarded tool — with an interface, validation, and docs — costs far less than the outages, errors, and re-builds that come from leaving it as tribal knowledge.',
+        body: 'A raw script feels finished because it works for its author. Turning it into a guarded tool (with an interface, validation, and docs) costs far less than the outages, errors, and re-builds that come from leaving it as tribal knowledge.',
       },
     ],
     scopeEyebrow: 'Approach',
@@ -874,9 +874,9 @@ const internalTools: ServiceDefinition = {
       'Lock the interface contract, build the smallest usable tool, and leave it documented enough for operators to run without the author.',
     processSteps: [
       ['01', 'Free diagnostic call', 'A 15-minute call to confirm the workflow is worth productizing. No charge, no obligation.'],
-      ['02', 'Tool scoping', 'A short paid discovery that locks the interface, valid inputs, access model, and handoff target — agreed in writing. The fee is credited toward the build.'],
+      ['02', 'Tool scoping', 'A short paid discovery that locks the interface, valid inputs, access model, and handoff target, agreed in writing. The fee is credited toward the build.'],
       ['03', 'Scoped build', 'Implementation with auth, validation, tests, and visible progress in GitHub instead of surprise scope creep.'],
-      ['04', 'Handoff', 'Operator docs, setup steps, and failure points — so your team runs and extends the tool without me on a call.'],
+      ['04', 'Handoff', 'Operator docs, setup steps, and failure points, so your team runs and extends the tool without me on a call.'],
     ],
     plansEyebrow: 'Plans & pricing',
     plansTitle: 'From one wrapped workflow to a platform several people rely on',
@@ -935,7 +935,7 @@ const internalTools: ServiceDefinition = {
     whyAltLabel: 'Generic contractor',
     whyAltItems: [
       'Leaves a script that works for them, with no interface or guardrails.',
-      'No validation — wrong input quietly corrupts the workflow.',
+      'No validation: wrong input quietly corrupts the workflow.',
       'No operator docs. Onboarding the next person means a call.',
       'No tests, so every change is a gamble.',
     ],
@@ -969,18 +969,18 @@ const internalTools: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Questions worth answering precisely',
     faqs: [
-      ['How do you price this — hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
+      ['How do you price this: hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
       [`What does the ${pricing.internalTools.en.scoping} scoping include?`, `A written interface contract: users, valid inputs, access model, and handoff target, plus a fixed-price quote. If you proceed, the ${pricing.internalTools.en.scoping} is credited toward the build.`],
-      ['Can you wrap an existing script we already have?', 'Yes — that is the common case. I wrap existing logic behind a clean interface with validation, tests, and docs, rather than rewriting it from scratch unless the code requires it.'],
+      ['Can you wrap an existing script we already have?', 'Yes: that is the common case. I wrap existing logic behind a clean interface with validation, tests, and docs, rather than rewriting it from scratch unless the code requires it.'],
       ['What stack do you use?', 'Primarily Python and FastAPI for APIs, plus CLIs and lightweight interfaces, with auth, tests, and GitHub Actions. The stack is chosen to fit your environment and handoff.'],
-      ['Do you build the frontend too?', 'I build lean, functional interfaces where they help operators. This service is not a design-heavy product UI — if you need that, a Static Sites & Front Ends engagement is the better fit.'],
+      ['Do you build the frontend too?', 'I build lean, functional interfaces where they help operators. This service is not a design-heavy product UI, if you need that, a Static Sites & Front Ends engagement is the better fit.'],
       ['Why is this priced in USD when the homepage shows UF?', 'This international service is delivered entirely in English with executive-ready documentation, priced in USD for US, UK, and EU clients. The Spanish version is calibrated for the Chilean and Latin American market in UF.'],
     ],
     contactEyebrow: 'Next step',
     contactTitle: 'Start by scoping the tool, not by signing a retainer',
     contactSubtitle:
       'If a workflow is trapped in one person or one script, the right entry point is a short scoping pass that turns it into a fixed-price build.',
-    contactCardTitle: `Tool scoping — from ${pricing.internalTools.en.scoping}`,
+    contactCardTitle: `Tool scoping: from ${pricing.internalTools.en.scoping}`,
     contactCardBody:
       'A written interface contract: users, valid inputs, access model, and handoff target, plus a fixed-price build quote. The fee is credited toward the build.',
     contactRiskNote:
@@ -1003,10 +1003,10 @@ const internalTools: ServiceDefinition = {
     serviceType: ['Desarrollo de herramientas internas', 'Desarrollo FastAPI', 'Desarrollo de APIs internas', 'Tooling de flujos'],
     eyebrow: 'Herramientas Internas y APIs · Tooltician',
     h1: 'Convierte el script que solo una persona sabe correr en una herramienta para tu equipo',
-    lede: 'Empaqueto scripts frágiles y flujos de una sola persona detrás de APIs internas, CLIs o interfaces guiadas — con autenticación, validación, tests y documentación — para que el flujo siga siendo usable cuando el autor está de vacaciones o ya no está.',
+    lede: 'Empaqueto scripts frágiles y flujos de una sola persona detrás de APIs internas, CLIs o interfaces guiadas (con autenticación, validación, tests y documentación) para que el flujo siga siendo usable cuando el autor está de vacaciones o ya no está.',
     subcopy:
       'El resultado es una herramienta interna mantenible, no un notebook con conocimiento tribal adjunto.',
-    ctaPrimary: `Acotar mi herramienta — diagnóstico desde ${pricing.internalTools.es.scoping}`,
+    ctaPrimary: `Acotar mi herramienta: diagnóstico desde ${pricing.internalTools.es.scoping}`,
     ctaSecondary: 'Ver qué incluye',
     microcopy:
       'Alcance fijo, no horas abiertas. Cada proyecto empieza con una llamada gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.',
@@ -1039,7 +1039,7 @@ const internalTools: ServiceDefinition = {
       },
       {
         title: 'La asimetría real',
-        body: 'Un script crudo parece terminado porque funciona para su autor. Convertirlo en una herramienta protegida — con interfaz, validación y docs — cuesta mucho menos que las caídas, los errores y las reconstrucciones de dejarlo como conocimiento tribal.',
+        body: 'Un script crudo parece terminado porque funciona para su autor. Convertirlo en una herramienta protegida (con interfaz, validación y docs) cuesta mucho menos que las caídas, los errores y las reconstrucciones de dejarlo como conocimiento tribal.',
       },
     ],
     scopeEyebrow: 'Enfoque',
@@ -1085,9 +1085,9 @@ const internalTools: ServiceDefinition = {
       'Fijar el contrato de la interfaz, construir la herramienta usable más pequeña, y dejarla documentada lo suficiente para que operadores la corran sin el autor.',
     processSteps: [
       ['01', 'Llamada de diagnóstico gratuita', 'Una llamada de 15 minutos para confirmar que el flujo vale la pena productizar. Sin costo, sin compromiso.'],
-      ['02', 'Diagnóstico de la herramienta', 'Un discovery corto y pagado que fija la interfaz, los inputs válidos, el modelo de acceso y el objetivo de traspaso — acordados por escrito. El valor se acredita a la implementación.'],
+      ['02', 'Diagnóstico de la herramienta', 'Un discovery corto y pagado que fija la interfaz, los inputs válidos, el modelo de acceso y el objetivo de traspaso, acordados por escrito. El valor se acredita a la implementación.'],
       ['03', 'Construcción acotada', 'Implementación con auth, validación, tests y progreso visible en GitHub en vez de scope creep sorpresa.'],
-      ['04', 'Traspaso', 'Docs de operador, pasos de setup y puntos de falla — para que tu equipo opere y extienda la herramienta sin necesitarme en una llamada.'],
+      ['04', 'Traspaso', 'Docs de operador, pasos de setup y puntos de falla, para que tu equipo opere y extienda la herramienta sin necesitarme en una llamada.'],
     ],
     plansEyebrow: 'Planes y precios',
     plansTitle: 'De un flujo empaquetado a una plataforma de la que dependen varios',
@@ -1146,7 +1146,7 @@ const internalTools: ServiceDefinition = {
     whyAltLabel: 'Contratista genérico',
     whyAltItems: [
       'Deja un script que funciona para él, sin interfaz ni guardas.',
-      'Sin validación — un input equivocado corrompe el flujo en silencio.',
+      'Sin validación: un input equivocado corrompe el flujo en silencio.',
       'Sin docs de operador. Subir a la siguiente persona implica una llamada.',
       'Sin tests, así que cada cambio es una apuesta.',
     ],
@@ -1180,18 +1180,18 @@ const internalTools: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
-      ['¿Cómo cobras esto — por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
+      ['¿Cómo cobras esto: por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
       [`¿Qué incluye el diagnóstico de ${pricing.internalTools.es.scoping}?`, `Un contrato de interfaz por escrito: usuarios, inputs válidos, modelo de acceso y objetivo de traspaso, más una cotización a precio fijo. Si avanzas, las ${pricing.internalTools.es.scoping} se acreditan a la construcción.`],
-      ['¿Puedes empaquetar un script que ya tenemos?', 'Sí — es el caso común. Empaqueto la lógica existente detrás de una interfaz limpia con validación, tests y docs, en vez de reescribirla desde cero salvo que el código lo exija.'],
+      ['¿Puedes empaquetar un script que ya tenemos?', 'Sí: es el caso común. Empaqueto la lógica existente detrás de una interfaz limpia con validación, tests y docs, en vez de reescribirla desde cero salvo que el código lo exija.'],
       ['¿Qué stack usas?', 'Principalmente Python y FastAPI para APIs, más CLIs e interfaces livianas, con auth, tests y GitHub Actions. El stack se elige para encajar con tu entorno y traspaso.'],
-      ['¿También construyes el frontend?', 'Construyo interfaces sobrias y funcionales donde ayudan a los operadores. Este servicio no es una UI de producto cargada de diseño — si necesitas eso, un proyecto de Sitios y Frontends encaja mejor.'],
+      ['¿También construyes el frontend?', 'Construyo interfaces sobrias y funcionales donde ayudan a los operadores. Este servicio no es una UI de producto cargada de diseño, si necesitas eso, un proyecto de Sitios y Frontends encaja mejor.'],
       ['¿Por qué la versión en inglés se cotiza en USD y aquí en UF?', 'El servicio internacional se entrega completamente en inglés con documentación lista para gerencia, cotizado en USD para clientes de EE. UU., Reino Unido y Europa. La versión en español está calibrada para el mercado chileno y latinoamericano en UF.'],
     ],
     contactEyebrow: 'Siguiente paso',
     contactTitle: 'Parte acotando la herramienta, no firmando un retainer',
     contactSubtitle:
       'Si un flujo está atrapado en una persona o un script, el punto de entrada correcto es un diagnóstico corto que lo convierte en una construcción a precio fijo.',
-    contactCardTitle: `Diagnóstico de la herramienta — desde ${pricing.internalTools.es.scoping}`,
+    contactCardTitle: `Diagnóstico de la herramienta: desde ${pricing.internalTools.es.scoping}`,
     contactCardBody:
       'Un contrato de interfaz por escrito: usuarios, inputs válidos, modelo de acceso y objetivo de traspaso, más una cotización a precio fijo. El valor se acredita a la construcción.',
     contactRiskNote:
@@ -1221,10 +1221,10 @@ const financialTooling: ServiceDefinition = {
     serviceType: ['Bank reconciliation automation', 'Financial reconciliation software', 'Audit tooling', 'Fail-closed controls'],
     eyebrow: 'Financial & Audit Tooling · Tooltician',
     h1: 'Reconciliation that stops on a mismatch instead of hiding it',
-    lede: 'I build finance and reconciliation workflows that fail closed — they halt on discrepancies, preserve deterministic audit trails, and make review easier — so a wrong number is caught before it becomes an expensive surprise.',
+    lede: 'I build finance and reconciliation workflows that stop on discrepancies, preserve deterministic audit trails and simplify reviews, so a wrong number is caught before it becomes an expensive surprise.',
     subcopy:
       'All deliverables are in English. Trust-critical work, built with the explicit checks and audit artifacts that finance review actually needs.',
-    ctaPrimary: `Scope my controls — diagnostic from ${pricing.financial.en.scoping}`,
+    ctaPrimary: `Scope my controls: diagnostic from ${pricing.financial.en.scoping}`,
     ctaSecondary: "See what's included",
     microcopy:
       'Fixed scope, not open-ended hours. Every engagement starts with a free 15-minute call to confirm fit before any quote.',
@@ -1253,7 +1253,7 @@ const financialTooling: ServiceDefinition = {
     problemCards: [
       {
         title: 'What typically happens',
-        body: 'Balances are matched by hand, a formula silently swallows a mismatch, and the report looks fine. The discrepancy surfaces weeks later in an audit, a close, or a complaint — long after it was cheap to fix.',
+        body: 'Balances are matched by hand, a formula silently swallows a mismatch, and the report looks fine. The discrepancy surfaces weeks later in an audit, a close, or a complaint: long after it was cheap to fix.',
       },
       {
         title: 'The real asymmetry',
@@ -1303,9 +1303,9 @@ const financialTooling: ServiceDefinition = {
       'Lock the control requirements, build the smallest verifiable system, and leave audit-grade evidence and documentation behind.',
     processSteps: [
       ['01', 'Free diagnostic call', 'A 15-minute call to confirm the reconciliation or control is a fit. No charge, no obligation.'],
-      ['02', 'Controls scoping', 'A short paid discovery that locks what must match, allowed tolerances, what the system must refuse, and required evidence — agreed in writing. The fee is credited toward the build.'],
+      ['02', 'Controls scoping', 'A short paid discovery that locks what must match, allowed tolerances, what the system must refuse, and required evidence, agreed in writing. The fee is credited toward the build.'],
       ['03', 'Scoped build', 'Implementation with fail-closed controls, tests, deterministic outputs, and visible progress in GitHub.'],
-      ['04', 'Handoff', 'Audit artifacts, control documentation, setup, and failure modes — so your team runs and reviews it without me on a call.'],
+      ['04', 'Handoff', 'Audit artifacts, control documentation, setup, and failure modes, so your team runs and reviews it without me on a call.'],
     ],
     plansEyebrow: 'Plans & pricing',
     plansTitle: 'From one reconciliation to a system of financial controls',
@@ -1365,7 +1365,7 @@ const financialTooling: ServiceDefinition = {
     whyAltItems: [
       'Fails open: produces a number even when inputs do not agree.',
       'Floating-point and copy errors hide inside formulas.',
-      'No audit trail — you cannot prove what a past run actually did.',
+      'No audit trail: you cannot prove what a past run actually did.',
       'No tests, so a quiet change to logic goes unnoticed.',
     ],
     whyUsLabel: 'Tooltician',
@@ -1398,9 +1398,9 @@ const financialTooling: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Questions worth answering precisely',
     faqs: [
-      ['How do you price this — hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
+      ['How do you price this: hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
       ['Why is this more expensive than the other services?', 'Trust-critical work carries more responsibility: the cost of a silent error is high, so the controls, tests, and audit artifacts are more rigorous. The pricing reflects that rigor.'],
-      ['Is this a financial audit?', 'No. I am not a CPA and this is not a certified audit. I build the tooling and controls that make your finance work verifiable and audit-ready — the audit itself stays with your auditor.'],
+      ['Is this a financial audit?', 'No. I am not a CPA and this is not a certified audit. I build the tooling and controls that make your finance work verifiable and audit-ready: the audit itself stays with your auditor.'],
       ['What does fail-closed mean here?', 'It means the system refuses to produce a confident result when inputs do not agree. It halts and flags instead of returning a number that looks fine but is wrong.'],
       ['Do you need access to financial data?', 'For scoping, usually a sample or schema is enough. For the build, controlled access to the relevant sources is required, scoped to what the work needs and handled with care.'],
       ['Why is this priced in USD when the homepage shows UF?', 'This international service is delivered entirely in English with executive-ready audit documentation, priced in USD for US, UK, and EU clients. The Spanish version is calibrated for the Chilean and Latin American market in UF.'],
@@ -1409,11 +1409,11 @@ const financialTooling: ServiceDefinition = {
     contactTitle: 'Start by scoping the controls, not by trusting the spreadsheet',
     contactSubtitle:
       'If a reconciliation or control matters enough that a silent error would hurt, the right entry point is a short scoping pass that turns it into a fail-closed build.',
-    contactCardTitle: `Controls scoping — from ${pricing.financial.en.scoping}`,
+    contactCardTitle: `Controls scoping: from ${pricing.financial.en.scoping}`,
     contactCardBody:
       'A written control spec: what must match, tolerances, refusals, and required evidence, plus a fixed-price build quote. The fee is credited toward the build.',
     contactRiskNote:
-      'If scoping shows existing controls are already sound, the document confirms it with evidence — knowing the basics hold is also valuable before an audit or a close. The fee applies regardless, but there are no surprises.',
+      'If scoping shows existing controls are already sound, the document confirms it with evidence, knowing the basics hold is also valuable before an audit or a close. The fee applies regardless, but there are no surprises.',
     contactCallLabel: 'Schedule a call instead',
     intakeHeading: 'Tell me about the control',
     intents: [
@@ -1432,10 +1432,10 @@ const financialTooling: ServiceDefinition = {
     serviceType: ['Automatización de conciliación bancaria', 'Software de conciliación financiera', 'Tooling de auditoría', 'Controles fail-closed'],
     eyebrow: 'Herramientas Financieras y de Auditoría · Tooltician',
     h1: 'Conciliación que se detiene ante una diferencia en vez de esconderla',
-    lede: 'Construyo flujos financieros y de conciliación que fallan cerrado — se detienen ante discrepancias, preservan trazas de auditoría deterministas y facilitan la revisión — para que un número equivocado se detecte antes de volverse una sorpresa cara.',
+    lede: 'Construyo flujos financieros y de conciliación que se detienen ante discrepancias, conservan trazas de auditoría y facilitan la revisión, para que un número equivocado se detecte antes de volverse una sorpresa cara.',
     subcopy:
       'Trabajo crítico para la confianza, construido con los chequeos explícitos y artefactos de auditoría que la revisión financiera realmente necesita.',
-    ctaPrimary: `Acotar mis controles — diagnóstico desde ${pricing.financial.es.scoping}`,
+    ctaPrimary: `Acotar mis controles: diagnóstico desde ${pricing.financial.es.scoping}`,
     ctaSecondary: 'Ver qué incluye',
     microcopy:
       'Alcance fijo, no horas abiertas. Cada proyecto empieza con una llamada gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.',
@@ -1464,7 +1464,7 @@ const financialTooling: ServiceDefinition = {
     problemCards: [
       {
         title: 'Lo que suele pasar',
-        body: 'Los saldos se cuadran a mano, una fórmula traga una diferencia en silencio, y el reporte se ve bien. La discrepancia aparece semanas después en una auditoría, un cierre o un reclamo — mucho después de cuando era barato arreglarla.',
+        body: 'Los saldos se cuadran a mano, una fórmula traga una diferencia en silencio, y el reporte se ve bien. La discrepancia aparece semanas después en una auditoría, un cierre o un reclamo: mucho después de cuando era barato arreglarla.',
       },
       {
         title: 'La asimetría real',
@@ -1514,9 +1514,9 @@ const financialTooling: ServiceDefinition = {
       'Fijar los requisitos de control, construir el sistema verificable más pequeño, y dejar evidencia y documentación con grado de auditoría.',
     processSteps: [
       ['01', 'Llamada de diagnóstico gratuita', 'Una llamada de 15 minutos para confirmar que la conciliación o el control encaja. Sin costo, sin compromiso.'],
-      ['02', 'Diagnóstico de controles', 'Un discovery corto y pagado que fija qué debe cuadrar, tolerancias permitidas, qué debe rechazar el sistema y la evidencia requerida — acordados por escrito. El valor se acredita a la implementación.'],
+      ['02', 'Diagnóstico de controles', 'Un discovery corto y pagado que fija qué debe cuadrar, tolerancias permitidas, qué debe rechazar el sistema y la evidencia requerida, acordados por escrito. El valor se acredita a la implementación.'],
       ['03', 'Construcción acotada', 'Implementación con controles fail-closed, tests, salidas deterministas y progreso visible en GitHub.'],
-      ['04', 'Traspaso', 'Artefactos de auditoría, documentación de controles, setup y modos de falla — para que tu equipo lo opere y revise sin necesitarme en una llamada.'],
+      ['04', 'Traspaso', 'Artefactos de auditoría, documentación de controles, setup y modos de falla, para que tu equipo lo opere y revise sin necesitarme en una llamada.'],
     ],
     plansEyebrow: 'Planes y precios',
     plansTitle: 'De una conciliación a un sistema de controles financieros',
@@ -1576,7 +1576,7 @@ const financialTooling: ServiceDefinition = {
     whyAltItems: [
       'Falla abierto: produce un número incluso cuando los inputs no cuadran.',
       'Errores de punto flotante y de copia se esconden dentro de las fórmulas.',
-      'Sin traza de auditoría — no puedes probar qué hizo realmente una ejecución pasada.',
+      'Sin traza de auditoría, no puedes probar qué hizo realmente una ejecución pasada.',
       'Sin tests, así que un cambio silencioso en la lógica pasa inadvertido.',
     ],
     whyUsLabel: 'Tooltician',
@@ -1609,9 +1609,9 @@ const financialTooling: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
-      ['¿Cómo cobras esto — por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
+      ['¿Cómo cobras esto: por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
       ['¿Por qué es más caro que los otros servicios?', 'El trabajo crítico para la confianza conlleva más responsabilidad: el costo de un error silencioso es alto, así que los controles, tests y artefactos de auditoría son más rigurosos. El precio refleja ese rigor.'],
-      ['¿Es esto una auditoría financiera?', 'No. No soy contador auditor y esto no es una auditoría certificada. Construyo el tooling y los controles que hacen verificable y lista-para-auditoría tu operación financiera — la auditoría en sí queda con tu auditor.'],
+      ['¿Es esto una auditoría financiera?', 'No. No soy contador auditor y esto no es una auditoría certificada. Construyo el tooling y los controles que hacen verificable y lista-para-auditoría tu operación financiera: la auditoría en sí queda con tu auditor.'],
       ['¿Qué significa fail-closed aquí?', 'Significa que el sistema se niega a producir un resultado con confianza cuando los inputs no cuadran. Se detiene y marca en vez de devolver un número que se ve bien pero está equivocado.'],
       ['¿Necesitas acceso a datos financieros?', 'Para el diagnóstico suele bastar una muestra o el esquema. Para la construcción se requiere acceso controlado a las fuentes relevantes, acotado a lo que el trabajo necesita y manejado con cuidado.'],
       ['¿Por qué la versión en inglés se cotiza en USD y aquí en UF?', 'El servicio internacional se entrega completamente en inglés con documentación de auditoría lista para gerencia, cotizado en USD para clientes de EE. UU., Reino Unido y Europa. La versión en español está calibrada para el mercado chileno y latinoamericano en UF.'],
@@ -1620,11 +1620,11 @@ const financialTooling: ServiceDefinition = {
     contactTitle: 'Parte acotando los controles, no confiando en la planilla',
     contactSubtitle:
       'Si una conciliación o control importa lo suficiente como para que un error silencioso duela, el punto de entrada correcto es un diagnóstico corto que lo convierte en una construcción fail-closed.',
-    contactCardTitle: `Diagnóstico de controles — desde ${pricing.financial.es.scoping}`,
+    contactCardTitle: `Diagnóstico de controles: desde ${pricing.financial.es.scoping}`,
     contactCardBody:
       'Una especificación de control por escrito: qué debe cuadrar, tolerancias, rechazos y evidencia requerida, más una cotización a precio fijo. El valor se acredita a la construcción.',
     contactRiskNote:
-      'Si el diagnóstico muestra que los controles existentes ya son sólidos, el documento lo confirma con evidencia — saber que lo básico se sostiene también es valioso antes de una auditoría o un cierre. El valor aplica igual, pero no hay sorpresas.',
+      'Si el diagnóstico muestra que los controles existentes ya son sólidos, el documento lo confirma con evidencia, saber que lo básico se sostiene también es valioso antes de una auditoría o un cierre. El valor aplica igual, pero no hay sorpresas.',
     contactCallLabel: 'Prefiero agendar una llamada',
     intakeHeading: 'Cuéntame sobre el control',
     intents: [
@@ -1649,11 +1649,11 @@ const staticSites: ServiceDefinition = {
     serviceName: 'Static Sites & Focused Front Ends',
     serviceType: ['Astro development', 'Static site development', 'Frontend development', 'Bilingual website development'],
     eyebrow: 'Static Sites & Front Ends · Tooltician',
-    h1: 'A fast, indexable site that explains the system — not decoration',
-    lede: 'I build lean Astro and static surfaces with SEO and performance baked in, bilingual where you need it, and a clean deploy pipeline — sites that convert the right lead and stay maintainable instead of rotting after launch.',
+    h1: 'A fast, indexable site that explains the system, not decoration',
+    lede: 'I build lean Astro and static surfaces with SEO and performance baked in, bilingual where you need it, and a clean deploy pipeline: sites that convert the right lead and stay maintainable instead of rotting after launch.',
     subcopy:
       'All deliverables are in English. You get a fast, accessible, documented site, not a heavy template you cannot edit.',
-    ctaPrimary: `Scope my site — diagnostic from ${pricing.staticSites.en.scoping}`,
+    ctaPrimary: `Scope my site: diagnostic from ${pricing.staticSites.en.scoping}`,
     ctaSecondary: "See what's included",
     microcopy:
       'Fixed scope, not open-ended hours. Every engagement starts with a free 15-minute call to confirm fit before any quote.',
@@ -1732,9 +1732,9 @@ const staticSites: ServiceDefinition = {
       'Agree the sitemap and conversion goal, build a fast and accessible surface, and hand it off documented enough to maintain.',
     processSteps: [
       ['01', 'Free diagnostic call', 'A 15-minute call to confirm the site is a fit and clarify the conversion goal. No charge, no obligation.'],
-      ['02', 'Site scoping', 'A short paid discovery that locks the sitemap, content surfaces, and success criteria — agreed in writing. The fee is credited toward the build.'],
+      ['02', 'Site scoping', 'A short paid discovery that locks the sitemap, content surfaces, and success criteria, agreed in writing. The fee is credited toward the build.'],
       ['03', 'Scoped build', 'Implementation with SEO and performance built in, visible progress in GitHub, and a clean deploy pipeline.'],
-      ['04', 'Handoff', 'Build, deploy, and content-edit documentation — so your team updates and extends the site without me on a call.'],
+      ['04', 'Handoff', 'Build, deploy, and content-edit documentation, so your team updates and extends the site without me on a call.'],
     ],
     plansEyebrow: 'Plans & pricing',
     plansTitle: 'From a fast landing to a complete bilingual site',
@@ -1799,7 +1799,7 @@ const staticSites: ServiceDefinition = {
     ],
     whyUsLabel: 'Tooltician',
     whyUsItems: [
-      'Lean by default — fast first paint and strong Core Web Vitals.',
+      'Lean by default: fast first paint and strong Core Web Vitals.',
       'SEO, structured data, and hreflang built in from the first commit.',
       'Content structured so your team can make safe edits.',
       'A documented deploy pipeline you actually own.',
@@ -1827,22 +1827,22 @@ const staticSites: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Questions worth answering precisely',
     faqs: [
-      ['How do you price this — hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
+      ['How do you price this: hourly or fixed?', 'Fixed scope, not hourly. After a short scoping step we agree on a fixed price for a clearly defined build. You know the cost before work starts.'],
       ['What stack do you use?', 'Primarily Astro and static generation with minimal JavaScript, self-hosted fonts, and a GitHub Actions deploy. The result is fast, accessible, and maintainable.'],
       ['Can my team edit the site afterwards?', 'Yes. Content is structured so non-developers can make safe edits, and the handoff includes documentation for content updates, build, and deploy.'],
-      ['Do you do e-commerce or complex web apps?', 'This service is for lean, fast public surfaces. Heavy e-commerce backends and complex web apps are out of scope — though I can advise on the right approach.'],
-      ['Can you make it bilingual?', 'Yes. The Multi-page + i18n tier includes a bilingual build with correct hreflang and a single content model — the same pattern this site uses.'],
+      ['Do you do e-commerce or complex web apps?', 'This service is for lean, fast public surfaces. Heavy e-commerce backends and complex web apps are out of scope: though I can advise on the right approach.'],
+      ['Can you make it bilingual?', 'Yes. The Multi-page + i18n tier includes a bilingual build with correct hreflang and a single content model: the same pattern this site uses.'],
       ['Why is this priced in USD when the homepage shows UF?', 'This international service is delivered entirely in English, priced in USD for US, UK, and EU clients. The Spanish version is calibrated for the Chilean and Latin American market in UF.'],
     ],
     contactEyebrow: 'Next step',
     contactTitle: 'Start by scoping the site, not by picking a template',
     contactSubtitle:
       'If you need a fast, credible, maintainable site, the right entry point is a short scoping pass that turns it into a fixed-price build.',
-    contactCardTitle: `Site scoping — from ${pricing.staticSites.en.scoping}`,
+    contactCardTitle: `Site scoping: from ${pricing.staticSites.en.scoping}`,
     contactCardBody:
       'A sitemap and scope: pages, content surfaces, conversion goal, and success criteria, plus a fixed-price build quote. The fee is credited toward the build.',
     contactRiskNote:
-      'If scoping shows your current site mostly needs targeted fixes rather than a rebuild, the document says so — sometimes the right answer is smaller than a full project. The fee applies regardless, but there are no surprises.',
+      'If scoping shows your current site mostly needs targeted fixes rather than a rebuild, the document says so: sometimes the right answer is smaller than a full project. The fee applies regardless, but there are no surprises.',
     contactCallLabel: 'Schedule a call instead',
     intakeHeading: 'Tell me about the site',
     intents: [
@@ -1860,11 +1860,11 @@ const staticSites: ServiceDefinition = {
     serviceName: 'Sitios Estáticos y Frontends Acotados',
     serviceType: ['Desarrollo Astro', 'Desarrollo de sitios estáticos', 'Desarrollo frontend', 'Desarrollo de sitios bilingües'],
     eyebrow: 'Sitios Web y Frontends · Tooltician',
-    h1: 'Un sitio rápido e indexable que explica el sistema — no decoración',
-    lede: 'Construyo superficies sobrias en Astro y estáticas con SEO y rendimiento integrados, bilingües donde lo necesites, y un pipeline de despliegue limpio — sitios que convierten al lead correcto y se mantienen mantenibles en vez de pudrirse después del lanzamiento.',
+    h1: 'Un sitio rápido e indexable que explica el sistema, no decoración',
+    lede: 'Construyo superficies sobrias en Astro y estáticas con SEO y rendimiento integrados, bilingües donde lo necesites, y un pipeline de despliegue limpio: sitios que convierten al lead correcto y se mantienen mantenibles en vez de pudrirse después del lanzamiento.',
     subcopy:
       'Obtienes un sitio rápido, accesible y documentado, no un template pesado que no puedes editar.',
-    ctaPrimary: `Acotar mi sitio — diagnóstico desde ${pricing.staticSites.es.scoping}`,
+    ctaPrimary: `Acotar mi sitio: diagnóstico desde ${pricing.staticSites.es.scoping}`,
     ctaSecondary: 'Ver qué incluye',
     microcopy:
       'Alcance fijo, no horas abiertas. Cada proyecto empieza con una llamada gratuita de 15 minutos para confirmar el encaje antes de cualquier cotización.',
@@ -1943,9 +1943,9 @@ const staticSites: ServiceDefinition = {
       'Acordar el sitemap y el objetivo de conversión, construir una superficie rápida y accesible, y traspasarla documentada lo suficiente para mantener.',
     processSteps: [
       ['01', 'Llamada de diagnóstico gratuita', 'Una llamada de 15 minutos para confirmar que el sitio encaja y aclarar el objetivo de conversión. Sin costo, sin compromiso.'],
-      ['02', 'Diagnóstico del sitio', 'Un discovery corto y pagado que fija el sitemap, las superficies de contenido y los criterios de éxito — acordados por escrito. El valor se acredita a la implementación.'],
+      ['02', 'Diagnóstico del sitio', 'Un discovery corto y pagado que fija el sitemap, las superficies de contenido y los criterios de éxito, acordados por escrito. El valor se acredita a la implementación.'],
       ['03', 'Construcción acotada', 'Implementación con SEO y rendimiento integrados, progreso visible en GitHub y un pipeline de despliegue limpio.'],
-      ['04', 'Traspaso', 'Documentación de build, despliegue y edición de contenido — para que tu equipo actualice y extienda el sitio sin necesitarme en una llamada.'],
+      ['04', 'Traspaso', 'Documentación de build, despliegue y edición de contenido, para que tu equipo actualice y extienda el sitio sin necesitarme en una llamada.'],
     ],
     plansEyebrow: 'Planes y precios',
     plansTitle: 'De una landing rápida a un sitio bilingüe completo',
@@ -2010,7 +2010,7 @@ const staticSites: ServiceDefinition = {
     ],
     whyUsLabel: 'Tooltician',
     whyUsItems: [
-      'Sobrio por defecto — primer render rápido y buenos Core Web Vitals.',
+      'Sobrio por defecto: primer render rápido y buenos Core Web Vitals.',
       'SEO, datos estructurados y hreflang integrados desde el primer commit.',
       'Contenido estructurado para que tu equipo edite con seguridad.',
       'Un pipeline de despliegue documentado que realmente es tuyo.',
@@ -2039,22 +2039,22 @@ const staticSites: ServiceDefinition = {
     faqEyebrow: 'FAQ',
     faqTitle: 'Preguntas que vale la pena responder con precisión',
     faqs: [
-      ['¿Cómo cobras esto — por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
+      ['¿Cómo cobras esto: por hora o precio fijo?', 'Alcance fijo, no por hora. Tras un paso corto de diagnóstico acordamos un precio fijo para una construcción claramente definida. Sabes el costo antes de empezar.'],
       ['¿Qué stack usas?', 'Principalmente Astro y generación estática con JavaScript mínimo, fuentes self-hosted y despliegue con GitHub Actions. El resultado es rápido, accesible y mantenible.'],
       ['¿Mi equipo puede editar el sitio después?', 'Sí. El contenido se estructura para que no-desarrolladores editen con seguridad, y el traspaso incluye documentación para actualizar contenido, build y despliegue.'],
-      ['¿Haces e-commerce o web apps complejas?', 'Este servicio es para superficies públicas sobrias y rápidas. Backends de e-commerce pesados y web apps complejas quedan fuera de alcance — aunque puedo asesorarte sobre el enfoque correcto.'],
-      ['¿Puedes hacerlo bilingüe?', 'Sí. El nivel Multi-página + i18n incluye una construcción bilingüe con hreflang correcto y un solo modelo de contenido — el mismo patrón que usa este sitio.'],
+      ['¿Haces e-commerce o web apps complejas?', 'Este servicio es para superficies públicas sobrias y rápidas. Backends de e-commerce pesados y web apps complejas quedan fuera de alcance, aunque puedo asesorarte sobre el enfoque correcto.'],
+      ['¿Puedes hacerlo bilingüe?', 'Sí. El nivel Multi-página + i18n incluye una construcción bilingüe con hreflang correcto y un solo modelo de contenido: el mismo patrón que usa este sitio.'],
       ['¿Por qué la versión en inglés se cotiza en USD y aquí en UF?', 'El servicio internacional se entrega completamente en inglés, cotizado en USD para clientes de EE. UU., Reino Unido y Europa. La versión en español está calibrada para el mercado chileno y latinoamericano en UF.'],
     ],
     contactEyebrow: 'Siguiente paso',
     contactTitle: 'Parte acotando el sitio, no eligiendo un template',
     contactSubtitle:
       'Si necesitas un sitio rápido, creíble y mantenible, el punto de entrada correcto es un diagnóstico corto que lo convierte en una construcción a precio fijo.',
-    contactCardTitle: `Diagnóstico del sitio — desde ${pricing.staticSites.es.scoping}`,
+    contactCardTitle: `Diagnóstico del sitio: desde ${pricing.staticSites.es.scoping}`,
     contactCardBody:
       'Un sitemap y alcance: páginas, superficies de contenido, objetivo de conversión y criterios de éxito, más una cotización a precio fijo. El valor se acredita a la construcción.',
     contactRiskNote:
-      'Si el diagnóstico muestra que tu sitio actual necesita arreglos puntuales en vez de una reconstrucción, el documento lo dice — a veces la respuesta correcta es más pequeña que un proyecto completo. El valor aplica igual, pero no hay sorpresas.',
+      'Si el diagnóstico muestra que tu sitio actual necesita arreglos puntuales en vez de una reconstrucción, el documento lo dice: a veces la respuesta correcta es más pequeña que un proyecto completo. El valor aplica igual, pero no hay sorpresas.',
     contactCallLabel: 'Prefiero agendar una llamada',
     intakeHeading: 'Cuéntame sobre el sitio',
     intents: [

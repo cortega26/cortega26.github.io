@@ -26,15 +26,15 @@ jobs:
         id: config
         env:
           CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CF_ACCOUNT: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         shell: bash
         run: |
           if [[ -z "$CF_TOKEN" || -z "$CF_ACCOUNT" ]]; then
             echo "configured=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::Cloudflare preview was not deployed. Configure Actions secret CLOUDFLARE_API_TOKEN and repository variable CLOUDFLARE_ACCOUNT_ID, then run this workflow manually."
+            echo "::warning::Cloudflare preview was not deployed. Configure Actions secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID, then run this workflow manually."
             {
               echo "### Cloudflare preview: not deployed"
-              echo "Missing Actions configuration: \`CLOUDFLARE_API_TOKEN\` secret or \`CLOUDFLARE_ACCOUNT_ID\` variable."
+              echo "Missing Actions secrets: \`CLOUDFLARE_API_TOKEN\` or \`CLOUDFLARE_ACCOUNT_ID\`."
               echo "Configure them once, then re-run this workflow using **Run workflow**."
             } >> "$GITHUB_STEP_SUMMARY"
           else
@@ -68,7 +68,7 @@ jobs:
         if: steps.config.outputs.configured == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           npx --yes wrangler@4.142.0 pages deploy support/dist \
             --project-name tooltician-support \

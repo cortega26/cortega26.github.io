@@ -205,12 +205,12 @@ Credenciales de la cuenta Cloudflare, configuradas **una sola vez** en el reposi
 - **Actions secret** `CLOUDFLARE_API_TOKEN`: token con permisos mínimos para editar
   Cloudflare Pages en la cuenta propietaria del proyecto `tooltician-support`.
   Guardarlo como secreto; nunca enviarlo por chat, añadirlo a código o logs.
-- **Actions variable** `CLOUDFLARE_ACCOUNT_ID`: identificador de la cuenta de
+- **Actions secret** `CLOUDFLARE_ACCOUNT_ID`: identificador de la cuenta de
   Cloudflare donde ya existe ese proyecto. El ID no es una credencial.
 - No utilizar `CF_API_TOKEN` de scripts personales como sustituto implícito de
   esta credencial de CI. No compartir una clave de acceso global.
 
-Si falta cualquiera de los dos valores, el job se marca como **omitido**
+Si falta cualquiera de los dos secretos, el despliegue se marca como **omitido**
 en su resumen, sin compilar ni realizar llamadas a Cloudflare. Una vez
 configurados, en GitHub > Actions > **Tooltician Support Cloudflare Preview**
 > **Run workflow** se ejecuta la publicación inicial; los cambios posteriores

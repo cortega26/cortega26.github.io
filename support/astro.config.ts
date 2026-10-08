@@ -15,6 +15,6 @@ export default defineConfig({
   site: business.origin,
   output: "static",
   trailingSlash: "always",
-  integrations: release ? [sitemap()] : [],
+  integrations: release ? [sitemap({ filter: (page) => !new URL(page).pathname.startsWith("/flyer/") })] : [],
   vite: { define: { __SUPPORT_RELEASE__: JSON.stringify(release) } },
 });

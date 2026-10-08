@@ -43,12 +43,19 @@ document.querySelectorAll<HTMLAnchorElement>("[data-neighbor-cta]").forEach((lin
       location: link.dataset.neighborCta,
       service,
     });
+    if (link.dataset.neighborDirect === "true") {
+      track("support_whatsapp_click", {
+        location: link.dataset.neighborCta,
+        variant: "neighbors",
+        mode: "direct",
+      });
+    }
   });
 });
 
 form?.addEventListener("focusin", () => {
   if (!started) {
-    track("support_triage_start", { source: "neighbors" });
+    track("support_triage_start", { variant: "neighbors" });
     started = true;
   }
 });
@@ -93,7 +100,7 @@ form?.addEventListener("submit", (event) => {
   if (!completed) {
     track("support_triage_complete", {
       service: input.service,
-      source: "neighbors",
+      variant: "neighbors",
     });
     completed = true;
   }
@@ -105,7 +112,7 @@ document
     if (!clicked) {
       track("support_whatsapp_click", {
         location: "neighbors-form",
-        source: "neighbors",
+        variant: "neighbors",
       });
       clicked = true;
     }
@@ -118,7 +125,7 @@ if ("IntersectionObserver" in window) {
         if (!entry.isIntersecting) return;
         const name = (entry.target as HTMLElement).dataset
           .sectionEvent as EventName;
-        if (eventNames.includes(name)) track(name, { source: "neighbors" });
+        if (eventNames.includes(name)) track(name, { variant: "neighbors" });
         observer.unobserve(entry.target);
       }),
     { threshold: 0.15 },
@@ -127,4 +134,15 @@ if ("IntersectionObserver" in window) {
   document.querySelectorAll("[data-section-event]").forEach((section) => {
     observer.observe(section);
   });
+}
+
+/* The sticky button must not cover the consultation form on small screens. */
+const mobileCta = document.querySelector<HTMLElement>(".mobile-cta");
+const contactSection = document.querySelector<HTMLElement>("#consulta");
+if (mobileCta && contactSection && "IntersectionObserver" in window) {
+  const stickyObserver = new IntersectionObserver(
+    ([entry]) => mobileCta.classList.toggle("is-hidden", Boolean(entry?.isIntersecting)),
+    { threshold: 0 },
+  );
+  stickyObserver.observe(contactSection);
 }

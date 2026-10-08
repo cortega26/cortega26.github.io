@@ -1144,3 +1144,104 @@ form > .button {
     animation: none !important;
   }
 }
+
+/* Neighbors: a concrete value summary instead of a decorative device drawing. */
+.neighbor-value-list {
+  list-style: none;
+  margin: 26px 0 18px;
+  padding: 0;
+  border-block: 1px solid var(--line);
+}
+.neighbor-value-list li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  column-gap: 12px;
+  padding: 16px 0;
+}
+.neighbor-value-list li + li {
+  border-top: 1px solid var(--line);
+}
+.neighbor-value-list li > span {
+  grid-row: span 2;
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.neighbor-value-list strong {
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+.neighbor-value-list small {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  padding-top: 4px;
+}
+.neighbor-price-example {
+  margin-top: 24px;
+  padding: 20px 22px;
+  background: #eff1e9;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.neighbor-price-example .eyebrow {
+  margin: 0 0 8px;
+  color: var(--green);
+}
+.neighbor-price-example > p:last-child {
+  color: var(--ink);
+  font-size: 0.88rem;
+}
+#neighbor-form-status {
+  margin-block: 14px;
+  font-size: 0.85rem;
+}
+#neighbor-message-result {
+  border-top: 1px solid #becdb8;
+  margin-top: 25px;
+  padding-top: 25px;
+}
+#neighbor-message-result h3 {
+  font-size: 1.15rem;
+}
+#neighbor-message-result pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #faf9f5;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 18px;
+}
+#neighbor-message-result p {
+  font-size: 0.8rem;
+  margin-top: 15px;
+}
+.mobile-cta.is-hidden {
+  display: none;
+}
+@media (max-width: 760px) {
+  .mobile-cta {
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .neighbor-value-list {
+    margin-block: 18px;
+  }
+  .neighbor-price-example {
+    padding: 18px;
+  }
+}
+
+/* One readable service per row on narrow screens, without changing the main site. */
+@media (max-width: 600px) {
+  .neighbors-services .service-grid {
+    grid-template-columns: 1fr;
+  }
+  .neighbors-services .service-card {
+    padding: 20px 22px;
+  }
+  .neighbors-services .service-card h3 {
+    margin-top: 14px;
+    min-height: 0;
+  }
+}

@@ -147,7 +147,49 @@ try {
     assert.ok(
       (await page.locator("details").first().getAttribute("open")) !== null,
     );
+    // Residents preview: no outbound booking, but a usable guided message.
+    await page.goto(base + "/vecinos/");
+    if (name === "chromium") {
+      for (const width of [390, 1440]) {
+        await page.setViewportSize({ width, height: 950 });
+        await page.evaluate(() => document.fonts.ready);
+        assert.ok(
+          await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+          `Neighbors: no horizontal overflow at ${width}`,
+        );
+        await page.screenshot({
+          path: `${output}/neighbors-${width}.png`,
+          fullPage: true,
+        });
+      }
+      await page.setViewportSize({ width: 390, height: 844 });
+    }
+    assert.match(await page.locator("h1").innerText(), /falla o no enciende/i);
+    assert.equal(await page.locator("#neighbor-whatsapp-link").count(), 0);
+    await page.locator('[data-neighbor-cta="services"][data-service="upgrade"]').click();
+    assert.equal(await page.locator("#neighbor-triage #service").inputValue(), "upgrade");
+    await page.locator("#consulta").scrollIntoViewIfNeeded();
+    await page.waitForFunction(
+      () => getComputedStyle(document.querySelector(".mobile-cta")).display === "none",
+      undefined,
+      { timeout: 5000 },
+    );
+    await page.getByRole("button", { name: "Preparar mensaje para consultar" }).click();
+    assert.equal(await page.locator(":focus").getAttribute("id"), "device");
+    await page.selectOption("#neighbor-triage #device", "Notebook");
+    await page.selectOption("#neighbor-triage #power", "Sí");
+    await page.fill("#neighbor-triage #problem", "El computador se reinicia sin aviso.");
+    await page.getByRole("button", { name: "Preparar mensaje para consultar" }).click();
+    assert.ok(await page.locator("#neighbor-message-result").isVisible());
+    assert.match(
+      await page.locator("#neighbor-message-preview").innerText(),
+      /soy vecino\/a del edificio/i,
+    );
+    assert.equal(await page.locator("#neighbor-whatsapp-link").count(), 0);
+    await page.fill("#neighbor-triage #problem", "Un síntoma distinto.");
+    assert.ok(await page.locator("#neighbor-message-result").isHidden());
     assert.deepEqual(errors, [], `${name} browser errors`);
+
     console.log(`PASS ${name}: form, escaping, keyboard, privacy, navigation`);
     await browser.close();
     browser = undefined;

@@ -1231,3 +1231,17 @@ form > .button {
     padding: 18px;
   }
 }
+
+/* One readable service per row on narrow screens, without changing the main site. */
+@media (max-width: 600px) {
+  .neighbors-services .service-grid {
+    grid-template-columns: 1fr;
+  }
+  .neighbors-services .service-card {
+    padding: 20px 22px;
+  }
+  .neighbors-services .service-card h3 {
+    margin-top: 14px;
+    min-height: 0;
+  }
+}

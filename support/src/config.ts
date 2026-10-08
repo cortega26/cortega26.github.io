@@ -141,13 +141,16 @@ export const neighborOffer = {
   // non-public/non-indexed and without live contact until its residential
   // operating constraints are explicitly cleared.
   ready: false,
+  // Independent from the general service launch. Only true after written
+  // confirmation that residential intake, custody and work are permitted.
+  operatingAuthorizationConfirmed: false,
   residentsOnly: true,
   priceReduction: 10000,
   diagnosticCredit: true,
   delivery:
     "Entrega y retiro coordinados en el edificio. La ubicación exacta se comparte por privado.",
   turnaround:
-    "Sin plazo fijo: se coordina según el equipo y la disponibilidad.",
+    "La disponibilidad y una estimación de revisión se confirman antes de recibir el equipo; el plazo de reparación depende del caso.",
   notebookMaintenancePrice: business.notebookMaintenancePrice - 10000,
 } as const;
 

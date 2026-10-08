@@ -34,7 +34,9 @@ test("built page ships the optimized portrait with sober alt text and no placeho
   assert.match(html, /<img[^>]+src="\/_astro\/[^"]*carlos-ortega[^"]*"/);
   assert.match(html, /alt="Carlos Ortega, responsable de Tooltician Soporte"/);
   assert.match(html, /srcset="[^"]+"/);
-  assert.match(html, /width="400" height="400"/);
+  assert.match(html, /sizes="\(max-width: 760px\) 320px, 370px"/);
+  assert.match(html, /960w/);
+  assert.match(html, /800w/);
   assert.doesNotMatch(html, /identity-monogram/);
 });
 

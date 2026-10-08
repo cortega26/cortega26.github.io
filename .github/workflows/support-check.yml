@@ -17,6 +17,8 @@ jobs:
       - run: npm ci
       # Canonical gate: check -> unit -> build -> artifact tests.
       - run: npm run support:verify
+      - name: Cloudflare authentication preflight unit tests (offline)
+        run: node --test support/tests/cloudflare-auth-preflight.test.mjs
       - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run support:e2e
       - run: npm run support:e2e:release

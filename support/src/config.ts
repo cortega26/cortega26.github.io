@@ -141,6 +141,10 @@ export const neighborOffer = {
   // non-public/non-indexed and without live contact until its residential
   // operating constraints are explicitly cleared.
   ready: false,
+  // Receiving enquiries is separate from permission to receive/repair devices.
+  // Never present an open WhatsApp channel as proof of municipal approval.
+  consultationsOpen: true,
+  initialReviewHours: 24,
   // Independent from the general service launch. Only true after written
   // confirmation that residential intake, custody and work are permitted.
   operatingAuthorizationConfirmed: false,
@@ -150,7 +154,7 @@ export const neighborOffer = {
   delivery:
     "Entrega y retiro coordinados en el edificio. La ubicación exacta se comparte por privado.",
   turnaround:
-    "La disponibilidad y una estimación de revisión se confirman antes de recibir el equipo; el plazo de reparación depende del caso.",
+    "Primera revisión dentro de 24 horas desde la recepción coordinada del equipo. La reparación puede tomar más tiempo según el diagnóstico, los repuestos y la autorización del cliente.",
   notebookMaintenancePrice: business.notebookMaintenancePrice - 10000,
 } as const;
 

@@ -1,0 +1,324 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+import { alternatesFor } from '../data/routes';
+import '../styles/global.css';
+
+interface Props { lang: 'en' | 'es' }
+const { lang } = Astro.props;
+const es = lang === 'es';
+const path = es ? '/es/trabajo/chile-hub/' : '/en/work/chile-hub/';
+const canonical = 'https://tooltician.com' + path;
+const serviceHref = es ? '/es/servicios/automatizacion-python/' : '/en/services/python-automation/';
+const workHref = es ? '/es/trabajo/' : '/en/work/';
+const github = 'https://github.com/cortega26/chile-hub';
+const sourceStudy = github + '/blob/main/docs/case-study-construccion-chile-hub.md';
+const published = '2026-10-08';
+
+const c = es ? {
+  title: 'Cómo evitar errores silenciosos en un pipeline de datos con Python',
+  description: 'Caso real de ingeniería de chile-hub: códigos territoriales, contratos ejecutables, validación y publicación segura de datos.',
+  back: 'Todos los proyectos', eyebrow: 'Nota de ingeniería / Caso documentado',
+  headline: 'Un pipeline puede ejecutarse bien y publicar datos equivocados.',
+  lede: 'En chile-hub, la pregunta no era cuántos datasets podíamos publicar. Era cómo evitar que un archivo aparentemente correcto introdujera un error difícil de detectar.',
+  byline: 'Carlos Ortega González · Diseño y mantenimiento de chile-hub',
+  reviewed: 'Documento preparado en octubre de 2026',
+  facts: ['Código público', 'Contratos verificables', 'Limitaciones documentadas'],
+  failureLabel: '01 / El riesgo concreto',
+  failureTitle: 'El cero que desaparece',
+  failureIntro: 'En Chile, el código territorial de Iquique es 01101. Si alguien lo convierte en número, se vuelve 1101. Ambos valores parecen razonables en una tabla, pero ya no son la misma clave.',
+  goodLabel: 'Identificador correcto', badLabel: 'Después de convertirlo a entero',
+  codeCaption: 'Reproducción mínima de una clase de error; no es el registro de un incidente en producción.',
+  consequence: 'Consecuencia: cruces entre fuentes pueden omitir filas sin que falle la consulta. Un reporte termina siendo convincente, pero incompleto.',
+  pipelineLabel: '02 / Decisión de arquitectura',
+  pipelineTitle: 'La validación decide si algo se publica',
+  pipelineIntro: 'El flujo separa obtención, construcción, verificación y publicación. Los contratos, la procedencia y los criterios de publicación no son adornos del README: son controles del sistema.',
+  steps: [
+    ['01', 'Extraer', 'Obtener datos y registrar su origen.'],
+    ['02', 'Construir', 'Normalizar claves y formatos sin perder información.'],
+    ['03', 'Verificar', 'Comprobar esquema, cobertura y reglas del dataset.'],
+    ['04', 'Publicar', 'Liberar solo lo que supera la política aplicable.'],
+  ],
+  choicesLabel: '03 / Decisiones comprobables',
+  choicesTitle: 'Tres decisiones que hacen al sistema auditable',
+  choices: [
+    ['Claves como texto de ancho fijo', 'Los códigos CUT se conservan como cadenas para evitar la pérdida de ceros iniciales.', 'Ver ADR de códigos CUT', github + '/blob/main/docs/adr/ADR-002-codigos-cut-varchar-fijo.md'],
+    ['Contratos ejecutables', 'Cada conjunto de datos declara restricciones verificables; los cambios de formato no deben pasar inadvertidos.', 'Inspeccionar contratos', github + '/tree/main/contracts/datasets'],
+    ['Publicación por madurez', 'Las fuentes frágiles o con licencias pendientes no se presentan automáticamente como estables y publicables.', 'Ver criterios de inclusión', github + '/blob/main/docs/dataset-inclusion-criteria.md'],
+  ],
+  limitsLabel: '04 / Lo que no voy a ocultar',
+  limitsTitle: 'La confiabilidad también implica decir «todavía no»',
+  limitsIntro: 'Las fuentes externas cambian, se caen y a veces bloquean la automatización. chile-hub documenta esas restricciones y distingue las fuentes estables de las candidatas. Un snapshot declarado no equivale a datos recién obtenidos.',
+  limitsNote: 'Este caso demuestra decisiones e implementación inspeccionables; no es una auditoría externa ni garantiza ausencia absoluta de errores. No equiparo descargas de PyPI con usuarios o instalaciones.',
+  evidenceLabel: '05 / Verificación independiente',
+  evidenceTitle: 'No tienes que confiar en esta página',
+  evidenceIntro: 'La explicación está conectada con el código y los documentos públicos. Abre cualquier evidencia y evalúa si las decisiones tienen sentido.',
+  evidence: [
+    ['Código y trazabilidad', 'Repositorio abierto y mantenido', github],
+    ['Control de publicación', 'Script de verificación del pipeline', github + '/blob/main/scripts/verify_pipeline.py'],
+    ['Documento de ingeniería', 'Caso técnico original, decisiones y limitaciones', sourceStudy],
+    ['Citación persistente', 'Registro DOI del proyecto en Zenodo', 'https://doi.org/10.5281/zenodo.22968698'],
+  ],
+  transferLabel: '06 / Aplicación fuera de chile-hub',
+  transferTitle: '¿Qué tiene que ver esto con tu automatización?',
+  transferIntro: 'Un proceso que consolida reportes, descarga permisos o sincroniza carpetas necesita principios parecidos: entradas verificadas, salidas deterministas, control de ejecuciones repetidas y fallos visibles. No es el mismo sistema, pero sí la misma disciplina.',
+  transferCta: 'Ver cómo trabajo con pipelines Python',
+  authorTitle: 'Autor y procedencia',
+  authorText: 'Carlos Ortega González desarrolla y mantiene chile-hub. Esta nota adapta su caso técnico publicado en GitHub y enlaza evidencia que puedes revisar. Fecha de preparación: octubre de 2026.',
+  authorLink: 'Perfil técnico de GitHub',
+} : {
+  title: 'How to prevent silent data errors in a Python pipeline',
+  description: 'A documented chile-hub engineering case study: fixed-width identifiers, executable data contracts, validation and safer publishing.',
+  back: 'All projects', eyebrow: 'Engineering field note / Documented build',
+  headline: 'A pipeline can run successfully and still publish the wrong data.',
+  lede: 'With chile-hub, the question was never how many datasets we could publish. It was how to stop plausible-looking files from introducing errors nobody noticed.',
+  byline: 'Carlos Ortega González · Built and maintains chile-hub',
+  reviewed: 'Prepared October 2026',
+  facts: ['Public source', 'Executable contracts', 'Documented limitations'],
+  failureLabel: '01 / The failure mode',
+  failureTitle: 'The disappearing zero',
+  failureIntro: "In Chile, Iquique's territorial identifier is 01101. Coerce it to an integer and it becomes 1101. Both look legitimate in a spreadsheet, but they are no longer the same join key.",
+  goodLabel: 'Correct identifier', badLabel: 'After integer coercion',
+  codeCaption: 'A minimal reproduction of a failure mode, not a production incident report.',
+  consequence: 'The result: a join can drop valid rows without throwing an error. The final report looks credible but is incomplete.',
+  pipelineLabel: '02 / Architecture decision',
+  pipelineTitle: 'Validation decides what gets published',
+  pipelineIntro: 'The workflow separates extraction, building, verification and publication. Data contracts, provenance and release rules are operational controls, not decorative README claims.',
+  steps: [
+    ['01', 'Extract', 'Acquire source data and preserve provenance.'],
+    ['02', 'Build', 'Normalize formats and keys without losing information.'],
+    ['03', 'Verify', 'Check schema, coverage and dataset-level invariants.'],
+    ['04', 'Publish', 'Release only datasets that meet the applicable policy.'],
+  ],
+  choicesLabel: '03 / Inspectable decisions',
+  choicesTitle: 'Three choices that make the system auditable',
+  choices: [
+    ['Fixed-width strings for identifiers', 'CUT codes remain strings so leading zeros survive extraction, transformation and joins.', 'Read the identifier ADR', github + '/blob/main/docs/adr/ADR-002-codigos-cut-varchar-fijo.md'],
+    ['Executable data contracts', 'Each dataset declares verifiable constraints. An upstream format change must not quietly become trusted output.', 'Inspect the contracts', github + '/tree/main/contracts/datasets'],
+    ['Publication maturity lanes', 'Fragile sources and unresolved licensing do not automatically qualify as stable, publishable data.', 'Read inclusion criteria', github + '/blob/main/docs/dataset-inclusion-criteria.md'],
+  ],
+  limitsLabel: '04 / What did not magically disappear',
+  limitsTitle: 'Reliability sometimes means saying “not yet”',
+  limitsIntro: 'External sources change, become unavailable and sometimes block automation. chile-hub documents those constraints and distinguishes stable datasets from candidates. A declared snapshot is not the same as newly fetched data.',
+  limitsNote: 'This case documents inspectable design choices and implementation, not an independent audit or a guarantee that errors are impossible. PyPI downloads are not presented as unique users or installations.',
+  evidenceLabel: '05 / Inspect the work',
+  evidenceTitle: "Don't take this page on faith",
+  evidenceIntro: 'Every engineering claim is linked to public source material. Follow the evidence and decide whether the design holds up.',
+  evidence: [
+    ['Source and history', 'Open, maintained repository', github],
+    ['Release safety', 'Pipeline verification implementation', github + '/blob/main/scripts/verify_pipeline.py'],
+    ['Engineering record', 'Original technical case study and tradeoffs', sourceStudy],
+    ['Persistent citation', 'Zenodo project DOI record', 'https://doi.org/10.5281/zenodo.22968698'],
+  ],
+  transferLabel: '06 / Beyond open data',
+  transferTitle: 'What does this mean for your automation?',
+  transferIntro: 'Recurring reports, permit collectors and scheduled folder syncs need similar discipline: validated inputs, deterministic outputs, safe reruns and visible failures. The systems differ; the engineering principles travel.',
+  transferCta: 'Explore Python automation services',
+  authorTitle: 'Author and provenance',
+  authorText: 'Carlos Ortega González built and maintains chile-hub. This note adapts the existing GitHub engineering study and links to inspectable evidence. Prepared October 2026.',
+  authorLink: 'Technical GitHub profile',
+};
+
+const navItems = [
+  { href: '#failure', label: es ? 'El error' : 'Failure' },
+  { href: '#pipeline', label: es ? 'Diseño' : 'Design' },
+  { href: '#evidence', label: es ? 'Evidencia' : 'Evidence' },
+  { href: '#contact', label: es ? 'Aplicación' : 'Use it' },
+];
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: c.title,
+  description: c.description,
+  inLanguage: lang,
+  author: { '@type': 'Person', name: 'Carlos Ortega González', url: 'https://github.com/cortega26' },
+  publisher: { '@type': 'Organization', name: 'Tooltician', url: 'https://tooltician.com/' },
+  mainEntityOfPage: canonical,
+  isBasedOn: sourceStudy,
+  datePublished: published,
+  dateModified: published,
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/' + lang + '/' },
+    { '@type': 'ListItem', position: 2, name: c.back, item: 'https://tooltician.com' + workHref },
+    { '@type': 'ListItem', position: 3, name: 'chile-hub', item: canonical },
+  ],
+};
+---
+<BaseLayout title={c.title + ' | Tooltician'} description={c.description} lang={lang} canonical={canonical} alternates={alternatesFor('case-study:chile-hub')}>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleJsonLd)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+  <Navbar lang={lang} items={navItems} ctaHref={serviceHref + '#contact'} />
+  <main id="main" class="story">
+    <section class="story-hero">
+      <div class="story-container">
+        <a href={workHref} class="story-back">← {c.back}</a>
+        <p class="story-eyebrow">{c.eyebrow}</p>
+        <h1>{c.headline}</h1>
+        <p class="story-lede">{c.lede}</p>
+        <p class="story-byline">{c.byline} <span aria-hidden="true">·</span> {c.reviewed}</p>
+        <div class="story-facts" aria-label={es ? 'Características verificables' : 'Inspectable characteristics'}>
+          {c.facts.map(fact => <span>{fact}</span>)}
+        </div>
+      </div>
+    </section>
+
+    <article class="story-container story-article">
+      <section id="failure" class="story-section">
+        <p class="story-kicker">{c.failureLabel}</p>
+        <h2>{c.failureTitle}</h2>
+        <p class="story-prose">{c.failureIntro}</p>
+        <div class="story-contrast" aria-label={es ? 'Comparación de identificadores' : 'Identifier comparison'}>
+          <div class="story-value story-value--valid">
+            <span>{c.goodLabel}</span>
+            <strong>01101</strong>
+          </div>
+          <div class="story-value story-value--wrong">
+            <span>{c.badLabel}</span>
+            <strong>1101</strong>
+          </div>
+        </div>
+        <pre class="story-code"><code>{'raw = "01101"\nwrong = str(int(raw))  # "1101"\nassert raw != wrong'}</code></pre>
+        <p class="story-footnote">{c.codeCaption}</p>
+        <p class="story-observation">{c.consequence}</p>
+      </section>
+
+      <section id="pipeline" class="story-section">
+        <p class="story-kicker">{c.pipelineLabel}</p>
+        <h2>{c.pipelineTitle}</h2>
+        <p class="story-prose">{c.pipelineIntro}</p>
+        <ol class="story-process">
+          {c.steps.map(([number, label, detail]) => (
+            <li><span class="story-step-no">{number}</span><h3>{label}</h3><p>{detail}</p></li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="story-section">
+        <p class="story-kicker">{c.choicesLabel}</p>
+        <h2>{c.choicesTitle}</h2>
+        <div class="story-decisions">
+          {c.choices.map(([title, detail, label, href]) => (
+            <div class="story-decision">
+              <h3>{title}</h3>
+              <p>{detail}</p>
+              <a href={href} target="_blank" rel="noopener noreferrer">{label} ↗</a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="story-section story-limit">
+        <p class="story-kicker">{c.limitsLabel}</p>
+        <h2>{c.limitsTitle}</h2>
+        <p>{c.limitsIntro}</p>
+        <p class="story-footnote">{c.limitsNote}</p>
+      </section>
+
+      <section id="evidence" class="story-section">
+        <p class="story-kicker">{c.evidenceLabel}</p>
+        <h2>{c.evidenceTitle}</h2>
+        <p class="story-prose">{c.evidenceIntro}</p>
+        <div class="story-evidence">
+          {c.evidence.map(([title, detail, href], index) => (
+            <a href={href} target="_blank" rel="noopener noreferrer" class="story-evidence-link">
+              <span class="story-evidence-index">0{index + 1}</span>
+              <span><strong>{title}</strong><small>{detail}</small></span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section id="contact" class="story-cta">
+        <p class="story-kicker">{c.transferLabel}</p>
+        <h2>{c.transferTitle}</h2>
+        <p>{c.transferIntro}</p>
+        <a href={serviceHref} class="story-button">{c.transferCta} →</a>
+      </section>
+
+      <aside class="story-author">
+        <h2>{c.authorTitle}</h2>
+        <p>{c.authorText}</p>
+        <a href="https://github.com/cortega26" target="_blank" rel="noopener noreferrer">{c.authorLink} ↗</a>
+      </aside>
+    </article>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  .story { color: var(--clr-text); background: var(--clr-bg); }
+  .story-container { width: min(100% - 2.5rem, 1040px); margin-inline: auto; }
+  .story-hero { padding: calc(var(--nav-height) + 4.5rem) 0 4.2rem; border-bottom: 1px solid var(--clr-border-strong); background: radial-gradient(ellipse at 80% 0%, rgba(196,160,74,.11), transparent 52%); }
+  .story-back, .story-decision a, .story-author a { color: var(--clr-accent); text-decoration: none; }
+  .story-back { display: inline-block; margin-bottom: 3rem; font-size: .88rem; }
+  .story-back:hover, .story-decision a:hover, .story-author a:hover { text-decoration: underline; }
+  .story-eyebrow, .story-kicker, .story-step-no, .story-evidence-index { font: 600 .75rem/1.5 var(--ff-label); letter-spacing: .08em; text-transform: uppercase; color: var(--clr-accent); }
+  .story-hero h1 { max-width: 950px; margin: .9rem 0 1.5rem; font: 750 clamp(2.5rem, 5.5vw, 5rem)/1.05 var(--ff-heading); letter-spacing: -.055em; text-wrap: balance; }
+  .story-lede { max-width: 730px; font-size: clamp(1.15rem, 1.7vw, 1.4rem); line-height: 1.6; color: var(--clr-text-muted); }
+  .story-byline { margin-top: 2rem; font-size: .88rem; color: var(--clr-text-muted); }
+  .story-facts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.8rem; }
+  .story-facts span { padding: .42rem .75rem; font: 500 .71rem var(--ff-label); color: var(--clr-text); border: 1px solid var(--clr-border-strong); border-radius: var(--radius-sm); }
+  .story-article { padding-bottom: 5rem; }
+  .story-section { padding: 5rem 0; border-bottom: 1px solid var(--clr-border); scroll-margin-top: 6rem; }
+  .story-section h2, .story-cta h2 { max-width: 750px; margin: .7rem 0 1.5rem; font: 720 clamp(1.85rem, 3.2vw, 2.9rem)/1.16 var(--ff-heading); letter-spacing: -.035em; text-wrap: balance; }
+  .story-prose, .story-section > p:not(.story-kicker):not(.story-footnote) { max-width: 770px; font-size: 1.1rem; line-height: 1.78; color: var(--clr-text-muted); }
+  .story-contrast { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; margin-top: 2.3rem; }
+  .story-value { padding: 1.5rem; border: 1px solid var(--clr-border-strong); border-radius: var(--radius-lg); background: var(--clr-bg-card); }
+  .story-value span { display: block; color: var(--clr-text-muted); font-size: .88rem; }
+  .story-value strong { display: block; margin-top: .85rem; font: 600 clamp(2rem, 5vw, 3.4rem) var(--ff-label); letter-spacing: .08em; }
+  .story-value--valid { border-color: rgba(74,222,128,.43); }
+  .story-value--valid strong { color: var(--clr-success); }
+  .story-value--wrong { border-color: rgba(248,113,113,.37); }
+  .story-value--wrong strong { color: #fca5a5; }
+  .story-code { margin: 1rem 0 .4rem; padding: 1.2rem 1.5rem; overflow-x: auto; border: 1px solid var(--clr-border); border-radius: var(--radius-md); background: #080e1b; color: #cbd5e1; font: .89rem/1.7 var(--ff-label); }
+  .story-footnote { margin-top: 1rem; max-width: 800px; font-size: .84rem; line-height: 1.65; color: var(--clr-text-faint); }
+  .story-observation { border-left: 3px solid var(--clr-accent); padding: 1rem 0 1rem 1.35rem; margin-top: 2rem; }
+  .story-process { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: .75rem; padding: 0; margin: 2.2rem 0 0; list-style: none; }
+  .story-process li { padding: 1.4rem 1.15rem; background: var(--clr-bg-card); border: 1px solid var(--clr-border); border-radius: var(--radius-md); }
+  .story-process h3 { margin: 1.1rem 0 .5rem; font-size: 1.12rem; }
+  .story-process p { color: var(--clr-text-muted); font-size: .9rem; line-height: 1.55; }
+  .story-decisions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .9rem; margin-top: 2rem; }
+  .story-decision { padding: 1.55rem; border: 1px solid var(--clr-border-strong); border-radius: var(--radius-md); }
+  .story-decision h3 { font-size: 1.13rem; line-height: 1.35; }
+  .story-decision p { min-height: 8.4rem; color: var(--clr-text-muted); font-size: .94rem; line-height: 1.65; margin: 1rem 0; }
+  .story-decision a { font-size: .83rem; font-weight: 650; }
+  .story-limit { padding-inline: min(3vw, 2rem); background: rgba(196,160,74,.035); }
+  .story-evidence { border-top: 1px solid var(--clr-border-strong); margin-top: 2.1rem; }
+  .story-evidence-link { display: grid; grid-template-columns: 3rem minmax(0,1fr) 1.5rem; align-items: center; gap: 1rem; padding: 1.3rem .5rem; color: var(--clr-text); text-decoration: none; border-bottom: 1px solid var(--clr-border-strong); }
+  .story-evidence-link:hover { background: var(--clr-surface); }
+  .story-evidence-link strong, .story-evidence-link small { display: block; }
+  .story-evidence-link small { margin-top: .4rem; color: var(--clr-text-muted); line-height: 1.45; }
+  .story-cta { padding: 3rem; margin: 5rem 0 3rem; border: 1px solid var(--clr-border-glow); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(196,160,74,.13), var(--clr-bg-card) 65%); scroll-margin-top: 6rem; }
+  .story-cta p:not(.story-kicker) { max-width: 720px; color: var(--clr-text-muted); font-size: 1.02rem; line-height: 1.75; }
+  .story-button { display: inline-block; margin-top: 1.5rem; padding: .95rem 1.4rem; background: var(--clr-accent); color: #0b1121; font-weight: 750; text-decoration: none; border-radius: var(--radius-sm); }
+  .story-button:hover { background: var(--clr-accent-hover); }
+  .story-author { max-width: 780px; border-top: 1px solid var(--clr-border); padding-top: 2.4rem; }
+  .story-author h2 { font-size: 1rem; }
+  .story-author p { margin: .8rem 0; color: var(--clr-text-muted); line-height: 1.7; }
+  .story-author a { font-size: .9rem; }
+  :where(.story a):focus-visible { outline: 2px solid var(--clr-accent); outline-offset: 4px; }
+  @media (max-width: 760px) {
+    .story-hero { padding-top: calc(var(--nav-height) + 2.3rem); }
+    .story-back { margin-bottom: 2.1rem; }
+    .story-section { padding: 3.6rem 0; }
+    .story-process { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .story-decisions { grid-template-columns: 1fr; }
+    .story-decision p { min-height: 0; }
+    .story-cta { padding: 1.6rem; margin-top: 3rem; }
+  }
+  @media (max-width: 470px) {
+    .story-container { width: min(100% - 2rem, 1040px); }
+    .story-contrast, .story-process { grid-template-columns: 1fr; }
+    .story-hero h1 { font-size: clamp(2.15rem, 11vw, 3rem); }
+    .story-evidence-link { grid-template-columns: 2rem minmax(0,1fr) 1rem; gap: .55rem; }
+  }
+</style>

@@ -118,7 +118,10 @@ export function buildPortfolioItemList(lang: JsonLdLocale, cases: CaseStudy[] = 
     itemListOrder: 'https://schema.org/ItemListOrderAscending',
     numberOfItems: cases.length,
     itemListElement: cases.map((project, index) => {
-      const url = project.evidence?.find((chip) => chip.type === 'pypi' && chip.href)?.href ?? project.links[0]?.href;
+      const candidateUrl = project.evidence?.find((chip) => chip.type === 'pypi' && chip.href)?.href ?? project.links[0]?.href;
+      // Schema.org URLs must be absolute. Local first-links are valid UI links,
+      // but cannot be emitted as relative item URLs in JSON-LD.
+      const url = candidateUrl?.startsWith('/') ? SITE_ORIGIN + candidateUrl : candidateUrl;
       return {
         '@type': 'ListItem',
         position: index + 1,

@@ -38,6 +38,17 @@ const caseIds = casesByLocale.en.map((c) => c.id).sort();
 assert('repoMap keys are case ids', JSON.stringify(Object.keys(repoMap).sort()) === JSON.stringify(caseIds), `repoMap keys=${Object.keys(repoMap).sort()} caseIds=${caseIds}`);
 assert('repoMap values match github-stats.json keys', JSON.stringify(Object.values(repoMap).sort()) === JSON.stringify(statsKeys.sort()), `repoMap values=${Object.values(repoMap).sort()} stats=${statsKeys.sort()}`);
 
+// A featured engineering story must be reachable in both languages from its
+// corresponding work card, with its route registered for hreflang and sitemap.
+const storyRoute = routeGroups.find((group) => group.id === 'case-study:chile-hub');
+assert('chile-hub story has bilingual route', Boolean(storyRoute?.paths.en && storyRoute?.paths.es));
+for (const lang of ['en', 'es']) {
+  const item = casesByLocale[lang].find((entry) => entry.id === 'chile-hub');
+  const localizedPath = storyRoute?.paths[lang];
+  assert(`${lang}: chile-hub card links to localized case study`,
+    Boolean(item?.links.some((link) => link.href === localizedPath)));
+}
+
 console.log(`\nResults: ${passed}/${passed + failed} passed`);
 if (failed) { console.log('\nFailed:'); failures.forEach((f) => console.log('  • ' + f)); process.exit(1); }
 console.log('All checks passed.');

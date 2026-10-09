@@ -128,7 +128,7 @@ const projectsEN: CaseStudy[] = [
     summary: 'A curated, reproducible data layer that normalizes and validates Chilean public datasets into single-line imports.',
     problem: 'Public datasets in Chile are fragmented, inconsistently formatted (e.g., variable-length CUT codes), and prone to silent upstream changes.',
     solution: 'Built an automated pipeline that extracts, sanitizes, and verifies geography, demography, and health data, exporting optimized Parquet, DuckDB, and JSON builds with loud-failing invariants.',
-    proof: 'Almost 60 GitHub stars, fully automated CI/CD pipeline, CLI/API package, and a public static dashboard with verified datasets.',
+    proof: 'Open source, published Python package, documented validation contracts, and a public data dashboard.',
     tags: ['Python', 'DuckDB', 'Data Pipelines', 'Parquet'],
     filters: ['python', 'data'],
     tagType: 'accent',
@@ -138,6 +138,7 @@ const projectsEN: CaseStudy[] = [
       { label: 'CI/CD Pipeline', type: 'ci' },
     ],
     links: [
+      { label: 'Read engineering case study', href: '/en/work/chile-hub/' },
       { label: 'View GitHub', href: 'https://github.com/cortega26/chile-hub' },
       { label: 'Python Automation', href: '/en/services/python-automation/' },
     ],
@@ -382,7 +383,7 @@ const projectsES: CaseStudy[] = [
     summary: 'Una capa de datos curada y reproducible que normaliza y valida datasets públicos de Chile para consumo en una sola línea.',
     problem: 'Los datos públicos chilenos están fragmentados, con formatos inconsistentes (ej. códigos CUT truncados) y propensos a cambios silenciosos de origen.',
     solution: 'Construí un pipeline automatizado que extrae, sanitiza y verifica datos de geografía, demografía y salud, exportando archivos optimizados en Parquet, DuckDB y JSON con alertas ante anomalías.',
-    proof: 'Casi 60 estrellas en GitHub, pipeline de CI/CD automatizado, CLI/API en Python y un dashboard estático público con datasets verificados.',
+    proof: 'Código abierto, paquete Python publicado, contratos de validación documentados y un panel público de datos.',
     tags: ['Python', 'DuckDB', 'Pipelines de Datos', 'Parquet'],
     filters: ['python', 'data'],
     tagType: 'accent',
@@ -392,6 +393,7 @@ const projectsES: CaseStudy[] = [
       { label: 'Pipeline CI/CD', type: 'ci' },
     ],
     links: [
+      { label: 'Leer caso de ingeniería', href: '/es/trabajo/chile-hub/' },
       { label: 'Ver GitHub', href: 'https://github.com/cortega26/chile-hub' },
       { label: 'Automatización Python', href: '/es/servicios/automatizacion-python/' },
     ],

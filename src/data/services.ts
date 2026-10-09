@@ -295,6 +295,7 @@ const pythonAutomation: ServiceDefinition = {
     relatedLabel: 'Related projects',
     related: [
       { label: 'chile-hub', href: 'https://github.com/cortega26/chile-hub', accent: true },
+      { label: 'Engineering case study: data reliability', href: '/en/work/chile-hub/' },
       { label: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario', accent: true },
       { label: 'rutificador', href: 'https://pypi.org/project/rutificador/', accent: true },
       { label: 'Portfolio', href: '/en/#portfolio' },
@@ -506,6 +507,7 @@ const pythonAutomation: ServiceDefinition = {
     relatedLabel: 'Proyectos relacionados',
     related: [
       { label: 'chile-hub', href: 'https://github.com/cortega26/chile-hub', accent: true },
+      { label: 'Caso de ingeniería: confiabilidad de datos', href: '/es/trabajo/chile-hub/' },
       { label: 'Conciliador Bancario', href: 'https://github.com/cortega26/conciliador_bancario', accent: true },
       { label: 'rutificador', href: 'https://pypi.org/project/rutificador/', accent: true },
       { label: 'Guía: automatizar reportes de Excel con Python', href: '/es/guias/automatizar-reportes-excel-python/' },

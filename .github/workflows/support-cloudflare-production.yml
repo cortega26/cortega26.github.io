@@ -1,0 +1,103 @@
+name: Tooltician Support Cloudflare Production
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'support/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.npmrc'
+      - '.github/workflows/support-cloudflare-production.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tooltician-support-cloudflare-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the approved master commit
+        uses: actions/checkout@900f2210b1d28bbbd0bd22d17926b9e224e8f231 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@ad1b57eb8159e2fd3cc753317dd4a4016287218f # v6
+        with:
+          node-version: 24
+          cache: npm
+      - name: Validate Cloudflare token and Pages project access
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node support/scripts/cloudflare-auth-preflight.mjs
+      - name: Install dependencies
+        run: npm ci
+      - name: Check the unchanged preview and independent tests
+        env:
+          SUPPORT_RELEASE: '0'
+        run: npm run support:verify
+      - name: Check public publication and build release
+        run: |
+          npm run support:release-check
+          SUPPORT_RELEASE=1 npm run support:build
+          test -f support/dist/index.html
+          test -f support/dist/sitemap-index.xml
+          grep -q 'index, follow' support/dist/index.html
+          grep -q 'noindex, nofollow' support/dist/vecinos/index.html
+      - name: Deploy production on existing Cloudflare Pages project
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@4.142.0 pages deploy support/dist \
+            --project-name tooltician-support \
+            --branch master \
+            --commit-hash "$GITHUB_SHA"
+      - name: Attach custom domain idempotently
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          api="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/tooltician-support/domains"
+          response="$(curl --fail --silent --show-error "$api" -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}")"
+          if ! jq -e '.success == true' <<< "$response" >/dev/null; then
+            echo "::error::Cannot list Cloudflare Pages custom domains."
+            exit 1
+          fi
+          if jq -e '.result[]? | select(.name == "soporte.tooltician.com")' <<< "$response" >/dev/null; then
+            echo "Custom domain already attached"
+          else
+            curl --fail --silent --show-error --request POST "$api" \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H 'Content-Type: application/json' \
+              --data '{"name":"soporte.tooltician.com"}' \
+              | jq -e '.success == true' >/dev/null
+            echo "Custom domain registration requested"
+          fi
+      - name: Verify public HTTPS and indexable production response
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://soporte.tooltician.com/'
+          for attempt in 1 2 3 4 5 6 7 8; do
+            if curl --fail --silent --show-error --location --max-time 20 "$url" > "$RUNNER_TEMP/support-production.html" \
+              && grep -Fq 'Tooltician Soporte' "$RUNNER_TEMP/support-production.html" \
+              && grep -Fq 'index, follow' "$RUNNER_TEMP/support-production.html" \
+              && ! grep -Fq 'Vista previa · Servicio aún no abierto' "$RUNNER_TEMP/support-production.html"; then
+              echo "Public website verified: $url"
+              echo "### Tooltician Soporte: public HTTPS verified" >> "$GITHUB_STEP_SUMMARY"
+              echo "$url" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::Cloudflare production deployed, but custom-domain DNS/TLS/indexability is not verified."
+          exit 1

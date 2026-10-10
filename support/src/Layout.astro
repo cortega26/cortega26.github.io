@@ -23,6 +23,12 @@ const socialTitle = !neighbors && !flyer ? '¿Tu computador está lento o fallan
 const socialDescription = !neighbors && !flyer ? 'Soporte técnico para PC y notebooks en Macul, Ñuñoa y Providencia. Visitas desde $30.000, diagnóstico claro y precios antes de cualquier trabajo.' : description;
 const sectionBase = neighbors ? '/vecinos/' : '/';
 const brandSubtitle = neighbors ? 'SOPORTE PARA VECINOS' : flyer ? 'SOPORTE EN TU BARRIO' : 'SOPORTE A DOMICILIO';
+// WCAG 2.5.3: the accessible name must contain the visible label text.
+const brandLabel = neighbors
+  ? 'tooltician soporte para vecinos, inicio'
+  : flyer
+    ? 'tooltician soporte en tu barrio, inicio'
+    : 'tooltician soporte a domicilio, inicio';
 const socialAlt = neighbors
   ? `${business.name}: soporte técnico exclusivo para vecinos del edificio.`
   : `${business.name}: ¿Tu computador está lento o fallando? Soporte técnico a domicilio en Macul, Ñuñoa y Providencia. Atención personal por Carlos Ortega.`;
@@ -111,7 +117,7 @@ const schema = neighbors
       : !released && <div class="preview-notice">Vista previa · Servicio aún no abierto a reservas</div>}
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href={sectionBase} aria-label={neighbors ? 'Tooltician Soporte para vecinos, inicio' : 'Tooltician Soporte a domicilio, inicio'}><img class="brand-mark" src="/tooltician-logo-64.webp" srcset="/tooltician-logo-64.webp 1x, /tooltician-logo-128.webp 2x" alt="" width="41" height="41" decoding="async" /><span>tooltician<span class="brand-sub">{brandSubtitle}</span></span></a>
+        <a class="brand" href={sectionBase} aria-label={brandLabel}><img class="brand-mark" src="/tooltician-logo-64.webp" srcset="/tooltician-logo-64.webp 1x, /tooltician-logo-128.webp 2x" alt="" width="41" height="41" decoding="async" /><span>tooltician <span class="brand-sub">{brandSubtitle}</span></span></a>
         {!flyer && <nav aria-label="Principal"><a href={`${sectionBase}#servicios`}>Servicios</a><a href={`${sectionBase}#precios`}>Precios</a><a href={neighbors ? '/vecinos/#como-funciona' : '/#cobertura'}>{neighbors ? 'Cómo funciona' : 'Cobertura'}</a></nav>}
         {!flyer && <a class="button small header-cta" href={`${sectionBase}#consulta`} data-cta="header">Consultar <span aria-hidden="true">↗</span></a>}
       </div>

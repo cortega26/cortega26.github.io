@@ -34,6 +34,7 @@ test("flyer preview is informative, focused, private and does not enable booking
   assert.match(html, /noindex, nofollow/);
   assert.match(html, /Vista previa/);
   assert.equal(html.split("<h1").length - 1, 1);
+  assert.match(html, /aria-label="tooltician soporte en tu barrio, inicio"/);
   assert.ok(!html.includes('href="https://wa.me/'));
   assert.doesNotMatch(html, /aria-label="Principal"/, "short landing has no competing header navigation");
   assert.match(html, /Visita y diagnóstico desde/);
@@ -65,6 +66,12 @@ test("support uses the Tooltician brand mark instead of the provisional t. monog
   assert.ok(existsSync(join(dist, "tooltician-logo-64.webp")), "64px Tooltician logo ships");
   assert.ok(existsSync(join(dist, "tooltician-logo-128.webp")), "128px Tooltician logo ships");
   assert.match(readFileSync(join(dist, "favicon.svg"), "utf8"), /data:image\/webp;base64,/);
+  // WCAG 2.5.3: accessible name contains the visible label text.
+  assert.match(html, /aria-label="tooltician soporte a domicilio, inicio"/);
+  assert.match(
+    html,
+    /<span>tooltician <span class="brand-sub">SOPORTE A DOMICILIO<\/span><\/span>/,
+  );
 });
 
 test("published prices are final and never promise or add tax", { skip: requiresBuild }, () => {
@@ -189,6 +196,7 @@ test("neighbors evaluation page stays private and preserves the agreed offer", {
   const html = readFileSync(join(dist, "vecinos", "index.html"), "utf8");
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);
   assert.match(html, /Exclusivo para vecinos del edificio/i);
+  assert.match(html, /aria-label="tooltician soporte para vecinos, inicio"/);
   assert.match(html, /alt="Carlos Ortega, responsable de Tooltician Soporte"/);
   assert.match(html, /sizes="\(max-width: 760px\) 320px, 370px"/);
   assert.match(html, /960w/);

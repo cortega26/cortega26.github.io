@@ -10,7 +10,6 @@ import { whatsappUrl } from '../lib/contact';
 // hard launch gate as the public home page.
 const contactReady =
   __SUPPORT_RELEASE__ &&
-  business.confirmed.municipalPermit &&
   /^569\d{8}$/.test(business.whatsapp);
 const leadMessage = [
   'Hola, vi el flyer de Tooltician Soporte (FLYER-C).',

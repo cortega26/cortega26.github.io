@@ -82,6 +82,51 @@ jobs:
               | jq -e '.success == true' >/dev/null
             echo "Custom domain registration requested"
           fi
+      - name: Ensure the Pages subdomain DNS exists without changing other records
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          auth="Authorization: Bearer ${CLOUDFLARE_API_TOKEN}"
+          zone_response="$(curl --fail --silent --show-error --get \
+            --data-urlencode 'name=tooltician.com' \
+            'https://api.cloudflare.com/client/v4/zones' \
+            -H "$auth")"
+          zone_id="$(jq -er '.result | map(select(.name == "tooltician.com")) | first | .id' <<< "$zone_response")" || {
+            echo "::error::Cannot find zone tooltician.com: token needs Zone Read permission in the correct account."
+            exit 1
+          }
+          api="https://api.cloudflare.com/client/v4/zones/${zone_id}/dns_records"
+          records="$(curl --fail --silent --show-error --get \
+            --data-urlencode 'name=soporte.tooltician.com' \
+            "$api" -H "$auth")" || {
+            echo "::error::Cannot inspect DNS: token requires DNS Read for tooltician.com."
+            exit 1
+          }
+          jq -e '.success == true' <<< "$records" >/dev/null || {
+            echo "::error::Cloudflare did not authorize the DNS read."
+            exit 1
+          }
+          if jq -e '[.result[]? | select(.type == "CNAME" and (.content | ascii_downcase | rtrimstr(".") == "tooltician-support.pages.dev"))] | length > 0' <<< "$records" >/dev/null; then
+            echo "Correct Pages DNS CNAME already exists"
+          elif jq -e '.result | length > 0' <<< "$records" >/dev/null; then
+            echo "::error::An existing DNS record conflicts with soporte.tooltician.com. No record was changed."
+            exit 1
+          else
+            payload='{"type":"CNAME","name":"soporte.tooltician.com","content":"tooltician-support.pages.dev","ttl":1,"proxied":true}'
+            created="$(curl --fail --silent --show-error --request POST "$api" \
+              -H "$auth" -H 'Content-Type: application/json' \
+              --data "$payload")" || {
+              echo "::error::Could not create the Pages DNS CNAME. Token may need DNS Edit permission."
+              exit 1
+            }
+            jq -e '.success == true and .result.type == "CNAME" and .result.name == "soporte.tooltician.com"' <<< "$created" >/dev/null || {
+              echo "::error::Cloudflare returned no confirmed CNAME creation."
+              exit 1
+            }
+            echo "Created proxied CNAME for soporte.tooltician.com (no existing records changed)"
+          fi
       - name: Verify public HTTPS and indexable production response
         shell: bash
         run: |

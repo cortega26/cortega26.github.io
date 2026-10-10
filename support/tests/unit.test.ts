@@ -179,11 +179,8 @@ const complete = {
   },
   verified: { realPhone: true, analytics: true, portrait: true },
 };
-test("unconfirmed business facts cannot be released", () => {
-  assert.ok(
-    hardLaunchIssues().length > 0,
-    "the real configuration is still not releasable",
-  );
+test("explicit pre-permit publication consent does not bypass other release facts", () => {
+  assert.deepEqual(hardLaunchIssues(), []);
   assert.deepEqual(hardLaunchIssues(complete), []);
   assert.deepEqual(softLaunchIssues(complete), []);
   assert.ok(
@@ -241,10 +238,13 @@ test("the tax regime and the real phone test no longer block a release", () => {
   assert.equal(business.municipal.responseDate, "2026-09-30");
   assert.equal(business.municipal.status, "application_pending");
   assert.equal(business.confirmed.municipalPermit, false);
+  assert.equal(business.prePermitPublication.approvedByOwner, true);
+  assert.equal(business.prePermitPublication.approvedOn, "2026-10-10");
+  assert.deepEqual(hardLaunchIssues(), [], "owner approved public launch, not a municipal permit");
   assert.deepEqual(
-    hardLaunchIssues(),
+    hardLaunchIssues({ ...business, prePermitPublication: { ...business.prePermitPublication, approvedByOwner: false } }),
     ["Confirmar municipalPermit"],
-    "only issuance of the municipal patent is still pending",
+    "without explicit owner approval, municipal issuance still blocks public launch",
   );
   for (const resolved of [
     "payment",

@@ -49,6 +49,12 @@ export const business = {
   // Written answer received from Municipalidad de Macul on 2026-09-30:
   // the applicable route is a Patente de Domicilio Postal Tributario. The
   // category is confirmed; issuance of the patent is still pending.
+  // Owner explicitly approved publishing and testing demand on 2026-10-10.
+  // This is NOT a municipal permit or a finding of legal authorization.
+  prePermitPublication: {
+    approvedByOwner: true,
+    approvedOn: "2026-10-10",
+  },
   municipal: {
     authority: "Municipalidad de Macul - Departamento de Rentas Municipales",
     permitType: "Patente de Domicilio Postal Tributario",
@@ -196,8 +202,12 @@ export function hardLaunchIssues(config = business): string[] {
   for (const key of ["payment", "taxRegime", "retention", "photo"] as const) {
     if (!config[key].trim()) issues.push(key);
   }
-  for (const [key, done] of Object.entries(config.confirmed))
+  for (const [key, done] of Object.entries(config.confirmed)) {
+    // Publication consent allows testing demand while the permit remains pending.
+    // Never mark municipalPermit as granted based on this exception.
+    if (key === "municipalPermit" && config.prePermitPublication.approvedByOwner) continue;
     if (!done) issues.push(`Confirmar ${key}`);
+  }
   if (!config.verified.realPhone)
     issues.push("Verificar realPhone (prueba desde un teléfono real)");
   if (!config.verified.portrait) issues.push("Verificar portrait");

@@ -66,9 +66,13 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
   visibles de mano de obra, sin licencias pirateadas y sin renuncia a derechos del
   consumidor.
 
-## Decisiones humanas pendientes antes de producción
+## Autorización de publicación y patente pendiente (2026-10-10)
 
-Queda una sola, y es externa: ningún cambio de código puede resolverla.
+El titular autorizó explícitamente publicar las páginas comerciales y recibir consultas para medir demanda **antes de la emisión de la patente**, asumiendo personalmente ese riesgo. Se registra mediante `business.prePermitPublication.approvedByOwner=true`. Esta decisión **no** es autorización municipal ni permite afirmar que la patente fue otorgada. `business.confirmed.municipalPermit=false` y `business.municipal.status=application_pending` permanecen intactos.
+
+La página general y el flyer pueden habilitar sus consultas en una compilación pública; la variante `/vecinos/` continúa con `forceNoindex`, sin `ready` ni autorización de recepción/reparación domiciliaria. La publicación no sustituye obligaciones legales y no prueba que haya demanda real. El despliegue de Pages, la asociación DNS/TLS y la medición deben verificarse operativamente.
+
+## Patente municipal aún pendiente
 
 1. **Emisión de la patente municipal** (`Confirmar municipalPermit`). El
    Departamento de Rentas de la Municipalidad de Macul respondió por escrito el
@@ -135,9 +139,7 @@ Valores exactos para el panel de Cloudflare Pages:
 | `SUPPORT_RELEASE` | sin definir (previews y producción por separado) |
 | `NODE_ENV` | sin tocar; `.npmrc` ya fuerza la instalación de devDependencies |
 
-El deploy de producción requiere todavía resolver DNS y el dominio propio. Añadir
-`soporte.tooltician.com` como dominio personalizado en Pages solo cuando el
-lanzamiento esté autorizado.
+El despliegue de producción y la asociación de `soporte.tooltician.com` se realizan desde el workflow `support-cloudflare-production.yml`, después de integrar su PR y superar CI. El workflow solicita el dominio mediante la API de Cloudflare y prueba HTTPS; cualquier fallo de token, DNS o TLS se debe reportar como bloqueo real, no como lanzamiento exitoso.
 
 ## Preview desplegado (2026-09-27)
 

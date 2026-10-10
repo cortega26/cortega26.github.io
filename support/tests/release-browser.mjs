@@ -119,6 +119,32 @@ try {
       `Exactly one ${name}`,
     );
   assert.ok(events.some((e) => e[0] === "event" && e[2].source === "facebook"));
+  // Direct WhatsApp option: release-only, prefilled with a qualification
+  // template, and measured as a direct contact without leaking form text.
+  const direct = page.locator("#whatsapp-direct");
+  assert.equal(await direct.count(), 1, "direct WhatsApp option ships in release");
+  const directHref = await direct.getAttribute("href");
+  assert.match(directHref, /^https:\/\/wa\.me\/56912345678\?text=/);
+  assert.match(new URL(directHref).searchParams.get("text"), /WEB-DIRECTO/);
+  await direct.evaluate((link) =>
+    link.addEventListener("click", (e) => e.preventDefault()),
+  );
+  await page.click("#whatsapp-direct");
+  const afterDirect = await page.evaluate(() =>
+    window.dataLayer.map((x) => Array.from(x)),
+  );
+  const directClicks = afterDirect.filter(
+    (e) =>
+      e[0] === "event" &&
+      e[1] === "support_whatsapp_click" &&
+      e[2].mode === "direct",
+  );
+  assert.equal(directClicks.length, 1, "Direct WhatsApp click is measured once");
+  assert.equal(directClicks[0][2].location, "contact-direct");
+  assert.ok(
+    !JSON.stringify(afterDirect).includes("PRIVATE-CUSTOMER-DESCRIPTION"),
+    "Direct click never leaks form text",
+  );
   await page.click('[data-consent="no"]');
   await page.waitForLoadState("load");
   assert.equal(

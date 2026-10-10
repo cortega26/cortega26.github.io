@@ -5,6 +5,8 @@ const hard = hardLaunchIssues();
 const soft = softLaunchIssues();
 if (business.photo && !existsSync(resolve(import.meta.dirname, business.photo)))
   hard.push(`El retrato debe existir en el repositorio: ${business.photo}`);
+if (!business.confirmed.municipalPermit && business.prePermitPublication.approvedByOwner)
+  console.warn("Publicación autorizada por el titular mientras la patente sigue pendiente; esto no equivale a autorización municipal.");
 if (soft.length) console.warn(`POST-LANZAMIENTO (no bloquea)\n- ${soft.join("\n- ")}`);
 if (hard.length) {
   console.error(`PUBLICACIÓN BLOQUEADA\n- ${hard.join("\n- ")}`);

@@ -108,24 +108,43 @@ jobs:
             echo "::error::Cloudflare did not authorize the DNS read."
             exit 1
           }
-          if jq -e '[.result[]? | select(.type == "CNAME" and (.content | ascii_downcase | rtrimstr(".") == "tooltician-support.pages.dev"))] | length > 0' <<< "$records" >/dev/null; then
-            echo "Correct Pages DNS CNAME already exists"
+          # Cloudflare Pages recommends DNS-only for custom domains that return
+          # 403 behind the zone proxy. This affects only the dedicated subdomain.
+          matching="$(jq -c '[.result[]? | select(.type == "CNAME" and (.content | ascii_downcase | rtrimstr(".") == "tooltician-support.pages.dev"))]' <<< "$records")"
+          if jq -e '.result | length == 1' <<< "$records" >/dev/null \
+            && jq -e 'length == 1' <<< "$matching" >/dev/null; then
+            if jq -e '.[0].proxied == true' <<< "$matching" >/dev/null; then
+              record_id="$(jq -er '.[0].id' <<< "$matching")"
+              updated="$(curl --fail --silent --show-error --request PATCH "$api/$record_id" \
+                -H "$auth" -H 'Content-Type: application/json' \
+                --data '{"proxied":false}')" || {
+                echo "::error::Cannot switch support Pages CNAME to DNS-only."
+                exit 1
+              }
+              jq -e '.success == true and .result.type == "CNAME" and .result.proxied == false' <<< "$updated" >/dev/null || {
+                echo "::error::Cloudflare did not confirm support CNAME DNS-only update."
+                exit 1
+              }
+              echo "Switched only soporte.tooltician.com CNAME to DNS-only"
+            else
+              echo "Correct DNS-only Pages CNAME already exists"
+            fi
           elif jq -e '.result | length > 0' <<< "$records" >/dev/null; then
             echo "::error::An existing DNS record conflicts with soporte.tooltician.com. No record was changed."
             exit 1
           else
-            payload='{"type":"CNAME","name":"soporte.tooltician.com","content":"tooltician-support.pages.dev","ttl":1,"proxied":true}'
+            payload='{"type":"CNAME","name":"soporte.tooltician.com","content":"tooltician-support.pages.dev","ttl":1,"proxied":false}'
             created="$(curl --fail --silent --show-error --request POST "$api" \
               -H "$auth" -H 'Content-Type: application/json' \
               --data "$payload")" || {
               echo "::error::Could not create the Pages DNS CNAME. Token may need DNS Edit permission."
               exit 1
             }
-            jq -e '.success == true and .result.type == "CNAME" and .result.name == "soporte.tooltician.com"' <<< "$created" >/dev/null || {
-              echo "::error::Cloudflare returned no confirmed CNAME creation."
+            jq -e '.success == true and .result.type == "CNAME" and .result.name == "soporte.tooltician.com" and .result.proxied == false' <<< "$created" >/dev/null || {
+              echo "::error::Cloudflare returned no confirmed DNS-only CNAME creation."
               exit 1
             }
-            echo "Created proxied CNAME for soporte.tooltician.com (no existing records changed)"
+            echo "Created DNS-only CNAME for soporte.tooltician.com (no existing records changed)"
           fi
       - name: Verify public HTTPS and indexable production response
         shell: bash

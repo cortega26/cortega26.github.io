@@ -114,6 +114,20 @@ test("search metadata matches the real intent and social tags are complete", { s
     assert.ok(html.includes(tag), `missing ${tag}`);
 });
 
+test("production-ready Facebook card is a real PNG and social metadata is versioned", { skip: requiresBuild }, () => {
+  const image = readFileSync(join(dist, "og-card-v2.png"));
+  assert.ok(image.length > 100_000, "real owner photo is present, not a placeholder");
+  assert.ok(image.length < 8 * 1024 * 1024, "Facebook share image stays below 8 MiB");
+  assert.deepEqual([...image.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], "PNG signature");
+  assert.equal(image.readUInt32BE(16), 1200, "OG width");
+  assert.equal(image.readUInt32BE(20), 630, "OG height");
+  const html = readFileSync(join(dist, "index.html"), "utf8");
+  assert.match(html, /property="og:image" content="https:\/\/soporte\.tooltician\.com\/og-card-v2\.png"/);
+  assert.match(html, /property="og:image:type" content="image\/png"/);
+  assert.match(html, /property="og:title" content="¿Tu computador está lento o fallando\?/);
+  assert.match(html, /name="twitter:image" content="https:\/\/soporte\.tooltician\.com\/og-card-v2\.png"/);
+});
+
 test("structured data is valid, truthful and declares no address or ratings", { skip: requiresBuild }, () => {
   const html = readFileSync(join(dist, "index.html"), "utf8");
   const raw = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];

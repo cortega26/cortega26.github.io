@@ -17,7 +17,7 @@
     "test:links": "node scripts/check-links-seo.js",
     "astro": "astro",
     "support:dev": "astro dev --root support",
-    "support:build": "astro build --root support",
+    "support:build": "node support/generate-og.mjs && astro build --root support",
     "support:check": "astro check --root support",
     "support:test": "npm run support:test:unit && npm run support:test:dist",
     "support:test:unit": "node --test support/tests/unit.test.ts",

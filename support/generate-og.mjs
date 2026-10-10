@@ -1,32 +1,72 @@
-// Reproducible typographic share image; no stock person or fabricated endorsement.
-import { business } from "./src/config.ts";
-import { mkdir } from "node:fs/promises";
-const { chromium } = await import(
-  process.env.SUPPORT_PLAYWRIGHT_MODULE || "playwright"
-);
-const browser = await chromium.launch();
-try {
-  const page = await browser.newPage({
-    viewport: { width: 1200, height: 630 },
-    deviceScaleFactor: 1,
-  });
-  const escapeHtml = (text) =>
-    text.replace(
-      /[&<>"']/g,
-      (c) =>
-        ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;",
-        })[c],
-    );
-  await page.setContent(
-    `<html lang="es"><body style="margin:0;background:#faf9f5;color:#172b29;font-family:Arial,sans-serif;padding:64px 74px;box-sizing:border-box;height:630px;border-bottom:18px solid #205c48"><div style="font-size:28px;font-weight:bold">${escapeHtml(business.name)}</div><div style="font-size:17px;letter-spacing:3px;margin-top:44px;color:#52645f">MACUL · ÑUÑOA · PROVIDENCIA</div><h1 style="font-size:72px;font-weight:600;line-height:1.08;letter-spacing:-3px;margin:25px 0">Tu computador debería<br><span style="font-family:Georgia,serif;font-weight:400">hacerte la vida fácil.</span></h1><p style="font-size:25px;color:#52645f;margin-top:30px">Soporte técnico a domicilio. Diagnóstico primero.</p><p style="font-size:19px;margin-top:30px">soporte.tooltician.com</p></body></html>`,
+// Deterministic Facebook/Open Graph card, generated from the verified owner photo.
+// No generative likeness or third-party image URLs are included in production.
+import sharp from "sharp";
+import { readFile, mkdir } from "node:fs/promises";
+import { join } from "node:path";
+import { business, basePrice, money } from "./src/config.ts";
+
+const WIDTH = 1200;
+const HEIGHT = 630;
+const outputFile = join("support", "public", "og-card-v2.png");
+const portraitFile = new URL("./src/assets/carlos-ortega-hq.webp", import.meta.url);
+const portrait = await sharp(await readFile(portraitFile))
+  .resize(362, 408, { fit: "cover", position: "attention" })
+  .png()
+  .toBuffer();
+
+const safe = (value) =>
+  String(value).replace(/[&<>"']/g, (character) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" })[character],
   );
-  await mkdir("support/public", { recursive: true });
-  await page.screenshot({ path: "support/public/og-card.png" });
-} finally {
-  await browser.close();
+
+const areas = business.areas.map((area) => area.name.toUpperCase()).join("  ·  ");
+const lowestPrice = money(basePrice());
+const otherPrice = business.areas.find((area) => area.price > basePrice());
+
+const svg = [
+  '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">',
+  '<defs>',
+  '  <clipPath id="portrait-clip"><rect x="805" y="91" width="362" height="408" rx="23"/></clipPath>',
+  '  <linearGradient id="green" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#174e3e"/><stop offset="1" stop-color="#0c2924"/></linearGradient>',
+  '</defs>',
+  '<rect width="1200" height="630" fill="#faf9f5"/>',
+  '<rect x="772" width="428" height="630" fill="url(#green)"/>',
+  '<circle cx="1183" cy="95" r="185" fill="none" stroke="#87b19c" stroke-opacity=".14" stroke-width="2"/>',
+  '<circle cx="1190" cy="95" r="216" fill="none" stroke="#87b19c" stroke-opacity=".1" stroke-width="2"/>',
+  '<rect x="68" y="57" width="49" height="49" rx="13" fill="#205c48"/>',
+  '<rect x="80" y="69" width="25" height="18" rx="2" fill="none" stroke="#fff" stroke-width="2.5"/>',
+  '<path d="M76 94h34l-5 4H81z" fill="#fff"/>',
+  '<g font-family="Arial,DejaVu Sans,sans-serif" fill="#172b29">',
+  ' <text x="133" y="91" font-size="29" font-weight="700">Tooltician</text>',
+  ' <text x="278" y="90" font-size="20" font-weight="600" letter-spacing="2" fill="#205c48">SOPORTE</text>',
+  ' <text x="72" y="156" font-size="17" font-weight="700" letter-spacing="2.1" fill="#4b6b60">' + safe(areas) + '</text>',
+  ' <text x="69" y="232" font-size="64" font-weight="750" letter-spacing="-2.1">¿Tu computador</text>',
+  ' <text x="69" y="309" font-size="64" font-weight="750" letter-spacing="-2.1">está lento o</text>',
+  ' <text x="69" y="386" font-size="64" font-weight="750" letter-spacing="-2.1">fallando?</text>',
+  ' <text x="72" y="435" font-size="24" font-weight="600">Soporte técnico para PC y notebooks</text>',
+  ' <text x="72" y="470" font-size="22" fill="#52645f">Diagnóstico claro. Tú decides.</text>',
+  '</g>',
+  '<rect x="71" y="500" width="321" height="64" rx="15" fill="#205c48"/>',
+  '<text x="99" y="541" fill="#fff" font-family="Arial,DejaVu Sans,sans-serif" font-size="24" font-weight="700">Consulta tu caso  →</text>',
+  '<g font-family="Arial,DejaVu Sans,sans-serif" fill="#172b29">',
+  ' <text x="429" y="518" font-size="14" font-weight="700" letter-spacing="1.5" fill="#52645f">VISITA DESDE</text>',
+  ' <text x="426" y="552" font-size="34" font-weight="700">' + safe(lowestPrice) + '</text>',
+  otherPrice ? ' <text x="428" y="578" font-size="15" fill="#52645f">' + safe(otherPrice.name) + ": " + safe(money(otherPrice.price)) + '</text>' : '',
+  ' <text x="72" y="611" font-size="20" font-weight="600" fill="#205c48">soporte.tooltician.com</text>',
+  '</g>',
+  '<rect x="799" y="85" width="374" height="420" rx="29" fill="#fff" opacity=".17"/>',
+  '<image x="805" y="91" width="362" height="408" href="data:image/png;base64,' + portrait.toString("base64") + '" clip-path="url(#portrait-clip)"/>',
+  '<text x="807" y="551" font-family="Arial,DejaVu Sans,sans-serif" font-size="18" font-weight="600" letter-spacing="2" fill="#b2dac8">ATENCIÓN PERSONAL</text>',
+  '<text x="805" y="595" font-family="Arial,DejaVu Sans,sans-serif" font-size="34" font-weight="700" fill="#fff">Carlos Ortega</text>',
+  '</svg>',
+].join("\n");
+
+await mkdir(join("support", "public"), { recursive: true });
+const metadata = await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(outputFile);
+if (metadata.width !== WIDTH || metadata.height !== HEIGHT) {
+  throw new Error("OG image dimensions unexpectedly changed");
 }
+if (metadata.size >= 8 * 1024 * 1024) {
+  throw new Error("OG image exceeds 8 MB");
+}
+console.log("Generated", outputFile, WIDTH + "x" + HEIGHT, metadata.size + " bytes");

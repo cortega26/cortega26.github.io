@@ -52,6 +52,11 @@ assert.match(
   await readFile(`${root}/dist/sitemap-0.xml`, "utf8"),
   /https:\/\/soporte.tooltician.com\//,
 );
+assert.doesNotMatch(
+  await readFile(`${root}/dist/sitemap-0.xml`, "utf8"),
+  /\/(vecinos|flyer)\//,
+  "non-indexed neighbor and flyer pages must not be present in the sitemap",
+);
 const server = await serve(`${root}/dist`, 4332);
 const browser = await chromium.launch();
 try {

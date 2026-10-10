@@ -18,12 +18,14 @@ const flyer = variant === 'flyer';
 const canonical = new URL(Astro.url.pathname, business.origin).href;
 const released = __SUPPORT_RELEASE__;
 const phone = `+${business.whatsapp}`;
-const socialImage = `${business.origin}/og-card.png`;
+const socialImage = `${business.origin}/og-card-v2.png`;
+const socialTitle = !neighbors && !flyer ? '¿Tu computador está lento o fallando? | Tooltician Soporte' : title;
+const socialDescription = !neighbors && !flyer ? 'Soporte técnico para PC y notebooks en Macul, Ñuñoa y Providencia. Visitas desde $30.000, diagnóstico claro y precios antes de cualquier trabajo.' : description;
 const sectionBase = neighbors ? '/vecinos/' : '/';
 const brandSubtitle = neighbors ? 'SOPORTE PARA VECINOS' : flyer ? 'SOPORTE EN TU BARRIO' : 'SOPORTE A DOMICILIO';
 const socialAlt = neighbors
   ? `${business.name}: soporte técnico exclusivo para vecinos del edificio.`
-  : `${business.name}: servicio técnico de computadores a domicilio en Macul, Ñuñoa y Providencia.`;
+  : `${business.name}: ¿Tu computador está lento o fallando? Soporte técnico a domicilio en Macul, Ñuñoa y Providencia. Atención personal por Carlos Ortega.`;
 // Organization on purpose: neither offer publishes a residential address.
 // The neighbors variant is evaluation-only, so it does not advertise a public
 // service area in structured data.
@@ -89,12 +91,13 @@ const schema = neighbors
     <meta name="theme-color" content="#172b29" />
     <meta property="og:type" content="website" /><meta property="og:locale" content="es_CL" />
     <meta property="og:site_name" content={business.name} />
-    <meta property="og:title" content={title} /><meta property="og:description" content={description} />
+    <meta property="og:title" content={socialTitle} /><meta property="og:description" content={socialDescription} />
     <meta property="og:url" content={canonical} /><meta property="og:image" content={socialImage} />
+    <meta property="og:image:secure_url" content={socialImage} /><meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={socialAlt} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={socialTitle} /><meta name="twitter:description" content={socialDescription} />
     <meta name="twitter:image" content={socialImage} />
     <meta name="twitter:image:alt" content={socialAlt} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />

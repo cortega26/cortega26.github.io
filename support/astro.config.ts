@@ -15,6 +15,7 @@ export default defineConfig({
   site: business.origin,
   output: "static",
   trailingSlash: "always",
-  integrations: release ? [sitemap({ filter: (page) => !new URL(page).pathname.startsWith("/flyer/") })] : [],
+  // The invite-only neighbor variant and flyer are deliberately excluded.
+  integrations: release ? [sitemap({ filter: (page) => !["/flyer/", "/vecinos/"].some((part) => new URL(page).pathname.startsWith(part)) })] : [],
   vite: { define: { __SUPPORT_RELEASE__: JSON.stringify(release) } },
 });

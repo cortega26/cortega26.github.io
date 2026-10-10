@@ -3,8 +3,21 @@ import { Image } from 'astro:assets';
 import portrait from '../assets/carlos-ortega-hq.webp';
 import Layout from '../Layout.astro';
 import { business, services, money, basePrice } from '../config';
-import { devices, powerStates } from '../lib/contact';
+import { devices, powerStates, whatsappUrl } from '../lib/contact';
 const contactReady = __SUPPORT_RELEASE__ && /^569\d{8}$/.test(business.whatsapp);
+// Direct chat keeps a lightweight template so the owner still receives the
+// comuna, device and symptom needed to qualify the enquiry. The tag separates
+// these conversations from form messages (which carry a Ref TS-) when counting
+// demand by channel without analytics.
+const directMessage = [
+  'Hola, vengo desde la página de Tooltician Soporte (WEB-DIRECTO).',
+  'Comuna: ',
+  'Equipo (PC o notebook): ',
+  'Problema: ',
+].join('\n');
+const directContactUrl = contactReady
+  ? whatsappUrl(business.whatsapp, directMessage)
+  : '#consulta';
 const faqs = [
   ['¿Cuánto cuesta la visita?', `La visita en Macul y Ñuñoa cuesta ${money(basePrice())}. En Providencia, ${money(business.areas[2]!.price)}. Incluye hasta ${business.visitMinutes} minutos de diagnóstico, explicación y soluciones simples que quepan en ese tiempo. El total se confirma antes de reservar.`],
   ['¿Se cobra aunque decida no reparar?', 'Sí. La visita remunera el traslado y el diagnóstico, aunque decidas no continuar con una reparación adicional. No se cobra trabajo adicional sin tu autorización.'],
@@ -57,7 +70,7 @@ const faqs = [
   <section id="cobertura" class="section container coverage" data-section-event="support_area_view"><div><p class="eyebrow">CERCA DE TI</p><h2>Atención local,<br />bien coordinada.</h2><p>Cobertura: Macul, Ñuñoa y Providencia.</p><p>La coordinación horaria, el acceso al inmueble y el estacionamiento pueden influir en la disponibilidad, no en si la comuna está cubierta. Acordamos día y franja antes de reservar.</p><p class="muted">Servicio exclusivamente a domicilio: no necesitas trasladar tu equipo a un taller.</p></div><div class="area-list">{business.areas.map((area, i) => <div><span class="service-index">0{i + 1}</span><h3>{area.name}</h3><span>{money(area.price)}<small>visita</small></span></div>)}<p>¿Otra comuna? Podemos evaluar soporte remoto según el problema.</p></div></section>
   <section class="privacy-strip"><div class="container"><h2>Tus archivos siguen siendo tuyos.</h2><p>No pido claves bancarias, no guardo contraseñas ni copio archivos sin autorización. Tampoco envío tu contenido a herramientas de IA.</p><a href="/privacidad/">Cómo cuido tus datos ↗</a></div></section>
   <section id="preguntas" class="section container faq"><div><p class="eyebrow">ANTES DE COORDINAR</p><h2>Preguntas<br />razonables.</h2><p>Lo que conviene saber antes de abrir tu equipo.</p></div><div>{faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</div></section>
-  <section id="consulta" class="contact-section section"><div class="container contact-grid"><div><p class="eyebrow">PARTAMOS POR EL PROBLEMA</p><h2>Cuéntame qué<br /><em>necesitas resolver.</em></h2><p>Completa estos datos para preparar tu mensaje. Podrás revisarlo antes de abrir WhatsApp.</p><p>No incluyas contraseñas, dirección exacta ni archivos privados.</p>{!contactReady && <p class="preview-contact">Estamos preparando la apertura. Puedes probar el formulario; todavía no envía consultas.</p>}<p class="muted">{business.availability}. No es un servicio de emergencia.</p></div>
+  <section id="consulta" class="contact-section section"><div class="container contact-grid"><div><p class="eyebrow">PARTAMOS POR EL PROBLEMA</p><h2>Cuéntame qué<br /><em>necesitas resolver.</em></h2><p>Completa estos datos para preparar tu mensaje. Podrás revisarlo antes de abrir WhatsApp.</p>{contactReady && <p><a id="whatsapp-direct" class="text-link" href={directContactUrl} target="_blank" rel="noopener noreferrer" data-cta="contact-direct" data-whatsapp-direct="true">Prefiero escribir directamente por WhatsApp ↗</a></p>}<p>No incluyas contraseñas, dirección exacta ni archivos privados.</p>{!contactReady && <p class="preview-contact">Estamos preparando la apertura. Puedes probar el formulario; todavía no envía consultas.</p>}<p class="muted">{business.availability}. No es un servicio de emergencia.</p></div>
     <form id="triage" novalidate><div class="form-grid">
       <div class="field"><label for="area">Comuna</label><select id="area" name="area" required aria-describedby="area-error"><option value="">Selecciona</option>{business.areas.map(a => <option value={a.id}>{a.name}</option>)}<option value="otra">Otra comuna</option></select><span class="field-error" id="area-error"></span></div>
       <div class="field"><label for="device">Equipo</label><select id="device" name="device" required aria-describedby="device-error"><option value="">Selecciona</option>{devices.map(d => <option>{d}</option>)}</select><span class="field-error" id="device-error"></span></div>

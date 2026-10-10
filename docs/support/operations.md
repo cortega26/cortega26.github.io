@@ -151,6 +151,22 @@ cotizado/cobrado, costo piezas/consumibles, transporte/estacionamiento, adquisic
 minutos de conversación, viaje, trabajo y retrabajo, reseña solicitada/recibida,
 referido/repetición. Usar IDs y mantener identidad/dirección en registro separado.
 
+### Atribución por canal sin analítica
+
+Cada canal deja una marca verificable en el mensaje recibido, útil mientras GA4 no
+esté activado. Registrar el canal en la columna "adquisición" al abrir cada consulta:
+
+| Marca en el mensaje | Canal | Nota |
+| --- | --- | --- |
+| `Ref: TS-XXXXXXXXXXXX` | Formulario de la home | La web guiada genera la referencia; no es un identificador de cliente. |
+| `(WEB-DIRECTO)` | Enlace directo de la home | Chat iniciado sin pasar por el formulario. |
+| `(FLYER-C)` | Flyer con QR | El flyer impreso lleva esa marca fija. |
+| `soy vecino/a del edificio` | Página de vecinos | Solo consultas informativas mientras la recepción no esté autorizada. |
+
+El clic o el mensaje no prueban que exista una consulta cualificada: clasificar
+recién cuando el mensaje permite evaluar comuna, equipo y problema. Un mensaje
+vacío o genérico no cuenta como consulta cualificada.
+
 - Conversión = trabajos pagados / leads calificados (misma cohorte).
 - Ingreso efectivo/hora = ingreso por mano de obra / horas totales dedicadas.
 - Contribución = cobrado menos piezas, consumibles, transporte y captación.

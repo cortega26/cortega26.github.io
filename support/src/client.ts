@@ -40,6 +40,11 @@ document.querySelectorAll<HTMLAnchorElement>("[data-cta]").forEach((link) => {
       if (result) result.hidden = true;
     }
     track("support_cta_click", { location: link.dataset.cta, service });
+    if (link.dataset.whatsappDirect === "true")
+      track("support_whatsapp_click", {
+        location: link.dataset.cta,
+        mode: "direct",
+      });
   });
 });
 form?.addEventListener("focusin", () => {

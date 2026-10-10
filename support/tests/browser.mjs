@@ -110,6 +110,14 @@ try {
       await page.locator("#message-result").isHidden(),
       "editing invalidates prepared message",
     );
+    // The sticky CTA must hide over the form so it cannot cover the submit
+    // button or the prepared message on small screens.
+    await page.locator("#consulta").scrollIntoViewIfNeeded();
+    await page.waitForFunction(
+      () => getComputedStyle(document.querySelector(".mobile-cta")).display === "none",
+      undefined,
+      { timeout: 5000 },
+    );
     assert.deepEqual(
       external,
       [],

@@ -1,6 +1,6 @@
-/** Testimonials reviewed against screenshots supplied by the owner (2026-10-08).
- * Do not invent names, service outcomes, dates, stars or aggregate ratings.
- * The private-chat client's identity must remain undisclosed.
+/** Testimonials supplied by the owner (2026-10-08; fuller originals 2026-10-11).
+ * Quote text is verbatim, including original spelling; never invent outcomes or ratings.
+ * Attribution of the private message is provided by the owner, not independently verified.
  */
 export interface NeighborTestimonial {
   id: string;
@@ -15,17 +15,17 @@ export const neighborTestimonials: readonly NeighborTestimonial[] = [
   {
     id: 'network-card',
     type: 'soporte',
-    quote: 'Fue buena la atención y el análisis entregado.',
-    author: 'Cliente de soporte técnico',
-    context: 'El cliente señaló que se normalizó un problema de la tarjeta de red que aparecía cuando el PC funcionaba sin cargador.',
-    source: 'Comentario recibido directamente · Identidad reservada',
+    quote: 'Fue buena la atención y el analisis entregado. El PC se corrigio debido a que habia una configuracion que activo y se normalizo el problema de la tarjeta de red cuando no estaba con cargador enchufado a la corriente.',
+    author: 'Oscar Matías',
+    context: 'Comentario de soporte técnico enviado por mensaje privado. Texto íntegro y atribución facilitados por el titular.',
+    source: 'Comentario recibido directamente',
   },
   {
     id: 'external-disk',
     type: 'soporte',
-    quote: 'Muchas gracias, excelente trabajo',
+    quote: 'Muchas gracias, excelente trabajo recupere gran parte de la información q se encontraba en el disco duro externo',
     author: 'Greily Molina',
-    context: 'Comentó que recuperó gran parte de la información almacenada en un disco duro externo. Es un caso anterior, no una promesa de recuperación de datos.',
+    context: 'Experiencia histórica de 2016 con un disco duro externo; no supone una oferta ni garantía de recuperación avanzada de datos.',
     source: 'Recomendación de LinkedIn · 28 de febrero de 2016',
   },
   {

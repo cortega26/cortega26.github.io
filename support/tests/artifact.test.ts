@@ -199,7 +199,10 @@ test("public home and resident page both show the same three contextual referenc
     assert.equal((html.match(/class="neighbor-testimonial"/g) ?? []).length, 3);
     assert.match(html, /Greily Molina/);
     assert.match(html, /Juan Carlos Ortega Rached/);
-    assert.match(html, /Identidad reservada/);
+    assert.match(html, /Oscar Matías/);
+    assert.match(html, /habia una configuracion que activo/);
+    assert.match(html, /tarjeta de red cuando no estaba con cargador enchufado a la corriente/);
+    assert.match(html, /recupere gran parte de la información q se encontraba en el disco duro externo/);
     assert.match(html, /Recomendación profesional/);
     assert.match(html, /2016/);
     assert.match(html, /no garantizan resultados idénticos/);
@@ -237,8 +240,8 @@ test("neighbors evaluation page stays private and preserves the agreed offer", {
   assert.match(html, /Consultas abiertas para vecinos/i);
   assert.match(html, /Greily Molina/);
   assert.match(html, /Juan Carlos Ortega Rached/);
-  assert.match(html, /Identidad reservada/);
-  assert.match(html, /gran parte de la información/i);
+  assert.match(html, /Oscar Matías/);
+  assert.match(html, /recupere gran parte de la información q se encontraba en el disco duro externo/i);
   assert.match(html, /Recomendación profesional/i);
   assert.doesNotMatch(html, /aggregateRating|ratingValue|reviewCount/i);
   assert.match(html, /Consultar por WhatsApp/i);

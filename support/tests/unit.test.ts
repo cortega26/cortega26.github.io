@@ -355,6 +355,15 @@ test("three testimonial claims are context-labelled and contain no synthetic rev
   ]);
   assert.equal(neighborTestimonials.filter((item) => item.type === "soporte").length, 2);
   assert.equal(neighborTestimonials.filter((item) => item.type === "trayectoria").length, 1);
+  assert.equal(neighborTestimonials.find((item) => item.id === "network-card")?.author, "Oscar Matías");
+  assert.equal(
+    neighborTestimonials.find((item) => item.id === "network-card")?.quote,
+    "Fue buena la atención y el analisis entregado. El PC se corrigio debido a que habia una configuracion que activo y se normalizo el problema de la tarjeta de red cuando no estaba con cargador enchufado a la corriente.",
+  );
+  assert.equal(
+    neighborTestimonials.find((item) => item.id === "external-disk")?.quote,
+    "Muchas gracias, excelente trabajo recupere gran parte de la información q se encontraba en el disco duro externo",
+  );
   assert.ok(neighborTestimonials.some((item) =>
     item.author === "Greily Molina" && /2016/.test(item.source)));
   assert.ok(neighborTestimonials.some((item) =>

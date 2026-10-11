@@ -206,6 +206,11 @@ test("public home and resident page both show the same three contextual referenc
     assert.match(html, /Recomendación profesional/);
     assert.match(html, /2016/);
     assert.match(html, /no garantizan resultados idénticos/);
+    assert.match(html, /¿Ya recibiste atención de Tooltician Soporte\?/);
+    assert.match(html, /Comparte tu experiencia en Google/);
+    assert.match(html, /href="https:\/\/g\.page\/r\/CXCAuluBtURSEBM\/review"/);
+    assert.match(html, /data-google-review-link/);
+    assert.match(html, /rel="noopener noreferrer"/);
     assert.doesNotMatch(html, /aggregateRating|ratingValue|reviewCount/i);
   }
   const home = readFileSync(join(dist, "index.html"), "utf8");

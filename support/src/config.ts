@@ -18,7 +18,7 @@ export const business = {
   whatsapp: "56951118901",
   email: "carlos@tooltician.com",
   photo: "src/assets/carlos-ortega-hq.webp",
-  reviewUrl: "",
+  reviewUrl: "https://g.page/r/CXCAuluBtURSEBM/review",
   availability: "Atención previa coordinación",
   payment: "Transferencia, efectivo o tarjeta. Mismo precio.",
   // Registro de Personas Naturales que desarrollan Actividades de Subsistencia

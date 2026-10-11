@@ -4,7 +4,7 @@ import portrait from '../assets/carlos-ortega-hq.webp';
 import Layout from '../Layout.astro';
 import { business, money, neighborOffer, neighborServices } from '../config';
 import { devices, powerStates, whatsappUrl } from '../lib/neighbor-contact';
-import { neighborTestimonials } from '../data/neighbor-testimonials';
+import Testimonials from '../components/Testimonials.astro';
 
 // Commercial enquiries do not imply permission to receive or repair devices.
 const contactReady =
@@ -145,23 +145,7 @@ const faqs = [
     </div>
   </section>
 
-  <section id="experiencias" class="section container neighbor-testimonials" aria-labelledby="neighbor-testimonials-heading">
-    <div class="section-heading">
-      <div><p class="eyebrow">EXPERIENCIAS Y REFERENCIAS REALES</p><h2 id="neighbor-testimonials-heading">Lo que han dicho de mi trabajo.</h2></div>
-      <p>Comentarios de soporte técnico y una recomendación profesional. Cada uno se presenta con su contexto, sin puntuaciones inventadas.</p>
-    </div>
-    <div class="neighbor-testimonials-grid">
-      {neighborTestimonials.map((item) =>
-        <figure class="neighbor-testimonial" data-proof-type={item.type}>
-          <div class="neighbor-proof-label">{item.type === 'soporte' ? 'Experiencia de soporte' : 'Recomendación profesional'}</div>
-          <blockquote>“{item.quote}”</blockquote>
-          <figcaption><strong>{item.author}</strong><span>{item.source}</span></figcaption>
-          <p>{item.context}</p>
-        </figure>
-      )}
-    </div>
-    <p class="neighbor-proof-note">Cada equipo y cada problema son distintos. Estos comentarios no garantizan resultados idénticos en otros casos.</p>
-  </section>
+  <Testimonials />
 
   <section id="quien-te-atiende" class="about section" data-section-event="support_about_view">
     <div class="container about-grid">

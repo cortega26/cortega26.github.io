@@ -140,9 +140,7 @@ realizo ese tipo de intervención. [Instrucción de no uso si hay riesgo concret
 Queda pendiente [si corresponde]. Adjunto resumen, recomendaciones y plazo de
 responsabilidad. Si notas un problema relacionado con la intervención, escríbeme.
 
-**Reseña:** Si recibiste el servicio, una reseña honesta en [URL real de Google]
-me ayuda a dar a conocer esta nueva área de Tooltician. Gracias por compartir tu
-experiencia. Pedir de forma consistente, sin premios ni filtro por satisfacción.
+**Reseña (enviar solo después del servicio, sin incentivos):** Si recibiste atención de Tooltician Soporte, puedes contar cómo fue tu experiencia —buena, regular o mala— en Google: https://g.page/r/CXCAuluBtURSEBM/review. Gracias por compartir tu opinión. Solicitar de forma consistente a clientes reales, sin premios, descuentos, presión ni filtro por satisfacción. No enviar mensajes automáticos sin consentimiento; jamás pedir reseñas a personas sin un servicio real.
 
 ## Registro semanal privado
 

@@ -19,9 +19,11 @@ El titular decidió recibir **consultas informativas por WhatsApp** aun cuando l
 La primera revisión que el titular afirma poder cumplir es dentro de 24 horas **desde la recepción coordinada**; no constituye un compromiso de reparación completa en 24 horas.
 
 Evidencias proporcionadas mediante capturas por el titular, sin fingir revisión independiente:
-- Mensaje privado de un cliente: satisfacción con el análisis y corrección de un problema de tarjeta de red cuando el PC funcionaba sin cargador. Mostrarlo anónimo; no exponer chat, teléfono ni imagen completa.
-- Recomendación de Greily Molina publicada en LinkedIn el 28-02-2016: agradece un trabajo de recuperación parcial de información en un disco externo. Es histórica, no acredita capacidad de laboratorio ni garantiza recuperación futura.
+- Mensaje privado sobre tarjeta de red: el 11-10-2026 el titular entregó texto completo y atribución «Oscar Matías» para publicarlos; no exponer chat, teléfono ni captura. La autorización del tercero para esta republicación no se ha verificado de forma independiente.
+- Recomendación de Greily Molina publicada en LinkedIn el 28-02-2016: el 11-10-2026 el titular aportó captura con comentario completo, sobre un trabajo de recuperación de información de disco externo. Mantener íntegra la transcripción y la fecha histórica; no acredita capacidad de laboratorio ni garantiza recuperación futura.
 - Recomendación de Juan Carlos Ortega Rached sobre desempeño general en TI: **referencia profesional**, no testimonio de reparación.
+
+No abreviar, reescribir ni dividir en cita parcial + paráfrasis los textos originales de Oscar y Greily. El titular solicitó mostrar las palabras completas y el contexto/fecha se mantiene en campos separados. La fuente canónica es `support/src/data/neighbor-testimonials.ts`, que abastece las páginas general y para vecinos mediante un solo componente.
 
 Antes de usar expresiones de testimonios privados en publicidad, verificar que el uso es compatible con la autorización del cliente. No fabricar fotos, enlaces directos a recomendaciones no obtenidos ni puntuaciones.
 

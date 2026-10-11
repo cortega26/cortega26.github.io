@@ -58,6 +58,14 @@ try {
     assert.match(await page.locator("#experiencias").innerText(), /Oscar Matías/);
     assert.match(await page.locator("#experiencias").innerText(), /configuracion que activo/);
     assert.match(await page.locator("#experiencias").innerText(), /gran parte de la información q se encontraba en el disco duro externo/);
+    assert.equal(
+      await page.locator("[data-google-review-link]").getAttribute("href"),
+      "https://g.page/r/CXCAuluBtURSEBM/review",
+    );
+    assert.equal(
+      await page.locator("[data-google-review-link]").getAttribute("rel"),
+      "noopener noreferrer",
+    );
     const servedCsp = await page.evaluate(async () => {
       const response = await fetch(location.href);
       return response.headers.get("content-security-policy");

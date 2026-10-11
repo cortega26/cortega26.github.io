@@ -1302,6 +1302,21 @@ form > .button {
   font-size: 0.79rem;
   margin-top: 16px;
 }
+.neighbor-review-invite {
+  margin-top: 18px;
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.neighbor-review-invite a {
+  color: var(--green);
+  font-weight: 700;
+  text-underline-offset: 3px;
+}
+.neighbor-review-invite a:hover,
+.neighbor-review-invite a:focus-visible {
+  text-decoration-thickness: 2px;
+}
 @media (max-width: 950px) {
   .neighbor-testimonials-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

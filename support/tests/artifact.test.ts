@@ -192,6 +192,23 @@ test("preview copy offers consumers only and never claims proposed prices", { sk
 });
 
 
+test("public home and resident page both show the same three contextual references", { skip: requiresBuild }, () => {
+  for (const page of ["index.html", join("vecinos", "index.html")]) {
+    const html = readFileSync(join(dist, page), "utf8");
+    assert.match(html, /id="experiencias"/);
+    assert.equal((html.match(/class="neighbor-testimonial"/g) ?? []).length, 3);
+    assert.match(html, /Greily Molina/);
+    assert.match(html, /Juan Carlos Ortega Rached/);
+    assert.match(html, /Identidad reservada/);
+    assert.match(html, /Recomendación profesional/);
+    assert.match(html, /2016/);
+    assert.match(html, /no garantizan resultados idénticos/);
+    assert.doesNotMatch(html, /aggregateRating|ratingValue|reviewCount/i);
+  }
+  const home = readFileSync(join(dist, "index.html"), "utf8");
+  assert.doesNotMatch(home, /EXCLUSIVO PARA VECINOS DEL EDIFICIO/);
+});
+
 test("neighbors evaluation page stays private and preserves the agreed offer", { skip: requiresBuild }, () => {
   const html = readFileSync(join(dist, "vecinos", "index.html"), "utf8");
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);

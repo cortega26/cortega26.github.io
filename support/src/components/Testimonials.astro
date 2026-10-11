@@ -1,5 +1,6 @@
 ---
 import { neighborTestimonials } from '../data/neighbor-testimonials';
+import { business } from '../config';
 ---
   <section id="experiencias" class="section container neighbor-testimonials" aria-labelledby="neighbor-testimonials-heading">
     <div class="section-heading">
@@ -17,5 +18,6 @@ import { neighborTestimonials } from '../data/neighbor-testimonials';
       )}
     </div>
     <p class="neighbor-proof-note">Cada equipo y cada problema son distintos. Estos comentarios no garantizan resultados idénticos en otros casos.</p>
+    {business.reviewUrl && <p class="neighbor-review-invite">¿Ya recibiste atención de Tooltician Soporte? <a data-google-review-link href={business.reviewUrl} target="_blank" rel="noopener noreferrer">Comparte tu experiencia en Google ↗</a> Tu opinión puede ser positiva, negativa o neutral.</p>}
   </section>
 

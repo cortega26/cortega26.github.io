@@ -51,7 +51,11 @@ try {
     await page.goto(
       `${base}/?utm_source=secret@example.com&problem=DO-NOT-LEAK`,
     );
-    const servedCsp = await page.evaluate(async () => {
+    // Real testimonials are shared with the public home, not just /vecinos/.
+    assert.equal(await page.locator("#experiencias .neighbor-testimonial").count(), 3);
+    assert.match(await page.locator("#experiencias").innerText(), /Greily Molina/);
+    assert.match(await page.locator("#experiencias").innerText(), /Juan Carlos Ortega Rached/);
+        const servedCsp = await page.evaluate(async () => {
       const response = await fetch(location.href);
       return response.headers.get("content-security-policy");
     });

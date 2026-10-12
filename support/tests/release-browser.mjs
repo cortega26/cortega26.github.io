@@ -147,6 +147,9 @@ try {
     "Direct click never leaks form text",
   );
   // All first-screen CTAs must open WhatsApp directly, never jump to #consulta.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.locator('.mobile-cta').waitFor({ state: 'visible' });
   for (const location of ["hero", "header", "mobile"]) {
     const link = page.locator(`[data-cta="${location}"]`);
     const url = await link.getAttribute("href");

@@ -369,7 +369,6 @@ pre:focus-visible {
 .visit-price {
   border-top: 1px solid #cbd5c5;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-top: 25px;
   padding-top: 18px;
@@ -382,16 +381,6 @@ pre:focus-visible {
 .visit-price strong {
   font-size: 1.2rem;
   font-weight: 550;
-}
-.visit-price .round-arrow {
-  border: 1px solid #c1ccbd;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--ink);
-  font-size: 1.2rem;
 }
 .trust-strip {
   border-block: 1px solid var(--line);

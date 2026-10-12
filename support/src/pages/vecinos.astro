@@ -94,7 +94,6 @@ const otherFaqs = faqs.filter(entry => !primaryFaqs.includes(entry));
       </div>
       <p class="hero-footnote"><strong>Diagnóstico {money(diagnostic.price)}</strong> · {money(neighborOffer.priceReduction)} menos que el precio general.</p>
       <p class="hero-footnote">Si autorizas otro servicio en la misma intervención, no pagas dos veces la mano de obra.</p>
-      <p class="hero-footnote">Consultas abiertas · Recepción de equipos aún no habilitada.</p>
       <div class="hero-trust">
         <Image src={portrait} alt="Retrato de Carlos Ortega" width={52} height={52} loading="lazy" densities={[1, 2]} format="webp" quality={88} />
         <p><strong>Soy Carlos, vecino del edificio</strong><span class="hero-trust-links"><a href={business.parent}>Tooltician ↗</a><a href={business.github}>GitHub ↗</a><a href={business.linkedin}>LinkedIn ↗</a></span></p>
@@ -114,7 +113,7 @@ const otherFaqs = faqs.filter(entry => !primaryFaqs.includes(entry));
     </aside>
   </section>
 
-  <div class="trust-strip"><div class="container"><span>✓ Primera revisión en {neighborOffer.initialReviewHours} h</span><span>✓ Precios publicados</span><span>✓ Tú autorizas</span><span>✓ Trabajo documentado</span></div></div>
+  <div class="trust-strip"><div class="container"><span>✓ Diagnóstico explicado</span><span>✓ Precios publicados</span><span>✓ Tú autorizas</span><span>✓ Trabajo documentado</span></div></div>
 
   <section id="servicios" class="section container neighbors-services" data-section-event="support_service_view">
     <div class="section-heading"><div><p class="eyebrow">PROBLEMAS FRECUENTES</p><h2>¿Qué le pasa a tu equipo?</h2></div><p>No necesitas conocer el nombre técnico de la falla.</p></div>

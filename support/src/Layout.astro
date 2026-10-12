@@ -1,6 +1,7 @@
 ---
 import './styles.css';
 import { business, neighborOffer } from './config';
+import { directContactMessage, whatsappUrl } from './lib/contact';
 interface Props {
   title: string;
   description: string;
@@ -22,6 +23,8 @@ const socialImage = `${business.origin}/og-card-v2.png`;
 const socialTitle = !neighbors && !flyer ? '¿Tu computador está lento o fallando? | Tooltician Soporte' : title;
 const socialDescription = !neighbors && !flyer ? 'Soporte técnico para PC y notebooks en Macul, Ñuñoa y Providencia. Visitas desde $30.000, diagnóstico claro y precios antes de cualquier trabajo.' : description;
 const sectionBase = neighbors ? '/vecinos/' : '/';
+const directHeader = !neighbors && !flyer && released && /^569\d{8}$/.test(business.whatsapp);
+const headerContactUrl = directHeader ? whatsappUrl(business.whatsapp, directContactMessage) : `${sectionBase}#consulta`;
 const brandSubtitle = neighbors ? 'SOPORTE PARA VECINOS' : flyer ? 'SOPORTE EN TU BARRIO' : 'SOPORTE A DOMICILIO';
 // WCAG 2.5.3: the accessible name must contain the visible label text.
 const brandLabel = neighbors
@@ -119,7 +122,7 @@ const schema = neighbors
       <div class="container header-inner">
         <a class="brand" href={sectionBase} aria-label={brandLabel}><img class="brand-mark" src="/tooltician-logo-64.webp" srcset="/tooltician-logo-64.webp 1x, /tooltician-logo-128.webp 2x" alt="" width="41" height="41" decoding="async" /><span>tooltician <span class="brand-sub">{brandSubtitle}</span></span></a>
         {!flyer && <nav aria-label="Principal"><a href={`${sectionBase}#servicios`}>Servicios</a><a href={`${sectionBase}#precios`}>Precios</a><a href={neighbors ? '/vecinos/#como-funciona' : '/#cobertura'}>{neighbors ? 'Cómo funciona' : 'Cobertura'}</a></nav>}
-        {!flyer && <a class="button small header-cta" href={`${sectionBase}#consulta`} data-cta="header">Consultar <span aria-hidden="true">↗</span></a>}
+        {!flyer && <a class="button small header-cta" href={headerContactUrl} target={directHeader ? '_blank' : undefined} rel={directHeader ? 'noopener noreferrer' : undefined} data-cta="header" data-whatsapp-direct={directHeader ? 'true' : undefined}>Consultar <span aria-hidden="true">↗</span></a>}
       </div>
     </header>
     <main id="main"><slot /></main>

@@ -45,7 +45,8 @@ export const business = {
   visitCredit: true,
   macOS: false,
   offsite: false,
-  analyticsId: "",
+  // Optional public build-time GA4 ID; leave blank until a real property is validated.
+  analyticsId: import.meta.env?.PUBLIC_SUPPORT_GA4_MEASUREMENT_ID?.trim() ?? "",
   // Written answer received from Municipalidad de Macul on 2026-09-30:
   // the applicable route is a Patente de Domicilio Postal Tributario. The
   // category is confirmed; issuance of the patent is still pending.

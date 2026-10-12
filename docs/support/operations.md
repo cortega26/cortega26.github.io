@@ -176,3 +176,14 @@ vacío o genérico no cuenta como consulta cualificada.
 
 Revisar después de 10 y 25 trabajos y mensualmente. Los objetivos del master plan
 son hipótesis; no datos observados. Medir primero antes de anuncios pagados.
+
+## Campañas pagadas y conversiones
+
+- El CTA público principal abre WhatsApp directamente; el formulario largo es opcional y sirve para consultas detalladas.
+- La consulta puede abrir WhatsApp sin que el visitante envíe realmente el mensaje. Nunca llamar *lead recibido* a un clic.
+- Eventos disponibles bajo consentimiento: `support_cta_click`, `support_whatsapp_click`, `support_triage_start`, `support_triage_complete`. Ninguno acredita una venta.
+- Para habilitar GA4 en la compilación, configurar `PUBLIC_SUPPORT_GA4_MEASUREMENT_ID=G-...` con el identificador **real**, validar en DebugView con consentimiento explícito y probar revocación y ausencia de PII; la variable vacía deja la medición desactivada.
+- `utm_source=google&utm_medium=cpc&utm_campaign=local` se clasifica sin guardar identificadores sensibles; si hay `gclid`, `gbraid` o `wbraid` sin UTM, solo se deriva categoría Google/CPC. Los valores de esos identificadores **no** se envían en los eventos.
+- Esta clasificación no reemplaza la instalación, el enlace ni la validación de una conversión en Google Ads; no activar campañas de optimización por conversiones sin comprobar el flujo real.
+- Mantener en registro privado por canal: conversaciones reales recibidas, visitas coordinadas, servicios completados, importe cobrado. No subir nombres, teléfonos, direcciones ni mensajes a GitHub/GA4.
+- Antes y después de campañas, comparar **visitas pagadas / conversaciones recibidas / trabajos pagados**, no únicamente CTR o clics a WhatsApp.

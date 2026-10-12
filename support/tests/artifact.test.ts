@@ -96,7 +96,8 @@ test("search metadata matches the real intent and social tags are complete", { s
   const html = readFileSync(join(dist, "index.html"), "utf8");
   assert.match(html, /<title>Técnico de computadores a domicilio \| Macul, Ñuñoa y Providencia<\/title>/);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
-  assert.match(html, /<h1>Servicio técnico de<[^>]*> <em>computadores a domicilio\.<\/em><\/h1>/);
+  assert.match(html, /<h1>¿Tu computador está <em>lento, falla o no enciende\?<\/em><\/h1>/);
+  assert.match(html, /Servicio técnico de computadores a domicilio/);
   for (const commune of ["Macul", "Ñuñoa", "Providencia"])
     assert.ok(html.includes(commune), `title/hero mentions ${commune}`);
   assert.match(
@@ -205,7 +206,8 @@ test("public home and resident page both show the same three contextual referenc
     assert.match(html, /recupere gran parte de la información q se encontraba en el disco duro externo/);
     assert.match(html, /Recomendación profesional/);
     assert.match(html, /2016/);
-    assert.match(html, /no garantizan resultados idénticos/);
+    assert.doesNotMatch(html, /no garantizan resultados idénticos|Experiencia histórica de 2016|Texto íntegro y atribución facilitados/);
+    assert.match(html, /LinkedIn · 2016/);
     assert.match(html, /¿Ya recibiste atención de Tooltician Soporte\?/);
     assert.match(html, /Comparte tu experiencia en Google/);
     assert.match(html, /href="https:\/\/g\.page\/r\/CXCAuluBtURSEBM\/review"/);

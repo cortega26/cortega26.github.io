@@ -421,6 +421,15 @@ pre:focus-visible {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
+.more-services { margin-top: 20px; }
+.more-services > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--green);
+  padding: 14px 0;
+  min-height: 44px;
+}
+.more-services[open] > .service-grid { margin-top: 12px; }
 .service-card {
   padding: 24px 22px;
   border: 1px solid var(--line);
@@ -482,6 +491,7 @@ pre:focus-visible {
 .process {
   background: #eff1e9;
 }
+.compact-process .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .steps {
   list-style: none;
   padding: 0;
@@ -727,6 +737,8 @@ pre:focus-visible {
   color: var(--muted);
   padding: 0 22px 22px 0;
 }
+.faq-more > summary { color: var(--green); }
+.faq-more > div { padding-left: 14px; }
 .contact-section {
   background: #e9eee5;
 }
@@ -1025,6 +1037,7 @@ form > .button {
   .service-link {
     font-size: 0.72rem;
   }
+  .compact-process .steps { grid-template-columns: 1fr; gap: 12px; }
   .steps {
     grid-template-columns: 1fr 1fr;
     gap: 30px 20px;

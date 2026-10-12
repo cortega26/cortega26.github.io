@@ -205,7 +205,8 @@ test("public home and resident page both show the same three contextual referenc
     assert.match(html, /recupere gran parte de la información q se encontraba en el disco duro externo/);
     assert.match(html, /Recomendación profesional/);
     assert.match(html, /2016/);
-    assert.match(html, /no garantizan resultados idénticos/);
+    assert.doesNotMatch(html, /no garantizan resultados idénticos|Experiencia histórica de 2016|Texto íntegro y atribución facilitados/);
+    assert.match(html, /LinkedIn · 2016/);
     assert.match(html, /¿Ya recibiste atención de Tooltician Soporte\?/);
     assert.match(html, /Comparte tu experiencia en Google/);
     assert.match(html, /href="https:\/\/g\.page\/r\/CXCAuluBtURSEBM\/review"/);

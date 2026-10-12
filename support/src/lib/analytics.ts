@@ -61,6 +61,8 @@ export function eventDimensions(
 }
 export function attribution(search: string) {
   const params = new URLSearchParams(search);
+  // Classify Google Ads auto-tagging without retaining or transmitting click IDs.
+  const googleAdClick = ["gclid", "gbraid", "wbraid"].some((key) => params.has(key));
   const safe = safeDimensions(
     Object.fromEntries(
       Object.keys(allowed)
@@ -69,8 +71,8 @@ export function attribution(search: string) {
     ),
   );
   return {
-    source: params.has("utm_source") ? "other" : "direct",
-    medium: "none",
+    source: params.has("utm_source") ? "other" : googleAdClick ? "google" : "direct",
+    medium: googleAdClick ? "cpc" : "none",
     campaign: "none",
     content: "none",
     ...safe,

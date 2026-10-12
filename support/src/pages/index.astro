@@ -33,7 +33,7 @@ const additional = services.filter(s => !featured.includes(s));
 const primaryFaqs = faqs.filter(([question]) => [
   '¿Cuánto cuesta la visita?', '¿Se cobra aunque decida no reparar?',
   '¿La visita se suma a la mano de obra?', '¿Qué garantía tiene el trabajo?',
-].includes(question));
+].includes(question ?? ''));
 const otherFaqs = faqs.filter(entry => !primaryFaqs.includes(entry));
 ---
 <Layout title="Técnico de computadores a domicilio | Macul, Ñuñoa y Providencia" description="Soporte técnico de PC y notebooks con Windows a domicilio en Macul, Ñuñoa y Providencia. Diagnóstico claro y precios a la vista antes de cualquier trabajo adicional.">

@@ -126,7 +126,7 @@ try {
   const directHref = await direct.getAttribute("href");
   assert.match(directHref, /^https:\/\/wa\.me\/56912345678\?text=/);
   assert.match(new URL(directHref).searchParams.get("text"), /necesito ayuda con mi computador/i);
-  assert.match(new URL(directHref).searchParams.get("text"), /Comuna: .*\\nEquipo: .*\\nProblema:/);
+  assert.ok((new URL(directHref).searchParams.get("text") ?? "").includes("Comuna: \nEquipo: \nProblema: "));
   await direct.evaluate((link) =>
     link.addEventListener("click", (e) => e.preventDefault()),
   );

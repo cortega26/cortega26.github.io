@@ -220,6 +220,25 @@ try {
     assert.equal(await page.locator(".neighbor-testimonial").count(), 3);
     assert.match(await page.locator("#experiencias").innerText(), /Greily Molina/);
     assert.equal(await page.locator("#neighbor-whatsapp-link").count(), 1);
+    // A resident can contact in one tap; detailed triage is optional.
+    for (const location of ["header", "hero", "mobile", "pricing", "contact-direct"]) {
+      const link = page.locator(`[data-neighbor-cta="${location}"]`);
+      assert.equal(await link.count(), 1, `neighbor ${location} CTA`);
+      const url = await link.getAttribute("href");
+      assert.match(url, /^https:\/\/wa\.me\/56951118901\?text=/);
+      assert.equal(await link.getAttribute("data-neighbor-direct"), "true");
+      assert.equal(await link.getAttribute("target"), "_blank");
+      const message = new URL(url).searchParams.get("text") ?? "";
+      assert.match(message, /vecino\/a del edificio/i);
+      assert.match(message, /Equipo:.*\nProblema:/);
+    }
+    assert.equal(await page.locator(".neighbors-services > .service-grid > .service-card").count(), 4);
+    assert.equal(await page.locator(".neighbors-services .more-services .service-card").count(), 2);
+    assert.ok(!(await page.locator(".neighbors-services .more-services").evaluate(e => e.open)));
+    assert.ok(!(await page.locator("#preguntas .faq-more").evaluate(e => e.open)));
+    assert.match(await page.locator(".preview-notice").innerText(), /Recepción de equipos aún no habilitada/);
+    assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex, nofollow');
+
     await page.locator('[data-neighbor-cta="services"][data-service="upgrade"]').click();
     assert.equal(await page.locator("#neighbor-triage #service").inputValue(), "upgrade");
     await page.locator("#consulta").scrollIntoViewIfNeeded();

@@ -3,6 +3,13 @@ import { devices, leadReference, powerStates, whatsappUrl } from "./contact.ts";
 
 export { devices, leadReference, powerStates, whatsappUrl };
 
+/** Short one-tap enquiry, not a booking or permission to receive a device. */
+export const neighborDirectMessage = [
+  "Hola, soy vecino/a del edificio y necesito ayuda con mi computador.",
+  "Equipo: ",
+  "Problema: ",
+].join("\n");
+
 export interface NeighborIntake {
   device: string;
   power: string;

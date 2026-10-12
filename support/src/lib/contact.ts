@@ -58,6 +58,14 @@ export function buildMessage(input: Intake, reference: string): string {
   ].join("\n");
 }
 
+/** Shared, minimal first-contact template for one-tap WhatsApp CTAs. */
+export const directContactMessage = [
+  "Hola, quisiera consultar por un problema con mi computador (WEB-DIRECTO).",
+  "Comuna: ",
+  "Equipo: ",
+  "Problema: ",
+].join("\\n");
+
 export function whatsappUrl(phone: string, message: string): string {
   if (!/^569\d{8}$/.test(phone))
     throw new Error("Missing or invalid WhatsApp number");

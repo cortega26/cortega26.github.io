@@ -26,7 +26,7 @@ const allowed = {
     "flyer",
     "other",
   ],
-  medium: ["none", "organic", "social", "classified", "referral", "qr"],
+  medium: ["none", "organic", "social", "classified", "referral", "qr", "cpc"],
   campaign: ["launch", "local", "none"],
   content: ["building", "macul", "nunoa", "providencia", "profile", "none"],
 };

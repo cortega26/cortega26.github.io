@@ -98,6 +98,17 @@ test("attribution retains only known categories and strips arbitrary PII", () =>
     { location: "hero", service: "windows", source: "google" },
   );
 });
+test("Google Ads UTM and auto-tagged visits are classified without leaking identifiers", () => {
+  const manual = attribution("?utm_source=google&utm_medium=cpc&utm_campaign=local");
+  assert.deepEqual(manual, { source: "google", medium: "cpc", campaign: "local", content: "none" });
+  const auto = attribution("?gclid=SENSITIVE-CLICK-ID&email=private@example.com");
+  assert.deepEqual(auto, { source: "google", medium: "cpc", campaign: "none", content: "none" });
+  for (const id of ["gbraid", "wbraid"])
+    assert.equal(attribution(`?${id}=SENSITIVE-CLICK-ID`).medium, "cpc");
+  const event = JSON.stringify(eventDimensions(auto, { location: "hero", mode: "direct" }));
+  assert.doesNotMatch(event, /SENSITIVE-CLICK-ID|example\\.com/);
+});
+
 test("neighbor direct-contact event keeps acquisition and emits only allowlisted dimensions", () => {
   const campaign = attribution("?utm_source=google&utm_medium=organic&utm_campaign=local");
   const direct = eventDimensions(campaign, {

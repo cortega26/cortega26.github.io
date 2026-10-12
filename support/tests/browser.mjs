@@ -51,6 +51,9 @@ try {
     await page.goto(
       `${base}/?utm_source=secret@example.com&problem=DO-NOT-LEAK`,
     );
+    // Preview never exposes live one-tap links; the release gate stays intact.
+    for (const location of ["hero", "header", "mobile"])
+      assert.ok(!(await page.locator(`[data-cta="${location}"]`).getAttribute("href")).startsWith("https://wa.me/"));
     // Real testimonials are shared with the public home, not just /vecinos/.
     assert.equal(await page.locator("#experiencias .neighbor-testimonial").count(), 3);
     assert.match(await page.locator("#experiencias").innerText(), /Greily Molina/);

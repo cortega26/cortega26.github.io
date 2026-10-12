@@ -96,7 +96,8 @@ test("search metadata matches the real intent and social tags are complete", { s
   const html = readFileSync(join(dist, "index.html"), "utf8");
   assert.match(html, /<title>Técnico de computadores a domicilio \| Macul, Ñuñoa y Providencia<\/title>/);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
-  assert.match(html, /<h1>Servicio técnico de<[^>]*> <em>computadores a domicilio\.<\/em><\/h1>/);
+  assert.match(html, /<h1>¿Tu computador está <em>lento, falla o no enciende\?<\/em><\/h1>/);
+  assert.match(html, /Servicio técnico de computadores a domicilio/);
   for (const commune of ["Macul", "Ñuñoa", "Providencia"])
     assert.ok(html.includes(commune), `title/hero mentions ${commune}`);
   assert.match(

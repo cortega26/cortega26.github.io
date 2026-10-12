@@ -60,11 +60,11 @@ export function buildMessage(input: Intake, reference: string): string {
 
 /** Shared, minimal first-contact template for one-tap WhatsApp CTAs. */
 export const directContactMessage = [
-  "Hola, quisiera consultar por un problema con mi computador (WEB-DIRECTO).",
+  "Hola, necesito ayuda con mi computador.",
   "Comuna: ",
   "Equipo: ",
   "Problema: ",
-].join("\\n");
+].join("\n");
 
 export function whatsappUrl(phone: string, message: string): string {
   if (!/^569\d{8}$/.test(phone))

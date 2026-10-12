@@ -125,7 +125,8 @@ try {
   assert.equal(await direct.count(), 1, "direct WhatsApp option ships in release");
   const directHref = await direct.getAttribute("href");
   assert.match(directHref, /^https:\/\/wa\.me\/56912345678\?text=/);
-  assert.match(new URL(directHref).searchParams.get("text"), /WEB-DIRECTO/);
+  assert.match(new URL(directHref).searchParams.get("text"), /necesito ayuda con mi computador/i);
+  assert.match(new URL(directHref).searchParams.get("text"), /Comuna: .*\\nEquipo: .*\\nProblema:/);
   await direct.evaluate((link) =>
     link.addEventListener("click", (e) => e.preventDefault()),
   );
@@ -145,6 +146,20 @@ try {
     !JSON.stringify(afterDirect).includes("PRIVATE-CUSTOMER-DESCRIPTION"),
     "Direct click never leaks form text",
   );
+  // All first-screen CTAs must open WhatsApp directly, never jump to #consulta.
+  for (const location of ["hero", "header", "mobile"]) {
+    const link = page.locator(`[data-cta="${location}"]`);
+    const url = await link.getAttribute("href");
+    assert.match(url, /^https:\\/\\/wa\\.me\\/56912345678\\?text=/);
+    assert.equal(await link.getAttribute("data-whatsapp-direct"), "true");
+    await link.evaluate((element) => element.addEventListener("click", (event) => event.preventDefault()));
+    if (location === "mobile") await page.setViewportSize({ width: 390, height: 844 });
+    await link.click();
+  }
+  const afterPrimary = await page.evaluate(() => window.dataLayer.map((x) => Array.from(x)));
+  for (const location of ["hero", "header", "mobile"])
+    assert.equal(afterPrimary.filter((e) => e[0] === "event" && e[1] === "support_whatsapp_click" && e[2].mode === "direct" && e[2].location === location).length, 1, `direct event at ${location}`);
+  assert.ok(!JSON.stringify(afterPrimary).includes("PRIVATE-CUSTOMER-DESCRIPTION"));
   await page.click('[data-consent="no"]');
   await page.waitForLoadState("load");
   assert.equal(

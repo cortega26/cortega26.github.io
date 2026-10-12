@@ -13,6 +13,7 @@ import {
 } from "../src/lib/contact.ts";
 import { attribution, eventDimensions, safeDimensions } from "../src/lib/analytics.ts";
 import { neighborTestimonials } from "../src/data/neighbor-testimonials.ts";
+import { neighborDirectMessage } from "../src/lib/neighbor-contact.ts";
 import {
   basePrice,
   business,
@@ -382,6 +383,12 @@ test("three testimonial claims are context-labelled and contain no synthetic rev
   const serialized = JSON.stringify(neighborTestimonials);
   assert.doesNotMatch(serialized, /5 estrellas|calificación|garantizamos/i);
   assert.doesNotMatch(serialized, /\+56\s*9\s*\d{4}|@gmail\.com/i);
+});
+
+test("neighbor direct contact is brief, scoped to enquiries and contains no address", () => {
+  assert.match(neighborDirectMessage, /soy vecino\/a del edificio/);
+  assert.match(neighborDirectMessage, /Equipo: \nProblema:/);
+  assert.doesNotMatch(neighborDirectMessage, /calle|departamento|direcci[oó]n|reserva|recepci[oó]n/i);
 });
 
 test("neighbors intake never asks for apartment or area and identifies the resident flow", () => {

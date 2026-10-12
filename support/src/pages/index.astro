@@ -4,20 +4,11 @@ import portrait from '../assets/carlos-ortega-hq.webp';
 import Layout from '../Layout.astro';
 import Testimonials from '../components/Testimonials.astro';
 import { business, services, money, basePrice } from '../config';
-import { devices, powerStates, whatsappUrl } from '../lib/contact';
+import { devices, powerStates, whatsappUrl, directContactMessage } from '../lib/contact';
 const contactReady = __SUPPORT_RELEASE__ && /^569\d{8}$/.test(business.whatsapp);
-// Direct chat keeps a lightweight template so the owner still receives the
-// comuna, device and symptom needed to qualify the enquiry. The tag separates
-// these conversations from form messages (which carry a Ref TS-) when counting
-// demand by channel without analytics.
-const directMessage = [
-  'Hola, vengo desde la página de Tooltician Soporte (WEB-DIRECTO).',
-  'Comuna: ',
-  'Equipo (PC o notebook): ',
-  'Problema: ',
-].join('\n');
+// Direct chat keeps a brief qualification template (form remains optional).
 const directContactUrl = contactReady
-  ? whatsappUrl(business.whatsapp, directMessage)
+  ? whatsappUrl(business.whatsapp, directContactMessage)
   : '#consulta';
 const faqs = [
   ['¿Cuánto cuesta la visita?', `La visita en Macul y Ñuñoa cuesta ${money(basePrice())}. En Providencia, ${money(business.areas[2]!.price)}. Incluye hasta ${business.visitMinutes} minutos de diagnóstico, explicación y soluciones simples que quepan en ese tiempo. El total se confirma antes de reservar.`],
@@ -45,7 +36,7 @@ const faqs = [
       <h1>Servicio técnico de<br class="desktop-break" /> <em>computadores a domicilio.</em></h1>
       <p class="hero-intro">Claro, personal y sin sorpresas.</p>
       <p class="hero-description">PC, notebooks y Wi-Fi. Soy Carlos: primero reviso el problema, te explico las opciones y acordamos el costo antes de hacer trabajos adicionales.</p>
-      <div class="actions"><a class="button" href="#consulta" data-cta="hero">{contactReady ? 'Consultar por WhatsApp' : 'Preparar mi consulta'} <span aria-hidden="true">↗</span></a><a class="text-link" href="#precios">Ver servicios y precios <span aria-hidden="true">↓</span></a></div>
+      <div class="actions"><a class="button" href={directContactUrl} target={contactReady ? '_blank' : undefined} rel={contactReady ? 'noopener noreferrer' : undefined} data-cta="hero" data-whatsapp-direct={contactReady ? 'true' : undefined}>{contactReady ? 'Consultar por WhatsApp' : 'Preparar mi consulta'} <span aria-hidden="true">↗</span></a><a class="text-link" href="#precios">Ver servicios y precios <span aria-hidden="true">↓</span></a></div>
       <p class="hero-footnote">Visita desde <strong>{money(basePrice())}</strong> · {business.availability}</p>
       <div class="hero-trust">
         <Image src={portrait} alt="Retrato de Carlos Ortega" width={52} height={52} loading="lazy" densities={[1, 2]} format="webp" quality={88} />
@@ -84,6 +75,6 @@ const faqs = [
       <div id="message-result" hidden><h3>Tu consulta, lista para revisar</h3><pre id="message-preview" tabindex="0"></pre>{contactReady ? <a id="whatsapp-link" class="button" href="#consulta" target="_blank" rel="noopener noreferrer">Abrir WhatsApp ↗</a> : <p>El contacto por WhatsApp estará disponible al abrir las reservas.</p>}<p>Puedes volver a editar los datos y preparar el mensaje de nuevo.</p></div>
       <noscript><p>Activa JavaScript para preparar tu consulta.{contactReady && <a href={`https://wa.me/${business.whatsapp}`} rel="noreferrer">También puedes abrir WhatsApp directamente.</a>}</p></noscript>
     </form></div></section>
-  <a class="mobile-cta button" href="#consulta" data-cta="mobile">{contactReady ? 'Consultar por WhatsApp' : 'Preparar consulta'} ↗</a>
+  <a class="mobile-cta button" href={directContactUrl} target={contactReady ? '_blank' : undefined} rel={contactReady ? 'noopener noreferrer' : undefined} data-cta="mobile" data-whatsapp-direct={contactReady ? 'true' : undefined}>{contactReady ? 'Consultar por WhatsApp' : 'Preparar consulta'} ↗</a>
   <script src="../client.ts"></script>
 </Layout>

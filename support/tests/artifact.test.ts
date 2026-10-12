@@ -219,6 +219,14 @@ test("public home and resident page both show the same three contextual referenc
   assert.doesNotMatch(home, /EXCLUSIVO PARA VECINOS DEL EDIFICIO/);
 });
 
+test("diagnostic price cards never show an inert fake-button arrow", { skip: requiresBuild }, () => {
+  for (const page of ["index.html", join("vecinos", "index.html")]) {
+    const html = readFileSync(join(dist, page), "utf8");
+    assert.match(html, /class="visit-price"/, `${page}: price card still present`);
+    assert.doesNotMatch(html, /class="round-arrow"/, `${page}: fake clickable arrow removed`);
+  }
+});
+
 test("neighbors evaluation page stays private and preserves the agreed offer", { skip: requiresBuild }, () => {
   const html = readFileSync(join(dist, "vecinos", "index.html"), "utf8");
   assert.match(html, /<meta name="robots" content="noindex, nofollow"/);

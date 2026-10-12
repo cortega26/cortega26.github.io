@@ -150,7 +150,7 @@ try {
   for (const location of ["hero", "header", "mobile"]) {
     const link = page.locator(`[data-cta="${location}"]`);
     const url = await link.getAttribute("href");
-    assert.match(url, /^https:\\/\\/wa\\.me\\/56912345678\\?text=/);
+    assert.ok(url?.startsWith("https://wa.me/56912345678?text="));
     assert.equal(await link.getAttribute("data-whatsapp-direct"), "true");
     await link.evaluate((element) => element.addEventListener("click", (event) => event.preventDefault()));
     if (location === "mobile") await page.setViewportSize({ width: 390, height: 844 });

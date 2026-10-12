@@ -245,6 +245,19 @@ test("neighbors evaluation page stays private and preserves the agreed offer", {
   assert.match(html, /Trabajo documentado/i);
   assert.match(html, /¿Qué recibo cuando termina el trabajo\?/i);
   assert.match(html, /Consultas abiertas para vecinos/i);
+  // The neighbor landing is an enquiry offer, not a residential repair booking.
+  assert.match(html, /Recepción de equipos aún no habilitada/i);
+  assert.match(html, /no estamos reservando recepciones ni reparaciones/i);
+  assert.match(html, /class="more-services"/);
+  assert.match(html, /Ver más servicios \(2\)/);
+  assert.match(html, /class="faq-more"/);
+  assert.match(html, /Ver otras preguntas/);
+  assert.match(html, /primero reviso|Primero reviso/i);
+  assert.doesNotMatch(html, /Más que una reparación|Sin resultados inventados ni piezas cambiadas/);
+  assert.match(html, /data-neighbor-cta="header" data-neighbor-direct="true"/);
+  assert.match(html, /data-neighbor-cta="pricing"/);
+  assert.ok((html.match(/data-neighbor-cta="services"/g) ?? []).length === 6);
+
   assert.match(html, /Greily Molina/);
   assert.match(html, /Juan Carlos Ortega Rached/);
   assert.match(html, /Oscar Matías/);

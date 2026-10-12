@@ -50,6 +50,16 @@ Si no está permitida, **replantear el producto** (por ejemplo, modalidad a domi
 - **Credibilidad:** solicitar permiso para usar testimonios reales de clientes anteriores. Publicar exclusivamente textos autorizados, sin inventar estrellas, cifras, resultados o credenciales. No convertir experiencia de desarrollo de software en una afirmación de experiencia en reparación de hardware.
 - **Precios:** validar costes reales de custodia, tiempo, mano de obra, consumibles y retrabajo antes de alterar los valores que hoy están configurados. Mantener la acreditación documentada del diagnóstico.
 
+## Simplificación de conversión de octubre de 2026
+
+- La consulta por WhatsApp está a un clic desde el encabezado, bloque principal, precio, sección de contacto y CTA móvil. Usa una plantilla breve con equipo y problema. No abre una reserva ni habilita recepción.
+- Servicios más buscados: cuatro tarjetas visibles y dos adicionales desplegables, sin eliminar ningún servicio contratado de la configuración. El formulario guiado sigue siendo opcional y conserva el selector de servicio.
+- Tres pasos explicativos en lugar de cuatro; se elimina el bloque duplicado de resultados y las preguntas frecuentes se organizan con cuatro prioritarias y seis bajo «Ver otras preguntas».
+- El precio de diagnóstico para vecinos y su acreditación si se hace trabajo adicional en la misma intervención permanecen intactos. Testimonios compartidos, contenido original y atribuciones permanecen intactos.
+- Mensaje comercial consistente con el estado canónico: **consultas abiertas**; recepción y reparación material de equipos en el departamento **todavía no habilitadas**. El plazo de primera revisión de 24 horas solo corresponde **después de una recepción autorizada y coordinada**, no al tiempo de respuesta de WhatsApp.
+- Se mantiene `noindex, nofollow`, no se publican direcciones residenciales ni se altera `neighborOffer.ready` o `operatingAuthorizationConfirmed`.
+- CI debe verificar `support:verify`, `support:e2e` y `support:e2e:release`, además de confirmar respuesta HTTPS real y los CTA publicados.
+
 ## Validación posterior a habilitación
 
 1. Comprobar en móvil y escritorio H1, precios, formularios, imágenes y flujo de WhatsApp real; probar un envío de prueba consentido.

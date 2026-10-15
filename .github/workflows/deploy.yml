@@ -59,7 +59,9 @@ jobs:
         run: node tests/run.js --built
       - name: Sitemap i18n check
         run: node tests/sitemap-i18n.mjs
-      - name: Blog language-switch regression\n        run: node tests/blog-language-switch.mjs\n      - name: Cache Playwright browsers
+      - name: Blog language-switch regression
+        run: node tests/blog-language-switch.mjs
+      - name: Cache Playwright browsers
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.cache/ms-playwright

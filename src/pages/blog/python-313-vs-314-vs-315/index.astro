@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import { alternatesFor } from '../../../data/routes';
+import benchmarks from '../../../data/benchmarks-2026.json';
+import '../../../styles/global.css';
+import '../../../styles/blog.css';
+
+const canonical = 'https://tooltician.com/blog/python-313-vs-314-vs-315/';
+const comparison = '3.15.0_vs_3.14.3';
+const navItems = [
+  { href: '/blog/', label: 'Blog' },
+  { href: '/es/', label: 'Inicio' },
+  { href: '/es/trabajo/', label: 'Trabajo' },
+  { href: '/es/#contact', label: 'Contacto' },
+];
+const labels: Record<string, string> = {
+  enteros: 'Enteros', flotantes: 'Matemáticas / flotantes',
+  comprehensions: 'Comprehensions', etl_puro: 'ETL sin librerías',
+  json_encode: 'JSON · escritura', json_decode: 'JSON · lectura',
+  regex: 'Expresiones regulares', sqlite: 'SQLite en memoria',
+  asyncio: 'asyncio', hilos_io: 'Hilos con espera de I/O',
+  base32: 'Base32', base64: 'Base64',
+  arranque_normal: 'Arranque normal', arranque_sin_site: 'Arranque sin site',
+};
+const rows = benchmarks.summary.map(row => ({
+  ...row,
+  label: labels[row.case] || row.case,
+  effect: row.comparisons[comparison],
+}));
+const chartCases = ['json_encode', 'json_decode', 'regex', 'enteros', 'comprehensions', 'flotantes', 'sqlite', 'asyncio', 'etl_puro', 'arranque_normal'];
+const chartRows = chartCases.map(id => rows.find(row => row.case === id)).filter((row): row is (typeof rows)[number] => Boolean(row));
+const fmt = (n: number, digits = 1) => new Intl.NumberFormat('es-CL', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(n);
+const pct = (n: number) => (n > 0 ? '+' : '') + fmt(n) + '%';
+const fmtMs = (n: number) => fmt(n, 3);
+const blogPosting = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'Python 3.13 vs. 3.14 vs. 3.15: no siempre gana el más nuevo',
+  description: 'Tres sesiones, 14 microbenchmarks y 1.512 ejecuciones: un experimento reproducible con datos, resultados y límites estadísticos.',
+  inLanguage: 'es',
+  datePublished: '2026-10-15',
+  dateModified: '2026-10-15',
+  mainEntityOfPage: canonical,
+  url: canonical,
+  author: { '@type': 'Person', name: 'Carlos Ortega González', url: 'https://tooltician.com/es/' },
+  publisher: { '@type': 'Organization', name: 'Tooltician', url: 'https://tooltician.com/' },
+  keywords: ['CPython', 'Python 3.13', 'Python 3.14', 'Python 3.15', 'benchmark', 'rendimiento'],
+};
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tooltician', item: 'https://tooltician.com/es/' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://tooltician.com/blog/' },
+    { '@type': 'ListItem', position: 3, name: 'Benchmark Python', item: canonical },
+  ],
+};
+---
+<BaseLayout
+  title="Python 3.13 vs. 3.14 vs. 3.15: benchmark real | Tooltician"
+  description="14 escenarios, tres sesiones independientes y 1.512 ejecuciones en un i5-12600K. Medimos Python 3.13, 3.14 y 3.15: datos reproducibles y conclusiones sin exageraciones."
+  lang="es"
+  canonical={canonical}
+  alternates={alternatesFor('blog:python-313-314-315')}
+>
+  <Fragment slot="head">
+    <meta property="article:published_time" content="2026-10-15T00:00:00-03:00" />
+    <meta property="article:author" content="Carlos Ortega González" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(blogPosting)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
+  </Fragment>
+  <Navbar lang="es" items={navItems} ctaHref="/es/#contact" switchHref="/en/" />
+
+  <main id="main" class="blog-shell blog-article">
+    <header class="blog-container">
+      <nav class="blog-breadcrumbs" aria-label="Migas de pan">
+        <a href="/es/">Tooltician</a><span aria-hidden="true">/</span>
+        <a href="/blog/">Blog</a><span aria-hidden="true">/</span>
+        <span>Laboratorio Python</span>
+      </nav>
+      <p class="blog-kicker">Ingeniería / Benchmarks / CPython</p>
+      <h1 class="blog-display">Python 3.13, 3.14 y 3.15. ¿De verdad gana el más nuevo?</h1>
+      <p class="blog-lead">Quise responder con mediciones y no con promesas: 14 escenarios, tres versiones de CPython, tres sesiones separadas y un solo Intel Core i5-12600K. El resultado es bastante menos predecible que un número de versión.</p>
+      <div class="blog-byline">
+        <strong>Carlos Ortega González</strong><span class="blog-dot"></span>
+        <time datetime="2026-10-15">15 de octubre de 2026</time>
+        <span class="blog-dot"></span><span>Experimento reproducible · 12 min de lectura</span>
+      </div>
+      <div class="blog-hero-rule"></div>
+      <div class="blog-stats" aria-label="Alcance del experimento">
+        <div class="blog-stat"><div class="blog-stat__num">3</div><div class="blog-stat__label">Versiones de CPython</div></div>
+        <div class="blog-stat"><div class="blog-stat__num">14</div><div class="blog-stat__label">Cargas de trabajo</div></div>
+        <div class="blog-stat"><div class="blog-stat__num">3</div><div class="blog-stat__label">Sesiones separadas</div></div>
+        <div class="blog-stat"><div class="blog-stat__num">1.512</div><div class="blog-stat__label">Ejecuciones de medición</div></div>
+      </div>
+    </header>
+
+    <div class="blog-container blog-narrow">
+      <div class="blog-callout">
+        <p><strong>La conclusión en una frase:</strong> Python 3.15 trae saltos enormes en codificaciones específicas y mejoras reproducibles en JSON, pero no es más rápido en todas las tareas. Algunas de las operaciones medidas siguen favoreciendo a Python 3.13.</p>
+      </div>
+      <p>Al comparar intérpretes, es fácil encontrar un resultado espectacular, convertirlo en titular y olvidar todo lo demás. El problema es que «Python es X% más rápido» no significa mucho sin saber <em>qué</em> ejecutamos, <em>cómo</em> lo medimos y cuánta incertidumbre aceptamos.</p>
+      <p>Por eso corrí el mismo protocolo con <strong>CPython 3.13.12, 3.14.3 y 3.15.0</strong>, instalado mediante <code>pyenv</code>, en un equipo Linux con Intel Core i5-12600K. Cada sesión tuvo 12 rondas por carga y versión, con 12 muestras internas por ejecución. En total: 504 ejecuciones por sesión y 18.144 muestras internas.</p>
+      <h2 id="json">Primera sorpresa: JSON sí mejoró, y de forma consistente</h2>
+      <p>En las tres sesiones, Python 3.15 superó a 3.14 tanto al serializar como al deserializar JSON. La mejora consolidada fue del <strong>22,1% en velocidad de escritura</strong> y del <strong>15,6% en velocidad de lectura</strong> para estas cargas concretas. No es una mejora universal de cualquier API: mide nuestro escenario de biblioteca estándar y su conjunto de datos.</p>
+    </div>
+
+    <section class="blog-wide blog-container" aria-labelledby="graph-title">
+      <div class="blog-card">
+        <h3 id="graph-title">¿Dónde fue más rápido Python 3.15 que 3.14?</h3>
+        <p class="blog-card__sub">Diferencia porcentual de velocidad · medias de log-razones pareadas agregadas por sesión · sin Base32/Base64 ni arranque sin site.</p>
+        <div class="blog-chart" role="img" aria-label="Gráfico horizontal de cambios porcentuales de velocidad de Python 3.15 frente a 3.14. Los números exactos están a la derecha.">
+          {chartRows.map(row => (
+            <div class="blog-chart__item">
+              <span class="blog-chart__name">{row.label}</span>
+              <div class="blog-chart__track">
+                <div class:list={['blog-chart__bar', { 'blog-chart__bar--muted': row.effect.speedup_pct < 0 }]}
+                  style={`width:${Math.min(100, Math.abs(row.effect.speedup_pct) / 25 * 100).toFixed(2)}%`}></div>
+              </div>
+              <span class:list={['blog-chart__value', { 'blog-chart__value--muted': row.effect.speedup_pct < 0 }]}>{pct(row.effect.speedup_pct)}</span>
+            </div>
+          ))}
+        </div>
+        <p class="blog-caption">La longitud de las barras representa la magnitud del cambio, no una clasificación de rendimiento global. Dorado: 3.15 ganó; gris: 3.14 ganó. El arranque normal incluye el entorno de instalación y debe interpretarse por separado. Fuente: tres sesiones v3, archivo consolidado enlazado al final.</p>
+      </div>
+    </section>
+
+    <div class="blog-container blog-narrow">
+      <h2 id="base32">¿Base32 más de 200 veces más rápido? Sí, pero hay una explicación.</h2>
+      <p>La diferencia más llamativa fue <strong>Base32: aproximadamente 219,6 veces</strong> la velocidad de 3.14 en nuestro escenario. Base64 alcanzó aproximadamente <strong>2,11 veces</strong> la velocidad. Ambos efectos se repitieron en las tres sesiones.</p>
+      <p>Esto no significa que Python 3.15 haya multiplicado su rendimiento general por 200. El trabajo de optimización está localizado: Python 3.15 añade implementaciones nativas en <code>binascii</code> para ciertas codificaciones que anteriormente seguían otras rutas. Los detalles están en la <a href="https://docs.python.org/3/whatsnew/3.15.html#binascii" target="_blank" rel="noopener noreferrer">documentación oficial de Python 3.15</a>.</p>
+      <div class="blog-callout"><p><strong>Una advertencia sobre promedios:</strong> mezclar un cambio de más de 200× con variaciones del 1% o 2% para calcular «la mejora media de Python» produciría una cifra llamativa y, probablemente, inútil para tomar decisiones.</p></div>
+
+      <h2 id="retrocesos">Segunda sorpresa: Python 3.13 sigue ganando algunas pruebas</h2>
+      <p>El escenario de funciones matemáticas con flotantes favoreció a 3.13 en las tres sesiones: <strong>3.15 mostró una tasa de ejecución aproximadamente 17,6% inferior a 3.13</strong> en esa prueba particular. Expresiones regulares y comprehensions también favorecieron a la versión más antigua frente a 3.15.</p>
+      <p>Eso no autoriza a afirmar que «Python 3.13 es mejor para matemáticas». El escenario combina determinadas operaciones, tamaños y datos; no representa NumPy, Pandas ni algoritmos científicos completos. Precisamente por ser inesperado, ese hallazgo merece validación adicional con <code>pyperformance</code> o un benchmark independiente.</p>
+      <p>Hubo buenas noticias para 3.14: <code>asyncio</code> resultó alrededor de <strong>23,8% más rápido que 3.13</strong> en nuestra tarea sintética, mientras que ETL puro mejoró aproximadamente un 9,5%. Tampoco debemos convertir estos resultados en predicciones directas sobre un backend real.</p>
+
+      <h2 id="datos">Los 14 escenarios, sin esconder los resultados pequeños</h2>
+      <p>La siguiente tabla muestra los tiempos centrales de cada versión y la comparación consolidada 3.15 frente a 3.14. En milisegundos, menos es mejor. En la última columna, un valor positivo significa mayor velocidad de 3.15.</p>
+    </div>
+
+    <div class="blog-wide blog-container">
+      <div class="blog-tablewrap">
+        <table class="blog-table">
+          <thead><tr><th scope="col">Carga</th><th scope="col">3.13.12 · ms</th><th scope="col">3.14.3 · ms</th><th scope="col">3.15.0 · ms</th><th scope="col">3.15 vs. 3.14</th></tr></thead>
+          <tbody>
+            {rows.map(row => (
+              <tr>
+                <td>{row.label}</td>
+                <td>{fmtMs(row.median_ms['3.13.12'])}</td>
+                <td>{fmtMs(row.median_ms['3.14.3'])}</td>
+                <td>{fmtMs(row.median_ms['3.15.0'])}</td>
+                <td class={row.effect.speedup_pct >= 0 ? 'positive' : 'negative'}>
+                  {row.case === 'base32' ? '≈219,6×' : pct(row.effect.speedup_pct)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="blog-caption">No se debe promediar esta tabla sin ponderar cargas representativas de una aplicación. Los tiempos centrales y los cambios de velocidad proceden de estimadores distintos (medianas descriptivas frente a log-razones pareadas), por lo que recalcular directamente el porcentaje desde los tiempos redondeados puede producir pequeñas diferencias.</p>
+    </div>
+
+    <div class="blog-container blog-narrow">
+      <h2 id="arranque">El arranque: una mejora que no es lo que parece</h2>
+      <p>3.14 arrancó aproximadamente al doble de velocidad que 3.13 en la prueba normal (proceso aislado con <code>-I</code>). Pero cuando deshabilitamos <code>site</code> con <code>-S</code>, la diferencia prácticamente desapareció. Eso sugiere que la instalación, la carga de módulos y el entorno influyen en esa aparente victoria.</p>
+      <p>La prueba de arranque merece su propio tratamiento porque no está midiendo lo mismo que un bucle de enteros o una operación de JSON. No utilizaría ese 2× para prometer que cualquier CLI duplicará su velocidad.</p>
+
+      <h2 id="metodo">Cómo se diseñó el experimento</h2>
+      <p>La idea fue alterar una sola variable principal: el intérprete. Las cargas se ejecutaron con entradas y semillas deterministas, comprobación SHA-256 de las salidas completas fuera del tramo cronometrado, calentamiento y orden contrabalanceado de versiones.</p>
+      <ul class="blog-list">
+        <li><strong>Equipo:</strong> Intel Core i5-12600K, Linux 7.0.0-38-generic, glibc 2.39.</li>
+        <li><strong>Instalaciones:</strong> CPython 3.13.12, 3.14.3 y 3.15.0 mediante <code>pyenv</code>; sin JIT y con GIL convencional.</li>
+        <li><strong>Muestras:</strong> tres sesiones en dos días (tarde y noche del 14 de octubre, mañana del 15); 12 rondas, 12 muestras internas, presupuesto de 110 ms.</li>
+        <li><strong>Afinidad:</strong> CPU lógico 0 (P-core), sin aislamiento exclusivo del núcleo ni de su hilo hermano.</li>
+        <li><strong>Condiciones energéticas:</strong> <code>intel_pstate</code>, governor <code>powersave</code>, Turbo habilitado; la frecuencia pudo variar.</li>
+        <li><strong>Inferencia:</strong> bootstrap jerárquico exploratorio, prueba bilateral exacta por sesión y corrección de Holm sobre 42 comparaciones.</li>
+      </ul>
+      <h3 id="estadistica">El matiz estadístico que importa</h3>
+      <p>Los cambios grandes mantuvieron dirección y magnitud comparables en las tres sesiones. Eso constituye <strong>evidencia de reproducibilidad local</strong>, pero no prueba una ventaja universal. Como solo hay tres sesiones verdaderamente separadas, la prueba exacta bilateral a nivel de sesión tiene un valor p mínimo de <strong>0,25</strong>; después de la corrección de Holm los 42 valores ajustados son 1,0. No podemos afirmar significación inferencial ajustada al 5%.</p>
+      <p>Los intervalos bootstrap del 95% publicados en los datos son <strong>exploratorios</strong>: con tres sesiones, no deben interpretarse como garantías del comportamiento en equipos ajenos. Además, existió actividad variable en el hilo hermano, el procesador no estuvo aislado y las compilaciones no son estrictamente idénticas.</p>
+      <div class="blog-callout"><p><strong>Qué conclusión NO extraigo:</strong> «Python 3.15 es 22% más rápido en general», «FastAPI irá 22% más rápido» o «ya no conviene usar 3.13». El experimento no mide esas afirmaciones.</p></div>
+
+      <h2 id="descargas">Datos, código y reproducibilidad</h2>
+      <p>Para que cualquiera pueda auditar los números, publico el script de la batería v3 y el consolidado utilizado para este artículo. El JSON conserva los resultados y comparaciones calculadas para las tres sesiones; el CSV facilita examinarlas en una planilla o en Pandas. Las tres capturas crudas de sesión son aproximadamente 1 MB cada una y se conservaron como archivos separados.</p>
+      <div class="blog-files">
+        <a class="blog-file-link" download href="/blog/benchmarks-2026/benchmark_python_versions_v3.py"><strong>Script v3 ↓</strong><span>Protocolo y cargas de trabajo en Python</span></a>
+        <a class="blog-file-link" download href="/blog/benchmarks-2026/consolidado.json"><strong>Consolidado JSON ↓</strong><span>Comparaciones, intervalos y metadatos</span></a>
+        <a class="blog-file-link" download href="/blog/benchmarks-2026/resumen_multisesion.csv"><strong>Resumen CSV ↓</strong><span>42 comparaciones, listo para analizar</span></a>
+      </div>
+      <p class="blog-caption">Reproduce con los mismos parámetros: <code>--rounds 12 --samples 12 --budget-ms 110</code>. El repositorio del sitio aloja el código publicado. Los archivos crudos originales se conservan y pueden incorporarse como un paquete adicional; el JSON consolidado no los sustituye íntegramente.</p>
+
+      <h2 id="conclusion">¿Qué Python elegiría después de esto?</h2>
+      <p>Si mi carga de trabajo dedica mucho tiempo a serializar JSON o codificar Base32/Base64, <strong>3.15 merece una prueba en mi propio entorno</strong>. Si mis tiempos dependen de cálculos, expresiones regulares o extensiones nativas, mediría primero el código real, sobre todo porque la compatibilidad de dependencias y los mecanismos internos cambian entre versiones.</p>
+      <p>La conclusión no es que la versión más nueva sea mala. Es que <strong>la pregunta útil nunca fue «¿cuál Python gana?», sino «¿qué cambia para mi aplicación, con qué magnitud y con qué evidencia?»</strong>.</p>
+      <a href="/blog/" class="blog-back">← Volver al blog técnico</a>
+    </div>
+  </main>
+  <Footer lang="es" />
+</BaseLayout>

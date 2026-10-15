@@ -38,7 +38,7 @@ const jsonLd = {
   <Fragment slot="head">
     <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   </Fragment>
-  <Navbar lang="es" items={navItems} ctaHref="/es/#contact" switchHref="/en/" />
+  <Navbar lang="es" items={navItems} ctaHref="/es/#contact" switchHref="/en/blog/" />
   <main class="blog-shell" id="main">
     <div class="blog-container blog-index">
       <nav class="blog-breadcrumbs" aria-label="Migas de pan"><a href="/es/">Tooltician</a><span aria-hidden="true">/</span><span>Blog</span></nav>
@@ -60,5 +60,5 @@ const jsonLd = {
       </div>
     </div>
   </main>
-  <Footer lang="es" />
+  <Footer lang="es" langHref="/en/blog/" />
 </BaseLayout>

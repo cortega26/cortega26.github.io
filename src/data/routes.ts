@@ -80,10 +80,10 @@ export const routeGroups: RouteGroup[] = [
       xDefault: '/es/guias/pagina-web-estatica-cuando-conviene/',
     },
   },
-  { id: 'blog-hub', paths: { es: '/blog/', xDefault: '/blog/' } },
+  { id: 'blog-hub', paths: { en: '/en/blog/', es: '/blog/', xDefault: '/blog/' } },
   {
     id: 'blog:python-313-314-315',
-    paths: { es: '/blog/python-313-vs-314-vs-315/', xDefault: '/blog/python-313-vs-314-vs-315/' },
+    paths: { en: '/en/blog/python-313-vs-314-vs-315/', es: '/blog/python-313-vs-314-vs-315/', xDefault: '/blog/python-313-vs-314-vs-315/' },
   },
 ];
 

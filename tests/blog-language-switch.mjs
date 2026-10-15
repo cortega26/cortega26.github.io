@@ -51,8 +51,13 @@ for (const required of [
   assert.ok(englishArticle.includes(required), `English article missing substantive content: ${required}`);
 }
 const spanishArticle = readPage('/blog/python-313-vs-314-vs-315/');
-assert.equal((englishArticle.match(/<tbody>\s*<tr>/g) || []).length, 14,
+function countTableRows(html) {
+  const tableBody = /<tbody\\b[^>]*>([\\s\\S]*?)<\\/tbody>/.exec(html)?.[1];
+  assert.ok(tableBody, 'Benchmark table body must be present');
+  return (tableBody.match(/<tr(?:\\s|>)/g) || []).length;
+}
+assert.equal(countTableRows(englishArticle), 14,
   'English comparison table must contain all 14 workloads');
-assert.equal((spanishArticle.match(/<tbody>\s*<tr>/g) || []).length, 14,
+assert.equal(countTableRows(spanishArticle), 14,
   'Spanish comparison table must contain all 14 workloads');
 console.log(`PASS: ${checks} localized pages, reciprocal links, hreflang, and complete benchmark tables.`);

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { alternatesFor } from '../../data/routes';
+import '../../styles/global.css';
+import '../../styles/blog.css';
+
+const canonical = 'https://tooltician.com/blog/';
+const navItems = [
+  { href: '/es/', label: 'Inicio' },
+  { href: '/es/trabajo/', label: 'Trabajo' },
+  { href: '/es/guias/', label: 'Guías' },
+  { href: '/es/#contact', label: 'Contacto' },
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Tooltician — Laboratorio técnico',
+  url: canonical,
+  inLanguage: 'es',
+  author: { '@type': 'Person', name: 'Carlos Ortega González' },
+  blogPost: [{
+    '@type': 'BlogPosting',
+    headline: 'Python 3.13, 3.14 y 3.15: medimos 1.512 ejecuciones y el más nuevo no siempre ganó',
+    url: 'https://tooltician.com/blog/python-313-vs-314-vs-315/',
+    datePublished: '2026-10-15',
+  }],
+};
+---
+<BaseLayout
+  title="Blog técnico | Experimentos, Python y sistemas — Tooltician"
+  description="Experimentos técnicos originales, comparativas reproducibles, Python, automatización y decisiones de ingeniería explicadas con datos."
+  lang="es"
+  canonical={canonical}
+  alternates={alternatesFor('blog-hub')}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+  <Navbar lang="es" items={navItems} ctaHref="/es/#contact" switchHref="/en/" />
+  <main class="blog-shell" id="main">
+    <div class="blog-container blog-index">
+      <nav class="blog-breadcrumbs" aria-label="Migas de pan"><a href="/es/">Tooltician</a><span aria-hidden="true">/</span><span>Blog</span></nav>
+      <header>
+        <p class="blog-kicker">Tooltician / Engineering Journal</p>
+        <h1 class="blog-display">Construir. Medir. Comprobar.</h1>
+        <p class="blog-lead">Un espacio para experimentos de ingeniería, herramientas que uso de verdad y decisiones técnicas explicadas con datos. Sin benchmarks de escaparate ni conclusiones que los números no sostengan.</p>
+      </header>
+      <div class="blog-hero-rule"></div>
+      <p class="blog-kicker">Publicaciones recientes / 01</p>
+      <div class="blog-index__grid">
+        <a class="blog-postcard" href="/blog/python-313-vs-314-vs-315/">
+          <span class="blog-tag">Python · Rendimiento · Experimento</span>
+          <h2>Python 3.13 vs. 3.14 vs. 3.15: no siempre gana el más nuevo</h2>
+          <p>14 cargas de trabajo, tres versiones, tres sesiones independientes y 1.512 ejecuciones sobre un Intel Core i5-12600K. Qué mejoras se reprodujeron, dónde ganó una versión anterior y qué no sabemos todavía.</p>
+          <div class="blog-byline"><strong>Carlos Ortega González</strong><span class="blog-dot"></span><time datetime="2026-10-15">15 oct 2026</time></div>
+          <span class="blog-postcard__read">Leer el experimento →</span>
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer lang="es" />
+</BaseLayout>

@@ -52,9 +52,9 @@ for (const required of [
 }
 const spanishArticle = readPage('/blog/python-313-vs-314-vs-315/');
 function countTableRows(html) {
-  const tableBody = /<tbody\\b[^>]*>([\\s\\S]*?)<\\/tbody>/.exec(html)?.[1];
+  const tableBody = /<tbody\b[^>]*>([\s\S]*?)<\/tbody>/.exec(html)?.[1];
   assert.ok(tableBody, 'Benchmark table body must be present');
-  return (tableBody.match(/<tr(?:\\s|>)/g) || []).length;
+  return (tableBody.match(/<tr(?:\s|>)/g) || []).length;
 }
 assert.equal(countTableRows(englishArticle), 14,
   'English comparison table must contain all 14 workloads');

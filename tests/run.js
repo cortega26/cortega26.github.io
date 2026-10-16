@@ -5,7 +5,7 @@
  * Run: node tests/run.js --built    (source + dist output checks)
  */
 
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
@@ -1791,6 +1791,52 @@ group('058 · Perf hygiene: LCP-only preload, gated preconnect, compositor scrol
     );
   }
 });
+
+// ─── SEO meta descriptions (compiled HTML, not source-copy guesses) ────────────
+
+if (BUILT) {
+  group('SEO · Indexable meta description length', () => {
+    const files = [];
+    function visit(dir) {
+      for (const entry of readdirSync(dir)) {
+        const abs = join(dir, entry);
+        if (statSync(abs).isDirectory()) visit(abs);
+        else if (entry.endsWith('.html')) files.push(abs);
+      }
+    }
+    visit(join(ROOT, 'dist'));
+
+    const overlong = [];
+    const missing = [];
+    let checked = 0;
+    for (const file of files) {
+      const html = readFileSync(file, 'utf8');
+      // 404 and any explicitly nonindexable page cannot show a SERP snippet.
+      if (/\/404\.html$/.test(file) || /<meta\b[^>]*\bname="robots"[^>]*\bcontent="[^"]*noindex/i.test(html)) continue;
+      if (!/<link\b[^>]*\brel="canonical"[^>]*\bhref="https:\/\/tooltician\.com\//i.test(html)) continue;
+      checked++;
+      const matches = [...html.matchAll(/<meta\b[^>]*\bname="description"[^>]*\bcontent="([^"]*)"/gi)];
+      if (matches.length !== 1) {
+        missing.push(file + ' (' + matches.length + ' descriptions)');
+        continue;
+      }
+      // These descriptions contain no HTML markup; decode common escaped
+      // punctuation before computing the user-visible string length.
+      const description = matches[0][1]
+        .replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
+      if (description.length > 155) {
+        overlong.push(file + ': ' + description.length);
+      }
+    }
+
+    assert('[built] indexable HTML has exactly one meta description',
+      missing.length === 0 && checked > 0, missing.join('; '));
+    assert('[built] all indexable meta descriptions are <=155 characters',
+      overlong.length === 0 && checked > 0, overlong.join('; '));
+  });
+}
 
 // ─── Summary ──────────────────────────────────────────────────────────────
 

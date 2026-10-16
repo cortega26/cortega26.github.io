@@ -28,8 +28,9 @@ Precio de visita, alcance y condiciones disponibles en el sitio. Los repuestos y
 trabajos adicionales se acuerdan antes de realizarlos. No hago reparación
 electrónica avanzada ni recuperación de datos en laboratorio.
 
-Consulta indicando comuna, modelo y problema:
-https://soporte.tooltician.com/?utm_source=yapo&utm_medium=classified&utm_campaign=launch&utm_content=profile
+Consulta a través del chat de Yapo indicando comuna, modelo y problema. No incluir enlaces externos, correos ni identificadores de redes sociales en el aviso. Precio final de visita en Macul/Ñuñoa: $30.000 por hasta 45 minutos de diagnóstico; trabajos y repuestos adicionales se cotizan previamente.
+
+Para atribución, registrar manualmente el canal «Yapo» en el seguimiento privado al recibir una consulta.
 
 ## Perfil WhatsApp Business
 

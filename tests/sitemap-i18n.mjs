@@ -60,6 +60,20 @@ const pathOf = (url) => {
   } else {
     ok('registry: every group defines x-default');
   }
+
+  // Prevent global "/" fallback on interior groups: Ahrefs correctly flags
+  // them because the homepage cannot return-link to every translated topic.
+  const wrongFallback = routeGroups.filter((group) =>
+    group.id === 'home'
+      ? group.paths.xDefault !== '/'
+      : ![group.paths.en, group.paths.es].includes(group.paths.xDefault)
+  );
+  if (wrongFallback.length > 0) {
+    fail('registry: x-default points within its own localized group',
+      wrongFallback.map((g) => g.id + '=' + g.paths.xDefault).join(', '));
+  } else {
+    ok('registry: x-default fallback stays within its own group (except homepage)');
+  }
 }
 
 // ── Parse the built sitemap ──────────────────────────────────────────────────
@@ -98,7 +112,7 @@ for (const match of xml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
   if (duplicates === 0) ok(`sitemap: no duplicate hreflang across ${sitemapEntries.size} URLs`);
 }
 
-// ── 3. Registry parity + 4. Reciprocity ──────────────────────────────────────
+// ── 3. Registry parity + 4. Reciprocity (including x-default) ────────────────
 {
   let mismatches = 0;
   let nonReciprocal = 0;
@@ -126,16 +140,17 @@ for (const match of xml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
     }
 
     for (const { lang, url } of links) {
-      if (lang === 'x-default') continue;
+      // x-default must be reciprocal too: it must not point service/work
+      // pages to a generic homepage that lacks their localized return tags.
       const reciprocal = sitemapEntries.get(url);
       if (!reciprocal || !reciprocal.some((link) => normalizeUrl(link.url) === normalizeUrl(loc))) {
         nonReciprocal++;
-        fail('sitemap: en/es alternates are reciprocal', `${loc} → ${lang}:${url} does not point back`);
+        fail('sitemap: en/es/x-default alternates are reciprocal', `${loc} → ${lang}:${url} does not point back`);
       }
     }
   }
   if (mismatches === 0) ok('sitemap: every URL matches its registry alternate set');
-  if (nonReciprocal === 0) ok('sitemap: en/es alternates are reciprocal');
+  if (nonReciprocal === 0) ok('sitemap: en/es/x-default alternates are reciprocal');
 
   const missingGroups = routeGroups.filter((group) => !seen.has(group.id));
   if (missingGroups.length > 0) {

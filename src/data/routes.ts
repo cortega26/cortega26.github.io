@@ -2,8 +2,12 @@
 // sitemap's xhtml:link groups. Consumed by BaseLayout, every localized page,
 // astro.config.mjs (sitemap serialize), and tests/sitemap-i18n.mjs.
 //
-// Normalization rule (audit 2026-09-23, Plan 025):
-// - Bilingual groups: en + es + x-default = '/' (the root x-default landing).
+// Normalization rule (fixed 2026-10-15, Ahrefs reciprocal hreflang):
+// - Homepage: en + es + x-default = '/' (the root language selector).
+// - Other bilingual groups: en + es + x-default = one localized URL
+//   IN THE SAME GROUP (English default for services/work/docs; Spanish for blog).
+//   A blanket x-default='/' creates non-reciprocal cross-topic links because
+//   the homepage doesn't link back to every service or work page.
 // - Monolingual ES groups (guides): es + x-default = the ES URL itself.
 // Never hardcode an alternate set anywhere else.
 
@@ -25,35 +29,35 @@ export const SITE_ORIGIN = 'https://tooltician.com';
 
 export const routeGroups: RouteGroup[] = [
   { id: 'home', paths: { en: '/en/', es: '/es/', xDefault: '/' } },
-  { id: 'work', paths: { en: '/en/work/', es: '/es/trabajo/', xDefault: '/' } },
-  { id: 'case-study:chile-hub', paths: { en: '/en/work/chile-hub/', es: '/es/trabajo/chile-hub/', xDefault: '/' } },
-  { id: 'doc:privacy', paths: { en: '/en/privacy/', es: '/es/privacy/', xDefault: '/' } },
-  { id: 'doc:cookies', paths: { en: '/en/cookies/', es: '/es/cookies/', xDefault: '/' } },
-  { id: 'doc:terms', paths: { en: '/en/terms/', es: '/es/terms/', xDefault: '/' } },
-  { id: 'doc:engagement', paths: { en: '/en/engagement/', es: '/es/engagement/', xDefault: '/' } },
+  { id: 'work', paths: { en: '/en/work/', es: '/es/trabajo/', xDefault: '/en/work/' } },
+  { id: 'case-study:chile-hub', paths: { en: '/en/work/chile-hub/', es: '/es/trabajo/chile-hub/', xDefault: '/en/work/chile-hub/' } },
+  { id: 'doc:privacy', paths: { en: '/en/privacy/', es: '/es/privacy/', xDefault: '/en/privacy/' } },
+  { id: 'doc:cookies', paths: { en: '/en/cookies/', es: '/es/cookies/', xDefault: '/en/cookies/' } },
+  { id: 'doc:terms', paths: { en: '/en/terms/', es: '/es/terms/', xDefault: '/en/terms/' } },
+  { id: 'doc:engagement', paths: { en: '/en/engagement/', es: '/es/engagement/', xDefault: '/en/engagement/' } },
   {
     id: 'service:automation',
-    paths: { en: '/en/services/python-automation/', es: '/es/servicios/automatizacion-python/', xDefault: '/' },
+    paths: { en: '/en/services/python-automation/', es: '/es/servicios/automatizacion-python/', xDefault: '/en/services/python-automation/' },
   },
   {
     id: 'service:recurring-data',
-    paths: { en: '/en/services/recurring-data-collection/', es: '/es/servicios/recoleccion-recurrente-datos/', xDefault: '/' },
+    paths: { en: '/en/services/recurring-data-collection/', es: '/es/servicios/recoleccion-recurrente-datos/', xDefault: '/en/services/recurring-data-collection/' },
   },
   {
     id: 'service:internal-tools',
-    paths: { en: '/en/services/internal-tools/', es: '/es/servicios/herramientas-internas/', xDefault: '/' },
+    paths: { en: '/en/services/internal-tools/', es: '/es/servicios/herramientas-internas/', xDefault: '/en/services/internal-tools/' },
   },
   {
     id: 'service:financial',
-    paths: { en: '/en/services/financial-tooling/', es: '/es/servicios/herramientas-financieras/', xDefault: '/' },
+    paths: { en: '/en/services/financial-tooling/', es: '/es/servicios/herramientas-financieras/', xDefault: '/en/services/financial-tooling/' },
   },
   {
     id: 'service:web',
-    paths: { en: '/en/services/static-sites/', es: '/es/servicios/sitios-web/', xDefault: '/' },
+    paths: { en: '/en/services/static-sites/', es: '/es/servicios/sitios-web/', xDefault: '/en/services/static-sites/' },
   },
   {
     id: 'service:htw',
-    paths: { en: '/en/services/web-technical-hygiene/', es: '/es/servicios/higiene-tecnica-web/', xDefault: '/' },
+    paths: { en: '/en/services/web-technical-hygiene/', es: '/es/servicios/higiene-tecnica-web/', xDefault: '/en/services/web-technical-hygiene/' },
   },
   {
     id: 'guides-hub',

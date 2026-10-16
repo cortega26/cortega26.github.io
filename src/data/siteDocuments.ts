@@ -307,7 +307,7 @@ export const siteDocuments: Record<SiteDocumentKey, Record<SiteLocale, SiteDocum
     en: {
       eyebrow: 'Agreement',
       title: 'Engagement Terms & Agreements',
-      description: 'Engagement terms: Detailed client responsibilities, intellectual property transfers, and confidentiality rules governing project agreements with Tooltician.',
+      description: 'Tooltician engagement terms: client responsibilities, intellectual property, confidentiality and conditions for scoped projects.',
       intro: 'A good project runs on clear expectations, not assumptions. These terms set out what each side commits to, how ownership and confidentiality work, and what happens if circumstances change, so both parties can stay focused on the work itself. They apply to every scoped engagement unless a separately signed written agreement takes precedence.',
       updatedLabel: 'Last updated',
       updatedAt: '27 May 2026',

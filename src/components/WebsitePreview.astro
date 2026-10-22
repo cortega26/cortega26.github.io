@@ -1,0 +1,196 @@
+---
+import type { Website } from '../data/websites';
+
+interface Props { site: Website; lang: 'es' | 'en' }
+const { site, lang } = Astro.props;
+const es = lang === 'es';
+---
+<div class={"site-shot site-shot--" + site.id} aria-hidden="true">
+  <div class="site-shot__browser">
+    <div class="site-shot__dots"><i></i><i></i><i></i></div>
+    <span class="site-shot__url">{site.domain}</span>
+    <span class="site-shot__secure">↗</span>
+  </div>
+
+  {site.id === 'noticiencias' && (
+    <div class="shot-news">
+      <div class="shot-news__nav"><b>noticiencias<span>.</span></b><span>{es ? 'Ciencia' : 'Science'} &nbsp; / &nbsp; {es ? 'Tecnología' : 'Technology'}</span></div>
+      <div class="shot-news__main">
+        <div class="shot-news__copy">
+          <small>{es ? 'DIVULGACIÓN CIENTÍFICA' : 'SCIENCE JOURNALISM'}</small>
+          <strong>{es ? 'Ciencia para leer con criterio.' : 'Science worth reading critically.'}</strong>
+          <span class="shot-news__hairline"></span>
+          <p>{es ? 'Hallazgos, contexto y fuentes originales.' : 'Discoveries, context and original sources.'}</p>
+          <span class="shot-news__pill">{es ? 'Explorar historias' : 'Explore stories'} &nbsp; ↗</span>
+        </div>
+        <img src="https://noticiencias.com/_astro/2026-10-17-neandertal-herido-y-cuidado-senal-de-empatia-hace-75-000-anos.dOSBiH_p_Z2aPWnO.webp" width="380" height="260" loading="lazy" decoding="async" alt="" />
+      </div>
+      <div class="shot-news__ticker"><span>{es ? 'ARQUEOLOGÍA' : 'ARCHAEOLOGY'}</span><span>{es ? 'CIENCIA' : 'SCIENCE'}</span><span>{es ? 'ARCHIVO' : 'ARCHIVE'}</span></div>
+    </div>
+  )}
+
+  {site.id === 'monedario' && (
+    <div class="shot-money">
+      <div class="shot-money__nav"><b>monedario<span>.</span></b><small>{es ? 'Guías · Calculadoras' : 'Guides · Calculators'}</small></div>
+      <div class="shot-money__grid">
+        <div class="shot-money__copy">
+          <span>{es ? 'TUS NÚMEROS, CLAROS.' : 'YOUR NUMBERS, CLEAR.'}</span>
+          <strong>{es ? 'Decisiones de plata con datos, no con humo.' : 'Financial decisions backed by facts.'}</strong>
+          <div class="shot-money__options">
+            <span>{es ? 'Sueldo líquido' : 'Net salary'} ↗</span>
+            <span>{es ? 'Finiquito' : 'Severance'} ↗</span>
+            <span>UF ↗</span>
+          </div>
+        </div>
+        <div class="shot-money__calc">
+          <small>{es ? 'CALCULADORA' : 'CALCULATOR'}</small>
+          <b>{es ? 'Sueldo líquido' : 'Net salary'}</b>
+          <div class="shot-money__field"></div>
+          <div class="shot-money__field shot-money__field--short"></div>
+          <div class="shot-money__action">{es ? 'Calcular' : 'Calculate'} →</div>
+        </div>
+      </div>
+      <div class="shot-money__foot">{es ? 'Herramientas gratuitas · Fuentes oficiales' : 'Free tools · Official sources'}</div>
+    </div>
+  )}
+
+  {site.id === 'ebano' && (
+    <div class="shot-shop">
+      <div class="shot-shop__nav"><b>El Rincón de Ébano</b><span>{es ? 'Mi carrito' : 'My cart'} <i>2</i></span></div>
+      <div class="shot-shop__copy"><small>{es ? 'COMERCIO DE PROXIMIDAD' : 'NEIGHBORHOOD SHOP'}</small><strong>{es ? '¿Qué te falta hoy?' : 'What do you need today?'}</strong><span class="shot-shop__search">{es ? 'Buscar en el catálogo' : 'Search the catalog'} <span>⌕</span></span></div>
+      <div class="shot-shop__products">
+        <div class="shot-shop__product"><img src="https://www.elrincondeebano.com/assets/images/variants/w400/images/despensa/Harina%20Mont%20Blanc%201Kg.webp" width="130" height="145" loading="lazy" decoding="async" alt="" /><b>{es ? 'Harina' : 'Flour'}</b><span>+</span></div>
+        <div class="shot-shop__product"><img src="https://www.elrincondeebano.com/assets/images/variants/w400/images/limpieza_y_aseo/Nova%20Cl%C3%A1siva%203x12m.webp" width="130" height="145" loading="lazy" decoding="async" alt="" /><b>{es ? 'Hogar' : 'Home'}</b><span>+</span></div>
+      </div>
+    </div>
+  )}
+
+  {site.id === 'casabea' && (
+    <div class="shot-bakery">
+      <div class="shot-bakery__nav"><b>Casa Bea<span>®</span></b><small>{es ? 'HECHO EN MACUL' : 'HANDMADE IN MACUL'}</small></div>
+      <div class="shot-bakery__body">
+        <div class="shot-bakery__copy"><small>{es ? 'RECIÉN HORNEADOS' : 'FRESHLY BAKED'}</small><strong>{es ? 'Un antojo hecho a mano.' : 'Handmade, made to share.'}</strong><p>{es ? 'Roles de canela artesanales.' : 'Artisan cinnamon rolls.'}</p><span>{es ? 'Ver sabores' : 'Explore flavors'} →</span></div>
+        <img src="https://casabea.cl/_astro/rol-tradicional.DDi5ZnEc_ZgBTTW.jpg" width="400" height="370" loading="lazy" decoding="async" alt="" />
+      </div>
+      <div class="shot-bakery__foot"><span>TRADICIONAL</span><span>AMERICANO</span><span>NUTELLA</span></div>
+    </div>
+  )}
+
+  {site.id === 'nohemi' && (
+    <div class="shot-art">
+      <div class="shot-art__nav"><span>NOHEMI PALENCIA</span><small>{es ? 'OBRA / TRAYECTORIA' : 'WORK / BIOGRAPHY'}</small></div>
+      <div class="shot-art__paintings">
+        <div class="shot-art__painting"><img src="https://nohemipalencia.com/assets/obras/gallery/guardiana-480.webp" width="260" height="340" loading="lazy" decoding="async" alt="" /></div>
+        <div class="shot-art__painting shot-art__painting--second"><img src="https://nohemipalencia.com/assets/obras/gallery/princesa-onirica-480.webp" width="260" height="340" loading="lazy" decoding="async" alt="" /></div>
+      </div>
+      <div class="shot-art__caption"><small>{es ? 'ARTE CONTEMPORÁNEO' : 'CONTEMPORARY ART'}</small><strong>{es ? 'Rostros oníricos.' : 'Dreamlike portraits.'}</strong></div>
+    </div>
+  )}
+
+  {site.id === 'chile-hub' && (
+    <div class="shot-data">
+      <div class="shot-data__nav"><b>chile<span>-hub</span></b><small>OPEN DATA / CHILE</small></div>
+      <div class="shot-data__heading"><small>{es ? 'DATOS PÚBLICOS, UTILIZABLES' : 'PUBLIC DATA, READY TO USE'}</small><strong>{es ? 'De datos dispersos a información usable.' : 'From fragmented data to usable information.'}</strong></div>
+      <div class="shot-data__dashboard">
+        <div><small>{es ? 'CAPAS' : 'LAYERS'}</small><b>22</b><span>{es ? 'en el catálogo' : 'published'}</span></div>
+        <div><small>{es ? 'COMUNAS' : 'DISTRICTS'}</small><b>346</b><span>{es ? 'normalizadas' : 'normalized'}</span></div>
+        <div class="shot-data__terminal"><span>SQL / PARQUET</span><code>SELECT * FROM comunas</code><span class="shot-data__terminal-line"></span></div>
+      </div>
+    </div>
+  )}
+
+  {site.id === 'tooltician' && (
+    <div class="shot-studio">
+      <div class="shot-studio__nav"><b><span>✳</span> tooltician</b><small>{es ? 'SERVICIOS · TRABAJO' : 'SERVICES · WORK'}</small></div>
+      <div class="shot-studio__body">
+        <small>PYTHON / DATA / WEB</small>
+        <strong>{es ? 'Sistemas que siguen funcionando.' : 'Systems that keep working.'}</strong>
+        <p>{es ? 'Automatización. Datos. Diseño digital.' : 'Automation. Data. Digital experiences.'}</p>
+        <span>{es ? 'Explorar casos' : 'Explore work'} ↗</span>
+      </div>
+      <div class="shot-studio__cards"><i>01 / AUTOMATION</i><i>02 / DATA</i><i>03 / WEB</i></div>
+    </div>
+  )}
+</div>
+<style>
+.site-shot{--shot-accent:#f7ca56;position:relative;aspect-ratio:1.56;min-height:270px;overflow:hidden;isolation:isolate;background:#f4f1eb}
+.site-shot__browser{height:30px;background:#161b26;color:#dce1e9;display:flex;align-items:center;gap:9px;padding:0 13px}
+.site-shot__dots{display:flex;gap:4px}.site-shot__dots i{width:6px;height:6px;border-radius:50%;background:#485366}.site-shot__dots i:first-child{background:#c06b67}.site-shot__dots i:nth-child(2){background:#cfaa5b}.site-shot__dots i:last-child{background:#6c9d85}
+.site-shot__url{font:500 10px/1.2 var(--ff-label);opacity:.76;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-left:auto}.site-shot__secure{font-size:11px;color:#aaa}
+.site-shot>div:not(.site-shot__browser){height:calc(100% - 30px)}
+.shot-news{background:#f5f4ef;color:#182a3c;font-family:Georgia,'Times New Roman',serif}
+.shot-news__nav{height:44px;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d5d5cb;gap:8px}
+.shot-news__nav b{font-family:var(--ff-heading);font-size:22px;letter-spacing:-1px}.shot-news__nav b span{color:#cc603e}
+.shot-news__nav>span{font:600 9px var(--ff-label);white-space:nowrap}
+.shot-news__main{display:grid;grid-template-columns:1fr 43%;height:calc(100% - 75px)}
+.shot-news__copy{padding:19px 12px 12px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.shot-news__copy small{font:700 9px var(--ff-label);letter-spacing:.08em;color:#ba5332}
+.shot-news__copy strong{font-size:clamp(22px,3vw,34px);line-height:1.04;letter-spacing:-.035em}
+.shot-news__hairline{width:30px;height:2px;background:#d26545}.shot-news__copy p{font:400 11px/1.45 var(--ff-body);color:#58616b}
+.shot-news__pill{margin-top:auto;border:1px solid #17324f;color:#17324f;padding:5px 9px;font:650 9px var(--ff-label)}
+.shot-news__main img{width:100%;height:100%;object-fit:cover}
+.shot-news__ticker{height:31px;border-top:1px solid #d5d5cb;display:flex;align-items:center;justify-content:space-around;font:650 9px var(--ff-label);color:#6b727c;letter-spacing:.05em}
+.shot-money{background:#f9f8f4;color:#132f32;font-family:var(--ff-heading)}
+.shot-money__nav{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid #e4e9e3}
+.shot-money__nav b{font-size:22px;letter-spacing:-1.1px}.shot-money__nav b span{color:#308b70}.shot-money__nav small{font-size:9px;color:#47726a}
+.shot-money__grid{height:calc(100% - 74px);display:grid;grid-template-columns:1.05fr .85fr;gap:12px;padding:22px}
+.shot-money__copy{display:flex;flex-direction:column;gap:11px}
+.shot-money__copy>span{font:700 9px var(--ff-label);letter-spacing:.06em;color:#258268}
+.shot-money__copy strong{font-size:clamp(19px,2.3vw,29px);letter-spacing:-.045em;line-height:1.1}
+.shot-money__options{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.shot-money__options span{border:1px solid #bdd7c8;border-radius:4px;padding:5px 7px;color:#306b57;font:600 9px var(--ff-label)}
+.shot-money__calc{background:#fff;border:1px solid #e2e8e2;box-shadow:0 10px 25px #143f2a17;border-radius:9px;padding:16px 15px;display:flex;flex-direction:column;gap:9px;transform:rotate(2deg)}
+.shot-money__calc small{font:700 8px var(--ff-label);letter-spacing:.11em;color:#46836e}
+.shot-money__calc b{font-size:16px;letter-spacing:-.04em}.shot-money__field{height:24px;border:1px solid #dce6df;background:#f5f8f4;border-radius:4px}.shot-money__field--short{width:75%}
+.shot-money__action{background:#1c6d52;border-radius:4px;padding:7px;color:white;font:600 10px var(--ff-label);text-align:center;margin-top:auto}
+.shot-money__foot{height:30px;background:#ecf2ed;color:#416d5d;padding:8px 22px;font:600 9px var(--ff-label)}
+.shot-shop{background:#faf9f5;color:#272724;font-family:var(--ff-heading)}
+.shot-shop__nav{height:46px;background:#173b2b;color:white;display:flex;justify-content:space-between;align-items:center;padding:0 20px;gap:8px}
+.shot-shop__nav b{font-size:16px;letter-spacing:-.03em}.shot-shop__nav>span{font-size:10px}.shot-shop__nav i{display:inline-grid;place-items:center;border-radius:50%;background:#f2b761;color:#173b2b;width:17px;height:17px;font-style:normal;margin-left:5px;font-weight:bold}
+.shot-shop__copy{padding:15px 21px 9px;display:flex;flex-direction:column;gap:6px}
+.shot-shop__copy small{font:700 8px var(--ff-label);color:#49876a;letter-spacing:.08em}.shot-shop__copy strong{font-size:clamp(21px,3vw,31px);letter-spacing:-.05em}
+.shot-shop__search{display:flex;justify-content:space-between;background:#fff;border:1px solid #d5dfd8;border-radius:6px;padding:7px 12px;color:#929d94;font-size:10px}.shot-shop__search span{color:#387b5b;font-size:15px}
+.shot-shop__products{display:flex;gap:12px;padding:4px 21px 14px}
+.shot-shop__product{background:#fff;border:1px solid #e4e7e1;border-radius:7px;min-width:0;flex:1;display:grid;grid-template-columns:1fr 21px;align-items:center;gap:2px;padding:7px}
+.shot-shop__product img{display:block;width:100%;height:75px;object-fit:contain;grid-column:1/-1}.shot-shop__product b{font-size:10px}.shot-shop__product span{width:18px;height:18px;border-radius:4px;background:#1d714b;color:white;display:grid;place-items:center}
+.shot-bakery{background:#f4e9de;color:#5c3025;font-family:var(--ff-heading)}
+.shot-bakery__nav{display:flex;justify-content:space-between;align-items:center;height:47px;padding:0 20px;position:relative;z-index:1}
+.shot-bakery__nav b{font-size:25px;letter-spacing:-.06em;font-family:Georgia,serif}.shot-bakery__nav b span{font-family:var(--ff-label);font-size:9px;vertical-align:top}
+.shot-bakery__nav small{font:700 9px var(--ff-label);letter-spacing:.08em;color:#945f42}
+.shot-bakery__body{height:calc(100% - 74px);display:grid;grid-template-columns:1fr 1.05fr;position:relative}
+.shot-bakery__copy{padding:23px 0 0 23px;z-index:2;display:flex;align-items:flex-start;flex-direction:column;gap:9px}
+.shot-bakery__copy small{font:700 9px var(--ff-label);letter-spacing:.07em;color:#a26748}
+.shot-bakery__copy strong{font-family:Georgia,serif;font-size:clamp(24px,3.3vw,38px);letter-spacing:-.055em;line-height:1.04}
+.shot-bakery__copy p{font-size:11px;color:#905d47;line-height:1.4}
+.shot-bakery__copy>span{margin-top:auto;padding:7px 10px;background:#653c2b;color:white;border-radius:3px;font:600 10px var(--ff-label)}
+.shot-bakery__body img{width:100%;height:100%;object-fit:cover;mask-image:linear-gradient(90deg,transparent 0%,black 20%)}
+.shot-bakery__foot{height:27px;border-top:1px solid #d8bdae;display:flex;gap:12px;align-items:center;justify-content:space-around;font:600 8px var(--ff-label);letter-spacing:.12em;color:#8f5b41}
+.shot-art{position:relative;background:#171818;color:#f8f5eb}
+.shot-art__nav{height:43px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font:500 10px var(--ff-label);letter-spacing:.1em;gap:8px}
+.shot-art__nav small{font-size:8px;color:#b2b5ac}
+.shot-art__paintings{height:calc(100% - 98px);display:flex;justify-content:center;align-items:center;gap:17px;padding:2px 26px}
+.shot-art__painting{height:100%;width:43%;min-width:0;background:#252525;padding:7px;box-shadow:0 4px 12px #0008}
+.shot-art__painting--second{transform:translateY(9px)}
+.shot-art__painting img{display:block;width:100%;height:100%;object-fit:contain}
+.shot-art__caption{height:55px;display:flex;gap:5px;justify-content:center;align-items:center;flex-direction:column}
+.shot-art__caption small{font:600 8px var(--ff-label);letter-spacing:.12em;color:#b6b39f}.shot-art__caption strong{font:italic 22px Georgia,serif;letter-spacing:-.035em}
+.shot-data{background:linear-gradient(140deg,#0a2638,#11394d);color:#ecf8fb}
+.shot-data__nav{height:45px;display:flex;justify-content:space-between;align-items:center;padding:0 21px;border-bottom:1px solid #ffffff24}
+.shot-data__nav b{font:700 21px var(--ff-heading);letter-spacing:-.055em}.shot-data__nav b span{color:#69d0c9}.shot-data__nav small{font:600 8px var(--ff-label);letter-spacing:.05em;color:#9bbdc7}
+.shot-data__heading{padding:16px 22px 11px;display:flex;flex-direction:column;gap:7px}
+.shot-data__heading small{font:700 8px var(--ff-label);color:#70dacc;letter-spacing:.12em}
+.shot-data__heading strong{font:700 clamp(18px,2.7vw,30px)/1.07 var(--ff-heading);letter-spacing:-.045em;max-width:24ch}
+.shot-data__dashboard{display:grid;grid-template-columns:.65fr .65fr 1.15fr;gap:7px;padding:0 22px 15px}
+.shot-data__dashboard>div{min-width:0;border:1px solid #ffffff28;background:#ffffff0c;border-radius:5px;padding:10px 9px;display:flex;flex-direction:column;gap:4px}
+.shot-data__dashboard small{font:600 8px var(--ff-label);color:#9fc7d1}.shot-data__dashboard b{font:700 29px var(--ff-heading);letter-spacing:-.06em}.shot-data__dashboard span{font:500 8px var(--ff-label);color:#9fc7d1}
+.shot-data__dashboard .shot-data__terminal{background:#091925}.shot-data__terminal>span:first-child{font-size:9px;color:#61d5b6}.shot-data__terminal code{margin-top:6px;white-space:nowrap;font:600 9px var(--ff-label);color:#e0e7ee}.shot-data__terminal-line{height:2px;width:75%;background:linear-gradient(90deg,#36d5aa,transparent);margin-top:auto}
+.shot-studio{background:radial-gradient(circle at 95% 50%,#3f3a29,#0b1324 58%);color:#f1f5f9}
+.shot-studio__nav{height:48px;display:flex;justify-content:space-between;align-items:center;padding:0 22px;border-bottom:1px solid #ffffff23}
+.shot-studio__nav b{font:700 19px var(--ff-heading);letter-spacing:-.05em}.shot-studio__nav b span{color:#c4a04a}.shot-studio__nav small{font:500 8px var(--ff-label);letter-spacing:.08em;color:#a9b3c4}
+.shot-studio__body{padding:20px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.shot-studio__body small{font:600 9px var(--ff-label);letter-spacing:.1em;color:#c4a04a}
+.shot-studio__body strong{font:700 clamp(23px,3.2vw,37px)/1.03 var(--ff-heading);letter-spacing:-.055em;max-width:18ch}
+.shot-studio__body p{font-size:10px;color:#a9b4c3}.shot-studio__body>span{display:block;font:600 9px var(--ff-label);padding:7px 10px;background:#c4a04a;color:#101522;border-radius:3px;margin-top:2px}
+.shot-studio__cards{display:flex;gap:7px;padding:0 22px}.shot-studio__cards i{border:1px solid #c4a04a40;background:#ffffff0b;padding:8px 9px;border-radius:3px;font:500 8px var(--ff-label);font-style:normal;color:#d8d5c8}
+@media(max-width:520px){.site-shot{min-height:240px;aspect-ratio:1.48}.shot-news__main{grid-template-columns:1.15fr .85fr}.shot-news__copy{padding:16px 8px 10px 14px;gap:6px}.shot-news__copy strong{font-size:24px}.shot-news__copy p{font-size:9px}.shot-news__nav b{font-size:19px}.shot-money__grid{padding:12px;gap:7px}.shot-money__copy strong{font-size:19px}.shot-money__calc{padding:10px;gap:7px}.shot-shop__products{padding-inline:12px}.shot-bakery__copy{padding:15px 0 0 14px}.shot-bakery__copy strong{font-size:26px}.shot-data__heading{padding:12px 14px 8px}.shot-data__dashboard{padding:0 14px 10px}.shot-studio__body{padding:15px}.shot-studio__cards{padding:0 15px}}
+@media(prefers-reduced-motion:reduce){.site-shot *{transition:none!important}}
+</style>

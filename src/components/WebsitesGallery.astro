@@ -1,39 +1,41 @@
 ---
+import WebsitePreview from './WebsitePreview.astro';
 import { websites, websiteGroups, websiteGroupLabels } from '../data/websites';
 import type { WebsiteGroup } from '../data/websites';
 
 interface Props { lang: 'en' | 'es' }
 const { lang } = Astro.props;
 const copy = lang === 'es' ? {
-  eyebrow: 'Portafolio web / 2026',
-  title: 'Sitios con identidad. Productos con propósito.',
-  intro: 'Una selección de experiencias digitales que he diseñado, desarrollado o mantenido: desde medios y herramientas públicas hasta tiendas, datos abiertos y arte.',
+  eyebrow: 'Diseño y desarrollo web · Proyectos reales',
+  title: 'Un buen sitio web no solo se ve bien. Hace algo útil.',
+  intro: 'Cada proyecto resuelve un desafío diferente: comunicar, vender, explicar, mostrar arte o hacer que los datos sean útiles. Aquí puedes descubrir cómo funciona cada experiencia sin visitar todas las páginas.',
   index: 'Explorar por categoría',
-  website: 'Visitar sitio',
-  source: 'Código público',
-  domainReview: 'Dominio informado · disponibilidad sin confirmar',
-  caveatTitle: 'Un dominio por confirmar',
-  caveat: 'También se indicó neareo.cl. No encontré un repositorio asociado ni pude comprobar su disponibilidad, por lo que no lo presento como un proyecto publicado.',
-  workTitle: 'Más allá de las páginas web',
-  workBody: 'Estos sitios son solo una parte del trabajo. El portafolio técnico incluye automatizaciones, pipelines, bibliotecas y herramientas.',
-  workLink: 'Explorar casos técnicos',
-  contactLink: 'Hablemos de tu proyecto',
+  website: 'Explorar sitio real',
+  source: 'Ver código',
+  preview: 'Vista representativa · incluye recursos de la web original',
+  purpose: 'Qué resuelve',
+  delivered: 'Qué incluye',
+  heroCta: 'Cuéntame tu proyecto',
+  workTitle: '¿Necesitas una web con propósito?',
+  workBody: 'Antes de pensar en plantillas o frameworks, conviene entender el problema, diseñar una experiencia clara y construir una solución que se pueda mantener.',
+  workLink: 'Ver servicios web',
+  contactLink: 'Conversemos',
 } : {
-  eyebrow: 'Web portfolio / 2026',
-  title: 'Distinct websites. Purpose-built products.',
-  intro: 'Digital experiences I have designed, developed or maintained, from publications and public tools to storefronts, open data and art.',
+  eyebrow: 'Web design & development · Real projects',
+  title: 'A great website does more than look good. It does something useful.',
+  intro: 'Every project solves a different challenge: communicate, sell, explain, showcase art or make data useful. Explore the experiences without having to open every website.',
   index: 'Browse by category',
-  website: 'Visit website',
-  source: 'Public source',
-  domainReview: 'Domain provided · live availability not confirmed',
-  caveatTitle: 'One domain awaiting confirmation',
-  caveat: 'neareo.cl was also supplied. I could not match it to a repository or confirm its availability, so it is not listed as a published project.',
-  workTitle: 'Beyond websites',
-  workBody: 'Websites are one part of the portfolio. The engineering work also includes automation, data pipelines, libraries and internal tools.',
-  workLink: 'Explore engineering work',
-  contactLink: 'Discuss a project',
+  website: 'Explore live website',
+  source: 'View code',
+  preview: 'Representative preview · includes imagery from the real website',
+  purpose: 'What it solves',
+  delivered: 'What it delivers',
+  heroCta: 'Discuss your project',
+  workTitle: 'Need a website with purpose?',
+  workBody: 'Before picking a template or framework, it helps to understand the problem, design a clear experience and build something maintainable.',
+  workLink: 'Explore web services',
+  contactLink: 'Let’s talk',
 };
-const checked = websites.filter((w) => w.status === 'checked').length;
 const namesByGroup: Record<WebsiteGroup, typeof websites> = {
   editorial: websites.filter((w) => w.group === 'editorial'),
   commerce: websites.filter((w) => w.group === 'commerce'),
@@ -41,7 +43,7 @@ const namesByGroup: Record<WebsiteGroup, typeof websites> = {
   data: websites.filter((w) => w.group === 'data'),
   studio: websites.filter((w) => w.group === 'studio'),
 };
-const workHref = lang === 'es' ? '/es/trabajo/' : '/en/work/';
+const workHref = lang === 'es' ? '/es/servicios/sitios-web/' : '/en/services/static-sites/';
 const contactHref = lang === 'es' ? '/es/#contact' : '/en/#contact';
 ---
 <div class="webshowcase">
@@ -51,11 +53,11 @@ const contactHref = lang === 'es' ? '/es/#contact' : '/en/#contact';
         <span class="section-eyebrow">{copy.eyebrow}</span>
         <h1>{copy.title}</h1>
         <p>{copy.intro}</p>
-        <a class="web-hero__explore" href="#sitios">{copy.index}<span aria-hidden="true"> ↘</span></a>
+        <div class="web-hero__ctas"><a class="web-hero__primary" href={contactHref}>{copy.heroCta}<span aria-hidden="true"> ↗</span></a><a class="web-hero__explore" href="#sitios">{copy.index}<span aria-hidden="true"> ↓</span></a></div>
       </div>
       <div class="web-hero__numbers" aria-label={lang === 'es' ? 'Resumen del portafolio' : 'Portfolio overview'}>
-        <div><strong>{websites.length.toString().padStart(2, '0')}</strong><span>{lang === 'es' ? 'proyectos documentados' : 'documented projects'}</span></div>
-        <div><strong>{checked.toString().padStart(2, '0')}</strong><span>{lang === 'es' ? 'sitios consultados' : 'websites checked'}</span></div>
+        <div><strong>{websites.length.toString().padStart(2, '0')}</strong><span>{lang === 'es' ? 'sitios seleccionados' : 'selected websites'}</span></div>
+        <div><strong>{websiteGroups.length.toString().padStart(2, '0')}</strong><span>{lang === 'es' ? 'áreas de trabajo' : 'categories'}</span></div>
         <div><strong>ES<span class="web-hero__slash">/</span>EN</strong><span>{lang === 'es' ? 'portafolio bilingüe' : 'bilingual portfolio'}</span></div>
       </div>
     </div>
@@ -77,16 +79,8 @@ const contactHref = lang === 'es' ? '/es/#contact' : '/en/#contact';
         <div class="web-grid">
           {namesByGroup[group].map((site) => (
             <article class="web-card">
-              <a class={`web-card__visual web-card__visual--${site.id}`} href={site.url} target="_blank" rel="noopener noreferrer" aria-label={`${copy.website}: ${site.name}`}>
-                <div class="web-card__window" aria-hidden="true">
-                  <span></span><span></span><span></span>
-                  <span class="web-card__address">{site.domain}</span>
-                </div>
-                <div class="web-card__visual-body" aria-hidden="true">
-                  <span class="web-card__overline">{site.tags[0]}</span>
-                  <strong>{site.name}</strong>
-                  <span class="web-card__tagline">{site.highlight[lang]}</span>
-                </div>
+              <a class="web-card__visual web-card__visual--rich" href={site.url} target="_blank" rel="noopener noreferrer" aria-label={copy.website + ': ' + site.name}>
+                <WebsitePreview site={site} lang={lang} />
                 <span class="web-card__arrow" aria-hidden="true">↗</span>
               </a>
               <div class="web-card__body">
@@ -95,29 +89,22 @@ const contactHref = lang === 'es' ? '/es/#contact' : '/en/#contact';
                     <h3>{site.name}</h3>
                     <p class="web-card__domain">{site.domain}</p>
                   </div>
-                  <span class={`web-card__state ${site.status === 'checked' ? 'web-card__state--checked' : ''}`} title={site.status === 'checked' ? (lang === 'es' ? 'Sitio consultado el 22-10-2026' : 'Website checked 2026-10-22') : copy.domainReview}>
-                    <span class="web-card__state-dot" aria-hidden="true"></span>{site.status === 'checked' ? (lang === 'es' ? 'Consultado' : 'Checked') : (lang === 'es' ? 'Sin verificar' : 'Unverified')}
-                  </span>
-                </div>
                 <p class="web-card__description">{site.description[lang]}</p>
+                <div class="web-card__proof"><div><span class="web-card__proof-label">{copy.purpose}</span><p>{site.benefit[lang]}</p></div><div><span class="web-card__proof-label">{copy.delivered}</span><ul>{site.capabilities[lang].map((item) => <li>{item}</li>)}</ul></div></div>
                 <ul class="web-card__tags" aria-label={lang === 'es' ? 'Tecnologías y características' : 'Technologies and features'}>
                   {site.tags.map((tag) => <li>{tag}</li>)}
                 </ul>
                 <div class="web-card__actions">
-                  <a href={site.url} target="_blank" rel="noopener noreferrer">{site.status === 'checked' ? copy.website : (lang === 'es' ? 'Abrir dominio' : 'Open domain')} <span aria-hidden="true">↗</span></a>
+                  <a href={site.url} target="_blank" rel="noopener noreferrer">{copy.website} <span aria-hidden="true">↗</span></a>
                   {site.repo && <a href={site.repo} target="_blank" rel="noopener noreferrer">{copy.source} <span aria-hidden="true">↗</span></a>}
                 </div>
-                {site.status === 'unverified' && <p class="web-card__note">{copy.domainReview}</p>}
+                <p class="web-card__preview-note">{copy.preview}</p>
               </div>
             </article>
           ))}
         </div>
       </section>
     ))}
-    <aside class="web-pending" aria-labelledby="web-pending-title">
-      <div><span class="web-pending__eyebrow">{lang === 'es' ? 'Inventario / pendiente' : 'Inventory / pending'}</span><h2 id="web-pending-title">{copy.caveatTitle}</h2><p>{copy.caveat}</p></div>
-      <code>neareo.cl</code>
-    </aside>
   </div>
   <section class="web-ending">
     <div class="container web-ending__inner">
@@ -195,4 +182,38 @@ const contactHref = lang === 'es' ? '/es/#contact' : '/en/#contact';
 @media(max-width:820px){.web-hero__inner{grid-template-columns:1fr}.web-hero__numbers{border-left:0;border-top:1px solid var(--clr-border-strong);padding:1.4rem 0 0;display:flex;justify-content:space-between}.web-grid{grid-template-columns:1fr}.web-ending__inner{align-items:flex-start;flex-direction:column}.web-ending__actions{flex-direction:row;flex-wrap:wrap}}
 @media(max-width:520px){.web-hero{padding-top:6rem}.web-hero__numbers{gap:.7rem}.web-hero__numbers strong{font-size:1.7rem}.web-hero__numbers span{font-size:.55rem}.web-card__visual{min-height:218px}.web-card__visual-body{padding:1.6rem}.web-card__head{flex-direction:column}.web-card__description{min-height:0}.web-pending{flex-direction:column;align-items:flex-start}.web-ending__actions{width:100%;flex-direction:column}.web-ending__actions a{justify-content:center}}
 @media(prefers-reduced-motion:reduce){.web-card{transition:none}.web-card:hover{transform:none}}
+
+/* Visual-first case study gallery */
+.web-hero{background:radial-gradient(ellipse at 80% 22%,rgba(196,160,74,.15),transparent 49%),linear-gradient(135deg,#152238,#0b1121 68%);padding-block:clamp(4.8rem,8vw,7rem) clamp(3.7rem,7vw,6rem)}
+.web-hero h1{max-width:16ch;font-size:clamp(2.85rem,6vw,5.4rem);line-height:1.04;letter-spacing:-.065em}
+.web-hero__heading>p{max-width:66ch;color:#b2becc;line-height:1.75;font-size:clamp(.97rem,1.5vw,1.12rem)}
+.web-hero__ctas{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap;margin-top:2.2rem}
+.web-hero__primary{display:inline-flex;gap:1.3rem;align-items:center;font:700 .78rem var(--ff-label);color:#0b1121;background:var(--clr-accent);border-radius:var(--radius-sm);padding:1rem 1.3rem}
+.web-hero__primary:hover{background:#e7be62}
+.web-hero__explore{display:inline-flex;gap:.8rem;align-items:center;font-weight:600;color:#e1e8f1}
+.web-hero__numbers{border-left-color:#c4a04a40}
+.web-card{background:#111a2b;border-color:rgba(148,163,184,.19);transition:transform .22s,border-color .22s,box-shadow .22s}
+.web-card:hover{transform:translateY(-3px);border-color:#c4a04a70;box-shadow:0 18px 40px #0004}
+.web-card__visual--rich{display:block;min-height:0;background:#f6f5f0;color:inherit}
+.web-card__visual--rich::before{display:none}
+.web-card__visual--rich .web-card__arrow{position:absolute;top:43px;right:12px;bottom:auto;color:#fff;background:#162337ea;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;font-size:1rem;z-index:3}
+.web-card__visual--rich:hover .web-card__arrow{background:var(--clr-accent);color:#182131}
+.web-card__body{padding:1.5rem}
+.web-card__head{align-items:baseline}
+.web-card__head h3{font-size:1.5rem;letter-spacing:-.045em}
+.web-card__domain{margin-top:.2rem}
+.web-card__description{min-height:3.1rem;margin-top:1rem}
+.web-card__proof{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem;padding-block:1.25rem;border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border);margin-top:1.3rem}
+.web-card__proof-label{display:block;color:var(--clr-accent);text-transform:uppercase;font:650 .59rem var(--ff-label);letter-spacing:.08em;margin-bottom:.55rem}
+.web-card__proof p,.web-card__proof li{color:#d0dae5;font-size:.82rem;line-height:1.65}
+.web-card__proof ul{padding:0;list-style:none}
+.web-card__proof li{position:relative;padding-left:1rem}
+.web-card__proof li::before{content:'↳';position:absolute;left:0;color:var(--clr-accent)}
+.web-card__tags{margin:.9rem 0 .6rem}
+.web-card__actions{padding-top:.8rem;gap:1.2rem;border-top:0}
+.web-card__preview-note{color:#8292a7;font:500 .61rem/1.5 var(--ff-label);margin-top:1rem}
+.web-ending{border-top-color:#c4a04a32}
+@media(max-width:650px){.web-hero h1{font-size:clamp(2.6rem,10.7vw,3.5rem)}.web-card__proof{grid-template-columns:1fr;gap:1rem}.web-card__description{min-height:0}.web-card__visual--rich{min-height:0}.web-hero__numbers{gap:.85rem}.web-hero__numbers strong{font-size:1.85rem}}
+@media(prefers-reduced-motion:reduce){.web-card,.web-card:hover{transition:none;transform:none}}
+
 </style>

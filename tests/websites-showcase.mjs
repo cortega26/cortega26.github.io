@@ -22,7 +22,7 @@ for (const domain of ['noticiencias.com', 'monedario.cl', 'casabea.cl', 'elrinco
 assert.ok(websites.some((s) => s.id === 'chile-hub'), 'Include public chile-hub portal');
 assert.ok(!websites.some((s) => s.domain === 'neareo.cl'), 'Unverified/unmatched domain is not presented as delivered');
 assert.ok(!websites.some((s) => s.domain === 'casabeya.cl'), 'Do not publish the misspelled bakery domain');
-assert.equal(websites.find((s) => s.id === 'nohemi')?.status, 'unverified', 'Artist custom domain not presented as live-verified');
+assert.equal(websites.find((s) => s.id === 'nohemi')?.status, 'checked', 'Artist custom domain verified reachable 2026-10-22');
 const alternates = alternatesFor('websites');
 assert.deepEqual(alternates.map((a) => a.hreflang), ['en','es','x-default']);
 assert.deepEqual(alternates.map((a) => new URL(a.href).pathname), ['/en/sites/','/es/sitios/','/en/sites/']);

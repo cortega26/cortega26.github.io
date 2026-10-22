@@ -30,6 +30,7 @@ export const SITE_ORIGIN = 'https://tooltician.com';
 export const routeGroups: RouteGroup[] = [
   { id: 'home', paths: { en: '/en/', es: '/es/', xDefault: '/' } },
   { id: 'work', paths: { en: '/en/work/', es: '/es/trabajo/', xDefault: '/en/work/' } },
+  { id: 'websites', paths: { en: '/en/sites/', es: '/es/sitios/', xDefault: '/en/sites/' } },
   { id: 'case-study:chile-hub', paths: { en: '/en/work/chile-hub/', es: '/es/trabajo/chile-hub/', xDefault: '/en/work/chile-hub/' } },
   { id: 'doc:privacy', paths: { en: '/en/privacy/', es: '/es/privacy/', xDefault: '/en/privacy/' } },
   { id: 'doc:cookies', paths: { en: '/en/cookies/', es: '/es/cookies/', xDefault: '/en/cookies/' } },

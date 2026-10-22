@@ -44,6 +44,7 @@ for (const id of websites.map((site) => site.id)) {
   assert.ok(visual.includes("site.id === '" + id + "'"), 'Dedicated visual concept: ' + id);
 }
 assert.ok(!visual.includes('<iframe'), 'Do not embed third-party sites in frames');
+assert.ok(visual.trimEnd().endsWith('</style>'), 'CSS must be scoped inside the Astro style block');
 assert.ok(!gallery.includes('neareo.cl') && !visual.includes('neareo.cl'), 'Unrelated domain never mentioned');
 assert.ok(visual.includes('shot-news__feature') && visual.includes('shot-news__edition'), 'Noticiencias uses a news-led editorial composition');
 assert.ok(visual.includes('shot-money__indicators') && visual.includes('shot-money__mark'), 'Monedario shows its actual financial indicators and logo mark');

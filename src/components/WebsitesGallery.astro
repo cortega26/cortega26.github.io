@@ -1,0 +1,198 @@
+---
+import { websites, websiteGroups, websiteGroupLabels } from '../data/websites';
+import type { WebsiteGroup } from '../data/websites';
+
+interface Props { lang: 'en' | 'es' }
+const { lang } = Astro.props;
+const copy = lang === 'es' ? {
+  eyebrow: 'Portafolio web / 2026',
+  title: 'Sitios con identidad. Productos con propósito.',
+  intro: 'Una selección de experiencias digitales que he diseñado, desarrollado o mantenido: desde medios y herramientas públicas hasta tiendas, datos abiertos y arte.',
+  index: 'Explorar por categoría',
+  website: 'Visitar sitio',
+  source: 'Código público',
+  domainReview: 'Dominio informado · disponibilidad sin confirmar',
+  caveatTitle: 'Un dominio por confirmar',
+  caveat: 'También se indicó neareo.cl. No encontré un repositorio asociado ni pude comprobar su disponibilidad, por lo que no lo presento como un proyecto publicado.',
+  workTitle: 'Más allá de las páginas web',
+  workBody: 'Estos sitios son solo una parte del trabajo. El portafolio técnico incluye automatizaciones, pipelines, bibliotecas y herramientas.',
+  workLink: 'Explorar casos técnicos',
+  contactLink: 'Hablemos de tu proyecto',
+} : {
+  eyebrow: 'Web portfolio / 2026',
+  title: 'Distinct websites. Purpose-built products.',
+  intro: 'Digital experiences I have designed, developed or maintained, from publications and public tools to storefronts, open data and art.',
+  index: 'Browse by category',
+  website: 'Visit website',
+  source: 'Public source',
+  domainReview: 'Domain provided · live availability not confirmed',
+  caveatTitle: 'One domain awaiting confirmation',
+  caveat: 'neareo.cl was also supplied. I could not match it to a repository or confirm its availability, so it is not listed as a published project.',
+  workTitle: 'Beyond websites',
+  workBody: 'Websites are one part of the portfolio. The engineering work also includes automation, data pipelines, libraries and internal tools.',
+  workLink: 'Explore engineering work',
+  contactLink: 'Discuss a project',
+};
+const checked = websites.filter((w) => w.status === 'checked').length;
+const namesByGroup: Record<WebsiteGroup, typeof websites> = {
+  editorial: websites.filter((w) => w.group === 'editorial'),
+  commerce: websites.filter((w) => w.group === 'commerce'),
+  culture: websites.filter((w) => w.group === 'culture'),
+  data: websites.filter((w) => w.group === 'data'),
+  studio: websites.filter((w) => w.group === 'studio'),
+};
+const workHref = lang === 'es' ? '/es/trabajo/' : '/en/work/';
+const contactHref = lang === 'es' ? '/es/#contact' : '/en/#contact';
+---
+<div class="webshowcase">
+  <header class="web-hero">
+    <div class="container web-hero__inner">
+      <div class="web-hero__heading">
+        <span class="section-eyebrow">{copy.eyebrow}</span>
+        <h1>{copy.title}</h1>
+        <p>{copy.intro}</p>
+        <a class="web-hero__explore" href="#sitios">{copy.index}<span aria-hidden="true"> ↘</span></a>
+      </div>
+      <div class="web-hero__numbers" aria-label={lang === 'es' ? 'Resumen del portafolio' : 'Portfolio overview'}>
+        <div><strong>{websites.length.toString().padStart(2, '0')}</strong><span>{lang === 'es' ? 'proyectos documentados' : 'documented projects'}</span></div>
+        <div><strong>{checked.toString().padStart(2, '0')}</strong><span>{lang === 'es' ? 'sitios consultados' : 'websites checked'}</span></div>
+        <div><strong>ES<span class="web-hero__slash">/</span>EN</strong><span>{lang === 'es' ? 'portafolio bilingüe' : 'bilingual portfolio'}</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container web-content" id="sitios">
+    <nav class="web-categories" aria-label={copy.index}>
+      {websiteGroups.map((group, i) => (
+        <a href={`#grupo-${group}`}><span class="web-categories__count">{String(i + 1).padStart(2, '0')}</span>{websiteGroupLabels[lang][group]}</a>
+      ))}
+    </nav>
+
+    {websiteGroups.map((group) => (
+      <section class="web-group" id={`grupo-${group}`} aria-labelledby={`titulo-${group}`}>
+        <div class="web-group__heading">
+          <h2 id={`titulo-${group}`}>{websiteGroupLabels[lang][group]}</h2>
+          <span>{String(namesByGroup[group].length).padStart(2, '0')} / {String(websites.length).padStart(2, '0')}</span>
+        </div>
+        <div class="web-grid">
+          {namesByGroup[group].map((site) => (
+            <article class="web-card">
+              <a class={`web-card__visual web-card__visual--${site.id}`} href={site.url} target="_blank" rel="noopener noreferrer" aria-label={`${copy.website}: ${site.name}`}>
+                <div class="web-card__window" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                  <span class="web-card__address">{site.domain}</span>
+                </div>
+                <div class="web-card__visual-body" aria-hidden="true">
+                  <span class="web-card__overline">{site.tags[0]}</span>
+                  <strong>{site.name}</strong>
+                  <span class="web-card__tagline">{site.highlight[lang]}</span>
+                </div>
+                <span class="web-card__arrow" aria-hidden="true">↗</span>
+              </a>
+              <div class="web-card__body">
+                <div class="web-card__head">
+                  <div>
+                    <h3>{site.name}</h3>
+                    <p class="web-card__domain">{site.domain}</p>
+                  </div>
+                  <span class={`web-card__state ${site.status === 'checked' ? 'web-card__state--checked' : ''}`} title={site.status === 'checked' ? (lang === 'es' ? 'Sitio consultado el 22-10-2026' : 'Website checked 2026-10-22') : copy.domainReview}>
+                    <span class="web-card__state-dot" aria-hidden="true"></span>{site.status === 'checked' ? (lang === 'es' ? 'Consultado' : 'Checked') : (lang === 'es' ? 'Sin verificar' : 'Unverified')}
+                  </span>
+                </div>
+                <p class="web-card__description">{site.description[lang]}</p>
+                <ul class="web-card__tags" aria-label={lang === 'es' ? 'Tecnologías y características' : 'Technologies and features'}>
+                  {site.tags.map((tag) => <li>{tag}</li>)}
+                </ul>
+                <div class="web-card__actions">
+                  <a href={site.url} target="_blank" rel="noopener noreferrer">{site.status === 'checked' ? copy.website : (lang === 'es' ? 'Abrir dominio' : 'Open domain')} <span aria-hidden="true">↗</span></a>
+                  {site.repo && <a href={site.repo} target="_blank" rel="noopener noreferrer">{copy.source} <span aria-hidden="true">↗</span></a>}
+                </div>
+                {site.status === 'unverified' && <p class="web-card__note">{copy.domainReview}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+    <aside class="web-pending" aria-labelledby="web-pending-title">
+      <div><span class="web-pending__eyebrow">{lang === 'es' ? 'Inventario / pendiente' : 'Inventory / pending'}</span><h2 id="web-pending-title">{copy.caveatTitle}</h2><p>{copy.caveat}</p></div>
+      <code>neareo.cl</code>
+    </aside>
+  </div>
+  <section class="web-ending">
+    <div class="container web-ending__inner">
+      <div><span class="section-eyebrow">Tooltician / Engineering</span><h2>{copy.workTitle}</h2><p>{copy.workBody}</p></div>
+      <div class="web-ending__actions"><a class="btn btn-primary" href={workHref}>{copy.workLink} ↗</a><a class="btn btn-secondary" href={contactHref}>{copy.contactLink} ↗</a></div>
+    </div>
+  </section>
+</div>
+<style>
+.webshowcase{background:var(--clr-bg);color:var(--clr-text)}
+.web-hero{border-bottom:1px solid var(--clr-border);background:radial-gradient(ellipse at 82% 24%,rgba(196,160,74,.12),transparent 42%),linear-gradient(138deg,#111b32,#0b1121 65%);padding:clamp(5rem,9vw,9rem) 0 clamp(3rem,6vw,6rem)}
+.web-hero__inner{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(15rem,.65fr);gap:3rem;align-items:end}
+.web-hero h1{font-family:var(--ff-heading);font-size:clamp(3rem,6.6vw,6rem);letter-spacing:-.065em;line-height:1.02;max-width:14ch;text-wrap:balance}
+.web-hero__heading>p{color:var(--clr-text-muted);font-size:clamp(1rem,1.7vw,1.14rem);line-height:1.8;max-width:60ch;margin:1.7rem 0}
+.web-hero__explore{font-family:var(--ff-label);font-size:.78rem;color:var(--clr-accent);border-bottom:1px solid rgba(196,160,74,.4);padding-bottom:.35rem}
+.web-hero__explore:hover{color:var(--clr-text)}
+.web-hero__numbers{display:grid;gap:1.25rem;border-left:1px solid var(--clr-border-strong);padding-left:2rem}
+.web-hero__numbers>div{display:flex;flex-direction:column;gap:.2rem}
+.web-hero__numbers strong{font-size:clamp(2rem,3.6vw,3.6rem);font-weight:700;letter-spacing:-.055em;line-height:1.12;font-family:var(--ff-heading)}
+.web-hero__numbers span{font-family:var(--ff-label);font-size:.67rem;letter-spacing:.04em;color:var(--clr-text-muted)}
+.web-hero__numbers .web-hero__slash{color:var(--clr-accent);font-size:.8em}
+.web-content{padding-block:3.2rem 6rem}
+.web-categories{display:flex;flex-wrap:wrap;gap:.7rem;padding-bottom:3rem;border-bottom:1px solid var(--clr-border)}
+.web-categories a{border:1px solid var(--clr-border-strong);border-radius:var(--radius-sm);padding:.75rem 1rem;color:var(--clr-text-muted);font-size:.81rem;transition:color .2s,border-color .2s,background .2s}
+.web-categories a:hover,.web-categories a:focus-visible{background:rgba(196,160,74,.09);border-color:var(--clr-accent);color:var(--clr-text)}
+.web-categories__count{font-family:var(--ff-label);color:var(--clr-accent);margin-right:.65rem;font-size:.64rem}
+.web-group{scroll-margin-top:calc(var(--nav-height) + 1.5rem);padding-top:3.5rem}
+.web-group__heading{display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;border-bottom:1px solid var(--clr-border);padding-bottom:1.15rem;margin-bottom:1.5rem}
+.web-group__heading h2{font-family:var(--ff-heading);font-size:clamp(1.5rem,2.9vw,2.25rem);letter-spacing:-.045em}
+.web-group__heading>span{font-family:var(--ff-label);color:var(--clr-text-faint);font-size:.72rem}
+.web-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem}
+.web-card{min-width:0;overflow:hidden;border:1px solid var(--clr-border-strong);border-radius:var(--radius-lg);background:#111a2b;transition:border-color .2s,transform .2s}
+.web-card:hover{border-color:rgba(196,160,74,.48);transform:translateY(-2px)}
+.web-card__visual{position:relative;display:flex;flex-direction:column;min-height:250px;overflow:hidden;color:#fff;isolation:isolate}
+.web-card__visual::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 82% 78%,rgba(255,255,255,.16),transparent 35%),repeating-linear-gradient(135deg,transparent 0 30px,rgba(255,255,255,.025) 30px 31px)}
+.web-card__visual--noticiencias{background:linear-gradient(135deg,#133547,#101b30)}
+.web-card__visual--monedario{background:linear-gradient(135deg,#133e3a,#112a33)}
+.web-card__visual--ebano{background:linear-gradient(135deg,#573927,#211a22)}
+.web-card__visual--casabea{background:linear-gradient(135deg,#70452e,#35221e)}
+.web-card__visual--nohemi{background:linear-gradient(135deg,#503a65,#1d203d)}
+.web-card__visual--chile-hub{background:linear-gradient(135deg,#163c5a,#0b2634)}
+.web-card__visual--tooltician{background:linear-gradient(135deg,#38404e,#111827)}
+.web-card__window{display:flex;align-items:center;gap:.35rem;padding:.9rem 1.15rem;border-bottom:1px solid rgba(255,255,255,.17)}
+.web-card__window>span:not(.web-card__address){width:6px;height:6px;border:1px solid rgba(255,255,255,.45);border-radius:50%}
+.web-card__address{margin-left:auto;font-family:var(--ff-label);font-size:.65rem;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%}
+.web-card__visual-body{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;flex:1;padding:2rem 2.1rem;gap:.55rem}
+.web-card__overline{text-transform:uppercase;font-family:var(--ff-label);font-size:.61rem;letter-spacing:.16em;opacity:.74}
+.web-card__visual-body strong{font-family:var(--ff-heading);font-size:clamp(2.15rem,3.6vw,3.7rem);line-height:1.03;letter-spacing:-.065em;max-width:12ch;text-wrap:balance}
+.web-card__tagline{font-size:.82rem;opacity:.8}
+.web-card__arrow{position:absolute;right:1.15rem;bottom:1rem;font-size:1.2rem;opacity:.75}
+.web-card__body{padding:1.5rem}
+.web-card__head{display:flex;gap:.75rem;justify-content:space-between;align-items:start}
+.web-card__head h3{font-size:1.25rem;font-weight:700;letter-spacing:-.025em}
+.web-card__domain{font-family:var(--ff-label);font-size:.67rem;color:var(--clr-accent);overflow-wrap:anywhere;margin-top:.3rem}
+.web-card__state{font-family:var(--ff-label);font-size:.6rem;color:var(--clr-text-muted);white-space:nowrap;border:1px solid var(--clr-border-strong);border-radius:20px;padding:.35rem .52rem}
+.web-card__state-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--clr-text-faint);margin-right:.35rem;vertical-align:middle}
+.web-card__state--checked .web-card__state-dot{background:var(--clr-success)}
+.web-card__description{font-size:.89rem;color:var(--clr-text-muted);line-height:1.7;margin-top:1.2rem;min-height:4.6rem}
+.web-card__tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.3rem 0;list-style:none}
+.web-card__tags li{font-family:var(--ff-label);font-size:.61rem;color:#cbd5e1;background:rgba(255,255,255,.05);border:1px solid var(--clr-border);padding:.3rem .5rem;border-radius:3px}
+.web-card__actions{display:flex;gap:1.4rem;flex-wrap:wrap;border-top:1px solid var(--clr-border);padding-top:1.1rem}
+.web-card__actions a{font-family:var(--ff-label);font-size:.68rem;font-weight:600;color:var(--clr-accent)}
+.web-card__actions a:hover{text-decoration:underline;color:var(--clr-text)}
+.web-card__note{font-size:.7rem;color:var(--clr-text-faint);margin-top:1rem}
+.web-pending{display:flex;justify-content:space-between;gap:2rem;align-items:center;border:1px dashed var(--clr-border-strong);border-radius:var(--radius-md);margin-top:4rem;padding:1.7rem}
+.web-pending__eyebrow{font-family:var(--ff-label);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--clr-accent)}
+.web-pending h2{font-family:var(--ff-heading);font-size:1.2rem;margin:.45rem 0}
+.web-pending p{font-size:.82rem;color:var(--clr-text-muted);line-height:1.65;max-width:67ch}
+.web-pending code{font-family:var(--ff-label);font-size:.75rem;white-space:nowrap;color:var(--clr-text);padding:.7rem 1rem;border:1px solid var(--clr-border-strong);border-radius:var(--radius-sm)}
+.web-ending{padding:4rem 0;border-top:1px solid var(--clr-border);background:linear-gradient(125deg,#141f32,#0b1121)}
+.web-ending__inner{display:flex;justify-content:space-between;align-items:center;gap:2rem}
+.web-ending h2{font-family:var(--ff-heading);font-size:clamp(2rem,4vw,3rem);letter-spacing:-.055em;margin:.3rem 0}
+.web-ending p{color:var(--clr-text-muted);max-width:58ch;line-height:1.7;font-size:.88rem}
+.web-ending__actions{display:flex;flex-direction:column;gap:.65rem;flex-shrink:0}
+@media(max-width:820px){.web-hero__inner{grid-template-columns:1fr}.web-hero__numbers{border-left:0;border-top:1px solid var(--clr-border-strong);padding:1.4rem 0 0;display:flex;justify-content:space-between}.web-grid{grid-template-columns:1fr}.web-ending__inner{align-items:flex-start;flex-direction:column}.web-ending__actions{flex-direction:row;flex-wrap:wrap}}
+@media(max-width:520px){.web-hero{padding-top:6rem}.web-hero__numbers{gap:.7rem}.web-hero__numbers strong{font-size:1.7rem}.web-hero__numbers span{font-size:.55rem}.web-card__visual{min-height:218px}.web-card__visual-body{padding:1.6rem}.web-card__head{flex-direction:column}.web-card__description{min-height:0}.web-pending{flex-direction:column;align-items:flex-start}.web-ending__actions{width:100%;flex-direction:column}.web-ending__actions a{justify-content:center}}
+@media(prefers-reduced-motion:reduce){.web-card{transition:none}.web-card:hover{transform:none}}
+</style>

@@ -44,4 +44,10 @@ for (const id of websites.map((site) => site.id)) {
   assert.ok(visual.includes("site.id === '" + id + "'"), 'Dedicated visual concept: ' + id);
 }
 assert.ok(!visual.includes('<iframe'), 'Do not embed third-party sites in frames');
+assert.ok(!gallery.includes('neareo.cl') && !visual.includes('neareo.cl'), 'Unrelated domain never mentioned');
+assert.ok(visual.includes('shot-news__feature') && visual.includes('shot-news__edition'), 'Noticiencias uses a news-led editorial composition');
+assert.ok(visual.includes('shot-money__indicators') && visual.includes('shot-money__mark'), 'Monedario shows its actual financial indicators and logo mark');
+assert.ok(visual.includes('#1a4f8a'), 'Monedario identity uses its real blue brand color');
+assert.ok(visual.includes('Ciencia y tecnología para leer con criterio.') && visual.includes('Decisiones de <em>plata</em> en Chile.'), 'Previews reflect verified homepage headlines');
+assert.ok(visual.indexOf('.shot-news__feature') !== visual.indexOf('.shot-money__content'), 'Previews have separate, site-specific layouts');
 console.log('PASS: 7 bilingual website cases, visual previews, verified ownership, delivery proof and routes.');

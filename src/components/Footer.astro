@@ -79,6 +79,7 @@ const legalLinks = [
       <div class="footer__bottom-links">
         <div class="footer__meta-links">
           <a href={switchHref} hreflang={lang === 'en' ? 'es' : 'en'} data-language-preference={lang === 'en' ? 'es' : 'en'}>{c.lang}</a>
+          <a href={lang === 'en' ? '/en/sites/' : '/es/sitios/'}>{lang === 'en' ? 'Websites' : 'Sitios web'}</a>
           {lang === 'es' && <a href="/es/guias/">Guías</a>}
           <a href={lang === 'en' ? '/en/blog/' : '/blog/'}>{lang === 'en' ? 'Technical blog' : 'Blog técnico'}</a>
           <a href="/llms.txt">{c.llms}</a>

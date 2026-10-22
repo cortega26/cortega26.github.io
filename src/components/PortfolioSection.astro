@@ -129,6 +129,7 @@ const displayGroups = full
       <div class="divider reveal"></div>
       <p class="section-subtitle reveal">{c.subtitle}</p>
       {full && <p class="section-note reveal">{c.publicNote}</p>}
+      <a class="btn btn-secondary" href={lang === 'en' ? '/en/sites/' : '/es/sitios/'}>{lang === 'en' ? 'Browse websites ↗' : 'Explorar sitios web ↗'}</a>
     </div>
 
     {full && <div class="filter-bar reveal" role="group" aria-label={c.fl.label}>

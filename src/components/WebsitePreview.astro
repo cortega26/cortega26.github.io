@@ -12,45 +12,63 @@ const es = lang === 'es';
     <span class="site-shot__secure">↗</span>
   </div>
 
+
   {site.id === 'noticiencias' && (
     <div class="shot-news">
-      <div class="shot-news__nav"><b>noticiencias<span>.</span></b><span>{es ? 'Ciencia' : 'Science'} &nbsp; / &nbsp; {es ? 'Tecnología' : 'Technology'}</span></div>
-      <div class="shot-news__main">
-        <div class="shot-news__copy">
-          <small>{es ? 'DIVULGACIÓN CIENTÍFICA' : 'SCIENCE JOURNALISM'}</small>
-          <strong>{es ? 'Ciencia para leer con criterio.' : 'Science worth reading critically.'}</strong>
-          <span class="shot-news__hairline"></span>
-          <p>{es ? 'Hallazgos, contexto y fuentes originales.' : 'Discoveries, context and original sources.'}</p>
-          <span class="shot-news__pill">{es ? 'Explorar historias' : 'Explore stories'} &nbsp; ↗</span>
-        </div>
-        <img src="https://noticiencias.com/_astro/2026-10-17-neandertal-herido-y-cuidado-senal-de-empatia-hace-75-000-anos.dOSBiH_p_Z2aPWnO.webp" width="380" height="260" loading="lazy" decoding="async" alt="" />
+      <div class="shot-news__nav">
+        <b>Noticiencias</b>
+        <span>{es ? 'Ciencia · Tecnología · Archivo' : 'Science · Technology · Archive'}</span>
       </div>
-      <div class="shot-news__ticker"><span>{es ? 'ARQUEOLOGÍA' : 'ARCHAEOLOGY'}</span><span>{es ? 'CIENCIA' : 'SCIENCE'}</span><span>{es ? 'ARCHIVO' : 'ARCHIVE'}</span></div>
+      <div class="shot-news__edition">
+        <span>{es ? 'PORTADA · 17 OCTUBRE 2026' : 'FRONT PAGE · 17 OCTOBER 2026'}</span>
+        <span>{es ? 'FUENTES IDENTIFICADAS' : 'SOURCED REPORTING'}</span>
+      </div>
+      <div class="shot-news__headline">
+        <strong>{es ? 'Ciencia y tecnología para leer con criterio.' : 'Science and technology, in context.'}</strong>
+        <p>{es ? 'Hallazgos, dudas y consecuencias de cada historia.' : 'Discoveries, questions and their implications.'}</p>
+      </div>
+      <div class="shot-news__feature">
+        <img src="https://noticiencias.com/_astro/2026-10-17-neandertal-herido-y-cuidado-senal-de-empatia-hace-75-000-anos.dOSBiH_p_Z2aPWnO.webp" width="440" height="300" loading="lazy" decoding="async" alt="" />
+        <div class="shot-news__feature-copy">
+          <small>{es ? 'ARQUEOLOGÍA · 17 OCT' : 'ARCHAEOLOGY · 17 OCT'}</small>
+          <b>{es ? '¿Qué ocurrió con el neandertal de Shanidar?' : 'What happened to the Shanidar Neanderthal?'}</b>
+          <span>{es ? 'FUENTE · 404 MEDIA' : 'SOURCE · 404 MEDIA'}</span>
+        </div>
+      </div>
+      <div class="shot-news__bottom">
+        <span>{es ? 'DE ESTA EDICIÓN' : 'IN THIS EDITION'}</span>
+        <span>{es ? 'Investigación · Ciencia · Tecnología' : 'Research · Science · Technology'}</span>
+      </div>
     </div>
   )}
 
   {site.id === 'monedario' && (
     <div class="shot-money">
-      <div class="shot-money__nav"><b>monedario<span>.</span></b><small>{es ? 'Guías · Calculadoras' : 'Guides · Calculators'}</small></div>
-      <div class="shot-money__grid">
-        <div class="shot-money__copy">
-          <span>{es ? 'TUS NÚMEROS, CLAROS.' : 'YOUR NUMBERS, CLEAR.'}</span>
-          <strong>{es ? 'Decisiones de plata con datos, no con humo.' : 'Financial decisions backed by facts.'}</strong>
-          <div class="shot-money__options">
-            <span>{es ? 'Sueldo líquido' : 'Net salary'} ↗</span>
-            <span>{es ? 'Finiquito' : 'Severance'} ↗</span>
-            <span>UF ↗</span>
-          </div>
+      <div class="shot-money__nav">
+        <div class="shot-money__brand">
+          <span class="shot-money__mark"><i></i><i></i><i></i></span>
+          <b>Monedario</b>
         </div>
-        <div class="shot-money__calc">
-          <small>{es ? 'CALCULADORA' : 'CALCULATOR'}</small>
-          <b>{es ? 'Sueldo líquido' : 'Net salary'}</b>
-          <div class="shot-money__field"></div>
-          <div class="shot-money__field shot-money__field--short"></div>
-          <div class="shot-money__action">{es ? 'Calcular' : 'Calculate'} →</div>
+        <span>{es ? 'Guías　 Calculadoras　 Glosario' : 'Guides　 Calculators　 Glossary'}</span>
+      </div>
+      <div class="shot-money__content">
+        <div class="shot-money__hero">
+          <span>{es ? 'FINANZAS PERSONALES · CHILE' : 'PERSONAL FINANCE · CHILE'}</span>
+          <strong>{es ? <>Decisiones de <em>plata</em> en Chile.</> : <>Make better <em>money</em> decisions.</>}</strong>
+          <p>{es ? 'Basadas en matemáticas y la ley vigente.' : 'Based on mathematics and current law.'}</p>
+        </div>
+        <div class="shot-money__links">
+          <span>{es ? 'Calcular sueldo líquido' : 'Calculate net salary'} <b>→</b></span>
+          <span>{es ? 'Simular finiquito' : 'Estimate severance'} <b>→</b></span>
+          <span>{es ? 'Convertir UF' : 'Convert UF'} <b>→</b></span>
         </div>
       </div>
-      <div class="shot-money__foot">{es ? 'Herramientas gratuitas · Fuentes oficiales' : 'Free tools · Official sources'}</div>
+      <div class="shot-money__indicators">
+        <div class="shot-money__indicator"><small>UF</small><b>UF ↔ CLP</b></div>
+        <div class="shot-money__indicator"><small>UTM</small><b>{es ? 'Impuestos' : 'Tax'}</b></div>
+        <div class="shot-money__indicator"><small>{es ? 'DÓLAR OBS.' : 'USD / CLP'}</small><b>{es ? 'Indicadores' : 'Indicators'}</b></div>
+      </div>
+      <div class="shot-money__foot">{es ? 'Sin publicidad · Sin registro · Fuentes oficiales' : 'Ad-free · No registration · Official sources'}</div>
     </div>
   )}
 
@@ -118,31 +136,64 @@ const es = lang === 'es';
 .site-shot__dots{display:flex;gap:4px}.site-shot__dots i{width:6px;height:6px;border-radius:50%;background:#485366}.site-shot__dots i:first-child{background:#c06b67}.site-shot__dots i:nth-child(2){background:#cfaa5b}.site-shot__dots i:last-child{background:#6c9d85}
 .site-shot__url{font:500 10px/1.2 var(--ff-label);opacity:.76;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-left:auto}.site-shot__secure{font-size:11px;color:#aaa}
 .site-shot>div:not(.site-shot__browser){height:calc(100% - 30px)}
-.shot-news{background:#f5f4ef;color:#182a3c;font-family:Georgia,'Times New Roman',serif}
-.shot-news__nav{height:44px;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d5d5cb;gap:8px}
-.shot-news__nav b{font-family:var(--ff-heading);font-size:22px;letter-spacing:-1px}.shot-news__nav b span{color:#cc603e}
-.shot-news__nav>span{font:600 9px var(--ff-label);white-space:nowrap}
-.shot-news__main{display:grid;grid-template-columns:1fr 43%;height:calc(100% - 75px)}
-.shot-news__copy{padding:19px 12px 12px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:9px}
-.shot-news__copy small{font:700 9px var(--ff-label);letter-spacing:.08em;color:#ba5332}
-.shot-news__copy strong{font-size:clamp(22px,3vw,34px);line-height:1.04;letter-spacing:-.035em}
-.shot-news__hairline{width:30px;height:2px;background:#d26545}.shot-news__copy p{font:400 11px/1.45 var(--ff-body);color:#58616b}
-.shot-news__pill{margin-top:auto;border:1px solid #17324f;color:#17324f;padding:5px 9px;font:650 9px var(--ff-label)}
-.shot-news__main img{width:100%;height:100%;object-fit:cover}
-.shot-news__ticker{height:31px;border-top:1px solid #d5d5cb;display:flex;align-items:center;justify-content:space-around;font:650 9px var(--ff-label);color:#6b727c;letter-spacing:.05em}
-.shot-money{background:#f9f8f4;color:#132f32;font-family:var(--ff-heading)}
-.shot-money__nav{height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid #e4e9e3}
-.shot-money__nav b{font-size:22px;letter-spacing:-1.1px}.shot-money__nav b span{color:#308b70}.shot-money__nav small{font-size:9px;color:#47726a}
-.shot-money__grid{height:calc(100% - 74px);display:grid;grid-template-columns:1.05fr .85fr;gap:12px;padding:22px}
-.shot-money__copy{display:flex;flex-direction:column;gap:11px}
-.shot-money__copy>span{font:700 9px var(--ff-label);letter-spacing:.06em;color:#258268}
-.shot-money__copy strong{font-size:clamp(19px,2.3vw,29px);letter-spacing:-.045em;line-height:1.1}
-.shot-money__options{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.shot-money__options span{border:1px solid #bdd7c8;border-radius:4px;padding:5px 7px;color:#306b57;font:600 9px var(--ff-label)}
-.shot-money__calc{background:#fff;border:1px solid #e2e8e2;box-shadow:0 10px 25px #143f2a17;border-radius:9px;padding:16px 15px;display:flex;flex-direction:column;gap:9px;transform:rotate(2deg)}
-.shot-money__calc small{font:700 8px var(--ff-label);letter-spacing:.11em;color:#46836e}
-.shot-money__calc b{font-size:16px;letter-spacing:-.04em}.shot-money__field{height:24px;border:1px solid #dce6df;background:#f5f8f4;border-radius:4px}.shot-money__field--short{width:75%}
-.shot-money__action{background:#1c6d52;border-radius:4px;padding:7px;color:white;font:600 10px var(--ff-label);text-align:center;margin-top:auto}
-.shot-money__foot{height:30px;background:#ecf2ed;color:#416d5d;padding:8px 22px;font:600 9px var(--ff-label)}
+
+/* Noticiencias: faithful news hierarchy — masthead, issue date, photo-led feature. */
+.shot-news{background:#fafaf8;color:#182638;font-family:Arial,Helvetica,sans-serif;display:flex;flex-direction:column}
+.shot-news__nav{height:38px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:2px solid #1e364e;padding:0 18px}
+.shot-news__nav b{font:800 21px/1 Arial,Helvetica,sans-serif;letter-spacing:-.055em}
+.shot-news__nav span{font:600 9px Arial,Helvetica,sans-serif;color:#52647a;white-space:nowrap}
+.shot-news__edition{height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:6px;margin:0 18px;border-bottom:1px solid #d9dfe4;color:#245780;font:750 9px Arial,Helvetica,sans-serif;letter-spacing:.04em}
+.shot-news__edition span:last-child{color:#647282;font-size:8px}
+.shot-news__headline{flex-shrink:0;padding:11px 18px 10px}
+.shot-news__headline strong{display:block;max-width:27ch;font:800 clamp(23px,2.65vw,31px)/1.02 Arial,Helvetica,sans-serif;letter-spacing:-.06em}
+.shot-news__headline p{margin-top:5px;color:#61707c;font:400 10px/1.35 Arial,Helvetica,sans-serif}
+.shot-news__feature{flex:1;min-height:0;display:grid;grid-template-columns:53% 47%;margin:0 18px 8px;border-top:1px solid #d9dfe4;overflow:hidden}
+.shot-news__feature img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;object-position:center 40%;padding-top:8px}
+.shot-news__feature-copy{min-width:0;padding:12px 6px 0 13px;display:flex;flex-direction:column;gap:7px;align-items:flex-start}
+.shot-news__feature-copy small{font:800 8px Arial,Helvetica,sans-serif;letter-spacing:.05em;color:#2a7296}
+.shot-news__feature-copy b{font:750 clamp(13px,1.5vw,18px)/1.14 Arial,Helvetica,sans-serif;letter-spacing:-.045em}
+.shot-news__feature-copy>span{font:700 8px Arial,Helvetica,sans-serif;color:#677482;margin-top:auto;padding-bottom:4px}
+.shot-news__bottom{height:22px;flex-shrink:0;background:#edf2f5;border-top:1px solid #d8e0e7;display:flex;align-items:center;justify-content:space-between;gap:5px;padding:0 18px;color:#39596d;font:700 8px Arial,Helvetica,sans-serif;letter-spacing:.025em}
+.shot-news__bottom span:last-child{font-weight:500;color:#61717c}
+
+/* Monedario: own blue identity, Fraunces-style italic display, CTA rows and indicator strip. */
+.shot-money{background:#f8f9fb;color:#1a2332;font-family:'Source Sans 3',Arial,sans-serif;display:flex;flex-direction:column}
+.shot-money__nav{height:44px;flex-shrink:0;border-bottom:1px solid #c8d3e0;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.shot-money__brand{display:flex;align-items:center;gap:7px}
+.shot-money__brand b{font:650 22px/1 Arial,Helvetica,sans-serif;letter-spacing:.005em;color:#1a2332}
+.shot-money__nav>span{font:600 9px Arial,Helvetica,sans-serif;color:#51637a;white-space:nowrap}
+.shot-money__mark{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;width:22px;height:22px}
+.shot-money__mark i{display:block;background:#1a4f8a;border-radius:3px;height:5px}
+.shot-money__mark i:nth-child(1){width:11px}.shot-money__mark i:nth-child(2){width:17px}.shot-money__mark i:nth-child(3){width:22px}
+.shot-money__content{flex:1;min-height:0;display:grid;grid-template-columns:1.14fr .86fr;gap:15px;padding:17px 18px 8px}
+.shot-money__hero{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.shot-money__hero>span{font:750 8px Arial,Helvetica,sans-serif;color:#1a4f8a;letter-spacing:.09em}
+.shot-money__hero strong{display:block;margin-top:9px;font:700 clamp(24px,2.65vw,32px)/1.03 Georgia,'Times New Roman',serif;letter-spacing:-.045em}
+.shot-money__hero strong em{font-weight:700;color:#1a4f8a}
+.shot-money__hero p{font:400 11px/1.4 Arial,Helvetica,sans-serif;color:#59697c;margin-top:9px}
+.shot-money__links{border-top:1px solid #c8d3e0;display:flex;flex-direction:column;justify-content:space-around;min-width:0}
+.shot-money__links>span{border-bottom:1px solid #c8d3e0;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:9px 4px;color:#1a4f8a;font:650 11px/1.25 Arial,Helvetica,sans-serif;text-decoration:underline;text-decoration-style:dashed;text-underline-offset:3px}
+.shot-money__links b{font-size:15px;text-decoration:none}
+.shot-money__indicators{border-block:1px solid #c8d3e0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:0 18px}
+.shot-money__indicator{min-width:0;display:flex;flex-direction:column;gap:4px;padding:8px 11px}
+.shot-money__indicator:first-child{padding-left:0}.shot-money__indicator:not(:last-child){border-right:1px solid #c8d3e0}
+.shot-money__indicator small{font:750 8px Arial,Helvetica,sans-serif;color:#63748a;letter-spacing:.05em}
+.shot-money__indicator b{font:700 12px/1.1 Georgia,'Times New Roman',serif;color:#1a2332}
+.shot-money__foot{flex-shrink:0;height:25px;display:flex;align-items:center;padding:0 18px;color:#536275;font:italic 10px Georgia,'Times New Roman',serif}
+@media(max-width:520px){
+  .shot-news__nav{padding-inline:12px;height:34px}.shot-news__nav b{font-size:18px}.shot-news__nav span{font-size:7px}
+  .shot-news__edition{margin-inline:12px;height:22px;font-size:7px}.shot-news__edition span:last-child{font-size:7px}
+  .shot-news__headline{padding:8px 12px 7px}.shot-news__headline strong{font-size:21px}.shot-news__headline p{font-size:8px}
+  .shot-news__feature{margin:0 12px 6px;grid-template-columns:51% 49%}.shot-news__feature-copy{padding:8px 0 0 8px;gap:4px}
+  .shot-news__feature-copy small,.shot-news__feature-copy>span{font-size:7px}.shot-news__feature-copy b{font-size:12px}
+  .shot-news__bottom{height:20px;padding-inline:12px;font-size:7px}
+  .shot-money__nav{height:37px;padding-inline:12px}.shot-money__brand b{font-size:18px}.shot-money__nav>span{font-size:7px}
+  .shot-money__content{padding:10px 12px 5px;gap:9px}.shot-money__hero strong{font-size:22px;margin-top:7px}.shot-money__hero p{font-size:9px;margin-top:5px}
+  .shot-money__links>span{font-size:9px;padding:7px 2px}.shot-money__indicators{margin-inline:12px}
+  .shot-money__indicator{padding:6px 7px;gap:2px}.shot-money__indicator small{font-size:7px}.shot-money__indicator b{font-size:10px}
+  .shot-money__foot{height:20px;padding-inline:12px;font-size:8px}
+}
+
 .shot-shop{background:#faf9f5;color:#272724;font-family:var(--ff-heading)}
 .shot-shop__nav{height:46px;background:#173b2b;color:white;display:flex;justify-content:space-between;align-items:center;padding:0 20px;gap:8px}
 .shot-shop__nav b{font-size:16px;letter-spacing:-.03em}.shot-shop__nav>span{font-size:10px}.shot-shop__nav i{display:inline-grid;place-items:center;border-radius:50%;background:#f2b761;color:#173b2b;width:17px;height:17px;font-style:normal;margin-left:5px;font-weight:bold}
@@ -194,3 +245,5 @@ const es = lang === 'es';
 @media(max-width:520px){.site-shot{min-height:240px;aspect-ratio:1.48}.shot-news__main{grid-template-columns:1.15fr .85fr}.shot-news__copy{padding:16px 8px 10px 14px;gap:6px}.shot-news__copy strong{font-size:24px}.shot-news__copy p{font-size:9px}.shot-news__nav b{font-size:19px}.shot-money__grid{padding:12px;gap:7px}.shot-money__copy strong{font-size:19px}.shot-money__calc{padding:10px;gap:7px}.shot-shop__products{padding-inline:12px}.shot-bakery__copy{padding:15px 0 0 14px}.shot-bakery__copy strong{font-size:26px}.shot-data__heading{padding:12px 14px 8px}.shot-data__dashboard{padding:0 14px 10px}.shot-studio__body{padding:15px}.shot-studio__cards{padding:0 15px}}
 @media(prefers-reduced-motion:reduce){.site-shot *{transition:none!important}}
 </style>
+/* The two more information-dense previews need a taller mobile viewport to keep the lead image and financial tools legible. */
+@media(max-width:520px){.site-shot.site-shot--noticiencias,.site-shot.site-shot--monedario{min-height:295px;aspect-ratio:1.27}}

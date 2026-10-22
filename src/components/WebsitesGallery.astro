@@ -89,6 +89,7 @@ const contactHref = lang === 'es' ? '/es/#contact' : '/en/#contact';
                     <h3>{site.name}</h3>
                     <p class="web-card__domain">{site.domain}</p>
                   </div>
+                </div>
                 <p class="web-card__description">{site.description[lang]}</p>
                 <div class="web-card__proof"><div><span class="web-card__proof-label">{copy.purpose}</span><p>{site.benefit[lang]}</p></div><div><span class="web-card__proof-label">{copy.delivered}</span><ul>{site.capabilities[lang].map((item) => <li>{item}</li>)}</ul></div></div>
                 <ul class="web-card__tags" aria-label={lang === 'es' ? 'Tecnologías y características' : 'Technologies and features'}>

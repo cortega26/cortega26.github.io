@@ -28,6 +28,7 @@ const navItems = [
 >
   <Fragment slot="head"><script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} /></Fragment>
   <Navbar lang="en" items={navItems} ctaHref="/en/#contact" switchHref="/es/sitios/" />
-  <main id="main" style="padding-top:var(--nav-height)"><WebsitesGallery lang="en" /></main>
+  <main id="main" class="websites-page"><WebsitesGallery lang="en" /></main>
   <Footer lang="en" langHref="/es/sitios/" />
 </BaseLayout>
+<style>.websites-page { padding-top: var(--nav-height); }</style>

@@ -83,7 +83,7 @@ export const websites: Website[] = [
     url: 'https://nohemipalencia.com/',
     repo: 'https://github.com/cortega26/nohemi-palencia',
     group: 'culture',
-    status: 'unverified',
+    status: 'checked',
     tags: ['Arte', 'Galería', 'Portafolio'],
     description: {
       es: 'Portafolio artístico y catálogo de obras de la pintora venezolana Nohemi Palencia Cisneros.',

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+import Footer from '../../../components/Footer.astro';
+import WebsitesGallery from '../../../components/WebsitesGallery.astro';
+import { alternatesFor } from '../../../data/routes';
+import { buildBreadcrumb } from '../../../data/jsonld';
+import '../../../styles/global.css';
+
+const canonical = 'https://tooltician.com/en/sites/';
+const breadcrumb = buildBreadcrumb([
+  { name: 'Tooltician', item: 'https://tooltician.com/en/' },
+  { name: 'Website portfolio', item: canonical },
+]);
+const navItems = [
+  { href: '/en/#services', label: 'Services' },
+  { href: '#sitios', label: 'Websites' },
+  { href: '/en/work/', label: 'Engineering' },
+  { href: '/en/#about', label: 'About' },
+];
+---
+<BaseLayout
+  lang="en"
+  title="Website Portfolio | Tooltician"
+  description="Explore the websites and digital products by Carlos Ortega: Noticiencias, Monedario, Casa Bea, El Rincón de Ébano, Nohemi Palencia, chile-hub and Tooltician."
+  canonical={canonical}
+  alternates={alternatesFor('websites')}
+>
+  <Fragment slot="head"><script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} /></Fragment>
+  <Navbar lang="en" items={navItems} ctaHref="/en/#contact" switchHref="/es/sitios/" />
+  <main id="main" style="padding-top:var(--nav-height)"><WebsitesGallery lang="en" /></main>
+  <Footer lang="en" langHref="/es/sitios/" />
+</BaseLayout>

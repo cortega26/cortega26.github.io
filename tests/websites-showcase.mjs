@@ -12,6 +12,9 @@ for (const site of websites) {
   assert.equal(new URL(site.url).protocol, 'https:', `HTTPS target: ${site.id}`);
   assert.ok(site.description.en?.length > 30 && site.description.es?.length > 30, `Bilingual copy: ${site.id}`);
   assert.ok(site.highlight.en?.length > 5 && site.highlight.es?.length > 5, `Visual title: ${site.id}`);
+  assert.ok(site.benefit.en?.length > 35 && site.benefit.es?.length > 35, `Client outcome: ${site.id}`);
+  assert.equal(site.capabilities.es?.length, 2, `Spanish deliverables: ${site.id}`);
+  assert.equal(site.capabilities.en?.length, 2, `English deliverables: ${site.id}`);
   assert.ok(site.tags.length > 0, `Nonempty tags: ${site.id}`);
   assert.ok(['checked', 'unverified'].includes(site.status), `Verification status: ${site.id}`);
   if (site.repo) assert.ok(site.repo.startsWith('https://github.com/cortega26/'), `Source repo: ${site.id}`);
@@ -20,7 +23,7 @@ for (const domain of ['noticiencias.com', 'monedario.cl', 'casabea.cl', 'elrinco
   assert.ok(websites.some((s) => s.domain === domain), `Present domain: ${domain}`);
 }
 assert.ok(websites.some((s) => s.id === 'chile-hub'), 'Include public chile-hub portal');
-assert.ok(!websites.some((s) => s.domain === 'neareo.cl'), 'Unverified/unmatched domain is not presented as delivered');
+assert.ok(websites.every((s) => s.status === 'checked'), 'Every displayed site must have been verified');
 assert.ok(!websites.some((s) => s.domain === 'casabeya.cl'), 'Do not publish the misspelled bakery domain');
 assert.equal(websites.find((s) => s.id === 'nohemi')?.status, 'checked', 'Artist custom domain verified reachable 2026-10-22');
 const alternates = alternatesFor('websites');
@@ -31,4 +34,14 @@ for (const path of ['src/pages/en/sites/index.astro', 'src/pages/es/sitios/index
   assert.ok(src.includes("alternatesFor('websites')"), `Correct hreflang group: ${path}`);
   assert.ok(src.includes('<WebsitesGallery'), `Shared component: ${path}`);
 }
-console.log('PASS: 7 bilingual website records, domain provenance, routes, and accessible page integration.');
+const gallery = readFileSync(new URL('../src/components/WebsitesGallery.astro', import.meta.url), 'utf8');
+const visual = readFileSync(new URL('../src/components/WebsitePreview.astro', import.meta.url), 'utf8');
+assert.ok(gallery.includes('<WebsitePreview'), 'Each card includes a representative UI preview');
+assert.ok(gallery.includes('site.benefit[lang]') && gallery.includes('site.capabilities[lang]'), 'Client-facing proof appears on cards');
+assert.ok(!gallery.includes('<aside'), 'No unrelated or speculative domain is promoted');
+assert.ok(visual.includes("object-fit:contain"), 'Artwork is displayed uncropped');
+for (const id of websites.map((site) => site.id)) {
+  assert.ok(visual.includes("site.id === '" + id + "'"), 'Dedicated visual concept: ' + id);
+}
+assert.ok(!visual.includes('<iframe'), 'Do not embed third-party sites in frames');
+console.log('PASS: 7 bilingual website cases, visual previews, verified ownership, delivery proof and routes.');

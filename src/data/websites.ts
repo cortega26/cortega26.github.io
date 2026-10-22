@@ -1,6 +1,6 @@
 // Public website showcase. Keep operational claims separate from domain ownership.
 // Audited 2026-10-22 against the live sites and their current GitHub repositories.
-// A domain provided by the owner without a successful live check is marked unverified.
+// Showcase only user-owned projects backed by a current repository or live site.
 export type WebsiteGroup = 'editorial' | 'commerce' | 'culture' | 'data' | 'studio';
 export type WebsiteStatus = 'checked' | 'unverified';
 
@@ -15,6 +15,8 @@ export interface Website {
   tags: string[];
   description: { es: string; en: string };
   highlight: { es: string; en: string };
+  benefit: { es: string; en: string };
+  capabilities: { es: [string, string]; en: [string, string] };
 }
 
 export const websites: Website[] = [
@@ -32,6 +34,8 @@ export const websites: Website[] = [
       en: 'Spanish-language science publication with named sources, a news archive and published editorial standards.',
     },
     highlight: { es: 'Ciencia con contexto', en: 'Science with context' },
+    benefit: { es: "Una experiencia editorial para descubrir, leer y profundizar sin perder las fuentes.", en: "An editorial experience built for discovery, reading and source transparency." },
+    capabilities: { es: ["Portada, secciones y archivo","Lectura optimizada y SEO"], en: ["Homepage, topics and archive","Reading experience and SEO"] },
   },
   {
     id: 'monedario',
@@ -46,6 +50,8 @@ export const websites: Website[] = [
       en: 'Chilean personal-finance guides and calculators covering salaries, taxes, inflation, credit and savings.',
     },
     highlight: { es: 'Finanzas sin humo', en: 'Practical personal finance' },
+    benefit: { es: "Convierte dudas financieras cotidianas en decisiones apoyadas por herramientas.", en: "Turns everyday finance questions into actions supported by practical tools." },
+    capabilities: { es: ["Calculadoras y guías útiles","Navegación por situaciones reales"], en: ["Calculators and useful guides","Navigation by real-life scenarios"] },
   },
   {
     id: 'ebano',
@@ -61,6 +67,8 @@ export const websites: Website[] = [
       en: 'Neighborhood minimarket with an online catalog, offers, cart and WhatsApp-based ordering.',
     },
     highlight: { es: 'Comercio de proximidad', en: 'Neighborhood commerce' },
+    benefit: { es: "Permite resolver compras cotidianas sin salir del edificio.", en: "Enables everyday shopping without leaving the building." },
+    capabilities: { es: ["Catálogo, búsqueda y carrito","Pedidos coordinados por WhatsApp"], en: ["Catalog, search and cart","WhatsApp order handoff"] },
   },
   {
     id: 'casabea',
@@ -75,6 +83,8 @@ export const websites: Website[] = [
       en: 'Digital storefront and order flow for an artisan cinnamon-roll bakery in Santiago.',
     },
     highlight: { es: 'Hecho a mano, pedido en línea', en: 'Handmade goods, online ordering' },
+    benefit: { es: "Transforma un producto artesanal en una experiencia clara de elección y pedido.", en: "Turns a handmade product into a clear digital browsing and ordering experience." },
+    capabilities: { es: ["Fotografía y catálogo de productos","Pedido y cotización por WhatsApp"], en: ["Product imagery and catalog","WhatsApp orders and quotes"] },
   },
   {
     id: 'nohemi',
@@ -90,6 +100,8 @@ export const websites: Website[] = [
       en: 'Artist portfolio and catalog of works by Venezuelan painter Nohemi Palencia Cisneros.',
     },
     highlight: { es: 'Una galería para la obra', en: 'A gallery for the work' },
+    benefit: { es: "La obra y la identidad artística ocupan el centro de la experiencia.", en: "Artworks and artistic identity are the focus of the experience." },
+    capabilities: { es: ["Galería visual y fichas de obras","Adaptación a móvil y exposición"], en: ["Artwork gallery and details","Mobile-first exhibition access"] },
   },
   {
     id: 'chile-hub',
@@ -105,6 +117,8 @@ export const websites: Website[] = [
       en: 'Curated Chilean public-data portal with a catalog, maps, SQL exploration and reproducible downloads.',
     },
     highlight: { es: 'Datos listos para usar', en: 'Public data, ready to use' },
+    benefit: { es: "Hace navegables y reutilizables conjuntos de datos públicos complejos.", en: "Makes complex public datasets explorable and reusable." },
+    capabilities: { es: ["Catálogo y exploración de datos","Descargas y trazabilidad"], en: ["Data catalog and exploration","Downloads and provenance"] },
   },
   {
     id: 'tooltician',
@@ -120,6 +134,8 @@ export const websites: Website[] = [
       en: 'Bilingual professional site for Python automation, data systems and verifiable case studies.',
     },
     highlight: { es: 'Sistemas que perduran', en: 'Systems that last' },
+    benefit: { es: "Presenta servicios técnicos mediante problemas reales y evidencia concreta.", en: "Presents technical services through real problems and evidence." },
+    capabilities: { es: ["Portafolio y casos verificables","Servicio bilingüe y contacto"], en: ["Portfolio and verifiable cases","Bilingual service and contact"] },
   },
 ];
 

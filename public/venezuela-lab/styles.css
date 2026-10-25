@@ -46,7 +46,6 @@ dialog{background:var(--paper);border:0;box-shadow:0 24px 100px #0a100eb0;color:
 .museum-teaser-copy small{display:block;letter-spacing:.07em;color:#aabfb1;font-size:9px;font-weight:700;line-height:1.5}
 
 @media (width <= 760px) {
-
   .museum-teaser {
     margin-top:65px;
     grid-template-columns:1fr

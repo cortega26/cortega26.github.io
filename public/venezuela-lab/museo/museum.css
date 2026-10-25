@@ -77,7 +77,6 @@
 .museum-footer{background:#132a23;color:#f0eee7;padding-top:35px}.museum-footer>.wrap:first-child{display:flex;align-items:center;gap:28px;justify-content:space-between;padding-bottom:35px}.museum-footer p{font:italic 18px Georgia,serif;color:#b8c6bc}.museum-footer a{font-size:11px}.museum-footer-small{border-top:1px solid #496052;padding:18px 0;font-size:9px;letter-spacing:.09em;color:#a8b7ac}
 
 @media (width <= 1000px) {
-
   .hero-museum-grid {
     gap:35px;
     grid-template-columns:1.1fr .9fr
@@ -105,7 +104,6 @@
 }
 
 @media (width <= 700px) {
-
   .museum-masthead {
     height:78px
   }
@@ -442,8 +440,7 @@
   font-weight:700
 }
 
-@media(max-width:800px) {
-
+@media (width <= 800px) {
   .casefile-heading,.casefile-evidence,.casefile-limits {
     grid-template-columns:1fr;
     gap:16px
@@ -474,8 +471,7 @@
   }
 }
 
-@media(max-width:370px) {
-
+@media (width <= 370px) {
   .casefile-result dt {
     max-width:45%
   }

@@ -12,7 +12,7 @@ for (const value of ['51,2 %','44,2 %','30,4 %','67,1 %','81,7 %','24.532','30.0
 }
 assert.ok(html.includes('resume una investigación ajena'), 'La ficha debe declarar límites de verificación');
 assert.ok(html.includes('noindex,nofollow,noarchive'), 'El prototipo no debe indexarse');
-assert.ok(css.includes('.museum-casefile') && css.includes('@media(max-width:800px)'), 'Estilo y adaptación móvil de ficha');
+assert.ok(css.includes('.museum-casefile') && css.includes('@media (width <= 800px)'), 'Estilo y adaptación móvil de ficha');
 const teaser = readFileSync(new URL('../public/venezuela-lab/index.html', import.meta.url), 'utf8');
 const teaserCss = readFileSync(new URL('../public/venezuela-lab/styles.css', import.meta.url), 'utf8');
 assert.ok(teaser.includes('<strong>PROHIBIDO<br>OLVIDAR<span>.</span></strong>'), 'El teaser del museo debe decir Prohibido olvidar');

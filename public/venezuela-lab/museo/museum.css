@@ -579,3 +579,130 @@
     padding: 25px 20px;
   }
 }
+
+
+/* Expediente 003 — secuencia institucional 2017: hechos, correcciones y evaluaciones */
+.museum-casefile-instituciones {
+  background: #f0ede4;
+  border-top-color: #ac4938;
+}
+
+.institutional-intro {
+  max-width: 1020px;
+  background: #e0e1d6;
+  border-left: 4px solid #a34132;
+  padding: 23px 30px;
+  margin-bottom: 32px;
+}
+
+.institutional-intro .museum-eyebrow {
+  color: #a34132;
+}
+
+.institutional-intro p:not(.museum-eyebrow) {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 12px 0 0;
+}
+
+.institutional-intro a {
+  color: #9b3b30;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.institutional-events {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.institutional-event {
+  background: #fdfaf2;
+  border-top: 3px solid #a74736;
+  padding: 30px 28px;
+}
+
+.institutional-event-head {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  color: #a74736;
+}
+
+.institutional-event h3 {
+  font: 500 clamp(25px, 2.6vw, 35px)/1.13 Georgia, serif;
+  letter-spacing: -.035em;
+  margin: 24px 0 20px;
+}
+
+.institutional-event p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #43554b;
+}
+
+.institutional-event a {
+  display: inline-block;
+  color: #963c32;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.5;
+  margin: 14px 15px 0 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.institutional-verdict {
+  margin-top: 28px;
+  padding: 30px 35px;
+  background: #20382d;
+  color: #f7f3e9;
+}
+
+.institutional-verdict .museum-eyebrow {
+  color: #f1b2a1;
+}
+
+.institutional-verdict h3 {
+  font: 500 clamp(27px, 3vw, 40px)/1.14 Georgia, serif;
+  letter-spacing: -.035em;
+  margin: 16px 0;
+}
+
+.institutional-verdict p:not(.museum-eyebrow) {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 950px;
+  color: #e2e9e0;
+}
+
+.institutional-verdict a {
+  color: #f7c4af;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (width <= 800px) {
+  .institutional-events {
+    grid-template-columns: 1fr;
+  }
+
+  .institutional-event {
+    padding: 24px 20px;
+  }
+
+  .institutional-intro {
+    padding: 20px;
+  }
+
+  .institutional-verdict {
+    padding: 25px 22px;
+  }
+}

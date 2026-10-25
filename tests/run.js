@@ -8,6 +8,7 @@
 import { readFileSync, existsSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
 import './websites-showcase.mjs';
+import './contrapeso-documentary.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const BUILT = process.argv.includes('--built');

@@ -12,7 +12,7 @@ assert.equal((museum.match(/class="barbados-entry"/g) || []).length, 4, 'Cuatro 
 assert.ok(museum.includes('17 OCT 2023'), 'Fecha del documento');
 assert.ok(museum.includes('28 de julio de 2024'), 'Fecha del evento electoral');
 for (const marker of ['TERCERO, NUMERAL 1', 'PRIMERO Y TERCERO, NUMERAL 11', 'TERCERO, NUMERAL 2', 'TERCERO, NUMERAL 4']) {
-  assert.ok(museum.includes(marker), 'Falta cláusula ' + marker);
+  assert.ok(museum.includes(marker), `Falta cláusula ${marker}`);
 }
 for (const url of [
   'https://accesoalajusticia.org/acuerdo-parcial-sobre-la-promocion-de-derechos-politicos-y-garantias-electorales-para-todos/',
@@ -21,7 +21,7 @@ for (const url of [
   'https://www.cartercenter.org/news/venezuela-062124/',
   'https://www.europarl.europa.eu/doceo/document/E-9-2024-001299-ASW_EN.pdf'
 ]) {
-  assert.ok(museum.includes(url), 'Falta enlace a fuente: ' + url);
+  assert.ok(museum.includes(url), `Falta enlace a fuente: ${url}`);
 }
 assert.ok(museum.includes('No todos los numerales constituían obligaciones directas'), 'Debe distinguir promover de obligarse');
 assert.ok(museum.includes('avances parciales') && museum.includes('deficiencias acreditadas'), 'Declaración de límites');

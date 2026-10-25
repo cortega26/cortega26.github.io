@@ -13,6 +13,8 @@ const year1999 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/19
 assert.ok(CASES.length >= 230, 'La colección ampliada exige al menos 230 registros documentales');
 assert.equal(CASES.filter(p=>p.episode==='2002-11A').length,19,'Las 19 víctimas nominales del 11A deben figurar');
 assert.equal(CASES.filter(p=>p.episode==='1999').length,3,'Tres casos nominales de fallecimiento documentado en 1999');
+assert.equal(CASES.find(p=>p.id==='jhon-alejandro-linares-pena')?.category,'policial','Jhon Linares no falleció durante una protesta');
+assert.ok(index.includes('data-filter="policial"'),'Filtro específico de intervenciones policiales');
 assert.equal(CASES.filter(p=>p.episode==='2009').length,7,'Siete fallecidos identificados por PROVEA en 2009');
 assert.ok(CASES.some(p=>p.name==='Franklin José Brito Rodríguez' && p.sources.includes('CIDH_BRITO')),'Franklin Brito bajo custodia y con evaluación interamericana');
 assert.equal(CASES.filter(p=>p.episode==='2019').length,38,'Los 38 nombres accesibles de la tabla de PROVEA deben figurar');

@@ -8,9 +8,13 @@ const index = readFileSync(new URL('../public/venezuela-lab/museo/victimas/index
 const profile = readFileSync(new URL('../public/venezuela-lab/museo/victimas/perfil.html', import.meta.url),'utf8');
 const script = readFileSync(new URL('../public/venezuela-lab/museo/victimas/app.js', import.meta.url),'utf8');
 const style = readFileSync(new URL('../public/venezuela-lab/museo/victimas/memorial.css', import.meta.url),'utf8');
+const year1999 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/1999/index.html', import.meta.url),'utf8');
 
 assert.ok(CASES.length >= 230, 'La colección ampliada exige al menos 230 registros documentales');
 assert.equal(CASES.filter(p=>p.episode==='2002-11A').length,19,'Las 19 víctimas nominales del 11A deben figurar');
+assert.equal(CASES.filter(p=>p.episode==='1999').length,3,'Tres casos nominales de fallecimiento documentado en 1999');
+assert.equal(CASES.find(p=>p.id==='jhon-alejandro-linares-pena')?.category,'policial','Jhon Linares no falleció durante una protesta');
+assert.ok(index.includes('data-filter="policial"'),'Filtro específico de intervenciones policiales');
 assert.equal(CASES.filter(p=>p.episode==='2009').length,7,'Siete fallecidos identificados por PROVEA en 2009');
 assert.ok(CASES.some(p=>p.name==='Franklin José Brito Rodríguez' && p.sources.includes('CIDH_BRITO')),'Franklin Brito bajo custodia y con evaluación interamericana');
 assert.equal(CASES.filter(p=>p.episode==='2019').length,38,'Los 38 nombres accesibles de la tabla de PROVEA deben figurar');
@@ -61,3 +65,26 @@ for (const page of [home, museum, index, profile]) {
 assert.ok(museum.includes('Una proclamación sin resultados por mesa no se puede auditar'), 'Argumentos verificables en vez de manifiestos');
 assert.ok(home.includes('el CNE proclamó un ganador sin publicar resultados por mesa'), 'Portada basada en hechos');
 assert.ok(index.includes('La CIDH calificó las siete muertes de El Junquito'), 'Atribuir expresamente conclusiones internacionales');
+
+assert.ok(index.includes('href="/venezuela-lab/museo/victimas/1999/"'), 'Acceso editorial a 1999 desde el memorial');
+for (const p of [
+  'Ángel Luis Castillo Muñoz',
+  'Oswaldo Blanco',
+  'Jhon Alejandro Linares Peña'
+]) {
+  assert.ok(CASES.some(person=>person.name===p && person.year===1999),`Caso comprobado 1999 ausente: ${p}`);
+  assert.ok(year1999.includes(p),`Ficha histórica 1999 debe mostrar: ${p}`);
+}
+for (const person of [
+  'Óscar José Blanco Romero',
+  'Roberto Javier Hernández Paz',
+  'José Francisco Rivas Fernández'
+]) {
+  assert.ok(year1999.includes(person), `Desaparición de Vargas ausente: ${person}`);
+  assert.ok(!CASES.some(p=>p.name===person), `No contabilizar desaparición no confirmada como muerte: ${person}`);
+}
+assert.ok(year1999.includes('No se contabilizan aquí como fallecimientos confirmados'),'Desaparición y fallecimiento separados');
+assert.ok(year1999.includes('Caldera y Chávez'), 'No atribuir a una sola administración un período que abarca dos');
+assert.ok(year1999.includes('no se transforman aquí en 78 asesinatos policiales'),'No convertir muertes carcelarias en asesinatos estatales');
+assert.ok(year1999.includes('noindex,nofollow,noarchive'),'Conservar restricción de indexación');
+assert.ok(Object.hasOwn(EPISODES,'1999'),'Filtro histórico 1999 presente');

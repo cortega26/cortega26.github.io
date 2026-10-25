@@ -10,6 +10,7 @@ import { join } from 'path';
 import './websites-showcase.mjs';
 import './contrapeso-documentary.mjs';
 import './contrapeso-barbados.mjs';
+import './contrapeso-instituciones.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const BUILT = process.argv.includes('--built');

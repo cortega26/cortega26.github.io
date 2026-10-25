@@ -706,3 +706,141 @@
     padding: 25px 22px;
   }
 }
+
+/* Expediente 004: balances ONU y contexto para evitar inferencias de causalidad */
+.museum-casefile-represion {
+  background: #e6e8dc;
+  border-top-color: #a44938;
+}
+
+.repression-summary {
+  border-top: 3px solid #ae4a37;
+  background: #f9f6ed;
+  padding: 30px 35px;
+}
+
+.repression-summary .museum-eyebrow {
+  color: #a44335;
+}
+
+.repression-summary p:not(.museum-eyebrow) {
+  color: #45594c;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.repression-totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.repression-number {
+  border-top: 2px solid #263f34;
+  padding: 18px 10px 18px 0;
+}
+
+.repression-number strong {
+  display: block;
+  color: #a13f32;
+  font: 500 clamp(45px, 5.5vw, 80px)/1 Georgia, serif;
+}
+
+.repression-number span {
+  display: block;
+  margin-top: 12px;
+  color: #354c3d;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .07em;
+  line-height: 1.55;
+}
+
+.repression-summary .repression-note {
+  border-left: 3px solid #ad4d38;
+  padding: 12px 17px;
+  background: #ebe9df;
+}
+
+.repression-summary a,.repression-finding a,.repression-context a {
+  display: inline-block;
+  color: #92372f;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin: 12px 14px 0 0;
+}
+
+.repression-findings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.repression-finding {
+  background: #f7f5ec;
+  border-top: 2px solid #284034;
+  padding: 25px 28px;
+}
+
+.repression-finding>span {
+  color: #a03e33;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .09em;
+}
+
+.repression-finding h3 {
+  font: 500 clamp(25px, 2.7vw, 35px)/1.16 Georgia, serif;
+  margin: 18px 0;
+}
+
+.repression-finding p {
+  color: #45584b;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.repression-context {
+  margin-top: 28px;
+  padding: 30px 35px;
+  background: #20372c;
+  color: #f8f4e8;
+}
+
+.repression-context .museum-eyebrow {
+  color: #efa995;
+}
+
+.repression-context h3 {
+  font: 500 clamp(27px, 3vw, 40px)/1.13 Georgia, serif;
+  margin: 16px 0 20px;
+}
+
+.repression-context p:not(.museum-eyebrow) {
+  max-width: 1000px;
+  color: #e0e9dc;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.repression-context a {
+  color: #f1ab95;
+}
+
+@media (width <= 800px) {
+  .repression-totals,.repression-findings {
+    grid-template-columns: 1fr;
+  }
+
+  .repression-summary,.repression-context {
+    padding: 25px 20px;
+  }
+
+  .repression-finding {
+    padding: 23px 20px;
+  }
+}

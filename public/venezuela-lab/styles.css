@@ -67,3 +67,19 @@ dialog{background:var(--paper);border:0;box-shadow:0 24px 100px #0a100eb0;color:
     font-size:43px
   }
 }
+
+/* Enlace contextual al segundo expediente del museo */
+.museum-secondary-link {
+  display: inline-flex;
+  margin: 14px 0 6px;
+  color: #f5e9df;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.museum-secondary-link:hover {
+  color: #fff;
+}

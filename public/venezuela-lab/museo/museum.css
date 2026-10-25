@@ -480,3 +480,102 @@
     font-size:29px
   }
 }
+
+/* Expediente 002 — acuerdo de Barbados: cláusula, evidencia y balance */
+.museum-casefile-barbados {
+  background: #e9e7dc;
+  border-top-color: #243c31;
+}
+
+.barbados-preface {
+  max-width: 900px;
+  margin: 0 0 34px;
+  font-size: 14px;
+  line-height: 1.8;
+  border-left: 3px solid #ad5140;
+  padding: 15px 20px;
+  background: #f6f4ed;
+}
+
+.barbados-ledger {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.barbados-entry {
+  border-top: 3px solid #263e32;
+  background: #f8f6ee;
+  padding: 25px 26px 27px;
+}
+
+.barbados-entry-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  color: #9c4234;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.barbados-entry h3 {
+  font: 500 27px/1.16 Georgia, serif;
+  letter-spacing: -.035em;
+  margin: 23px 0 18px;
+}
+
+.barbados-entry p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #46594e;
+}
+
+.barbados-entry a,.barbados-conclusion a {
+  display: inline-block;
+  color: #9d3d30;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  margin-right: 17px;
+}
+
+.barbados-conclusion {
+  margin-top: 29px;
+  padding: 25px 30px;
+  background: #213d32;
+  color: #f1efe7;
+}
+
+.barbados-conclusion .museum-eyebrow {
+  color: #f1ac96;
+}
+
+.barbados-conclusion h3 {
+  font: 500 clamp(27px, 3.2vw, 40px)/1.13 Georgia, serif;
+  margin: 15px 0;
+  letter-spacing: -.04em;
+}
+
+.barbados-conclusion p:not(.museum-eyebrow) {
+  max-width: 950px;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.barbados-conclusion a {
+  color: #f1ac96;
+}
+
+@media (width <= 800px) {
+  .barbados-ledger {
+    grid-template-columns: 1fr;
+  }
+
+  .barbados-entry {
+    padding: 25px 20px;
+  }
+}

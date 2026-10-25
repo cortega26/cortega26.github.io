@@ -77,6 +77,15 @@ jobs:
         run: node tests/htw-snapshot.mjs
       - name: Behavioral tests
         run: node tests/behavioral.mjs
+      - name: Memorial responsive visual audit
+        run: node tests/contrapeso-layout.mjs
+      - name: Upload memorial visual evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: memorial-responsive-screenshots
+          path: output/memorial-visual/
+          if-no-files-found: ignore
       - name: Link & SEO audit (informational)
         run: node scripts/check-links-seo.js
         continue-on-error: true

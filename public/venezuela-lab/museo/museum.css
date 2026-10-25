@@ -4,6 +4,7 @@
 .museum-page a:focus-visible,.museum-page button:focus-visible{outline:3px solid #ba4434;outline-offset:4px}
 .museum-header{background:#f6f4ed}.museum-masthead{height:103px;display:flex;justify-content:space-between;align-items:center}.museum-back{font-weight:800;letter-spacing:.13em;font-size:10px;border-bottom:1px solid #25392f;padding:8px 0}.museum-nav{border-top:1px solid #b4bbb0;border-bottom:1px solid #283b31}.museum-menu{min-height:50px;display:flex;gap:40px;align-items:center}.museum-menu a{font-size:10px;font-weight:800;letter-spacing:.15em}
 .museum-hero{background:#162e27;color:#f5f2e7;overflow:hidden}.hero-museum-grid{display:grid;grid-template-columns:1.1fr .85fr;min-height:660px;gap:8%;align-items:center;padding:58px 0}.museum-kicker,.museum-index,.museum-eyebrow{font-size:10px;font-weight:800;letter-spacing:.18em}.museum-kicker{color:#f0a58e}.museum-index{color:#b2bfb3;margin:36px 0 20px}.museum-hero h1{font:500 clamp(56px,6.1vw,105px)/.98 Georgia,'Times New Roman',serif;letter-spacing:-.075em;margin:0 0 30px}.museum-hero h1 em{color:#e8a08e}.museum-hero h1>span{color:#d14b35}.museum-lead{font:20px/1.55 Georgia,'Times New Roman',serif;max-width:630px;color:#e0e6dc}.museum-pledge{margin-top:20px;color:#e8aa96;font-size:12px;font-weight:700;border-left:3px solid #d14b35;padding-left:13px}.museum-actions{display:flex;align-items:center;flex-wrap:wrap;gap:25px;margin-top:30px}.museum-actions .button-primary{background:#d4563b;color:white;border:0}.museum-actions>a:last-child{color:#e9eadf;font-size:11px;letter-spacing:.09em;font-weight:800}
+
 .museum-poster {
   background:#c84d39;
   min-height:500px;
@@ -17,12 +18,14 @@
   transform:rotate(1deg);
   overflow:hidden
 }
-.museum-poster:before {
+
+.museum-poster::before {
   content:"";
   inset:0;
   position:absolute;
   background:repeating-linear-gradient(0deg,transparent 0 44px,#ffffff17 45px 46px),repeating-linear-gradient(90deg,transparent 0 44px,#ffffff15 45px 46px)
 }
+
 .poster-top,.poster-bottom {
   z-index:1;
   display:flex;
@@ -34,11 +37,13 @@
   letter-spacing:.14em;
   font-weight:800
 }
+
 .poster-bottom {
   border:0;
   border-top:1px solid #f5ded08a;
   padding:14px 0 0
 }
+
 .poster-word {
   font:800 clamp(40px,5.6vw,78px)/.95 Georgia,serif;
   letter-spacing:-.07em;
@@ -46,10 +51,12 @@
   color:#ffdfc0;
   white-space:nowrap
 }
+
 .poster-word i {
   color:#273b30;
   font-style:normal
 }
+
 .museum-subnav {
   display:grid;
   grid-template-columns:repeat(5,1fr);
@@ -68,126 +75,163 @@
 .museum-principles{padding-top:110px;padding-bottom:110px;max-width:1050px}.museum-principles .museum-eyebrow{color:#b94c39}.museum-principles h2{margin:27px 0}.museum-principles blockquote{font:italic clamp(25px,3vw,36px)/1.32 Georgia,serif;border-left:5px solid #c84d39;padding:16px 30px;margin:30px 0;color:#a83d2f}.museum-principles>p:not(.museum-eyebrow){font:18px/1.6 Georgia,serif;max-width:730px}.principle-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:19px;margin-top:46px}.principle-grid>div{border-top:2px solid #243d32;padding-top:16px;display:grid;gap:14px}.principle-grid b{font-size:10px;color:#ba4633;letter-spacing:.08em}.principle-grid span{font-size:13px;color:#545f58;line-height:1.55}
 .museum-bibliography{background:#e2ded2;padding:95px 0 100px}.museum-bibliography h2{margin:20px 0 39px}.museum-bibliography .museum-eyebrow{color:#ba4633}.museum-source-list{border-top:2px solid #23382e}.museum-source-list a{display:grid;grid-template-columns:40px 1fr 90px;gap:18px;align-items:center;border-bottom:1px solid #bcbfb5;padding:24px 0}.museum-source-list a>span{font-size:11px;color:#b14b3a;font-weight:800}.museum-source-list a>span:last-child{text-align:right}.museum-source-list a strong{font:500 23px Georgia,serif}.museum-source-list a:hover strong{text-decoration:underline}.source-disclaimer{font-size:12px;color:#626c63;max-width:760px;line-height:1.65;margin-top:20px}
 .museum-footer{background:#132a23;color:#f0eee7;padding-top:35px}.museum-footer>.wrap:first-child{display:flex;align-items:center;gap:28px;justify-content:space-between;padding-bottom:35px}.museum-footer p{font:italic 18px Georgia,serif;color:#b8c6bc}.museum-footer a{font-size:11px}.museum-footer-small{border-top:1px solid #496052;padding:18px 0;font-size:9px;letter-spacing:.09em;color:#a8b7ac}
-@media(max-width:1000px) {
+
+@media (width <= 1000px) {
+
   .hero-museum-grid {
     gap:35px;
     grid-template-columns:1.1fr .9fr
   }
+
   .poster-word {
     font-size:clamp(35px,5.5vw,58px)
   }
+
   .museum-hero h1 {
     font-size:65px
   }
+
   .room-grid {
     grid-template-columns:repeat(2,minmax(0,1fr))
   }
+
   .room-art>strong {
     font-size:73px
   }
+
   .principle-grid {
     grid-template-columns:repeat(2,1fr)
   }
 }
-@media(max-width:700px) {
+
+@media (width <= 700px) {
+
   .museum-masthead {
     height:78px
   }
+
   .museum-back {
     font-size:9px
   }
+
   .museum-menu {
     gap:18px;
     overflow-x:auto
   }
+
   .museum-menu a {
     white-space:nowrap;
     font-size:9px
   }
+
   .hero-museum-grid {
     grid-template-columns:1fr;
     padding:54px 0;
     gap:48px
   }
+
   .museum-hero h1 {
     font-size:clamp(56px,11.5vw,83px)
   }
+
   .museum-poster {
     min-height:405px;
     max-width:480px;
     width:calc(100% - 20px)
   }
+
   .poster-word {
     font-size:clamp(30px,8vw,55px)
   }
+
   .museum-subnav {
     grid-template-columns:repeat(2,1fr);
     row-gap:14px
   }
+
   .museum-intro {
     grid-template-columns:1fr;
     gap:16px;
     padding:65px 0
   }
+
   .museum-intro h2 {
     font-size:43px
   }
+
   .museum-collection {
     padding-bottom:65px
   }
+
   .room-filters {
     gap:20px
   }
+
   .room-grid {
     grid-template-columns:1fr
   }
+
   .room-art {
     height:300px
   }
+
   .room-art>strong {
     font-size:85px
   }
+
   .museum-timeline {
     padding:70px 0
   }
+
   .timeline-items li {
     grid-template-columns:83px 1fr;
     gap:10px 15px
   }
+
   .timeline-items li>a {
     grid-column:2;
     text-align:left
   }
+
   .timeline-items h3 {
     font-size:23px
   }
+
   .museum-principles {
     padding:70px 0
   }
+
   .museum-principles h2,.museum-bibliography h2 {
     font-size:46px
   }
+
   .principle-grid {
     gap:18px
   }
+
   .museum-bibliography {
     padding:70px 0
   }
+
   .museum-source-list a {
     grid-template-columns:27px 1fr;
     gap:9px
   }
+
   .museum-source-list a>span:last-child {
     grid-column:2;
     text-align:left
   }
+
   .museum-source-list a strong {
     font-size:20px
   }
+
   .museum-footer>.wrap:first-child {
     flex-direction:column;
     align-items:start
   }
+
   .museum-footer-small {
     line-height:1.6
   }
@@ -196,12 +240,14 @@
 
 
 /* Contrapeso / Expediente electoral 001: datos y límites en el mismo plano editorial */
+
 .museum-casefile {
   background:#f8f6ee;
   color:#182e27;
   padding:88px 0 98px;
   border-top:5px solid #b64c3a
 }
+
 .casefile-top {
   display:flex;
   justify-content:space-between;
@@ -213,6 +259,7 @@
   letter-spacing:.12em;
   color:#98503e
 }
+
 .casefile-heading {
   display:grid;
   grid-template-columns:1.15fr 1fr;
@@ -220,35 +267,43 @@
   align-items:end;
   margin:43px 0 40px
 }
+
 .casefile-heading .museum-eyebrow {
   color:#b74c37
 }
+
 .casefile-heading h2 {
   font:500 clamp(40px,5vw,72px)/1.04 Georgia,serif;
   letter-spacing:-.06em;
   margin:19px 0 0
 }
+
 .casefile-heading h2 em {
   color:#bb4f3c
 }
+
 .casefile-heading>p {
   font:19px/1.58 Georgia,serif;
   max-width:660px
 }
+
 .casefile-compare {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:2px;
   background:#1e392f
 }
+
 .casefile-result {
   background:#e1e0d6;
   padding:30px 34px 25px
 }
+
 .casefile-result-evidence {
   background:#214035;
   color:#f4f1e7
 }
+
 .casefile-label {
   min-height:28px;
   font-size:10px;
@@ -257,12 +312,15 @@
   color:#914b39;
   line-height:1.45
 }
+
 .casefile-result-evidence .casefile-label {
   color:#eeab97
 }
+
 .casefile-result dl {
   margin:20px 0 16px
 }
+
 .casefile-result dl>div {
   display:flex;
   justify-content:space-between;
@@ -271,80 +329,97 @@
   border-bottom:1px solid #9ca9a0;
   padding:12px 0
 }
+
 .casefile-result-evidence dl>div {
   border-color:#698479
 }
+
 .casefile-result dt {
   font-size:13px;
   font-weight:700;
   line-height:1.4
 }
+
 .casefile-result dd {
   font:500 clamp(31px,3.5vw,51px)/1 Georgia,serif;
   letter-spacing:-.05em;
   margin:0;
   white-space:nowrap
 }
+
 .casefile-result>p:last-child {
   font-size:12px;
   line-height:1.6;
   margin-bottom:0;
   color:#475d52
 }
+
 .casefile-result-evidence>p:last-child {
   color:#cbd8cc
 }
+
 .casefile-evidence {
   display:grid;
   grid-template-columns:.85fr 1.4fr;
   gap:60px;
   padding-top:64px
 }
+
 .casefile-math {
   border-left:4px solid #bd4e3b;
   padding-left:24px
 }
+
 .casefile-math .museum-eyebrow,.casefile-readout .museum-eyebrow,.casefile-limits .museum-eyebrow {
   color:#af4535
 }
+
 .casefile-math strong {
   display:block;
   font:500 clamp(34px,4.5vw,59px)/1.15 Georgia,serif;
   letter-spacing:-.055em;
   margin:20px 0 8px
 }
+
 .casefile-math strong span {
   color:#9baca0
 }
+
 .casefile-math p:not(.museum-eyebrow) {
   font-size:14px;
   line-height:1.7;
   color:#455b50
 }
+
 .casefile-math hr {
   border:0;
   border-top:1px solid #aabaae;
   margin:26px 0
 }
+
 .casefile-readout h3 {
   font:500 clamp(29px,3.3vw,44px)/1.15 Georgia,serif;
   letter-spacing:-.045em;
   margin:22px 0 25px
 }
+
 .casefile-readout ol {
   padding-left:22px;
   margin:0
 }
+
 .casefile-readout li {
   padding:0 0 19px 5px;
   font-size:14px;
   line-height:1.8;
   color:#42564b
 }
+
 .casefile-readout li::marker {
   font-weight:800;
   color:#ba4b37
 }
+
 .casefile-limits {
   margin-top:42px;
   border-top:1px solid #9eaea0;
@@ -353,45 +428,58 @@
   grid-template-columns:1fr 3fr;
   gap:36px
 }
+
 .casefile-limits p:not(.museum-eyebrow) {
   font-size:13px;
   line-height:1.8;
   color:#45584c
 }
+
 .casefile-limits a {
   color:#a13e30;
   text-decoration:underline;
   text-underline-offset:3px;
   font-weight:700
 }
+
 @media(max-width:800px) {
+
   .casefile-heading,.casefile-evidence,.casefile-limits {
     grid-template-columns:1fr;
     gap:16px
   }
+
   .casefile-compare {
     grid-template-columns:1fr
   }
+
   .casefile-top {
     flex-direction:column
   }
+
   .museum-casefile {
     padding:65px 0
   }
+
   .casefile-heading {
     margin:30px 0
   }
+
   .casefile-evidence {
     padding-top:43px
   }
+
   .casefile-result {
     padding:26px 20px
   }
 }
+
 @media(max-width:370px) {
+
   .casefile-result dt {
     max-width:45%
   }
+
   .casefile-result dd {
     font-size:29px
   }

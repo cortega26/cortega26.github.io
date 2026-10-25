@@ -102,7 +102,7 @@ for (const person of cases2000) {
   assert.ok(['custodia','policial'].includes(person.category),'Categoría veraz del caso 2000');
 }
 for (const name of ['Jaime Hilarión Pálima Domínguez','Richard Lucambio','Guillerma Colmenares','Ronny José Tovar','Francisco José Mister','Luis Alberto Hernández']) {
-  assert.ok(cases2000.some(p=>p.name===name),'Caso corroborado por segundo informe: '+name);
+  assert.ok(cases2000.some(p=>p.name===name),`Caso corroborado por segundo informe: ${name}`);
 }
 assert.ok(year2000.includes('no a todo el año calendario 2000'),'Desglose de ventanas temporales');
 assert.ok(year2000.includes('edades de Ronny Tovar, Francisco Mister y Luis Hernández'),'Conflicto entre edades documentado');

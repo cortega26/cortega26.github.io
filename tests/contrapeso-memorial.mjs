@@ -41,3 +41,12 @@ for (const oldId of ['expediente-2024','expediente-barbados','expediente-2017','
   assert.ok(museum.includes(`id="${oldId}"`),`Preservar expediente previo ${oldId}`);
 }
 console.log(`Contrapeso memorial: ${CASES.length} casos con fuentes, biografías, navegación y accesibilidad PASS`);
+
+// La línea editorial es una norma interna, no un lema del sitio.
+for (const page of [home, museum, index, profile]) {
+  assert.ok(!page.includes('Jamás entregarle al chavismo ni un milímetro'), 'El principio interno no debe publicarse como eslogan');
+  assert.ok(!page.includes('Sin concesiones innecesarias.'), 'Eliminar meta-consignas de las páginas');
+}
+assert.ok(museum.includes('Una proclamación sin resultados por mesa no se puede auditar'), 'Argumentos verificables en vez de manifiestos');
+assert.ok(home.includes('el CNE proclamó un ganador sin publicar resultados por mesa'), 'Portada basada en hechos');
+assert.ok(index.includes('La CIDH calificó las siete muertes de El Junquito'), 'Atribuir expresamente conclusiones internacionales');

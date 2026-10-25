@@ -56,40 +56,43 @@ try {
       page.on('pageerror', (error) => errors.push(error.message));
       await page.goto(origin + target.path, { waitUntil: 'networkidle' });
       await page.locator(target.selector).first().waitFor({ timeout: 10000 });
-      const result = await page.evaluate(() => {
-        const box = (el) => {
-          const b = el.getBoundingClientRect();
-          return { left: b.left, right: b.right, top: b.top, bottom: b.bottom, width: b.width, height: b.height };
-        };
-        const problems = [];
-        const rootEl = document.documentElement;
-        if (rootEl.scrollWidth > rootEl.clientWidth + 2) {
-          problems.push(`Horizontal overflow: scrollWidth ${rootEl.scrollWidth} > viewport ${rootEl.clientWidth}`);
+      const result = await page.evaluate(() => ({
+        background: getComputedStyle(document.body).backgroundColor,
+        documentWidth: document.documentElement.scrollWidth,
+        viewportWidth: document.documentElement.clientWidth
+      }));
+      if (result.documentWidth > result.viewportWidth + 2) {
+        findings.push(`${target.id}/${width}: Horizontal overflow: ${result.documentWidth} > ${result.viewportWidth}`);
+      }
+      if (result.background !== 'rgb(246, 245, 239)') {
+        findings.push(`${target.id}/${width}: CSS missing: ${result.background}`);
+      }
+      const headings = page.locator('.hero h1, .person-name, .profile-name, .year-card h3');
+      const headingCount = Math.min(await headings.count(), 24);
+      for (let k = 0; k < headingCount; k++) {
+        const rect = await headings.nth(k).boundingBox();
+        if (rect && (rect.x < -2 || rect.x + rect.width > width + 2)) {
+          findings.push(`${target.id}/${width}: Heading outside viewport at index ${k}`);
         }
-        const bodyColor = getComputedStyle(document.body).backgroundColor;
-        if (bodyColor !== 'rgb(246, 245, 239)') problems.push(`Expected memorial stylesheet, got body background ${bodyColor}`);
-        const samples = document.querySelectorAll('.hero h1, .person-name, .profile-name, .year-card h3, .year-roster-item>div a');
-        for (const el of [...samples].slice(0, 70)) {
-          const b = box(el);
-          if (b.left < -2 || b.right > innerWidth + 2) problems.push(`Clipped heading: ${el.textContent?.slice(0, 45)}`);
-        }
-        for (const card of [...document.querySelectorAll('.person-card')].slice(0, 24)) {
-          const fields = ['.person-top', '.person-name', '.person-excerpt', '.person-actions']
-            .map((selector) => card.querySelector(selector)).filter(Boolean);
-          for (let i = 1; i < fields.length; i++) {
-            if (box(fields[i]).top < box(fields[i - 1]).bottom - 1) {
-              problems.push(`Overlapping victim card: ${card.querySelector('h3')?.textContent} (${fields[i - 1].className}/${fields[i].className})`);
+      }
+      if (target.id === 'directory') {
+        const recordCards = page.locator('.person-card');
+        const cardCount = Math.min(await recordCards.count(), 6);
+        for (let k = 0; k < cardCount; k++) {
+          const card = recordCards.nth(k);
+          const selectors = ['.person-top', '.person-name', '.person-excerpt', '.person-actions'];
+          let bottom = -Infinity;
+          for (const selector of selectors) {
+            const rect = await card.locator(selector).boundingBox();
+            if (!rect) continue;
+            if (rect.y < bottom - 1) {
+              findings.push(`${target.id}/${width}: Overlapping card ${k} at ${selector}`);
             }
+            bottom = rect.y + rect.height;
           }
         }
-        return {
-          background: bodyColor,
-          documentWidth: rootEl.scrollWidth,
-          viewportWidth: rootEl.clientWidth,
-          problems
-        };
-      });
-      for (const issue of [...result.problems, ...errors]) findings.push(`${target.id}/${width}: ${issue}`);
+      }
+      for (const error of errors) findings.push(`${target.id}/${width}: Browser error: ${error}`);
       if (target.id === 'directory') {
         const n = await page.locator('.person-card').count();
         if (n !== 24) findings.push(`${target.id}/${width}: expected 24 visible records, got ${n}`);

@@ -844,3 +844,79 @@
     padding: 23px 20px;
   }
 }
+
+/* Acceso visual al memorial: texto prioritario y pieza tipográfica sin fotografías de víctimas */
+.victim-memorial-preview {
+  display: grid;
+  grid-template-columns: 1.35fr .8fr;
+  gap: 50px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  background: #203c30;
+  color: #f3f1e6;
+  padding: 54px;
+}
+
+.memorial-preview-copy .museum-eyebrow {
+  color: #f1a88f;
+}
+
+.memorial-preview-copy h2 {
+  margin: 17px 0 25px;
+  font: 500 clamp(39px,4vw,62px)/1.1 Georgia,serif;
+  letter-spacing: -.055em;
+}
+
+.memorial-preview-copy h2 em {
+  color: #e9ac93;
+}
+
+.memorial-preview-copy p:not(.museum-eyebrow) {
+  color: #d6e0d2;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 650px;
+}
+
+.memorial-preview-copy .memorial-preview-caution {
+  color: #f1b9a5;
+  font-size: 12px;
+}
+
+.memorial-preview-copy .button-primary {
+  margin-top: 21px;
+}
+
+.memorial-preview-art {
+  padding: 23px;
+  background: #b64a36;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 315px;
+  transform: rotate(1deg);
+}
+
+.memorial-preview-art>span,.memorial-preview-art small {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .09em;
+}
+
+.memorial-preview-art strong {
+  font: 800 clamp(30px,3.5vw,52px)/1.07 Georgia,serif;
+  letter-spacing: -.065em;
+  overflow-wrap: anywhere;
+}
+
+@media (width <= 800px) {
+  .victim-memorial-preview {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 35px 23px;
+  }
+
+  .memorial-preview-art {
+    min-height: 220px;
+  }
+}

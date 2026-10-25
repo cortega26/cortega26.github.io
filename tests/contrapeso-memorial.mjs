@@ -33,7 +33,8 @@ for(const text of [index,profile])assert.ok(text.includes('noindex,nofollow,noar
 assert.ok(home.includes('href="/venezuela-lab/museo/victimas/"'),'Entrada desde portada');
 assert.ok(museum.includes('href="/venezuela-lab/museo/victimas/"'),'Entrada desde museo');
 assert.ok(index.includes('Los muertos del chavismo') && museum.includes('Los muertos'),'Nombre editorial');
-assert.ok(index.includes('no todas tienen la misma atribución') && index.includes('no prueba por sí sola homicidio'),'Prohibir afirmación indiscriminada de asesinato');
+assert.ok(index.includes('otros casos tienen denuncias') || index.includes('Otros casos tienen denuncias'), 'No igualar casos con atribuciones distintas');
+assert.ok(index.includes('por sí sola no prueba homicidio'), 'No presumir homicidio a partir de custodia');
 assert.ok(script.includes("new URLSearchParams") && script.includes("person.id"),'Perfiles individuales enlazables');
 assert.ok(index.includes('id="search"') && index.includes('data-filter="custodia"') && index.includes('id="year"'),'Búsqueda y filtros');
 assert.ok(style.includes('@media (width <= 600px)') && !style.includes('@import'),'Responsive y sin solicitudes externas de tipografías');

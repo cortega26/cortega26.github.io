@@ -88,3 +88,23 @@ assert.ok(year1999.includes('Caldera y Chávez'), 'No atribuir a una sola admini
 assert.ok(year1999.includes('no se transforman aquí en 78 asesinatos policiales'),'No convertir muertes carcelarias en asesinatos estatales');
 assert.ok(year1999.includes('noindex,nofollow,noarchive'),'Conservar restricción de indexación');
 assert.ok(Object.hasOwn(EPISODES,'1999'),'Filtro histórico 1999 presente');
+
+const year2000 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2000/index.html', import.meta.url),'utf8');
+const cases2000 = CASES.filter(p => p.year===2000);
+assert.equal(cases2000.length,50,'Cincuenta fichas nominales de 2000 en la primera revisión');
+assert.equal(CASES.length,301,'Conservación de 251 registros anteriores más 50 nuevos');
+assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2000/"'),'Acceso a la página anual de 2000');
+assert.ok(Object.hasOwn(EPISODES,'2000'),'Filtro por episodio 2000');
+for (const person of cases2000) {
+  assert.ok(year2000.includes(person.name),`Ficha 2000 en página anual: ${person.name}`);
+  assert.ok(year2000.includes(`perfil.html?id=${person.id}`),`Enlace individual: ${person.name}`);
+  assert.ok(person.sources.includes('PRO2000'),'Anexo PROVEA referenciado en cada ficha del año 2000');
+  assert.ok(['custodia','policial'].includes(person.category),'Categoría veraz del caso 2000');
+}
+for (const name of ['Jaime Hilarión Pálima Domínguez','Richard Lucambio','Guillerma Colmenares','Ronny José Tovar','Francisco José Mister','Luis Alberto Hernández']) {
+  assert.ok(cases2000.some(p=>p.name===name),`Caso corroborado por segundo informe: ${name}`);
+}
+assert.ok(year2000.includes('no a todo el año calendario 2000'),'Desglose de ventanas temporales');
+assert.ok(year2000.includes('edades de Ronny Tovar, Francisco Mister y Luis Hernández'),'Conflicto entre edades documentado');
+assert.ok(year2000.includes('No se atribuye a todos los casos una motivación política'),'No inferir motivación común');
+assert.ok(year2000.includes('noindex,nofollow,noarchive'),'Preservación de noindex');

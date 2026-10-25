@@ -19,7 +19,7 @@ for (const url of [
   'https://www.regjeringen.no/en/topics/foreign-affairs/peace-and-conflict-resolution/norways_engagement/venezuela_negotiations/id2674295/',
   'https://www.cartercenter.org/news/venezuela-073024/',
   'https://www.cartercenter.org/news/venezuela-062124/',
-  'https://www.europarl.europa.eu/doceo/document/E-9-2024-001299-ASW_EN.pdf'
+  'https://www.eeas.europa.eu/delegations/un-geneva/hrc56-interactive-dialogue-report-high-commissioner-situation-human-rights-bolivarian-republic_en'
 ]) {
   assert.ok(museum.includes(url), `Falta enlace a fuente: ${url}`);
 }

@@ -22,6 +22,17 @@ function internal(label, href, className = '') {
   return link;
 };
 const sorted = [...CASES].sort((a,b) => b.year-a.year || a.name.localeCompare(b.name, 'es'));
+function matchesYear(person, selectedYear) {
+  if (selectedYear === 'todos') return true;
+  const value = Number(selectedYear);
+  return value >= person.year && value <= (person.yearEnd || person.year);
+}
+function matchesSelection(person, kind, episode, year, query) {
+  return (kind === 'todas' || person.category === kind)
+    && (episode === 'todos' || person.episode === episode)
+    && matchesYear(person, year)
+    && (!query || normalize(person.name).includes(query));
+}
 function dateLabel(person) {
   return person.date ? new Date(`${person.date}T12:00:00Z`).toLocaleDateString('es-VE',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}) : person.period || String(person.year);
 }
@@ -50,7 +61,7 @@ function renderIndex() {
   let limit = 24;
   function draw() {
     const needle = normalize(search.value.trim());
-    const records = sorted.filter(p => (kind === 'todas' || kind === p.category) && (episode.value === 'todos' || p.episode === episode.value) && (year.value === 'todos' || (+year.value >= p.year && +year.value <= (p.yearEnd || p.year))) && (!needle || normalize(p.name).includes(needle)));
+    const records = sorted.filter(p => matchesSelection(p, kind, episode.value, year.value, needle));
     const displayed = records.slice(0,limit);
     const frag = document.createDocumentFragment();
     for (const person of displayed) {

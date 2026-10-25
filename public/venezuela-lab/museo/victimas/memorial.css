@@ -646,3 +646,59 @@ button,input,select {
     padding-top: 60px;
   }
 }
+
+/* El archivo ampliado: filtros por episodio y paginación */
+.hero-history-link {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 18px;
+  border: 1px solid #e9a78f;
+  color: #ffe3d7;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-underline-offset: 4px;
+}
+
+.filters .episode-label {
+  grid-column: 1/-1;
+}
+
+.episode-label span {
+  display: block;
+  color: #526158;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  margin-bottom: 12px;
+}
+
+.filters .episode-label select {
+  width: 100%;
+  max-width: 400px;
+}
+
+.pagination {
+  margin-top: 34px;
+  text-align: center;
+}
+
+.pagination button {
+  padding: 15px 28px;
+  border: 1px solid #324e3e;
+  background: #233f32;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background: #a44434;
+}
+
+.profile-period {
+  color: #a24232;
+  font-weight: 800;
+  font-size: 12px;
+}

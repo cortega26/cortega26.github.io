@@ -11,6 +11,8 @@ const style = readFileSync(new URL('../public/venezuela-lab/museo/victimas/memor
 
 assert.ok(CASES.length >= 230, 'La colección ampliada exige al menos 230 registros documentales');
 assert.equal(CASES.filter(p=>p.episode==='2002-11A').length,19,'Las 19 víctimas nominales del 11A deben figurar');
+assert.equal(CASES.filter(p=>p.episode==='2009').length,7,'Siete fallecidos identificados por PROVEA en 2009');
+assert.ok(CASES.some(p=>p.name==='Franklin José Brito Rodríguez' && p.sources.includes('CIDH_BRITO')),'Franklin Brito bajo custodia y con evaluación interamericana');
 assert.equal(CASES.filter(p=>p.episode==='2019').length,38,'Los 38 nombres accesibles de la tabla de PROVEA deben figurar');
 assert.equal(CASES.filter(p=>p.episode==='2024').length,25,'Relación de 25 víctimas de 2024');
 assert.ok(CASES.filter(p=>p.episode==='2017-18').length>=95,'Ampliación de 2017-2018');

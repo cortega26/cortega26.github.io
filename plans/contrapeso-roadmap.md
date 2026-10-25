@@ -1,0 +1,163 @@
+# Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
+**Propuesta operativa · 25 de octubre de 2026**  
+**Destino sugerido en GitHub:** `plans/contrapeso-roadmap.md`  
+**Documento normativo complementario:** `docs/editorial/contrapeso-manual.md`  
+**Alcance:** prototipo `public/venezuela-lab/` dentro de `cortega26/cortega26.github.io`.
+
+
+> **Estado de adopción:** documento versionado como hoja de ruta propuesta. Sus decisiones editoriales no sustituyen `AGENTS.md` ni la carta vigente; ninguna regla de este plan autoriza por sí sola fusionar, publicar o levantar `noindex`.
+
+## 1. Objetivo y criterio de éxito
+
+Desarrollar un medio completo —actualidad, investigación, análisis, opinión y memoria— a partir de unidades pequeñas, terminadas, probadas y documentadas. **No medir éxito por cantidad de runs, fichas, PR ni comentarios, sino por contenido verificado, funcionalidad útil y riesgos realmente cerrados.**
+
+No crear otra automatización, agenda, ledger ni infraestructura de publicación paralela. La task de ChatGPT existente se mantiene a 66 minutos; el repositorio y los PR son fuentes de estado durables.
+
+## 2. Diagnóstico inicial verificado (foto, no verdad permanente)
+
+- Repo público: `cortega26/cortega26.github.io`, rama `master`.
+- HEAD verificado en esta actualización: `80557713087a6b4a0b1786bfff4bae4f16c088a5` (merge PR #145). Referencia histórica previa: `0418cafd608fd253ae84f5f1c3b383ea7b17c254` (#144). Verificar de nuevo en cada run.
+- `AGENTS.md` define pruebas `npm test`, `npm run check`, `npm run build`, y trabajo nuevo en rama/PR; planes en `plans/`.
+- Existe `docs/editorial/contrapeso-principios.md` con carta editorial y salvaguardas, pero se declara propuesta de prototipo, no redacción operativa.
+- Portada en `public/venezuela-lab/index.html`; Museo en `public/venezuela-lab/museo/index.html`; memorial, fichas y archivos anuales 1999/2000 en `public/venezuela-lab/museo/victimas/`.
+- La portada todavía contiene **artículos de ejemplo** y rotulación de «BOCETO EN DESARROLLO». No está lanzada como medio.
+- PR #145 **fusionado el 25-10-2026**; añadió mejoras UX/UI responsive y pruebas visuales. La prueba `tests/contrapeso-layout.mjs` en `master` sigue comparando `#registered-count` con la cadena literal `301` (deuda de mantenibilidad comprobada). Los comentarios Codacy anteriores son históricos, no hallazgos activos confirmados. Verificar los checks del HEAD exacto antes de concluir sobre calidad.
+- No se encontró `public/venezuela-lab/museo/victimas/2001/index.html` en `master` al inspeccionar, lo cual NO demuestra ausencia de fichas de 2001 dentro del dataset general.
+- `noindex,nofollow,noarchive` debe mantenerse hasta decisión de lanzamiento.
+- El repositorio y la portada contienen enlaces públicos a Tooltician: separar marca, privacidad y autoría requiere decisión independiente.
+
+### No verificado
+No se verificaron en este diagnóstico las capturas visuales finales, todos los resultados CI del commit de integración #145 ni el estado del sitio desplegado. Tampoco se auditó exhaustivamente la exactitud de cada registro nominal; ningún conteo del PR sustituye el dataset vivo.
+
+## 3. Fases con salidas comprobables
+
+### F0 — Saneamiento y base editorial
+**Prioridad inmediata.**
+- Verificar el resultado post-merge del PR #145; corregir defectos reproducibles y desacoplar las pruebas visuales del conteo fijo de fichas.
+- Validar responsive 320, 390, 768, 1024 y 1440 px, navegación, contraste, overflow, estado `noindex`, filtros y detalle individual.
+- Adoptar manual editorial y este roadmap después de revisarlos. No sustituir la carta ya existente ni duplicar instrucciones.
+- Detectar artículos de ejemplo, elementos no funcionales o enlaces engañosos: preservarlos claramente rotulados como prototipo o preparar su reemplazo verificado.
+
+**Cierre F0:** sin P1/P2 técnicos confirmados, PR relevante integrado con controles y comprobación de sitio (si procede); manual y plan versionados; estado de prototipo consistente.
+
+### F1 — Normalizar el memorial como base documental
+- Inventariar fichas, categorías, años, episodios, fuentes, identidad duplicada y lagunas: primero auditar lo que ya existe.
+- Comprobar cada vínculo afirmación–nombre–episodio–documento; documentar casos ambiguos sin forzar certeza.
+- Añadir índices anuales según datos realmente respaldados; **2001** es candidato para investigar porque falta página anual, no decisión irrevocable.
+- Completar biografías y referencias sin publicar fotos privadas o historias inventadas.
+
+**Cierre F1:** índice navegable consistente, fuente nominal verificable para cada ficha publicada, duplicados diagnosticados/corregidos y barreras de regresión mantenidas. No exige un número arbitrario de nombres.
+
+### F2 — Museo y expedientes históricos
+- Reconciliar los expedientes ya presentes (elección 2024, Barbados 2023, instituciones/represión 2017).
+- Preparar un inventario de brechas para 11 de abril de 2002, otros procesos electorales, detenciones, censura, negociación política, crisis y desplazamiento.
+- Elegir **un expediente concreto a la vez**, con fuentes, cronología, estado probatorio, versiones relevantes, enlaces y QA visual.
+
+**Cierre F2:** cada sala tiene expedientes reales con fuentes, explicación y navegación; nada se presenta como estudio exhaustivo sin evidencia.
+
+### F3 — Completar el medio, no solo el archivo
+- Reemplazar gradualmente tarjetas «EJEMPLO» por publicaciones reales verificadas o mantenerlas explícitamente como demostración.
+- Crear formatos reutilizables y distintivos para noticias, opinión, investigaciones y explicadores.
+- Establecer páginas claras de método, correcciones, fecha de revisión y atribución editorial apropiada.
+- No crear un flujo automático de noticias antes de verificar que puede sostenerse con calidad.
+
+**Cierre F3:** navegación y secciones funcionan, cada publicación lleva género/fecha/fuentes, no hay promesas funcionales falsas, y un lector distingue actualidad de historia.
+
+### F4 — Preparación del lanzamiento
+- Decisiones pendientes del propietario: nombre/dominio, grado de anonimato, firma editorial, política de comentarios, licencias de imágenes, monetización y patrocinios.
+- QA legal, seguridad y privacidad; revisión de enlaces, sitemap, metadatos, accesibilidad y presentación móvil.
+- Mantener `noindex` hasta autorización expresa. Crear checklist de salida y rollback.
+
+**Cierre F4:** decisión humana de lanzamiento y gates comprobables; publicación de dominio/indexación no automática.
+
+## 4. Cola inicial de unidades de trabajo
+
+La task debe **reordenar dinámicamente** esta lista contra GitHub, sin duplicar el trabajo de otros:
+
+| ID | Prioridad | Unidad verificable | Dependencia / definición de terminado |
+|---|---|---|---|
+| CP-001 | P0 | Verificar post-merge de PR #145 | Integración observada; verificar despliegue/visual/CI y no abrir PR duplicado |
+| CP-002 | P0 | Resolver contador fijo `301` en test visual | Defecto de mantenibilidad observado en `master`; test compara conteo real sin romper ampliaciones legítimas; evidencia RED/GREEN si se implementa |
+| CP-003 | P1 | Verificar calidad post-merge de #145 | No tratar comentarios antiguos de Codacy como problemas vigentes; verificar los gates y cualquier fallo actual |
+| CP-004 | P1 | Auditar dataset de víctimas existente | Inventario verificable de nombres, fuente nominal, año exacto/indeterminado y duplicados |
+| CP-005 | P1 | Adoptar manual editorial | No contradice la carta actual; revisión de privacidad/atribución; archivo versionado |
+| CP-006 | P1 | Inspeccionar y, si hay respaldo, crear capítulo 2001 | Sin afirmar que faltan personas; enlaces y tests pertinentes |
+| CP-007 | P1 | Reconciliar memorial con expedientes del Museo | Navegación recíproca y contexto sin duplicados ni conclusiones causales excesivas |
+| CP-008 | P2 | Auditar 11 de abril de 2002 | Individuos, cronología, autoría atribuida, múltiples fuentes y estado procesal |
+| CP-009 | P2 | Auditar y mejorar páginas de caso individual | Accesibilidad, fuentes visibles, diferencias entre tipos de evidencia |
+| CP-010 | P2 | Clasificar los contenidos «EJEMPLO» de portada | Plan para retirar/reemplazar según material listo; no publicarlos engañosamente |
+| CP-011 | P2 | Plantilla de noticia/opinión/explicador | Metadatos y tratamiento editorial diferenciados, pruebas y estilo consistentes |
+| CP-012 | P3 | Preparar checklist de lanzamiento y riesgo de identidad | Decisiones explícitas del propietario; no levantar noindex |
+
+Una unidad solo se marca completada por evidencia (archivo/commit/PR/tests/resultado); no por una respuesta de la task. Si se necesita cola persistente, conservarla en este archivo bajo Git y actualizarla en PR junto con trabajo real, **no crear un segundo ledger**.
+
+## 5. Algoritmo de cada ejecución de 66 minutos
+
+**La frecuencia programa oportunidades de avance; no obliga a crear un PR cada 66 minutos.**
+
+1. **PREFLIGHT:** leer `master`/HEAD, `AGENTS.md`, carta editorial, manual, roadmap y PR/Issues actuales. Confirmar herramientas, ownership y estado vivo.
+2. **RECONCILIAR:** detectar trabajos en curso, feedback reciente, cambios de SHA, CI, merges y posibles duplicados.
+3. **DETERMINAR PRIMER BLOQUEO:** defecto de seguridad/precisión/fuente → bloqueo de PR/QA → trabajo editorial comenzado → primer ítem elegible del roadmap.
+4. **ELEGIR SOLO UNA UNIDAD:** si otro agente progresa sobre ella, no interferir; avanzar una independiente únicamente si no compite por archivos o decisiones.
+5. **EJECUTAR:** investigación con fuentes primarias **o** cambio mínimo con pruebas adecuadas. No inventar contenido para alcanzar cuota.
+6. **VERIFICAR:** hechos y atribuciones, diff exacto, regresión, build/QA móvil, reviews, GitHub Actions, deploy cuando corresponda.
+7. **PERSISTIR:** evidencia en PR/commit/documento canónico ya existente; sin creación de issues de estado por rutina.
+8. **REPORTAR POR EXCEPCIÓN:** qué cambió materialmente, estado cierto, SHA y siguiente dependencia.
+
+### Árbol de decisión
+
+```text
+¿Hay alerta P0/P1 verificable de seguridad, exactitud o UX grave?
+  Sí → resolverla en el trabajo propietario autorizado.
+  No → ¿hay PR/fix ya iniciado y accionable?
+           Sí → continuar o revisar ese mismo trabajo sin duplicarlo.
+           No → ¿hay una unidad elegible con fuentes suficientes?
+                    Sí → investigar/implementar y verificar un incremento.
+                    No → registrar brecha concreta; no fabricar publicación.
+```
+
+### Reglas de capacidad
+- **Máximo un paquete cohesionado por ejecución.**
+- Preferencia por un PR activo de Contrapeso a la vez; excepciones solo por independencia material y evidencia.
+- Una CI pendiente sin cambio nuevo **no** justifica nuevo comentario cada 66 minutos.
+- Si un cambio precisa varias ejecuciones, conservar la continuidad en el mismo PR/Issue, no abrir trabajo paralelo.
+- Si GitHub no permite escribir, entregar investigación o diff propuesto y declarar `NO IMPLEMENTADO`; no eludir bloqueos de plataforma.
+- Los temas sensibles siguen revisión editorial humana; no equiparar CI verde con aprobación de una acusación.
+- Separar `INVESTIGADO`, `DOCUMENTADO`, `IMPLEMENTADO EN PR`, `VALIDADO EN SHA`, `INTEGRADO` y `COMPROBADO EN SITIO`.
+
+## 6. Gates por tipo de contenido
+
+| Tipo | Gates mínimos |
+|---|---|
+| Ficha nominal | Identidad, contexto, fuente para esa persona, atribución, dedupe, privacidad, test |
+| Expediente histórico | Fecha, fuentes inspeccionadas, hechos frente a alegaciones, versiones relevantes, revisión, enlaces |
+| Columna | Género OPINIÓN inequívoco, tesis y sustento factual, distinción opinión/hechos, corrección posible |
+| Noticia | Confirmación reciente de la fuente, fecha exacta, contraste, actualización, no recircular hecho viejo como nuevo |
+| UX | Capturas o pruebas reales de varios anchos, no overflow/superposición, controles accesibles, regresión |
+| Lanzamiento | Autorización expresa, identidad/dominio/privacidad, revisión legal, SEO, seguridad, rollback |
+
+## 7. Métricas de calidad, no cuotas
+
+- Porcentaje de registros que tienen fuente nominal inspeccionable (tendencia, no inventar el denominador).
+- Fichas duplicadas detectadas/corregidas y atribuciones ambiguas marcadas.
+- Expedientes con enlaces primarios verificados y estado editorial.
+- Regresiones visuales y errores de navegación reproducibles.
+- PR bloqueados por P1/P2 o Codacy con causa y resolución documentada.
+- Cambios integrados **y comprobados en el sitio**, diferenciados de investigaciones y PR.
+- Contenidos rotulados falsamente como reales y enlaces sin destino funcional.
+
+No medir como éxito «22 PR al día» ni «50 nombres nuevos por corrida». La tarea puede concluir sin cambio cuando está esperando fuentes, revisión o controles legítimos.
+
+## 8. Integración con la task existente
+
+La task «Contrapeso — Desarrollo incremental» debe conservar `RRULE:FREQ=MINUTELY;INTERVAL=66`. Tras adoptar este documento en el repositorio, su prompt debe **leer primero**:
+1. `AGENTS.md` y documentación normativa del repo.
+2. `docs/editorial/contrapeso-principios.md` (principios).
+3. `docs/editorial/contrapeso-manual.md` (manual de ejecución editorial, si está integrado).
+4. `plans/contrapeso-roadmap.md` (orden de trabajo, si está integrado).
+5. Estado vivo de PR, Issues, rama y SHA.
+
+**Hasta que los documentos se fusionen en `master`, no afirmar que la task los está usando.**
+
+---
+**Base verificada:** GitHub conectado, repositorio `cortega26/cortega26.github.io`; `master` HEAD actualizado a `80557713087a6b4a0b1786bfff4bae4f16c088a5` durante esta incorporación, carta editorial, README/AGENTS, portada, Museo, PR #145 y sus comentarios. No se efectuaron commits, tests locales ni actualizaciones de la task al generar esta propuesta.

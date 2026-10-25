@@ -1,842 +1,92 @@
-// Archivo editorial de carácter no exhaustivo. La inclusión no determina una condena penal.
-// Fuente y alcance se guardan en cada entrada; ampliar solo con referencias comprobadas.
+// Registro no exhaustivo. Cada entrada exige fuentes y atribuciones explícitas.
 export const SOURCES = {
-  "OVP": {
-    "title": "Observatorio Venezolano de Prisiones · Informe Anual 2024, pp. 84–85",
-    "url": "https://provea.org/wp-content/uploads/2025/07/Informe-Anual-2024-20.07.25_compressed.pdf",
-    "scope": "Listado de 22 personas fallecidas bajo custodia o arresto domiciliario entre 2015 y 2024; no determina por sí solo la causa penal de cada muerte."
-  },
-  "CIDH": {
-    "title": "CIDH · Caso 14.178, El Junquito (2023)",
-    "url": "https://www.oas.org/es/CIDH/jsForm/?File=%2Fes%2Fcidh%2Fprensa%2Fcomunicados%2F2023%2F316.asp",
-    "scope": "La Comisión atribuyó siete ejecuciones extrajudiciales al operativo y elevó el caso ante la Corte IDH; distinguir la conclusión de la CIDH de una sentencia firme."
-  },
-  "PROVEA": {
-    "title": "PROVEA · Estudiantes fallecidos en las protestas de 2017",
-    "url": "https://provea.org/trabajos-especiales/especiales/estudiantes-y-universidades/",
-    "scope": "Registro de estudiantes fallecidos en el contexto de las protestas de 2017; el listado no determina autoría individual."
-  },
-  "FAMILIAS": {
-    "title": "PROVEA · Pronunciamiento de familiares de víctimas de 2017 (2023)",
-    "url": "https://provea.org/actualidad/derechos-civiles-y-politicos/justicia/familiares-de-las-victimas-de-las-protestas-2017-asesinatos/",
-    "scope": "Nueve familias denunciaron ausencia de imputaciones en sus casos según la publicación de 2023; no sustituye expedientes penales."
-  },
-  "AMNESTY": {
-    "title": "Amnistía Internacional · Los rostros de la impunidad (2015)",
-    "url": "https://www.amnesty.org/es/documents/AMR53/1239/2015/es/",
-    "scope": "Casos documentados de muertes en el contexto de las manifestaciones de 2014."
-  },
-  "JEP": {
-    "title": "Justicia, Encuentro y Perdón · Museo de la Memoria",
-    "url": "https://www.jepvenezuela.com/museo-de-la-memoria-y-la-represion/sala-2017-2018/",
-    "scope": "Memorial nominal complementario de 2017–2018."
-  },
-  "HRW": {
-    "title": "Human Rights Watch · Castigados por buscar un cambio (2025)",
-    "url": "https://www.hrw.org/es/report/2025/04/30/castigados-por-buscar-un-cambio/asesinatos-desapariciones-forzadas-y-detenciones",
-    "scope": "25 muertes en el contexto de protestas postelectorales de 2024; no implica autoría estatal comprobada en cada caso."
-  },
-  "HEROES": {
-    "title": "Memoria de las Víctimas · Memorial nominal",
-    "url": "https://heroesdevenezuela.org/heroes",
-    "scope": "Identificaciones personales utilizadas como punto de partida de casos de 2024; verificar por separado antes de una conclusión de responsabilidad."
-  }
+  OVP: {"title":"Observatorio Venezolano de Prisiones · Informe Anual 2024, pp. 84–85","url":"https://provea.org/wp-content/uploads/2025/07/Informe-Anual-2024-20.07.25_compressed.pdf","scope":"Listado de 22 personas fallecidas bajo custodia o arresto domiciliario entre 2015 y 2024; no determina por sí solo la causa penal de cada muerte."},
+  CIDH: {"title":"CIDH · Caso 14.178, El Junquito (2023)","url":"https://www.oas.org/es/CIDH/jsForm/?File=%2Fes%2Fcidh%2Fprensa%2Fcomunicados%2F2023%2F316.asp","scope":"La Comisión atribuyó siete ejecuciones extrajudiciales al operativo y elevó el caso ante la Corte IDH; distinguir la conclusión de la CIDH de una sentencia firme."},
+  PROVEA: {"title":"PROVEA · Estudiantes fallecidos en las protestas de 2017","url":"https://provea.org/trabajos-especiales/especiales/estudiantes-y-universidades/","scope":"Registro de estudiantes fallecidos en el contexto de las protestas de 2017; el listado no determina autoría individual."},
+  FAMILIAS: {"title":"PROVEA · Pronunciamiento de familiares de víctimas de 2017 (2023)","url":"https://provea.org/actualidad/derechos-civiles-y-politicos/justicia/familiares-de-las-victimas-de-las-protestas-2017-asesinatos/","scope":"Nueve familias denunciaron ausencia de imputaciones en sus casos según la publicación de 2023; no sustituye expedientes penales."},
+  AMNESTY: {"title":"Amnistía Internacional · Los rostros de la impunidad (2015)","url":"https://www.amnesty.org/es/documents/AMR53/1239/2015/es/","scope":"Casos documentados de muertes en el contexto de las manifestaciones de 2014."},
+  JEP: {"title":"Justicia, Encuentro y Perdón · Museo de la Memoria","url":"https://www.jepvenezuela.com/museo-de-la-memoria-y-la-represion/sala-2017-2018/","scope":"Memorial nominal complementario de 2017–2018."},
+  HRW: {"title":"Human Rights Watch · Castigados por buscar un cambio (2025)","url":"https://www.hrw.org/es/report/2025/04/30/castigados-por-buscar-un-cambio/asesinatos-desapariciones-forzadas-y-detenciones","scope":"25 muertes en el contexto de protestas postelectorales de 2024; no implica autoría estatal comprobada en cada caso."},
+  HEROES: {"title":"Memoria de las Víctimas · Memorial nominal","url":"https://heroesdevenezuela.org/heroes","scope":"Identificaciones personales utilizadas como punto de partida de casos de 2024; verificar por separado antes de una conclusión de responsabilidad."},
 };
 export const CASES = [
-  {
-    "id": "rodolfo-pedro-gonzalez",
-    "name": "Rodolfo Pedro González",
-    "year": 2015,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "carlos-andres-garcia",
-    "name": "Carlos Andrés García",
-    "year": 2017,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "rafael-arreaza",
-    "name": "Rafael Arreaza",
-    "year": 2017,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "fernando-alban",
-    "name": "Fernando Albán",
-    "year": 2018,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente.",
-    "biography": "https://es.wikipedia.org/wiki/Fernando_Alb%C3%A1n_%28pol%C3%ADtico%29"
-  },
-  {
-    "id": "nelson-martinez",
-    "name": "Nelson Martínez",
-    "year": 2018,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "virgilio-jimenez-urbina",
-    "name": "Virgilio Jiménez Urbina",
-    "year": 2019,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "angel-javier-sequera-romero",
-    "name": "Ángel Javier Sequera Romero",
-    "year": 2019,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "elwin-mendoza",
-    "name": "Elwin Mendoza",
-    "year": 2019,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "rafael-acosta-arevalo",
-    "name": "Rafael Acosta Arévalo",
-    "year": 2019,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente.",
-    "biography": "https://es.wikipedia.org/wiki/Rafael_Acosta_Ar%C3%A9valo"
-  },
-  {
-    "id": "wilfredo-jose-heredia-rodriguez",
-    "name": "Wilfredo José Heredia Rodríguez",
-    "year": 2020,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "luis-armando-monsalve-estaba",
-    "name": "Luis Armando Monsalve Estaba",
-    "year": 2020,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "pedro-pablo-santana",
-    "name": "Pedro Pablo Santana",
-    "year": 2020,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "salvador-franco",
-    "name": "Salvador Franco",
-    "year": 2021,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "gabriel-andres-medina-diaz",
-    "name": "Gabriel Andrés Medina Díaz",
-    "year": 2021,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "raul-isaias-baduel",
-    "name": "Raúl Isaías Baduel",
-    "year": 2021,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente.",
-    "biography": "https://es.wikipedia.org/wiki/Ra%C3%BAl_Isa%C3%ADas_Baduel"
-  },
-  {
-    "id": "armando-flores-pinango",
-    "name": "Armando Flores Piñango",
-    "year": 2022,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "leoner-azuaje-urrea",
-    "name": "Leoner Azuaje Urrea",
-    "year": 2023,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "juan-manuel-almeida-morgado",
-    "name": "Juan Manuel Almeida Morgado",
-    "year": 2023,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "marino-lugo-aguilar",
-    "name": "Marino Lugo Aguilar",
-    "year": 2024,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "jesus-manuel-martinez-medina",
-    "name": "Jesús Manuel Martínez Medina",
-    "year": 2024,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "jesus-rafael-alvarez",
-    "name": "Jesús Rafael Álvarez",
-    "year": 2024,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "osgual-alexander-gonzalez",
-    "name": "Osgual Alexander González",
-    "year": 2024,
-    "category": "custodia",
-    "sources": [
-      "OVP"
-    ],
-    "note": "Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."
-  },
-  {
-    "id": "oscar-alberto-perez",
-    "name": "Óscar Alberto Pérez",
-    "year": 2018,
-    "category": "operativo",
-    "sources": [
-      "CIDH"
-    ],
-    "note": "Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.",
-    "date": "2018-01-15",
-    "biography": "https://es.wikipedia.org/wiki/%C3%93scar_P%C3%A9rez_%28polic%C3%ADa%29"
-  },
-  {
-    "id": "israel-abraham-agostini",
-    "name": "Israel Abraham Agostini",
-    "year": 2018,
-    "category": "operativo",
-    "sources": [
-      "CIDH"
-    ],
-    "note": "Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.",
-    "date": "2018-01-15"
-  },
-  {
-    "id": "daniel-soto-torres",
-    "name": "Daniel Soto Torres",
-    "year": 2018,
-    "category": "operativo",
-    "sources": [
-      "CIDH"
-    ],
-    "note": "Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.",
-    "date": "2018-01-15"
-  },
-  {
-    "id": "abraham-lugo-ramos",
-    "name": "Abraham Lugo Ramos",
-    "year": 2018,
-    "category": "operativo",
-    "sources": [
-      "CIDH"
-    ],
-    "note": "Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.",
-    "date": "2018-01-15"
-  },
-  {
-    "id": "jairo-lugo-ramos",
-    "name": "Jairo Lugo Ramos",
-    "year": 2018,
-    "category": "operativo",
-    "sources": [
-      "CIDH"
-    ],
-    "note": "Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.",
-    "date": "2018-01-15"
-  },
-  {
-    "id": "jose-alejandro-diaz-pimentel",
-    "name": "José Alejandro Díaz Pimentel",
-    "year": 2018,
-    "category": "operativo",
-    "sources": [
-      "CIDH"
-    ],
-    "note": "Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.",
-    "date": "2018-01-15"
-  },
-  {
-    "id": "lisbeth-andreina-ramirez-montilla",
-    "name": "Lisbeth Andreína Ramírez Montilla",
-    "year": 2018,
-    "category": "operativo",
-    "sources": [
-      "CIDH"
-    ],
-    "note": "Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.",
-    "date": "2018-01-15"
-  },
-  {
-    "id": "jairo-johan-ortiz-bustamante",
-    "name": "Jairo Johan Ortiz Bustamante",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-04-06",
-    "biography": "https://es.wikipedia.org/wiki/Jairo_Ortiz"
-  },
-  {
-    "id": "daniel-alejandro-queliz-araca",
-    "name": "Daniel Alejandro Queliz Araca",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-04-10"
-  },
-  {
-    "id": "carlos-jose-moreno",
-    "name": "Carlos José Moreno",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-04-19"
-  },
-  {
-    "id": "paola-andreina-ramirez-gomez",
-    "name": "Paola Andreína Ramírez Gómez",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-04-19",
-    "biography": "https://es.wikipedia.org/wiki/Paola_Ram%C3%ADrez"
-  },
-  {
-    "id": "manuel-perez",
-    "name": "Manuel Pérez",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-04-21"
-  },
-  {
-    "id": "christian-humberto-ochoa-soriano",
-    "name": "Christian Humberto Ochoa Soriano",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-04-26"
-  },
-  {
-    "id": "juan-pablo-pernalete-llovera",
-    "name": "Juan Pablo Pernalete Llovera",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-04-26",
-    "biography": "https://es.wikipedia.org/wiki/Juan_Pablo_Pernalete"
-  },
-  {
-    "id": "armando-canizales-carrillo",
-    "name": "Armando Cañizales Carrillo",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-05-03",
-    "biography": "https://es.wikipedia.org/wiki/Armando_Ca%C3%B1izales"
-  },
-  {
-    "id": "paul-moreno-camacho",
-    "name": "Paúl Moreno Camacho",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-05-18"
-  },
-  {
-    "id": "daniel-rodriguez",
-    "name": "Daniel Rodríguez",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-05-18"
-  },
-  {
-    "id": "edy-alejandro-teran-aguilar",
-    "name": "Edy Alejandro Terán Aguilar",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-05-20"
-  },
-  {
-    "id": "augusto-sergio-pugas-velasquez",
-    "name": "Augusto Sergio Pugas Velásquez",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-05-24"
-  },
-  {
-    "id": "cesar-david-pereira-villegas",
-    "name": "César David Pereira Villegas",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-05-28"
-  },
-  {
-    "id": "luis-enrique-vera-sulbaran",
-    "name": "Luis Enrique Vera Sulbarán",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-06-15"
-  },
-  {
-    "id": "jose-gregorio-perez-perez",
-    "name": "José Gregorio Pérez Pérez",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-06-15"
-  },
-  {
-    "id": "nelson-daniel-arevalo-avendano",
-    "name": "Nelson Daniel Arévalo Avendaño",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-06-16"
-  },
-  {
-    "id": "fabian-urbina",
-    "name": "Fabián Urbina",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-06-19",
-    "biography": "https://es.wikipedia.org/wiki/Fabi%C3%A1n_Urbina"
-  },
-  {
-    "id": "eduardo-jose-marquez-albarran",
-    "name": "Eduardo José Márquez Albarrán",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-06-30"
-  },
-  {
-    "id": "miguel-angel-villalobos-urdaneta",
-    "name": "Miguel Ángel Villalobos Urdaneta",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-07-11"
-  },
-  {
-    "id": "oswaldo-rafael-britt",
-    "name": "Oswaldo Rafael Britt",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-07-11"
-  },
-  {
-    "id": "ricardo-campos",
-    "name": "Ricardo Campos",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-07-30"
-  },
-  {
-    "id": "willmerys-ocarina-zerpa",
-    "name": "Willmerys Ocarina Zerpa",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-08-07"
-  },
-  {
-    "id": "eduardo-jose-orozco-porras",
-    "name": "Eduardo José Orozco Porras",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "PROVEA"
-    ],
-    "note": "Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.",
-    "date": "2017-08-07"
-  },
-  {
-    "id": "yoinier-javier-pena-hernandez",
-    "name": "Yoinier Javier Peña Hernández",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "FAMILIAS"
-    ],
-    "note": "Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."
-  },
-  {
-    "id": "miguel-fernando-castillo-bracho",
-    "name": "Miguel Fernando Castillo Bracho",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "FAMILIAS"
-    ],
-    "note": "Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."
-  },
-  {
-    "id": "diego-fernando-arellano-figueredo",
-    "name": "Diego Fernando Arellano Figueredo",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "FAMILIAS"
-    ],
-    "note": "Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."
-  },
-  {
-    "id": "yorman-ali-bervecia-cabeza",
-    "name": "Yorman Alí Bervecia Cabeza",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "FAMILIAS"
-    ],
-    "note": "Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."
-  },
-  {
-    "id": "adrian-jose-duque-bravo",
-    "name": "Adrián José Duque Bravo",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "FAMILIAS"
-    ],
-    "note": "Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."
-  },
-  {
-    "id": "luis-guillermo-espinoza-castillo",
-    "name": "Luis Guillermo Espinoza Castillo",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "FAMILIAS"
-    ],
-    "note": "Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."
-  },
-  {
-    "id": "roberto-enrique-duran-ramirez",
-    "name": "Roberto Enrique Durán Ramírez",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "FAMILIAS"
-    ],
-    "note": "Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."
-  },
-  {
-    "id": "neomar-alejandro-lander-armas",
-    "name": "Neomar Alejandro Lander Armas",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "JEP"
-    ],
-    "note": "Falleció durante las protestas de junio de 2017; su biografía pública documenta el caso.",
-    "date": "2017-06-07",
-    "biography": "https://es.wikipedia.org/wiki/Neomar_Lander"
-  },
-  {
-    "id": "david-jose-vallenilla-luis",
-    "name": "David José Vallenilla Luis",
-    "year": 2017,
-    "category": "protesta",
-    "sources": [
-      "JEP"
-    ],
-    "note": "Falleció durante las protestas de junio de 2017; su biografía pública documenta el caso.",
-    "date": "2017-06-22",
-    "biography": "https://es.wikipedia.org/wiki/David_Vallenilla"
-  },
-  {
-    "id": "bassil-alejandro-dacosta-frias",
-    "name": "Bassil Alejandro Dacosta Frías",
-    "year": 2014,
-    "category": "protesta",
-    "sources": [
-      "AMNESTY"
-    ],
-    "note": "Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual.",
-    "biography": "https://es.wikipedia.org/wiki/Bassil_Dacosta"
-  },
-  {
-    "id": "genesis-carmona",
-    "name": "Génesis Carmona",
-    "year": 2014,
-    "category": "protesta",
-    "sources": [
-      "AMNESTY"
-    ],
-    "note": "Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual.",
-    "biography": "https://es.wikipedia.org/wiki/G%C3%A9nesis_Carmona"
-  },
-  {
-    "id": "geraldine-moreno",
-    "name": "Geraldine Moreno",
-    "year": 2014,
-    "category": "protesta",
-    "sources": [
-      "AMNESTY"
-    ],
-    "note": "Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual."
-  },
-  {
-    "id": "guillermo-sanchez",
-    "name": "Guillermo Sánchez",
-    "year": 2014,
-    "category": "protesta",
-    "sources": [
-      "AMNESTY"
-    ],
-    "note": "Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual."
-  },
-  {
-    "id": "juan-montoya",
-    "name": "Juan Montoya",
-    "year": 2014,
-    "category": "protesta",
-    "sources": [
-      "AMNESTY"
-    ],
-    "note": "Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual."
-  },
-  {
-    "id": "julio-valerio-garcia",
-    "name": "Julio Valerio García",
-    "year": 2024,
-    "category": "protesta",
-    "sources": [
-      "HEROES",
-      "HRW"
-    ],
-    "note": "La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."
-  },
-  {
-    "id": "jesus-tovar-perdomo",
-    "name": "Jesús Tovar Perdomo",
-    "year": 2024,
-    "category": "protesta",
-    "sources": [
-      "HEROES",
-      "HRW"
-    ],
-    "note": "La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."
-  },
-  {
-    "id": "jhon-alejandro-graterol-mendoza",
-    "name": "Jhon Alejandro Graterol Mendoza",
-    "year": 2024,
-    "category": "protesta",
-    "sources": [
-      "HEROES",
-      "HRW"
-    ],
-    "note": "La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."
-  },
-  {
-    "id": "isaias-fuenmayor",
-    "name": "Isaías Fuenmayor",
-    "year": 2024,
-    "category": "protesta",
-    "sources": [
-      "HEROES",
-      "HRW"
-    ],
-    "note": "La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."
-  },
-  {
-    "id": "olinger-montano",
-    "name": "Olinger Montaño",
-    "year": 2024,
-    "category": "protesta",
-    "sources": [
-      "HEROES",
-      "HRW"
-    ],
-    "note": "La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."
-  },
-  {
-    "id": "antoni-canizalez",
-    "name": "Antoni Cañizález",
-    "year": 2024,
-    "category": "protesta",
-    "sources": [
-      "HEROES",
-      "HRW"
-    ],
-    "note": "La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."
-  },
-  {
-    "id": "jeison-javier-bracho-martinez",
-    "name": "Jeison Javier Bracho Martínez",
-    "year": 2024,
-    "category": "protesta",
-    "sources": [
-      "HEROES",
-      "HRW"
-    ],
-    "note": "La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."
-  },
-  {
-    "id": "rances-daniel-yzarra-bolivar",
-    "name": "Rancés Daniel Yzarra Bolívar",
-    "year": 2024,
-    "category": "protesta",
-    "sources": [
-      "HEROES",
-      "HRW"
-    ],
-    "note": "La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."
-  }
+  {"id":"rodolfo-pedro-gonzalez","name":"Rodolfo Pedro González","year":2015,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"carlos-andres-garcia","name":"Carlos Andrés García","year":2017,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"rafael-arreaza","name":"Rafael Arreaza","year":2017,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"fernando-alban","name":"Fernando Albán","year":2018,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente.","biography":"https://es.wikipedia.org/wiki/Fernando_Alb%C3%A1n_%28pol%C3%ADtico%29"},
+  {"id":"nelson-martinez","name":"Nelson Martínez","year":2018,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"virgilio-jimenez-urbina","name":"Virgilio Jiménez Urbina","year":2019,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"angel-javier-sequera-romero","name":"Ángel Javier Sequera Romero","year":2019,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"elwin-mendoza","name":"Elwin Mendoza","year":2019,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"rafael-acosta-arevalo","name":"Rafael Acosta Arévalo","year":2019,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente.","biography":"https://es.wikipedia.org/wiki/Rafael_Acosta_Ar%C3%A9valo"},
+  {"id":"wilfredo-jose-heredia-rodriguez","name":"Wilfredo José Heredia Rodríguez","year":2020,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"luis-armando-monsalve-estaba","name":"Luis Armando Monsalve Estaba","year":2020,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"pedro-pablo-santana","name":"Pedro Pablo Santana","year":2020,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"salvador-franco","name":"Salvador Franco","year":2021,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"gabriel-andres-medina-diaz","name":"Gabriel Andrés Medina Díaz","year":2021,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"raul-isaias-baduel","name":"Raúl Isaías Baduel","year":2021,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente.","biography":"https://es.wikipedia.org/wiki/Ra%C3%BAl_Isa%C3%ADas_Baduel"},
+  {"id":"armando-flores-pinango","name":"Armando Flores Piñango","year":2022,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"leoner-azuaje-urrea","name":"Leoner Azuaje Urrea","year":2023,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"juan-manuel-almeida-morgado","name":"Juan Manuel Almeida Morgado","year":2023,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"marino-lugo-aguilar","name":"Marino Lugo Aguilar","year":2024,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"jesus-manuel-martinez-medina","name":"Jesús Manuel Martínez Medina","year":2024,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"jesus-rafael-alvarez","name":"Jesús Rafael Álvarez","year":2024,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"osgual-alexander-gonzalez","name":"Osgual Alexander González","year":2024,"category":"custodia","sources":["OVP"],"note":"Fallecimiento durante custodia estatal o, donde se indica, arresto domiciliario, incluido por el Observatorio Venezolano de Prisiones. La causa concreta debe examinarse individualmente."},
+  {"id":"oscar-alberto-perez","name":"Óscar Alberto Pérez","year":2018,"category":"operativo","sources":["CIDH"],"note":"Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.","date":"2018-01-15","biography":"https://es.wikipedia.org/wiki/%C3%93scar_P%C3%A9rez_%28polic%C3%ADa%29"},
+  {"id":"israel-abraham-agostini","name":"Israel Abraham Agostini","year":2018,"category":"operativo","sources":["CIDH"],"note":"Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.","date":"2018-01-15"},
+  {"id":"daniel-soto-torres","name":"Daniel Soto Torres","year":2018,"category":"operativo","sources":["CIDH"],"note":"Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.","date":"2018-01-15"},
+  {"id":"abraham-lugo-ramos","name":"Abraham Lugo Ramos","year":2018,"category":"operativo","sources":["CIDH"],"note":"Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.","date":"2018-01-15"},
+  {"id":"jairo-lugo-ramos","name":"Jairo Lugo Ramos","year":2018,"category":"operativo","sources":["CIDH"],"note":"Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.","date":"2018-01-15"},
+  {"id":"jose-alejandro-diaz-pimentel","name":"José Alejandro Díaz Pimentel","year":2018,"category":"operativo","sources":["CIDH"],"note":"Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.","date":"2018-01-15"},
+  {"id":"lisbeth-andreina-ramirez-montilla","name":"Lisbeth Andreína Ramírez Montilla","year":2018,"category":"operativo","sources":["CIDH"],"note":"Murió durante el operativo de El Junquito del 15 de enero de 2018. La CIDH presentó el caso de las siete víctimas como ejecuciones extrajudiciales ante la Corte Interamericana.","date":"2018-01-15"},
+  {"id":"jairo-johan-ortiz-bustamante","name":"Jairo Johan Ortiz Bustamante","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-04-06","biography":"https://es.wikipedia.org/wiki/Jairo_Ortiz"},
+  {"id":"daniel-alejandro-queliz-araca","name":"Daniel Alejandro Queliz Araca","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-04-10"},
+  {"id":"carlos-jose-moreno","name":"Carlos José Moreno","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-04-19"},
+  {"id":"paola-andreina-ramirez-gomez","name":"Paola Andreína Ramírez Gómez","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-04-19","biography":"https://es.wikipedia.org/wiki/Paola_Ram%C3%ADrez"},
+  {"id":"manuel-perez","name":"Manuel Pérez","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-04-21"},
+  {"id":"christian-humberto-ochoa-soriano","name":"Christian Humberto Ochoa Soriano","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-04-26"},
+  {"id":"juan-pablo-pernalete-llovera","name":"Juan Pablo Pernalete Llovera","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-04-26","biography":"https://es.wikipedia.org/wiki/Juan_Pablo_Pernalete"},
+  {"id":"armando-canizales-carrillo","name":"Armando Cañizales Carrillo","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-05-03","biography":"https://es.wikipedia.org/wiki/Armando_Ca%C3%B1izales"},
+  {"id":"paul-moreno-camacho","name":"Paúl Moreno Camacho","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-05-18"},
+  {"id":"daniel-rodriguez","name":"Daniel Rodríguez","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-05-18"},
+  {"id":"edy-alejandro-teran-aguilar","name":"Edy Alejandro Terán Aguilar","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-05-20"},
+  {"id":"augusto-sergio-pugas-velasquez","name":"Augusto Sergio Pugas Velásquez","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-05-24"},
+  {"id":"cesar-david-pereira-villegas","name":"César David Pereira Villegas","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-05-28"},
+  {"id":"luis-enrique-vera-sulbaran","name":"Luis Enrique Vera Sulbarán","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-06-15"},
+  {"id":"jose-gregorio-perez-perez","name":"José Gregorio Pérez Pérez","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-06-15"},
+  {"id":"nelson-daniel-arevalo-avendano","name":"Nelson Daniel Arévalo Avendaño","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-06-16"},
+  {"id":"fabian-urbina","name":"Fabián Urbina","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-06-19","biography":"https://es.wikipedia.org/wiki/Fabi%C3%A1n_Urbina"},
+  {"id":"eduardo-jose-marquez-albarran","name":"Eduardo José Márquez Albarrán","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-06-30"},
+  {"id":"miguel-angel-villalobos-urdaneta","name":"Miguel Ángel Villalobos Urdaneta","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-07-11"},
+  {"id":"oswaldo-rafael-britt","name":"Oswaldo Rafael Britt","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-07-11"},
+  {"id":"ricardo-campos","name":"Ricardo Campos","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-07-30"},
+  {"id":"willmerys-ocarina-zerpa","name":"Willmerys Ocarina Zerpa","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-08-07"},
+  {"id":"eduardo-jose-orozco-porras","name":"Eduardo José Orozco Porras","year":2017,"category":"protesta","sources":["PROVEA"],"note":"Estudiante registrado por PROVEA entre las personas fallecidas en el contexto de las protestas de 2017. La fuente general no atribuye automáticamente la autoría de cada muerte.","date":"2017-08-07"},
+  {"id":"yoinier-javier-pena-hernandez","name":"Yoinier Javier Peña Hernández","year":2017,"category":"protesta","sources":["FAMILIAS"],"note":"Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."},
+  {"id":"miguel-fernando-castillo-bracho","name":"Miguel Fernando Castillo Bracho","year":2017,"category":"protesta","sources":["FAMILIAS"],"note":"Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."},
+  {"id":"diego-fernando-arellano-figueredo","name":"Diego Fernando Arellano Figueredo","year":2017,"category":"protesta","sources":["FAMILIAS"],"note":"Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."},
+  {"id":"yorman-ali-bervecia-cabeza","name":"Yorman Alí Bervecia Cabeza","year":2017,"category":"protesta","sources":["FAMILIAS"],"note":"Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."},
+  {"id":"adrian-jose-duque-bravo","name":"Adrián José Duque Bravo","year":2017,"category":"protesta","sources":["FAMILIAS"],"note":"Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."},
+  {"id":"luis-guillermo-espinoza-castillo","name":"Luis Guillermo Espinoza Castillo","year":2017,"category":"protesta","sources":["FAMILIAS"],"note":"Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."},
+  {"id":"roberto-enrique-duran-ramirez","name":"Roberto Enrique Durán Ramírez","year":2017,"category":"protesta","sources":["FAMILIAS"],"note":"Su familia figura en el pronunciamiento recogido por PROVEA sobre la búsqueda de justicia por muertes durante las protestas de 2017."},
+  {"id":"neomar-alejandro-lander-armas","name":"Neomar Alejandro Lander Armas","year":2017,"category":"protesta","sources":["JEP"],"note":"Falleció durante las protestas de junio de 2017; su biografía pública documenta el caso.","date":"2017-06-07","biography":"https://es.wikipedia.org/wiki/Neomar_Lander"},
+  {"id":"david-jose-vallenilla-luis","name":"David José Vallenilla Luis","year":2017,"category":"protesta","sources":["JEP"],"note":"Falleció durante las protestas de junio de 2017; su biografía pública documenta el caso.","date":"2017-06-22","biography":"https://es.wikipedia.org/wiki/David_Vallenilla"},
+  {"id":"bassil-alejandro-dacosta-frias","name":"Bassil Alejandro Dacosta Frías","year":2014,"category":"protesta","sources":["AMNESTY"],"note":"Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual.","biography":"https://es.wikipedia.org/wiki/Bassil_Dacosta"},
+  {"id":"genesis-carmona","name":"Génesis Carmona","year":2014,"category":"protesta","sources":["AMNESTY"],"note":"Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual.","biography":"https://es.wikipedia.org/wiki/G%C3%A9nesis_Carmona"},
+  {"id":"geraldine-moreno","name":"Geraldine Moreno","year":2014,"category":"protesta","sources":["AMNESTY"],"note":"Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual."},
+  {"id":"guillermo-sanchez","name":"Guillermo Sánchez","year":2014,"category":"protesta","sources":["AMNESTY"],"note":"Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual."},
+  {"id":"juan-montoya","name":"Juan Montoya","year":2014,"category":"protesta","sources":["AMNESTY"],"note":"Falleció en el contexto de las protestas de 2014. El contexto de cada muerte y la posible responsabilidad estatal requieren distinción individual."},
+  {"id":"julio-valerio-garcia","name":"Julio Valerio García","year":2024,"category":"protesta","sources":["HEROES","HRW"],"note":"La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."},
+  {"id":"jesus-tovar-perdomo","name":"Jesús Tovar Perdomo","year":2024,"category":"protesta","sources":["HEROES","HRW"],"note":"La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."},
+  {"id":"jhon-alejandro-graterol-mendoza","name":"Jhon Alejandro Graterol Mendoza","year":2024,"category":"protesta","sources":["HEROES","HRW"],"note":"La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."},
+  {"id":"isaias-fuenmayor","name":"Isaías Fuenmayor","year":2024,"category":"protesta","sources":["HEROES","HRW"],"note":"La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."},
+  {"id":"olinger-montano","name":"Olinger Montaño","year":2024,"category":"protesta","sources":["HEROES","HRW"],"note":"La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."},
+  {"id":"antoni-canizalez","name":"Antoni Cañizález","year":2024,"category":"protesta","sources":["HEROES","HRW"],"note":"La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."},
+  {"id":"jeison-javier-bracho-martinez","name":"Jeison Javier Bracho Martínez","year":2024,"category":"protesta","sources":["HEROES","HRW"],"note":"La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."},
+  {"id":"rances-daniel-yzarra-bolivar","name":"Rancés Daniel Yzarra Bolívar","year":2024,"category":"protesta","sources":["HEROES","HRW"],"note":"La persona aparece en un memorial nominal de las protestas postelectorales de 2024. HRW documenta el patrón general de muertes; la atribución individual permanece sujeta a corroboración."},
 ];
 export const CATEGORIES = {
- protesta:"Protestas",custodia:"Bajo custodia",operativo:"Operativos estatales"
+  protesta: 'Protestas',
+  custodia: 'Bajo custodia',
+  operativo: 'Operativos estatales'
 };

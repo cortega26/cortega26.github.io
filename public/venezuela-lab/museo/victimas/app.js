@@ -1,26 +1,30 @@
 import { CASES, SOURCES, CATEGORIES } from './data.js';
 
-const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-const elem = (tag, className, value) => {
+function normalize(value) {
+  return value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+}
+function elem(tag, className, value) {
   const item = document.createElement(tag);
   if (className) item.className = className;
   if (value !== undefined) item.textContent = value;
   return item;
 };
-const external = (label, href, className = '') => {
+function external(label, href, className = '') {
   const link = elem('a', className, label);
   link.href = href;
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   return link;
 };
-const internal = (label, href, className = '') => {
+function internal(label, href, className = '') {
   const link = elem('a', className, label);
   link.href = href;
   return link;
 };
 const sorted = [...CASES].sort((a,b) => b.year-a.year || a.name.localeCompare(b.name, 'es'));
-const dateLabel = person => person.date ? new Date(person.date+'T12:00:00Z').toLocaleDateString('es-VE',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}) : String(person.year);
+function dateLabel(person) {
+  return person.date ? new Date(`${person.date}T12:00:00Z`).toLocaleDateString('es-VE',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}) : String(person.year);
+}
 
 function renderIndex() {
   const container = document.querySelector('#cases');
@@ -43,10 +47,10 @@ function renderIndex() {
       const card = elem('article', 'person-card');
       const top = elem('div','person-top');
       top.append(elem('span','person-year', dateLabel(person)),elem('span','person-category', CATEGORIES[person.category]));
-      const name = elem('h3','person-name'); name.append(internal(person.name, './perfil.html?id='+encodeURIComponent(person.id))); card.append(top,name);
+      const name = elem('h3','person-name'); name.append(internal(person.name, `./perfil.html?id=${encodeURIComponent(person.id)}`)); card.append(top,name);
       const excerpt=elem('p','person-excerpt',person.note);card.append(excerpt);
       const actions=elem('div','person-actions');
-      actions.append(internal('VER FICHA DOCUMENTAL →','./perfil.html?id='+encodeURIComponent(person.id),'detail-link'));
+      actions.append(internal('VER FICHA DOCUMENTAL →',`./perfil.html?id=${encodeURIComponent(person.id)}`,'detail-link'));
       if(person.biography)actions.append(external('BIOGRAFÍA EXTERNA ↗',person.biography,'bio-link'));
       card.append(actions);frag.append(card);
     }
@@ -66,7 +70,7 @@ function renderIndex() {
   for(const [key,source] of Object.entries(SOURCES)){
     const node=elem('article','reference');
     node.append(elem('span','reference-number',key));
-    const name=elem('h3'); name.append(external(source.title+' ↗',source.url));node.append(name);
+    const name=elem('h3'); name.append(external(`${source.title} ↗`,source.url));node.append(name);
     node.append(elem('p','',source.scope)); sources.append(node);
   }
 }
@@ -98,7 +102,7 @@ function renderProfile() {
     const source=SOURCES[id];
     if(!source)continue;
     const item=elem('article','reference');
-    const heading=elem('h3');heading.append(external(source.title+' ↗',source.url));
+    const heading=elem('h3');heading.append(external(`${source.title} ↗`,source.url));
     item.append(heading,elem('p','',source.scope));list.append(item);
   }
   section.append(list);target.append(section);

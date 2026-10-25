@@ -12,7 +12,7 @@ const style = readFileSync(new URL('../public/venezuela-lab/museo/victimas/memor
 assert.ok(CASES.length >= 70, 'Cobertura inaugural con 70 o más personas documentadas');
 const ids = CASES.map(person => person.id);
 assert.equal(new Set(ids).size,CASES.length,'Identificadores únicos');
-assert.equal(new Set(CASES.map(person => person.name.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase())).size,CASES.length,'No duplicar nombres');
+assert.equal(new Set(CASES.map(person => person.name.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase())).size,CASES.length,'No duplicar nombres');
 assert.equal(CASES.filter(person => person.category === 'custodia').length,22,'22 casos de custodia en el informe OVP');
 assert.equal(CASES.filter(person => person.category === 'operativo').length,7,'Siete personas de El Junquito según la CIDH');
 assert.ok(CASES.filter(person => person.category === 'protesta').length >= 40,'Registros de manifestaciones');

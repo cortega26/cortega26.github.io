@@ -1,12 +1,13 @@
 :root {
   color-scheme: light;
+
   --ink: #193128;
   --muted: #59675f;
   --red: #b64a35;
   --bg: #f1f0e8;
   --line: #bdc8bb;
-  --serif: Georgia, 'Times New Roman', serif;
-  --sans: Arial, Helvetica, sans-serif;
+  --serif: georgia, 'Times New Roman', serif;
+  --sans: arial, helvetica, sans-serif;
 }
 
 * {

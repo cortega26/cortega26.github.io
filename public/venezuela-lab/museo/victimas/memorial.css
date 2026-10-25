@@ -702,3 +702,196 @@ button,input,select {
   font-weight: 800;
   font-size: 12px;
 }
+
+/* Archivo anual: acceso directo a 1999 y lectura documental diferenciada */
+.hero-history-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.year-report {
+  padding-top: 72px;
+  padding-bottom: 90px;
+}
+
+.year-head {
+  border-top: 4px solid #ad4a3a;
+  padding-top: 30px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, .55fr);
+  gap: 48px;
+}
+
+.year-head h1 {
+  font: 400 clamp(64px, 9vw, 120px)/1 Georgia, serif;
+  letter-spacing: -.08em;
+  margin: 0 0 25px;
+}
+
+.year-intro {
+  max-width: 690px;
+  color: #405449;
+  font: 400 19px/1.7 Georgia, serif;
+}
+
+.year-fact {
+  padding: 28px;
+  background: #e2e7da;
+  align-self: start;
+}
+
+.year-fact strong {
+  display: block;
+  font: 400 55px/1 Georgia, serif;
+  color: #a94635;
+}
+
+.year-fact span {
+  display: block;
+  padding-top: 12px;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.year-block {
+  margin-top: 72px;
+}
+
+.year-block-heading {
+  border-bottom: 1px solid #8fa596;
+  padding-bottom: 17px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.year-block h2 {
+  font: 400 clamp(29px, 4vw, 47px)/1.2 Georgia, serif;
+  margin: 0;
+}
+
+.year-block-heading>span {
+  font-size: 11px;
+  font-weight: 800;
+  color: #a34434;
+}
+
+.year-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 28px;
+}
+
+.year-card {
+  padding: 24px;
+  border-top: 3px solid #284838;
+  background: #fffdf4;
+}
+
+.year-card h3 {
+  font: 400 25px/1.25 Georgia, serif;
+  margin: 20px 0;
+}
+
+.year-card p, .year-context p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #415748;
+}
+
+.year-card .year-case-date {
+  color: #9d4532;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.year-card a, .year-context a {
+  color: #9c4435;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.year-case-evidence {
+  border-left: 3px solid #a94538;
+  margin: 30px 0;
+  padding: 19px 24px;
+  background: #e8e6db;
+}
+
+.year-case-evidence p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.year-disappeared {
+  background: #1d392d;
+  color: #f4f1e5;
+  padding: 35px;
+  margin-top: 35px;
+}
+
+.year-disappeared h3 {
+  margin-top: 0;
+  font: 400 clamp(28px, 3vw, 40px)/1.3 Georgia, serif;
+}
+
+.year-disappeared p {
+  max-width: 1000px;
+  color: #d4e1d3;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.year-disappeared ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.year-disappeared li {
+  border-top: 1px solid #7e9b84;
+  padding-top: 15px;
+  font: 400 18px/1.35 Georgia, serif;
+}
+
+.year-disappeared a {
+  color: #ffcfac;
+}
+
+.year-context {
+  padding: 25px 29px;
+  background: #e2e7da;
+  margin-top: 25px;
+}
+
+.year-context h3 {
+  margin: 0;
+  font: 400 28px/1.3 Georgia, serif;
+}
+
+.year-context p {
+  max-width: 950px;
+}
+
+@media (width <= 800px) {
+  .year-head, .year-card-grid, .year-disappeared ul {
+    grid-template-columns: 1fr;
+  }
+
+  .year-report {
+    padding-top: 50px;
+  }
+
+  .year-disappeared {
+    padding: 24px;
+  }
+}

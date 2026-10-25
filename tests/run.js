@@ -12,6 +12,7 @@ import './contrapeso-documentary.mjs';
 import './contrapeso-barbados.mjs';
 import './contrapeso-instituciones.mjs';
 import './contrapeso-represion.mjs';
+import './contrapeso-memorial.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const BUILT = process.argv.includes('--built');

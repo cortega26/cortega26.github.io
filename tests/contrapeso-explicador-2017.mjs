@@ -22,6 +22,9 @@ if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', import.meta.url), 'utf8');
   assert.ok(built.includes('noindex,nofollow,noarchive'), 'Build conserva noindex');
   assert.ok(built.includes('Sentencias 155 y 156'), 'La página se empaquetó correctamente');
+  const built28j = readFileSync(new URL('../dist/venezuela-lab/explicadores/actas-28j-2024/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(built28j), 'El segundo explicador conserva noindex tras el build');
+  assert.ok(built28j.includes('3.915.001') && built28j.includes('338.457'), 'El segundo explicador conserva la cuenta en el build');
 }
 
 assert.ok(hasNoindexMeta(html), 'La comprobación de producción acepta el noindex real del prototipo');

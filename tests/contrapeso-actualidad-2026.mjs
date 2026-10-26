@@ -38,6 +38,6 @@ assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card
 assert.ok(home.includes('5 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
 if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/actualidad/regreso-machado-2026/index.html', import.meta.url), 'utf8');
-  assert.ok(hasNoindexMeta(built) && built.includes('María Corina Machado regresa'), 'Build de noticia noindex');
+  assert.ok(hasNoindexMeta(built) && built.includes('María Corina Machado regresó'), 'Build de noticia noindex');
 }
 console.log('Contrapeso actualidad 2026: género, fuentes, límites, portada, ruta y noindex PASS');

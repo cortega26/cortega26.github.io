@@ -51,7 +51,7 @@ const articleGrid = frontpage.split('<div class="articles-grid" id="article-list
 assert.ok(articleGrid, 'La portada mantiene la grilla de publicaciones');
 assert.equal((articleGrid.match(/class="story-card"/g) || []).length, 6, 'Se conservan seis tarjetas y el layout');
 assert.equal((articleGrid.match(/class="demo-tag"/g) || []).length, 5, 'Solo cinco tarjetas se identifican como muestras');
-const realCard = articleGrid.match(/<article class="story-card" data-category="Explicadores"[\\s\\S]*?<\\/article>/)?.[0];
+const realCard = articleGrid.split('<article class="story-card" data-category="Explicadores"')[1]?.split('</article>')[0];
 assert.ok(realCard, 'Existe una tarjeta de explicador real con género identificable');
 assert.ok(realCard.includes(`href="${editorialPath}"`), 'La tarjeta enlaza al explicador documentado');
 assert.ok(!realCard.includes('data-article=') && !realCard.includes('demo-tag'), 'El artículo real no abre un modal demostrativo ni se etiqueta EJEMPLO');

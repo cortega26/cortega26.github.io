@@ -24,6 +24,6 @@ for (const url of [
 }
 assert.ok(museum.includes('/venezuela-lab/explicadores/sentencias-155-156-2017/'), 'Enlace de acceso desde el Museo');
 assert.ok(css.includes('@media(max-width:540px)') && css.includes('@media(max-width:800px)'), 'Adaptación móvil y tableta');
-assert.ok(!/<script\\b/i.test(html), 'Sin nueva superficie de JS o cambios de CSP');
+assert.ok(!/<script\b/i.test(html), 'Sin nueva superficie de JS o cambios de CSP');
 assert.ok(html.includes('href="../explicadores.css"'), 'Stylesheet local');
 console.log('Contrapeso explicador TSJ 2017: contrato editorial, rutas y estilos PASS');

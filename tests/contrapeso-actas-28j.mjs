@@ -32,16 +32,18 @@ const missingRegistered = 3576544;
 const margin = gonzalez - maduro;
 assert.equal(margin, 3915001, 'Diferencia calculada a partir de actas');
 assert.equal(margin - missingRegistered, 338457, 'Cota conservadora de la ventaja');
-for (const number of ['7.156.462', '3.241.461', '3.915.001', '3.576.544', '338.457']) {
-  assert.ok(html.includes(number), `Falta cifra trazable: ${number}`);
-}
-for (const source of [
-  'https://www.cartercenter.org/wp-content/uploads/2025/02/venezuela-final-report-2025.pdf',
-  'https://www.cartercenter.org/news/venezuela-073024/',
-  'https://scm.oas.org/pdfs/2025/CP50866e.pdf'
-]) {
-  assert.ok(html.includes(source), `Falta fuente documental: ${source}`);
-}
+assert.ok(
+  ['7.156.462', '3.241.461', '3.915.001', '3.576.544', '338.457'].every((number) => html.includes(number)),
+  'Todas las cifras de la cuenta conservan trazabilidad'
+);
+assert.ok(
+  [
+    'https://www.cartercenter.org/wp-content/uploads/2025/02/venezuela-final-report-2025.pdf',
+    'https://www.cartercenter.org/news/venezuela-073024/',
+    'https://scm.oas.org/pdfs/2025/CP50866e.pdf'
+  ].every((source) => html.includes(source)),
+  'Las tres fuentes documentales están enlazadas'
+);
 assert.ok(museum.includes(`href="${path}"`), 'Expediente del Museo enlaza al explicador');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1]?.split('</div><p id="no-results"')[0];
 assert.ok(grid, 'Portada conserva grilla');

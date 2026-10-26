@@ -32,6 +32,9 @@ assert.ok(!hasNoindexMeta('<meta name="robots" content="index,follow">'), 'La co
 assert.match(html, /<html lang="es">/, 'Idioma principal claro');
 assert.match(html, /<meta name="robots" content="noindex,nofollow,noarchive">/, 'Mantener prototipo no indexable');
 assert.match(html, /EXPLICADOR HISTÓRICO/, 'Género editorial diferenciado de noticia');
+assert.match(html, /el TSJ se atribuyó funciones parlamentarias y luego retrocedió/, 'Titular directo y documental');
+assert.ok(!/Conviene distinguir|Sería incorrecto|No es una inferencia basada únicamente/.test(html), 'Sin prosa defensiva redundante');
+assert.ok(frontpage.includes('Sentencias 155 y 156: el TSJ se atribuyó funciones parlamentarias y luego retrocedió'), 'Portada alineada con titular documental');
 assert.match(html, /28 de marzo de 2017/, 'Fecha 155');
 assert.match(html, /29 de marzo/, 'Fecha 156');
 assert.match(html, /1 de abril/, 'Fecha de rectificaciones');

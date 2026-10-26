@@ -1,9 +1,25 @@
 import { readFileSync } from 'node:fs';
 import { strict as assert } from 'node:assert';
+import { prototypeOnlyRoutes, routeGroups } from '../src/data/routes.ts';
 
 const html = readFileSync(new URL('../public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../public/venezuela-lab/explicadores/explicadores.css', import.meta.url), 'utf8');
 const museum = readFileSync(new URL('../public/venezuela-lab/museo/index.html', import.meta.url), 'utf8');
+
+const editorialPath = '/venezuela-lab/explicadores/sentencias-155-156-2017/';
+assert.ok(
+  prototypeOnlyRoutes.some((route) => route.id === 'contrapeso:explainer:tsj-2017' && route.path === editorialPath),
+  'Nueva página inscrita en inventario explícito de prototipos'
+);
+assert.ok(
+  !routeGroups.some((group) => Object.values(group.paths).includes(editorialPath)),
+  'Prototipo no debe estar en grupos SEO/sitemap indexables'
+);
+if (process.argv.includes('--built')) {
+  const built = readFileSync(new URL('../dist/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', import.meta.url), 'utf8');
+  assert.ok(built.includes('noindex,nofollow,noarchive'), 'Build conserva noindex');
+  assert.ok(built.includes('Sentencias 155 y 156'), 'La página se empaquetó correctamente');
+}
 
 assert.match(html, /<html lang="es">/, 'Idioma principal claro');
 assert.match(html, /<meta name="robots" content="noindex,nofollow,noarchive">/, 'Mantener prototipo no indexable');

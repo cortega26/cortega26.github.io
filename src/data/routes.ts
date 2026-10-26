@@ -96,6 +96,10 @@ export const routeGroups: RouteGroup[] = [
  * They are reachable for QA but explicitly noindex until the owner launches. */
 export const prototypeOnlyRoutes = [
   {
+    id: 'contrapeso:explainer:actas-28j-2024',
+    path: '/venezuela-lab/explicadores/actas-28j-2024/',
+  },
+  {
     id: 'contrapeso:method',
     path: '/venezuela-lab/metodo/',
   },

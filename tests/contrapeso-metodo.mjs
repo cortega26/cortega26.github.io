@@ -3,11 +3,10 @@ import { strict as assert } from 'node:assert';
 import { prototypeOnlyRoutes, routeGroups } from '../src/data/routes.ts';
 import { hasNoindexMeta } from '../scripts/check-production.mjs';
 
-const read = (path) => readFileSync(new URL(path, import.meta.url), 'utf8');
-const html = read('../public/venezuela-lab/metodo/index.html');
-const home = read('../public/venezuela-lab/index.html');
-const explainer = read('../public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html');
-const css = read('../public/venezuela-lab/explicadores/explicadores.css');
+const html = readFileSync(new URL('../public/venezuela-lab/metodo/index.html', import.meta.url), 'utf8');
+const home = readFileSync(new URL('../public/venezuela-lab/index.html', import.meta.url), 'utf8');
+const explainer = readFileSync(new URL('../public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', import.meta.url), 'utf8');
+const css = readFileSync(new URL('../public/venezuela-lab/explicadores/explicadores.css', import.meta.url), 'utf8');
 const path = '/venezuela-lab/metodo/';
 
 assert.ok(prototypeOnlyRoutes.some((route) => route.id === 'contrapeso:method' && route.path === path),
@@ -32,7 +31,7 @@ assert.ok(html.includes('href="../explicadores/explicadores.css"') && css.includ
 assert.ok(home.includes('href="/venezuela-lab/metodo/"'), 'La portada enlaza al método');
 assert.ok(explainer.includes('href="/venezuela-lab/metodo/"'), 'La publicación real enlaza al método');
 if (process.argv.includes('--built')) {
-  const built = read('../dist/venezuela-lab/metodo/index.html');
+  const built = readFileSync(new URL('../dist/venezuela-lab/metodo/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(built), 'El build conserva la directiva noindex');
   assert.ok(built.includes('Rectificaciones y actualizaciones'), 'El build incluye la política pública');
 }

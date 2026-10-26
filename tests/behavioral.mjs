@@ -800,6 +800,27 @@ async function testContrapesoFrontpage(browser) {
           else ok(`Contrapeso ${width}: news filter, link, noindex and responsive width`);
         }
       }
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      await page.locator('[data-filter="Expedientes"]').click();
+      const caseCards = page.locator('#article-list .story-card:visible');
+      if (await caseCards.count() !== 1) {
+        fail(`Contrapeso ${width}: Expedientes must show one sourced casefile`);
+      } else {
+        const caseLink = caseCards.locator('a[href="/venezuela-lab/museo/#expediente-barbados"]');
+        if (await caseLink.count() !== 1) {
+          fail(`Contrapeso ${width}: documentary card must link to the Barbados casefile`);
+        } else {
+          await caseLink.click();
+          await page.waitForURL('**/venezuela-lab/museo/#expediente-barbados');
+          const heading = await page.locator('#expediente-barbados h2').textContent();
+          const robots = await page.locator('meta[name="robots"]').getAttribute('content');
+          const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+          if (!heading?.includes('Firmar no es')) fail(`Contrapeso ${width}: wrong casefile destination`);
+          else if (robots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: museum noindex missing`);
+          else if (overflow) fail(`Contrapeso ${width}: museum horizontal overflow`);
+          else ok(`Contrapeso ${width}: casefile filter, anchor, noindex and responsive width`);
+        }
+      }
       if (pageErrors.length) fail(`Contrapeso ${width}: JS errors`, pageErrors.join('; '));
     } finally {
       await context.close();

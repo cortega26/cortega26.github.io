@@ -27,6 +27,15 @@ assert.ok(museum.includes('No todos los numerales constituían obligaciones dire
 assert.ok(museum.includes('avances parciales') && museum.includes('deficiencias acreditadas'), 'Declaración de límites');
 assert.ok(museum.indexOf('id="expediente-2024"') < museum.indexOf('id="expediente-barbados"'), 'Expediente 002 después de 001');
 assert.ok(home.includes('href="/venezuela-lab/museo/#expediente-barbados"'), 'Acceso 002 desde portada');
+const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
+const caseCard = grid.split('<article class="story-card" data-category="Expedientes"')[1]?.split('</article>')[0];
+assert.ok(caseCard, 'Tarjeta Expedientes visible en portada');
+assert.ok(caseCard.includes('Barbados: cuatro compromisos') && caseCard.includes('DOCUMENTADO'), 'Título y carácter documental, sin falsa actualidad');
+assert.ok(caseCard.includes('href="/venezuela-lab/museo/#expediente-barbados"'), 'Tarjeta enlaza al expediente real');
+assert.ok(!caseCard.includes('demo-tag') && !caseCard.includes('data-article='), 'Expediente no se presenta como modal ficticio');
+assert.equal((grid.match(/class="demo-tag"/g) || []).length, 2, 'Solo Opinión y Archivo son muestras');
+assert.ok(home.includes('4 PUBLICACIONES DOCUMENTADAS · 2 MUESTRAS'), 'Conteo documental actualizado');
+
 assert.ok(home.includes('href="/venezuela-lab/museo/#expediente-2024"'), 'La portada conduce al 001 real');
 assert.ok(!home.includes('data-article="actas"'), 'No presenta el expediente real como ejemplo');
 assert.ok(museumCss.includes('.barbados-ledger') && museumCss.includes('@media (width <= 800px)'), 'Estilos adaptables');

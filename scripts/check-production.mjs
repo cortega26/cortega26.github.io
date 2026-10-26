@@ -7,6 +7,7 @@ import {
   SITE_ORIGIN,
   alternatesFor,
   groupForPath,
+  prototypeOnlyRoutes,
 } from '../src/data/routes.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -223,6 +224,30 @@ async function main() {
     }
     if (total > 0 && ok200 === total) pass(`${ok200}/${total} URLs returned 200`);
     if (total > 0 && parityOk === total) pass(`hreflang/canonical parity for ${parityOk} pages`);
+  }
+
+  // Prototype-only paths are auditable but must never enter the public sitemap.
+  // Run this after deployment; a PR has not deployed its new static files yet.
+  for (const prototype of prototypeOnlyRoutes) {
+    if (liveUrls !== null && liveUrls.some((url) => normalizePath(new URL(url).pathname) === prototype.path)) {
+      fail(`prototype sitemap exclusion: ${prototype.id}`, `${prototype.path} must remain out of the public sitemap`);
+    }
+    try {
+      const response = await fetchWithRetry(`${base}${prototype.path}`);
+      if (response.status !== 200) {
+        fail(`prototype HTTP: ${prototype.id}`, `expected 200, got ${response.status}`);
+        await drain(response);
+        continue;
+      }
+      const html = await response.text();
+      if (!/<meta\\s+name="robots"\\s+content="[^"]*noindex/i.test(html)) {
+        fail(`prototype noindex: ${prototype.id}`, 'missing robots noindex on deployed page');
+      } else {
+        pass(`prototype ${prototype.id}: HTTP 200, noindex and sitemap exclusion checked`);
+      }
+    } catch (error) {
+      fail(`prototype HTTP: ${prototype.id}`, error.message);
+    }
   }
 
   let homeHtml = null;

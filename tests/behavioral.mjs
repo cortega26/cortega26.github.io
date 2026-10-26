@@ -821,6 +821,29 @@ async function testContrapesoFrontpage(browser) {
           else ok(`Contrapeso ${width}: casefile filter, anchor, noindex and responsive width`);
         }
       }
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      await page.locator('[data-filter="Archivo"]').click();
+      const archiveCards = page.locator('#article-list .story-card:visible');
+      if (await archiveCards.count() !== 1) {
+        fail(`Contrapeso ${width}: Archivo must show one real memorial entry`);
+      } else {
+        const archiveLink = archiveCards.locator('a[href="/venezuela-lab/museo/victimas/"]');
+        if (await archiveLink.count() !== 1) {
+          fail(`Contrapeso ${width}: Archivo card must link to the memorial, not a demo modal`);
+        } else {
+          await archiveLink.click();
+          await page.waitForURL('**/venezuela-lab/museo/victimas/');
+          const title = await page.locator('h1').first().textContent();
+          const robots = await page.locator('meta[name="robots"]').getAttribute('content');
+          const disclaimer = await page.locator('.prototype').textContent();
+          const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+          if (!title?.includes('Los muertos')) fail(`Contrapeso ${width}: wrong memorial destination`);
+          else if (!disclaimer?.includes('NO EXHAUSTIVO')) fail(`Contrapeso ${width}: memorial scope disclaimer missing`);
+          else if (robots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: memorial noindex missing`);
+          else if (overflow) fail(`Contrapeso ${width}: memorial horizontal overflow`);
+          else ok(`Contrapeso ${width}: Archivo filter, memorial link, scope, noindex and responsive width`);
+        }
+      }
       if (pageErrors.length) fail(`Contrapeso ${width}: JS errors`, pageErrors.join('; '));
     } finally {
       await context.close();

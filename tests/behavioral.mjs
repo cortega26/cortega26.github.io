@@ -716,6 +716,46 @@ async function testFiltersOnPage(browser, path) {
   return checked;
 }
 
+// Contrapeso's prototype frontpage must distinguish sourced publications from demos.
+async function testContrapesoFrontpage(browser) {
+  const explainerPath = '/venezuela-lab/explicadores/sentencias-155-156-2017/';
+  for (const width of [390, 1280]) {
+    const context = await browser.newContext({ viewport: { width, height: 900 } });
+    const page = await context.newPage();
+    const pageErrors = [];
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+    try {
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      const cards = page.locator('#article-list .story-card');
+      if (await cards.count() !== 6) fail(`Contrapeso ${width}: expected six cards`);
+      const filter = page.locator('[data-filter="Explicadores"]');
+      await filter.click();
+      const visible = page.locator('#article-list .story-card:visible');
+      if (await visible.count() !== 1) {
+        fail(`Contrapeso ${width}: Explicadores must show exactly one real card`);
+      } else {
+        const link = visible.first().locator(`a[href="${explainerPath}"]`);
+        if (await link.count() !== 1) {
+          fail(`Contrapeso ${width}: real card must link to the explainer, not a demo modal`);
+        } else {
+          await link.click();
+          await page.waitForURL(`**${explainerPath}`);
+          const title = await page.locator('h1').first().textContent();
+          const robots = await page.locator('meta[name="robots"]').getAttribute('content');
+          if (!title?.includes('Sentencias 155 y 156')) fail(`Contrapeso ${width}: wrong explainer page`);
+          if (robots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: prototype noindex missing`);
+          const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+          if (overflow) fail(`Contrapeso ${width}: explainer has horizontal overflow`);
+          else ok(`Contrapeso ${width}: filter, real link, noindex and responsive width`);
+        }
+      }
+      if (pageErrors.length) fail(`Contrapeso ${width}: JS errors`, pageErrors.join('; '));
+    } finally {
+      await context.close();
+    }
+  }
+}
+
 let preview = null;
 let browser = null;
 try {
@@ -733,6 +773,7 @@ try {
   for (const path of pages) {
     totalFilterChecks += await testFiltersOnPage(browser, path);
   }
+  await testContrapesoFrontpage(browser);
 } catch (err) {
   fail('harness', err?.message || String(err));
 } finally {

@@ -17,7 +17,7 @@ let activeFilter='Todas';
 function applyFilter(){
 const query=search.value.toLocaleLowerCase('es').trim();let visible=0;
 for(const card of cards){const show=(activeFilter==='Todas'||card.dataset.category===activeFilter)&&(!query||(card.dataset.search+' '+card.innerText).toLocaleLowerCase('es').includes(query));card.hidden=!show;if(show)visible++;}
-count.textContent=visible+' '+(visible===1?'publicación':'publicaciones')+' en esta selección';
+count.textContent=`${visible} ${visible===1?'publicación':'publicaciones'} en esta selección`;
 noResults.hidden=visible!==0;
 for(const button of filterButtons){const pressed=button.dataset.filter===activeFilter;button.classList.toggle('active',pressed);button.setAttribute('aria-pressed',String(pressed));}
 }

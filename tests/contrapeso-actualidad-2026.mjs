@@ -20,14 +20,14 @@ for (const url of [
   'https://apnews.com/article/venezuela-maria-corina-machado-return-democracy-maduro-e6eff0c2ff962fd9b0f87270b24ef567',
   'https://elpais.com/america/2026-10-25/maria-corina-machado-regresa-a-venezuela.html',
   'https://www.theguardian.com/world/2026/oct/25/exiled-venezuelan-opposition-leader-maria-corina-machado-announces-her-return'
-]) assert.ok(html.includes(url), 'Fuente inspeccionada: ' + url);
+]) assert.ok(html.includes(url), `Fuente inspeccionada: ${url}`);
 assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
 assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 'Reutiliza CSS existente');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
 assert.equal((grid.match(/class="story-card"/g) || []).length, 6, 'Seis tarjetas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 3, 'Tres muestras');
 const card = grid.split('<article class="story-card" data-category="Actualidad"')[1].split('</article>')[0];
-assert.ok(card.includes('href="' + path + '"') && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
+assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
 assert.ok(home.includes('3 PUBLICACIONES DOCUMENTADAS · 3 MUESTRAS'), 'Balance editorial actualizado');
 if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/actualidad/regreso-machado-2026/index.html', import.meta.url), 'utf8');

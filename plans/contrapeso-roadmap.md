@@ -5,7 +5,6 @@
 **Documento normativo complementario:** `docs/editorial/contrapeso-manual.md`  
 **Alcance:** prototipo `public/venezuela-lab/` dentro de `cortega26/cortega26.github.io`.
 
-
 > **Estado de adopción:** documento versionado como hoja de ruta propuesta. Sus decisiones editoriales no sustituyen `AGENTS.md` ni la carta vigente; ninguna regla de este plan autoriza por sí sola fusionar, publicar o levantar `noindex`.
 
 ## 1. Objetivo y criterio de éxito

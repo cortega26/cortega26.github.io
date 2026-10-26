@@ -39,10 +39,10 @@ for (const url of [
   'https://accesoalajusticia.org/autorizacion-del-tsj-por-encima-de-la-an-al-ejecutivo-para-crear-empresas-mixtas/',
   'https://elpitazo.net/politica/tsj-se-retracta-echa-atras-decisiones-la-asamblea-nacional/'
 ]) {
-  assert.ok(html.includes(url), 'Falta fuente auditada: ' + url);
+  assert.ok(html.includes(url), `Falta fuente auditada: ${url}`);
 }
 assert.ok(museum.includes('/venezuela-lab/explicadores/sentencias-155-156-2017/'), 'Enlace de acceso desde el Museo');
-assert.ok(css.includes('@media (max-width: 540px)') && css.includes('@media (max-width: 800px)'), 'Adaptación móvil y tableta');
+assert.ok(css.includes('@media (width <= 540px)') && css.includes('@media (width <= 800px)'), 'Adaptación móvil y tableta');
 assert.ok(!/<script\b/i.test(html), 'Sin nueva superficie de JS o cambios de CSP');
 assert.ok(html.includes('href="../explicadores.css"'), 'Stylesheet local');
 console.log('Contrapeso explicador TSJ 2017: contrato editorial, rutas y estilos PASS');

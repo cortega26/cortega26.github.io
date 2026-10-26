@@ -1,0 +1,50 @@
+import { readFileSync } from 'node:fs';
+import { strict as assert } from 'node:assert';
+import { hasNoindexMeta } from '../scripts/check-production.mjs';
+
+const html = readFileSync(new URL('../public/venezuela-lab/explicadores/actas-28j-2024/index.html', import.meta.url), 'utf8');
+const home = readFileSync(new URL('../public/venezuela-lab/index.html', import.meta.url), 'utf8');
+const museum = readFileSync(new URL('../public/venezuela-lab/museo/index.html', import.meta.url), 'utf8');
+const routes = readFileSync(new URL('../src/data/routes.ts', import.meta.url), 'utf8');
+const css = readFileSync(new URL('../public/venezuela-lab/explicadores/explicadores.css', import.meta.url), 'utf8');
+const path = '/venezuela-lab/explicadores/actas-28j-2024/';
+const indexable = routes.split('export const routeGroups')[1].split('export const prototypeOnlyRoutes')[0];
+
+assert.match(routes, /id: 'contrapeso:explainer:actas-28j-2024',\s*path: '\/venezuela-lab\/explicadores\/actas-28j-2024\/'/, 'Ruta solo de prototipo');
+assert.ok(!indexable.includes(path), 'Excluida de routeGroups/sitemap');
+assert.ok(hasNoindexMeta(html), 'Noindex explícito');
+assert.match(html, /<html lang="es">/, 'Idioma español');
+assert.match(html, /EXPLICADOR HISTÓRICO/, 'No es noticia reciente');
+assert.match(html, /26 de octubre de 2026/, 'Fecha de revisión');
+assert.match(html, /81,7 % de las mesas/, 'Cobertura medida en mesas');
+assert.match(html, /muestra aleatoria de 100 mesas/, 'Límite de autenticidad');
+assert.match(html, /24\.533 actas.*24\.532/s, 'Discrepancia interna del informe declarada');
+assert.match(html, /ciberataque/, 'Versión del CNE atribuida');
+assert.match(html, /no es una segunda auditoría independiente/i, 'CIDH no se presenta como recuento independiente');
+assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
+assert.ok(html.includes('href="../explicadores.css"'), 'Reutiliza estilos');
+assert.ok(css.includes('@media (width <= 540px)'), 'Estilos móviles existentes');
+
+assert.equal(7156462 - 3241461, 3915001, 'Margen de votos');
+assert.equal(3915001 - 3576544, 338457, 'Cota conservadora');
+assert.ok(html.includes('7.156.462'), 'Votos González');
+assert.ok(html.includes('3.241.461'), 'Votos Maduro');
+assert.ok(html.includes('3.915.001'), 'Margen');
+assert.ok(html.includes('3.576.544'), 'Electores en mesas faltantes');
+assert.ok(html.includes('338.457'), 'Cota');
+assert.ok(html.includes('https://www.cartercenter.org/wp-content/uploads/2025/02/venezuela-final-report-2025.pdf'), 'Informe final Carter');
+assert.ok(html.includes('https://www.cartercenter.org/news/venezuela-073024/'), 'Declaración Carter');
+assert.ok(html.includes('https://scm.oas.org/pdfs/2025/CP50866e.pdf'), 'Informe CIDH');
+
+assert.ok(museum.includes(`href="${path}"`), 'Museo enlaza al explicador');
+const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
+assert.equal([...grid.matchAll(/class="story-card"/g)].length, 6, 'Seis tarjetas');
+assert.equal([...grid.matchAll(/class="demo-tag"/g)].length, 4, 'Cuatro muestras');
+assert.equal([...grid.matchAll(/data-category="Explicadores"/g)].length, 2, 'Dos explicadores');
+const card = grid.split('<article class="story-card" data-category="Explicadores" data-search="28j')[1].split('</article>')[0];
+assert.ok(card.includes(`href="${path}"`), 'Tarjeta real enlazada');
+assert.ok(!card.includes('demo-tag'), 'No se etiqueta como muestra');
+assert.ok(!card.includes('data-article='), 'No usa modal ficticio');
+assert.ok(home.includes('2 EXPLICADORES DOCUMENTADOS · 4 MUESTRAS'), 'Recuento editorial visible');
+assert.ok(home.includes('noindex,nofollow,noarchive'), 'Portada no indexable');
+console.log('Contrapeso 28J: fuentes, cota electoral, rutas, tarjetas y noindex PASS');

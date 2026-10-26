@@ -22,6 +22,9 @@ if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', import.meta.url), 'utf8');
   assert.ok(built.includes('noindex,nofollow,noarchive'), 'Build conserva noindex');
   assert.ok(built.includes('Sentencias 155 y 156'), 'La página se empaquetó correctamente');
+  const built28j = readFileSync(new URL('../dist/venezuela-lab/explicadores/actas-28j-2024/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(built28j), 'El segundo explicador conserva noindex tras el build');
+  assert.ok(built28j.includes('3.915.001') && built28j.includes('338.457'), 'El segundo explicador conserva la cuenta en el build');
 }
 
 assert.ok(hasNoindexMeta(html), 'La comprobación de producción acepta el noindex real del prototipo');
@@ -50,13 +53,13 @@ assert.ok(html.includes('href="../explicadores.css"'), 'Stylesheet local');
 const articleGrid = frontpage.split('<div class="articles-grid" id="article-list">')[1]?.split('</div><p id="no-results"')[0];
 assert.ok(articleGrid, 'La portada mantiene la grilla de publicaciones');
 assert.equal((articleGrid.match(/class="story-card"/g) || []).length, 6, 'Se conservan seis tarjetas y el layout');
-assert.equal((articleGrid.match(/class="demo-tag"/g) || []).length, 5, 'Solo cinco tarjetas se identifican como muestras');
+assert.equal((articleGrid.match(/class="demo-tag"/g) || []).length, 4, 'Solo cuatro tarjetas se identifican como muestras');
 const realCard = articleGrid.split('<article class="story-card" data-category="Explicadores"')[1]?.split('</article>')[0];
 assert.ok(realCard, 'Existe una tarjeta de explicador real con género identificable');
 assert.ok(realCard.includes(`href="${editorialPath}"`), 'La tarjeta enlaza al explicador documentado');
 assert.ok(!realCard.includes('data-article=') && !realCard.includes('demo-tag'), 'El artículo real no abre un modal demostrativo ni se etiqueta EJEMPLO');
 assert.ok(frontpage.includes('data-filter="Explicadores"'), 'El filtro permite encontrar explicadores');
-assert.ok(frontpage.includes('1 EXPLICADOR DOCUMENTADO · 5 MUESTRAS'), 'La portada diferencia contenido real de muestras');
+assert.ok(frontpage.includes('2 EXPLICADORES DOCUMENTADOS · 4 MUESTRAS'), 'La portada diferencia contenido real de muestras');
 assert.ok(frontpage.includes('noindex,nofollow,noarchive'), 'La portada sigue no indexable');
 assert.ok(!frontpage.includes('TODOS LOS ARTÍCULOS SON DEMOSTRATIVOS'), 'No se atribuye carácter ficticio al artículo real');
 assert.ok(!frontpageScript.includes("+' de ejemplo'"), 'El contador dinámico no llama ejemplos a los resultados reales');

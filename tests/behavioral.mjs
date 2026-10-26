@@ -731,8 +731,8 @@ async function testContrapesoFrontpage(browser) {
       const filter = page.locator('[data-filter="Explicadores"]');
       await filter.click();
       const visible = page.locator('#article-list .story-card:visible');
-      if (await visible.count() !== 1) {
-        fail(`Contrapeso ${width}: Explicadores must show exactly one real card`);
+      if (await visible.count() !== 2) {
+        fail(`Contrapeso ${width}: Explicadores must show exactly two real cards`);
       } else {
         const link = visible.first().locator(`a[href="${explainerPath}"]`);
         if (await link.count() !== 1) {
@@ -762,6 +762,22 @@ async function testContrapesoFrontpage(browser) {
             else ok(`Contrapeso ${width}: explainer → method navigation, noindex and responsive width`);
           }
         }
+      }
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      await page.locator('[data-filter="Explicadores"]').click();
+      const secondLink = page.locator('#article-list .story-card:visible a[href="/venezuela-lab/explicadores/actas-28j-2024/"]');
+      if (await secondLink.count() !== 1) {
+        fail(`Contrapeso ${width}: second verified explainer link missing from filter`);
+      } else {
+        await secondLink.click();
+        await page.waitForURL('**/venezuela-lab/explicadores/actas-28j-2024/');
+        const secondTitle = await page.locator('h1').first().textContent();
+        const secondRobots = await page.locator('meta[name="robots"]').getAttribute('content');
+        const secondOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+        if (!secondTitle?.includes('28J:')) fail(`Contrapeso ${width}: wrong 28J explainer page`);
+        else if (secondRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: 28J noindex missing`);
+        else if (secondOverflow) fail(`Contrapeso ${width}: 28J page has horizontal overflow`);
+        else ok(`Contrapeso ${width}: second explainer, filter, noindex and responsive width`);
       }
       if (pageErrors.length) fail(`Contrapeso ${width}: JS errors`, pageErrors.join('; '));
     } finally {

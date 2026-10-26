@@ -779,6 +779,27 @@ async function testContrapesoFrontpage(browser) {
         else if (secondOverflow) fail(`Contrapeso ${width}: 28J page has horizontal overflow`);
         else ok(`Contrapeso ${width}: second explainer, filter, noindex and responsive width`);
       }
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      await page.locator('[data-filter="Actualidad"]').click();
+      const newsCards = page.locator('#article-list .story-card:visible');
+      if (await newsCards.count() !== 1) {
+        fail(`Contrapeso ${width}: Actualidad must show one sourced news story`);
+      } else {
+        const newsLink = newsCards.locator('a[href="/venezuela-lab/actualidad/regreso-machado-2026/"]');
+        if (await newsLink.count() !== 1) {
+          fail(`Contrapeso ${width}: sourced news must link to article, not demo modal`);
+        } else {
+          await newsLink.click();
+          await page.waitForURL('**/venezuela-lab/actualidad/regreso-machado-2026/');
+          const newsTitle = await page.locator('h1').first().textContent();
+          const newsRobots = await page.locator('meta[name="robots"]').getAttribute('content');
+          const newsOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+          if (!newsTitle?.includes('María Corina Machado regresa')) fail(`Contrapeso ${width}: wrong news article`);
+          else if (newsRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: news noindex missing`);
+          else if (newsOverflow) fail(`Contrapeso ${width}: news horizontal overflow`);
+          else ok(`Contrapeso ${width}: news filter, link, noindex and responsive width`);
+        }
+      }
       if (pageErrors.length) fail(`Contrapeso ${width}: JS errors`, pageErrors.join('; '));
     } finally {
       await context.close();

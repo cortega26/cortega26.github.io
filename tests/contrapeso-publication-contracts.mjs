@@ -18,9 +18,26 @@ function pages(dir) {
   });
 }
 
+function genreChecks(genre, metadata, kicker) {
+  const issues = [];
+  if (genre === 'news') {
+    if (!/Hecho:\s*[^<]*20\d{2}/.test(metadata)) issues.push('news-event-date');
+    if (!/Publicado y revisado:\s*[^<]*20\d{2}/.test(metadata)) issues.push('news-review-date');
+  }
+  if (genre === 'explainer') {
+    if (!/HISTÓRICO/.test(kicker)) issues.push('historical-label');
+    if (!/históric|historia|no es actualidad|noticia de última hora/i.test(metadata)) issues.push('historical-context');
+  }
+  if (genre === 'opinion') {
+    if (!/(?:Firma|Autoría):\s*[^<]+/i.test(metadata)) issues.push('opinion-signature');
+    if (!/(?:Publicado|Revisado):\s*[^<]*20\d{2}/i.test(metadata)) issues.push('opinion-review-date');
+  }
+  return issues;
+}
+
 function validatePublication(html, genre, route) {
   const errors = [];
-  const requireCheck = (condition, code) => { if (!condition) errors.push(code); };
+  function requireCheck(condition, code) { if (!condition) errors.push(code); }
   requireCheck(/<html lang="es">/.test(html), 'language');
   requireCheck(hasNoindexMeta(html), 'robots');
   requireCheck(/<meta name="description" content="[^"]+">/.test(html), 'description');
@@ -39,18 +56,7 @@ function validatePublication(html, genre, route) {
   const external = new Set([...sources.matchAll(/href="(https:\/\/[^"]+)"/g)].map((match) => match[1]));
   requireCheck(external.size >= (genre === 'opinion' ? 1 : 2), 'source-links');
   requireCheck(/<section\b[^>]*class="[^"]*\bmethod\b[^"]*"/.test(html), 'limits-section');
-  if (genre === 'news') {
-    requireCheck(/Hecho:\s*[^<]*20\d{2}/.test(metadata), 'news-event-date');
-    requireCheck(/Publicado y revisado:\s*[^<]*20\d{2}/.test(metadata), 'news-review-date');
-  }
-  if (genre === 'explainer') {
-    requireCheck(/HISTÓRICO/.test(kicker), 'historical-label');
-    requireCheck(/históric|historia|no es actualidad|noticia de última hora/i.test(metadata), 'historical-context');
-  }
-  if (genre === 'opinion') {
-    requireCheck(/(?:Firma|Autoría):\s*[^<]+/i.test(metadata), 'opinion-signature');
-    requireCheck(/(?:Publicado|Revisado):\s*[^<]*20\d{2}/i.test(metadata), 'opinion-review-date');
-  }
+  errors.push(...genreChecks(genre, metadata, kicker));
   requireCheck(inventory.includes(`path: '${route}'`), 'prototype-inventory');
   requireCheck(!indexable.includes(route), 'sitemap-exclusion');
   return errors;

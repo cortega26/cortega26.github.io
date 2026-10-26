@@ -17,6 +17,14 @@ assert.ok(hasNoindexMeta(html), 'La página conserva meta robots noindex');
 assert.match(html, /<html lang="es">/, 'Idioma identificado');
 assert.match(html, /<main id="contenido"/, 'Destino de salto accesible');
 assert.match(html, /M[eé]todo y rectificaciones/i, 'Género y propósito explícitos');
+assert.match(html, /Hechos con pruebas\.\s*<em>Errores con rectificación visible\./,
+  'El titular comunica el método con voz directa');
+assert.match(html, /sin fingir equidistancia:[^<]+afirmamos lo que las pruebas sostienen/,
+  'La bajada expone la postura editorial y el estándar probatorio sin defensividad');
+assert.doesNotMatch(html, /Esto <strong>no significa que esté libre de errores<\/strong>|No se presenta un registro vacío como prueba de exactitud/,
+  'El método evita descargos redundantes sin ocultar el estado real del registro');
+assert.match(html, /meta name="robots" content="noindex,nofollow,noarchive"/,
+  'La página conserva las tres directivas de robots');
 assert.match(html, /26 de octubre de 2026/, 'Fecha de revisión visible');
 assert.match(html, /Hecho documentado:/, 'Diferencia hechos');
 assert.match(html, /Denuncia o testimonio:/, 'Diferencia alegaciones');
@@ -34,5 +42,6 @@ if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/metodo/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(built), 'El build conserva la directiva noindex');
   assert.ok(built.includes('Rectificaciones y actualizaciones'), 'El build incluye la política pública');
+  assert.ok(built.includes('Errores con rectificación visible.'), 'El build conserva el nuevo titular');
 }
 console.log('Contrapeso método y rectificaciones: rutas, transparencia, enlaces y noindex PASS');

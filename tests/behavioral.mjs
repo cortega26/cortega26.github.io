@@ -774,7 +774,7 @@ async function testContrapesoFrontpage(browser) {
         const secondTitle = await page.locator('h1').first().textContent();
         const secondRobots = await page.locator('meta[name="robots"]').getAttribute('content');
         const secondOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
-        if (!secondTitle?.includes('28J:')) fail(`Contrapeso ${width}: wrong 28J explainer page`);
+        if (!secondTitle?.includes('28J:') || !secondTitle.includes('ni todos los votos posibles de las mesas sin actas')) fail(`Contrapeso ${width}: wrong 28J explainer headline`);
         else if (secondRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: 28J noindex missing`);
         else if (secondOverflow) fail(`Contrapeso ${width}: 28J page has horizontal overflow`);
         else ok(`Contrapeso ${width}: second explainer, filter, noindex and responsive width`);

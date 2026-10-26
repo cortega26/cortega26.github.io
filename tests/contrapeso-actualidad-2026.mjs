@@ -16,6 +16,13 @@ assert.match(html, /Publicado y revisado: 26 de octubre de 2026/, 'Fecha de revi
 assert.match(html, /sin reporteo propio/, 'Sin atribución falsa de reporteo');
 assert.match(html, /No verificado aquí:/, 'Límites explícitos');
 assert.match(html, /no se había anunciado una fecha/, 'Estado temporal atribuido');
+assert.match(html, /María Corina Machado regresó a Venezuela\. <em>Las elecciones presidenciales siguen sin fecha\./, 'Titular directo y fechado');
+assert.doesNotMatch(html, /no equivale por sí mismo|no significa que exista un pacto definitivo|no una crónica desde el lugar de los hechos|este prototipo no pudo inspeccionar/i, 'Sin prosa defensiva redundante');
+assert.match(html, /Es una atribución de Rubio/, 'Atribución explícita de declaraciones');
+assert.match(html, /no acreditan un acuerdo privado de seguridad/, 'No inferir garantías privadas');
+assert.match(html, /mensaje original de Machado en X no fue inspeccionado directamente/, 'Límite material de fuente primaria');
+assert.match(html, /content="noindex,nofollow,noarchive"/, 'Tres directivas robots');
+
 for (const url of [
   'https://apnews.com/article/venezuela-maria-corina-machado-return-democracy-maduro-e6eff0c2ff962fd9b0f87270b24ef567',
   'https://elpais.com/america/2026-10-25/maria-corina-machado-regresa-a-venezuela.html',

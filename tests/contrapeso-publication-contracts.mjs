@@ -24,7 +24,7 @@ function hasPrototypeRobots(html) {
 }
 
 function hasEditorialDate(metadata) {
-  return /<span>(?:Publicado(?: y revisado)?|Revisado):[^<]*20\d{2}<\/span>|<span>\d{1,2} de [a-záéíóú]+ de 20\d{2}<\/span>/i.test(metadata);
+  return /<span>(?:Publicado(?: y revisado)?|Revisado):[^<]*20\d{2}[^<]*<\/span>|<span>\d{1,2} de [a-záéíóú]+ de 20\d{2}<\/span>/i.test(metadata);
 }
 
 function genreChecks(genre, metadata, kicker) {
@@ -89,6 +89,7 @@ const news = readFileSync(join(prototype, 'actualidad/regreso-machado-2026/index
 const newsRoute = '/venezuela-lab/actualidad/regreso-machado-2026/';
 assert.ok(validatePublication(news.replace('noindex,nofollow,noarchive', 'index,follow'), 'news', newsRoute).includes('robots'), 'El guard rechaza indexación accidental');
 assert.ok(validatePublication(news.replace('Hecho: 25 de octubre de 2026', 'Episodio: 25 de octubre de 2026'), 'news', newsRoute).includes('news-event-date'), 'El guard rechaza noticia sin fecha del hecho');
+assert.ok(hasEditorialDate('<span>Publicado y revisado: 26 de octubre de 2026, 06:00 (Chile)</span>'), 'Acepta hora y zona horaria de revisión');
 assert.ok(validatePublication(news.replace('class="sources"', 'class="references"'), 'news', newsRoute).includes('sources-section'), 'El guard rechaza ausencia de fuentes');
 assert.ok(validatePublication(news.replace('noindex,nofollow,noarchive', 'noindex'), 'news', newsRoute).includes('robots'), 'El guard exige nofollow y noarchive');
 const historical = readFileSync(join(prototype, 'explicadores/actas-28j-2024/index.html'), 'utf8');

@@ -2,7 +2,6 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { strict as assert } from 'node:assert';
 import { fileURLToPath } from 'node:url';
-import { hasNoindexMeta } from '../scripts/check-production.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const prototype = join(root, 'public/venezuela-lab');
@@ -18,14 +17,23 @@ function pages(dir) {
   });
 }
 
+function hasPrototypeRobots(html) {
+  const value = html.match(/<meta name="robots" content="([^"]+)">/)?.[1] ?? '';
+  const directives = value.split(',').map((token) => token.trim());
+  return directives.includes('noindex') && directives.includes('nofollow') && directives.includes('noarchive');
+}
+
+function hasEditorialDate(metadata) {
+  return /<span>(?:Publicado(?: y revisado)?|Revisado):[^<]*20\d{2}<\/span>|<span>\d{1,2} de [a-záéíóú]+ de 20\d{2}<\/span>/i.test(metadata);
+}
+
 function genreChecks(genre, metadata, kicker) {
   const issues = [];
   if (genre === 'news') {
     if (!/Hecho:\s*[^<]*20\d{2}/.test(metadata)) issues.push('news-event-date');
     if (!/Publicado y revisado:\s*[^<]*20\d{2}/.test(metadata)) issues.push('news-review-date');
   }
-  if (genre === 'explainer') {
-    if (!/HISTÓRICO/.test(kicker)) issues.push('historical-label');
+  if (genre === 'explainer' && /HISTÓRICO/.test(kicker)) {
     if (!/históric|historia|no es actualidad|noticia de última hora/i.test(metadata)) issues.push('historical-context');
   }
   if (genre === 'opinion') {
@@ -39,7 +47,7 @@ function validatePublication(html, genre, route) {
   const errors = [];
   function requireCheck(condition, code) { if (!condition) errors.push(code); }
   requireCheck(/<html lang="es">/.test(html), 'language');
-  requireCheck(hasNoindexMeta(html), 'robots');
+  requireCheck(hasPrototypeRobots(html), 'robots');
   requireCheck(/<meta name="description" content="[^"]+">/.test(html), 'description');
   requireCheck((html.match(/<h1\b/g) ?? []).length === 1, 'single-h1');
   requireCheck(/<article\b/.test(html) && /class="article-header"/.test(html), 'article-layout');
@@ -47,7 +55,7 @@ function validatePublication(html, genre, route) {
   requireCheck(!/<script\b|<form\b/i.test(html), 'no-collection-or-script');
   requireCheck(/href="\/venezuela-lab\/metodo\/"/.test(html), 'corrections-link');
   const metadata = html.match(/<div class="article-meta">([\s\S]*?)<\/div>/)?.[1] ?? '';
-  requireCheck(/20\d{2}/.test(metadata), 'dated-metadata');
+  requireCheck(hasEditorialDate(metadata), 'editorial-date');
   const kicker = html.match(/class="kicker"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? '';
   const labels = { news: /ACTUALIDAD/, explainer: /EXPLICADOR/, opinion: /OPINI[ÓO]N/ };
   requireCheck(labels[genre].test(kicker), 'genre-label');
@@ -71,7 +79,7 @@ for (const [directory, genre] of [['actualidad', 'news'], ['explicadores', 'expl
     if (process.argv.includes('--built')) {
       const built = join(root, 'dist', route.slice(1), 'index.html');
       assert.ok(existsSync(built), `Build presente: ${route}`);
-      assert.ok(hasNoindexMeta(readFileSync(built, 'utf8')), `Build noindex: ${route}`);
+      assert.ok(hasPrototypeRobots(readFileSync(built, 'utf8')), `Build robots completos: ${route}`);
     }
     checked++;
   }
@@ -82,4 +90,10 @@ const newsRoute = '/venezuela-lab/actualidad/regreso-machado-2026/';
 assert.ok(validatePublication(news.replace('noindex,nofollow,noarchive', 'index,follow'), 'news', newsRoute).includes('robots'), 'El guard rechaza indexación accidental');
 assert.ok(validatePublication(news.replace('Hecho: 25 de octubre de 2026', 'Episodio: 25 de octubre de 2026'), 'news', newsRoute).includes('news-event-date'), 'El guard rechaza noticia sin fecha del hecho');
 assert.ok(validatePublication(news.replace('class="sources"', 'class="references"'), 'news', newsRoute).includes('sources-section'), 'El guard rechaza ausencia de fuentes');
+assert.ok(validatePublication(news.replace('noindex,nofollow,noarchive', 'noindex'), 'news', newsRoute).includes('robots'), 'El guard exige nofollow y noarchive');
+const historical = readFileSync(join(prototype, 'explicadores/actas-28j-2024/index.html'), 'utf8');
+const historicalRoute = '/venezuela-lab/explicadores/actas-28j-2024/';
+assert.ok(validatePublication(historical.replace('<span>26 de octubre de 2026</span>', ''), 'explainer', historicalRoute).includes('editorial-date'), 'El guard distingue fecha editorial de período investigado');
+const currentExplainer = historical.replace('EXPLICADOR HISTÓRICO', 'EXPLICADOR').replace('Revisión histórica de informes de 2024 y 2025; no es actualidad', 'Contexto vigente revisado');
+assert.deepEqual(validatePublication(currentExplainer, 'explainer', historicalRoute), [], 'Un explicador vigente no requiere etiqueta histórica');
 console.log(`Contrapeso CP-011: ${checked} páginas con contratos por género y pruebas negativas PASS`);

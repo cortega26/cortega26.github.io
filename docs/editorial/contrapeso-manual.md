@@ -1,4 +1,5 @@
 # Contrapeso — Manual de línea editorial
+
 **Propuesta para revisión editorial · 25 de octubre de 2026**  
 **Destino sugerido en GitHub:** `docs/editorial/contrapeso-manual.md`  
 **Precedencia:** amplía, pero no reemplaza, `docs/editorial/contrapeso-principios.md`.
@@ -59,6 +60,7 @@ Una fuente única e indirecta puede servir para **plantear una investigación**,
 ## 6. Regla especial del memorial
 
 **La inclusión en «Los muertos del chavismo» no es una sentencia ni una clasificación uniforme de asesinato.** Cada ficha debe distinguir:
+
 - Identificación y variantes del nombre.
 - Fecha del hecho y fecha de fallecimiento, si difieren; precisión temporal de la fuente.
 - Contexto: protesta, operativo, custodia, actuación policial u otro, sin forzar una sola categoría.
@@ -67,7 +69,8 @@ Una fuente única e indirecta puede servir para **plantear una investigación**,
 - Dudas, contradicciones, versión de las autoridades cuando sea material, historial de rectificación.
 - Identificador estable, procedencia y deduplicación.
 
-**No hacer:**
+### Prácticas prohibidas
+
 - Declarar que todas las muertes bajo custodia fueron asesinatos.
 - Atribuir una muerte a agentes concretos porque ocurrió durante una protesta.
 - Confundir desapariciones forzadas con fallecimientos confirmados.
@@ -100,4 +103,5 @@ Requerir revisión humana explícita para acusaciones penales no suficientemente
 Cada pieza debe responder **qué ocurrió**, **qué evidencia lo acredita**, **qué no sabemos**, **por qué importa**, **dónde consultar las fuentes** y **cuándo se revisó**. No publicar por cuota. La claridad visual, accesibilidad, indexación deliberada, navegación y ausencia de regresiones son parte de la calidad, no tareas cosméticas.
 
 ---
+
 **Base de esta propuesta:** inspección de `master` en `cortega26/cortega26.github.io`, HEAD observado `0418cafd608fd253ae84f5f1c3b383ea7b17c254`; `AGENTS.md`, `README.md`, `docs/editorial/contrapeso-principios.md`, `public/venezuela-lab/index.html` y `public/venezuela-lab/museo/index.html`. Estado referencial, no sustituto de preflight en ejecuciones futuras.

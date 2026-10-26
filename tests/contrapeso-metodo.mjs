@@ -24,7 +24,7 @@ assert.match(html, /Denuncia o testimonio:/, 'Diferencia alegaciones');
 assert.match(html, /Opinión:/, 'Diferencia valoraciones');
 assert.match(html, /contenido anterior, modificación y motivo/, 'Política de rectificación auditable');
 assert.match(html, /no ofrece un historial público verificable/, 'No inventa registro de correcciones');
-assert.match(html, /no dispone aquí de un formulario de denuncias/, 'No anuncia recepción de datos inexistente');
+assert.match(html, /no dispone aquí de un formulario de denuncias/i, 'No anuncia recepción de datos inexistente');
 assert.ok(!/<form\b|<script\b/i.test(html), 'Sin formulario ni JavaScript ni cambio CSP');
 assert.ok(!/Jamás entregarle al chavismo ni un milímetro/.test(html), 'Sin consignas internas publicadas');
 assert.ok(html.includes('href="../explicadores/explicadores.css"') && css.includes('@media (width <= 540px)'),

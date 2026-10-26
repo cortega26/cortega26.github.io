@@ -1,6 +1,7 @@
 // Visual regression guard for the documentary memorial (rendered Chromium).
 // Run after astro build and Playwright browser installation.
 import { chromium } from '@playwright/test';
+import { CASES } from '../public/venezuela-lab/museo/victimas/data.js';
 import { createServer } from 'node:http';
 import { readFile, stat, mkdir } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
@@ -97,11 +98,12 @@ try {
         const n = await page.locator('.person-card').count();
         if (n !== 24) findings.push(`${target.id}/${width}: expected 24 visible records, got ${n}`);
         const count = (await page.locator('#registered-count').textContent())?.trim();
-        if (count !== '301') findings.push(`${target.id}/${width}: expected 301 records, got ${count}`);
+        if (count !== String(CASES.length)) findings.push(`${target.id}/${width}: expected ${CASES.length} records, got ${count}`);
       }
       if (target.id === 'year-2000') {
         const n = await page.locator('.year-roster-item').count();
-        if (n !== 50) findings.push(`${target.id}/${width}: expected 50 year records, got ${n}`);
+        const expectedYearRecords = CASES.filter(person => person.year === 2000).length;
+        if (n !== expectedYearRecords) findings.push(`${target.id}/${width}: expected ${expectedYearRecords} year records, got ${n}`);
       }
       if ([390, 1440].includes(width)) {
         await page.screenshot({ path: resolve(out, `${target.id}-${width}.png`) });

@@ -1,7 +1,6 @@
 # Contrapeso — Manual de línea editorial
 
-**Propuesta para revisión editorial · 25 de octubre de 2026**  
-**Destino sugerido en GitHub:** `docs/editorial/contrapeso-manual.md`  
+**Manual editorial vigente · revisión de voz 26 de octubre de 2026**  
 **Precedencia:** amplía, pero no reemplaza, `docs/editorial/contrapeso-principios.md`.
 
 ## 1. Identidad y propósito
@@ -45,6 +44,32 @@ El Museo es una sección del medio, no sustituye toda la redacción.
 - Respuestas institucionales o refutaciones relevantes deben reflejarse con atribución y contexto; no se exige darles valor probatorio equivalente.
 - Evitar tono panfletario. Una conclusión firme puede formularse en términos jurídicos, institucionales e históricos precisos.
 - El medio puede usar títulos editorialmente contundentes, pero su contenido debe ofrecer pruebas con un nivel de detalle proporcional a la gravedad.
+
+## 4.1. Regla de voz editorial: convicción sin defensividad
+
+**Rigor de investigación no es cautela retórica.** Contrapeso comprueba sus afirmaciones ANTES de publicarlas. La página no tiene que pedir permiso para existir, disculparse por su tesis ni recitar el expediente probatorio en cada párrafo. Nuestra postura editorial es explícita; no aspiramos a una neutralidad de apariencia ni practicamos la equidistancia.
+
+- **Escribir afirmativamente cuando la prueba alcanza.** Preferir «El tribunal anuló la decisión de la Asamblea» a «Se ha señalado que el tribunal habría procedido a anular…», si el texto judicial establece el hecho. Nombrar quién hizo qué, cuándo y con qué consecuencia; usar verbos activos y títulos directos.
+- **Usar reservas solo donde hay incertidumbre material.** «Presuntamente», «habría», «según versiones» y «no puede descartarse» solo cuando describen fielmente una duda real. No añadirlas por reflejo ni para proteger el tono. Una imputación de autoría controvertida se atribuye con precisión; no se disfraza una acusación de hecho probado.
+- **Sin falso equilibrio.** No introducir «por otra parte» ni citas oficiales de relleno para compensar evidencia sólida. Una respuesta sustantiva o una contradicción material sí se incluye, con su peso probatorio; una negación vacía no convierte el asunto en una controversia equivalente.
+- **Nada de prosa defensiva.** Eliminar preámbulos como «es importante señalar», «conviene recordar», «cabe destacar», «sin pretender afirmar», «en aras de la objetividad», reiteraciones de «según» y disclaimers sobre lo que el medio *no* está diciendo, salvo que cambien la comprensión de los hechos.
+- **Estructura de lectura, no acta de auditoría.** Abrir con el hecho, el hallazgo o la conclusión; desarrollar contexto y consecuencias; situar fuentes en enlaces/notas accesibles y una sección final concisa. No intercalar cada frase con explicaciones del proceso de verificación.
+- **Dureza sustantiva, precisión léxica.** Se permiten ironía, denuncia editorial, conclusiones severas y lenguaje incisivo si se sostienen. No usar eufemismos ni solemnidad burocrática para suavizar conductas documentadas. Evitar insultos sustitutos de argumentos, hechos inventados y acusaciones personales no acreditadas.
+- **Diferenciar géneros sin diluirlos.** En noticia, hechos claros y atribución de disputas genuinas; en investigación, conclusión sustentada; en explicador, respuesta directa; en opinión, tesis fuerte identificada como tal. No atribuir opiniones a una firma personal no aprobada.
+
+**Separar el taller de la página:** conservar internamente fuente, corroboración, grado de certeza, hipótesis alternativas y trazabilidad. En público solo presentar los límites **necesarios para entender la conclusión**. Las fuentes siguen visibles y las rectificaciones documentadas; lo que desaparece es la inseguridad verbal automática, no la verificación.
+
+### Gate obligatorio de edición de voz
+
+Antes de integrar un texto nuevo y al revisar el contenido actual:
+
+1. **Prueba de certeza:** subrayar cada «presuntamente», condicional y fórmula evasiva. ¿Describe incertidumbre REAL? Si no, convertirla en afirmación comprobada y directa.
+2. **Prueba de simetría:** cada réplica o versión contrapuesta debe aportar evidencia o contexto relevante, no equilibrio ceremonial.
+3. **Prueba de ritmo:** quitar introducciones autorreferenciales y advertencias redundantes; poner el dato y la conclusión en el primer tramo.
+4. **Prueba de soporte:** comprobar que cada afirmación categórica importante está respaldada en la documentación interna y fuentes públicas. Si no, investigar más o atribuir precisamente, nunca inventar certeza.
+5. **Prueba de lectura:** una persona que no comparta la línea editorial debe poder distinguir los hechos de la tesis sin encontrar un texto tímido, lleno de excusas o eufemismos.
+
+**Revisión del material existente:** auditar prioritariamente portada, titulares, bajadas, explicadores, método, Museo y publicaciones documentales. Corregir problemas de estilo concretos en PR pequeños, sin alterar datos o atribuciones, sin retirar límites sustantivos ni romper enlaces, robots o pruebas. No convertir la auditoría en un bucle infinito ni publicar únicamente por cuota.
 
 ## 5. Jerarquía de fuentes y verificación
 

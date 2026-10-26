@@ -756,7 +756,7 @@ async function testContrapesoFrontpage(browser) {
             const methodTitle = await page.locator('h1').first().textContent();
             const methodRobots = await page.locator('meta[name="robots"]').getAttribute('content');
             const methodOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
-            if (!methodTitle?.includes('Una afirmación')) fail(`Contrapeso ${width}: wrong method page`);
+            if (!methodTitle?.includes('Hechos con pruebas.')) fail(`Contrapeso ${width}: wrong method page`);
             else if (methodRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: method noindex missing`);
             else if (methodOverflow) fail(`Contrapeso ${width}: method horizontal overflow`);
             else ok(`Contrapeso ${width}: explainer → method navigation, noindex and responsive width`);

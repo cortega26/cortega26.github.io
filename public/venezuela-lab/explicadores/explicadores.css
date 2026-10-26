@@ -1,5 +1,6 @@
 :root {
   color-scheme: light;
+
   --paper: #f6f5ef;
   --ink: #172027;
   --muted: #59646a;
@@ -209,7 +210,7 @@ article ol {
   background: var(--surface);
   border-top: 5px solid var(--red);
   padding: clamp(24px, 4vw, 38px);
-  box-shadow: 0 1px 6px rgb(15 33 39 / 0.045);
+  box-shadow: 0 1px 6px rgb(15 33 39 / 4.5%);
 }
 
 .summary h2 {
@@ -289,7 +290,7 @@ article ol {
   letter-spacing: 0.09em;
 }
 
-@media (max-width: 800px) {
+@media (width <= 800px) {
   .article-layout {
     grid-template-columns: 1fr;
   }
@@ -306,7 +307,7 @@ article ol {
   }
 }
 
-@media (max-width: 540px) {
+@media (width <= 540px) {
   .shell {
     width: calc(100% - 32px);
   }

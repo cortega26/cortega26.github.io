@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { strict as assert } from 'node:assert';
 import { prototypeOnlyRoutes, routeGroups } from '../src/data/routes.ts';
+import { hasNoindexMeta } from '../scripts/check-production.mjs';
 
 const html = readFileSync(new URL('../public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../public/venezuela-lab/explicadores/explicadores.css', import.meta.url), 'utf8');
@@ -21,6 +22,8 @@ if (process.argv.includes('--built')) {
   assert.ok(built.includes('Sentencias 155 y 156'), 'La página se empaquetó correctamente');
 }
 
+assert.ok(hasNoindexMeta(html), 'La comprobación de producción acepta el noindex real del prototipo');
+assert.ok(!hasNoindexMeta('<meta name="robots" content="index,follow">'), 'La comprobación rechaza páginas sin noindex');
 assert.match(html, /<html lang="es">/, 'Idioma principal claro');
 assert.match(html, /<meta name="robots" content="noindex,nofollow,noarchive">/, 'Mantener prototipo no indexable');
 assert.match(html, /EXPLICADOR HISTÓRICO/, 'Género editorial diferenciado de noticia');

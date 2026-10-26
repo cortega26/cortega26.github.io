@@ -6,6 +6,8 @@ import { hasNoindexMeta } from '../scripts/check-production.mjs';
 const html = readFileSync(new URL('../public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../public/venezuela-lab/explicadores/explicadores.css', import.meta.url), 'utf8');
 const museum = readFileSync(new URL('../public/venezuela-lab/museo/index.html', import.meta.url), 'utf8');
+const frontpage = readFileSync(new URL('../public/venezuela-lab/index.html', import.meta.url), 'utf8');
+const frontpageScript = readFileSync(new URL('../public/venezuela-lab/app.js', import.meta.url), 'utf8');
 
 const editorialPath = '/venezuela-lab/explicadores/sentencias-155-156-2017/';
 assert.ok(
@@ -45,4 +47,17 @@ assert.ok(museum.includes('/venezuela-lab/explicadores/sentencias-155-156-2017/'
 assert.ok(css.includes('@media (width <= 540px)') && css.includes('@media (width <= 800px)'), 'Adaptación móvil y tableta');
 assert.ok(!/<script\b/i.test(html), 'Sin nueva superficie de JS o cambios de CSP');
 assert.ok(html.includes('href="../explicadores.css"'), 'Stylesheet local');
-console.log('Contrapeso explicador TSJ 2017: contrato editorial, rutas y estilos PASS');
+const articleGrid = frontpage.split('<div class="articles-grid" id="article-list">')[1]?.split('</div><p id="no-results"')[0];
+assert.ok(articleGrid, 'La portada mantiene la grilla de publicaciones');
+assert.equal((articleGrid.match(/class="story-card"/g) || []).length, 6, 'Se conservan seis tarjetas y el layout');
+assert.equal((articleGrid.match(/class="demo-tag"/g) || []).length, 5, 'Solo cinco tarjetas se identifican como muestras');
+const realCard = articleGrid.match(/<article class="story-card" data-category="Explicadores"[\\s\\S]*?<\\/article>/)?.[0];
+assert.ok(realCard, 'Existe una tarjeta de explicador real con género identificable');
+assert.ok(realCard.includes(`href="${editorialPath}"`), 'La tarjeta enlaza al explicador documentado');
+assert.ok(!realCard.includes('data-article=') && !realCard.includes('demo-tag'), 'El artículo real no abre un modal demostrativo ni se etiqueta EJEMPLO');
+assert.ok(frontpage.includes('data-filter="Explicadores"'), 'El filtro permite encontrar explicadores');
+assert.ok(frontpage.includes('1 EXPLICADOR DOCUMENTADO · 5 MUESTRAS'), 'La portada diferencia contenido real de muestras');
+assert.ok(frontpage.includes('noindex,nofollow,noarchive'), 'La portada sigue no indexable');
+assert.ok(!frontpage.includes('TODOS LOS ARTÍCULOS SON DEMOSTRATIVOS'), 'No se atribuye carácter ficticio al artículo real');
+assert.ok(!frontpageScript.includes("+' de ejemplo'"), 'El contador dinámico no llama ejemplos a los resultados reales');
+console.log('Contrapeso explicador TSJ 2017 y portada mixta: contratos, rutas y estilos PASS');

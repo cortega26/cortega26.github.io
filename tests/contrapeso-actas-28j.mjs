@@ -41,6 +41,8 @@ assert.ok(html.includes('338.457'), 'Cota');
 assert.ok(html.includes('https://www.cartercenter.org/wp-content/uploads/2025/02/venezuela-final-report-2025.pdf'), 'Informe final Carter');
 assert.ok(html.includes('https://www.cartercenter.org/news/venezuela-073024/'), 'Declaración Carter');
 assert.ok(html.includes('https://scm.oas.org/pdfs/2025/CP50866e.pdf'), 'Informe CIDH');
+assert.match(html, /<a href="https:\/\/tooltician\.com\/retardo_cne\/" target="_blank" rel="noopener noreferrer">28J: cronología, obligaciones del CNE, auditorías y actas ↗<\/a>/, 'Expediente retardo_cne enlazado con URL pública exacta y rel seguro');
+assert.match(html, /Investigación documental del mismo mantenedor de Contrapeso; no constituye corroboración independiente ni reemplaza las fuentes originales citadas\./, 'Expediente relacionado no se presenta como fuente primaria ni revisión independiente');
 
 assert.ok(museum.includes(`href="${path}"`), 'Museo enlaza al explicador');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];

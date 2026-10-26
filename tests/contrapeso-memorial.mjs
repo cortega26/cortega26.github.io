@@ -91,8 +91,15 @@ assert.ok(Object.hasOwn(EPISODES,'1999'),'Filtro histórico 1999 presente');
 
 const year2000 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2000/index.html', import.meta.url),'utf8');
 const cases2000 = CASES.filter(p => p.year===2000);
-assert.equal(cases2000.length,50,'Cincuenta fichas nominales de 2000 en la primera revisión');
-assert.equal(CASES.length,301,'Conservación de 251 registros anteriores más 50 nuevos');
+assert.ok(cases2000.length >= 50, 'Conservar las 50 fichas nominales iniciales de 2000 sin bloquear ampliaciones');
+// Conservar cada identificador del inventario auditado, sin impedir futuras incorporaciones.
+const baselineIds = JSON.parse(readFileSync(new URL('./fixtures/contrapeso-baseline-ids.json', import.meta.url), 'utf8'));
+assert.ok(baselineIds.length > 0, 'Inventario de referencia no vacío');
+assert.equal(new Set(baselineIds).size, baselineIds.length, 'Inventario de referencia sin duplicados');
+for (const id of baselineIds) {
+  assert.ok(ids.includes(id), `Ficha histórica eliminada o identificador modificado sin revisión: ${id}`);
+}
+assert.ok(CASES.length >= baselineIds.length, 'No perder registros nominales de la línea base');
 assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2000/"'),'Acceso a la página anual de 2000');
 assert.ok(Object.hasOwn(EPISODES,'2000'),'Filtro por episodio 2000');
 for (const person of cases2000) {

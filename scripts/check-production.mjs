@@ -7,6 +7,7 @@ import {
   SITE_ORIGIN,
   alternatesFor,
   groupForPath,
+  prototypeOnlyRoutes,
 } from '../src/data/routes.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -87,6 +88,11 @@ export function verifyCspStub(html, pinnedTokens) {
     : { ok: false, computed, reason: `live=${computed} pinned=[${pinnedTokens.join(', ')}]` };
 }
 
+/** Detect noindex on the deployed prototype rather than inlining a fragile regexp. */
+export function hasNoindexMeta(html) {
+  return /<meta\s+name="robots"\s+content="[^"]*\bnoindex\b/i.test(html);
+}
+
 function linkTags(html) {
   return [...html.matchAll(/<link\b[^>]*>/gi)].map((match) => match[0]);
 }
@@ -105,6 +111,43 @@ function fail(name, detail = '') {
 
 function pass(message) {
   console.log(`PASS: ${message}`);
+}
+
+// Prototype-only pages are intentionally omitted from public sitemap and hreflang.
+function validatePrototypeSitemap(liveUrls, prototype) {
+  if (liveUrls === null) return;
+  const isIndexed = liveUrls.some((url) => normalizePath(new URL(url).pathname) === prototype.path);
+  if (isIndexed) {
+    fail(`prototype sitemap exclusion: ${prototype.id}`, `${prototype.path} must remain out of the public sitemap`);
+  }
+}
+
+async function validatePrototypePage(base, prototype) {
+  try {
+    const response = await fetchWithRetry(`${base}${prototype.path}`);
+    if (response.status !== 200) {
+      fail(`prototype HTTP: ${prototype.id}`, `expected 200, got ${response.status}`);
+      await drain(response);
+      return;
+    }
+
+    const html = await response.text();
+    if (!hasNoindexMeta(html)) {
+      fail(`prototype noindex: ${prototype.id}`, 'missing robots noindex on deployed page');
+      return;
+    }
+
+    pass(`prototype ${prototype.id}: HTTP 200 and noindex verified`);
+  } catch (error) {
+    fail(`prototype HTTP: ${prototype.id}`, error.message);
+  }
+}
+
+async function validatePrototypeRoutes(base, liveUrls) {
+  for (const prototype of prototypeOnlyRoutes) {
+    validatePrototypeSitemap(liveUrls, prototype);
+    await validatePrototypePage(base, prototype);
+  }
 }
 
 async function main() {
@@ -224,6 +267,8 @@ async function main() {
     if (total > 0 && ok200 === total) pass(`${ok200}/${total} URLs returned 200`);
     if (total > 0 && parityOk === total) pass(`hreflang/canonical parity for ${parityOk} pages`);
   }
+
+  await validatePrototypeRoutes(base, liveUrls);
 
   let homeHtml = null;
   try {

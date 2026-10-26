@@ -1,4 +1,5 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
+
 **Propuesta operativa · 25 de octubre de 2026**  
 **Destino sugerido en GitHub:** `plans/contrapeso-roadmap.md`  
 **Documento normativo complementario:** `docs/editorial/contrapeso-manual.md`  
@@ -27,12 +28,15 @@ No crear otra automatización, agenda, ledger ni infraestructura de publicación
 - El repositorio y la portada contienen enlaces públicos a Tooltician: separar marca, privacidad y autoría requiere decisión independiente.
 
 ### No verificado
+
 No se verificaron en este diagnóstico las capturas visuales finales, todos los resultados CI del commit de integración #145 ni el estado del sitio desplegado. Tampoco se auditó exhaustivamente la exactitud de cada registro nominal; ningún conteo del PR sustituye el dataset vivo.
 
 ## 3. Fases con salidas comprobables
 
 ### F0 — Saneamiento y base editorial
+
 **Prioridad inmediata.**
+
 - Verificar el resultado post-merge del PR #145; corregir defectos reproducibles y desacoplar las pruebas visuales del conteo fijo de fichas.
 - Validar responsive 320, 390, 768, 1024 y 1440 px, navegación, contraste, overflow, estado `noindex`, filtros y detalle individual.
 - Adoptar manual editorial y este roadmap después de revisarlos. No sustituir la carta ya existente ni duplicar instrucciones.
@@ -41,6 +45,7 @@ No se verificaron en este diagnóstico las capturas visuales finales, todos los 
 **Cierre F0:** sin P1/P2 técnicos confirmados, PR relevante integrado con controles y comprobación de sitio (si procede); manual y plan versionados; estado de prototipo consistente.
 
 ### F1 — Normalizar el memorial como base documental
+
 - Inventariar fichas, categorías, años, episodios, fuentes, identidad duplicada y lagunas: primero auditar lo que ya existe.
 - Comprobar cada vínculo afirmación–nombre–episodio–documento; documentar casos ambiguos sin forzar certeza.
 - Añadir índices anuales según datos realmente respaldados; **2001** es candidato para investigar porque falta página anual, no decisión irrevocable.
@@ -49,6 +54,7 @@ No se verificaron en este diagnóstico las capturas visuales finales, todos los 
 **Cierre F1:** índice navegable consistente, fuente nominal verificable para cada ficha publicada, duplicados diagnosticados/corregidos y barreras de regresión mantenidas. No exige un número arbitrario de nombres.
 
 ### F2 — Museo y expedientes históricos
+
 - Reconciliar los expedientes ya presentes (elección 2024, Barbados 2023, instituciones/represión 2017).
 - Preparar un inventario de brechas para 11 de abril de 2002, otros procesos electorales, detenciones, censura, negociación política, crisis y desplazamiento.
 - Elegir **un expediente concreto a la vez**, con fuentes, cronología, estado probatorio, versiones relevantes, enlaces y QA visual.
@@ -56,6 +62,7 @@ No se verificaron en este diagnóstico las capturas visuales finales, todos los 
 **Cierre F2:** cada sala tiene expedientes reales con fuentes, explicación y navegación; nada se presenta como estudio exhaustivo sin evidencia.
 
 ### F3 — Completar el medio, no solo el archivo
+
 - Reemplazar gradualmente tarjetas «EJEMPLO» por publicaciones reales verificadas o mantenerlas explícitamente como demostración.
 - Crear formatos reutilizables y distintivos para noticias, opinión, investigaciones y explicadores.
 - Establecer páginas claras de método, correcciones, fecha de revisión y atribución editorial apropiada.
@@ -64,6 +71,7 @@ No se verificaron en este diagnóstico las capturas visuales finales, todos los 
 **Cierre F3:** navegación y secciones funcionan, cada publicación lleva género/fecha/fuentes, no hay promesas funcionales falsas, y un lector distingue actualidad de historia.
 
 ### F4 — Preparación del lanzamiento
+
 - Decisiones pendientes del propietario: nombre/dominio, grado de anonimato, firma editorial, política de comentarios, licencias de imágenes, monetización y patrocinios.
 - QA legal, seguridad y privacidad; revisión de enlaces, sitemap, metadatos, accesibilidad y presentación móvil.
 - Mantener `noindex` hasta autorización expresa. Crear checklist de salida y rollback.
@@ -114,9 +122,11 @@ Una unidad solo se marca completada por evidencia (archivo/commit/PR/tests/resul
            No → ¿hay una unidad elegible con fuentes suficientes?
                     Sí → investigar/implementar y verificar un incremento.
                     No → registrar brecha concreta; no fabricar publicación.
+
 ```
 
 ### Reglas de capacidad
+
 - **Máximo un paquete cohesionado por ejecución.**
 - Preferencia por un PR activo de Contrapeso a la vez; excepciones solo por independencia material y evidencia.
 - Una CI pendiente sin cambio nuevo **no** justifica nuevo comentario cada 66 minutos.
@@ -151,6 +161,7 @@ No medir como éxito «22 PR al día» ni «50 nombres nuevos por corrida». La 
 ## 8. Integración con la task existente
 
 La task «Contrapeso — Desarrollo incremental» debe conservar `RRULE:FREQ=MINUTELY;INTERVAL=66`. Tras adoptar este documento en el repositorio, su prompt debe **leer primero**:
+
 1. `AGENTS.md` y documentación normativa del repo.
 2. `docs/editorial/contrapeso-principios.md` (principios).
 3. `docs/editorial/contrapeso-manual.md` (manual de ejecución editorial, si está integrado).
@@ -160,4 +171,5 @@ La task «Contrapeso — Desarrollo incremental» debe conservar `RRULE:FREQ=MIN
 **Hasta que los documentos se fusionen en `master`, no afirmar que la task los está usando.**
 
 ---
+
 **Base verificada:** GitHub conectado, repositorio `cortega26/cortega26.github.io`; `master` HEAD actualizado a `80557713087a6b4a0b1786bfff4bae4f16c088a5` durante esta incorporación, carta editorial, README/AGENTS, portada, Museo, PR #145 y sus comentarios. No se efectuaron commits, tests locales ni actualizaciones de la task al generar esta propuesta.

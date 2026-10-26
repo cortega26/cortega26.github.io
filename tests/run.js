@@ -18,6 +18,7 @@ import './contrapeso-explicador-2017.mjs';
 import './contrapeso-actas-28j.mjs';
 import './contrapeso-actualidad-2026.mjs';
 import './contrapeso-metodo.mjs';
+import './contrapeso-publication-contracts.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
 const BUILT = process.argv.includes('--built');

@@ -794,7 +794,7 @@ async function testContrapesoFrontpage(browser) {
           const newsTitle = await page.locator('h1').first().textContent();
           const newsRobots = await page.locator('meta[name="robots"]').getAttribute('content');
           const newsOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
-          if (!newsTitle?.includes('María Corina Machado regresa')) fail(`Contrapeso ${width}: wrong news article`);
+          if (!newsTitle?.includes('María Corina Machado regresó')) fail(`Contrapeso ${width}: wrong news article`);
           else if (newsRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: news noindex missing`);
           else if (newsOverflow) fail(`Contrapeso ${width}: news horizontal overflow`);
           else ok(`Contrapeso ${width}: news filter, link, noindex and responsive width`);

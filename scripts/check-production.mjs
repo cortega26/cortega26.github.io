@@ -88,6 +88,11 @@ export function verifyCspStub(html, pinnedTokens) {
     : { ok: false, computed, reason: `live=${computed} pinned=[${pinnedTokens.join(', ')}]` };
 }
 
+/** Detect noindex on the deployed prototype rather than inlining a fragile regexp. */
+export function hasNoindexMeta(html) {
+  return /<meta\s+name="robots"\s+content="[^"]*\bnoindex\b/i.test(html);
+}
+
 function linkTags(html) {
   return [...html.matchAll(/<link\b[^>]*>/gi)].map((match) => match[0]);
 }
@@ -240,7 +245,7 @@ async function main() {
         continue;
       }
       const html = await response.text();
-      if (!/<meta\\s+name="robots"\\s+content="[^"]*noindex/i.test(html)) {
+      if (!hasNoindexMeta(html)) {
         fail(`prototype noindex: ${prototype.id}`, 'missing robots noindex on deployed page');
       } else {
         pass(`prototype ${prototype.id}: HTTP 200, noindex and sitemap exclusion checked`);

@@ -92,6 +92,15 @@ export const routeGroups: RouteGroup[] = [
   },
 ];
 
+/** Prototype-only public paths. Kept OUT of routeGroups, hreflang and sitemap.
+ * They are reachable for QA but explicitly noindex until the owner launches. */
+export const prototypeOnlyRoutes = [
+  {
+    id: 'contrapeso:explainer:tsj-2017',
+    path: '/venezuela-lab/explicadores/sentencias-155-156-2017/',
+  },
+] as const;
+
 function normalizePath(pathname: string): string {
   if (!pathname) return '/';
   const withLeading = pathname.startsWith('/') ? pathname : `/${pathname}`;

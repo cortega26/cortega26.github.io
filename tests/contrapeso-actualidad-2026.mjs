@@ -21,7 +21,7 @@ for (const url of [
   'https://elpais.com/america/2026-10-25/maria-corina-machado-regresa-a-venezuela.html',
   'https://www.theguardian.com/world/2026/oct/25/exiled-venezuelan-opposition-leader-maria-corina-machado-announces-her-return'
 ]) assert.ok(html.includes(url), 'Fuente inspeccionada: ' + url);
-assert.ok(!/<script\\b|<form\\b/i.test(html), 'Sin JS ni captación de datos');
+assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
 assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 'Reutiliza CSS existente');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
 assert.equal((grid.match(/class="story-card"/g) || []).length, 6, 'Seis tarjetas');

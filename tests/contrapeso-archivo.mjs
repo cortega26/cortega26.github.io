@@ -5,6 +5,8 @@ import { hasNoindexMeta } from '../scripts/check-production.mjs';
 
 const home = readFileSync(new URL('../public/venezuela-lab/index.html', import.meta.url), 'utf8');
 const app = readFileSync(new URL('../public/venezuela-lab/app.js', import.meta.url));
+assert.ok(home.includes('<span>Tooltician / laboratorio editorial</span>'), 'El banner informativo no debe aparentar un enlace inexistente');
+assert.ok(home.includes('<span class="locale">EN ESPAÑOL</span>'), 'El idioma estático no debe aparentar un selector inexistente');
 const appHash = createHash('sha1').update(`blob ${app.length}\0`).update(app).digest('hex').slice(0, 8);
 assert.ok(home.includes(`src="./app.js?v=${appHash}"`), 'La portada debe invalidar caché cuando cambia el JS del filtro');
 const memorial = readFileSync(new URL('../public/venezuela-lab/museo/victimas/index.html', import.meta.url), 'utf8');

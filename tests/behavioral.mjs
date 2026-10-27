@@ -742,7 +742,9 @@ async function testContrapesoFrontpage(browser) {
       ]) {
         await searchBox.fill(query);
         const found = await page.locator('#article-list .story-card:visible').count();
-        if (found !== expected) fail(`Contrapeso ${width}: search ${JSON.stringify(query)} returned ${found}, expected ${expected}`);
+        if (found !== expected) {
+          fail(`Contrapeso ${width}: búsqueda ${JSON.stringify(query)}: ${found} de ${expected}`);
+        }
       }
       await searchBox.fill('');
       await page.locator('[data-filter="Opinión"]').click();

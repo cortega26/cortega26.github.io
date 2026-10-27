@@ -13,7 +13,12 @@ const search=document.querySelector('#article-search');
 const count=document.querySelector('#result-count');
 const noResults=document.querySelector('#no-results');
 let activeFilter='Todas';
-function normalizeSearch(value){return value.normalize('NFD').replace(/n\u0303/gi,'ñ').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es');}
+function normalizeSearch(value) {
+  return value.normalize('NFD')
+    .replace(/n\u0303/gi, 'ñ')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase('es');
+}
 function applyFilter(){
 const query=normalizeSearch(search.value).trim();let visible=0;let demos=0;
 for(const card of cards){const show=(activeFilter==='Todas'||card.dataset.category===activeFilter)&&(!query||normalizeSearch(card.dataset.search+' '+card.innerText).includes(query));card.hidden=!show;if(show){visible++;if(card.querySelector('.demo-tag'))demos++;}}

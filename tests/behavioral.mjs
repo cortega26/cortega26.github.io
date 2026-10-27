@@ -738,7 +738,7 @@ async function testContrapesoFrontpage(browser) {
       const searchBox = page.locator('#article-search');
       for (const [query, expected] of [
         ['garantias', 1], ['observacion', 1], ['OPINION', 1],
-        ['ñ', 0], ['n\\u0303', 0], ['N\\u0303', 0],
+        ['ñ', 0], ['n\u0303', 0], ['N\u0303', 0],
       ]) {
         await searchBox.fill(query);
         const found = await page.locator('#article-list .story-card:visible').count();

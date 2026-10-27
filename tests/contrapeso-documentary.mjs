@@ -6,6 +6,10 @@ const css = readFileSync(new URL('../public/venezuela-lab/museo/museum.css', imp
 const source = 'https://www.cartercenter.org/publication/final-report-observacion-de-las-elecciones-presidenciales-en-venezuela-julio-de-2024/';
 assert.equal((html.match(/id="expediente-2024"/g) || []).length, 1, 'Un expediente 2024');
 assert.ok(html.includes('href="#expediente-2024"'), 'Accesible desde sala electoral');
+const electoralRoom = html.match(/<article class="room-card" data-room="Instituciones">([\s\S]*?)<\/article>/)?.[1] ?? '';
+assert.ok(electoralRoom.includes('href="#expediente-2024"'), 'La sala de actas dirige al expediente electoral 001');
+assert.ok(!electoralRoom.includes('href="#expediente-2017"'), 'La sala de actas no desvía al expediente institucional 003');
+assert.equal((electoralRoom.match(/href="#expediente-2024"/g) ?? []).length, 1, 'Un acceso interno inequívoco al expediente 001');
 assert.ok(html.includes(source), 'Fuente primaria en español enlazada');
 for (const value of ['51,2 %','44,2 %','30,4 %','67,1 %','81,7 %','24.532','30.026','3.915.001','3.576.544']) {
   assert.ok(html.includes(value), `Falta dato documentado: ${value}`);

@@ -9,8 +9,8 @@ assert.equal(entries.length, 6, 'Se prueban las seis tarjetas reales de portada'
 const control = () => ({
   handlers: {},
   addEventListener(type, fn) { this.handlers[type] = fn; },
-  setAttribute(name, value) { this[name] = value; },
-  classList: { toggle() {} },
+  setAttribute(name, value) { if (name === 'aria-pressed') this.ariaPressed = value; },
+  classList: { toggle(name, active) { if (name === 'active') this.active = active; } },
 });
 const cards = entries.map((entry, i) => ({
   dataset: { category: entry[1], search: entry[2] },
@@ -26,7 +26,7 @@ const buttons = ['Todas', 'Actualidad', 'Explicadores', 'Opinión', 'Expedientes
 const search = Object.assign(control(), { value: '' });
 const count = { textContent: '' };
 const noResults = { hidden: true };
-const dialog = Object.assign(control(), { showModal() {}, close() {} });
+const dialog = Object.assign(control(), { showModal() { this.open = true; }, close() { this.open = false; } });
 const elements = {
   '#article-search': search,
   '#result-count': count,

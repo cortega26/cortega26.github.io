@@ -728,6 +728,24 @@ async function testContrapesoFrontpage(browser) {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       const cards = page.locator('#article-list .story-card');
       if (await cards.count() !== 6) fail(`Contrapeso ${width}: expected six cards`);
+      // Provenance must remain visible after JS filters the editorial prototype.
+      const provenance = page.locator('#result-count');
+      const initialCount = (await provenance.textContent())?.trim();
+      if (initialCount !== '6 contenidos: 5 con fuentes y 1 muestra') {
+        fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
+      }
+      await page.locator('[data-filter="Opinión"]').click();
+      const opinionCount = (await provenance.textContent())?.trim();
+      if (opinionCount !== '1 contenido: 0 con fuentes y 1 muestra') {
+        fail(`Contrapeso ${width}: opinion demo must not count as sourced publication`, opinionCount);
+      }
+      await page.locator('[data-filter="Todas"]').click();
+      await page.locator('#article-search').fill('___sin_resultados___');
+      const emptyCount = (await provenance.textContent())?.trim();
+      if (emptyCount !== '0 contenidos: 0 con fuentes y 0 muestras') {
+        fail(`Contrapeso ${width}: empty search provenance must be accurate`, emptyCount);
+      }
+      await page.locator('#article-search').fill('');
       const filter = page.locator('[data-filter="Explicadores"]');
       await filter.click();
       const visible = page.locator('#article-list .story-card:visible');

@@ -1,9 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { strict as assert } from 'node:assert';
-import { runInNewContext } from 'node:vm';
 
 const home = readFileSync(new URL('../public/venezuela-lab/index.html', import.meta.url), 'utf8');
-const app = readFileSync(new URL('../public/venezuela-lab/app.js', import.meta.url), 'utf8');
 const entries = [...home.matchAll(/<article class="story-card" data-category="([^"]+)" data-search="([^"]+)"/g)];
 assert.equal(entries.length, 6, 'Se prueban las seis tarjetas reales de portada');
 const control = () => ({
@@ -22,11 +20,11 @@ const cards = entries.map((entry, i) => ({
   },
 }));
 const buttons = ['Todas', 'Actualidad', 'Explicadores', 'Opinión', 'Expedientes', 'Archivo']
-  .map(filter => Object.assign(control(), { dataset: { filter } }));
-const search = Object.assign(control(), { value: '' });
+  .map(filter => ({ ...control(), dataset: { filter } }));
+const search = { ...control(), value: '' };
 const count = { textContent: '' };
 const noResults = { hidden: true };
-const dialog = Object.assign(control(), { showModal() { this.open = true; }, close() { this.open = false; } });
+const dialog = { ...control(), showModal() { this.open = true; }, close() { this.open = false; } };
 const elements = {
   '#article-search': search,
   '#result-count': count,
@@ -46,7 +44,14 @@ const document = {
   querySelector(selector) { return elements[selector] ?? null; },
   createElement() { return { textContent: '' }; },
 };
-runInNewContext(app, { document });
+const previousDocument = globalThis.document;
+globalThis.document = document;
+try {
+  await import('../public/venezuela-lab/app.js');
+} finally {
+  if (previousDocument === undefined) delete globalThis.document;
+  else globalThis.document = previousDocument;
+}
 assert.equal(count.textContent, '6 contenidos: 5 con fuentes y 1 muestra');
 function searchFor(query, expected) {
   search.value = query;

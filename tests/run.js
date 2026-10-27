@@ -11,7 +11,6 @@ import './websites-showcase.mjs';
 import './contrapeso-documentary.mjs';
 import './contrapeso-barbados.mjs';
 import './contrapeso-archivo.mjs';
-import './contrapeso-busqueda.mjs';
 import './contrapeso-instituciones.mjs';
 import './contrapeso-represion.mjs';
 import './contrapeso-memorial.mjs';

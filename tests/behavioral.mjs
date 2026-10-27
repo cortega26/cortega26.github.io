@@ -734,6 +734,17 @@ async function testContrapesoFrontpage(browser) {
       if (initialCount !== '6 contenidos: 5 con fuentes y 1 muestra') {
         fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
       }
+      // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.
+      const searchBox = page.locator('#article-search');
+      for (const [query, expected] of [
+        ['garantias', 1], ['observacion', 1], ['OPINION', 1],
+        ['ñ', 0], ['n\\u0303', 0], ['N\\u0303', 0],
+      ]) {
+        await searchBox.fill(query);
+        const found = await page.locator('#article-list .story-card:visible').count();
+        if (found !== expected) fail(`Contrapeso ${width}: search ${JSON.stringify(query)} returned ${found}, expected ${expected}`);
+      }
+      await searchBox.fill('');
       await page.locator('[data-filter="Opinión"]').click();
       const opinionCount = (await provenance.textContent())?.trim();
       if (opinionCount !== '1 contenido: 0 con fuentes y 1 muestra') {

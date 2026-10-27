@@ -21,7 +21,7 @@ function normalizeSearch(value) {
 }
 function applyFilter(){
 const query=normalizeSearch(search.value).trim();let visible=0;let demos=0;
-for(const card of cards){const show=(activeFilter==='Todas'||card.dataset.category===activeFilter)&&(!query||normalizeSearch(card.dataset.search+' '+card.innerText).includes(query));card.hidden=!show;if(show){visible++;if(card.querySelector('.demo-tag'))demos++;}}
+for(const card of cards){const show=(activeFilter==='Todas'||card.dataset.category===activeFilter)&&(!query||normalizeSearch(`${card.dataset.search} ${card.innerText}`).includes(query));card.hidden=!show;if(show){visible++;if(card.querySelector('.demo-tag'))demos++;}}
 const sourced=visible-demos;
 count.textContent=`${visible} ${visible===1?'contenido':'contenidos'}: ${sourced} con fuentes y ${demos} ${demos===1?'muestra':'muestras'}`;
 noResults.hidden=visible!==0;

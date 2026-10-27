@@ -62,6 +62,9 @@ function searchFor(query, expected) {
 searchFor('garantias', 1);
 searchFor('observacion', 1);
 searchFor('OPINION', 1);
+searchFor('ñ', 0);
+searchFor('n\u0303', 0);
+searchFor('N\u0303', 0);
 searchFor('inexistente', 0);
 searchFor('', 6);
 buttons.find(button => button.dataset.filter === 'Opinión').handlers.click();

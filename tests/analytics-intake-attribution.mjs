@@ -302,6 +302,24 @@ await group('A5 · Unrecognized or untrusted UTM values fail closed', async () =
   }
 });
 
+await group('A6 · All intake script entrypoints use one versioned URL', async () => {
+  const sources = [
+    'src/components/ContactSection.astro',
+    'src/components/ServicePage.astro',
+    'src/pages/es/servicios/higiene-tecnica-web/index.astro',
+    'src/pages/en/services/web-technical-hygiene/index.astro',
+  ];
+  const versions = [];
+  for (const path of sources) {
+    const html = read(path);
+    const matches = [...html.matchAll(/src="\/assets\/js\/intake-form\.js\?v=([A-Za-z0-9-]+)"/g)];
+    assert(`${path} has one cache-busted script`, matches.length === 1);
+    assert(`${path} has no unversioned script`, !html.includes('src="/assets/js/intake-form.js"'));
+    versions.push(...matches.map((match) => match[1]));
+  }
+  assert('All scripts use one release key', new Set(versions).size === 1);
+});
+
 // ─── Summary ────────────────────────────────────────────────────────────────
 
 console.log(`\n${passed} passed, ${failed} failed`);

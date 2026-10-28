@@ -31,6 +31,12 @@ No se capturan direcciones arbitrarias, mensajes, archivos, fragmentos de URL ni
 - [ ] Registrar por separado sesiones, envíos exitosos, leads calificados, diagnósticos pagos y proyectos contratados. Los ceros solo son verificables con una fuente consultada; si no, anotar `desconocido`.
 - [ ] Comparar las primeras 7, 14 y 30 jornadas usando la fecha real de despliegue del PR del producto. Concluir según el criterio fijado en el issue #131, sin mover umbrales retroactivamente.
 
+## Caché del recurso de formulario
+
+Tras el primer despliegue, la URL pública sin versión de `intake-form.js` todavía devolvía el código anterior, mientras que el mismo recurso con un parámetro de consulta nuevo entregaba la atribución B2B actualizada. Para que el navegador y las cachés no sigan usando el script antiguo, **las cuatro plantillas que lo cargan** se actualizaron a una URL versionada idéntica (`?v=20261028-b2b1`). La suite de atribución verifica que ninguna conserva la ruta sin versión y que las cuatro coinciden.
+
+La publicación y recepción final se verifican por separado en el workflow de Pages y mediante la URL de recurso versionada, sin enviar formularios reales de prueba a Formspree.
+
 ## Pruebas
 
 `node tests/analytics-intake-attribution.mjs` cubre ambos tipos de intención y URL sin campaña, incorrecta, maliciosa o con parámetros duplicados. El resto del conjunto de calidad existente debe permanecer verde. Nunca probar contra el endpoint Formspree real con datos sintéticos no solicitados.

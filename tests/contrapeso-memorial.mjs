@@ -118,7 +118,7 @@ assert.ok(year2000.includes('noindex,nofollow,noarchive'),'Preservación de noin
 
 const year2001 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2001/index.html', import.meta.url), 'utf8');
 const cases2001 = CASES.filter(p => p.year === 2001);
-assert.ok(cases2001.length >= 5, 'Conservar las cinco fichas iniciales de 2001 sin bloquear ampliaciones');
+assert.ok(cases2001.length >= 7, 'Conservar las cinco fichas iniciales y las dos de HRW de 2001');
 assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2001/"'), 'Navegación al capítulo 2001');
 assert.ok(Object.hasOwn(EPISODES, '2001'), 'Episodio anual 2001 disponible en filtros');
 assert.ok(year2001.includes('noindex,nofollow,noarchive'), 'No indexar el capítulo 2001');
@@ -126,11 +126,18 @@ assert.equal((year2001.match(/class="year-roster-item"/g) || []).length, cases20
 for (const person of cases2001) {
   assert.ok(year2001.includes(person.name), `Nombre 2001 en página anual: ${person.name}`);
   assert.ok(year2001.includes(`perfil.html?id=${person.id}`), `Enlace individual 2001: ${person.name}`);
-  assert.ok(person.sources.includes('US2001'), `Informe 2001 atribuido a: ${person.name}`);
+  assert.ok(person.sources.includes('US2001') || person.sources.includes('HRW2001'), `Fuente 2001 atribuida a: ${person.name}`);
 }
 for (const name of ['Jesús Alberto Febres', 'Luis Fernando Briceño', 'Ángel Ardilla', 'Ericson José Parra', 'Juan Pablo Arroyave']) {
   assert.ok(cases2001.some(p => p.name === name), `Caso nominal 2001 ausente: ${name}`);
 }
+for (const name of ['José Ramón Rodríguez', 'Belmiro Gutiérrez']) {
+  const person = cases2001.find(p => p.name === name);
+  assert.ok(person && person.sources.includes('HRW2001'), `Caso HRW 2001 sin fuente nominal: ${name}`);
+  assert.equal(person.category, 'investigacion', `No presumir autoría policial individual: ${name}`);
+}
+assert.ok(index.includes('data-filter="investigacion"'), 'Filtro para asesinatos sin autoría individual acreditada');
+assert.ok(SOURCES.HRW2001.url.includes('hrw.org/legacy/spanish/inf_anual/2002/venezuela.html'), 'HRW 2002 sobre hechos de 2001');
 assert.ok(SOURCES.US2001.url.includes('refworld.org/reference/annualreport/usdos/2002/31349'), 'Fuente archivada verificable de 2001');
 assert.ok(year2001.includes('octubre de 2000–septiembre de 2001'), 'No convertir la cifra PROVEA 241 en total de año calendario');
 assert.ok(year2001.includes('registro es parcial') || year2001.includes('registro es parcial'.replace('r','R')), 'Advertencia de no exhaustividad');

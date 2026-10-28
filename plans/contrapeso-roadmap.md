@@ -332,3 +332,17 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Principios:** libertad individual — aplica con evidencia (vida e integridad); propiedad privada — no aplica; control del poder — aplica con evidencia (actuaciones de seguridad y denuncias). Sin presumir motivación política común ni sentencias individuales.
 
 **Siguiente unidad:** PROVEA p. impresa **466 / PDF índice 24**, registros 107–116. Persisten pendientes Jorge Luis Aponte (70), Annelk (65), Edixon/Ericson Parra, Mijares E. (88), fuentes judiciales y el anexo octubre 2001–septiembre 2002.
+
+## F1 — Novena unidad de 2001 — PROVEA, registros 107–116 (28-10-2026; PR #172)
+
+**Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 466 / PDF índice 24](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=25), registros **107–116**, hechos del 9 al 18 de febrero de 2001. Cotejados los nombres contra las 48 fichas anteriores de 2001; diez fichas nuevas sin duplicados nominales detectados.
+
+**Personas:** Argenis González; José Raúl Cumare Jiménez; Williams González; Dairilis Yulibet Sánchez Pérez; José David Gallardo Gómez; José Alberto Figueroa; Edison Álvarez; Carlos A. Villanueva; Pedro Antonio Belisario; Joel Carlitos Alay Pérez.
+
+**Límites probatorios:** los n.os 109 y 115 solo contienen denuncias ante Humanas Dignitas y versiones oficiales de enfrentamiento, sin relato individual; los n.os 108, 110, 111 y 114 están vinculados por PROVEA al llamado Grupo Exterminio sin sentencia individual; en 107, 112 y 116 la fuente recoge denuncias de actuaciones policiales y versiones oficiales de enfrentamiento. El n.º 113 consigna la fecha «17.02.01*», cuyo asterisco **requiere cotejo**. La inicial A. de Villanueva no se expande. No se afirma autoría penal ni motivación política común.
+
+**Resultado en PR:** 58 fichas de 2001 y 359 en el dataset, 58 enlaces nominales; registro parcial, no balance anual exhaustivo. Dataset, página anual, catálogo de fuentes y pruebas actualizados; QA exact-SHA y revisión editorial humana pendientes de comprobar. Sin merge, publicación comercial ni lanzamiento.
+
+**Principios:** libertad individual — **aplica con evidencia** (vida e integridad); propiedad privada — **no aplica**; control del poder — **aplica con evidencia** (actuaciones de seguridad y denuncias). No se presupone culpabilidad.
+
+**Siguiente unidad:** PROVEA p. impresa **467 / PDF índice 25**, registros 117–121. Pendientes anteriores: causalidad de Jorge Luis Aponte (70), Annelk (65), Edixon/Ericson Parra, Mijares E. (88), fecha de Álvarez (113), fuentes judiciales y anexo octubre 2001–septiembre 2002.

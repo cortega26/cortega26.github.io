@@ -131,12 +131,18 @@ for (const person of cases2001) {
 for (const name of ['Jesús Alberto Febres', 'Luis Fernando Briceño', 'Ángel Ardilla', 'Ericson José Parra', 'Juan Pablo Arroyave']) {
   assert.ok(cases2001.some(p => p.name === name), `Caso nominal 2001 ausente: ${name}`);
 }
-for (const name of ['José Ramón Rodríguez', 'Belmiro Gutiérrez']) {
+for (const name of ['José Ramón Rodríguez', 'Belmiro Alexander Gutiérrez']) {
   const person = cases2001.find(p => p.name === name);
   assert.ok(person && person.sources.includes('HRW2001'), `Caso HRW 2001 sin fuente nominal: ${name}`);
   assert.equal(person.category, 'investigacion', `No presumir autoría policial individual: ${name}`);
 }
 assert.ok(index.includes('data-filter="investigacion"'), 'Filtro para asesinatos sin autoría individual acreditada');
+assert.equal(cases2001.find(p => p.name === 'José Ramón Rodríguez')?.date, '2001-05-15', 'Fecha cotejada en PROVEA');
+assert.equal(cases2001.find(p => p.name === 'Belmiro Alexander Gutiérrez')?.date, '2001-05-19', 'Fecha y nombre completo cotejados en PROVEA');
+assert.ok(cases2001.filter(p => p.sources.includes('PRO2001')).length >= 2, 'Doble fuente HRW/PROVEA');
+assert.ok(cases2001.find(p => p.id === 'ericson-jose-parra')?.note.includes('Edixon Parra'), 'Registrar discrepancia nominal sin duplicar víctima');
+assert.ok(!cases2001.some(p => p.id === 'edixon-parra'), 'No duplicar identidad Parra pendiente de cotejo');
+assert.ok(SOURCES.PRO2001.url.includes('archivo.provea.org/wp-content/uploads/01_anexos0001.pdf'), 'Anexo PROVEA 2000-2001 accesible');
 assert.ok(SOURCES.HRW2001.url.includes('hrw.org/legacy/spanish/inf_anual/2002/venezuela.html'), 'HRW 2002 sobre hechos de 2001');
 assert.ok(SOURCES.US2001.url.includes('refworld.org/reference/annualreport/usdos/2002/31349'), 'Fuente archivada verificable de 2001');
 assert.ok(year2001.includes('octubre de 2000–septiembre de 2001'), 'No convertir la cifra PROVEA 241 en total de año calendario');

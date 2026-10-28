@@ -283,7 +283,6 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 
 **Próxima unidad:** p. impresa **462 / PDF 20**, registros 74–83; contrastar casos que solo tienen referencia agregada de Defensoría (75 y 80), fechas del hecho frente a fallecimiento y posibles nombres ya registrados. En paralelo queda pendiente Aponte (registro 70), grafía Annelk y Edixon/Ericson Parra. Exigir source/build/Playwright, Codacy y Codex del nuevo SHA, revisión editorial humana y autorización de merge.
 
-
 ## F1 — Quinta unidad de 2001 — PROVEA, registros 74–83 (28-10-2026; PR #172)
 
 **Fuente inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 462 / PDF p. 20](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf). Se cotejaron los diez nombres y fechas de los registros 74–83 contra las 16 fichas previas del PR. Diez entradas nominales nuevas, sin duplicación detectada: Edward José Morales, Julio Hurtado, Roger Eduardo Castillo Castillo, Jeimon Rodríguez, Jhonny M. Meneses, Darwin Maita, Héctor José Bolívar, Raúl Alberto Villegas, Luis Alfredo Carrera Yéguez y Danilo Enrique Martínez Carrillo.
@@ -293,7 +292,6 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Estado:** 26 fichas de 2001 y 327 en el dataset de la rama, **no exhaustivas**. La página anual, el dataset y pruebas de fuente se actualizan en el mismo PR #172; no hay merge ni lanzamiento autorizado. Siguiente lote: PROVEA p. 463 / PDF p. 21, registros 84 en adelante; mantener pendientes la causalidad de Jorge Luis Aponte, variantes Edixon/Ericson Parra y Annelk Martínez, y el anexo octubre 2001–septiembre 2002.
 
 **Orientación editorial:** libertad individual **aplica con evidencia** (vida, custodia y uso de fuerza); propiedad privada **no aplica**; control del poder **aplica con evidencia** (denuncias y actuaciones de seguridad). No se imputa condena ni autoría no acreditada.
-
 
 ## F1 — Sexta unidad de 2001 — PROVEA, registros 84–91 (28-10-2026; PR #172)
 

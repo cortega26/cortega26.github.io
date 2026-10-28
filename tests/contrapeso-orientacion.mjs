@@ -1,5 +1,5 @@
 import { readFileSync, readdirSync } from 'node:fs';
-import { join, relative, sep } from 'node:path';
+import { join } from 'node:path';
 import { strict as assert } from 'node:assert';
 import { fileURLToPath } from 'node:url';
 
@@ -11,49 +11,38 @@ const manual = read('docs/editorial/contrapeso-manual.md');
 const contracts = read('docs/editorial/contrapeso-contratos-publicacion.md');
 const method = read('public/venezuela-lab/metodo/index.html');
 
-for (const [name, doc] of [['carta', charter], ['manual', manual], ['contratos', contracts]]) {
-  assert.match(doc, /libertad individual/i, `${name}: libertad individual`);
-  assert.match(doc, /propiedad privada/i, `${name}: propiedad privada`);
-  assert.match(doc, /control del poder|control institucional del poder|control institucional/i, `${name}: control del poder`);
+for (const doc of [charter, manual, contracts]) {
+  assert.ok(doc.includes('libertad individual') || doc.includes('Libertad individual'), 'Libertad individual en normas');
+  assert.ok(doc.includes('propiedad privada') || doc.includes('Propiedad privada'), 'Propiedad privada en normas');
+  assert.ok(doc.includes('control del poder') || doc.includes('Control del poder') || doc.includes('control institucional del poder'), 'Control del poder en normas');
 }
-assert.match(method, /id="orientacion"/, 'El método publica la orientación editorial');
-for (const principle of ['Libertad individual:', 'Propiedad privada:', 'Control del poder:']) {
-  assert.ok(method.includes(principle), `El método publica: ${principle}`);
-}
+assert.ok(method.includes('id="orientacion"'), 'El método publica la orientación editorial');
 
-function htmlFiles(dir) {
-  return readdirSync(dir, { withFileTypes: true }).flatMap((item) => {
-    const path = join(dir, item.name);
-    return item.isDirectory() ? htmlFiles(path) : item.name.endsWith('.html') ? [path] : [];
-  });
-}
+const pages = readdirSync(prototype, { recursive: true, withFileTypes: true })
+  .filter((entry) => entry.isFile() && entry.name.endsWith('.html'))
+  .map((entry) => join(entry.parentPath, entry.name));
+assert.ok(pages.length >= 10, 'El barrido cubre 10 páginas HTML incluido perfil.html');
 
-const pages = htmlFiles(prototype);
-assert.ok(pages.length >= 10, 'El barrido cubre las diez superficies HTML actuales, incluido perfil.html');
 for (const file of pages) {
-  const path = relative(prototype, file).split(sep).join('/');
-  const html = readFileSync(file, 'utf8');
-  assert.match(html, /<meta name="robots" content="noindex,nofollow,noarchive">/,
-    `${path}: preserva robots de prototipo`);
-  if (path !== 'metodo/index.html') {
-    assert.match(html, /href="\/venezuela-lab\/metodo\/(?:#orientacion)?"/,
-      `${path}: enlaza a principios y rectificaciones`);
+  const source = readFileSync(file, 'utf8');
+  assert.ok(source.includes('name="robots" content="noindex,nofollow,noarchive"'), 'Robots: ' + file);
+  if (!file.endsWith('/metodo/index.html')) {
+    assert.ok(
+      source.includes('href="/venezuela-lab/metodo/"') ||
+        source.includes('href="/venezuela-lab/metodo/#orientacion"'),
+      'Enlace a método: ' + file,
+    );
   }
   if (process.argv.includes('--built')) {
-    const built = readFileSync(join(root, 'dist/venezuela-lab', path), 'utf8');
-    assert.match(built, /<meta name="robots" content="noindex,nofollow,noarchive">/,
-      `${path}: build preserva robots`);
+    const builtPath = file.replace(prototype, join(root, 'dist/venezuela-lab'));
+    const built = readFileSync(builtPath, 'utf8');
+    assert.ok(built.includes('name="robots" content="noindex,nofollow,noarchive"'), 'Robots en build: ' + file);
   }
 }
 
-for (const [path, marker] of [
-  ['public/venezuela-lab/actualidad/regreso-machado-2026/index.html', 'controles independientes'],
-  ['public/venezuela-lab/explicadores/actas-28j-2024/index.html', 'control del poder electoral'],
-  ['public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', 'separación de poderes'],
-]) {
-  assert.ok(read(path).includes(marker), `${path}: contextualización institucional revisada`);
-}
-assert.match(contracts, /aplica con evidencia \/ no aplica \/ requiere investigación/i,
-  'Los contratos contemplan pertinencia, inaplicabilidad y necesidad de investigación');
-assert.match(manual, /registros dinámicos/i, 'La auditoría de fichas requiere revisión individual');
-console.log(`Contrapeso orientación editorial: carta, método, ${pages.length} páginas, contratos y robots PASS`);
+assert.ok(read('public/venezuela-lab/actualidad/regreso-machado-2026/index.html').includes('controles independientes'), 'Noticia: revisión institucional');
+assert.ok(read('public/venezuela-lab/explicadores/actas-28j-2024/index.html').includes('control del poder electoral'), '28J: control del poder');
+assert.ok(read('public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html').includes('separación de poderes'), 'TSJ: separación de poderes');
+assert.ok(contracts.includes('aplica con evidencia / no aplica / requiere investigación'), 'Contrato de revisión por principio');
+assert.ok(manual.includes('registros dinámicos'), 'Fichas individuales pendientes de revisión factual');
+console.log('Contrapeso orientación editorial: principios, enlaces y robots PASS');

@@ -118,7 +118,7 @@ assert.ok(year2000.includes('noindex,nofollow,noarchive'),'Preservación de noin
 
 const year2001 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2001/index.html', import.meta.url), 'utf8');
 const cases2001 = CASES.filter(p => p.year === 2001);
-assert.ok(cases2001.length >= 7, 'Conservar las cinco fichas iniciales y las dos de HRW de 2001');
+assert.ok(cases2001.length >= 13, 'Conservar siete fichas iniciales y seis casos nominales de enero 2001');
 assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2001/"'), 'Navegación al capítulo 2001');
 assert.ok(Object.hasOwn(EPISODES, '2001'), 'Episodio anual 2001 disponible en filtros');
 assert.ok(year2001.includes('noindex,nofollow,noarchive'), 'No indexar el capítulo 2001');
@@ -126,7 +126,7 @@ assert.equal((year2001.match(/class="year-roster-item"/g) || []).length, cases20
 for (const person of cases2001) {
   assert.ok(year2001.includes(person.name), `Nombre 2001 en página anual: ${person.name}`);
   assert.ok(year2001.includes(`perfil.html?id=${person.id}`), `Enlace individual 2001: ${person.name}`);
-  assert.ok(person.sources.includes('US2001') || person.sources.includes('HRW2001'), `Fuente 2001 atribuida a: ${person.name}`);
+  assert.ok(person.sources.some(key => ['US2001','HRW2001','PRO2001'].includes(key)), `Fuente 2001 atribuida a: ${person.name}`);
 }
 for (const name of ['Jesús Alberto Febres', 'Luis Fernando Briceño', 'Ángel Ardilla', 'Ericson José Parra', 'Juan Pablo Arroyave']) {
   assert.ok(cases2001.some(p => p.name === name), `Caso nominal 2001 ausente: ${name}`);
@@ -144,6 +144,25 @@ assert.ok(cases2001.filter(p => p.sources.includes('PRO2001')).length >= 2, 'Dob
 assert.ok(cases2001.find(p => p.id === 'ericson-jose-parra')?.note.includes('Edixon Parra'), 'Registrar discrepancia nominal sin duplicar víctima');
 assert.deepEqual(cases2001.find(p => p.id === 'ericson-jose-parra')?.sources, ['US2001', 'PRO2001'], 'La ficha de Parra enlaza ambos documentos que explican la discrepancia');
 assert.ok(!cases2001.some(p => p.id === 'edixon-parra'), 'No duplicar identidad Parra pendiente de cotejo');
+const early2001 = [
+  ['juan-carlos-castillo-romero', '2001-01-02', 'investigacion'],
+  ['jose-gregorio-pastrana', '2001-01-05', 'policial'],
+  ['miguel-angel-matos-idrogo', '2001-01-05', 'policial'],
+  ['annelk-luis-martinez-yaguaran', '2001-01-05', 'policial'],
+  ['oswaldo-jose-herrera-gurgos', '2001-01-07', 'investigacion'],
+  ['alexander-sandoval', '2001-01-09', 'policial']
+];
+for (const [id, date, category] of early2001) {
+  const matches = cases2001.filter(person => person.id === id);
+  assert.equal(matches.length, 1, `Una ficha para ${id}, sin duplicados`);
+  assert.equal(matches[0].date, date, `Fecha del anexo PROVEA, p. 460: ${id}`);
+  assert.equal(matches[0].category, category, `No confundir denuncia de grupo con autoría probada: ${id}`);
+  assert.deepEqual(matches[0].sources, ['PRO2001'], `Fuente primaria inspeccionada: ${id}`);
+  assert.ok(year2001.includes(`perfil.html?id=${id}`), `Perfil enlazado desde 2001: ${id}`);
+}
+assert.ok(year2001.includes('201 como ejecuciones'), '241 casos PROVEA incluyen 201 ejecuciones, no 241 ejecuciones');
+assert.ok(!year2001.includes('241 ejecuciones extrajudiciales'), 'No inflar la categoría de ejecuciones');
+assert.ok(SOURCES.PRO2001.title.includes('p. 485'), 'Fuente precisa del desglose de 241 casos');
 assert.ok(SOURCES.PRO2001.url.includes('archivo.provea.org/wp-content/uploads/01_anexos0001.pdf'), 'Anexo PROVEA 2000-2001 accesible');
 assert.ok(SOURCES.HRW2001.url.includes('hrw.org/legacy/spanish/inf_anual/2002/venezuela.html'), 'HRW 2002 sobre hechos de 2001');
 assert.ok(SOURCES.US2001.url.includes('refworld.org/reference/annualreport/usdos/2002/31349'), 'Fuente archivada verificable de 2001');

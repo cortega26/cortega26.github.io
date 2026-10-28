@@ -75,6 +75,22 @@ Antes de integrar un texto nuevo y al revisar el contenido actual:
 
 **Revisión del material existente:** auditar prioritariamente portada, titulares, bajadas, explicadores, método, Museo y publicaciones documentales. Corregir problemas de estilo concretos en PR pequeños, sin alterar datos o atribuciones, sin retirar límites sustantivos ni romper enlaces, robots o pruebas. No convertir la auditoría en un bucle infinito ni publicar únicamente por cuota.
 
+### Revisión editorial obligatoria para lo nuevo y lo publicado
+
+**Alcance desde el 28-10-2026:** aplicar los principios de la carta editorial a toda publicación futura y a todo el archivo existente. No alcanza con declararlos en el método: cada revisión debe evaluar su relevancia sin introducir consignas en piezas informativas.
+
+**Lista interna de revisión, antes de publicar o modificar:**
+1. **Libertad individual:** examinar autonomía, libertad de expresión y asociación, garantías de defensa y posibles coacciones, cuando sean relevantes y verificables. Si no aplican al asunto, consignar «no aplica».
+2. **Propiedad privada:** revisar titularidad, seguridad jurídica, expropiaciones, confiscaciones, contratos y debido proceso cuando los hechos lo justifiquen. No calificar toda regulación de abuso automáticamente.
+3. **Control del poder:** preguntar quién actuó, con qué competencias, qué controles existían, qué documentos permiten verificar la decisión y quién debe rendir cuentas.
+4. **Universalidad:** mantener iguales estándares frente a actores políticamente afines, adversarios y particulares. Las convicciones no convierten una imputación en hecho ni eximen de responsabilidad.
+5. **Género:** hechos primero en noticia; argumentos y valoraciones identificados en análisis y opinión; dignidad, contexto y atribución individual en memorial. No insertar fórmulas ideológicas por cuota.
+6. **Verificación:** registrar documentos, fuentes contrarias relevantes, límites y fecha de revisión. Rectificar los errores materiales con nota pública; una mejora de encuadre no debe aparentar una nueva prueba.
+
+**Retroactividad:** inventariar páginas y registros dinámicos, revisar las piezas según relevancia y riesgo (primero imputaciones, fuentes, privacidad y fechas). Documentar en cada PR qué piezas fueron efectivamente examinadas, qué hallazgos se corrigieron y qué falta. No declarar que una ficha nominal se auditó individualmente por haber actualizado su plantilla o índice.
+
+**Guard automatizado:** exigir enlaces accesibles al método y preservar robots en cada HTML. El test no certifica la veracidad ni puede sustituir la evaluación humana de los principios.
+
 ## 5. Jerarquía de fuentes y verificación
 
 1. **Primarias:** resoluciones judiciales, documentos oficiales auténticos, actas, archivos, comunicados originales y bases de datos con metodología.

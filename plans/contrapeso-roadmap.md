@@ -282,3 +282,14 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Principios:** libertad individual — aplica con evidencia en detenciones y uso de fuerza; propiedad privada — no aplica; control del poder — aplica con evidencia en intervenciones policiales y necesidad de investigación. No se imputa motivación política ni autoría judicial no probada.
 
 **Próxima unidad:** p. impresa **462 / PDF 20**, registros 74–83; contrastar casos que solo tienen referencia agregada de Defensoría (75 y 80), fechas del hecho frente a fallecimiento y posibles nombres ya registrados. En paralelo queda pendiente Aponte (registro 70), grafía Annelk y Edixon/Ericson Parra. Exigir source/build/Playwright, Codacy y Codex del nuevo SHA, revisión editorial humana y autorización de merge.
+
+
+## F1 — Quinta unidad de 2001 — PROVEA, registros 74–83 (28-10-2026; PR #172)
+
+**Fuente inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 462 / PDF p. 20](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf). Se cotejaron los diez nombres y fechas de los registros 74–83 contra las 16 fichas previas del PR. Diez entradas nominales nuevas, sin duplicación detectada: Edward José Morales, Julio Hurtado, Roger Eduardo Castillo Castillo, Jeimon Rodríguez, Jhonny M. Meneses, Darwin Maita, Héctor José Bolívar, Raúl Alberto Villegas, Luis Alfredo Carrera Yéguez y Danilo Enrique Martínez Carrillo.
+
+**Límites probatorios:** los registros 75 (Julio Hurtado) y 80 (Héctor José Bolívar) solo identifican dos nombres dentro de catorce denuncias de ajusticiamientos atribuidos a agentes estatales comunicadas por la defensora Indira Narváez; no incluyen narración individual ni sentencia. Se conservan como fichas documentales de **denuncia**, sin transformar el agregado de 14 en 14 fichas. Los registros 77–79 refieren una detención conjunta denunciada por familiares y una versión oficial de enfrentamiento, sin autoría penal dirimida. El n.º 81 alude al llamado Grupo Exterminio sin sentencia individual. El n.º 83 documenta a un menor de 13 años fallecido en intervención policial, sin difundir datos privados. Para los diez casos faltan contraste judicial y fuentes independientes.
+
+**Estado:** 26 fichas de 2001 y 327 en el dataset de la rama, **no exhaustivas**. La página anual, el dataset y pruebas de fuente se actualizan en el mismo PR #172; no hay merge ni lanzamiento autorizado. Siguiente lote: PROVEA p. 463 / PDF p. 21, registros 84 en adelante; mantener pendientes la causalidad de Jorge Luis Aponte, variantes Edixon/Ericson Parra y Annelk Martínez, y el anexo octubre 2001–septiembre 2002.
+
+**Orientación editorial:** libertad individual **aplica con evidencia** (vida, custodia y uso de fuerza); propiedad privada **no aplica**; control del poder **aplica con evidencia** (denuncias y actuaciones de seguridad). No se imputa condena ni autoría no acreditada.

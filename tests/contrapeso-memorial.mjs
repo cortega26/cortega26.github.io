@@ -118,7 +118,7 @@ assert.ok(year2000.includes('noindex,nofollow,noarchive'),'Preservación de noin
 
 const year2001 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2001/index.html', import.meta.url), 'utf8');
 const cases2001 = CASES.filter(p => p.year === 2001);
-assert.ok(cases2001.length >= 13, 'Conservar siete fichas iniciales y seis casos nominales de enero 2001');
+assert.ok(cases2001.length >= 16, 'Conservar trece fichas previas y tres casos nominales de enero 2001');
 assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2001/"'), 'Navegación al capítulo 2001');
 assert.ok(Object.hasOwn(EPISODES, '2001'), 'Episodio anual 2001 disponible en filtros');
 assert.ok(year2001.includes('noindex,nofollow,noarchive'), 'No indexar el capítulo 2001');
@@ -160,6 +160,25 @@ for (const [id, date, category] of early2001) {
   assert.deepEqual(matches[0].sources, ['PRO2001'], `Fuente primaria inspeccionada: ${id}`);
   assert.ok(year2001.includes(`perfil.html?id=${id}`), `Perfil enlazado desde 2001: ${id}`);
 }
+// Cuarta unidad documental: anexo PROVEA p. 461, registros 69–73.
+const febres2001 = cases2001.find(p => p.id === 'jesus-alberto-febres');
+assert.equal(febres2001?.date, '2001-01-31', 'Fecha de muerte de Febres, distinta del incidente del 10 de enero');
+assert.deepEqual(febres2001?.sources, ['US2001', 'PRO2001'], 'Doble fuente para Febres Narváez');
+assert.ok(febres2001?.note.includes('Febres Narváez'), 'Variante nominal documentada por PROVEA');
+for (const [id, date, category] of [
+  ['jose-gregorio-castillo-2001', '2001-01-10', 'policial'],
+  ['luis-enrique-gonzalez-2001', '2001-01-10', 'policial'],
+  ['pablo-jose-marcano-franco', '2001-01-11', 'investigacion']
+]) {
+  const matches = cases2001.filter(p => p.id === id);
+  assert.equal(matches.length, 1, `Una ficha sin duplicados para ${id}`);
+  assert.equal(matches[0].date, date, `Fecha PROVEA p. 461 para ${id}`);
+  assert.equal(matches[0].category, category, `Atribución PROVEA p. 461 para ${id}`);
+  assert.deepEqual(matches[0].sources, ['PRO2001'], `Fuente inspeccionada para ${id}`);
+  assert.ok(year2001.includes(`perfil.html?id=${id}`), `Enlace a ficha de ${id}`);
+}
+assert.ok(year2001.includes('Jorge Luis Aponte') && year2001.includes('corroboración causal'), 'El registro 70 no se contabiliza sin corroborar el nexo causal');
+assert.ok(SOURCES.PRO2001.title.includes('460–461'), 'Cita exacta del nuevo lote PROVEA');
 assert.ok(year2001.includes('201 como ejecuciones'), '241 casos PROVEA incluyen 201 ejecuciones, no 241 ejecuciones');
 assert.ok(!year2001.includes('241 ejecuciones extrajudiciales'), 'No inflar la categoría de ejecuciones');
 assert.ok(SOURCES.PRO2001.title.includes('p. 485'), 'Fuente precisa del desglose de 241 casos');

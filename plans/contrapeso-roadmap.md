@@ -98,6 +98,24 @@ La task debe **reordenar dinámicamente** esta lista contra GitHub, sin duplicar
 
 Una unidad solo se marca completada por evidencia (archivo/commit/PR/tests/resultado); no por una respuesta de la task. Si se necesita cola persistente, conservarla en este archivo bajo Git y actualizarla en PR junto con trabajo real, **no crear un segundo ledger**.
 
+### Migración transversal de principios — decisión del propietario (28-10-2026)
+
+Aplicar libertad individual, propiedad privada legítima y límites institucionales al poder a **toda publicación futura y a todo el archivo existente**, sin etiqueta pública «libertaria». Estos principios sirven para formular preguntas, nunca para anticipar hechos ni culpabilidades. La revisión debe indicar si cada lente aporta algo real o no aplica.
+
+**Inventario inicial inspeccionado:** diez páginas HTML: portada, método, Museo, memorial, archivos 1999 y 2000, plantilla dinámica `perfil.html`, noticia del regreso de Machado, explicador 28J y explicador TSJ 2017. Existen también muestras no publicadas en `app.js` y registros nominales dinámicos en `museo/victimas/data.js`. Una revisión de páginas **no equivale** a una comprobación individual de todos los expedientes ni nombres.
+
+| Superficie | Enfoque material de esta revisión | Estado y pendiente |
+|---|---|---|
+| Portada y método | Los tres principios ya están declarados desde PR #170 | Mantener, sin etiquetas doctrinarias ni levantar noindex |
+| Actualidad: regreso de Machado | Convocatoria, autoridad, reglas, garantías y controles | Revisar contexto sin agregar hechos no respaldados |
+| Explicador 28J | Resultados auditables y rendición de cuentas del poder electoral | Conservar cifras y límites de la prueba |
+| Explicador TSJ 2017 | Separación de poderes y límites de competencias | Conservar sentencias, fechas y atribuciones |
+| Museo y expedientes | Libertades, concentración institucional y documentos | Introducir referencia al método; contrastación por expediente pendiente |
+| Memorial y archivos 1999/2000 | Vida, libertad, custodia, debido proceso | Referir criterios editoriales; no alterar identidad ni causalidades |
+| Perfil nominal dinámico | Mismo método accesible en cada perfil | Auditoría **caso por caso de `data.js` aún pendiente** |
+
+**Cierre retroactivo:** evidencia de revisión de cada caso y corrección de errores materiales, no solo un enlace al método o pruebas verdes. Priorizar por riesgo factual, privacidad y fuentes; avanzar en PR pequeños, sin segundo ledger ni task paralela.
+
 ## 5. Algoritmo de cada ejecución de 66 minutos
 
 **La frecuencia programa oportunidades de avance; no obliga a crear un PR cada 66 minutos.**

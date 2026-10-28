@@ -13,6 +13,18 @@
 - **Prototipo:** `noindex,nofollow,noarchive`, etiqueta de prototipo, sin formularios ni scripts añadidos por defecto. Ruta únicamente en `prototypeOnlyRoutes`, nunca en `routeGroups`/sitemap.
 - **QA:** fuente, build y Chromium exact-SHA; Codacy/revisión independiente, autorización para merge y verificación postdeploy diferenciadas. Revisión humana adicional para imputaciones sensibles, identidad, privacidad y lanzamiento.
 
+## Criterio transversal de orientación editorial
+
+Cada PR que publique o revise un contenido debe indicar en su descripción, para **libertad individual**, **propiedad privada** y **control del poder**, uno de estos resultados: **aplica con evidencia / no aplica / requiere investigación**. Justificar sucintamente las elecciones relevantes y separar siempre hechos de valoraciones.
+
+- **Actualidad:** informar primero el hecho; explicar los mecanismos de control o derechos implicados únicamente si son pertinentes, sin convertir la noticia en columna.
+- **Investigaciones y explicadores:** contrastar decisiones, competencias y garantías con sus documentos; distinguir la conclusión factual del juicio editorial.
+- **Opinión:** puede defender tesis desde principios declarados, manteniendo género, autoría autorizada y evidencia para sus premisas.
+- **Museo y memorial:** aplicar dignidad, libertad y rendición de cuentas sin presuponer motivos, responsables o delitos por afinidades políticas.
+- **Archivo existente:** cada página y ficha individual se revisa de forma gradual; las plantillas y los índices no son verificación de cientos de casos. No reescribir narraciones sólidas solo para insertar palabras doctrinarias.
+
+El contrato de `tests/contrapeso-orientacion.mjs` verifica enlaces al método y robots en las páginas existentes y futuras; no acredita la evaluación editorial semántica ni los documentos.
+
 ## Plantilla A — Noticia contextualizada / Actualidad
 
 **Género:** ACTUALIDAD  

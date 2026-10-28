@@ -58,26 +58,21 @@
    * Never copy arbitrary UTM values, query strings, RUTs, or file contents.
    * Invalid/missing/duplicated keys fail closed (no attribution).
    */
-  const rutificadorReferral = () => {
+  function rutificadorReferral() {
     try {
-      const loc = typedWindow.location;
-      if (!loc || !loc.origin) return null;
-      const url = new URL((loc.pathname || '/') + (loc.search || ''), loc.origin);
-      const params = url.searchParams;
-      const required = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
-      if (required.some((key) => params.getAll(key).length !== 1)) return null;
-      if (
-        params.get('utm_source') !== 'rutificador' ||
-        params.get('utm_medium') !== 'referral' ||
-        params.get('utm_campaign') !== 'auditoria_rut_b2b'
-      ) return null;
-      const intent = params.get('utm_content');
-      if (intent !== 'diagnostico' && intent !== 'recurrente') return null;
-      return intent;
+      const params = new URL(typedWindow.location.href).searchParams;
+      const expected = [
+        ['utm_source', 'rutificador'],
+        ['utm_medium', 'referral'],
+        ['utm_campaign', 'auditoria_rut_b2b'],
+      ];
+      if (!expected.every(([key, value]) => params.getAll(key).length === 1 && params.get(key) === value)) return null;
+      const content = params.getAll('utm_content');
+      return content.length === 1 && ['diagnostico', 'recurrente'].includes(content[0]) ? content[0] : null;
     } catch (_) {
       return null;
     }
-  };
+  }
 
   /**
    * Show a submit-result banner and bring it into view. On short/mobile
@@ -218,7 +213,7 @@
           // Values are fixed enums, not raw URL parameters or user input.
           payload.set('referral_product', 'rutificador');
           payload.set('referral_interest', rutificadorInterest);
-          payload.set('_subject', 'Rutificador - Auditoria B2B (' + rutificadorInterest + ')');
+          payload.set('_subject', `Rutificador - Auditoria B2B (${rutificadorInterest})`);
         }
         const response = await fetch(form.action, {
           method: 'POST',

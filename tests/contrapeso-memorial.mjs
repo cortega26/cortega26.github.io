@@ -394,7 +394,7 @@ assert.ok(cases2001.find(p=>p.id==='jose-gregorio-subero').note.includes('versi�
 const mujica2001=cases2001.find(p=>p.id==='alexis-mujica');
 assert.ok(mujica2001.note.includes('versión oficial sostuvo que Mujica se suicidó') && mujica2001.note.includes('no de peritajes inspeccionados'),'No sustituir suicidio oficial por enfrentamiento ni afirmar peritaje');
 assert.ok(SOURCES.PRO2001.title.includes('460–471') && SOURCES.PRO2001.scope.includes('n.os 62–153'),'Alcance fuente actualizado hasta 136');
-assert.ok(year2001.includes('Los registros 62–153') && year2001.includes('No es un balance anual exhaustivo'),'Cobertura parcial declarada');
+assert.ok(year2001.includes('Los registros 62–164') && year2001.includes('No es un balance anual exhaustivo'),'Cobertura parcial declarada');
 
 // Decimocuarta unidad: PROVEA p. 470, registros 137–143.
 const fourteenthBatch2001=[["jose-martin-rodriguez-2001","José Martín Rodríguez","2001-03-18","policial"],["nino-antonio-gonzalez","Nino Antonio González","2001-03-20","investigacion"],["jose-gregorio-colmenarez","José Gregorio Colmenárez","2001-03-20","investigacion"],["regulo-bello","Régulo Bello","2001-03-24","policial"],["jesus-barroso","Jesús Barroso","2001-03-24","policial"],["ali-gonzalez-2001","Alí González","2001-03-24","policial"],["rafael-simon-colmenares","Rafael Simón Colmenares","2001-03-25","investigacion"]];
@@ -411,14 +411,14 @@ for(const [id,name,date,category] of fourteenthBatch2001){
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace: ${id}`);
 }
 assert.ok(cases2001.find(x=>x.id==='jesus-barroso').note.includes('24.03.01*'),'Asterisco n.º 141');
-assert.ok(SOURCES.PRO2001.title.includes('460–471')&&SOURCES.PRO2001.scope.includes('n.os 62–153'),'Alcance PROVEA');
-assert.ok(year2001.includes('Los registros 62–153')&&year2001.includes('No es un balance anual exhaustivo'),'Registro no exhaustivo');
+assert.ok(SOURCES.PRO2001.title.includes('460–472')&&SOURCES.PRO2001.scope.includes('n.os 62–164'),'Alcance PROVEA');
+assert.ok(year2001.includes('Los registros 62–164')&&year2001.includes('No es un balance anual exhaustivo'),'Registro no exhaustivo');
 
 // Decimoquinta unidad: PROVEA p. 471, registros 144–153; n.º 151 sin identidad.
 const fifteenthBatch2001 = [["ramon-jose-zambrano-garcia","Ramón José Zambrano García","2001-04-01","policial",144],["luis-felipe-bolivar-hernandez","Luis Felipe Bolívar Hernández","2001-04-01","policial",145],["jhonathan-david-silva-bermudez","Jhonathan David Silva Bermúdez","2001-04-04","policial",146],["carlos-alberto-campos-2001","Carlos Alberto Campos","2001-04-05","investigacion",147],["elio-jose-abreu-ovalles","Elio José Abreu Ovalles","2001-04-05","investigacion",148],["jose-alirio-garcia-segura","José Alirio García Segura","2001-04-05","investigacion",149],["jose-empireo-posa-bustillos","José Empíreo Posa Bustillos","2001-04-05","investigacion",150],["antonio-jose-zambrano-2001","Antonio José Zambrano","2001-04-05","investigacion",152],["carlos-a-oliveros-c","Carlos A. Oliveros C.","2001-04-05","investigacion",153]];
-assert.equal(cases2001.length,94,'94 fichas de 2001; registro parcial');
-assert.equal(CASES.length,395,'395 fichas totales');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,94,'94 enlaces nominales del capítulo anual');
+assert.equal(cases2001.length,104,'104 fichas de 2001; registro parcial');
+assert.equal(CASES.length,405,'405 fichas totales');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,104,'104 enlaces nominales del capítulo anual');
 for(const [id,name,date,category,number] of fifteenthBatch2001){
  const matches=cases2001.filter(p=>p.id===id);
  assert.equal(matches.length,1,`ID único: ${id}`);
@@ -433,6 +433,26 @@ assert.ok(!cases2001.some(p=>p.name==='S/I'),'No convertir el registro anónimo 
 assert.ok(cases2001.find(p=>p.id==='jose-empireo-posa-bustillos').note.includes('Farfán Bustillos'),'Variante nominal n.º 150 preservada');
 assert.ok(cases2001.find(p=>p.id==='carlos-a-oliveros-c').name.includes('C.'),'No expandir iniciales n.º 153');
 assert.ok(cases2001.find(p=>p.id==='jhonathan-david-silva-bermudez').note.includes('versión oficial'),'Denuncia y versión oficial n.º 146');
-assert.ok(SOURCES.PRO2001.title.includes('460–471')&&SOURCES.PRO2001.scope.includes('n.os 62–153'),'Cobertura actualizada hasta p. 471');
+assert.ok(SOURCES.PRO2001.title.includes('460–472')&&SOURCES.PRO2001.scope.includes('n.os 62–164'),'Cobertura actualizada hasta p. 471');
 assert.ok(year2001.includes('n.º 151')&&year2001.includes('No es un balance anual exhaustivo'),'Registro sin nombre excluido y límites preservados');
 assert.ok(year2001.includes('noindex,nofollow,noarchive'),'No indexar capítulo');
+
+// Decimosexta unidad: PROVEA p. 472; n.º 162 retenido por posible duplicidad.
+const sixteenthBatch2001 = [["darlius-antonio-silva-gonzalez","Darlius Antonio Silva González","2001-04-05","investigacion",154],["jose-javier-amaya-sanchez","José Javier Amaya Sánchez","2001-04-05","investigacion",155],["jairo-e-amaya-s","Jairo E. Amaya S.","2001-04-05","investigacion",156],["pablo-de-la-cruz-medina-perez","Pablo de la Cruz Medina Pérez","2001-04-05","investigacion",157],["ricardo-freites-boscan","Ricardo Freites Boscán","2001-04-06","policial",158],["endis-segundo-fonseca-tovar","Endis Segundo Fonseca Tovar","2001-04-06","policial",159],["ender-jose-mavarez-yanez","Ender José Mavárez Yánez","2001-04-06","policial",160],["jose-antonio-cuicas","José Antonio Cuicas","2001-04-06","policial",161],["haron-ely-rojas-medina","Haron Ely Rojas Medina","2001-04-17","policial",163],["luis-gregorio-ojeda-fajardo","Luis Gregorio Ojeda Fajardo","2001-04-20","investigacion",164]];
+for(const [id,name,date,category,number] of sixteenthBatch2001){
+ const found=cases2001.filter(p=>p.id===id);
+ assert.equal(found.length,1,`ID único: ${id}`);
+ assert.equal(found[0].name,name,`Nombre: ${id}`);
+ assert.equal(found[0].date,date,`Fecha: ${id}`);
+ assert.equal(found[0].category,category,`Categoría: ${id}`);
+ assert.deepEqual(found[0].sources,['PRO2001'],`Fuente: ${id}`);
+ assert.ok(found[0].note.includes('p. 472')&&found[0].note.includes(`n.º ${number}`),`Fuente nominal: ${id}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual: ${id}`);
+}
+assert.ok(!cases2001.some(p=>p.name==='Jonathan David Silva'),'No duplicar el n.º 162 sin corroboración');
+assert.ok(SOURCES.PRO2001.scope.includes('n.º 162')&&year2001.includes('El n.º 162'),'Posible duplicidad 146/162 documentada');
+for(const id of ['ricardo-freites-boscan','endis-segundo-fonseca-tovar','ender-jose-mavarez-yanez','jose-antonio-cuicas']){
+ assert.ok(cases2001.find(p=>p.id===id).note.includes('06.04.01*'),'Asterisco pendiente de cotejo');
+}
+assert.ok(cases2001.find(p=>p.id==='luis-gregorio-ojeda-fajardo').note.includes('no establece quién disparó'),'No atribuir disparos sin prueba');
+assert.ok(year2001.includes('noindex,nofollow,noarchive'),'Robots preservados');

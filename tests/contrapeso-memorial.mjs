@@ -178,7 +178,7 @@ for (const [id, date, category] of [
   assert.ok(year2001.includes(`perfil.html?id=${id}`), `Enlace a ficha de ${id}`);
 }
 assert.ok(year2001.includes('Jorge Luis Aponte') && year2001.includes('corroboración causal'), 'El registro 70 no se contabiliza sin corroborar el nexo causal');
-assert.ok(SOURCES.PRO2001.title.includes('460–463'), 'Cita PROVEA actualizada tras el quinto lote');
+assert.ok(SOURCES.PRO2001.title.includes('460–464'), 'Cita PROVEA actualizada tras el quinto lote');
 assert.ok(year2001.includes('201 como ejecuciones'), '241 casos PROVEA incluyen 201 ejecuciones, no 241 ejecuciones');
 assert.ok(!year2001.includes('241 ejecuciones extrajudiciales'), 'No inflar la categoría de ejecuciones');
 assert.ok(SOURCES.PRO2001.title.includes('p. 485'), 'Fuente precisa del desglose de 241 casos');
@@ -205,8 +205,8 @@ for (const [id, name, date, category] of fifthBatch2001) {
 for (const id of ['julio-hurtado-2001', 'hector-jose-bolivar-2001']) {
   assert.ok(cases2001.find(p => p.id === id)?.note.includes('sin circunstancias') || cases2001.find(p => p.id === id)?.note.includes('sin relato individual'), `No inventar hechos en registro colectivo: ${id}`);
 }
-assert.ok(SOURCES.PRO2001.title.includes('460–463'), 'Cita de PROVEA p. 462');
-assert.ok(year2001.includes('62–91'), 'Cobertura del anexo p. 462 explicitada');
+assert.ok(SOURCES.PRO2001.title.includes('460–464'), 'Cita de PROVEA p. 462');
+assert.ok(year2001.includes('62–99'), 'Cobertura del anexo p. 462 explicitada');
 
 // Sexta unidad: PROVEA p. 463, registros 84–91 (20–25 de enero de 2001).
 const sixthBatch2001 = [["eduardo-jesus-marchan","Eduardo Jesús Marchán","2001-01-20","policial"],["pedro-antonio-anzola","Pedro Antonio Anzola","2001-01-20","policial"],["juan-quintero-2001","Juan Quintero","2001-01-20","policial"],["luis-marin-2001","Luis Marín","2001-01-20","policial"],["reuca-jose-mijares-e","Reuca José Mijares E.","2001-01-21","custodia"],["darwin-edison-rodriguez-cedeno","Darwin Edison Rodríguez Cedeño","2001-01-23","policial"],["manuel-guevara-pino","Manuel Guevara Pino","2001-01-24","policial"],["juan-carlos-garcia-mejias","Juan Carlos García Mejías","2001-01-25","policial"]];
@@ -223,5 +223,28 @@ for (const [id, name, date, category] of sixthBatch2001) {
 }
 assert.ok(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.note.includes('literalmente «MIJARES E. Reuca José»'), 'No resolver por conjetura la grafía ni inicial de Mijares');
 assert.equal(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.category, 'custodia', 'Muerte en prisión bajo custodia');
-assert.ok(year2001.includes('62–91') && SOURCES.PRO2001.title.includes('460–463'), 'Cobertura del sexto lote explícita');
+assert.ok(year2001.includes('62–99') && SOURCES.PRO2001.title.includes('460–464'), 'Cobertura del sexto lote explícita');
 assert.ok(year2001.includes('El registro es parcial') || year2001.includes('El registro es parcial'.toLowerCase()), 'Sin declarar exhaustividad anual');
+
+// Séptima unidad: PROVEA p. 464, registros 92–99 (25–31 de enero de 2001).
+const seventhBatch2001 = [["elvis-torres","Elvis Torres","2001-01-25","policial"],["argenis-ramon-sanchez","Argenis Ramón Sánchez","2001-01-25","policial"],["david-enrique-merga","David Enrique Merga","2001-01-25","policial"],["sergio-antonio-aristiguetas","Sergio Antonio Aristiguetas","2001-01-26","policial"],["jose-gregorio-rangel-lopez","José Gregorio Rangel López","2001-01-30","policial"],["luis-miguel-castaneda-angulo","Luis Miguel Castañeda Angulo","2001-01-31","investigacion"],["oscar-ramon-rodriguez-2001","Oscar Ramón Rodríguez","2001-01-31","investigacion"],["wilfredo-velasquez-soler","Wilfredo Velásquez Soler","2001-01-31","policial"]];
+assert.equal(seventhBatch2001.length,8,'Ocho casos de PROVEA p. 464');
+assert.equal(cases2001.length,42,'42 fichas de 2001, no balance anual');
+assert.equal(CASES.length,343,'Conservar dataset completo');
+for (const [id,name,date,category] of seventhBatch2001) {
+ const matches=cases2001.filter(p=>p.id===id);
+ assert.equal(matches.length,1,`Ficha única: ${id}`);
+ assert.equal(matches[0].name,name,`Nombre: ${id}`);
+ assert.equal(matches[0].date,date,`Fecha: ${id}`);
+ assert.equal(matches[0].category,category,`Categoría: ${id}`);
+ assert.deepEqual(matches[0].sources,['PRO2001'],`Fuente: ${id}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace: ${id}`);
+}
+for (const id of ['argenis-ramon-sanchez','david-enrique-merga']) {
+ const p=cases2001.find(x=>x.id===id);
+ assert.ok(p.note.includes('denuncia') && p.note.includes('sentencia'),`Denuncia sin sentencia: ${id}`);
+}
+for (const id of ['luis-miguel-castaneda-angulo','oscar-ramon-rodriguez-2001'])
+ assert.equal(cases2001.find(p=>p.id===id)?.category,'investigacion','Sin autoría judicial del Grupo Exterminio');
+assert.ok(year2001.includes('62–99') && SOURCES.PRO2001.title.includes('460–464'),'Cobertura del lote');
+assert.ok(year2001.includes('No es un balance anual exhaustivo'),'No declarar exhaustividad');

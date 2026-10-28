@@ -306,3 +306,15 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Principios:** libertad individual — aplica con evidencia (vida y custodia); propiedad privada — no aplica; control del poder — aplica con evidencia (uso de fuerza y garantías). No se infiere motivación política común ni condenas individuales.
 
 **Siguiente unidad:** PROVEA p. impresa **464 / PDF p. 22**, registros 92 en adelante; pendientes anteriores: causalidad de Jorge Luis Aponte (70), grafía de Annelk (65), variante Edixon/Ericson Parra, grafía e inicial de Mijares (88), fuentes judiciales y anexo octubre 2001–septiembre 2002.
+
+## F1 — Séptima unidad de 2001 — PROVEA, registros 92–99 (28-10-2026; PR #172)
+
+**Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 464 / PDF índice 22](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=23), registros 92–99, fechas 25–31 de enero de 2001. Ocho fichas nuevas: Elvis Torres, Argenis Ramón Sánchez, David Enrique Merga, Sergio Antonio Aristiguetas, José Gregorio Rangel López, Luis Miguel Castañeda Angulo, Oscar Ramón Rodríguez y Wilfredo Velásquez Soler.
+
+**Límites:** n.º 93 Sánchez, denuncia parlamentaria sin relato individual; n.º 94 Merga, una de catorce denuncias de la Defensoría sin relato individual (no catorce fichas); n.os 95–96, versiones oficiales de enfrentamiento controvertidas; n.os 97–98, atribución documental al llamado Grupo Exterminio, sin autoría judicial individual; n.º 99, muerte posterior a agresión policial según PROVEA. No se acreditan sentencias individuales ni se da por probada la conjetura sobre drogas en n.º 96.
+
+**Resultado de la unidad:** 42 fichas de 2001 y 343 en el dataset, 42 enlaces nominales, sin duplicados detectados en preflight; capítulo aún no exhaustivo. Actualizados dataset, página anual, pruebas de fuente y roadmap. Revisión editorial humana y autorización de merge pendientes. Las cifras agregadas de PROVEA cubren octubre de 2000–septiembre de 2001, no el calendario 2001.
+
+**Principios:** libertad individual — aplica con evidencia (vida, integridad y garantías); propiedad privada — no aplica; control del poder — aplica con evidencia (uso de fuerza y rendición de cuentas). No se presume motivación política común.
+
+**Próxima unidad:** PROVEA p. impresa **465 / PDF índice 23**, registros 100 en adelante. Pendientes: Jorge Luis Aponte (70), Annelk (65), Edixon/Ericson Parra, Mijares E. (88), corroboraciones judiciales y anexo octubre 2001–septiembre 2002.

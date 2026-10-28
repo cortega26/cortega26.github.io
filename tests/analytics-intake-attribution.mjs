@@ -168,6 +168,7 @@ function loadIntake({ ctx, valid = true, withAnalytics = true, search = '', path
       origin: 'https://tooltician.com',
       pathname,
       search,
+      href: 'https://tooltician.com' + pathname + search,
     },
     ttTrack: (name, params) => calls.push({ name, params }),
   };
@@ -266,16 +267,16 @@ await group('A4 · Rutificador: only exact campaign UTMs become fixed Formspree 
   const base = '?utm_source=rutificador&utm_medium=referral&utm_campaign=auditoria_rut_b2b';
   for (const intent of ['diagnostico', 'recurrente']) {
     const { form, submitted, calls } = loadIntake({
-      ctx: 'intake', pathname: '/es/', search: base + '&utm_content=' + intent,
+      ctx: 'intake', pathname: '/es/', search: `${base}&utm_content=${intent}`,
     });
     await fireSubmit(form);
-    assert(intent + ': one POST', submitted.length === 1);
+    assert(`${intent}: one POST`, submitted.length === 1);
     const body = submitted[0];
-    assert(intent + ': fixed referral product', body.get('referral_product') === 'rutificador');
-    assert(intent + ': fixed referral intent', body.get('referral_interest') === intent);
-    assert(intent + ': subject identifies campaign', body.get('_subject') ===
-      'Rutificador - Auditoria B2B (' + intent + ')');
-    assert(intent + ': no dynamic campaign data in canonical events',
+    assert(`${intent}: fixed referral product`, body.get('referral_product') === 'rutificador');
+    assert(`${intent}: fixed referral intent`, body.get('referral_interest') === intent);
+    assert(`${intent}: subject identifies campaign`, body.get('_subject') ===
+      `Rutificador - Auditoria B2B (${intent})`);
+    assert(`${intent}: no dynamic campaign data in canonical events`,
       calls.every((call) => !('utm_source' in (call.params || {})) && !('referral_product' in (call.params || {}))));
   }
 });
@@ -286,8 +287,8 @@ await group('A5 · Unrecognized or untrusted UTM values fail closed', async () =
     '',
     '?utm_source=rutificador&utm_medium=referral&utm_campaign=wrong&utm_content=diagnostico',
     '?utm_source=rutificador&utm_medium=social&utm_campaign=auditoria_rut_b2b&utm_content=diagnostico',
-    base + '&utm_content=someone%40example.com',
-    base + '&utm_content=diagnostico&utm_content=recurrente',
+    `${base}&utm_content=someone%40example.com`,
+    `${base}&utm_content=diagnostico&utm_content=recurrente`,
     '?utm_source=user%40example.com&utm_medium=referral&utm_campaign=auditoria_rut_b2b&utm_content=recurrente',
     '?utm_source=rutificador&utm_medium=referral&utm_campaign=auditoria_rut_b2b&utm_content=%2F%2Fevil.example',
   ];

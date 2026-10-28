@@ -8,6 +8,12 @@ const home = readFileSync(new URL('../public/venezuela-lab/index.html', import.m
 const explainer = readFileSync(new URL('../public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html', import.meta.url), 'utf8');
 const css = readFileSync(new URL('../public/venezuela-lab/explicadores/explicadores.css', import.meta.url), 'utf8');
 const path = '/venezuela-lab/metodo/';
+const charter = readFileSync(new URL('../docs/editorial/contrapeso-principios.md', import.meta.url), 'utf8');
+const manual = readFileSync(new URL('../docs/editorial/contrapeso-manual.md', import.meta.url), 'utf8');
+assert.match(charter, /Libertad individual/, 'Carta editorial incluye libertad individual');
+assert.match(charter, /Propiedad privada/, 'Carta editorial incluye propiedad privada');
+assert.match(charter, /Control del poder/, 'Carta editorial incluye límites institucionales al poder');
+assert.match(manual, /Principios editoriales declarados/, 'Manual aplica la carta a las publicaciones');
 
 assert.ok(prototypeOnlyRoutes.some((route) => route.id === 'contrapeso:method' && route.path === path),
   'La página metodológica está inventariada solo como prototipo');
@@ -25,7 +31,15 @@ assert.doesNotMatch(html, /Esto <strong>no significa que esté libre de errores<
   'El método evita descargos redundantes sin ocultar el estado real del registro');
 assert.match(html, /meta name="robots" content="noindex,nofollow,noarchive"/,
   'La página conserva las tres directivas de robots');
-assert.match(html, /26 de octubre de 2026/, 'Fecha de revisión visible');
+assert.match(html, /28 de octubre de 2026/, 'Fecha de revisión visible');
+assert.match(html, /id="orientacion"/, 'Principios accesibles desde el método público');
+for (const principle of ['Libertad individual:', 'Propiedad privada:', 'Control del poder:']) {
+  assert.ok(html.includes(principle), `Principio público explícito: ${principle}`);
+}
+assert.match(html, /no deciden los hechos por adelantado/, 'Los principios no sustituyen la verificación');
+assert.doesNotMatch(html, /\blibertari[oa]s?\b/i, 'El prototipo no adopta la etiqueta doctrinaria');
+assert.match(home, /Libertades y límites al poder/, 'Portada refleja el marco editorial sin etiqueta ideológica');
+assert.match(home, /Libertad individual, propiedad privada y rendición de cuentas/, 'La síntesis pública declara principios');
 assert.match(html, /Hecho documentado:/, 'Diferencia hechos');
 assert.match(html, /Denuncia o testimonio:/, 'Diferencia alegaciones');
 assert.match(html, /Opinión:/, 'Diferencia valoraciones');

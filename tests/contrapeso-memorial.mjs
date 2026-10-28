@@ -178,7 +178,7 @@ for (const [id, date, category] of [
   assert.ok(year2001.includes(`perfil.html?id=${id}`), `Enlace a ficha de ${id}`);
 }
 assert.ok(year2001.includes('Jorge Luis Aponte') && year2001.includes('corroboración causal'), 'El registro 70 no se contabiliza sin corroborar el nexo causal');
-assert.ok(SOURCES.PRO2001.title.includes('460–471'), 'Cita PROVEA actualizada tras el quinto lote');
+assert.ok(SOURCES.PRO2001.title.includes('460–472'), 'Cita PROVEA vigente tras decimosexta unidad');
 assert.ok(year2001.includes('201 como ejecuciones'), '241 casos PROVEA incluyen 201 ejecuciones, no 241 ejecuciones');
 assert.ok(!year2001.includes('241 ejecuciones extrajudiciales'), 'No inflar la categoría de ejecuciones');
 assert.ok(SOURCES.PRO2001.title.includes('p. 485'), 'Fuente precisa del desglose de 241 casos');
@@ -205,7 +205,7 @@ for (const [id, name, date, category] of fifthBatch2001) {
 for (const id of ['julio-hurtado-2001', 'hector-jose-bolivar-2001']) {
   assert.ok(cases2001.find(p => p.id === id)?.note.includes('sin circunstancias') || cases2001.find(p => p.id === id)?.note.includes('sin relato individual'), `No inventar hechos en registro colectivo: ${id}`);
 }
-assert.ok(SOURCES.PRO2001.title.includes('460–471'), 'Cita de PROVEA p. 462');
+assert.ok(SOURCES.PRO2001.title.includes('460–472'), 'Cobertura acumulada PROVEA hasta p. 472');
 assert.ok(year2001.includes('Los registros 62–'), 'Cobertura del anexo p. 462 explicitada');
 
 // Sexta unidad: PROVEA p. 463, registros 84–91 (20–25 de enero de 2001).
@@ -393,7 +393,7 @@ assert.ok(cases2001.find(p=>p.id==='wilmar-avileny-veliz-pina').note.includes('S
 assert.ok(cases2001.find(p=>p.id==='jose-gregorio-subero').note.includes('versión oficial sostuvo un enfrentamiento'),'Registrar versión oficial n.º 135');
 const mujica2001=cases2001.find(p=>p.id==='alexis-mujica');
 assert.ok(mujica2001.note.includes('versión oficial sostuvo que Mujica se suicidó') && mujica2001.note.includes('no de peritajes inspeccionados'),'No sustituir suicidio oficial por enfrentamiento ni afirmar peritaje');
-assert.ok(SOURCES.PRO2001.title.includes('460–471') && SOURCES.PRO2001.scope.includes('n.os 62–153'),'Alcance fuente actualizado hasta 136');
+assert.ok(SOURCES.PRO2001.title.includes('460–472') && SOURCES.PRO2001.scope.includes('n.os 62–164'),'Alcance fuente actualizado hasta 164');
 assert.ok(year2001.includes('Los registros 62–164') && year2001.includes('No es un balance anual exhaustivo'),'Cobertura parcial declarada');
 
 // Decimocuarta unidad: PROVEA p. 470, registros 137–143.

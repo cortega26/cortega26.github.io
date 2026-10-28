@@ -9,6 +9,10 @@
 
 **Línea editorial:** postura abiertamente crítica del chavismo, sus prácticas autoritarias y las estructuras políticas e institucionales que respaldan su ejercicio del poder. No se exige equidistancia artificial ante hechos acreditados. Esa posición **no altera el estándar probatorio**: la afirmación más incómoda merece la misma verificación que cualquier otra.
 
+**Principios editoriales declarados:** Contrapeso defiende la libertad individual, la propiedad privada legítima con seguridad jurídica y debido proceso, y el control institucional del poder mediante transparencia, división de poderes y rendición de cuentas. Esta orientación sirve para formular preguntas y evaluar decisiones; **no predetermina hechos, culpabilidades ni conclusiones investigativas**. El estándar de evidencia también rige para personas, empresas y gobiernos afines. El medio publica estos principios sin autodenominarse «libertario» ni anunciar afiliación partidista o doctrinaria.
+
+**Aplicación por género:** en Actualidad e Investigación, describir y demostrar primero los hechos; en Análisis y Opinión, hacer explícitos los argumentos valorativos sin disfrazarlos de prueba. Examinar las restricciones o confiscaciones de propiedad con contexto normativo y garantías procesales, no concluir automáticamente que toda regulación constituye abuso. La crítica a la coacción arbitraria no exonera abusos entre privados ni vulneraciones de derechos por aliados políticos.
+
 **Regla interna de estilo:** palabras sobrias, argumentos contundentes. No convertir directrices internas o máximas estratégicas del propietario en eslóganes públicos.
 
 **Promesa al lector:** poder seguir la cadena «afirmación → evidencia → fuente → límites → conclusión» sin confiar únicamente en la autoridad de Contrapeso.

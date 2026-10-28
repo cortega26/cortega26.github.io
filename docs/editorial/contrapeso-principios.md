@@ -12,6 +12,17 @@
 5. **Rectificación visible.** Corregir inmediatamente y registrar la fecha, alcance y motivo; corregir un error fortalece la investigación y no implica retractarse del principio editorial.
 6. **Seguridad y dignidad.** No exponer datos privados de víctimas, familiares, denunciantes o informantes; evitar fotografías de violencia sin necesidad periodística y consentimiento apropiado.
 
+## Principios editoriales: libertades y límites al poder
+
+Contrapeso declara sus principios, sin adoptar por ahora una etiqueta doctrinaria o una afiliación partidista como identidad pública. Son criterios de juicio editorial, **no presunciones sobre los hechos ni sustitutos del trabajo de investigación**.
+
+1. **Libertad individual.** Defender la autonomía de las personas, su libertad de expresión, asociación, conciencia y proyecto de vida frente a la coacción arbitraria, con respeto a los derechos de los demás.
+2. **Propiedad privada.** Reconocer la titularidad y el uso legítimo de los bienes, la seguridad jurídica y las garantías del debido proceso frente a confiscaciones, expropiaciones o restricciones arbitrarias. Una controversia sobre propiedad o regulación se investiga y contextualiza; no se prejuzga por principio.
+3. **Control del poder.** Exigir separación de poderes, controles efectivos, transparencia, rendición de cuentas, justicia independiente y límites a la discrecionalidad de autoridades y quienes ejercen poder público.
+4. **Estándar universal.** Someter a escrutinio también los abusos de actores privados y de quienes compartan nuestras posiciones. La afinidad ideológica no exonera, y la discrepancia ideológica no prueba culpabilidad. Distinguir la valoración editorial del hecho demostrado.
+
+**Regla de presentación:** expresar estos principios claramente en el método público, sin presentarse como un medio «libertario» ni atribuirse adhesiones a partidos, corrientes o personalidades. Cualquier decisión posterior de adoptar una etiqueta ideológica explícita exige autorización editorial humana.
+
 ## Museo del Horror del Chavismo
 **Función:** memorial y archivo documental, no catálogo de insultos ni dramatización del sufrimiento. Las salas ordenan hechos, datos, documentos, voces y cronologías para la consulta y la investigación.
 

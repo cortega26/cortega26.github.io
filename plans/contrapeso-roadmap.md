@@ -365,7 +365,6 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 
 **Próxima unidad:** PROVEA p. impresa 468, registros **125–131** (varios casos vinculados por la fuente al llamado Grupo Exterminio, además de denuncia de extorsión policial); después p. 469, registros 132 en adelante. Pendientes: revisión humana de las imputaciones de este episodio y las anteriores, fechas con asterisco, identidades ambiguas y documentación judicial posterior. QA exact-SHA y checks pendientes al preparar este incremento.
 
-
 ## F1 — Duodécima unidad de 2001 — PROVEA, registros 125–131 (28-10-2026; PR #172)
 
 **Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 468 / PDF índice 26](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=27), registros **125–131**. Se revisaron la identidad, fecha, localidad y columna de circunstancias de cada registro. Siete fichas nuevas: **Ismael G. Rodríguez T.** (01-03), **Miguel Ángel Castillo** (02-03), **Daniel Evaristo Peñuela Piña** (03-03), **Luis O. Zabaleta F.** (03-03), **Melkis Emilio Silva Sánchez** (03-03), **Juan Carlos Colmenares** (06-03) y **Juan Ramón Hernández Guindano** (08-03).
@@ -375,7 +374,6 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Resultado propuesto en rama:** 73 fichas de 2001, 374 registros totales, siete perfiles nuevos enlazados desde el archivo anual. El año sigue incompleto; PROVEA cubre octubre de 2000–septiembre de 2001 y no debe convertirse en cifra de año calendario. Libertad individual — aplica con evidencia; propiedad privada — no aplica; control del poder — aplica con evidencia. La fuente no permite afirmar motivación política común ni condenas individuales.
 
 **Siguiente unidad:** PROVEA p. impresa 469 / PDF índice 27, registros 132 en adelante; mantener pendientes nominales, causales y judiciales anteriores. QA exact-SHA, Codacy, Codex y revisión humana deben certificarse antes de merge; noindex, prototipo y ausencia de lanzamiento se mantienen.
-
 
 ## F1 — Decimotercera unidad de 2001 — PROVEA, registros 132–136 (28-10-2026; PR #172)
 

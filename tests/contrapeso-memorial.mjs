@@ -115,3 +115,23 @@ assert.ok(year2000.includes('no a todo el año calendario 2000'),'Desglose de ve
 assert.ok(year2000.includes('edades de Ronny Tovar, Francisco Mister y Luis Hernández'),'Conflicto entre edades documentado');
 assert.ok(year2000.includes('No se atribuye a todos los casos una motivación política'),'No inferir motivación común');
 assert.ok(year2000.includes('noindex,nofollow,noarchive'),'Preservación de noindex');
+
+const year2001 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2001/index.html', import.meta.url), 'utf8');
+const cases2001 = CASES.filter(p => p.year === 2001);
+assert.ok(cases2001.length >= 5, 'Conservar las cinco fichas iniciales de 2001 sin bloquear ampliaciones');
+assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2001/"'), 'Navegación al capítulo 2001');
+assert.ok(Object.hasOwn(EPISODES, '2001'), 'Episodio anual 2001 disponible en filtros');
+assert.ok(year2001.includes('noindex,nofollow,noarchive'), 'No indexar el capítulo 2001');
+assert.equal((year2001.match(/class="year-roster-item"/g) || []).length, cases2001.length, 'El registro HTML de 2001 coincide con el dataset');
+for (const person of cases2001) {
+  assert.ok(year2001.includes(person.name), `Nombre 2001 en página anual: ${person.name}`);
+  assert.ok(year2001.includes(`perfil.html?id=${person.id}`), `Enlace individual 2001: ${person.name}`);
+  assert.ok(person.sources.includes('US2001'), `Informe 2001 atribuido a: ${person.name}`);
+}
+for (const name of ['Jesús Alberto Febres', 'Luis Fernando Briceño', 'Ángel Ardilla', 'Ericson José Parra', 'Juan Pablo Arroyave']) {
+  assert.ok(cases2001.some(p => p.name === name), `Caso nominal 2001 ausente: ${name}`);
+}
+assert.ok(SOURCES.US2001.url.includes('refworld.org/reference/annualreport/usdos/2002/31349'), 'Fuente archivada verificable de 2001');
+assert.ok(year2001.includes('octubre de 2000–septiembre de 2001'), 'No convertir la cifra PROVEA 241 en total de año calendario');
+assert.ok(year2001.includes('registro es parcial') || year2001.includes('registro es parcial'.replace('r','R')), 'Advertencia de no exhaustividad');
+assert.ok(year2001.includes('href="/venezuela-lab/metodo/"'), 'Método editorial accesible desde 2001');

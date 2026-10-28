@@ -293,3 +293,18 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Estado:** 26 fichas de 2001 y 327 en el dataset de la rama, **no exhaustivas**. La página anual, el dataset y pruebas de fuente se actualizan en el mismo PR #172; no hay merge ni lanzamiento autorizado. Siguiente lote: PROVEA p. 463 / PDF p. 21, registros 84 en adelante; mantener pendientes la causalidad de Jorge Luis Aponte, variantes Edixon/Ericson Parra y Annelk Martínez, y el anexo octubre 2001–septiembre 2002.
 
 **Orientación editorial:** libertad individual **aplica con evidencia** (vida, custodia y uso de fuerza); propiedad privada **no aplica**; control del poder **aplica con evidencia** (denuncias y actuaciones de seguridad). No se imputa condena ni autoría no acreditada.
+
+
+## F1 — Sexta unidad de 2001 — PROVEA, registros 84–91 (28-10-2026; PR #172)
+
+**Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 463 / PDF p. 21](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf), registros **84–91**, hechos del 20 al 25 de enero de 2001. Se compararon los ocho nombres con las 26 fichas ya presentes en la rama del PR. El anexo sigue sin revisión integral.
+
+**Ocho fichas nominales nuevas:** Eduardo Jesús Marchán (15 años, Caracas, 20-01), Pedro Antonio Anzola (15 años, Sarare, 20-01), Juan Quintero y Luis Marín (Ciudad Bolívar, 20-01, episodio conjunto), Reuca José Mijares E. (Internado Judicial de Carabobo, 21-01), Darwin Edison Rodríguez Cedeño (Barcelona, 23-01), Manuel Guevara Pino (Ciudad Bolívar, 24-01) y Juan Carlos García Mejías (Barcelona, 25-01).
+
+**Límites probatorios:** PROVEA recoge relatos de disparos de cuerpos policiales o Guardia Nacional y, en varios casos, versiones oficiales de enfrentamiento contradichas por testimonios. No se presentan como sentencias ni se imputa una autoría penal individual acreditada. El n.º 88 se transcribe provisionalmente como **Reuca José Mijares E.**, pues el anexo imprime **«MIJARES E. Reuca José»**: la inicial y la grafía requieren segunda fuente; el caso se clasifica como muerte **bajo custodia** en el Internado Judicial de Carabobo, no como protesta. Los dos adolescentes se documentan sin datos privados adicionales.
+
+**Resultado en PR:** 34 fichas nominales de 2001, 335 entradas en dataset si el lote se integra sobre el HEAD anterior, 34 enlaces anuales; no representa balance exhaustivo ni determina responsabilidades judiciales. Actualizados dataset, página anual, fuente PRO2001, pruebas de regresión y este roadmap. Las pruebas de CI, Codacy y Codex deben verificarse para el SHA exacto resultante; revisión humana y autorización de merge siguen pendientes.
+
+**Principios:** libertad individual — aplica con evidencia (vida y custodia); propiedad privada — no aplica; control del poder — aplica con evidencia (uso de fuerza y garantías). No se infiere motivación política común ni condenas individuales.
+
+**Siguiente unidad:** PROVEA p. impresa **464 / PDF p. 22**, registros 92 en adelante; pendientes anteriores: causalidad de Jorge Luis Aponte (70), grafía de Annelk (65), variante Edixon/Ericson Parra, grafía e inicial de Mijares (88), fuentes judiciales y anexo octubre 2001–septiembre 2002.

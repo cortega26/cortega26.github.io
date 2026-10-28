@@ -178,7 +178,7 @@ for (const [id, date, category] of [
   assert.ok(year2001.includes(`perfil.html?id=${id}`), `Enlace a ficha de ${id}`);
 }
 assert.ok(year2001.includes('Jorge Luis Aponte') && year2001.includes('corroboración causal'), 'El registro 70 no se contabiliza sin corroborar el nexo causal');
-assert.ok(SOURCES.PRO2001.title.includes('460–462'), 'Cita PROVEA actualizada tras el quinto lote');
+assert.ok(SOURCES.PRO2001.title.includes('460–463'), 'Cita PROVEA actualizada tras el quinto lote');
 assert.ok(year2001.includes('201 como ejecuciones'), '241 casos PROVEA incluyen 201 ejecuciones, no 241 ejecuciones');
 assert.ok(!year2001.includes('241 ejecuciones extrajudiciales'), 'No inflar la categoría de ejecuciones');
 assert.ok(SOURCES.PRO2001.title.includes('p. 485'), 'Fuente precisa del desglose de 241 casos');
@@ -205,5 +205,23 @@ for (const [id, name, date, category] of fifthBatch2001) {
 for (const id of ['julio-hurtado-2001', 'hector-jose-bolivar-2001']) {
   assert.ok(cases2001.find(p => p.id === id)?.note.includes('sin circunstancias') || cases2001.find(p => p.id === id)?.note.includes('sin relato individual'), `No inventar hechos en registro colectivo: ${id}`);
 }
-assert.ok(SOURCES.PRO2001.title.includes('460–462'), 'Cita de PROVEA p. 462');
-assert.ok(year2001.includes('62–83'), 'Cobertura del anexo p. 462 explicitada');
+assert.ok(SOURCES.PRO2001.title.includes('460–463'), 'Cita de PROVEA p. 462');
+assert.ok(year2001.includes('62–91'), 'Cobertura del anexo p. 462 explicitada');
+
+// Sexta unidad: PROVEA p. 463, registros 84–91 (20–25 de enero de 2001).
+const sixthBatch2001 = [["eduardo-jesus-marchan","Eduardo Jesús Marchán","2001-01-20","policial"],["pedro-antonio-anzola","Pedro Antonio Anzola","2001-01-20","policial"],["juan-quintero-2001","Juan Quintero","2001-01-20","policial"],["luis-marin-2001","Luis Marín","2001-01-20","policial"],["reuca-jose-mijares-e","Reuca José Mijares E.","2001-01-21","custodia"],["darwin-edison-rodriguez-cedeno","Darwin Edison Rodríguez Cedeño","2001-01-23","policial"],["manuel-guevara-pino","Manuel Guevara Pino","2001-01-24","policial"],["juan-carlos-garcia-mejias","Juan Carlos García Mejías","2001-01-25","policial"]];
+assert.equal(sixthBatch2001.length, 8, 'Ocho registros nominales nuevos en PROVEA p. 463');
+assert.ok(cases2001.length >= 34, 'Conservar 34 fichas documentadas hasta el registro 91');
+for (const [id, name, date, category] of sixthBatch2001) {
+  const matches = cases2001.filter(person => person.id === id);
+  assert.equal(matches.length, 1, `Una ficha para PROVEA p. 463: ${id}`);
+  assert.equal(matches[0].name, name, `Nombre cotejado con PROVEA p. 463: ${id}`);
+  assert.equal(matches[0].date, date, `Fecha de PROVEA p. 463: ${id}`);
+  assert.equal(matches[0].category, category, `Categoría con cautela probatoria: ${id}`);
+  assert.deepEqual(matches[0].sources, ['PRO2001'], `Fuente documental p. 463: ${id}`);
+  assert.ok(year2001.includes(`perfil.html?id=${id}`), `Perfil anual enlazado: ${id}`);
+}
+assert.ok(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.note.includes('literalmente «MIJARES E. Reuca José»'), 'No resolver por conjetura la grafía ni inicial de Mijares');
+assert.equal(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.category, 'custodia', 'Muerte en prisión bajo custodia');
+assert.ok(year2001.includes('62–91') && SOURCES.PRO2001.title.includes('460–463'), 'Cobertura del sexto lote explícita');
+assert.ok(year2001.includes('El registro es parcial') || year2001.includes('El registro es parcial'.toLowerCase()), 'Sin declarar exhaustividad anual');

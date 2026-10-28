@@ -128,7 +128,7 @@ for (const person of cases2001) {
   assert.ok(year2001.includes(`perfil.html?id=${person.id}`), `Enlace individual 2001: ${person.name}`);
   assert.ok(person.sources.some(key => ['US2001','HRW2001','PRO2001'].includes(key)), `Fuente 2001 atribuida a: ${person.name}`);
 }
-for (const name of ['Jesús Alberto Febres', 'Luis Fernando Briceño', 'Ángel Ardilla', 'Ericson José Parra', 'Juan Pablo Arroyave']) {
+for (const name of ['Jesús Alberto Febres', 'Luis Fernando Briceño', 'Ángel Alberto Ardila', 'Ericson José Parra', 'Juan Pablo Arroyave']) {
   assert.ok(cases2001.some(p => p.name === name), `Caso nominal 2001 ausente: ${name}`);
 }
 const jose2001 = cases2001.find(p => p.name === 'José Ramón Rodríguez');

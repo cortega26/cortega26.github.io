@@ -13,6 +13,7 @@
 6. **Seguridad y dignidad.** No exponer datos privados de víctimas, familiares, denunciantes o informantes; evitar fotografías de violencia sin necesidad periodística y consentimiento apropiado.
 
 ## Principios editoriales: libertades y límites al poder
+
 Contrapeso declara sus principios, sin adoptar por ahora una etiqueta doctrinaria o una afiliación partidista como identidad pública. Son criterios de juicio editorial, **no presunciones sobre los hechos ni sustitutos del trabajo de investigación**.
 
 1. **Libertad individual.** Defender la autonomía de las personas, su libertad de expresión, asociación, conciencia y proyecto de vida frente a la coacción arbitraria, con respeto a los derechos de los demás.

@@ -168,7 +168,7 @@ function loadIntake({ ctx, valid = true, withAnalytics = true, search = '', path
       origin: 'https://tooltician.com',
       pathname,
       search,
-      href: 'https://tooltician.com' + pathname + search,
+      href: `https://tooltician.com${pathname}${search}`,
     },
     ttTrack: (name, params) => calls.push({ name, params }),
   };

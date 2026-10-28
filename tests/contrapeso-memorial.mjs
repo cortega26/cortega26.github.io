@@ -188,3 +188,22 @@ assert.ok(SOURCES.US2001.url.includes('refworld.org/reference/annualreport/usdos
 assert.ok(year2001.includes('octubre de 2000–septiembre de 2001'), 'No convertir la cifra PROVEA 241 en total de año calendario');
 assert.ok(year2001.includes('registro es parcial') || year2001.includes('registro es parcial'.replace('r','R')), 'Advertencia de no exhaustividad');
 assert.ok(year2001.includes('href="/venezuela-lab/metodo/"'), 'Método editorial accesible desde 2001');
+
+
+// Quinta unidad documental: PROVEA, p. 462, registros 74–83 (18 de enero de 2001).
+const fifthBatch2001 = [["edward-jose-morales","Edward José Morales","2001-01-11","policial"],["julio-hurtado-2001","Julio Hurtado","2001-01-11","policial"],["roger-eduardo-castillo-castillo","Roger Eduardo Castillo Castillo","2001-01-14","policial"],["jeimon-rodriguez-2001","Jeimon Rodríguez","2001-01-14","policial"],["jhonny-m-meneses","Jhonny M. Meneses","2001-01-14","policial"],["darwin-maita","Darwin Maita","2001-01-14","policial"],["hector-jose-bolivar-2001","Héctor José Bolívar","2001-01-15","policial"],["raul-alberto-villegas","Raúl Alberto Villegas","2001-01-16","investigacion"],["luis-alfredo-carrera-yeguez","Luis Alfredo Carrera Yéguez","2001-01-17","policial"],["danilo-enrique-martinez-carrillo","Danilo Enrique Martínez Carrillo","2001-01-18","policial"]];
+assert.ok(cases2001.length >= 26, 'No perder las 26 fichas documentadas hasta PROVEA n.º 83');
+for (const [id, name, date, category] of fifthBatch2001) {
+  const matches = cases2001.filter(person => person.id === id);
+  assert.equal(matches.length, 1, `Ficha única PROVEA p. 462: ${id}`);
+  assert.equal(matches[0].name, name, `Nombre cotejado PROVEA p. 462: ${id}`);
+  assert.equal(matches[0].date, date, `Fecha PROVEA p. 462: ${id}`);
+  assert.equal(matches[0].category, category, `Atribución categórica: ${id}`);
+  assert.deepEqual(matches[0].sources, ['PRO2001'], `Documento nominal enlazado: ${id}`);
+  assert.ok(year2001.includes(`perfil.html?id=${id}`), `Enlace nominal visible: ${id}`);
+}
+for (const id of ['julio-hurtado-2001', 'hector-jose-bolivar-2001']) {
+  assert.ok(cases2001.find(p => p.id === id)?.note.includes('sin circunstancias') || cases2001.find(p => p.id === id)?.note.includes('sin relato individual'), `No inventar hechos en registro colectivo: ${id}`);
+}
+assert.ok(SOURCES.PRO2001.title.includes('460–462'), 'Cita de PROVEA p. 462');
+assert.ok(year2001.includes('62–83'), 'Cobertura del anexo p. 462 explicitada');

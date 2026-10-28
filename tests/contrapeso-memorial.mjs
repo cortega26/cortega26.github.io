@@ -368,6 +368,8 @@ for(const [id] of twelfthBatch2001.slice(0,6)) {
 }
 const extortion2001=cases2001.find(x=>x.id==='juan-ramon-hernandez-guindano');
 assert.ok(extortion2001.note.includes('versión oficial') && extortion2001.note.includes('alegaciones') && extortion2001.note.includes('sentencia'),'No elevar denuncia a sentencia en registro 131');
+assert.ok(extortion2001.note.includes('Hernández recibió Bs. 5.000 de un funcionario') && !extortion2001.note.includes('entregó Bs. 5.000 a un funcionario'),'La víctima recibió dinero del funcionario, no al revés');
+assert.ok(year2001.includes('un funcionario entregó Bs. 5.000 a Hernández'),'La página anual preserva el sentido de la transacción');
 assert.ok(cases2001.find(x=>x.id==='ismael-g-rodriguez-t').name.includes('G.') && cases2001.find(x=>x.id==='luis-o-zabaleta-f').name.includes('F.'),'No expandir iniciales sin fuente');
 const sourceRangeUpper2001 = Number(year2001.match(/Los registros 62–(\d+)/)?.[1] ?? 0);
 assert.ok(sourceRangeUpper2001>=131 && SOURCES.PRO2001.scope.includes(`n.os 62–${sourceRangeUpper2001}`),'Cobertura nominal desde 62 hasta al menos 131, consistente con fuente');

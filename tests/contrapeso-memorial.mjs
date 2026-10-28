@@ -304,7 +304,7 @@ for(const [id,name,date,category] of ninthBatch2001) {
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace nominal: ${id}`);
 }
 for(const id of ['williams-gonzalez-2001','pedro-antonio-belisario'])
- assert.ok(cases2001.find(p=>p.id===id)?.note.includes('sin relato individual'),'Denuncia sin relato: '+id);
+ assert.ok(cases2001.find(p=>p.id===id)?.note.includes('sin relato individual'),`Denuncia sin relato: ${id}`);
 assert.ok(cases2001.find(p=>p.id==='edison-alvarez-2001')?.note.includes('asterisco pendiente de cotejo'),'Incertidumbre de fecha');
 assert.ok(cases2001.find(p=>p.id==='carlos-a-villanueva')?.note.includes('no se expande'),'No inventar segundo nombre');
 assert.ok(year2001.includes('62–116') && SOURCES.PRO2001.title.includes('460–466'),'Cobertura actualizada');

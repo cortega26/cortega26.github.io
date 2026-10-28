@@ -727,11 +727,11 @@ async function testContrapesoFrontpage(browser) {
     try {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       const cards = page.locator('#article-list .story-card');
-      if (await cards.count() !== 6) fail(`Contrapeso ${width}: expected six cards`);
+      if (await cards.count() !== 7) fail(`Contrapeso ${width}: expected seven cards`);
       // Provenance must remain visible after JS filters the editorial prototype.
       const provenance = page.locator('#result-count');
       const initialCount = (await provenance.textContent())?.trim();
-      if (initialCount !== '6 contenidos: 5 con fuentes y 1 muestra') {
+      if (initialCount !== '7 contenidos: 6 con fuentes y 1 muestra') {
         fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
       }
       // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.
@@ -813,8 +813,8 @@ async function testContrapesoFrontpage(browser) {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();
       const newsCards = page.locator('#article-list .story-card:visible');
-      if (await newsCards.count() !== 1) {
-        fail(`Contrapeso ${width}: Actualidad must show one sourced news story`);
+      if (await newsCards.count() !== 2) {
+        fail(`Contrapeso ${width}: Actualidad must show two sourced news stories`);
       } else {
         const newsLink = newsCards.locator('a[href="/venezuela-lab/actualidad/regreso-machado-2026/"]');
         if (await newsLink.count() !== 1) {

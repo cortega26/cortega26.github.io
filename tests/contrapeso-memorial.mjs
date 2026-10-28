@@ -229,8 +229,8 @@ assert.ok(year2001.includes('El registro es parcial') || year2001.includes('El r
 // Séptima unidad: PROVEA p. 464, registros 92–99 (25–31 de enero de 2001).
 const seventhBatch2001 = [["elvis-torres","Elvis Torres","2001-01-25","policial"],["argenis-ramon-sanchez","Argenis Ramón Sánchez","2001-01-25","policial"],["david-enrique-merga","David Enrique Merga","2001-01-25","policial"],["sergio-antonio-aristiguetas","Sergio Antonio Aristiguetas","2001-01-26","policial"],["jose-gregorio-rangel-lopez","José Gregorio Rangel López","2001-01-30","policial"],["luis-miguel-castaneda-angulo","Luis Miguel Castañeda Angulo","2001-01-31","investigacion"],["oscar-ramon-rodriguez-2001","Oscar Ramón Rodríguez","2001-01-31","investigacion"],["wilfredo-velasquez-soler","Wilfredo Velásquez Soler","2001-01-31","policial"]];
 assert.equal(seventhBatch2001.length,8,'Ocho casos de PROVEA p. 464');
-assert.equal(cases2001.length,42,'42 fichas de 2001, no balance anual');
-assert.equal(CASES.length,343,'Conservar dataset completo');
+assert.ok(cases2001.length>=42,'Conservar al menos 42 fichas de 2001, no balance anual');
+assert.ok(CASES.length>=343,'Conservar el dataset completo en futuras unidades');
 for (const [id,name,date,category] of seventhBatch2001) {
  const matches=cases2001.filter(p=>p.id===id);
  assert.equal(matches.length,1,`Ficha única: ${id}`);

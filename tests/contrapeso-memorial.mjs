@@ -278,9 +278,19 @@ for (const id of ['pedro-eduardo-santil','ramon-antonio-granado']) {
 assert.ok(year2001.includes('62–116') && SOURCES.PRO2001.title.includes('460–466'),'Cobertura exacta del anexo');
 assert.ok(year2001.includes('No es un balance anual exhaustivo'),'Sin declarar cierre del año');
 
-
 // Novena unidad: PROVEA p. 466, registros 107–116 (febrero 2001).
-const ninthBatch2001 = [["argenis-gonzalez-2001","Argenis González","2001-02-09","policial"],["jose-raul-cumare-jimenez","José Raúl Cumare Jiménez","2001-02-09","investigacion"],["williams-gonzalez-2001","Williams González","2001-02-10","policial"],["dairilis-yulibet-sanchez-perez","Dairilis Yulibet Sánchez Pérez","2001-02-14","investigacion"],["jose-david-gallardo-gomez","José David Gallardo Gómez","2001-02-14","investigacion"],["jose-alberto-figueroa-2001","José Alberto Figueroa","2001-02-16","policial"],["edison-alvarez-2001","Edison Álvarez","2001-02-17","policial"],["carlos-a-villanueva","Carlos A. Villanueva","2001-02-17","investigacion"],["pedro-antonio-belisario","Pedro Antonio Belisario","2001-02-17","policial"],["joel-carlitos-alay-perez","Joel Carlitos Alay Pérez","2001-02-18","policial"]];
+const ninthBatch2001 = [
+  ["argenis-gonzalez-2001","Argenis González","2001-02-09","policial"],
+  ["jose-raul-cumare-jimenez","José Raúl Cumare Jiménez","2001-02-09","investigacion"],
+  ["williams-gonzalez-2001","Williams González","2001-02-10","policial"],
+  ["dairilis-yulibet-sanchez-perez","Dairilis Yulibet Sánchez Pérez","2001-02-14","investigacion"],
+  ["jose-david-gallardo-gomez","José David Gallardo Gómez","2001-02-14","investigacion"],
+  ["jose-alberto-figueroa-2001","José Alberto Figueroa","2001-02-16","policial"],
+  ["edison-alvarez-2001","Edison Álvarez","2001-02-17","policial"],
+  ["carlos-a-villanueva","Carlos A. Villanueva","2001-02-17","investigacion"],
+  ["pedro-antonio-belisario","Pedro Antonio Belisario","2001-02-17","policial"],
+  ["joel-carlitos-alay-perez","Joel Carlitos Alay Pérez","2001-02-18","policial"],
+];
 assert.equal(ninthBatch2001.length,10,'Diez registros individuales nuevos');
 assert.equal(cases2001.length,58,'58 fichas 2001, todavía no exhaustivas');
 assert.equal(CASES.length,359,'359 fichas en el dataset');

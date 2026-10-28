@@ -198,3 +198,34 @@ La task «Contrapeso — Desarrollo incremental» debe conservar `RRULE:FREQ=MIN
 **No cerrar 2001:** Human Rights Watch documentó los asesinatos de José Ramón Rodríguez y Belmiro Gutiérrez en mayo de 2001, vinculados al contexto de amenazas del «Grupo Exterminio»; falta verificar por separado autoría y circunstancias antes de ficharlos (<https://www.hrw.org/legacy/spanish/inf_anual/2002/venezuela.html>). Falta localizar y contrastar los anexos nominales originales de PROVEA 2000–2001, depurar posibles duplicados y determinar otras muertes bajo custodia. El recuento de **241** que reproduce el informe estadounidense corresponde a **octubre de 2000–septiembre de 2001**, por lo que **no** es un total del año calendario 2001. El siguiente incremento debe seguir con **2001**, no saltar a 2002 hasta agotar fuentes accesibles o registrar bloqueo concreto.
 
 **Verificaciones exigidas antes de merge:** coherencia 5 registros ↔ 5 filas de la página ↔ selector por año; robots en la nueva ruta; enlaces de perfiles; source check, build, Playwright a 320/390/768/1024/1440, revisión Codacy/Codex y revisión humana para imputaciones. Esta anotación no certifica esas pruebas ni el despliegue.
+
+## F1 — Segunda unidad documental de 2001 (28-10-2026; en PR #172)
+
+**Investigado:** Human Rights Watch, *Informe Mundial 2002*, sección Venezuela
+(hechos de 2001): <https://www.hrw.org/legacy/spanish/inf_anual/2002/venezuela.html>.
+El informe identifica dos asesinatos en Portuguesa durante mayo de 2001:
+**José Ramón Rodríguez**, padre de Jimmy Rodríguez y reclamante público de justicia,
+y **Belmiro Gutiérrez**, testigo de los asesinatos de Jimmy Rodríguez y César Agray
+Meléndez (octubre de 2000). No aporta fechas exactas ni identifica quién disparó
+contra cada uno. Los informes de amenazas, presunta complicidad de funcionarios y
+detenciones en el contexto del llamado «Grupo Exterminio» no son sentencias
+individuales. Los casos se etiquetan como **asesinatos en investigación**, sin
+atribución penal automática a agentes estatales.
+
+**Fuente pendiente de lectura nominal:** PROVEA mantiene accesible la página del
+informe octubre de 2000–septiembre de 2001:
+<https://provea.org/publicaciones/informes-anuales/informe-anual-octubre-2000-septiembre-2001/>.
+Su enlace «Anexos» remite a OneDrive
+(<https://1drv.ms/b/s!Ao_EOncu5r6snDEzX2ZXXw4ZtM-r>), cuyo PDF no pudo abrirse
+mediante la herramienta de lectura disponible en esta revisión. No se inventan
+nombres ni se transforma una cifra agregada en fichas. El capítulo de 2001
+**sigue abierto** a contrastación con ese anexo y fuentes adicionales.
+
+**Criterio editorial transversal:** libertad individual — aplica (víctimas y
+testigos de violencia); propiedad privada — no aplica en esta unidad;
+control del poder — aplica (investigaciones y responsabilidad de cuerpos
+policiales), sin prejuzgar autoría ni culpabilidad individual.
+
+**Integración:** el incremento suma dos fichas a las cinco anteriores,
+actualiza la página anual y el filtro de casos con autoría no acreditada,
+y conserva la revisión humana y el gate de QA exact-SHA antes de cualquier merge.

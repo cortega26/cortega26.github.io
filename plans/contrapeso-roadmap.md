@@ -347,7 +347,6 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 
 **Siguiente unidad:** PROVEA p. impresa **467 / PDF índice 25**, registros 117–121. Pendientes anteriores: causalidad de Jorge Luis Aponte (70), Annelk (65), Edixon/Ericson Parra, Mijares E. (88), fecha de Álvarez (113), fuentes judiciales y anexo octubre 2001–septiembre 2002.
 
-
 ## F1 — Décima unidad de 2001 — PROVEA, registros 117–121 (28-10-2026; PR #172)
 
 **Fuente primaria cotejada en imagen:** [PROVEA, anexo 3, p. impresa 467 / PDF índice 25](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=26), registros 117–121. Cinco personas identificadas: Amable Jerry Useche (18-02), Wuilkenfer Antonio Gutiérrez Lunar (25-02), Franklin Manuel Alejos Rondón (27-02), Miguel Antonio Torres (28-02) y Héctor Cabrera (fecha impresa 03.02.01*). Los registros 119 y 120 están clasificados por PROVEA como víctimas del llamado Grupo Exterminio, sin que esa etiqueta determine una condena o autoría penal individual. El registro 118 contrapone testimonio y versión oficial; la grafía Wuilkenfer necesita segunda fuente. La fecha del registro 121 lleva asterisco y aparece fuera de secuencia cronológica: se conserva provisionalmente y queda pendiente de cotejo.

@@ -25,18 +25,18 @@ assert.ok(pages.length >= 10, 'El barrido cubre 10 páginas HTML incluido perfil
 
 for (const file of pages) {
   const source = readFileSync(file, 'utf8');
-  assert.ok(source.includes('name="robots" content="noindex,nofollow,noarchive"'), 'Robots: ' + file);
+  assert.ok(source.includes('name="robots" content="noindex,nofollow,noarchive"'), `Robots: ${file}`);
   if (!file.endsWith('/metodo/index.html')) {
     assert.ok(
       source.includes('href="/venezuela-lab/metodo/"') ||
         source.includes('href="/venezuela-lab/metodo/#orientacion"'),
-      'Enlace a método: ' + file,
+      `Enlace a método: ${file}`,
     );
   }
   if (process.argv.includes('--built')) {
     const builtPath = file.replace(prototype, join(root, 'dist/venezuela-lab'));
     const built = readFileSync(builtPath, 'utf8');
-    assert.ok(built.includes('name="robots" content="noindex,nofollow,noarchive"'), 'Robots en build: ' + file);
+    assert.ok(built.includes('name="robots" content="noindex,nofollow,noarchive"'), `Robots en build: ${file}`);
   }
 }
 

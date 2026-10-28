@@ -375,3 +375,14 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Resultado propuesto en rama:** 73 fichas de 2001, 374 registros totales, siete perfiles nuevos enlazados desde el archivo anual. El año sigue incompleto; PROVEA cubre octubre de 2000–septiembre de 2001 y no debe convertirse en cifra de año calendario. Libertad individual — aplica con evidencia; propiedad privada — no aplica; control del poder — aplica con evidencia. La fuente no permite afirmar motivación política común ni condenas individuales.
 
 **Siguiente unidad:** PROVEA p. impresa 469 / PDF índice 27, registros 132 en adelante; mantener pendientes nominales, causales y judiciales anteriores. QA exact-SHA, Codacy, Codex y revisión humana deben certificarse antes de merge; noindex, prototipo y ausencia de lanzamiento se mantienen.
+
+
+## F1 — Decimotercera unidad de 2001 — PROVEA, registros 132–136 (28-10-2026; PR #172)
+
+**Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 469 / PDF índice 27](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=28), registros **132–136**, hechos del **15 al 18 de marzo de 2001**. Se compararon nombres y fechas contra las 73 fichas previas del PR; no se detectaron duplicados nominales en el dataset.
+
+**Cinco nuevas fichas:** José Luis Cabrera González (15-03, Esteller, Portuguesa), Carlos Jesús Riera Perozo (15-03, Páez, Portuguesa), Wilmar Avileny Véliz Piña (16-03, Maracay), José Gregorio Subero (17-03, Bolívar) y Alexis Mujica (18-03, Maracay). Los dos primeros son clasificados por PROVEA como víctimas del llamado Grupo Exterminio, sin autoría penal individual demostrada. Para Véliz Piña, PROVEA recoge denuncias de disparos policiales, demora de atención y exigencia de dinero formulada por su madre, sin verificación judicial del móvil. Para Subero, recoge testimonio del tío y versión oficial de enfrentamiento. Para Mujica, recoge denuncia de disparos policiales y **versión oficial de suicidio**, con discrepancia de calibres señalada por familiares; no se inspeccionaron peritajes ni sentencias.
+
+**Resultado propuesto en rama:** **78 fichas de 2001 y 379 registros totales**, cinco enlaces anuales, fuente extendida hasta p. 469, pruebas nominales y de atribución; **2001 sigue incompleto**. Libertad individual: **aplica con evidencia** (vida, integridad); propiedad privada: **no aplica**; control del poder: **aplica con evidencia** (intervención policial y rendición de cuentas). Ninguna denuncia se presenta como sentencia ni se presume motivación política común.
+
+**Siguiente unidad:** PROVEA p. impresa 470 / PDF índice 28, registros 137–143. Mantener pendientes anteriores, contraste de testimonios/peritajes para 134–136, revisión editorial humana, QA exact-SHA, Codacy y Codex antes de merge. Noindex y restricciones de prototipo sin cambios.

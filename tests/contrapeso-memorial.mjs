@@ -178,7 +178,7 @@ for (const [id, date, category] of [
   assert.ok(year2001.includes(`perfil.html?id=${id}`), `Enlace a ficha de ${id}`);
 }
 assert.ok(year2001.includes('Jorge Luis Aponte') && year2001.includes('corroboración causal'), 'El registro 70 no se contabiliza sin corroborar el nexo causal');
-assert.ok(SOURCES.PRO2001.title.includes('460–468'), 'Cita PROVEA actualizada tras el quinto lote');
+assert.ok(SOURCES.PRO2001.title.includes('460–469'), 'Cita PROVEA actualizada tras el quinto lote');
 assert.ok(year2001.includes('201 como ejecuciones'), '241 casos PROVEA incluyen 201 ejecuciones, no 241 ejecuciones');
 assert.ok(!year2001.includes('241 ejecuciones extrajudiciales'), 'No inflar la categoría de ejecuciones');
 assert.ok(SOURCES.PRO2001.title.includes('p. 485'), 'Fuente precisa del desglose de 241 casos');
@@ -205,7 +205,7 @@ for (const [id, name, date, category] of fifthBatch2001) {
 for (const id of ['julio-hurtado-2001', 'hector-jose-bolivar-2001']) {
   assert.ok(cases2001.find(p => p.id === id)?.note.includes('sin circunstancias') || cases2001.find(p => p.id === id)?.note.includes('sin relato individual'), `No inventar hechos en registro colectivo: ${id}`);
 }
-assert.ok(SOURCES.PRO2001.title.includes('460–468'), 'Cita de PROVEA p. 462');
+assert.ok(SOURCES.PRO2001.title.includes('460–469'), 'Cita de PROVEA p. 462');
 assert.ok(year2001.includes('Los registros 62–'), 'Cobertura del anexo p. 462 explicitada');
 
 // Sexta unidad: PROVEA p. 463, registros 84–91 (20–25 de enero de 2001).
@@ -374,3 +374,24 @@ assert.ok(cases2001.find(x=>x.id==='ismael-g-rodriguez-t').name.includes('G.') &
 const sourceRangeUpper2001 = Number(year2001.match(/Los registros 62–(\d+)/)?.[1] ?? 0);
 assert.ok(sourceRangeUpper2001>=131 && SOURCES.PRO2001.scope.includes(`n.os 62–${sourceRangeUpper2001}`),'Cobertura nominal desde 62 hasta al menos 131, consistente con fuente');
 assert.ok(year2001.includes('No es un balance anual exhaustivo') && year2001.includes('noindex,nofollow,noarchive'),'Año abierto y no indexable');
+
+// Decimotercera unidad: PROVEA p. 469, registros 132–136 (15–18 de marzo de 2001).
+const thirteenthBatch2001=[["jose-luis-cabrera-gonzalez","José Luis Cabrera González","2001-03-15","investigacion"],["carlos-jesus-riera-perozo","Carlos Jesús Riera Perozo","2001-03-15","investigacion"],["wilmar-avileny-veliz-pina","Wilmar Avileny Véliz Piña","2001-03-16","policial"],["jose-gregorio-subero","José Gregorio Subero","2001-03-17","policial"],["alexis-mujica","Alexis Mujica","2001-03-18","policial"]];
+assert.equal(thirteenthBatch2001.length,5,'Cinco registros nominales de PROVEA p. 469');
+assert.ok(cases2001.length>=78 && CASES.length>=379,'Conservar 78 fichas de 2001 y 379 totales');
+for(const [id,name,date,category] of thirteenthBatch2001){
+ const matches=cases2001.filter(p=>p.id===id);
+ assert.equal(matches.length,1,`Identificador único p. 469: ${id}`);
+ assert.equal(matches[0].name,name,`Nombre cotejado p. 469: ${id}`);
+ assert.equal(matches[0].date,date,`Fecha cotejada p. 469: ${id}`);
+ assert.equal(matches[0].category,category,`Categoría documental p. 469: ${id}`);
+ assert.deepEqual(matches[0].sources,['PRO2001'],`Fuente única p. 469: ${id}`);
+ assert.ok(matches[0].note.includes('p. 469') && matches[0].note.includes('n.º'),`Localizador nominal p. 469: ${id}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`),`Perfil anual p. 469: ${id}`);
+}
+assert.ok(cases2001.find(p=>p.id==='wilmar-avileny-veliz-pina').note.includes('Su madre denunció'),'No afirmar como probado el supuesto cobro en registro 134');
+assert.ok(cases2001.find(p=>p.id==='jose-gregorio-subero').note.includes('versión oficial sostuvo un enfrentamiento'),'Registrar versión oficial n.º 135');
+const mujica2001=cases2001.find(p=>p.id==='alexis-mujica');
+assert.ok(mujica2001.note.includes('versión oficial sostuvo que Mujica se suicidó') && mujica2001.note.includes('no de peritajes inspeccionados'),'No sustituir suicidio oficial por enfrentamiento ni afirmar peritaje');
+assert.ok(SOURCES.PRO2001.title.includes('460–469') && SOURCES.PRO2001.scope.includes('n.os 62–136'),'Alcance fuente actualizado hasta 136');
+assert.ok(year2001.includes('Los registros 62–136') && year2001.includes('No es un balance anual exhaustivo'),'Cobertura parcial declarada');

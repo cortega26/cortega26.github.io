@@ -832,6 +832,22 @@ async function testContrapesoFrontpage(browser) {
         }
       }
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      await page.locator('[data-filter="Actualidad"]').click();
+      const marchLink = page.locator('#article-list .story-card:visible a[href="/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/"]');
+      if (await marchLink.count() !== 1) {
+        fail(`Contrapeso ${width}: new October 28 news link missing`);
+      } else {
+        await marchLink.click();
+        await page.waitForURL('**/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/');
+        const marchTitle = await page.locator('h1').first().textContent();
+        const marchRobots = await page.locator('meta[name="robots"]').getAttribute('content');
+        const marchOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+        if (!marchTitle?.includes('Una marcha por elecciones')) fail(`Contrapeso ${width}: wrong October 28 news`);
+        else if (marchRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: October 28 news robots missing`);
+        else if (marchOverflow) fail(`Contrapeso ${width}: October 28 news horizontal overflow`);
+        else ok(`Contrapeso ${width}: second news link, noindex and responsive width`);
+      }
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Expedientes"]').click();
       const caseCards = page.locator('#article-list .story-card:visible');
       if (await caseCards.count() !== 1) {

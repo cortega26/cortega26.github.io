@@ -132,19 +132,25 @@ function fakeForm(ctx, { valid = true } = {}) {
  * handles. Set withAnalytics=false for the negative control (ttAnalytics is
  * removed before intake-form loads, so only the legacy track path remains).
  */
-function loadIntake({ ctx, valid = true, withAnalytics = true } = {}) {
+function loadIntake({ ctx, valid = true, withAnalytics = true, search = '', pathname = '/en/' } = {}) {
   const calls = [];
   const form = fakeForm(ctx, { valid });
   const docListeners = {};
+  const submitted = [];
   const sandbox = {
     console,
     URL,
     Element: FakeElement,
     navigator: {},
     FormData: class {
-      constructor() {}
+      constructor() { this.fields = new Map([['_subject', 'General inquiry']]); }
+      set(key, value) { this.fields.set(key, value); }
+      get(key) { return this.fields.get(key) ?? null; }
     },
-    fetch: async () => ({ ok: true, status: 200 }),
+    fetch: async (_url, options) => {
+      submitted.push(options.body);
+      return { ok: true, status: 200 };
+    },
     document: {
       readyState: 'complete',
       querySelector: () => null,
@@ -160,7 +166,8 @@ function loadIntake({ ctx, valid = true, withAnalytics = true } = {}) {
       hostname: 'tooltician.com',
       protocol: 'https:',
       origin: 'https://tooltician.com',
-      pathname: '/en/',
+      pathname,
+      search,
     },
     ttTrack: (name, params) => calls.push({ name, params }),
   };
@@ -169,7 +176,7 @@ function loadIntake({ ctx, valid = true, withAnalytics = true } = {}) {
   vm.runInContext(ANALYTICS_SRC, sandbox, { filename: 'product-analytics.js' });
   if (!withAnalytics) delete sandbox.window.ttAnalytics;
   vm.runInContext(INTAKE_SRC, sandbox, { filename: 'intake-form.js' });
-  return { sandbox, form, calls, docListeners };
+  return { sandbox, form, calls, docListeners, submitted };
 }
 
 function fireInput(form, target) {
@@ -253,6 +260,45 @@ await group('A3 · Negative control: no analytics, no throw, legacy intact', asy
     find(outcome || [], 'form_start').length === 1,
     JSON.stringify(outcome)
   );
+});
+
+await group('A4 · Rutificador: only exact campaign UTMs become fixed Formspree labels', async () => {
+  const base = '?utm_source=rutificador&utm_medium=referral&utm_campaign=auditoria_rut_b2b';
+  for (const intent of ['diagnostico', 'recurrente']) {
+    const { form, submitted, calls } = loadIntake({
+      ctx: 'intake', pathname: '/es/', search: base + '&utm_content=' + intent,
+    });
+    await fireSubmit(form);
+    assert(intent + ': one POST', submitted.length === 1);
+    const body = submitted[0];
+    assert(intent + ': fixed referral product', body.get('referral_product') === 'rutificador');
+    assert(intent + ': fixed referral intent', body.get('referral_interest') === intent);
+    assert(intent + ': subject identifies campaign', body.get('_subject') ===
+      'Rutificador - Auditoria B2B (' + intent + ')');
+    assert(intent + ': no dynamic campaign data in canonical events',
+      calls.every((call) => !('utm_source' in (call.params || {})) && !('referral_product' in (call.params || {}))));
+  }
+});
+
+await group('A5 · Unrecognized or untrusted UTM values fail closed', async () => {
+  const base = '?utm_source=rutificador&utm_medium=referral&utm_campaign=auditoria_rut_b2b';
+  const bad = [
+    '',
+    '?utm_source=rutificador&utm_medium=referral&utm_campaign=wrong&utm_content=diagnostico',
+    '?utm_source=rutificador&utm_medium=social&utm_campaign=auditoria_rut_b2b&utm_content=diagnostico',
+    base + '&utm_content=someone%40example.com',
+    base + '&utm_content=diagnostico&utm_content=recurrente',
+    '?utm_source=user%40example.com&utm_medium=referral&utm_campaign=auditoria_rut_b2b&utm_content=recurrente',
+    '?utm_source=rutificador&utm_medium=referral&utm_campaign=auditoria_rut_b2b&utm_content=%2F%2Fevil.example',
+  ];
+  for (const search of bad) {
+    const { form, submitted } = loadIntake({ ctx: 'intake', search });
+    await fireSubmit(form);
+    assert('untrusted campaign does not break form', submitted.length === 1, search);
+    const body = submitted[0];
+    assert('untrusted campaign adds no referral field', body.get('referral_product') === null, search);
+    assert('untrusted campaign cannot override subject', body.get('_subject') === 'General inquiry', search);
+  }
 });
 
 // ─── Summary ────────────────────────────────────────────────────────────────

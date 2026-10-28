@@ -318,3 +318,17 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Principios:** libertad individual — aplica con evidencia (vida, integridad y garantías); propiedad privada — no aplica; control del poder — aplica con evidencia (uso de fuerza y rendición de cuentas). No se presume motivación política común.
 
 **Próxima unidad:** PROVEA p. impresa **465 / PDF índice 23**, registros 100 en adelante. Pendientes: Jorge Luis Aponte (70), Annelk (65), Edixon/Ericson Parra, Mijares E. (88), corroboraciones judiciales y anexo octubre 2001–septiembre 2002.
+
+## F1 — Octava unidad de 2001 — PROVEA, registros 100–106 (28-10-2026; PR #172)
+
+**Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 465 / PDF índice 23](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=24), registros 100–106, hechos del 2 al 7 de febrero de 2001. Contraste adicional del registro 100 con [Departamento de Estado, informe 2001, sección 1.a](https://www.refworld.org/reference/annualreport/usdos/2002/31349), consultados el 28-10-2026.
+
+**Seis fichas nuevas:** Yohanny Roseliano Rodríguez Piña (Catia La Mar, 02-02), Juan Francisco Maestracci (San Félix, 04-02), Jean Pier Marshal (Petare, 04-02), Jesús Alberto Galíndez (Araure, 05-02), Pedro Eduardo Santil (San Félix, 07-02) y Ramón Antonio Granado (Ciudad Bolívar, 07-02). Los registros 105 y 106 contienen denuncias ante Humanas Dignitas y versiones oficiales de enfrentamiento, sin relato individual ni sentencia verificada. El n.º 104 se relaciona con el llamado Grupo Exterminio sin atribución penal individual firme. Los demás son relatos de actuaciones policiales o militares; no se transforman testimonios o versiones oficiales en condenas.
+
+**Reconciliación y rectificación factual:** el n.º 100 de PROVEA identifica a **Ángel Alberto Ardila**, mientras el informe estadounidense registra **«Angel Ardilla»** con idéntica fecha (02-02-2001), lugar (Casigua El Cubo) y acompañante (Alba Marina Bustamante). Se actualiza la ficha existente `angel-ardilla` y se preserva su URL; **no** se crea una segunda víctima. Se corrige además el n.º 91: el original de PROVEA imprime **«GARCÍA MEJÍAS, Jean Carlos»**, no «Juan Carlos», conservando `juan-carlos-garcia-mejias` como identificador técnico estable. Se deja constancia de ambas variantes para evitar pérdida de trazabilidad.
+
+**Resultado en PR:** 48 fichas de 2001, 349 en el dataset total, capítulo y pruebas actualizados. No equivalen a un balance anual exhaustivo; el período del informe PROVEA abarca octubre de 2000–septiembre de 2001. Faltan contrastes judiciales, revisión humana, QA exact-SHA y autorización de merge. No se publica ni integra automáticamente.
+
+**Principios:** libertad individual — aplica con evidencia (vida e integridad); propiedad privada — no aplica; control del poder — aplica con evidencia (actuaciones de seguridad y denuncias). Sin presumir motivación política común ni sentencias individuales.
+
+**Siguiente unidad:** PROVEA p. impresa **466 / PDF índice 24**, registros 107–116. Persisten pendientes Jorge Luis Aponte (70), Annelk (65), Edixon/Ericson Parra, Mijares E. (88), fuentes judiciales y el anexo octubre 2001–septiembre 2002.

@@ -384,3 +384,13 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Resultado propuesto en rama:** **78 fichas de 2001 y 379 registros totales**, cinco enlaces anuales, fuente extendida hasta p. 469, pruebas nominales y de atribución; **2001 sigue incompleto**. Libertad individual: **aplica con evidencia** (vida, integridad); propiedad privada: **no aplica**; control del poder: **aplica con evidencia** (intervención policial y rendición de cuentas). Ninguna denuncia se presenta como sentencia ni se presume motivación política común.
 
 **Siguiente unidad:** PROVEA p. impresa 470 / PDF índice 28, registros 137–143. Mantener pendientes anteriores, contraste de testimonios/peritajes para 134–136, revisión editorial humana, QA exact-SHA, Codacy y Codex antes de merge. Noindex y restricciones de prototipo sin cambios.
+
+## F1 — Decimocuarta unidad de 2001 — PROVEA, registros 137–143 (28-10-2026; PR #172)
+
+**Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 470 / PDF índice 28](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=29), registros **137–143**, hechos del 18 al 25 de marzo de 2001. Cotejo nominal sin duplicados detectados.
+
+**Siete personas:** José Martín Rodríguez (18-03), Nino Antonio González (20-03), José Gregorio Colmenárez (20-03), Régulo Bello (24-03), Jesús Barroso (24-03), Alí González (24-03) y Rafael Simón Colmenares (25-03). Los n.os 138, 139 y 143 son atribuciones documentales al llamado Grupo Exterminio, sin sentencia individual. El n.º 137 registra denuncia contra un funcionario y versión oficial que presenta a la víctima como asaltante. Los n.os 140–142 son un mismo episodio: detención denunciada y aparición sin vida con signos de maltrato, frente a versión oficial de enfrentamiento. El n.º 141 imprime «24.03.01*», asterisco pendiente de cotejo.
+
+**Resultado propuesto en rama:** **85 fichas de 2001 / 386 totales**, capítulo anual, fuente y pruebas actualizados. Año no cerrado. Libertad individual — aplica con evidencia; propiedad privada — no aplica; control del poder — aplica con evidencia. No se presume motivación política ni sentencia individual.
+
+**Próxima unidad:** PROVEA p. impresa **471 / PDF índice 29**, registros **144–153**. El n.º 151 figura «S/I»: no inventar ficha nominal. Pendientes revisión humana, CI/Codacy/Codex exact-SHA, autorización de merge y cotejos anteriores. Mantener noindex y prototipo.

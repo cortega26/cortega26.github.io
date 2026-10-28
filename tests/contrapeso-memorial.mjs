@@ -223,7 +223,7 @@ for (const [id, name, date, category] of sixthBatch2001) {
 }
 assert.ok(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.note.includes('literalmente «MIJARES E. Reuca José»'), 'No resolver por conjetura la grafía ni inicial de Mijares');
 assert.equal(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.category, 'custodia', 'Muerte en prisión bajo custodia');
-assert.ok(year2001.includes('62–116') && SOURCES.PRO2001.title.includes('460–466'), 'Cobertura del sexto lote explícita');
+assert.ok(year2001.includes('62–121') && SOURCES.PRO2001.title.includes('460–467'), 'Cobertura del sexto lote explícita');
 assert.ok(year2001.includes('El registro es parcial') || year2001.includes('El registro es parcial'.toLowerCase()), 'Sin declarar exhaustividad anual');
 
 // Séptima unidad: PROVEA p. 464, registros 92–99 (25–31 de enero de 2001).
@@ -292,8 +292,8 @@ const ninthBatch2001 = [
   ["joel-carlitos-alay-perez","Joel Carlitos Alay Pérez","2001-02-18","policial"],
 ];
 assert.equal(ninthBatch2001.length,10,'Diez registros individuales nuevos');
-assert.equal(cases2001.length,58,'58 fichas 2001, todavía no exhaustivas');
-assert.equal(CASES.length,359,'359 fichas en el dataset');
+assert.ok(cases2001.length>=58,'Preservar las 58 fichas del noveno lote');
+assert.ok(CASES.length>=359,'Preservar las 359 fichas del noveno lote');
 for(const [id,name,date,category] of ninthBatch2001) {
  const found=cases2001.filter(p=>p.id===id);
  assert.equal(found.length,1,`Ficha única: ${id}`);
@@ -309,3 +309,23 @@ assert.ok(cases2001.find(p=>p.id==='edison-alvarez-2001')?.note.includes('asteri
 assert.ok(cases2001.find(p=>p.id==='carlos-a-villanueva')?.note.includes('no se expande'),'No inventar segundo nombre');
 assert.ok(year2001.includes('62–116') && SOURCES.PRO2001.title.includes('460–466'),'Cobertura actualizada');
 assert.ok(year2001.includes('No es un balance anual exhaustivo'),'2001 sigue abierto');
+
+
+// Décima unidad: PROVEA p. 467, registros 117–121. Fecha y grafía pendientes explícitos.
+const tenthBatch2001 = [["amable-jerry-useche","Amable Jerry Useche","2001-02-18","policial"],["wuilkenfer-antonio-gutierrez-lunar","Wuilkenfer Antonio Gutiérrez Lunar","2001-02-25","policial"],["franklin-manuel-alejos-rondon","Franklin Manuel Alejos Rondón","2001-02-27","investigacion"],["miguel-antonio-torres-2001","Miguel Antonio Torres","2001-02-28","investigacion"],["hector-cabrera-2001","Héctor Cabrera","2001-02-03","policial"]];
+assert.equal(tenthBatch2001.length,5,'Cinco registros nominales en PROVEA p. 467');
+assert.equal(cases2001.length,63,'63 fichas de 2001, registro parcial');
+assert.equal(CASES.length,364,'364 fichas totales, sin duplicaciones');
+for (const [id,name,date,category] of tenthBatch2001) {
+ const found=cases2001.filter(p=>p.id===id);
+ assert.equal(found.length,1,`Ficha única: ${id}`);
+ assert.equal(found[0].name,name,`Nombre PROVEA: ${id}`);
+ assert.equal(found[0].date,date,`Fecha fuente: ${id}`);
+ assert.equal(found[0].category,category,`Categoría sin sentencia presunta: ${id}`);
+ assert.deepEqual(found[0].sources,['PRO2001'],`Fuente nominal: ${id}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual: ${id}`);
+}
+assert.ok(cases2001.find(p=>p.id==='hector-cabrera-2001')?.note.includes('03.02.01*'),'No ocultar fecha con asterisco');
+assert.ok(cases2001.find(p=>p.id==='wuilkenfer-antonio-gutierrez-lunar')?.note.includes('grafía Wuilkenfer'),'Corroboración nominal pendiente');
+assert.ok(year2001.includes('62–121') && SOURCES.PRO2001.title.includes('460–467'),'Cobertura del anexo actualizada');
+assert.ok(year2001.includes('No es un balance anual exhaustivo'),'Sin cierre falso del año');

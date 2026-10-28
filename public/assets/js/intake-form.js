@@ -53,6 +53,28 @@
   };
 
   /**
+   * Campaign attribution in the delivered brief, not in analytics events.
+   * Only the fully matching, fixed Rutificador experiment is recognized.
+   * Never copy arbitrary UTM values, query strings, RUTs, or file contents.
+   * Invalid/missing/duplicated keys fail closed (no attribution).
+   */
+  function rutificadorReferral() {
+    try {
+      const params = new URL(typedWindow.location.href).searchParams;
+      const expected = [
+        ['utm_source', 'rutificador'],
+        ['utm_medium', 'referral'],
+        ['utm_campaign', 'auditoria_rut_b2b'],
+      ];
+      if (!expected.every(([key, value]) => params.getAll(key).length === 1 && params.get(key) === value)) return null;
+      const content = params.getAll('utm_content');
+      return content.length === 1 && ['diagnostico', 'recurrente'].includes(content[0]) ? content[0] : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /**
    * Show a submit-result banner and bring it into view. On short/mobile
    * viewports the banner sits right after the submit button and can render
    * below the visible viewport with no scroll or focus change (confirmed via
@@ -185,9 +207,17 @@
       errorEl && errorEl.classList.remove('show');
 
       try {
+        const payload = new FormData(form);
+        const rutificadorInterest = rutificadorReferral();
+        if (rutificadorInterest && typeof payload.set === 'function') {
+          // Values are fixed enums, not raw URL parameters or user input.
+          payload.set('referral_product', 'rutificador');
+          payload.set('referral_interest', rutificadorInterest);
+          payload.set('_subject', `Rutificador - Auditoria B2B (${rutificadorInterest})`);
+        }
         const response = await fetch(form.action, {
           method: 'POST',
-          body: new FormData(form),
+          body: payload,
           headers: { Accept: 'application/json' },
         });
         if (response.ok) {

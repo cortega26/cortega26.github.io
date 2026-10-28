@@ -229,3 +229,28 @@ policiales), sin prejuzgar autoría ni culpabilidad individual.
 **Integración:** el incremento suma dos fichas a las cinco anteriores,
 actualiza la página anual y el filtro de casos con autoría no acreditada,
 y conserva la revisión humana y el gate de QA exact-SHA antes de cualquier merge.
+
+### Contraste nominal PROVEA — fuente original localizada (28-10-2026)
+
+Se encontró el PDF del **anexo 3 del informe octubre 2000–septiembre 2001** en el
+archivo de PROVEA: <https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf>.
+Se inspeccionaron las páginas impresas **475 y 476** (páginas PDF 34 y 35),
+no el anexo completo. El registro n.º 184 confirma **José Ramón Rodríguez**,
+**15-05-2001**, Acarigua; el n.º 191 identifica **Belmiro Alexander Gutiérrez**,
+**19-05-2001**, Acarigua. Las circunstancias documentadas son compatibles
+con HRW, que utiliza el nombre abreviado «Belmiro Gutiérrez».
+
+**Discrepancia P1 de identidad:** el registro n.º 194 del mismo anexo identifica
+a **Edixon Parra**, 16 años, Petare, 31-05-2001, herido en una pierna por
+policías y muerto durante el traslado. El Departamento de Estado identifica a
+**Ericson José Parra**, también 16 años, misma fecha, lugar y hechos.
+Es **probable** que se trate de una misma víctima, pero no se ha confirmado
+la forma nominal correcta. Se mantiene **una sola ficha**, con advertencia
+explícita y sin crear un segundo caso. Investigar fuentes originales de
+Red de Apoyo y otros testimonios antes de rectificar el nombre.
+
+La localización del PDF **resuelve el bloqueo de acceso al anexo**, pero
+**no equivale a su auditoría exhaustiva**: hay muchas más entradas y fechas
+que cotejar. Próxima unidad: recorrer cronológicamente los casos de enero a
+septiembre de 2001 y confrontarlos con el inventario canónico; consultar
+el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.

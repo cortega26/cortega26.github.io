@@ -42,6 +42,7 @@ const pages = [
   { id: 'directory', path: '/venezuela-lab/museo/victimas/', selector: '.person-card' },
   { id: 'year-1999', path: '/venezuela-lab/museo/victimas/1999/', selector: '.year-card' },
   { id: 'year-2000', path: '/venezuela-lab/museo/victimas/2000/', selector: '.year-roster-item' },
+  { id: 'year-2001', path: '/venezuela-lab/museo/victimas/2001/', selector: '.year-roster-item' },
   { id: 'profile', path: '/venezuela-lab/museo/victimas/perfil.html?id=jaime-hilarion-palima-dominguez', selector: '.profile-name' }
 ];
 const widths = [320, 390, 768, 1024, 1440];
@@ -99,6 +100,11 @@ try {
         if (n !== 24) findings.push(`${target.id}/${width}: expected 24 visible records, got ${n}`);
         const count = (await page.locator('#registered-count').textContent())?.trim();
         if (count !== String(CASES.length)) findings.push(`${target.id}/${width}: expected ${CASES.length} records, got ${count}`);
+      }
+      if (target.id === 'year-2001') {
+        const n = await page.locator('.year-roster-item').count();
+        const expected = CASES.filter(person => person.year === 2001).length;
+        if (n !== expected) findings.push(`${target.id}/${width}: expected ${expected} year records, got ${n}`);
       }
       if (target.id === 'year-2000') {
         const n = await page.locator('.year-roster-item').count();

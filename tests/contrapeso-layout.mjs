@@ -101,14 +101,10 @@ try {
         const count = (await page.locator('#registered-count').textContent())?.trim();
         if (count !== String(CASES.length)) findings.push(`${target.id}/${width}: expected ${CASES.length} records, got ${count}`);
       }
-      if (target.id === 'year-2001') {
+      if (['year-2000', 'year-2001'].includes(target.id)) {
         const n = await page.locator('.year-roster-item').count();
-        const expected = CASES.filter(person => person.year === 2001).length;
-        if (n !== expected) findings.push(`${target.id}/${width}: expected ${expected} year records, got ${n}`);
-      }
-      if (target.id === 'year-2000') {
-        const n = await page.locator('.year-roster-item').count();
-        const expectedYearRecords = CASES.filter(person => person.year === 2000).length;
+        const year = Number(target.id.slice(-4));
+        const expectedYearRecords = CASES.filter(person => person.year === year).length;
         if (n !== expectedYearRecords) findings.push(`${target.id}/${width}: expected ${expectedYearRecords} year records, got ${n}`);
       }
       if ([390, 1440].includes(width)) {

@@ -553,8 +553,8 @@ const twentyFirstBatch2001=[["hidublis-diaz-acosta","Hidublis Díaz Acosta","200
 // Hito mínimo de 136 fichas, no techo: futuros lotes deben seguir pasando sin alterar la auditoría de este hito.
 assert.ok(cases2001.length>=136,'136 fichas de 2001; registro parcial');
 assert.equal(new Set(CASES.map(p=>p.id)).size,CASES.length,'IDs globales únicos');
-assert.ok(CASES.length>=437,'437 fichas totales sin duplicados');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'136 enlaces nominales');
+assert.ok(CASES.length>=437,'Preservar 437 fichas previas');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Enlaces nominales sincronizados con dataset');
 for(const [id,name,date,num] of twentyFirstBatch2001){
  const m=cases2001.filter(p=>p.id===id);
  assert.equal(m.length,1,`ID único ${num}`);
@@ -573,9 +573,9 @@ assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No
 
 // Auditoría transversal de tres fichas existentes de marzo de 2001: COFAVIC vs. PROVEA.
 const elTigre=[["yavidilex-placencio-borges","Yavidilex Placencio Borges"],["wilmer-villarroel-2001","Wilmer Villarroel"],["rafael-leonardo-moreno","Rafael Leonardo Moreno"]];
-assert.ok(cases2001.length>=136,'Cotejo de El Tigre no crea personas nuevas');
-assert.ok(CASES.length>=437,'Cotejo no altera total nominal');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Cotejo no duplica enlaces');
+assert.ok(cases2001.length>=136,'Preservar hito de 136 fichas al cotejar El Tigre');
+assert.ok(CASES.length>=437,'Preservar hito global de 437 fichas');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Enlaces sincronizados tras cotejo El Tigre');
 assert.ok(SOURCES.COF2001.url.includes('6-COF-HIS.pdf'),'Fuente COFAVIC identificada');
 for(const [id,name] of elTigre){
  const match=cases2001.filter(p=>p.id===id);
@@ -605,8 +605,8 @@ for(const [id,name,num] of [['jose-daniel-carmona-yaguaracuto','José Daniel Car
  assert.ok(p.note.includes('discrep')&&p.note.includes('sentencia firme'),`Contradicciones y límites ${num}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
-assert.ok(cases2001.length>=136,'Total 2001 tras cotejo Carmona');
-assert.ok(CASES.length>=437,'Total global tras cotejo Carmona');
+assert.ok(cases2001.length>=136,'Preservar hito de 136 fichas tras cotejo Carmona');
+assert.ok(CASES.length>=437,'Preservar hito global tras cotejo Carmona');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Enlaces exactos tras cotejo Carmona');
 assert.ok(year2001.includes('14/15 frente a 15/16')&&year2001.includes('noindex,nofollow,noarchive'),'Discrepancias y robots visibles');
 
@@ -622,8 +622,8 @@ for(const [id,name,num] of [['danner-pastor-barreto-torres','Danner Pastor Barre
  assert.ok(p.note.includes('p. 477')&&p.note.includes('anulada')&&p.note.includes('04-06-2001')&&p.note.includes('05-06-2001'),`Contradicción y estado judicial ${num}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
-assert.ok(cases2001.length>=136,'136 fichas parciales de 2001');
-assert.ok(CASES.length>=437,'437 fichas nominales en total');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'136 enlaces anuales');
+assert.ok(cases2001.length>=136,'Preservar al menos 136 fichas parciales de 2001');
+assert.ok(CASES.length>=437,'Preservar al menos 437 fichas nominales');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Enlaces anuales sincronizados con dataset');
 assert.ok(SOURCES.COVICIL2001.url.includes('poderesimpunidad.pdf')&&year2001.includes('poderesimpunidad.pdf#page=198'),'COVICIL enlazado y localizado');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y alcance parcial');

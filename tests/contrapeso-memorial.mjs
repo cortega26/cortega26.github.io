@@ -533,13 +533,13 @@ assert.equal(CASES.length,431,'431 fichas totales; dos identidades no duplicadas
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,130,'130 enlaces anuales');
 for(const [id,name,date,num] of twentiethBatch2001){
  const found=cases2001.filter(p=>p.id===id);
- assert.equal(found.length,1,'ID único '+num);
- assert.equal(found[0].name,name,'Nombre '+num);
- assert.equal(found[0].date,date,'Fecha '+num);
- assert.equal(found[0].category,'policial','Categoría '+num);
- assert.deepEqual(found[0].sources,['PRO2001'],'Fuente '+num);
- assert.ok(found[0].note.includes('p. 476')&&found[0].note.includes('n.º '+num),'Localizador '+num);
- assert.ok(year2001.includes('perfil.html?id='+id),'Enlace '+num);
+ assert.equal(found.length,1,`ID único ${num}`);
+ assert.equal(found[0].name,name,`Nombre ${num}`);
+ assert.equal(found[0].date,date,`Fecha ${num}`);
+ assert.equal(found[0].category,'policial',`Categoría ${num}`);
+ assert.deepEqual(found[0].sources,['PRO2001'],`Fuente ${num}`);
+ assert.ok(found[0].note.includes('p. 476')&&found[0].note.includes(`n.º ${num}`),`Localizador ${num}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace ${num}`);
 }
 assert.equal(cases2001.filter(p=>p.id==='belmiro-alexander-gutierrez').length,1,'N.º 191 no duplicado');
 assert.equal(cases2001.filter(p=>p.id==='ericson-jose-parra').length,1,'N.º 194 no duplicado');

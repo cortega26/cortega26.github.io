@@ -77,7 +77,7 @@ assert.match(assets, /Qué falta verificar/, 'Límites materiales');
 assert.match(assets, /No se inspeccionó una transcripción oficial íntegra/, 'Fuente primaria no inspeccionada declarada');
 assert.ok(assets.includes('https://www.reuters.com/world/americas/venezuela-offer-state-assets-private-sector-president-rodriguez-says-2026-10-29/'), 'Reuters');
 assert.ok(assets.includes('https://elpais.com/america/2026-10-29/delcy-rodriguez-se-erige-como-unica-garante-de-un-cambio-democratico-en-venezuela-y-promete-elecciones-con-una-autoridad-renovada.html'), 'El País');
-assert.ok(!/<script\\b|<form\\b/i.test(assets), 'Sin scripts ni formularios');
+assert.ok(!/<script\b|<form\b/i.test(assets), 'Sin scripts ni formularios');
 const assetsCard = grid.split('data-search="activos estatales delcy propiedad privada')[1]?.split('</article>')[0];
 assert.ok(assetsCard?.includes(`href="${assetsPath}"`) && !assetsCard.includes('demo-tag'), 'Tarjeta real enlazada');
 if (process.argv.includes('--built')) {

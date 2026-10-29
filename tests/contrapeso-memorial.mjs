@@ -646,12 +646,12 @@ for (const [id,name,date,num] of provea478) {
   assert.ok(p.note.includes('No se inspeccionaron')||p.note.includes('no se inspeccionaron'),`Límites probatorios ${num}`);
   assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
-assert.equal(cases2001.length,141,'141 fichas parciales 2001, incluido el n.º 207 de p. 478');
-assert.equal(CASES.length,442,'442 fichas totales tras incorporar n.º 207 de PROVEA');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,141,'Roster anual exacto');
+assert.equal(cases2001.length,142,'142 fichas parciales 2001 tras PROVEA p. 479');
+assert.equal(CASES.length,443,'443 fichas totales tras PROVEA p. 479');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,142,'Roster anual exacto');
 assert.ok(SOURCES.PRO2001.title.includes('478')&&SOURCES.PRO2001.scope.includes('n.º 206'),'Fuente y casos reservados');
 assert.ok(cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('compañera')&&cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('a la mujer en un brazo')&&!cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('madre'),'Distinguir lesión de compañera y muerte de Pereira, sin inventar parentesco');
-assert.ok(year2001.includes('141 FICHAS NOMINALES')&&year2001.includes('<strong>141</strong>'),'Contadores visibles');
+assert.ok(year2001.includes('142 FICHAS NOMINALES')&&year2001.includes('<strong>142</strong>'),'Contadores visibles');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y cautelas');
 
 // PROVEA p. 478, n.º 207: un adulto, atribución documental sin convertirla en condena; n.º 206 pendiente.
@@ -666,3 +666,16 @@ assert.ok(anderson2001[0].note.includes('adolescente del n.º 206')&&!anderson20
 assert.ok(SOURCES.PRO2001.scope.includes('n.º 206 (adolescente de 16 años)')&&!SOURCES.PRO2001.scope.includes('Díaz López'),'Fuente canónica con reserva de identidad');
 assert.ok(!year2001.includes('Díaz López'),'La página pública no identifica al adolescente pendiente');
 assert.ok(year2001.includes('perfil.html?id=anderson-garcia-orellana-2001')&&year2001.includes('n.º 206 (adolescente)'),'Enlace y pendiente visibles');
+
+// PROVEA p. 479, n.os 208 y 211: deduplicación documental y denuncia atribuida.
+const arroyave2001=cases2001.filter(x=>x.id==='juan-pablo-arroyave');
+assert.equal(arroyave2001.length,1);
+assert.deepEqual(arroyave2001[0].sources,['US2001','PRO2001']);
+assert.ok(arroyave2001[0].note.includes('Arroyabe Corrales')&&arroyave2001[0].note.includes('n.º 208')&&arroyave2001[0].note.includes('situación judicial posterior'));
+const gamez2001=cases2001.filter(x=>x.id==='isidro-rafael-gamez-salazar-2001');
+assert.equal(gamez2001.length,1);
+assert.equal(gamez2001[0].date,'2001-06-29');
+assert.deepEqual(gamez2001[0].sources,['PRO2001']);
+assert.ok(gamez2001[0].note.includes('n.º 211')&&gamez2001[0].note.includes('versión oficial')&&gamez2001[0].note.includes('no se inspeccionaron'));
+assert.ok(html2001.includes('perfil.html?id=isidro-rafael-gamez-salazar-2001'));
+assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));

@@ -1,5 +1,17 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## Cotejo documental · 29-10-2026, 17:45 Chile — PROVEA p. 479, n.os 208–212
+
+- **Preflight GitHub:** `master@da804398523c1cbab1f6f578b99e7cb0c54ead9e`, PR #172–#177 integrados, sin PR abiertos. Estado inicial: 141 fichas 2001 / 442 totales, año parcial.
+- **Fuentes primarias inspeccionadas:** [PROVEA, anexo 3, p. 479](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=38), tabla original visual; [Departamento de Estado de EE. UU., informe Venezuela 2001, sección 1.a, publicado el 04-03-2002](https://www.refworld.org/reference/annualreport/usdos/2002/31349). Búsquedas nominales adicionales sin hallazgo independiente para el n.º 211; no presumir independencia de origen de los dos documentos sobre n.º 208.
+- **N.º 208 — reconciliación:** PROVEA identifica a **Juan Pablo Arroyabe Corrales (19)**, 22-06-2001, San Antonio, Táchira, fallecido tras orden de accionar freno de mano; el informe estadounidense identifica a **Juan Pablo Arroyave**, misma fecha, lugar, edad, cuerpo policial y secuencia. Es **una sola persona**; ampliar ficha `juan-pablo-arroyave` con variante y ambas fuentes, sin duplicar. Segundo apellido y grafía pendientes de cotejo registral. La ausencia de investigación reportada en 2002 no prueba situación judicial actual.
+- **N.º 211 — una alta:** **Isidro Rafael Gámez Salazar (35)**, Mariara, Carabobo, 29-06-2001. PROVEA denuncia disparos policiales tras sacarlo de su residencia; **versión oficial de enfrentamiento**. No se inspeccionaron peritaje, autopsia, expediente, sentencia ni declaraciones originales. No imputar responsabilidad penal individual.
+- **Exclusiones:** n.os 209–210 describen pérdidas de embarazo sin nombres individuales; n.º 212 (Antonio Enrique Infante Navas, edad no consignada) requiere cotejo adicional. Sin identidades de familiares, testigos, funcionarios ni domicilios.
+- **Principios:** libertad individual — **aplica con evidencia** a las muertes y actuaciones descritas; propiedad privada — **no aplica**; control del poder — **aplica con evidencia** a las denuncias y versiones oficiales, sin fallo judicial comprobado.
+- **Salida:** 142 fichas 2001 / 443 totales, una alta y una reconciliación, HTML, dataset y tests. **Auditoría propia, sin revisión de sesión aislada. Codex: NO SOLICITADO — revisión selectiva.** CI, Playwright, Codacy y gates exact-SHA pendientes; no se ejecutó Node local. Mantener noindex y prototipo. Siguiente unidad: cotejar n.º 212 y p. 480.
+- **Rectificación del registro de trabajo:** un apartado histórico de las 11:12 decía que el n.º 198 seguía excluido, pero el dataset actual incluye `hidublis-diaz-acosta`. Esa anotación no refleja el estado vigente; su discrepancia causal exige auditoría específica, sin borrado silencioso.
+
+
 ## Auditoría documental · 29-10-2026, 14:29 Chile — PROVEA p. 478, n.os 206–207
 
 - **Base verificada:** `master@639a15219f8b0bf9c2792ecabecfd53d2ad591eb`; PR #172, #173, #174 y #175 integrados; ningún PR abierto al preflight. Dataset: 140 fichas de 2001 / 441 totales antes de esta unidad; el capítulo 2001 contiene 140 enlaces. La cifra no es exhaustiva.

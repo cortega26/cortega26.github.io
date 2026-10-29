@@ -627,3 +627,28 @@ assert.ok(CASES.length>=437,'Preservar al menos 437 fichas nominales');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Enlaces anuales sincronizados con dataset');
 assert.ok(SOURCES.COVICIL2001.url.includes('poderesimpunidad.pdf')&&year2001.includes('poderesimpunidad.pdf#page=198'),'COVICIL enlazado y localizado');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y alcance parcial');
+// Unidad PROVEA p. 478: cuatro personas adultas, registros 202–205; no elevar denuncias a sentencias.
+const provea478 = [
+  ['arnaldo-rosas-2001','Arnaldo Rosas','2001-06-13',202],
+  ['carlos-enrique-santana-redondo','Carlos Enrique Santana Redondo','2001-06-15',203],
+  ['eduardo-jose-mejicano-garcia','Eduardo José Mejicano García','2001-06-18',204],
+  ['edgar-antonio-pereira-2001','Edgar Antonio Pereira','2001-06-20',205]
+];
+for (const [id,name,date,num] of provea478) {
+  const matches=cases2001.filter(p=>p.id===id);
+  assert.equal(matches.length,1,`Una ficha por registro PROVEA ${num}`);
+  const p=matches[0];
+  assert.equal(p.name,name,`Nombre cotejado en p. 478 n.º ${num}`);
+  assert.equal(p.date,date,`Fecha del anexo n.º ${num}`);
+  assert.equal(p.category,'policial',`No atribuir sentencia ${num}`);
+  assert.deepEqual(p.sources,['PRO2001'],`Una fuente documental declarada ${num}`);
+  assert.ok(p.note.includes('p. 478')&&p.note.includes(`n.º ${num}`),`Localizador exacto ${num}`);
+  assert.ok(p.note.includes('No se inspeccionaron')||p.note.includes('no se inspeccionaron'),`Límites probatorios ${num}`);
+  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
+}
+assert.equal(cases2001.length,140,'140 fichas parciales 2001 tras cuatro adultos de p. 478');
+assert.equal(CASES.length,441,'441 fichas totales tras unidad PROVEA p. 478');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,140,'Roster anual exacto');
+assert.ok(SOURCES.PRO2001.title.includes('478')&&SOURCES.PRO2001.scope.includes('206–207'),'Fuente y casos reservados');
+assert.ok(year2001.includes('140 FICHAS NOMINALES')&&year2001.includes('<strong>140</strong>'),'Contadores visibles');
+assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y cautelas');

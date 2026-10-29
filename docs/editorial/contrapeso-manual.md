@@ -89,7 +89,7 @@ Antes de integrar un texto nuevo y al revisar el contenido actual:
 
 **Retroactividad:** inventariar páginas y registros dinámicos, revisar las piezas según relevancia y riesgo (primero imputaciones, fuentes, privacidad y fechas). Documentar en cada PR qué piezas fueron efectivamente examinadas, qué hallazgos se corrigieron y qué falta. No declarar que una ficha nominal se auditó individualmente por haber actualizado su plantilla o índice.
 
-**Guard automatizado:** exigir enlaces accesibles al método y preservar robots en cada HTML. El test no certifica la veracidad ni puede sustituir la evaluación humana de los principios.
+**Guard automatizado:** exigir enlaces accesibles al método y preservar robots en cada HTML. El test no certifica la veracidad ni sustituye la auditoría factual y editorial documentada del responsable de Contrapeso.
 
 ## 5. Jerarquía de fuentes y verificación
 
@@ -132,7 +132,13 @@ Una fuente única e indirecta puede servir para **plantear una investigación**,
 - **Rectificación:** registrar fecha, versión anterior, qué cambió y por qué; actualizar las páginas dependientes, no borrar silenciosamente el historial.
 - **Actualización:** una noticia reciente lleva fecha de hecho, fecha de publicación y última revisión cuando corresponda.
 
-Requerir revisión humana explícita para acusaciones penales no suficientemente acreditadas, identificación de víctimas vulnerables, decisiones de lanzamiento, cambios de identidad pública y riesgos legales/privacidad relevantes. Una revisión del mismo agente sobre su propio texto no es una revisión editorial independiente.
+**Mandato del propietario (29-10-2026): responsabilidad editorial integral.** La investigación, contrastación, redacción, comprobación factual, evaluación de privacidad, correcciones, pruebas y decisión de integración de PRs del prototipo corresponden al responsable de Contrapeso. **No se exige revisión humana editorial por ficha, noticia, expediente, opinión institucional o PR**, ni puede invocarse su ausencia como bloqueo. La autonomía no autoriza publicar imputaciones insuficientemente acreditadas, ocultar incertidumbres, exponer innecesariamente a víctimas vulnerables ni sortear reglas de protección.
+
+**Gate reforzado para contenido sensible:** documentar en el PR la fuente primaria y pasaje exacto, emisor, fecha, corroboración necesaria, versión institucional y evidencia adversa, distinción entre denuncia/hallazgo/sentencia, causalidad, variantes nominales, deduplicación, datos personales imprescindibles y límites de verificación. Si la prueba no basta, investigar más, reformular con atribución precisa, desidentificar, excluir o posponer la pieza. La revisión técnica y los tests no certifican veracidad.
+
+**Revisión independiente por sesión aislada:** una revisión efectivamente ejecutada en sesión fresca sin contexto del implementador constituye independencia de criterio/contexto, **no auditoría externa ni aprobación de un tercero**. Acreditar sesión separada, SHA/diff, fuentes, hallazgos verificables y correcciones; no simular aislamiento si no está disponible. Reservarla para hitos consolidados y riesgos materiales, no cada commit; respetar las revisiones externas formalmente obligatorias y la política selectiva de Codex.
+
+**Decisiones reservadas al propietario:** lanzamiento público, levantamiento de `noindex`, cambio de dominio, identidad o firma personal que lo represente y monetización. Un merge al prototipo no autoriza esas decisiones. Mantener `noindex,nofollow,noarchive` y las protecciones de GitHub; la accesibilidad directa por URL exige el mismo rigor de privacidad y exactitud.
 
 ## 8. Independencia, seguridad y transparencia
 

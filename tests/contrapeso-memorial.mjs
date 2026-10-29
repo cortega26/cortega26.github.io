@@ -569,7 +569,6 @@ assert.ok(SOURCES.PRO2001.title.includes('477')&&SOURCES.PRO2001.scope.includes(
 assert.ok(year2001.includes('<strong>132</strong>')&&year2001.includes('132 FICHAS NOMINALES'),'Contadores concordantes');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Prototipo y cautelas');
 
-
 // Auditoría transversal de tres fichas existentes de marzo de 2001: COFAVIC vs. PROVEA.
 const elTigre=[["yavidilex-placencio-borges","Yavidilex Placencio Borges"],["wilmer-villarroel-2001","Wilmer Villarroel"],["rafael-leonardo-moreno","Rafael Leonardo Moreno"]];
 assert.equal(cases2001.length,132,'Cotejo de El Tigre no crea personas nuevas');

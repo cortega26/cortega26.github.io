@@ -453,7 +453,6 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 
 **Próxima unidad:** PROVEA p. 477 / PDF índice 35, n.os 195–201, con cautela por menores y versiones familiares. Pendientes: identidades 146/162 y Ericson/Edixon, fechas, causalidad y estado judicial. Codex: **NO SOLICITADO — revisión selectiva**.
 
-
 ## F1 — Vigesimoprimera unidad de 2001 — PROVEA p. 477, selección adulta (29-10-2026; PR #172)
 
 **Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, p. impresa 477 / PDF índice 35, registros 195–201](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=36). Se cotejaron los siete renglones con el dataset: **dos fichas nuevas de adultos**, Hidublis Díaz Acosta (n.º 198, Puerto Ordaz, 11-06-2001*) y Franklin Rafael Salazar Pérez (n.º 201, Ciudad Bolívar, 12-06-2001). La fecha del n.º 198 aparece con asterisco no explicado; se registra como fecha del hecho informada, no certificación médico-legal del día de fallecimiento. PROVEA recoge en el n.º 198 una denuncia de golpes durante interrogatorio y la versión oficial de infarto; en el n.º 201, denuncia familiar de ejecución policial y versión de enfrentamiento. No se inspeccionaron peritajes, autopsias ni sentencias; no se atribuye responsabilidad penal individual acreditada.
@@ -463,7 +462,6 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 **Resultado en PR:** 132 fichas de 2001 / 433 totales, capítulo y dataset reconciliados, fuentes y tests nominales/robots extendidos; el año sigue **parcial y abierto**. Libertad individual: **aplica con evidencia** (vida e integridad); propiedad privada: **no aplica** a los dos episodios; control del poder: **aplica con evidencia** (interrogatorio denunciado, versiones oficiales y exigencia de investigación). Auditoría propia de esta unidad: fuente visual cotejada, atribución diferenciada, fecha asteriscada y ausencia de sentencia declaradas; **sin revisión de sesión aislada**. Codex **NO SOLICITADO — revisión selectiva**. No se autoriza merge hasta auditoría consolidada de las fichas del PR, checks exact-SHA y controles restantes.
 
 **Próxima unidad:** resolver la revisión individual de los cinco adolescentes de p. 477 y luego p. 478 (n.os 202–207); mantener pendientes 146/162, Edixon/Ericson, causalidades, fechas y actuaciones judiciales. No levantar noindex ni declarar completado 2001.
-
 
 ## F1 — Vigesimosegunda unidad: auditoría adversarial del episodio de El Tigre, marzo de 2001 (29-10-2026; PR #172)
 

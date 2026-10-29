@@ -523,14 +523,14 @@ assert.ok(reconciled184[0].sources.includes('HRW2001')&&reconciled184[0].sources
 assert.ok(cases2001.find(p=>p.id==='jhonny-brito-salazar').note.includes('versión oficial')&&cases2001.find(p=>p.id==='franklin-salazar-2001').note.includes('versión oficial'),'Preservar versión oficial del episodio 185–186');
 assert.ok(cases2001.find(p=>p.id==='henry-german-aponte-requena').note.includes('Familiares')&&cases2001.find(p=>p.id==='henry-german-aponte-requena').note.includes('No se inspeccionaron peritajes'),'Discrepancia probatoria n.º 188');
 assert.ok(SOURCES.PRO2001.scope.includes('n.os 62–194')&&year2001.includes('Los registros 62–194'),'Cobertura parcial coherente');
-assert.ok(!year2001.includes('ciento catorce')&&year2001.includes('<strong>130</strong>')&&year2001.includes('130 FICHAS NOMINALES'),'Sin contador textual obsoleto');
+assert.ok(!year2001.includes('ciento catorce')&&year2001.includes(`<strong>${cases2001.length}</strong>`)&&year2001.includes(`${cases2001.length} FICHAS NOMINALES`),'Sin contador textual obsoleto');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Prototipo y límites preservados');
 
 // Vigésima unidad: PROVEA p. 476, n.os 189–194; 191 y 194 ya estaban reconciliados.
 const twentiethBatch2001=[["alexis-jose-torres-2001","Alexis José Torres","2001-05-17",189],["juan-arevalo-arias-lugo","Juan Arévalo Arias Lugo","2001-05-17",190],["rafael-antonio-lazaro-dobables","Rafael Antonio Lázaro Dobables","2001-05-26",192],["prospero-sumoza-gonzalez","Próspero Sumoza González","2001-05-27",193]];
-assert.equal(cases2001.length,130,'130 fichas de 2001; no exhaustivo');
-assert.equal(CASES.length,431,'431 fichas totales; dos identidades no duplicadas');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,130,'130 enlaces anuales');
+assert.ok(cases2001.length>=130,'Conservar 130 fichas del hito previo; no exhaustivo');
+assert.ok(CASES.length>=431,'Conservar 431 fichas previas sin duplicar');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Enlaces anuales exactos');
 for(const [id,name,date,num] of twentiethBatch2001){
  const found=cases2001.filter(p=>p.id===id);
  assert.equal(found.length,1,`ID único ${num}`);
@@ -547,3 +547,24 @@ assert.ok(!cases2001.some(p=>p.id==='edixon-parra-2001'),'Variante Ericson/Edixo
 assert.ok(cases2001.find(p=>p.id==='prospero-sumoza-gonzalez').note.includes('fecha exacta de la muerte'),'No inferir fecha de fallecimiento');
 assert.ok(SOURCES.PRO2001.scope.includes('n.os 62–194')&&year2001.includes('Los registros 62–194'),'Cobertura');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y límites');
+
+// Vigésima primera unidad: p. 477, adultos n.os 198 y 201; adolescentes diferidos por privacidad.
+const twentyFirstBatch2001=[["hidublis-diaz-acosta","Hidublis Díaz Acosta","2001-06-11",198],["franklin-rafael-salazar-perez","Franklin Rafael Salazar Pérez","2001-06-12",201]];
+assert.equal(cases2001.length,132,'132 fichas de 2001; registro parcial');
+assert.equal(CASES.length,433,'433 fichas totales sin duplicados');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,132,'132 enlaces nominales');
+for(const [id,name,date,num] of twentyFirstBatch2001){
+ const m=cases2001.filter(p=>p.id===id);
+ assert.equal(m.length,1,`ID único ${num}`);
+ assert.equal(m[0].name,name,`Nombre PROVEA ${num}`);
+ assert.equal(m[0].date,date,`Fecha evento ${num}`);
+ assert.equal(m[0].category,'policial',`Categoría ${num}`);
+ assert.deepEqual(m[0].sources,['PRO2001'],`Fuente ${num}`);
+ assert.ok(m[0].note.includes('p. 477')&&m[0].note.includes(`n.º ${num}`),`Pasaje ${num}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace ${num}`);
+}
+assert.ok(cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('infarto')&&cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('asterisco'),'Conservar versión oficial y fecha no confirmada');
+assert.ok(cases2001.find(p=>p.id==='franklin-rafael-salazar-perez').note.includes('funcionarios alegaron'),'No convertir denuncia en sentencia');
+assert.ok(SOURCES.PRO2001.title.includes('477')&&SOURCES.PRO2001.scope.includes('195–197')&&year2001.includes('195–197'),'Adolescentes no incluidos sin evaluación');
+assert.ok(year2001.includes('<strong>132</strong>')&&year2001.includes('132 FICHAS NOMINALES'),'Contadores concordantes');
+assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Prototipo y cautelas');

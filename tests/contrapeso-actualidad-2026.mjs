@@ -57,7 +57,7 @@ assert.match(march, /dos versiones incompatibles/, 'Contradicción material expl
 assert.ok(march.includes('https://www.infobae.com/america/agencias/2026/10/28/activistas-exigen-presidenciales-y-un-indulto-masivo-para-presos-politicos-en-venezuela/'), 'Despacho EFE consultado');
 assert.ok(!/<script\b|<form\b/i.test(march), 'Sin JS ni formularios nuevos');
 const marchCard = grid.split('data-search="marcha miraflores 28 octubre 2026')[1]?.split('</article>')[0];
-assert.ok(marchCard?.includes('href="' + marchPath + '"') && !marchCard.includes('demo-tag'), 'Tarjeta de actualidad enlaza a noticia real');
+assert.ok(marchCard?.includes(`href="${marchPath}"`) && !marchCard.includes('demo-tag'), 'Tarjeta de actualidad enlaza a noticia real');
 assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 2, 'Dos noticias reales en Actualidad');
 if (process.argv.includes('--built')) {
   const builtMarch = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/index.html', import.meta.url), 'utf8');

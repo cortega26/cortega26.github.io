@@ -1,6 +1,6 @@
 # Contrapeso — Contratos de publicación por género (CP-011)
 
-**Estado:** guía interna para el prototipo, 26-10-2026. Complementa la carta editorial y el manual; no autoriza publicar sin revisión. Las plantillas son campos de trabajo, **no contenido listo para mostrar**.
+**Estado:** guía interna para el prototipo, actualizada el 29-10-2026 por mandato del propietario. Complementa la carta editorial y el manual; exige auditoría editorial propia y gates técnicos antes de integrar. Las plantillas son campos de trabajo, **no contenido listo para mostrar**.
 
 ## Campos comunes obligatorios
 
@@ -11,7 +11,13 @@
 - **Incertidumbre:** apartado visible con lo que no se sabe, no pudo verificarse o está en disputa.
 - **Correcciones:** enlace a `/venezuela-lab/metodo/`; si se corrige un error material, nota pública con fecha, versión anterior, cambio y motivo.
 - **Prototipo:** `noindex,nofollow,noarchive`, etiqueta de prototipo, sin formularios ni scripts añadidos por defecto. Ruta únicamente en `prototypeOnlyRoutes`, nunca en `routeGroups`/sitemap.
-- **QA:** fuente, build y Chromium exact-SHA; Codacy/revisión independiente, autorización para merge y verificación postdeploy diferenciadas. Revisión humana adicional para imputaciones sensibles, identidad, privacidad y lanzamiento.
+- **QA:** fuente, build y Chromium exact-SHA; Codacy, auditoría editorial propia documentada, revisión independiente selectiva cuando corresponda, merge condicionado y verificación postdeploy diferenciadas. No hay gate humano editorial por publicación. Los riesgos sensibles requieren prueba reforzada; lanzamiento, indexación, identidad personal y monetización siguen reservados al propietario.
+
+## Autonomía editorial y revisión independiente por aislamiento (29-10-2026)
+
+El responsable de Contrapeso ejecuta de punta a punta investigación, redacción, verificación, evaluación de riesgos, correcciones, pruebas y merges de prototipo cuando se cumplen los gates. **No se requiere revisor humano editorial** por pieza, ficha, noticia o PR. Para acusaciones sensibles, verificar y registrar fuentes primarias con pasaje, corroboración pertinente, evidencia adversa, atribución precisa (denuncia/hallazgo/sentencia), causalidad, privacidad, deduplicación e incertidumbre. Si no existe prueba suficiente, excluir, desidentificar, corregir o posponer la afirmación.
+
+Una sesión nueva realmente aislada del contexto de desarrollo puede aportar **revisión independiente de criterio**, pero no es aprobación externa ni cumple por sí sola un requisito de aprobador distinto de GitHub. Documentar SHA, alcance, fuentes y hallazgos; si no existe aislamiento comprobable, declarar «auditoría propia, sin revisión de sesión aislada». Usar revisión fresca solo ante riesgo o hito sustancial, sin pedir Codex por rutina. El merge del prototipo puede exponer URLs directas aunque haya `noindex`; no equivale a autorización de lanzamiento, indexación, identidad personal, dominio ni comercialización.
 
 ## Criterio transversal de orientación editorial
 
@@ -43,12 +49,12 @@ El contrato de `tests/contrapeso-orientacion.mjs` verifica enlaces al método y 
 
 **Gate específico:** no republicar como novedad una noticia desactualizada. Contrastar cambios materiales al momento de publicar.
 
-## Plantilla B — Columna / Opinión (solo borrador hasta aprobación humana)
+## Plantilla B — Columna / Opinión institucional (sin firma personal atribuida)
 
 **Género:** OPINIÓN (visible en portada, encabezado y artículo)  
 **Título/tesis:** [posición defendida explícitamente]  
-**Firma:** [identidad o fórmula editorial autorizada por el propietario; nunca inventada]  
-**Publicado/revisado:** [fechas verificables, solo después de aprobación]  
+**Responsabilidad editorial:** [Contrapeso; sin atribuir la opinión a una persona real ni inventar firma]  
+**Publicado/revisado:** [fechas verificables de integración y revisión editorial]  
 
 1. **Tesis y razonamiento:** qué sostiene el autor y por qué.
 2. **Hechos de soporte:** datos y citas comprobables con enlaces; distinguirlos de juicios de valor.
@@ -56,7 +62,7 @@ El contrato de `tests/contrapeso-orientacion.mjs` verifica enlaces al método y 
 4. **Alcance y límites:** qué no puede concluirse; distinguir crítica política de imputación penal.
 5. **Fuentes y rectificaciones:** referencias inspeccionables y enlace al método.
 
-**Gate específico:** una IA puede preparar un borrador, pero no adjudicarse la voz personal del propietario, elegir firma ni publicar una columna sensible sin aprobación editorial humana. Mientras tanto, conservar el borrador fuera de `public/` y no reemplazar la tarjeta EJEMPLO.
+**Gate específico:** puede prepararse e integrarse al prototipo una columna institucional genuina, identificada como OPINIÓN y atribuida a la responsabilidad editorial de Contrapeso, cuando se hayan verificado hechos, objeciones, fuentes y controles. No adjudicarse la voz personal del propietario ni inventar autor, firma o corresponsal. Si incluye una imputación sensible, aplicar el gate reforzado de evidencia o excluirla. Integrar en el prototipo no equivale a lanzamiento ni levanta `noindex`.
 
 ## Plantilla C — Explicador documental
 
@@ -76,6 +82,6 @@ El contrato de `tests/contrapeso-orientacion.mjs` verifica enlaces al método y 
 
 ## Aplicación técnica actual
 
-Las páginas reales de Actualidad y Explicadores ya usan `article-header`, `article-meta`, `sources` y `method`, con CSS compartido. No duplicar plantillas HTML ni CSS sin necesidad. `tests/contrapeso-publication-contracts.mjs` comprueba automáticamente las páginas de `actualidad/`, `explicadores/` y, cuando exista una publicación autorizada, `opinion/`. Es un **guard de estructura**, no una certificación de veracidad, de enlaces externos vivos, de autoría auténtica ni de aprobación humana. Las pruebas específicas de cada publicación siguen siendo obligatorias.
+Las páginas reales de Actualidad y Explicadores ya usan `article-header`, `article-meta`, `sources` y `method`, con CSS compartido. No duplicar plantillas HTML ni CSS sin necesidad. `tests/contrapeso-publication-contracts.mjs` comprueba automáticamente las páginas de `actualidad/`, `explicadores/` y, cuando exista una publicación autorizada, `opinion/`. Es un **guard de estructura**, no una certificación de veracidad, de enlaces externos vivos, de autoría auténtica ni de auditoría editorial propia. Las pruebas específicas de cada publicación siguen siendo obligatorias.
 
 **Fuentes de autoridad:** `AGENTS.md`, `docs/editorial/contrapeso-principios.md`, `docs/editorial/contrapeso-manual.md`, `plans/contrapeso-roadmap.md`.

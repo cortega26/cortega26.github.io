@@ -662,4 +662,7 @@ assert.equal(anderson2001[0].date,'2001-06-21');
 assert.deepEqual(anderson2001[0].sources,['PRO2001'],'URRU es listado derivado, no corroboración independiente');
 assert.ok(anderson2001[0].note.includes('n.º 207')&&anderson2001[0].note.includes('versión oficial')&&anderson2001[0].note.includes('No se inspeccionaron'),'Pasaje, versión y límites');
 assert.ok(!cases2001.some(p=>p.name==='Alberto Díaz López'),'No incorporar al adolescente sin auditoría adicional');
+assert.ok(anderson2001[0].note.includes('adolescente del n.º 206')&&!anderson2001[0].note.includes('Díaz López'),'Referencia documental sin identificar al menor pendiente');
+assert.ok(SOURCES.PRO2001.scope.includes('n.º 206 (adolescente de 16 años)')&&!SOURCES.PRO2001.scope.includes('Díaz López'),'Fuente canónica con reserva de identidad');
+assert.ok(!year2001.includes('Díaz López'),'La página pública no identifica al adolescente pendiente');
 assert.ok(year2001.includes('perfil.html?id=anderson-garcia-orellana-2001')&&year2001.includes('n.º 206 (adolescente)'),'Enlace y pendiente visibles');

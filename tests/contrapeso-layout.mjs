@@ -42,6 +42,7 @@ const pages = [
   { id: 'directory', path: '/venezuela-lab/museo/victimas/', selector: '.person-card' },
   { id: 'year-1999', path: '/venezuela-lab/museo/victimas/1999/', selector: '.year-card' },
   { id: 'year-2000', path: '/venezuela-lab/museo/victimas/2000/', selector: '.year-roster-item' },
+  { id: 'year-2001', path: '/venezuela-lab/museo/victimas/2001/', selector: '.year-roster-item' },
   { id: 'profile', path: '/venezuela-lab/museo/victimas/perfil.html?id=jaime-hilarion-palima-dominguez', selector: '.profile-name' }
 ];
 const widths = [320, 390, 768, 1024, 1440];
@@ -100,9 +101,10 @@ try {
         const count = (await page.locator('#registered-count').textContent())?.trim();
         if (count !== String(CASES.length)) findings.push(`${target.id}/${width}: expected ${CASES.length} records, got ${count}`);
       }
-      if (target.id === 'year-2000') {
+      if (['year-2000', 'year-2001'].includes(target.id)) {
         const n = await page.locator('.year-roster-item').count();
-        const expectedYearRecords = CASES.filter(person => person.year === 2000).length;
+        const year = Number(target.id.slice(-4));
+        const expectedYearRecords = CASES.filter(person => person.year === year).length;
         if (n !== expectedYearRecords) findings.push(`${target.id}/${width}: expected ${expectedYearRecords} year records, got ${n}`);
       }
       if ([390, 1440].includes(width)) {

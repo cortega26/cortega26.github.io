@@ -8,7 +8,6 @@
 - **Decisión:** incorporar dos fichas con fuentes PRO2001/COF2001, contradicciones explícitas, índice y regresiones. Libertad individual: aplica con evidencia; propiedad privada: no aplica; control del poder: aplica con evidencia. Auditoría propia, **sin revisión de sesión aislada**; no equivale a auditoría externa. El año 2001 sigue incompleto; otros tres adolescentes de la p. 477 (n.os 195–197) quedan pendientes de cotejo individual.
 - **Estado:** integración condicionada a CI exact-SHA, Codacy y auditoría consolidada del PR; **no merge** en esta unidad.
 
-
 **Propuesta operativa · 25 de octubre de 2026**  
 **Destino sugerido en GitHub:** `plans/contrapeso-roadmap.md`  
 **Documento normativo complementario:** `docs/editorial/contrapeso-manual.md`  

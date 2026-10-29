@@ -31,7 +31,9 @@ function genreChecks(genre, metadata, kicker) {
   const issues = [];
   if (genre === 'news') {
     if (!/Hecho:\s*[^<]*20\d{2}/.test(metadata)) issues.push('news-event-date');
-    if (!/Publicado y revisado:\s*[^<]*20\d{2}/.test(metadata)) issues.push('news-review-date');
+    const combined = /Publicado y revisado:\s*[^<]*20\d{2}/.test(metadata);
+    const separated = /Publicado:\s*[^<]*20\d{2}[\s\S]*Revisado:\s*[^<]*20\d{2}/.test(metadata);
+    if (!combined && !separated) issues.push('news-review-date');
   }
   if (genre === 'explainer' && /HISTÓRICO/.test(kicker)) {
     if (!/históric|historia|no es actualidad|noticia de última hora/i.test(metadata)) issues.push('historical-context');
@@ -90,6 +92,10 @@ const newsRoute = '/venezuela-lab/actualidad/regreso-machado-2026/';
 assert.ok(validatePublication(news.replace('noindex,nofollow,noarchive', 'index,follow'), 'news', newsRoute).includes('robots'), 'El guard rechaza indexación accidental');
 assert.ok(validatePublication(news.replace('Hecho: 25 de octubre de 2026', 'Episodio: 25 de octubre de 2026'), 'news', newsRoute).includes('news-event-date'), 'El guard rechaza noticia sin fecha del hecho');
 assert.ok(hasEditorialDate('<span>Publicado y revisado: 26 de octubre de 2026, 06:00 (Chile)</span>'), 'Acepta hora y zona horaria de revisión');
+const march = readFileSync(join(prototype, 'actualidad/marcha-miraflores-28oct-2026/index.html'), 'utf8');
+const marchRoute = '/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/';
+assert.deepEqual(validatePublication(march, 'news', marchRoute), [], 'Acepta fechas separadas de publicación y revisión');
+assert.ok(validatePublication(march.replace('Revisado: 29 de octubre de 2026', 'Revisión pendiente'), 'news', marchRoute).includes('news-review-date'), 'Rechaza fecha de revisión ausente');
 assert.ok(validatePublication(news.replace('class="sources"', 'class="references"'), 'news', newsRoute).includes('sources-section'), 'El guard rechaza ausencia de fuentes');
 assert.ok(validatePublication(news.replace('noindex,nofollow,noarchive', 'noindex'), 'news', newsRoute).includes('robots'), 'El guard exige nofollow y noarchive');
 const historical = readFileSync(join(prototype, 'explicadores/actas-28j-2024/index.html'), 'utf8');

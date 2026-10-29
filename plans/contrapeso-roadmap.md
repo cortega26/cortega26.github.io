@@ -5,7 +5,7 @@
 **Documento normativo complementario:** `docs/editorial/contrapeso-manual.md`  
 **Alcance:** prototipo `public/venezuela-lab/` dentro de `cortega26/cortega26.github.io`.
 
-> **Estado de adopción:** documento versionado como hoja de ruta propuesta. Sus decisiones editoriales no sustituyen `AGENTS.md` ni la carta vigente; ninguna regla de este plan autoriza por sí sola fusionar, publicar o levantar `noindex`.
+> **Estado de adopción y vigencia (29-10-2026):** hoja de ruta histórica y operativa subordinada a `AGENTS.md`, la carta y el manual/contratos editoriales actuales. Los hitos ordinarios del prototipo pueden integrarse bajo autorización condicionada del propietario, tras auditoría factual propia, CI y protecciones vigentes; **no** se autoriza lanzamiento, identidad personal, dominio, monetización ni levantar `noindex`. Las menciones anteriores a revisión editorial humana en el historial de unidades describen el estado de entonces y **no constituyen gates vigentes**. La revisión independiente por sesión aislada solo se acredita cuando ocurrió efectivamente; no sustituye aprobaciones de rama requeridas.
 
 ## 1. Objetivo y criterio de éxito
 
@@ -149,7 +149,7 @@ Aplicar libertad individual, propiedad privada legítima y límites instituciona
 - Una CI pendiente sin cambio nuevo **no** justifica nuevo comentario cada 66 minutos.
 - Si un cambio precisa varias ejecuciones, conservar la continuidad en el mismo PR/Issue, no abrir trabajo paralelo.
 - Si GitHub no permite escribir, entregar investigación o diff propuesto y declarar `NO IMPLEMENTADO`; no eludir bloqueos de plataforma.
-- Los temas sensibles siguen revisión editorial humana; no equiparar CI verde con aprobación de una acusación.
+- Los temas sensibles exigen auditoría editorial propia trazable: fuente primaria, versión adversa, estado de la imputación, causalidad, privacidad, incertidumbre y corrección o exclusión de lo insuficientemente sustentado. No equiparar CI verde con validación factual. La revisión por sesión aislada se reserva para riesgos/hitos que la justifiquen y se acredita solo si realmente se ejecutó; cumplir cualquier aprobación formal obligatoria de GitHub.
 - Separar `INVESTIGADO`, `DOCUMENTADO`, `IMPLEMENTADO EN PR`, `VALIDADO EN SHA`, `INTEGRADO` y `COMPROBADO EN SITIO`.
 
 ## 6. Gates por tipo de contenido
@@ -443,4 +443,4 @@ el anexo del informe octubre 2001–septiembre 2002 para octubre–diciembre.
 
 **Corrección editorial P1:** el capítulo anual mostraba 121 fichas pero conservaba «ciento catorce» en metadatos e introducción. Se eliminó el conteo escrito estático para prevenir nuevas contradicciones, manteniendo contador visible y regresión. **Resultado propuesto:** **126 fichas de 2001 / 427 totales**; capítulo, dataset, fuente, tests y roadmap reconciliados. 2001 sigue abierto, sin atribuir motivación política común. Libertad individual: **aplica con evidencia** (vida e integridad); propiedad privada: **no aplica**; control del poder: **aplica con evidencia** (denuncias de actuaciones policiales, versiones oficiales y rendición de cuentas).
 
-**Próxima unidad:** PROVEA p. impresa 476 / PDF índice 34, registros 189–194; revisar si algún caso ya consta (por ejemplo, Edixon Parra), sin duplicar. Mantener pendientes previos de identidad 146/162, fechas con asterisco, causalidades, peritajes, sentencias y revisión editorial humana antes del merge. Codex NO SOLICITADO — revisión selectiva. Prototipo `noindex,nofollow,noarchive` y PR draft sin lanzamiento.
+**Próxima unidad:** PROVEA p. impresa 476 / PDF índice 34, registros 189–194; revisar si algún caso ya consta (por ejemplo, Edixon Parra), sin duplicar. Mantener pendientes previos de identidad 146/162, fechas con asterisco, causalidades, peritajes y sentencias. **Gate previo a merge:** auditoría editorial propia documentada de los 126 registros, atribuciones y privacidad; revalidación de la fuente y sus límites, controles source/build/Playwright y Codacy sobre HEAD exacto, comprobación de protecciones y, si el riesgo lo exige y puede acreditarse, revisión por sesión aislada. No existe gate humano editorial. Codex NO SOLICITADO — revisión selectiva. Prototipo `noindex,nofollow,noarchive`, PR aún sin integración ni lanzamiento.

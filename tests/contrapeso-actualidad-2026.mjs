@@ -31,11 +31,11 @@ for (const url of [
 assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
 assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 'Reutiliza CSS existente');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
-assert.equal((grid.match(/class="story-card"/g) || []).length, 7, 'Siete tarjetas');
+assert.equal((grid.match(/class="story-card"/g) || []).length, 8, 'Ocho tarjetas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Una muestra');
 const card = grid.split('<article class="story-card" data-category="Actualidad"')[1].split('</article>')[0];
 assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
-assert.ok(home.includes('6 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
+assert.ok(home.includes('7 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
 if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/actualidad/regreso-machado-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(built) && built.includes('María Corina Machado regresó'), 'Build de noticia noindex');
@@ -58,10 +58,31 @@ assert.ok(march.includes('https://www.infobae.com/america/agencias/2026/10/28/ac
 assert.ok(!/<script\b|<form\b/i.test(march), 'Sin JS ni formularios nuevos');
 const marchCard = grid.split('data-search="marcha miraflores 28 octubre 2026')[1]?.split('</article>')[0];
 assert.ok(marchCard?.includes(`href="${marchPath}"`) && !marchCard.includes('demo-tag'), 'Tarjeta de actualidad enlaza a noticia real');
-assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 2, 'Dos noticias reales en Actualidad');
+assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 3, 'Tres noticias reales en Actualidad');
 if (process.argv.includes('--built')) {
   const builtMarch = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtMarch) && builtMarch.includes('Miraflores'), 'Build conserva noticia y noindex');
+}
+
+const assetsPath = '/venezuela-lab/actualidad/activos-estatales-29oct-2026/';
+const assets = readFileSync(new URL('../public/venezuela-lab/actualidad/activos-estatales-29oct-2026/index.html', import.meta.url), 'utf8');
+assert.ok(prototypeOnlyRoutes.some((r) => r.path === assetsPath), 'Nueva noticia en inventario de prototipo');
+assert.ok(!routeGroups.some((g) => Object.values(g.paths).includes(assetsPath)), 'Nueva noticia excluida de sitemap');
+assert.ok(hasNoindexMeta(assets) && assets.includes('noindex,nofollow,noarchive'), 'Robots completos');
+assert.match(assets, /Hecho: 29 de octubre de 2026/, 'Fecha del hecho');
+assert.match(assets, /Publicado: 29 de octubre de 2026/, 'Fecha de edición');
+assert.match(assets, /Revisado: 29 de octubre de 2026/, 'Fecha de revisión');
+assert.match(assets, /sin reporteo propio/, 'No inventar reporteo');
+assert.match(assets, /Qué falta verificar/, 'Límites materiales');
+assert.match(assets, /No se inspeccionó una transcripción oficial íntegra/, 'Fuente primaria no inspeccionada declarada');
+assert.ok(assets.includes('https://www.reuters.com/world/americas/venezuela-offer-state-assets-private-sector-president-rodriguez-says-2026-10-29/'), 'Reuters');
+assert.ok(assets.includes('https://elpais.com/america/2026-10-29/delcy-rodriguez-se-erige-como-unica-garante-de-un-cambio-democratico-en-venezuela-y-promete-elecciones-con-una-autoridad-renovada.html'), 'El País');
+assert.ok(!/<script\b|<form\b/i.test(assets), 'Sin scripts ni formularios');
+const assetsCard = grid.split('data-search="activos estatales delcy propiedad privada')[1]?.split('</article>')[0];
+assert.ok(assetsCard?.includes(`href="${assetsPath}"`) && !assetsCard.includes('demo-tag'), 'Tarjeta real enlazada');
+if (process.argv.includes('--built')) {
+  const builtAssets = readFileSync(new URL('../dist/venezuela-lab/actualidad/activos-estatales-29oct-2026/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(builtAssets), 'Build noindex');
 }
 
 console.log('Contrapeso actualidad 2026: género, fuentes, límites, portada, ruta y noindex PASS');

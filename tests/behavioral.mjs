@@ -727,11 +727,11 @@ async function testContrapesoFrontpage(browser) {
     try {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       const cards = page.locator('#article-list .story-card');
-      if (await cards.count() !== 7) fail(`Contrapeso ${width}: expected seven cards`);
+      if (await cards.count() !== 8) fail(`Contrapeso ${width}: expected eight cards`);
       // Provenance must remain visible after JS filters the editorial prototype.
       const provenance = page.locator('#result-count');
       const initialCount = (await provenance.textContent())?.trim();
-      if (initialCount !== '7 contenidos: 6 con fuentes y 1 muestra') {
+      if (initialCount !== '8 contenidos: 7 con fuentes y 1 muestra') {
         fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
       }
       // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.
@@ -813,8 +813,8 @@ async function testContrapesoFrontpage(browser) {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();
       const newsCards = page.locator('#article-list .story-card:visible');
-      if (await newsCards.count() !== 2) {
-        fail(`Contrapeso ${width}: Actualidad must show two sourced news stories`);
+      if (await newsCards.count() !== 3) {
+        fail(`Contrapeso ${width}: Actualidad must show three sourced news stories`);
       } else {
         const newsLink = newsCards.locator('a[href="/venezuela-lab/actualidad/regreso-machado-2026/"]');
         if (await newsLink.count() !== 1) {
@@ -830,6 +830,22 @@ async function testContrapesoFrontpage(browser) {
           else if (newsOverflow) fail(`Contrapeso ${width}: news horizontal overflow`);
           else ok(`Contrapeso ${width}: news filter, link, noindex and responsive width`);
         }
+      }
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      await page.locator('[data-filter="Actualidad"]').click();
+      const assetsLink = page.locator('#article-list .story-card:visible a[href="/venezuela-lab/actualidad/activos-estatales-29oct-2026/"]');
+      if (await assetsLink.count() !== 1) {
+        fail(`Contrapeso ${width}: new October 29 news link missing`);
+      } else {
+        await assetsLink.click();
+        await page.waitForURL('**/venezuela-lab/actualidad/activos-estatales-29oct-2026/');
+        const assetsTitle = await page.locator('h1').first().textContent();
+        const assetsRobots = await page.locator('meta[name="robots"]').getAttribute('content');
+        const assetsOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+        if (!assetsTitle?.includes('Rodríguez plantea devolver activos')) fail(`Contrapeso ${width}: wrong October 29 news`);
+        else if (assetsRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: October 29 news robots missing`);
+        else if (assetsOverflow) fail(`Contrapeso ${width}: October 29 news horizontal overflow`);
+        else ok(`Contrapeso ${width}: October 29 news, noindex and responsive width`);
       }
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();

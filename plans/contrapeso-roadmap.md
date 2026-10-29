@@ -1,5 +1,14 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## Auditoría puntual · 29-10-2026, primos Carmona (unidad 23)
+
+- **Fuentes primarias inspeccionadas visualmente:** PROVEA, anexo 3, p. 477 (PDF índice 35), n.os 199–200; COFAVIC, *La historia de COFIVANZ*, anexo 1 p. 51 (PDF índice 50). Ambos documentos registran dos primos fallecidos el **12-06-2001**.
+- **Contradicciones abiertas:** PROVEA da 14 y 15 años, COFAVIC 15 y 16; PROVEA identifica a Héctor Luis Carmona y COFAVIC añade «Soto»; PROVEA sitúa el hecho en El Tigre y atribuye actuación a Policía Municipal de Barcelona, COFAVIC describe un episodio frente a una farmacia en Barcelona y atribuye la denuncia a presuntos funcionarios del CICPC. **No resolver artificialmente ubicación, edad, cuerpo ni apellido.** La versión oficial de enfrentamiento consta en PROVEA. COFAVIC indicaba **audiencia preliminar** al publicarse (2009/2010), sin sentencia firme ni situación judicial actual verificada.
+- **Privacidad:** dos fallecidos que eran adolescentes, ya identificados por dos fuentes documentales públicas; se incluyen únicamente nombres, año/fecha y hechos pertinentes al memorial, sin publicar nombres de familiares, testigos, domicilio privado ni otros datos innecesarios. La identificación y la atribución no equivalen a sentencia. No se identifican agentes concretos.
+- **Decisión:** incorporar dos fichas con fuentes PRO2001/COF2001, contradicciones explícitas, índice y regresiones. Libertad individual: aplica con evidencia; propiedad privada: no aplica; control del poder: aplica con evidencia. Auditoría propia, **sin revisión de sesión aislada**; no equivale a auditoría externa. El año 2001 sigue incompleto; otros tres adolescentes de la p. 477 (n.os 195–197) quedan pendientes de cotejo individual.
+- **Estado:** integración condicionada a CI exact-SHA, Codacy y auditoría consolidada del PR; **no merge** en esta unidad.
+
+
 **Propuesta operativa · 25 de octubre de 2026**  
 **Destino sugerido en GitHub:** `plans/contrapeso-roadmap.md`  
 **Documento normativo complementario:** `docs/editorial/contrapeso-manual.md`  

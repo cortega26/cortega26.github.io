@@ -568,3 +568,25 @@ assert.ok(cases2001.find(p=>p.id==='franklin-rafael-salazar-perez').note.include
 assert.ok(SOURCES.PRO2001.title.includes('477')&&SOURCES.PRO2001.scope.includes('195–197')&&year2001.includes('195–197'),'Adolescentes no incluidos sin evaluación');
 assert.ok(year2001.includes('<strong>132</strong>')&&year2001.includes('132 FICHAS NOMINALES'),'Contadores concordantes');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Prototipo y cautelas');
+
+
+// Auditoría transversal de tres fichas existentes de marzo de 2001: COFAVIC vs. PROVEA.
+const elTigre=[["yavidilex-placencio-borges","Yavidilex Placencio Borges"],["wilmer-villarroel-2001","Wilmer Villarroel"],["rafael-leonardo-moreno","Rafael Leonardo Moreno"]];
+assert.equal(cases2001.length,132,'Cotejo de El Tigre no crea personas nuevas');
+assert.equal(CASES.length,433,'Cotejo no altera total nominal');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,132,'Cotejo no duplica enlaces');
+assert.ok(SOURCES.COF2001.url.includes('6-COF-HIS.pdf'),'Fuente COFAVIC identificada');
+for(const [id,name] of elTigre){
+ const match=cases2001.filter(p=>p.id===id);
+ assert.equal(match.length,1,`Una sola ficha para ${name}`);
+ assert.equal(match[0].name,name,`Conservar etiqueta nominal PROVEA ${name}`);
+ assert.equal(match[0].date,'2001-03-01',`Fecha del registro PROVEA, no consenso ${name}`);
+ assert.deepEqual(match[0].sources,['PRO2001','COF2001'],`Dos documentos ${name}`);
+ assert.ok(match[0].note.includes('01-03-2001')&&match[0].note.includes('10-03-2001'),`Fechas discrepantes visibles ${name}`);
+ assert.ok(match[0].note.includes('anulada en apelación'),`No convertir condena anulada en firme ${name}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace conservado ${name}`);
+}
+assert.ok(cases2001.find(p=>p.id==='yavidilex-placencio-borges').note.includes('Yavidilet Katiuska Placeres Borges'),'Variante nominal adolescente atribuida');
+assert.ok(cases2001.find(p=>p.id==='wilmer-villarroel-2001').note.includes('24 años'),'Discrepancia de edad preservada');
+assert.ok(cases2001.find(p=>p.id==='rafael-leonardo-moreno').note.includes('Moreno Villarroel'),'Variante de apellido preservada');
+assert.ok(year2001.includes('COFAVIC')&&year2001.includes('condena inicial')&&year2001.includes('noindex,nofollow,noarchive'),'Cotejo público y robots');

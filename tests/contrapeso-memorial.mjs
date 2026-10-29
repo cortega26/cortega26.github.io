@@ -677,5 +677,5 @@ assert.equal(gamez2001.length,1);
 assert.equal(gamez2001[0].date,'2001-06-29');
 assert.deepEqual(gamez2001[0].sources,['PRO2001']);
 assert.ok(gamez2001[0].note.includes('n.º 211')&&gamez2001[0].note.includes('versión oficial')&&gamez2001[0].note.includes('no se inspeccionaron'));
-assert.ok(html2001.includes('perfil.html?id=isidro-rafael-gamez-salazar-2001'));
+assert.ok(year2001.includes('perfil.html?id=isidro-rafael-gamez-salazar-2001'));
 assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));

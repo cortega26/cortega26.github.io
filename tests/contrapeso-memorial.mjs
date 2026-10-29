@@ -340,7 +340,7 @@ for(const [id,name,date,category] of eleventhBatch2001) {
  assert.equal(matches[0].name,name,`Identidad PROVEA: ${id}`);
  assert.equal(matches[0].date,date,`Fecha: ${id}`);
  assert.equal(matches[0].category,category,`Categoría: ${id}`);
- assert.deepEqual(matches[0].sources,['PRO2001'],`Fuente: ${id}`);
+ assert.deepEqual(matches[0].sources,['PRO2001','COF2001'],`Fuentes reconciliadas: ${id}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Perfil enlazado: ${id}`);
 }
 assert.ok(cases2001.find(p=>p.id==='rafael-leonardo-moreno')?.note.includes('denuncia'), 'No presentar ejecución denunciada como sentencia');

@@ -47,10 +47,13 @@ assert.ok(prototypeOnlyRoutes.some((r) => r.id === 'contrapeso:news:marcha-miraf
 assert.ok(!routeGroups.some((g) => Object.values(g.paths).includes(marchPath)), 'Segunda noticia fuera de sitemap');
 assert.ok(hasNoindexMeta(march) && march.includes('noindex,nofollow,noarchive'), 'Robots completos de segunda noticia');
 assert.match(march, /Hecho: 28 de octubre de 2026/, 'Fecha del hecho actual');
-assert.match(march, /Publicado y revisado: 28 de octubre de 2026/, 'Revisión editorial actual');
+assert.match(march, /Publicado: 28 de octubre de 2026/, 'Fecha de publicación original');
+assert.match(march, /Revisado: 29 de octubre de 2026/, 'Fecha de revisión diferenciada');
 assert.match(march, /sin reporteo propio/, 'No se inventa reporteo');
 assert.match(march, /Qué falta verificar/, 'Límites documentados');
 assert.ok(march.includes('https://eldiario.com/2026/10/28/represion-policial-marcha/'), 'Fuente local consultada');
+assert.ok(march.includes('https://runrun.es/noticias/623963/pnb-bloquea-a-manifestantes-sindicales-y-familiares-de-presos-politicos-antes-de-llegar-a-miraflores/'), 'Tercera fuente sobre versiones de acceso');
+assert.match(march, /dos versiones incompatibles/, 'Contradicción material explícita');
 assert.ok(march.includes('https://www.infobae.com/america/agencias/2026/10/28/activistas-exigen-presidenciales-y-un-indulto-masivo-para-presos-politicos-en-venezuela/'), 'Despacho EFE consultado');
 assert.ok(!/<script\b|<form\b/i.test(march), 'Sin JS ni formularios nuevos');
 const marchCard = grid.split('data-search="marcha miraflores 28 octubre 2026')[1]?.split('</article>')[0];

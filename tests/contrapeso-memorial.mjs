@@ -600,7 +600,7 @@ for(const [id,name,num] of [['jose-daniel-carmona-yaguaracuto','José Daniel Car
  assert.deepEqual(p.sources,['PRO2001','COF2001'],`Dos fuentes ${num}`);
  assert.equal(p.category,'policial',`Sin condena inferida ${num}`);
  assert.ok(p.note.includes('p. 477')&&p.note.includes(`n.º ${num}`)&&p.note.includes('p. 51'),`Localizadores ${num}`);
- assert.ok(p.note.includes('discrepanc')&&p.note.includes('sentencia firme'),`Contradicciones y límites ${num}`);
+ assert.ok(p.note.includes('discrep')&&p.note.includes('sentencia firme'),`Contradicciones y límites ${num}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
 assert.equal(cases2001.length,134,'Total 2001 tras cotejo Carmona');

@@ -727,11 +727,11 @@ async function testContrapesoFrontpage(browser) {
     try {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       const cards = page.locator('#article-list .story-card');
-      if (await cards.count() !== 6) fail(`Contrapeso ${width}: expected six cards`);
+      if (await cards.count() !== 7) fail(`Contrapeso ${width}: expected seven cards`);
       // Provenance must remain visible after JS filters the editorial prototype.
       const provenance = page.locator('#result-count');
       const initialCount = (await provenance.textContent())?.trim();
-      if (initialCount !== '6 contenidos: 5 con fuentes y 1 muestra') {
+      if (initialCount !== '7 contenidos: 6 con fuentes y 1 muestra') {
         fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
       }
       // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.
@@ -813,8 +813,8 @@ async function testContrapesoFrontpage(browser) {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();
       const newsCards = page.locator('#article-list .story-card:visible');
-      if (await newsCards.count() !== 1) {
-        fail(`Contrapeso ${width}: Actualidad must show one sourced news story`);
+      if (await newsCards.count() !== 2) {
+        fail(`Contrapeso ${width}: Actualidad must show two sourced news stories`);
       } else {
         const newsLink = newsCards.locator('a[href="/venezuela-lab/actualidad/regreso-machado-2026/"]');
         if (await newsLink.count() !== 1) {
@@ -830,6 +830,22 @@ async function testContrapesoFrontpage(browser) {
           else if (newsOverflow) fail(`Contrapeso ${width}: news horizontal overflow`);
           else ok(`Contrapeso ${width}: news filter, link, noindex and responsive width`);
         }
+      }
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      await page.locator('[data-filter="Actualidad"]').click();
+      const marchLink = page.locator('#article-list .story-card:visible a[href="/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/"]');
+      if (await marchLink.count() !== 1) {
+        fail(`Contrapeso ${width}: new October 28 news link missing`);
+      } else {
+        await marchLink.click();
+        await page.waitForURL('**/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/');
+        const marchTitle = await page.locator('h1').first().textContent();
+        const marchRobots = await page.locator('meta[name="robots"]').getAttribute('content');
+        const marchOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+        if (!marchTitle?.includes('Una marcha por elecciones')) fail(`Contrapeso ${width}: wrong October 28 news`);
+        else if (marchRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: October 28 news robots missing`);
+        else if (marchOverflow) fail(`Contrapeso ${width}: October 28 news horizontal overflow`);
+        else ok(`Contrapeso ${width}: second news link, noindex and responsive width`);
       }
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Expedientes"]').click();

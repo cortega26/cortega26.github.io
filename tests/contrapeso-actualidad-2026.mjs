@@ -57,8 +57,8 @@ const marchCard = grid.split('data-search="marcha miraflores 28 octubre 2026')[1
 assert.ok(marchCard?.includes('href="' + marchPath + '"') && !marchCard.includes('demo-tag'), 'Tarjeta de actualidad enlaza a noticia real');
 assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 2, 'Dos noticias reales en Actualidad');
 if (process.argv.includes('--built')) {
- const builtMarch = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/index.html', import.meta.url), 'utf8');
- assert.ok(hasNoindexMeta(builtMarch) && builtMarch.includes('Miraflores'), 'Build conserva noticia y noindex');
+  const builtMarch = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(builtMarch) && builtMarch.includes('Miraflores'), 'Build conserva noticia y noindex');
 }
 
 console.log('Contrapeso actualidad 2026: género, fuentes, límites, portada, ruta y noindex PASS');

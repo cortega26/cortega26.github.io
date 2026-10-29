@@ -650,5 +650,6 @@ assert.equal(cases2001.length,140,'140 fichas parciales 2001 tras cuatro adultos
 assert.equal(CASES.length,441,'441 fichas totales tras unidad PROVEA p. 478');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,140,'Roster anual exacto');
 assert.ok(SOURCES.PRO2001.title.includes('478')&&SOURCES.PRO2001.scope.includes('206–207'),'Fuente y casos reservados');
+assert.ok(cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('compañera')&&cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('a la mujer en un brazo')&&!cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('madre'),'Distinguir lesión de compañera y muerte de Pereira, sin inventar parentesco');
 assert.ok(year2001.includes('140 FICHAS NOMINALES')&&year2001.includes('<strong>140</strong>'),'Contadores visibles');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y cautelas');

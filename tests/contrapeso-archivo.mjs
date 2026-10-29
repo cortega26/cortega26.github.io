@@ -19,10 +19,10 @@ assert.ok(card.includes('REGISTRO NOMINAL') && card.includes('EN CONSTRUCCIÓN')
 assert.ok(card.includes('no exhaustivo'), 'No promete exhaustividad');
 assert.ok(card.includes('href="/venezuela-lab/museo/victimas/"'), 'La tarjeta conduce al memorial existente');
 assert.ok(!card.includes('demo-tag') && !card.includes('data-article='), 'El enlace real no abre un modal de ejemplo');
-assert.equal((grid.match(/class="story-card"/g) || []).length, 7, 'Siete tarjetas conservadas');
+assert.equal((grid.match(/class="story-card"/g) || []).length, 8, 'Ocho tarjetas conservadas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Solo Opinión sigue como ejemplo');
-assert.ok(home.includes('6 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance real sin llamar noticia al memorial');
-assert.ok(home.includes('7 contenidos: 6 con fuentes y 1 muestra'), 'Recuento inicial consistente');
+assert.ok(home.includes('7 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance real sin llamar noticia al memorial');
+assert.ok(home.includes('8 contenidos: 7 con fuentes y 1 muestra'), 'Recuento inicial consistente');
 assert.ok(home.includes('data-filter="Archivo"'), 'Filtro Archivo disponible');
 assert.ok(hasNoindexMeta(home) && hasNoindexMeta(memorial), 'Ambas páginas permanecen noindex');
 assert.ok(memorial.includes('REGISTRO ABIERTO Y NO EXHAUSTIVO'), 'Destino confirma alcance limitado');

@@ -550,9 +550,9 @@ assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No
 
 // Vigésima primera unidad: p. 477, adultos n.os 198 y 201; adolescentes diferidos por privacidad.
 const twentyFirstBatch2001=[["hidublis-diaz-acosta","Hidublis Díaz Acosta","2001-06-11",198],["franklin-rafael-salazar-perez","Franklin Rafael Salazar Pérez","2001-06-12",201]];
-assert.equal(cases2001.length,134,'134 fichas de 2001; registro parcial');
-assert.equal(CASES.length,435,'435 fichas totales sin duplicados');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,134,'134 enlaces nominales');
+assert.equal(cases2001.length,136,'136 fichas de 2001; registro parcial');
+assert.equal(CASES.length,437,'437 fichas totales sin duplicados');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,136,'136 enlaces nominales');
 for(const [id,name,date,num] of twentyFirstBatch2001){
  const m=cases2001.filter(p=>p.id===id);
  assert.equal(m.length,1,`ID único ${num}`);
@@ -565,15 +565,15 @@ for(const [id,name,date,num] of twentyFirstBatch2001){
 }
 assert.ok(cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('infarto')&&cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('asterisco'),'Conservar versión oficial y fecha no confirmada');
 assert.ok(cases2001.find(p=>p.id==='franklin-rafael-salazar-perez').note.includes('funcionarios alegaron'),'No convertir denuncia en sentencia');
-assert.ok(SOURCES.PRO2001.title.includes('477')&&SOURCES.PRO2001.scope.includes('195–197')&&year2001.includes('195–197'),'Adolescentes no incluidos sin evaluación');
-assert.ok(year2001.includes('<strong>134</strong>')&&year2001.includes('134 FICHAS NOMINALES'),'Contadores concordantes');
+assert.ok(SOURCES.PRO2001.title.includes('477')&&SOURCES.PRO2001.scope.includes('n.º 197')&&year2001.includes('n.º 197'),'Anthony Salazar pendiente de evaluación');
+assert.ok(year2001.includes('<strong>136</strong>')&&year2001.includes('136 FICHAS NOMINALES'),'Contadores concordantes');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Prototipo y cautelas');
 
 // Auditoría transversal de tres fichas existentes de marzo de 2001: COFAVIC vs. PROVEA.
 const elTigre=[["yavidilex-placencio-borges","Yavidilex Placencio Borges"],["wilmer-villarroel-2001","Wilmer Villarroel"],["rafael-leonardo-moreno","Rafael Leonardo Moreno"]];
-assert.equal(cases2001.length,134,'Cotejo de El Tigre no crea personas nuevas');
-assert.equal(CASES.length,435,'Cotejo no altera total nominal');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,134,'Cotejo no duplica enlaces');
+assert.equal(cases2001.length,136,'Cotejo de El Tigre no crea personas nuevas');
+assert.equal(CASES.length,437,'Cotejo no altera total nominal');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,136,'Cotejo no duplica enlaces');
 assert.ok(SOURCES.COF2001.url.includes('6-COF-HIS.pdf'),'Fuente COFAVIC identificada');
 for(const [id,name] of elTigre){
  const match=cases2001.filter(p=>p.id===id);
@@ -603,7 +603,25 @@ for(const [id,name,num] of [['jose-daniel-carmona-yaguaracuto','José Daniel Car
  assert.ok(p.note.includes('discrep')&&p.note.includes('sentencia firme'),`Contradicciones y límites ${num}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
-assert.equal(cases2001.length,134,'Total 2001 tras cotejo Carmona');
-assert.equal(CASES.length,435,'Total global tras cotejo Carmona');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,134,'Enlaces exactos tras cotejo Carmona');
+assert.equal(cases2001.length,136,'Total 2001 tras cotejo Carmona');
+assert.equal(CASES.length,437,'Total global tras cotejo Carmona');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,136,'Enlaces exactos tras cotejo Carmona');
 assert.ok(year2001.includes('14/15 frente a 15/16')&&year2001.includes('noindex,nofollow,noarchive'),'Discrepancias y robots visibles');
+
+// Unidad 24: adolescentes de San Juan, dos fuentes documentales y sentencia anulada.
+for(const [id,name,num] of [['danner-pastor-barreto-torres','Danner Pastor Barreto Torres',195],['luis-javier-gimenez-2001','Luis Javier Giménez',196]]){
+ const match=cases2001.filter(p=>p.id===id);
+ assert.equal(match.length,1,`Sin duplicidad del registro ${num}`);
+ const p=match[0];
+ assert.equal(p.name,name,`Nombre PROVEA ${num}`);
+ assert.equal(p.date,'2001-06-05',`Fecha PROVEA ${num}`);
+ assert.equal(p.category,'policial',`Sin atribución penal automática ${num}`);
+ assert.deepEqual(p.sources,['PRO2001','COVICIL2001'],`Fuentes de ${num}`);
+ assert.ok(p.note.includes('p. 477')&&p.note.includes('anulada')&&p.note.includes('04-06-2001')&&p.note.includes('05-06-2001'),`Contradicción y estado judicial ${num}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
+}
+assert.equal(cases2001.length,136,'136 fichas parciales de 2001');
+assert.equal(CASES.length,437,'437 fichas nominales en total');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,136,'136 enlaces anuales');
+assert.ok(SOURCES.COVICIL2001.url.includes('poderesimpunidad.pdf')&&year2001.includes('poderesimpunidad.pdf#page=198'),'COVICIL enlazado y localizado');
+assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y alcance parcial');

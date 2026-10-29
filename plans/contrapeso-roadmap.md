@@ -1,5 +1,14 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## Auditoría puntual · 29-10-2026, San Juan (unidad 24; PROVEA n.os 195–196)
+
+- **Fuentes originales inspeccionadas visualmente:** [PROVEA, anexo 3 p. 477, n.os 195–196](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=36) y [COVICIL, *Impunidad y Poder* (2012), pp. 189, 195–196](https://archivo.provea.org/wp-content/uploads/poderesimpunidad.pdf#page=191). COVICIL investigó con seguimiento de PROVEA: son dos documentos y líneas de investigación, **no dos organizaciones enteramente independientes**. Ambos identifican a los adolescentes Danner Pastor Barreto Torres (17) y Luis Javier Giménez (13) como fallecidos en el barrio San Juan de Barquisimeto en junio de 2001.
+- **Alegación y versión institucional:** PROVEA y COVICIL recogen denuncia de ejecución durante actuación de Guardia Nacional (COVICIL también refiere CICPC), frente a versión oficial de enfrentamiento. No convertir denuncias en hallazgos judiciales definitivos ni atribuir autoría individual sin resolución inspeccionada. La investigación COVICIL reporta condena de cinco funcionarios el **17-02-2011**, **anulada en apelación el 04-11-2011**; **no se acredita sentencia firme ni situación procesal posterior**.
+- **Discrepancias:** PROVEA y narración de COVICIL sitúan el hecho el **05-06-2001**, pero la tabla de COVICIL p. 142 imprime **04-06-2001**; en la narración se observan además referencias erráticas a julio en una cita. Conservar fecha del anexo y explicitar la incertidumbre; COVICIL usa Barreto y Barreto Torres, y Giménez/Jiménez. No inferir identidad adicional ni otra muerte por variantes.
+- **Privacidad y riesgo:** víctimas adolescentes fallecidas hace 25 años, identificadas públicamente por organizaciones de DDHH; se publican solo sus nombres y hechos estrictamente relevantes al memorial. Se omiten nombres de familiares, testigos y funcionarios individualmente señalados; no se divulgan domicilios ni otros identificadores. El registro n.º **197 (Anthony Salazar)** sigue **pendiente de segunda fuente y evaluación individual**; no se añade por cuota.
+- **Principios:** libertad individual — aplica con evidencia a la privación de vida denunciada; propiedad privada — no aplica; control del poder — aplica con evidencia a investigación judicial y anulación de condena. **Auditoría propia, sin revisión de sesión aislada. Codex: NO SOLICITADO — revisión selectiva.** Año 2001 parcial, no exhaustivo. Próximo lote: n.º 197 y p. 478; antes de merge, auditoría consolidada del PR, tests exact-SHA, Codacy y reglas de rama.
+
+
 ## Auditoría puntual · 29-10-2026, primos Carmona (unidad 23)
 
 - **Fuentes primarias inspeccionadas visualmente:** PROVEA, anexo 3, p. 477 (PDF índice 35), n.os 199–200; COFAVIC, *La historia de COFIVANZ*, anexo 1 p. 51 (PDF índice 50). Ambos documentos registran dos primos fallecidos el **12-06-2001**.

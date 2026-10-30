@@ -567,7 +567,7 @@ for(const [id,name,date,num] of twentyFirstBatch2001){
 }
 assert.ok(cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('infarto')&&cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('publicación de la denuncia'),'Conservar versión oficial y fecha no confirmada');
 assert.ok(cases2001.find(p=>p.id==='franklin-rafael-salazar-perez').note.includes('funcionarios alegaron'),'No convertir denuncia en sentencia');
-assert.ok(SOURCES.PRO2001.title.includes('477')&&SOURCES.PRO2001.scope.includes('n.º 197')&&year2001.includes('n.º 197'),'Anthony Salazar pendiente de evaluación');
+assert.ok(SOURCES.PRO2001.title.includes('460–484')&&SOURCES.PRO2001.scope.includes('n.º 197')&&year2001.includes('n.º 197'),'Anthony Salazar pendiente de evaluación');
 assert.ok(year2001.includes(`<strong>${cases2001.length}</strong>`)&&year2001.includes(`${cases2001.length} FICHAS NOMINALES`),'Contadores concordantes con dataset');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Prototipo y cautelas');
 
@@ -655,7 +655,7 @@ for (const [id,name,date,num] of provea478) {
 assert.ok(cases2001.length>=142,'Preservar hito histórico de 142 fichas 2001 sin bloquear ampliaciones');
 assert.ok(CASES.length>=443,'Preservar hito histórico de 443 fichas sin bloquear ampliaciones');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Roster anual sincronizado con dataset');
-assert.ok(SOURCES.PRO2001.title.includes('479')&&SOURCES.PRO2001.scope.includes('n.º 206'),'Fuente y casos reservados');
+assert.ok(SOURCES.PRO2001.title.includes('460–484')&&SOURCES.PRO2001.scope.includes('n.º 206'),'Fuente y casos reservados');
 assert.ok(cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('compañera')&&cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('a la mujer en un brazo')&&!cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('madre'),'Distinguir lesión de compañera y muerte de Pereira, sin inventar parentesco');
 assert.ok(year2001.includes(`${cases2001.length} FICHAS NOMINALES`)&&year2001.includes(`<strong>${cases2001.length}</strong>`),'Contadores dinámicos visibles');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y cautelas');

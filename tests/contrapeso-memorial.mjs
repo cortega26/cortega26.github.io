@@ -186,6 +186,12 @@ assert.ok(SOURCES.PRO2001.url.includes('archivo.provea.org/wp-content/uploads/01
 assert.ok(SOURCES.HRW2001.url.includes('hrw.org/legacy/spanish/inf_anual/2002/venezuela.html'), 'HRW 2002 sobre hechos de 2001');
 assert.ok(SOURCES.US2001.url.includes('refworld.org/reference/annualreport/usdos/2002/31349'), 'Fuente archivada verificable de 2001');
 assert.ok(year2001.includes('octubre de 2000–septiembre de 2001'), 'No convertir la cifra PROVEA 241 en total de año calendario');
+assert.ok(year2001.includes('244 reclusos muertos y 1.249 heridos en 2001'), 'Serie penitenciaria PROVEA 2001 diferenciada de memorial nominal');
+assert.ok(year2001.includes('300 muertos y 1.285 heridos para 2001'), 'Discrepancia de serie OVP conservada');
+assert.ok(year2001.includes('el desfase de año no está explicado'), 'No resolver arbitrariamente desplazamiento entre series');
+assert.ok(year2001.includes('no se presentan como 244 o 300 identidades verificadas'), 'No inflar registros nominales con agregados penitenciarios');
+assert.ok(year2001.includes('el n.º 212 ya incorporado'), 'No declarar pendiente un caso ya incluido');
+assert.ok(year2001.includes('El n.º 29 (Ayrton Asdrúbal Obregón Llano'), 'No declarar excluida una ficha ya documentada');
 assert.ok(year2001.includes('registro es parcial') || year2001.includes('registro es parcial'.replace('r','R')), 'Advertencia de no exhaustividad');
 assert.ok(year2001.includes('href="/venezuela-lab/metodo/"'), 'Método editorial accesible desde 2001');
 

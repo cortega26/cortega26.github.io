@@ -167,7 +167,7 @@ assert.deepEqual(febres2001?.sources, ['US2001', 'PRO2001'], 'Doble fuente para 
 assert.ok(febres2001?.note.includes('Febres Narváez'), 'Variante nominal documentada por PROVEA');
 for (const [id, date, category] of [
   ['jose-gregorio-castillo-2001', '2001-01-10', 'policial'],
-  ['luis-enrique-gonzalez-2001', '2001-01-10', 'policial'],
+  ['luis-enrique-gonzalez-2001', undefined, 'policial'],
   ['pablo-jose-marcano-franco', '2001-01-11', 'investigacion']
 ]) {
   const matches = cases2001.filter(p => p.id === id);
@@ -191,7 +191,7 @@ assert.ok(year2001.includes('href="/venezuela-lab/metodo/"'), 'Método editorial
 
 
 // Quinta unidad documental: PROVEA, p. 462, registros 74–83 (18 de enero de 2001).
-const fifthBatch2001 = [["edward-jose-morales","Edward José Morales","2001-01-11","policial"],["julio-hurtado-2001","Julio Hurtado","2001-01-11","policial"],["roger-eduardo-castillo-castillo","Roger Eduardo Castillo Castillo","2001-01-14","policial"],["jeimon-rodriguez-2001","Jeimon Rodríguez","2001-01-14","policial"],["jhonny-m-meneses","Jhonny M. Meneses","2001-01-14","policial"],["darwin-maita","Darwin Maita","2001-01-14","policial"],["hector-jose-bolivar-2001","Héctor José Bolívar","2001-01-15","policial"],["raul-alberto-villegas","Raúl Alberto Villegas","2001-01-16","investigacion"],["luis-alfredo-carrera-yeguez","Luis Alfredo Carrera Yéguez","2001-01-17","policial"],["danilo-enrique-martinez-carrillo","Danilo Enrique Martínez Carrillo","2001-01-18","policial"]];
+const fifthBatch2001 = [["edward-jose-morales","Edward José Morales","2001-01-11","policial"],["julio-hurtado-2001","Julio Hurtado","2001-01-11","policial"],["roger-eduardo-castillo-castillo","Roger Eduardo Castillo Castillo","2001-01-14","policial"],["jeimon-rodriguez-2001","Jeimon Rodríguez","2001-01-14","policial"],["jhonny-m-meneses","Jhonny M. Meneses","2001-01-14","policial"],["darwin-maita","Darwin Maita","2001-01-14","policial"],["hector-jose-bolivar-2001","Héctor José Bolívar","2001-01-15","policial"],["raul-alberto-villegas","Raúl Alberto Villegas","2001-01-16","investigacion"],["luis-alfredo-carrera-yeguez","Luis Alfredo Carrera Yéguez",undefined,"policial"],["danilo-enrique-martinez-carrillo","Danilo Enrique Martínez Carrillo","2001-01-18","policial"]];
 assert.ok(cases2001.length >= 26, 'No perder las 26 fichas documentadas hasta PROVEA n.º 83');
 for (const [id, name, date, category] of fifthBatch2001) {
   const matches = cases2001.filter(person => person.id === id);
@@ -209,7 +209,7 @@ assert.ok(SOURCES.PRO2001.title.includes('460–476'), 'Cobertura acumulada PROV
 assert.ok(year2001.includes('Los registros 62–'), 'Cobertura del anexo p. 462 explicitada');
 
 // Sexta unidad: PROVEA p. 463, registros 84–91 (20–25 de enero de 2001).
-const sixthBatch2001 = [["eduardo-jesus-marchan","Eduardo Jesús Marchán","2001-01-20","policial"],["pedro-antonio-anzola","Pedro Antonio Anzola","2001-01-20","policial"],["juan-quintero-2001","Juan Quintero","2001-01-20","policial"],["luis-marin-2001","Luis Marín","2001-01-20","policial"],["reuca-jose-mijares-e","Reuca José Mijares E.","2001-01-21","custodia"],["darwin-edison-rodriguez-cedeno","Darwin Edison Rodríguez Cedeño","2001-01-23","policial"],["manuel-guevara-pino","Manuel Guevara Pino","2001-01-24","policial"],["juan-carlos-garcia-mejias","Jean Carlos García Mejías","2001-01-25","policial"]];
+const sixthBatch2001 = [["eduardo-jesus-marchan","Eduardo Jesús Marchán","2001-01-20","policial"],["pedro-antonio-anzola","Pedro Antonio Anzola","2001-01-20","policial"],["juan-quintero-2001","Juan Quintero",undefined,"policial"],["luis-marin-2001","Luis Marín",undefined,"policial"],["reuca-jose-mijares-e","Reuca José Mijares E.","2001-01-21","custodia"],["darwin-edison-rodriguez-cedeno","Darwin Edison Rodríguez Cedeño","2001-01-23","policial"],["manuel-guevara-pino","Manuel Guevara Pino","2001-01-24","policial"],["juan-carlos-garcia-mejias","Jean Carlos García Mejías","2001-01-25","policial"]];
 assert.equal(sixthBatch2001.length, 8, 'Ocho registros nominales nuevos en PROVEA p. 463');
 assert.ok(cases2001.length >= 34, 'Conservar 34 fichas documentadas hasta el registro 91');
 for (const [id, name, date, category] of sixthBatch2001) {
@@ -481,7 +481,7 @@ assert.ok(year2001.includes('Los registros 62–194')&&year2001.includes('No es 
 assert.ok(year2001.includes('noindex,nofollow,noarchive'),'Noindex conservado');
 
 // Decimoctava unidad: PROVEA p. 474, n.os 175–181, y p. 475, n.º 182.
-const eighteenthBatch2001=[["luis-joel-ramirez","Luis Joel Ramírez","2001-05-08","policial",176],["oscar-ramirez-2001","Óscar Ramírez","2001-05-08","policial",177],["vladimir-gomez-2001","Vladimir Gómez","2001-05-09","policial",178],["freddy-caraballo-2001","Freddy Caraballo","2001-05-11","policial",179],["italo-mujica-2001","Ítalo Mujica","2001-05-12","policial",180],["raul-alexander-nieves-palma","Raúl Alexander Nieves Palma","2001-05-13","policial",181],["william-jaramillo-2001","William Jaramillo","2001-05-13","policial",182]];
+const eighteenthBatch2001=[["luis-joel-ramirez","Luis Joel Ramírez","2001-05-08","policial",176],["oscar-ramirez-2001","Óscar Ramírez","2001-05-08","policial",177],["vladimir-gomez-2001","Vladimir Gómez","2001-05-09","policial",178],["freddy-caraballo-2001","Freddy Caraballo",undefined,"policial",179],["italo-mujica-2001","Ítalo Mujica","2001-05-12","policial",180],["raul-alexander-nieves-palma","Raúl Alexander Nieves Palma","2001-05-13","policial",181],["william-jaramillo-2001","William Jaramillo","2001-05-13","policial",182]];
 assert.ok(cases2001.length>=121,'121 fichas de 2001; registro parcial');
 assert.ok(CASES.length>=422,'422 fichas totales');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'121 enlaces anuales');
@@ -699,3 +699,11 @@ assert.equal(ojeda2001.length,1,'No duplicar n.os 164 y 215 sin cotejo de identi
 assert.ok(ojeda2001[0].note.includes('n.º 215')&&ojeda2001[0].note.includes('homónimo'));
 assert.ok(year2001.includes('n.º 215')&&year2001.includes('no está probado si se trata'));
 assert.ok(cases2001.length>=228&&CASES.length>=529,'Preservar lote parcial sin regresión');
+
+// La marca * del anexo 3 de PROVEA significa fecha de publicación de denuncia, no defunción.
+for (const id of ["luis-enrique-gonzalez-2001","luis-alfredo-carrera-yeguez","juan-quintero-2001","luis-marin-2001","freddy-caraballo-2001"]) {
+  const victim = cases2001.find(p => p.id === id);
+  assert.ok(victim && !Object.hasOwn(victim, 'date'), `No asignar fecha de muerte desde denuncia asteriscada: ${id}`);
+  assert.ok(victim.note.includes('publicación de la denuncia') && victim.note.includes('año'), `Documentar incertidumbre temporal: ${id}`);
+  assert.ok(year2001.includes(`perfil.html?id=${id}`), `Ficha anual sin pérdida: ${id}`);
+}

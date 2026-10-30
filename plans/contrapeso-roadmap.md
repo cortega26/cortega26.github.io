@@ -1,5 +1,7 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+**Corrección focalizada de cobertura (30-10-2026):** [workflow #41073673677](https://github.com/cortega26/cortega26.github.io/actions/runs/41073673677) identificó aserciones antiguas que exigían el título PROVEA pp. 460–476 aunque la fuente canónica cubre pp. 460–484. Se actualizan 6 expectativas textuales a la cobertura real, sin alterar datos ni evidencias.
+
 **Corrección focalizada adicional (30-10-2026):** [workflow #41073285989](https://github.com/cortega26/cortega26.github.io/actions/runs/41073285989) detectó expectativa obsoleta de fuentes de Febres. Se incorpora PROVIDA2002, ya presente en la ficha. Además se reconcilian aserciones del episodio El Tigre: las tres fechas exactas se retiraron por contradicción documental, y COF81/AI2007 ampliaron las fuentes de Yavidilex. Los tests ahora exigen las fuentes originales mínimas sin rechazar fuentes nuevas válidas; no se cambia ninguna ficha.
 
 **Corrección focalizada adicional de CI (30-10-2026):** [workflow #41072969238](https://github.com/cortega26/cortega26.github.io/actions/runs/41072969238) reveló que la prueba de fuentes de 2001 omitía PRO2002 (fallecimientos de octubre–diciembre de 2001 publicados en el informe siguiente) y CIDHLANGTON25 (resolución interamericana sobre Sarah Lyn Langton). Se amplía únicamente la allowlist de fuentes válidas para 2001, sin cambiar datos ni aceptar fuentes desconocidas. Nuevo CI pendiente.

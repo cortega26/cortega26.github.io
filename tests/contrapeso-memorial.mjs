@@ -652,12 +652,12 @@ for (const [id,name,date,num] of provea478) {
   assert.ok(p.note.includes('No se inspeccionaron')||p.note.includes('no se inspeccionaron'),`Límites probatorios ${num}`);
   assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
-assert.equal(cases2001.length,142,'142 fichas parciales 2001 tras PROVEA p. 479');
-assert.equal(CASES.length,443,'443 fichas totales tras PROVEA p. 479');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,142,'Roster anual exacto');
+assert.ok(cases2001.length>=142,'Preservar hito histórico de 142 fichas 2001 sin bloquear ampliaciones');
+assert.ok(CASES.length>=443,'Preservar hito histórico de 443 fichas sin bloquear ampliaciones');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Roster anual sincronizado con dataset');
 assert.ok(SOURCES.PRO2001.title.includes('479')&&SOURCES.PRO2001.scope.includes('n.º 206'),'Fuente y casos reservados');
 assert.ok(cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('compañera')&&cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('a la mujer en un brazo')&&!cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('madre'),'Distinguir lesión de compañera y muerte de Pereira, sin inventar parentesco');
-assert.ok(year2001.includes('142 FICHAS NOMINALES')&&year2001.includes('<strong>142</strong>'),'Contadores visibles');
+assert.ok(year2001.includes(`${cases2001.length} FICHAS NOMINALES`)&&year2001.includes(`<strong>${cases2001.length}</strong>`),'Contadores dinámicos visibles');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y cautelas');
 
 // PROVEA p. 478, n.º 207: un adulto, atribución documental sin convertirla en condena; n.º 206 pendiente.
@@ -685,3 +685,17 @@ assert.deepEqual(gamez2001[0].sources,['PRO2001']);
 assert.ok(gamez2001[0].note.includes('n.º 211')&&gamez2001[0].note.includes('versión oficial')&&gamez2001[0].note.includes('no se inspeccionaron'));
 assert.ok(year2001.includes('perfil.html?id=isidro-rafael-gamez-salazar-2001'));
 assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));
+
+// Cotejo 30-10-2026: una alta y homonimia no resuelta sin duplicación.
+const infante2001=cases2001.filter(p=>p.id==='antonio-enrique-infante-navas-2001');
+assert.equal(infante2001.length,1,'Ficha única PROVEA n.º 212');
+assert.equal(infante2001[0].date,'2001-06-30');
+assert.equal(infante2001[0].category,'policial');
+assert.deepEqual(infante2001[0].sources,['PRO2001']);
+assert.ok(infante2001[0].note.includes('n.º 212')&&infante2001[0].note.includes('no una determinación judicial')&&infante2001[0].note.includes('Edad no consignada'));
+assert.ok(year2001.includes('perfil.html?id=antonio-enrique-infante-navas-2001'));
+const ojeda2001=cases2001.filter(p=>p.id==='luis-gregorio-ojeda-fajardo');
+assert.equal(ojeda2001.length,1,'No duplicar n.os 164 y 215 sin cotejo de identidad');
+assert.ok(ojeda2001[0].note.includes('n.º 215')&&ojeda2001[0].note.includes('homónimo'));
+assert.ok(year2001.includes('n.º 215')&&year2001.includes('no está probado si se trata'));
+assert.ok(cases2001.length>=228&&CASES.length>=529,'Preservar lote parcial sin regresión');

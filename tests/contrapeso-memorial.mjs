@@ -445,7 +445,7 @@ for(const [id,name,date,category,number] of sixteenthBatch2001){
  assert.equal(found[0].name,name,`Nombre: ${id}`);
  assert.equal(found[0].date,date,`Fecha: ${id}`);
  assert.equal(found[0].category,category,`Categoría: ${id}`);
- assert.deepEqual(found[0].sources,['PRO2001'],`Fuente: ${id}`);
+ assert.deepEqual(found[0].sources,id==='luis-gregorio-ojeda-fajardo'?['PRO2001','COF2001']:['PRO2001'],`Fuente: ${id}`);
  assert.ok(found[0].note.includes('p. 472')&&found[0].note.includes(`n.º ${number}`),`Fuente nominal: ${id}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual: ${id}`);
 }

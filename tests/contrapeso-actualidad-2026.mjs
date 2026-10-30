@@ -31,7 +31,7 @@ for (const url of [
 assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
 assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 'Reutiliza CSS existente');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
-assert.equal((grid.match(/class="story-card"/g) || []).length, 8, 'Ocho tarjetas');
+assert.equal((grid.match(/class="story-card"/g) || []).length, 9, 'Nueve tarjetas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Una muestra');
 const card = grid.split('<article class="story-card" data-category="Actualidad"')[1].split('</article>')[0];
 assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
@@ -58,7 +58,7 @@ assert.ok(march.includes('https://www.infobae.com/america/agencias/2026/10/28/ac
 assert.ok(!/<script\b|<form\b/i.test(march), 'Sin JS ni formularios nuevos');
 const marchCard = grid.split('data-search="marcha miraflores 28 octubre 2026')[1]?.split('</article>')[0];
 assert.ok(marchCard?.includes(`href="${marchPath}"`) && !marchCard.includes('demo-tag'), 'Tarjeta de actualidad enlaza a noticia real');
-assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 3, 'Tres noticias reales en Actualidad');
+assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 4, 'Cuatro noticias reales en Actualidad');
 if (process.argv.includes('--built')) {
   const builtMarch = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtMarch) && builtMarch.includes('Miraflores'), 'Build conserva noticia y noindex');
@@ -83,6 +83,27 @@ assert.ok(assetsCard?.includes(`href="${assetsPath}"`) && !assetsCard.includes('
 if (process.argv.includes('--built')) {
   const builtAssets = readFileSync(new URL('../dist/venezuela-lab/actualidad/activos-estatales-29oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtAssets), 'Build noindex');
+}
+
+const calendarPath = '/venezuela-lab/actualidad/calendario-electoral-29oct-2026/';
+const calendar = readFileSync(new URL('../public/venezuela-lab/actualidad/calendario-electoral-29oct-2026/index.html', import.meta.url), 'utf8');
+assert.ok(prototypeOnlyRoutes.some((r) => r.id === 'contrapeso:news:calendario-electoral-29oct-2026' && r.path === calendarPath), 'Calendario en inventario del prototipo');
+assert.ok(!routeGroups.some((g) => Object.values(g.paths).includes(calendarPath)), 'Calendario fuera de sitemap');
+assert.ok(hasNoindexMeta(calendar) && calendar.includes('noindex,nofollow,noarchive'), 'Robots de noticia electoral');
+assert.match(calendar, /Hecho: 29 de octubre de 2026/, 'Fecha del hecho electoral');
+assert.match(calendar, /Publicado: 30 de octubre de 2026/, 'Fecha de edición diferenciada');
+assert.match(calendar, /Revisado: 30 de octubre de 2026/, 'Fecha de revisión');
+assert.match(calendar, /sin reporteo propio/, 'No se inventa reporteo');
+assert.match(calendar, /no hay confirmación independiente de un calendario formal/, 'Propuesta no es calendario oficial');
+assert.match(calendar, /No se inspeccionaron los videos o transcripciones oficiales/, 'Límite de acceso original');
+assert.match(calendar, /Qué falta verificar/, 'Límites editoriales');
+assert.ok(calendar.includes('https://www.reuters.com/world/americas/us-has-proposed-venezuela-elections-2027-opposition-leader-says-2026-10-29/') && calendar.includes('https://apnews.com/article/venezuela-maria-corina-machado-elections-b2b023d18eadfa57e701bd554503017a') && calendar.includes('https://www.emol.com/noticias/Internacional/2026/10/29/1215549/delcy-rodriguez-elecciones-venezuela.html'), 'Fuentes independientes');
+assert.ok(!/<script\b|<form\b/i.test(calendar), 'Sin scripts ni formularios');
+const calendarCard = grid.split('data-search="machado rodriguez elecciones 2027 calendario')[1]?.split('</article>')[0];
+assert.ok(calendarCard?.includes(`href="${calendarPath}"`) && !calendarCard.includes('demo-tag'), 'Tarjeta electoral real enlazada');
+if (process.argv.includes('--built')) {
+  const builtCalendar = readFileSync(new URL('../dist/venezuela-lab/actualidad/calendario-electoral-29oct-2026/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(builtCalendar), 'Build de noticia electoral noindex');
 }
 
 console.log('Contrapeso actualidad 2026: género, fuentes, límites, portada, ruta y noindex PASS');

@@ -481,7 +481,7 @@ assert.ok(year2001.includes('Los registros 62–194')&&year2001.includes('No es 
 assert.ok(year2001.includes('noindex,nofollow,noarchive'),'Noindex conservado');
 
 // Decimoctava unidad: PROVEA p. 474, n.os 175–181, y p. 475, n.º 182.
-const eighteenthBatch2001=[["luis-joel-ramirez","Luis Joel Ramírez","2001-05-08","policial",176],["oscar-ramirez-2001","Óscar Ramírez","2001-05-08","policial",177],["vladimir-gomez-2001","Vladimir Gómez","2001-05-09","policial",178],["freddy-caraballo-2001","Freddy Caraballo",undefined,"policial",179],["italo-mujica-2001","Ítalo Mujica","2001-05-12","policial",180],["raul-alexander-nieves-palma","Raúl Alexander Nieves Palma","2001-05-13","policial",181],["william-jaramillo-2001","William Jaramillo","2001-05-13","policial",182]];
+const eighteenthBatch2001=[["luis-joel-ramirez","Luis Joel Ramírez","2001-05-08","policial",176],["oscar-ramirez-2001","Óscar Ramírez","2001-05-08","policial",177],["vladimir-gomez-2001","Rladimir Gómez","2001-05-09","policial",178],["freddy-caraballo-2001","Freddy Caraballo",undefined,"policial",179],["italo-mujica-2001","Ítalo Mujica","2001-05-12","policial",180],["raul-alexander-nieves-palma","Raúl Alexander Nieves Palma",undefined,"policial",181],["william-jaramillo-2001","Willian Jaramillo",undefined,"policial",182]];
 assert.ok(cases2001.length>=121,'121 fichas de 2001; registro parcial');
 assert.ok(CASES.length>=422,'422 fichas totales');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'121 enlaces anuales');
@@ -720,3 +720,15 @@ assert.deepEqual(ojedaCorroborado.sources,['PRO2001','COF2001']);
 assert.equal(ojedaCorroborado.date,'2001-04-20');
 assert.ok(ojedaCorroborado.note.includes('32 años')&&ojedaCorroborado.note.includes('35 en PROVEA')&&ojedaCorroborado.note.includes('anulada en apelación'));
 assert.ok(year2001.includes('una denuncia posterior del fallecimiento de abril'));
+
+// Cotejo PROVEA pp. 474–475, 480–481 (30-10-2026): nombres y fecha de detención.
+for(const [id,name] of [['norman-germain-perez-2001','Norman Germán Pérez'],['vladimir-gomez-2001','Rladimir Gómez'],['william-jaramillo-2001','Willian Jaramillo']]){
+ const p=cases2001.find(x=>x.id===id);assert.equal(p?.name,name);assert.ok(year2001.includes('perfil.html?id='+id));
+}
+for(const id of ['raul-alexander-nieves-palma','william-jaramillo-2001']){
+ const p=cases2001.find(x=>x.id===id);assert.ok(p&&!Object.hasOwn(p,'date')&&p.note.includes('13-05-2001'));
+}
+const remigio=cases2001.filter(p=>p.id==='remigio-abbaie-tovar-diaz-2001');
+assert.equal(remigio.length,1);assert.equal(remigio[0].name,'Remigio Abbaie Tovar Díaz');
+assert.ok(!Object.hasOwn(remigio[0],'date')&&remigio[0].sources.includes('PRO2001')&&remigio[0].note.includes('n.º 220')&&remigio[0].note.includes('versión oficial'));
+assert.ok(year2001.includes('perfil.html?id=remigio-abbaie-tovar-diaz-2001'));

@@ -21,7 +21,7 @@ assert.ok(card.includes('href="/venezuela-lab/museo/victimas/"'), 'La tarjeta co
 assert.ok(!card.includes('demo-tag') && !card.includes('data-article='), 'El enlace real no abre un modal de ejemplo');
 assert.equal((grid.match(/class="story-card"/g) || []).length, 9, 'Nueve tarjetas conservadas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Solo Opinión sigue como ejemplo');
-assert.ok(home.includes('7 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance real sin llamar noticia al memorial');
+assert.ok(home.includes('8 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance real sin llamar noticia al memorial');
 assert.ok(home.includes('9 contenidos: 8 con fuentes y 1 muestra'), 'Recuento inicial consistente');
 assert.ok(home.includes('data-filter="Archivo"'), 'Filtro Archivo disponible');
 assert.ok(hasNoindexMeta(home) && hasNoindexMeta(memorial), 'Ambas páginas permanecen noindex');

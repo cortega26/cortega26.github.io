@@ -727,11 +727,11 @@ async function testContrapesoFrontpage(browser) {
     try {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       const cards = page.locator('#article-list .story-card');
-      if (await cards.count() !== 8) fail(`Contrapeso ${width}: expected eight cards`);
+      if (await cards.count() !== 9) fail(`Contrapeso ${width}: expected nine cards`);
       // Provenance must remain visible after JS filters the editorial prototype.
       const provenance = page.locator('#result-count');
       const initialCount = (await provenance.textContent())?.trim();
-      if (initialCount !== '8 contenidos: 7 con fuentes y 1 muestra') {
+      if (initialCount !== '9 contenidos: 8 con fuentes y 1 muestra') {
         fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
       }
       // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.
@@ -813,8 +813,8 @@ async function testContrapesoFrontpage(browser) {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();
       const newsCards = page.locator('#article-list .story-card:visible');
-      if (await newsCards.count() !== 3) {
-        fail(`Contrapeso ${width}: Actualidad must show three sourced news stories`);
+      if (await newsCards.count() !== 4) {
+        fail(`Contrapeso ${width}: Actualidad must show four sourced news stories`);
       } else {
         const newsLink = newsCards.locator('a[href="/venezuela-lab/actualidad/regreso-machado-2026/"]');
         if (await newsLink.count() !== 1) {
@@ -830,6 +830,22 @@ async function testContrapesoFrontpage(browser) {
           else if (newsOverflow) fail(`Contrapeso ${width}: news horizontal overflow`);
           else ok(`Contrapeso ${width}: news filter, link, noindex and responsive width`);
         }
+      }
+      await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
+      await page.locator('[data-filter="Actualidad"]').click();
+      const calendarLink = page.locator('#article-list .story-card:visible a[href="/venezuela-lab/actualidad/calendario-electoral-29oct-2026/"]');
+      if (await calendarLink.count() !== 1) {
+        fail(`Contrapeso ${width}: October 29 electoral news link missing`);
+      } else {
+        await calendarLink.click();
+        await page.waitForURL('**/venezuela-lab/actualidad/calendario-electoral-29oct-2026/');
+        const calendarTitle = await page.locator('h1').first().textContent();
+        const calendarRobots = await page.locator('meta[name="robots"]').getAttribute('content');
+        const calendarOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+        if (!calendarTitle?.includes('Machado apunta a presidenciales en 2027')) fail(`Contrapeso ${width}: wrong electoral news`);
+        else if (calendarRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: electoral news robots missing`);
+        else if (calendarOverflow) fail(`Contrapeso ${width}: electoral news horizontal overflow`);
+        else ok(`Contrapeso ${width}: electoral news, noindex and responsive width`);
       }
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();

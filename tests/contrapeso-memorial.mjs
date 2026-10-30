@@ -732,3 +732,12 @@ const remigio=cases2001.filter(p=>p.id==='remigio-abbaie-tovar-diaz-2001');
 assert.equal(remigio.length,1);assert.equal(remigio[0].name,'Remigio Abbaie Tovar Díaz');
 assert.ok(!Object.hasOwn(remigio[0],'date')&&remigio[0].sources.includes('PRO2001')&&remigio[0].note.includes('n.º 220')&&remigio[0].note.includes('versión oficial'));
 assert.ok(year2001.includes('perfil.html?id=remigio-abbaie-tovar-diaz-2001'));
+
+// Fuente PROVEA anexo 6 n.º 29 y relato narrativo p. 6: no duplicar ni adjudicar condena.
+const ayrton=cases2001.filter(p=>p.id==='ayrton-asdrubal-obregon-llano-2001');
+assert.equal(ayrton.length,1);
+assert.equal(ayrton[0].name,'Ayrton Asdrúbal Obregón Llano');
+assert.equal(ayrton[0].date,'2001-11-11');
+assert.deepEqual(ayrton[0].sources,['PRO2002','PROVIDA2002']);
+assert.ok(ayrton[0].note.includes('No hay condena firme')&&ayrton[0].note.includes('no hay corroboración institucional independiente'));
+assert.ok(year2001.includes('perfil.html?id=ayrton-asdrubal-obregon-llano-2001')&&year2001.includes('231 FICHAS NOMINALES'));

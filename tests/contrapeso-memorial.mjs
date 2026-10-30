@@ -286,7 +286,7 @@ const ninthBatch2001 = [
   ["dairilis-yulibet-sanchez-perez","Dairilis Yulibet Sánchez Pérez","2001-02-14","investigacion"],
   ["jose-david-gallardo-gomez","José David Gallardo Gómez","2001-02-14","investigacion"],
   ["jose-alberto-figueroa-2001","José Alberto Figueroa","2001-02-16","policial"],
-  ["edison-alvarez-2001","Edison Álvarez","2001-02-17","policial"],
+  ["edison-alvarez-2001","Edison Álvarez",undefined,"policial"],
   ["carlos-a-villanueva","Carlos A. Villanueva","2001-02-17","investigacion"],
   ["pedro-antonio-belisario","Pedro Antonio Belisario","2001-02-17","policial"],
   ["joel-carlitos-alay-perez","Joel Carlitos Alay Pérez","2001-02-18","policial"],
@@ -312,7 +312,7 @@ assert.ok(year2001.includes('No es un balance anual exhaustivo'),'2001 sigue abi
 
 
 // Décima unidad: PROVEA p. 467, registros 117–121. Fecha y grafía pendientes explícitos.
-const tenthBatch2001 = [["amable-jerry-useche","Amable Jerry Useche","2001-02-18","policial"],["wuilkenfer-antonio-gutierrez-lunar","Wuilkenfer Antonio Gutiérrez Lunar","2001-02-25","policial"],["franklin-manuel-alejos-rondon","Franklin Manuel Alejos Rondón","2001-02-27","investigacion"],["miguel-antonio-torres-2001","Miguel Antonio Torres","2001-02-28","investigacion"],["hector-cabrera-2001","Héctor Cabrera","2001-02-03","policial"]];
+const tenthBatch2001 = [["amable-jerry-useche","Amable Jerry Useche","2001-02-18","policial"],["wuilkenfer-antonio-gutierrez-lunar","Wuilkenfer Antonio Gutiérrez Lunar","2001-02-25","policial"],["franklin-manuel-alejos-rondon","Franklin Manuel Alejos Rondón","2001-02-27","investigacion"],["miguel-antonio-torres-2001","Miguel Antonio Torres","2001-02-28","investigacion"],["hector-cabrera-2001","Héctor Cabrera",undefined,"policial"]];
 assert.equal(tenthBatch2001.length,5,'Cinco registros nominales en PROVEA p. 467');
 assert.ok(cases2001.length>=63,'Preservar las 63 fichas del décimo lote, registro parcial');
 assert.ok(CASES.length>=364,'Preservar las 364 fichas del décimo lote');
@@ -397,7 +397,7 @@ assert.ok(SOURCES.PRO2001.title.includes('460–484') && SOURCES.PRO2001.scope.i
 assert.ok(year2001.includes('Los registros 62–194') && year2001.includes('No es un balance anual exhaustivo'),'Cobertura parcial declarada');
 
 // Decimocuarta unidad: PROVEA p. 470, registros 137–143.
-const fourteenthBatch2001=[["jose-martin-rodriguez-2001","José Martín Rodríguez","2001-03-18","policial"],["nino-antonio-gonzalez","Nino Antonio González","2001-03-20","investigacion"],["jose-gregorio-colmenarez","José Gregorio Colmenárez","2001-03-20","investigacion"],["regulo-bello","Régulo Bello","2001-03-24","policial"],["jesus-barroso","Jesús Barroso","2001-03-24","policial"],["ali-gonzalez-2001","Alí González","2001-03-24","policial"],["rafael-simon-colmenares","Rafael Simón Colmenares","2001-03-25","investigacion"]];
+const fourteenthBatch2001=[["jose-martin-rodriguez-2001","José Martín Rodríguez","2001-03-18","policial"],["nino-antonio-gonzalez","Nino Antonio González","2001-03-20","investigacion"],["jose-gregorio-colmenarez","José Gregorio Colmenárez","2001-03-20","investigacion"],["regulo-bello","Régulo Bello",undefined,"policial"],["jesus-barroso","Jesús Barroso",undefined,"policial"],["ali-gonzalez-2001","Alí González",undefined,"policial"],["rafael-simon-colmenares","Rafael Simón Colmenares","2001-03-25","investigacion"]];
 assert.ok(cases2001.length>=85,'Conservar las 85 fichas previas de 2001, registro parcial');
 assert.ok(CASES.length>=386,'Conservar las 386 fichas previas');
 for(const [id,name,date,category] of fourteenthBatch2001){
@@ -438,7 +438,7 @@ assert.ok(year2001.includes('n.º 151')&&year2001.includes('No es un balance anu
 assert.ok(year2001.includes('noindex,nofollow,noarchive'),'No indexar capítulo');
 
 // Decimosexta unidad: PROVEA p. 472; n.º 162 retenido por posible duplicidad.
-const sixteenthBatch2001 = [["darlius-antonio-silva-gonzalez","Darlius Antonio Silva González","2001-04-05","investigacion",154],["jose-javier-amaya-sanchez","José Javier Amaya Sánchez","2001-04-05","investigacion",155],["jairo-e-amaya-s","Jairo E. Amaya S.","2001-04-05","investigacion",156],["pablo-de-la-cruz-medina-perez","Pablo de la Cruz Medina Pérez","2001-04-05","investigacion",157],["ricardo-freites-boscan","Ricardo Freites Boscán","2001-04-06","policial",158],["endis-segundo-fonseca-tovar","Endis Segundo Fonseca Tovar","2001-04-06","policial",159],["ender-jose-mavarez-yanez","Ender José Mavárez Yánez","2001-04-06","policial",160],["jose-antonio-cuicas","José Antonio Cuicas","2001-04-06","policial",161],["haron-ely-rojas-medina","Haron Ely Rojas Medina","2001-04-17","policial",163],["luis-gregorio-ojeda-fajardo","Luis Gregorio Ojeda Fajardo","2001-04-20","investigacion",164]];
+const sixteenthBatch2001 = [["darlius-antonio-silva-gonzalez","Darlius Antonio Silva González","2001-04-05","investigacion",154],["jose-javier-amaya-sanchez","José Javier Amaya Sánchez","2001-04-05","investigacion",155],["jairo-e-amaya-s","Jairo E. Amaya S.","2001-04-05","investigacion",156],["pablo-de-la-cruz-medina-perez","Pablo de la Cruz Medina Pérez","2001-04-05","investigacion",157],["ricardo-freites-boscan","Ricardo Freites Boscán",undefined,"policial",158],["endis-segundo-fonseca-tovar","Endis Segundo Fonseca Tovar",undefined,"policial",159],["ender-jose-mavarez-yanez","Ender José Mavárez Yánez",undefined,"policial",160],["jose-antonio-cuicas","José Antonio Cuicas",undefined,"policial",161],["haron-ely-rojas-medina","Haron Ely Rojas Medina","2001-04-17","policial",163],["luis-gregorio-ojeda-fajardo","Luis Gregorio Ojeda Fajardo","2001-04-20","investigacion",164]];
 for(const [id,name,date,category,number] of sixteenthBatch2001){
  const found=cases2001.filter(p=>p.id===id);
  assert.equal(found.length,1,`ID único: ${id}`);
@@ -458,7 +458,7 @@ assert.ok(cases2001.find(p=>p.id==='luis-gregorio-ojeda-fajardo').note.includes(
 assert.ok(year2001.includes('noindex,nofollow,noarchive'),'Robots preservados');
 
 // Decimoséptima unidad: PROVEA p. 473, registros 165–174.
-const seventeenthBatch2001=[["luis-emiro-perez-briceno","Luis Emiro Pérez Briceño","2001-04-20","policial",165],["orlando-jose-perez-rodriguez","Orlando José Pérez Rodríguez","2001-04-23","investigacion",166],["jose-miguel-camacho-2001","José Miguel Camacho","2001-04-23","investigacion",167],["rene-alexander-castro-medina","René Alexander Castro Medina","2001-04-27","policial",168],["ramon-alexis-chirinos","Ramón Alexis Chirinos","2001-04-28","policial",169],["rafael-angarita-2001","Rafael Angarita","2001-05-03","policial",170],["pablo-sanchez-2001","Pablo Sánchez","2001-05-03","policial",171],["nelson-sanchez-2001","Nelson Sánchez","2001-05-03","policial",172],["alexander-lago-2001","Alexander Lago","2001-05-03","policial",173],["angel-r-marquez-h","Ángel R. Márquez H.","2001-05-05","investigacion",174]];
+const seventeenthBatch2001=[["luis-emiro-perez-briceno","Luis Emiro Pérez Briceño","2001-04-20","policial",165],["orlando-jose-perez-rodriguez","Orlando José Pérez Rodríguez","2001-04-23","investigacion",166],["jose-miguel-camacho-2001","José Miguel Camacho","2001-04-23","investigacion",167],["rene-alexander-castro-medina","René Alexander Castro Medina","2001-04-27","policial",168],["ramon-alexis-chirinos","Ramón Alexis Chirinos","2001-04-28","policial",169],["rafael-angarita-2001","Rafael Angarita",undefined,"policial",170],["pablo-sanchez-2001","Pablo Sánchez",undefined,"policial",171],["nelson-sanchez-2001","Nelson Sánchez",undefined,"policial",172],["alexander-lago-2001","Alexander Lago",undefined,"policial",173],["angel-r-marquez-h","Ángel R. Márquez H.","2001-05-05","investigacion",174]];
 assert.ok(cases2001.length>=121,'114 fichas de 2001, registro parcial');
 assert.ok(CASES.length>=422,'415 fichas totales');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'114 enlaces anuales');

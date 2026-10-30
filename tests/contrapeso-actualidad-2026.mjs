@@ -33,7 +33,7 @@ assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
 assert.equal((grid.match(/class="story-card"/g) || []).length, 10, 'Diez tarjetas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Una muestra');
-const card = grid.split('<article class="story-card" data-category="Actualidad"')[1].split('</article>')[0];
+const card = grid.split('data-search="maria corina machado regresa venezuela octubre 2026')[1]?.split('</article>')[0];
 assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
 assert.ok(home.includes('9 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
 if (process.argv.includes('--built')) {

@@ -46,7 +46,7 @@ assert.match(html, /Investigación documental del mismo mantenedor de Contrapeso
 
 assert.ok(museum.includes(`href="${path}"`), 'Museo enlaza al explicador');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
-assert.equal([...grid.matchAll(/class="story-card"/g)].length, 8, 'Ocho tarjetas');
+assert.equal([...grid.matchAll(/class="story-card"/g)].length, 9, 'Nueve tarjetas');
 assert.equal([...grid.matchAll(/class="demo-tag"/g)].length, 1, 'Una muestra');
 assert.equal([...grid.matchAll(/data-category="Explicadores"/g)].length, 2, 'Dos explicadores');
 const card = grid.split('<article class="story-card" data-category="Explicadores" data-search="28j')[1].split('</article>')[0];
@@ -54,6 +54,6 @@ assert.ok(card.includes(`href="${path}"`), 'Tarjeta real enlazada');
 assert.ok(card.includes('la ventaja de González superaba todos los votos posibles'), 'Portada enuncia hallazgo verificable');
 assert.ok(!card.includes('demo-tag'), 'No se etiqueta como muestra');
 assert.ok(!card.includes('data-article='), 'No usa modal ficticio');
-assert.ok(home.includes('7 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Recuento editorial visible');
+assert.ok(home.includes('8 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Recuento editorial visible');
 assert.ok(home.includes('noindex,nofollow,noarchive'), 'Portada no indexable');
 console.log('Contrapeso 28J: fuentes, cota electoral, rutas, tarjetas y noindex PASS');

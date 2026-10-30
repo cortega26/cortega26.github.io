@@ -406,7 +406,7 @@ for(const [id,name,date,category] of fourteenthBatch2001){
  assert.equal(m[0].name,name,`Nombre: ${id}`);
  assert.equal(m[0].date,date,`Fecha: ${id}`);
  assert.equal(m[0].category,category,`Categoría: ${id}`);
- assert.deepEqual(m[0].sources,['PRO2001'],`Fuente: ${id}`);
+ assert.deepEqual(m[0].sources,['PRO2001',...(['regulo-bello','jesus-barroso'].includes(id)?['COF2001']:[])],`Fuente: ${id}`);
  assert.ok(m[0].note.includes('p. 470')&&m[0].note.includes('n.º'),`Localizador: ${id}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace: ${id}`);
 }
@@ -468,7 +468,7 @@ for(const [id,name,date,category,num] of seventeenthBatch2001){
  assert.equal(found[0].name,name,`Nombre p. 473 ${id}`);
  assert.equal(found[0].date,date,`Fecha p. 473 ${id}`);
  assert.equal(found[0].category,category,`Categoría p. 473 ${id}`);
- assert.deepEqual(found[0].sources,['PRO2001'],`Fuente p. 473 ${id}`);
+ assert.deepEqual(found[0].sources,['PRO2001',...(id==='rene-alexander-castro-medina'?['COF2001']:[])],`Fuente p. 473 ${id}`);
  assert.ok(found[0].note.includes('p. 473')&&found[0].note.includes(`n.º ${num}`),`Localizador p. 473 ${id}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace p. 473 ${id}`);
 }

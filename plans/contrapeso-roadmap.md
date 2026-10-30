@@ -1,5 +1,13 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## Lote de producción · 29-10-2026, 21:05 Chile — PROVEA pp. 480–483, n.os 213–235
+
+- **Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, pp. 480–483](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=39), páginas PDF 39–41 (índice cero 38–41); 23 registros n.os 213–235 cotejados contra dataset de 2001. **20 fichas nominales nuevas adultas**, 142 → 162 para 2001, 443 → 463 totales, sujetas a auditoría final del batch; ninguna sentencia firme inferida.
+- **Exclusiones / ambigüedades:** n.º 215 Luis Gregorio Ojeda Fajardo ya existe como n.º 164 (20-04-2001, Puerto La Cruz), mientras el n.º 215 dice 12-07-2001, Barcelona: **no duplicar ni afirmar que son dos personas** sin cotejo adicional. N.º 220 grafía de nombres incierta en el PDF; pendiente. N.º 235 Daniel José Borges (16 años) reservado por protección reforzada de menor y corroboración. N.º 232 Andrés Juan Carlos Jiménez Pacheco: el asterisco de 05-09-2001 indica **fecha de publicación de la denuncia**, no fallecimiento; campo `date` omitido. N.º 230: amenazas previas documentadas, pero **autoría y causalidad del homicidio no probadas**. N.º 216: se registra también que Naranjo hirió a un policía con un machete, contexto adverso necesario.
+- **Principios:** libertad individual — aplica con evidencia a muertes y actuaciones relatadas; propiedad privada — no aplica como conclusión del lote (el contexto de desalojo n.º 216 requiere examen jurídico adicional); control del poder — aplica con evidencia a denuncias y versiones oficiales, sin fallo judicial acreditado.
+- **Estado:** FASE DE PRODUCCIÓN / LOTE EN PROGRESO. QA ligero incremental de IDs únicos, conteos, fuentes y robots sin cambios; **sin auditoría final, Codacy, Codex, Playwright ni merge** en esta corrida. Próximo tramo: PROVEA p. 484 n.os 236–241, cotejo de n.º 215/220 y fuentes adicionales para menores antes del cierre de hito. Noindex y prototipo intactos.
+
+
 ## Cotejo documental · 29-10-2026, 17:45 Chile — PROVEA p. 479, n.os 208–212
 
 - **Preflight GitHub:** `master@da804398523c1cbab1f6f578b99e7cb0c54ead9e`, PR #172–#177 integrados, sin PR abiertos. Estado inicial: 141 fichas 2001 / 442 totales, año parcial.

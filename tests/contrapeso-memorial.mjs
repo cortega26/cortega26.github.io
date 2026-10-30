@@ -126,7 +126,7 @@ assert.equal((year2001.match(/class="year-roster-item"/g) || []).length, cases20
 for (const person of cases2001) {
   assert.ok(year2001.includes(person.name), `Nombre 2001 en página anual: ${person.name}`);
   assert.ok(year2001.includes(`perfil.html?id=${person.id}`), `Enlace individual 2001: ${person.name}`);
-  assert.ok(person.sources.some(key => ['US2001','HRW2001','PRO2001'].includes(key)), `Fuente 2001 atribuida a: ${person.name}`);
+  assert.ok(person.sources.some(key => ['US2001','HRW2001','PRO2001','PRO2002','CIDHLANGTON25'].includes(key)), `Fuente 2001 atribuida a: ${person.name}`);
 }
 for (const name of ['Jesús Alberto Febres', 'Luis Fernando Briceño', 'Ángel Alberto Ardila', 'Ericson José Parra', 'Juan Pablo Arroyave']) {
   assert.ok(cases2001.some(p => p.name === name), `Caso nominal 2001 ausente: ${name}`);

@@ -1,5 +1,7 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+**Corrección focalizada adicional de CI (30-10-2026):** [workflow #41072969238](https://github.com/cortega26/cortega26.github.io/actions/runs/41072969238) reveló que la prueba de fuentes de 2001 omitía PRO2002 (fallecimientos de octubre–diciembre de 2001 publicados en el informe siguiente) y CIDHLANGTON25 (resolución interamericana sobre Sarah Lyn Langton). Se amplía únicamente la allowlist de fuentes válidas para 2001, sin cambiar datos ni aceptar fuentes desconocidas. Nuevo CI pendiente.
+
 **Corrección focalizada de CI (30-10-2026):** [workflow #41072562726](https://github.com/cortega26/cortega26.github.io/actions/runs/41072562726) falló en `tests/contrapeso-memorial.mjs` porque contaba todas las fichas `category=operativo` como si fueran las siete víctimas de El Junquito. El dataset contiene además a Renzo David Padilla Torres (2001), también clasificado como operativo. Se restringe la aserción a `episode=2018-junquito` y `category=operativo`; no se elimina ni recategoriza ninguna víctima. Revalidación CI del nuevo SHA pendiente.
 
 ## Cotejo nominal y temporal · 30-10-2026, 11:23 Chile — PROVEA pp. 474–475 y 480–481 (PR #180; lote en progreso)

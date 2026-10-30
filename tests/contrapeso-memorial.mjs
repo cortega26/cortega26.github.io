@@ -565,7 +565,7 @@ for(const [id,name,date,num] of twentyFirstBatch2001){
  assert.ok(m[0].note.includes('p. 477')&&m[0].note.includes(`n.º ${num}`),`Pasaje ${num}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace ${num}`);
 }
-assert.ok(cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('infarto')&&cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('asterisco'),'Conservar versión oficial y fecha no confirmada');
+assert.ok(cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('infarto')&&cases2001.find(p=>p.id==='hidublis-diaz-acosta').note.includes('publicación de la denuncia'),'Conservar versión oficial y fecha no confirmada');
 assert.ok(cases2001.find(p=>p.id==='franklin-rafael-salazar-perez').note.includes('funcionarios alegaron'),'No convertir denuncia en sentencia');
 assert.ok(SOURCES.PRO2001.title.includes('477')&&SOURCES.PRO2001.scope.includes('n.º 197')&&year2001.includes('n.º 197'),'Anthony Salazar pendiente de evaluación');
 assert.ok(year2001.includes(`<strong>${cases2001.length}</strong>`)&&year2001.includes(`${cases2001.length} FICHAS NOMINALES`),'Contadores concordantes con dataset');

@@ -618,7 +618,7 @@ for(const [id,name,num] of [['danner-pastor-barreto-torres','Danner Pastor Barre
  assert.equal(p.name,name,`Nombre PROVEA ${num}`);
  assert.equal(p.date,'2001-06-05',`Fecha PROVEA ${num}`);
  assert.equal(p.category,'policial',`Sin atribución penal automática ${num}`);
- assert.deepEqual(p.sources,['PRO2001','COVICIL2001'],`Fuentes de ${num}`);
+ assert.deepEqual(p.sources,['PRO2001','COVICIL2001','PRO2002'],`Fuentes de ${num}`);
  assert.ok(p.note.includes('p. 477')&&p.note.includes('anulada')&&p.note.includes('04-06-2001')&&p.note.includes('05-06-2001'),`Contradicción y estado judicial ${num}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
@@ -627,6 +627,12 @@ assert.ok(CASES.length>=437,'Preservar al menos 437 fichas nominales');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Enlaces anuales sincronizados con dataset');
 assert.ok(SOURCES.COVICIL2001.url.includes('poderesimpunidad.pdf')&&year2001.includes('poderesimpunidad.pdf#page=198'),'COVICIL enlazado y localizado');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y alcance parcial');
+assert.ok(year2001.includes('24-10-2001')&&year2001.includes('04-06')&&year2001.includes('05-06')&&year2001.includes('no son dos fallecimientos adicionales'),'Tres fechas incompatibles y deduplicación visibles');
+for(const id of ['danner-pastor-barreto-torres','luis-javier-gimenez-2001']){
+ const item=cases2001.find(p=>p.id===id);
+ assert.ok(item.note.includes('24-10-2001')&&item.note.includes('05-06-2001')&&item.sources.includes('PRO2002'),'Cotejo temporal cruzado y fuente de '+id);
+}
+
 // Unidad PROVEA p. 478: cuatro personas adultas, registros 202–205; no elevar denuncias a sentencias.
 const provea478 = [
   ['arnaldo-rosas-2001','Arnaldo Rosas','2001-06-13',202],

@@ -1,5 +1,14 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## Lote de producción · 29-10-2026, 22:07 Chile — PROVEA 2001–2002 pp. 555–558, n.os 1–34
+
+- **Fuente primaria visual:** [PROVEA, anexo 6, pp. 555–558](https://archivo.provea.org/wp-content/uploads/anexos0001.pdf#page=10), 34 registros cotejados. **30 fichas adultas nuevas**, 167 → 197 de 2001 y 468 → 498 totales; acumulado del PR #180: 55 altas, lote aún abierto. Se conservaron denuncia, versión oficial y límites sin convertir relatos en condenas.
+- **Exclusiones:** n.os 29–30 (Ayrton Asdrúbal Obregón Llano, 15; Yamilet de los Ángeles González Giménez, 13) por evaluación reforzada de menores; n.os 17–18 son los ya documentados Luis Javier Giménez y Danner Pastor Barreto Torres. **Contradicción material**: anexo 2001–2002 los fecha 24-10-2001, pero PROVEA anterior/COVICIL 05-06-2001; no duplicar ni resolver fecha sin cotejo.
+- **Contexto adverso:** n.º 3 versión oficial sobre forcejeo y arma; n.os 8–9 alegación de robo; n.os 12–13 y 25–26 versión de enfrentamiento; n.º 20 alegación de extorsión refutada por familiares; n.º 27 alegación de intento de robo. N.os 22/33/34 pertenecen a investigación de once casos de Chivacoa, sin crear identidades ausentes.
+- **Principios:** libertad individual — aplica con evidencia a las detenciones y muertes denunciadas; propiedad privada — no aplica; control del poder — aplica con evidencia a denuncias, investigación y versiones oficiales, sin sentencia individual verificada.
+- **Estado:** FASE DE PRODUCCIÓN, QA incremental (IDs, enlaces, contadores, robots). No auditoría final de batch, CI completa, Playwright, Codacy, Codex ni merge. Próxima sección: PROVEA p. 559 y siguientes, hasta diciembre 2001, reconciliando menores y contradicciones al cierre del lote.
+
+
 ## Lote de producción · 29-10-2026, 22:07 Chile — PROVEA p. 484, n.os 236–241
 
 - **Fuente inspeccionada visualmente:** [PROVEA, anexo 3, p. 484](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=43), seis registros 236–241. Cinco fichas adultas nuevas: Walter Gregorio Figueredo (237), Juan Patiño (238), Hermer Suárez Bravo (239), Alexis Carilo (240), Ángel Ramón Añanguren (241). Total 2001: **162 → 167**, dataset global **463 → 468**; año incompleto y registros sujetos a auditoría de cierre.

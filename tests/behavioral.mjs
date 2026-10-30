@@ -727,11 +727,11 @@ async function testContrapesoFrontpage(browser) {
     try {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       const cards = page.locator('#article-list .story-card');
-      if (await cards.count() !== 9) fail(`Contrapeso ${width}: expected nine cards`);
+      if (await cards.count() !== 10) fail(`Contrapeso ${width}: expected ten cards`);
       // Provenance must remain visible after JS filters the editorial prototype.
       const provenance = page.locator('#result-count');
       const initialCount = (await provenance.textContent())?.trim();
-      if (initialCount !== '9 contenidos: 8 con fuentes y 1 muestra') {
+      if (initialCount !== '10 contenidos: 9 con fuentes y 1 muestra') {
         fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
       }
       // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.
@@ -813,8 +813,8 @@ async function testContrapesoFrontpage(browser) {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();
       const newsCards = page.locator('#article-list .story-card:visible');
-      if (await newsCards.count() !== 4) {
-        fail(`Contrapeso ${width}: Actualidad must show four sourced news stories`);
+      if (await newsCards.count() !== 5) {
+        fail(`Contrapeso ${width}: Actualidad must show five sourced news stories`);
       } else {
         const newsLink = newsCards.locator('a[href="/venezuela-lab/actualidad/regreso-machado-2026/"]');
         if (await newsLink.count() !== 1) {
@@ -831,6 +831,14 @@ async function testContrapesoFrontpage(browser) {
           else ok(`Contrapeso ${width}: news filter, link, noindex and responsive width`);
         }
       }
+      await page.goto(`${BASE}/venezuela-lab/actualidad/petroleo-nabep-30oct-2026/`, { waitUntil: 'networkidle' });
+      const oilTitle = await page.locator('h1').first().textContent();
+      const oilRobots = await page.locator('meta[name="robots"]').getAttribute('content');
+      const oilOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+      if (!oilTitle?.includes('La meta petrolera de NABEP')) fail(`Contrapeso ${width}: wrong oil report`);
+      else if (oilRobots !== 'noindex,nofollow,noarchive') fail(`Contrapeso ${width}: oil report robots missing`);
+      else if (oilOverflow) fail(`Contrapeso ${width}: oil report horizontal overflow`);
+      else ok(`Contrapeso ${width}: oil report responsive, sourced and noindex`);
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();
       const calendarLink = page.locator('#article-list .story-card:visible a[href="/venezuela-lab/actualidad/calendario-electoral-29oct-2026/"]');

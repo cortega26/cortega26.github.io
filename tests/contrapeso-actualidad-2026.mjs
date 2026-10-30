@@ -31,11 +31,11 @@ for (const url of [
 assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
 assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 'Reutiliza CSS existente');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
-assert.equal((grid.match(/class="story-card"/g) || []).length, 9, 'Nueve tarjetas');
+assert.equal((grid.match(/class="story-card"/g) || []).length, 10, 'Diez tarjetas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Una muestra');
 const card = grid.split('<article class="story-card" data-category="Actualidad"')[1].split('</article>')[0];
 assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
-assert.ok(home.includes('8 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
+assert.ok(home.includes('9 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
 if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/actualidad/regreso-machado-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(built) && built.includes('María Corina Machado regresó'), 'Build de noticia noindex');
@@ -58,7 +58,7 @@ assert.ok(march.includes('https://www.infobae.com/america/agencias/2026/10/28/ac
 assert.ok(!/<script\b|<form\b/i.test(march), 'Sin JS ni formularios nuevos');
 const marchCard = grid.split('data-search="marcha miraflores 28 octubre 2026')[1]?.split('</article>')[0];
 assert.ok(marchCard?.includes(`href="${marchPath}"`) && !marchCard.includes('demo-tag'), 'Tarjeta de actualidad enlaza a noticia real');
-assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 4, 'Cuatro noticias reales en Actualidad');
+assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 5, 'Cinco noticias reales en Actualidad');
 if (process.argv.includes('--built')) {
   const builtMarch = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtMarch) && builtMarch.includes('Miraflores'), 'Build conserva noticia y noindex');
@@ -107,3 +107,23 @@ if (process.argv.includes('--built')) {
 }
 
 console.log('Contrapeso actualidad 2026: género, fuentes, límites, portada, ruta y noindex PASS');
+
+const oilPath = '/venezuela-lab/actualidad/petroleo-nabep-30oct-2026/';
+const oil = readFileSync(new URL('../public/venezuela-lab/actualidad/petroleo-nabep-30oct-2026/index.html', import.meta.url), 'utf8');
+assert.ok(prototypeOnlyRoutes.some((r) => r.id === 'contrapeso:news:petroleo-nabep-30oct-2026' && r.path === oilPath), 'Noticia petrolera inventariada');
+assert.ok(!routeGroups.some((g) => Object.values(g.paths).includes(oilPath)), 'Noticia petrolera fuera de sitemap');
+assert.ok(hasNoindexMeta(oil) && oil.includes('noindex,nofollow,noarchive'), 'Robots completos de petróleo');
+assert.match(oil, /Hecho: investigación publicada el 30 de octubre de 2026/, 'Fecha de la investigación');
+assert.match(oil, /Publicado: 30 de octubre de 2026/, 'Fecha editorial');
+assert.match(oil, /Revisado: 30 de octubre de 2026/, 'Revisión fechada');
+assert.match(oil, /sin reporteo propio/, 'No inventar reporteo');
+assert.match(oil, /Qué falta verificar/, 'Límites explícitos');
+assert.match(oil, /objetivo, no resultado/, 'Meta no confundida con producción');
+assert.ok(oil.includes('https://www.reuters.com/legal/litigation/trump-touted-record-venezuela-oil-deal-now-reality-is-setting-2026-10-30/') && oil.includes('https://news.bloomberglaw.com/environment-and-energy/trumps-venezuela-oil-venture-eyes-150-output-hike-by-2028-1'), 'Fuentes fechadas y separadas');
+assert.ok(!/<script\\b|<form\\b/i.test(oil), 'Sin JS ni captación');
+const oilCard = grid.split('data-search="petroleo nabep venezuela 17 campos')[1]?.split('</article>')[0];
+assert.ok(oilCard?.includes(`href="${oilPath}"`) && !oilCard.includes('demo-tag'), 'Tarjeta real enlazada');
+if (process.argv.includes('--built')) {
+  const builtOil = readFileSync(new URL('../dist/venezuela-lab/actualidad/petroleo-nabep-30oct-2026/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(builtOil), 'Build petrolero conserva noindex');
+}

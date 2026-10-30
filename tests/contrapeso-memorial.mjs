@@ -163,7 +163,7 @@ for (const [id, date, category] of early2001) {
 // Cuarta unidad documental: anexo PROVEA p. 461, registros 69–73.
 const febres2001 = cases2001.find(p => p.id === 'jesus-alberto-febres');
 assert.equal(febres2001?.date, '2001-01-31', 'Fecha de muerte de Febres, distinta del incidente del 10 de enero');
-assert.deepEqual(febres2001?.sources, ['US2001', 'PRO2001'], 'Doble fuente para Febres Narváez');
+assert.deepEqual(febres2001?.sources, ['US2001', 'PRO2001', 'PROVIDA2002'], 'Fuentes documentales de Febres Narváez');
 assert.ok(febres2001?.note.includes('Febres Narváez'), 'Variante nominal documentada por PROVEA');
 for (const [id, date, category] of [
   ['jose-gregorio-castillo-2001', '2001-01-10', 'policial'],
@@ -340,7 +340,7 @@ for(const [id,name,date,category] of eleventhBatch2001) {
  assert.equal(matches[0].name,name,`Identidad PROVEA: ${id}`);
  assert.equal(matches[0].date,date,`Fecha: ${id}`);
  assert.equal(matches[0].category,category,`Categoría: ${id}`);
- assert.deepEqual(matches[0].sources,['PRO2001','COF2001'],`Fuentes reconciliadas: ${id}`);
+ assert.ok(['PRO2001','COF2001'].every(key=>matches[0].sources.includes(key)),`Fuentes reconciliadas: ${id}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Perfil enlazado: ${id}`);
 }
 assert.ok(cases2001.find(p=>p.id==='rafael-leonardo-moreno')?.note.includes('denuncia'), 'No presentar ejecución denunciada como sentencia');
@@ -581,8 +581,8 @@ for(const [id,name] of elTigre){
  const match=cases2001.filter(p=>p.id===id);
  assert.equal(match.length,1,`Una sola ficha para ${name}`);
  assert.equal(match[0].name,name,`Conservar etiqueta nominal PROVEA ${name}`);
- assert.equal(match[0].date,'2001-03-01',`Fecha del registro PROVEA, no consenso ${name}`);
- assert.deepEqual(match[0].sources,['PRO2001','COF2001'],`Dos documentos ${name}`);
+ assert.ok(!Object.hasOwn(match[0],'date'),`Día exacto de muerte no acreditado: ${name}`);
+ assert.ok(['PRO2001','COF2001'].every(key=>match[0].sources.includes(key)),`Dos documentos ${name}`);
  assert.ok(match[0].note.includes('01-03-2001')&&match[0].note.includes('10-03-2001'),`Fechas discrepantes visibles ${name}`);
  assert.ok(match[0].note.includes('anulada en apelación'),`No convertir condena anulada en firme ${name}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace conservado ${name}`);

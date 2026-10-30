@@ -62,7 +62,7 @@ assert.ok(realCard, 'Existe una tarjeta de explicador real con género identific
 assert.ok(realCard.includes(`href="${editorialPath}"`), 'La tarjeta enlaza al explicador documentado');
 assert.ok(!realCard.includes('data-article=') && !realCard.includes('demo-tag'), 'El artículo real no abre un modal demostrativo ni se etiqueta EJEMPLO');
 assert.ok(frontpage.includes('data-filter="Explicadores"'), 'El filtro permite encontrar explicadores');
-assert.ok(frontpage.includes('7 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'La portada diferencia contenido real de muestras');
+assert.ok(frontpage.includes('8 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'La portada diferencia contenido real de muestras');
 assert.ok(frontpage.includes('noindex,nofollow,noarchive'), 'La portada sigue no indexable');
 assert.ok(!frontpage.includes('TODOS LOS ARTÍCULOS SON DEMOSTRATIVOS'), 'No se atribuye carácter ficticio al artículo real');
 assert.ok(!frontpageScript.includes("+' de ejemplo'"), 'El contador dinámico no llama ejemplos a los resultados reales');

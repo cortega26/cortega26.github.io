@@ -746,4 +746,19 @@ assert.equal(ayrton[0].name,'Ayrton Asdrúbal Obregón Llano');
 assert.equal(ayrton[0].date,'2001-11-11');
 assert.deepEqual(ayrton[0].sources,['PRO2002','PROVIDA2002']);
 assert.ok(ayrton[0].note.includes('No hay condena firme')&&ayrton[0].note.includes('no hay corroboración institucional independiente'));
-assert.ok(year2001.includes('perfil.html?id=ayrton-asdrubal-obregon-llano-2001')&&year2001.includes('231 FICHAS NOMINALES'));
+assert.ok(year2001.includes('perfil.html?id=ayrton-asdrubal-obregon-llano-2001')&&year2001.includes(`${cases2001.length} FICHAS NOMINALES`));
+
+// HRW/AI 2002: una alta de El Rodeo y una reconciliación de identidad, sin duplicados.
+const edgardRodeo=cases2001.filter(p=>p.id==='edgard-alexander-bazan-2001');
+assert.equal(edgardRodeo.length,1);
+assert.equal(edgardRodeo[0].category,'custodia');
+assert.deepEqual(edgardRodeo[0].sources,['HRW2001']);
+assert.ok(!Object.hasOwn(edgardRodeo[0],'date')&&edgardRodeo[0].note.includes('NO ejecución atribuida a funcionarios'));
+assert.ok(year2001.includes('perfil.html?id=edgard-alexander-bazan-2001'));
+const argenisAi=cases2001.filter(p=>p.id==='argenis-gonzalez-2001');
+assert.equal(argenisAi.length,1);
+assert.equal(argenisAi[0].name,'Argenis Antonio González');
+assert.deepEqual(argenisAi[0].sources,['PRO2001','AI2002']);
+assert.equal(argenisAi[0].date,'2001-02-09');
+assert.ok(year2001.includes('Argenis Antonio González')&&SOURCES.AI2002.url.includes('amnesty/2002'));
+assert.ok(year2001.includes(`${cases2001.length} FICHAS NOMINALES`)&&year2001.includes('noindex,nofollow,noarchive'));

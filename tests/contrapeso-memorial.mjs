@@ -235,7 +235,7 @@ for (const [id,name,date,category] of seventhBatch2001) {
  const matches=cases2001.filter(p=>p.id===id);
  assert.equal(matches.length,1,`Ficha única: ${id}`);
  assert.equal(matches[0].name,name,`Nombre: ${id}`);
- assert.equal(matches[0].date,date,`Fecha: ${id}`);
+ assert.equal(matches[0].date,date,`Fecha exacta no demostrada: ${id}`);
  assert.equal(matches[0].category,category,`Categoría: ${id}`);
  assert.deepEqual(matches[0].sources,['PRO2001'],`Fuente: ${id}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace: ${id}`);
@@ -260,7 +260,7 @@ for (const [id,name,date,category] of eighthBatch2001) {
  assert.equal(found[0].name,name,`Nombre PROVEA: ${id}`);
  assert.equal(found[0].date,date,`Fecha PROVEA: ${id}`);
  assert.equal(found[0].category,category,`Categoría: ${id}`);
- assert.deepEqual(found[0].sources,['PRO2001'],`Fuente: ${id}`);
+ assert.deepEqual(found[0].sources,id==='luis-gregorio-ojeda-fajardo'?['PRO2001','COF2001']:['PRO2001'],`Fuente: ${id}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace estable: ${id}`);
 }
 const ardila=cases2001.find(p=>p.id==='angel-ardilla');
@@ -331,7 +331,7 @@ assert.ok(year2001.includes('Los registros 62–') && SOURCES.PRO2001.title.incl
 assert.ok(year2001.includes('No es un balance anual exhaustivo'),'Sin cierre falso del año');
 
 // Undécima unidad: PROVEA p. 468, registros 122–124, tres víctimas del mismo episodio.
-const eleventhBatch2001 = [["yavidilex-placencio-borges","Yavidilex Placencio Borges","2001-03-01","policial"],["wilmer-villarroel-2001","Wilmer Villarroel","2001-03-01","policial"],["rafael-leonardo-moreno","Rafael Leonardo Moreno","2001-03-01","policial"]];
+const eleventhBatch2001 = [["yavidilex-placencio-borges","Yavidilex Placencio Borges",undefined,"policial"],["wilmer-villarroel-2001","Wilmer Villarroel",undefined,"policial"],["rafael-leonardo-moreno","Rafael Leonardo Moreno",undefined,"policial"]];
 assert.ok(cases2001.length>=66,'Preservar 66 fichas de 2001 tras el undécimo lote');
 assert.ok(CASES.length>=367,'Preservar 367 fichas totales');
 for(const [id,name,date,category] of eleventhBatch2001) {
@@ -707,3 +707,16 @@ for (const id of ["luis-enrique-gonzalez-2001","luis-alfredo-carrera-yeguez","ju
   assert.ok(victim.note.includes('publicación de la denuncia') && victim.note.includes('año'), `Documentar incertidumbre temporal: ${id}`);
   assert.ok(year2001.includes(`perfil.html?id=${id}`), `Ficha anual sin pérdida: ${id}`);
 }
+
+// Cotejo transversal COFAVIC p. 31/p. 51: conflicto interno de fecha y edad; PROVEA p. 468.
+for(const id of ['yavidilex-placencio-borges','wilmer-villarroel-2001','rafael-leonardo-moreno']){
+ const p=cases2001.find(v=>v.id===id);
+ assert.ok(p&&!Object.hasOwn(p,'date'),`No convertir 1/10/11 de marzo en fecha cierta de muerte: ${id}`);
+ assert.ok(p.note.includes('11-03-2001')&&p.note.includes('10-03-2001')&&p.note.includes('01-03-2001'),`Contradicción temporal visible: ${id}`);
+ assert.ok(year2001.includes(`perfil.html?id=${id}`)&&year2001.includes('1/10/11: fuentes discrepantes'),`Rótulo anual prudente: ${id}`);
+}
+const ojedaCorroborado=cases2001.find(v=>v.id==='luis-gregorio-ojeda-fajardo');
+assert.deepEqual(ojedaCorroborado.sources,['PRO2001','COF2001']);
+assert.equal(ojedaCorroborado.date,'2001-04-20');
+assert.ok(ojedaCorroborado.note.includes('32 años')&&ojedaCorroborado.note.includes('35 en PROVEA')&&ojedaCorroborado.note.includes('anulada en apelación'));
+assert.ok(year2001.includes('una denuncia posterior del fallecimiento de abril'));

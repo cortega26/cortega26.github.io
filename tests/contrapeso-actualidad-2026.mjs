@@ -35,7 +35,7 @@ assert.equal((grid.match(/class="story-card"/g) || []).length, 9, 'Nueve tarjeta
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Una muestra');
 const card = grid.split('<article class="story-card" data-category="Actualidad"')[1].split('</article>')[0];
 assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
-assert.ok(home.includes('7 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
+assert.ok(home.includes('8 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
 if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/actualidad/regreso-machado-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(built) && built.includes('María Corina Machado regresó'), 'Build de noticia noindex');

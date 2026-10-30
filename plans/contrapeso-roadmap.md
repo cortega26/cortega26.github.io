@@ -1,5 +1,14 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## Lote de producción · 29-10-2026, 22:07 Chile — PROVEA p. 484, n.os 236–241
+
+- **Fuente inspeccionada visualmente:** [PROVEA, anexo 3, p. 484](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=43), seis registros 236–241. Cinco fichas adultas nuevas: Walter Gregorio Figueredo (237), Juan Patiño (238), Hermer Suárez Bravo (239), Alexis Carilo (240), Ángel Ramón Añanguren (241). Total 2001: **162 → 167**, dataset global **463 → 468**; año incompleto y registros sujetos a auditoría de cierre.
+- **Exclusión:** n.º 236 Osniel Abilarmino Brizuela, 15 años, requiere segunda fuente y privacidad reforzada; no incorporar por cuota.
+- **Incertidumbres:** n.º 238 «30.09.01**» sin significado de doble asterisco resuelto; n.º 239 «16.10.01» posterior al período formal del informe; n.os 240–241 «03.10.01*» es fecha de publicación de denuncia, NO muerte. Se omitió `date` en los cuatro casos. N.º 237 fecha 26-09-2001. Ninguna denuncia equivale a sentencia; se conserva versión oficial de enfrentamiento en n.º 237 y alegación de venganza no probada en n.º 238.
+- **Orientación:** libertad individual — aplica con evidencia a detenciones y muertes denunciadas; propiedad privada — no aplica; control del poder — aplica con evidencia al contraste de actuaciones y denuncias, sin responsabilidad penal individual acreditada.
+- **Estado:** PRODUCCIÓN/ACUMULACIÓN, lote #180 abierto. QA incremental de sintaxis, IDs, enlaces, contadores y robots; no se solicitó Codex, no hubo auditoría final, build, Playwright, Codacy ni merge. Próxima investigación: informe PROVEA octubre 2001–septiembre 2002 (casos octubre–diciembre 2001) y pendientes nominales 197, 206, 215, 220, 235, 236; luego capítulo 2002.
+
+
 ## Lote de producción · 29-10-2026, 21:05 Chile — PROVEA pp. 480–483, n.os 213–235
 
 - **Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 3, pp. 480–483](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=39), páginas PDF 39–41 (índice cero 38–41); 23 registros n.os 213–235 cotejados contra dataset de 2001. **20 fichas nominales nuevas adultas**, 142 → 162 para 2001, 443 → 463 totales, sujetas a auditoría final del batch; ninguna sentencia firme inferida.

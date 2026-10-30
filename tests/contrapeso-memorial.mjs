@@ -549,7 +549,7 @@ assert.ok(SOURCES.PRO2001.scope.includes('n.os 62–194')&&year2001.includes('Lo
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y límites');
 
 // Vigésima primera unidad: p. 477, adultos n.os 198 y 201; adolescentes diferidos por privacidad.
-const twentyFirstBatch2001=[["hidublis-diaz-acosta","Hidublis Díaz Acosta","2001-06-11",198],["franklin-rafael-salazar-perez","Franklin Rafael Salazar Pérez","2001-06-12",201]];
+const twentyFirstBatch2001=[["hidublis-diaz-acosta","Hidublis Díaz Acosta",undefined,198],["franklin-rafael-salazar-perez","Franklin Rafael Salazar Pérez","2001-06-12",201]];
 // Hito mínimo de 136 fichas, no techo: futuros lotes deben seguir pasando sin alterar la auditoría de este hito.
 assert.ok(cases2001.length>=136,'136 fichas de 2001; registro parcial');
 assert.equal(new Set(CASES.map(p=>p.id)).size,CASES.length,'IDs globales únicos');
@@ -635,7 +635,7 @@ for(const id of ['danner-pastor-barreto-torres','luis-javier-gimenez-2001']){
 
 // Unidad PROVEA p. 478: cuatro personas adultas, registros 202–205; no elevar denuncias a sentencias.
 const provea478 = [
-  ['arnaldo-rosas-2001','Arnaldo Rosas','2001-06-13',202],
+  ['arnaldo-rosas-2001','Arnaldo Rosas',undefined,202],
   ['carlos-enrique-santana-redondo','Carlos Enrique Santana Redondo','2001-06-15',203],
   ['eduardo-jose-mejicano-garcia','Eduardo José Mejicano García','2001-06-18',204],
   ['edgar-antonio-pereira-2001','Edgar Antonio Pereira','2001-06-20',205]

@@ -1,5 +1,14 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## F1 — Cotejo nominal de menor y corte temporal (30-10-2026, 12:24 Chile; PR #180, lote en progreso)
+
+**Fuentes visuales inspeccionadas:** [PROVEA, anexo 6, p. 558, n.os 27–34](https://archivo.provea.org/wp-content/uploads/anexos0001.pdf#page=13); [PROVEA, Derecho a la vida, PDF p. 6](https://provea.org/wp-content/uploads/2017/08/001_derecho_a_la_vida-2.pdf#page=6); [PROVEA, anexo 6, pp. 562–565](https://archivo.provea.org/wp-content/uploads/anexos0001.pdf#page=17), n.os 62–96. **Una ficha nueva:** Ayrton Asdrúbal Obregón Llano, 15 años, muerto el 11-11-2001 en Naguanagua. El capítulo narrativo amplía el anexo: testimonio de familiares/acompañantes, versión oficial de enfrentamiento, denuncia de impedimento al auxilio y actuaciones procesales reportadas a comienzos de 2002 (medida de privación de libertad contra dos funcionarios y solicitud de exhumación). No se inspeccionó expediente ni sentencia; dos pasajes de PROVEA no constituyen corroboración independiente.
+
+**Excepción documentada a múltiples altas:** de los seis menores de 2001 pendientes en el anexo 6, solo Ayrton cuenta en el capítulo inspeccionado con relato narrativo adicional y referencias procesales individualizadas; los otros cinco siguen reservados hasta corroboración proporcional. Se publica solo el nombre de la persona fallecida ya divulgado por PROVEA; sin datos de familiares, testigos o agentes. **231 fichas de 2001 / 532 globales**, sin duplicados de ID en el cotejo incremental. Las pp. 563–565 empiezan con el n.º 75 de 08-01-2002 y avanzan por enero/febrero de 2002: no adscribir esos casos a 2001. El n.º 58 conserva anomalía 19-12-2002 sin resolver.
+
+**QA ligero incremental:** parseo de registros, IDs únicos, contadores y 231 enlaces del capítulo, robots conservados, test nominal añadido. **No es auditoría final de batch**; build, Playwright y Codacy no ejecutados. Codex: **NO SOLICITADO — revisión selectiva**. Libertad individual y control del poder: aplican con evidencia; propiedad privada: no aplica. 2001 no exhaustivo, PR abierto, sin merge/indexación/lanzamiento. **Siguiente unidad:** buscar fuentes adicionales para cinco menores y documentación nominal penitenciaria de 2001.
+
+
 ## Cotejo transversal · 30-10-2026, 11:51 Chile — PROVEA 2001–2002, anexo 6, pp. 555–562; HRW 2002
 
 - **Ocho páginas consecutivas inspeccionadas visualmente:** [PROVEA, anexo 6, pp. 555–562](https://archivo.provea.org/wp-content/uploads/anexos0001.pdf#page=10), n.os 1–74, que cubren octubre de 2001 y avanzan hasta enero de 2002. Cotejo nominal de adultos de octubre–diciembre contra el dataset vigente: **sin altas nuevas justificadas**, pues los adultos revisados ya tienen ficha; no adscribir los casos de 2002 a 2001. El n.º 58 imprime 19-12-2002 pese a su ubicación entre registros de diciembre de 2001: no resolver la anomalía sin prueba adicional.

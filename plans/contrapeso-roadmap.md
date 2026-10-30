@@ -1,5 +1,7 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+**Corrección focalizada de CI (30-10-2026):** [workflow #41072562726](https://github.com/cortega26/cortega26.github.io/actions/runs/41072562726) falló en `tests/contrapeso-memorial.mjs` porque contaba todas las fichas `category=operativo` como si fueran las siete víctimas de El Junquito. El dataset contiene además a Renzo David Padilla Torres (2001), también clasificado como operativo. Se restringe la aserción a `episode=2018-junquito` y `category=operativo`; no se elimina ni recategoriza ninguna víctima. Revalidación CI del nuevo SHA pendiente.
+
 ## Cotejo nominal y temporal · 30-10-2026, 11:23 Chile — PROVEA pp. 474–475 y 480–481 (PR #180; lote en progreso)
 
 - **Cuatro páginas originales inspeccionadas:** [PROVEA p. 474, n.os 178 y 181](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=33), [p. 475, n.º 182](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=34), [p. 480, n.º 214](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=39) y [p. 481, n.º 220](https://archivo.provea.org/wp-content/uploads/01_anexos0001.pdf#page=40). Una sola fuente primaria, sin fingir independencia entre páginas.

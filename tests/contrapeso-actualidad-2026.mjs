@@ -138,7 +138,7 @@ assert.match(warrants, /Publicado: 31 de octubre de 2026/, 'Fecha editorial');
 assert.match(warrants, /sin reporteo propio/, 'Procedencia explícita');
 assert.match(warrants, /Qué falta verificar/, 'Límites de evidencia');
 assert.ok(warrants.includes('https://efe.com/mundo/2026-10-29/venezuela-discurso-delcy-rodriguez-medidas-machado/') && warrants.includes('https://eldiario.com/2026/10/30/foropanal-represion-politica/') && warrants.includes('https://www.bcn.cl/procesoconstituyente/comparadordeconstituciones/constitucion/ven'), 'Fuente de anuncio, respuesta y norma');
-assert.ok(!/<script\\b|<form\\b/i.test(warrants), 'Sin JS ni captación');
+assert.ok(!/<script\b|<form\b/i.test(warrants), 'Sin JS ni captación');
 const warrantsCard = grid.split('data-search="orden judicial detenciones foro penal 30 octubre 2026')[1]?.split('</article>')[0];
 assert.ok(warrantsCard?.includes(`href="${warrantsPath}"`) && !warrantsCard.includes('demo-tag'), 'Tarjeta real enlazada');
 if (process.argv.includes('--built')) {

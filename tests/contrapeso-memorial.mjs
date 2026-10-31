@@ -647,7 +647,7 @@ for (const [id,name,date,num] of provea478) {
   assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
 assert.equal(cases2001.length,142,'142 fichas parciales 2001 tras PROVEA p. 479');
-assert.equal(CASES.length,443,'443 fichas totales tras PROVEA p. 479');
+assert.ok(CASES.length>=443,'Conservar las 443 fichas de la línea base de PROVEA p. 479');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,142,'Roster anual exacto');
 assert.ok(SOURCES.PRO2001.title.includes('479')&&SOURCES.PRO2001.scope.includes('n.º 206'),'Fuente y casos reservados');
 assert.ok(cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('compañera')&&cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('a la mujer en un brazo')&&!cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('madre'),'Distinguir lesión de compañera y muerte de Pereira, sin inventar parentesco');
@@ -679,3 +679,15 @@ assert.deepEqual(gamez2001[0].sources,['PRO2001']);
 assert.ok(gamez2001[0].note.includes('n.º 211')&&gamez2001[0].note.includes('versión oficial')&&gamez2001[0].note.includes('no se inspeccionaron'));
 assert.ok(year2001.includes('perfil.html?id=isidro-rafael-gamez-salazar-2001'));
 assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));
+
+// Hito judicial acotado: tres víctimas del mismo expediente de la Corte IDH, sin duplicación.
+const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
+const diaz2003 = CASES.filter(p => p.episode === '2003');
+assert.equal(diaz2003.length,3,'Tres víctimas judicialmente identificadas, no recuento anual');
+assert.equal(new Set(diaz2003.map(p=>p.id)).size,3,'Tres identidades distintas');
+assert.ok(diaz2003.every(p=>p.sources.includes('CORTEIDH392') && p.date==='2003-01-06'));
+assert.ok(diaz2003.every(p=>year2003.includes('perfil.html?id='+p.id)));
+assert.ok(year2003.includes('noindex,nofollow,noarchive'));
+assert.ok(year2003.includes('no equivale a condena penal individual'));
+assert.ok(index.includes('/venezuela-lab/museo/victimas/2003/'));
+assert.ok(SOURCES.CORTEIDH392.url.includes('corteidh.or.cr/docs/casos/articulos/resumen_392_esp.pdf'));

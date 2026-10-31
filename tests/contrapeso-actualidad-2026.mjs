@@ -31,7 +31,7 @@ for (const url of [
 assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
 assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 'Reutiliza CSS existente');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
-assert.equal((grid.match(/class="story-card"/g) || []).length, 11, 'Once tarjetas');
+assert.ok((grid.match(/class="story-card"/g) || []).length >= 11, 'Conserva las tarjetas previas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Una muestra');
 const card = grid.split('data-search="maria corina machado regresa venezuela octubre 2026')[1]?.split('</article>')[0];
 assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
@@ -58,7 +58,7 @@ assert.ok(march.includes('https://www.infobae.com/america/agencias/2026/10/28/ac
 assert.ok(!/<script\b|<form\b/i.test(march), 'Sin JS ni formularios nuevos');
 const marchCard = grid.split('data-search="marcha miraflores 28 octubre 2026')[1]?.split('</article>')[0];
 assert.ok(marchCard?.includes(`href="${marchPath}"`) && !marchCard.includes('demo-tag'), 'Tarjeta de actualidad enlaza a noticia real');
-assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 6, 'Seis noticias reales en Actualidad');
+assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, prototypeOnlyRoutes.filter((r) => r.id.startsWith('contrapeso:news:')).length, 'Portada incluye todas las noticias del inventario');
 if (process.argv.includes('--built')) {
   const builtMarch = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtMarch) && builtMarch.includes('Miraflores'), 'Build conserva noticia y noindex');

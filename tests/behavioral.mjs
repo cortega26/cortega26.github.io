@@ -815,8 +815,9 @@ async function testContrapesoFrontpage(browser) {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       await page.locator('[data-filter="Actualidad"]').click();
       const newsCards = page.locator('#article-list .story-card:visible');
-      if (await newsCards.count() !== 6) {
-        fail(`Contrapeso ${width}: Actualidad must show six sourced news stories`);
+      const expectedNews = await page.locator('#article-list .story-card[data-category="Actualidad"]').count();
+      if (expectedNews < 6 || await newsCards.count() !== expectedNews) {
+        fail(`Contrapeso ${width}: Actualidad debe mostrar todas las noticias del inventario`);
       } else {
         const newsLink = newsCards.locator('a[href="/venezuela-lab/actualidad/regreso-machado-2026/"]');
         if (await newsLink.count() !== 1) {

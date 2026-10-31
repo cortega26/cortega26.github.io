@@ -55,14 +55,14 @@ assert.ok(!/<script\b/i.test(html), 'Sin nueva superficie de JS o cambios de CSP
 assert.ok(html.includes('href="../explicadores.css"'), 'Stylesheet local');
 const articleGrid = frontpage.split('<div class="articles-grid" id="article-list">')[1]?.split('</div><p id="no-results"')[0];
 assert.ok(articleGrid, 'La portada mantiene la grilla de publicaciones');
-assert.equal((articleGrid.match(/class="story-card"/g) || []).length, 10, 'Se conservan diez tarjetas y el layout');
+assert.equal((articleGrid.match(/class="story-card"/g) || []).length, 11, 'Se conservan once tarjetas y el layout');
 assert.equal((articleGrid.match(/class="demo-tag"/g) || []).length, 1, 'Solo Opinión se identifica como muestra');
 const realCard = articleGrid.split('<article class="story-card" data-category="Explicadores"')[1]?.split('</article>')[0];
 assert.ok(realCard, 'Existe una tarjeta de explicador real con género identificable');
 assert.ok(realCard.includes(`href="${editorialPath}"`), 'La tarjeta enlaza al explicador documentado');
 assert.ok(!realCard.includes('data-article=') && !realCard.includes('demo-tag'), 'El artículo real no abre un modal demostrativo ni se etiqueta EJEMPLO');
 assert.ok(frontpage.includes('data-filter="Explicadores"'), 'El filtro permite encontrar explicadores');
-assert.ok(frontpage.includes('9 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'La portada diferencia contenido real de muestras');
+assert.ok(frontpage.includes('10 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'La portada diferencia contenido real de muestras');
 assert.ok(frontpage.includes('noindex,nofollow,noarchive'), 'La portada sigue no indexable');
 assert.ok(!frontpage.includes('TODOS LOS ARTÍCULOS SON DEMOSTRATIVOS'), 'No se atribuye carácter ficticio al artículo real');
 assert.ok(!frontpageScript.includes("+' de ejemplo'"), 'El contador dinámico no llama ejemplos a los resultados reales');

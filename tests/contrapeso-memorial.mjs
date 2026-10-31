@@ -14,11 +14,18 @@ assert.ok(CASES.length >= 230, 'La colección ampliada exige al menos 230 regist
 assert.equal(CASES.filter(p=>p.episode==='2002-11A').length,19,'Las 19 víctimas nominales del 11A deben figurar');
 const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
 const cases2003 = CASES.filter(p => p.year === 2003);
-assert.equal(cases2003.length, 18, 'Lote parcial de adultos 2003 PROVEA');
+assert.equal(cases2003.length, 52, 'Lote parcial de adultos 2003 PROVEA');
 assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2003/"'), 'Enlace al capítulo 2003');
 assert.ok(year2003.includes('noindex,nofollow,noarchive') && year2003.includes('no es el total de 2003'), 'Robots y alcance parcial 2003');
 for (const p of cases2003) { assert.ok(p.sources.includes('PRO2003JAN') && p.episode==='2003', 'Fuente/episodio 2003: '+p.id); assert.ok(year2003.includes('perfil.html?id='+p.id), 'Enlace nominal 2003: '+p.id); }
 for (const n of ['Egli Yorman Martínez','Michael Bolívar','Carlos Alberto Lezama','José Humberto Moreno','Raúl Guerra']) assert.ok(!cases2003.some(p=>p.name===n), 'Reserva sensible o temporal: '+n);
+
+// PROVEA anexo 5, pp. 548–553: lote 66–112, adultos con identidad y edad explícitas.
+const adult2003Batch=["leonel-anza-2003","winder-alexander-olivero-seijas-2003","roberto-antonio-guaicara-romero-2003","carlos-giovanni-marcano-tineo-2003","jhoan-julio-alvarado-paredes-2003","jhon-peter-perez-2003","arturo-contreras-arias-2003","jose-tovar-nava-2003","jose-de-jesus-cordero-2003","darwin-castillo-2003","ronald-ricardo-sojo-bonilla-2003","humberto-de-jesus-hernandez-guevara-2003","juan-carlos-benedetti-otaola-2003","hanner-monterrosa-jordan-2003","javier-pantoja-hernandez-2003","gustavo-daniel-flores-salas-2003","johan-rafael-torres-hernandez-2003","jhonder-javier-rodriguez-gomez-2003","jorjan-antonio-coronel-lara-2003","ivan-ali-zabala-medina-2003","yorbi-joan-ruiz-guerrero-2003","jesus-manuel-rodriguez-indriago-2003","enmary-dahiana-cava-2003","jose-luis-peraza-2003","rafael-rivero-tovar-2003","yilme-jesus-antequera-zeppa-2003","maikel-liendo-2003","carlos-jose-caldera-mena-2003","javier-alexander-gomez-2003","lenin-monasterios-2003","kelvin-dominguez-2003","anibal-hernandez-2003","carlos-enrique-madriz-2003","ubaldino-martinez-colorado-2003"];
+assert.equal(adult2003Batch.length,34);
+for(const id of adult2003Batch){const p=CASES.find(x=>x.id===id);assert.ok(p&&p.year===2003&&p.sources.includes('PRO2003JAN')&&!Object.hasOwn(p,'date'),'Ficha adulta 2003 sin fecha certificada: '+id);assert.ok(p.note.includes('fecha tabulada del episodio')&&year2003.includes('perfil.html?id='+id),'Fuente, límite y enlace 2003: '+id);}
+for(const name of ['Windred Alixeth Olivero Romero','Manuel Antonio Salcedo Jiménez','Diego León Gutiérrez','Carlos Eduardo Durán','Andison José Larrosa Terán'])assert.ok(!CASES.some(p=>p.year===2003&&p.name===name),'Menor reservado: '+name);
+
 const year2002 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2002/index.html', import.meta.url),'utf8');
 for (const id of ["jose-alejandro-ibarra-2002","mauricio-marin-2002","david-vargas-2002","yurmi-noe-nieto-laya-2002","rommy-jose-nieto-laya-2002"]) {
   const person = CASES.find(p=>p.id===id);

@@ -20,6 +20,19 @@ assert.ok(year2003.includes('noindex,nofollow,noarchive') && year2003.includes('
 for (const p of cases2003) { assert.ok(p.sources.includes('PRO2003JAN') && p.episode==='2003', 'Fuente/episodio 2003: '+p.id); assert.ok(year2003.includes('perfil.html?id='+p.id), 'Enlace nominal 2003: '+p.id); }
 for (const n of ['Egli Yorman Martínez','Michael Bolívar','Carlos Alberto Lezama','José Humberto Moreno','Raúl Guerra']) assert.ok(!cases2003.some(p=>p.name===n), 'Reserva sensible o temporal: '+n);
 
+// Corrección documental: la sentencia de la Corte IDH de 2019 prevalece sobre el estado procesal descrito por PROVEA en 2003.
+const diazLoretoIds = ["robert-ignacio-diaz-loreto-2003","octavio-ignacio-diaz-alvarez-2003","david-octavio-diaz-loreto-2003"];
+assert.ok(SOURCES.CORTEIDH392.url.includes('corteidh.or.cr/docs/casos/articulos/seriec_392_esp.pdf'));
+for (const id of diazLoretoIds) {
+  const p = CASES.find(v => v.id === id);
+  assert.ok(p && p.year === 2003 && p.date === '2003-01-06', 'Fecha acreditada judicialmente: '+id);
+  assert.ok(p.sources.includes('PRO2003JAN') && p.sources.includes('CORTEIDH392'), 'Dos fuentes documentales: '+id);
+  assert.ok(p.note.includes('responsabilidad internacional') && p.note.includes('absolvi'), 'Distinguir sentencia internacional y absolución penal: '+id);
+  assert.ok(year2003.includes('perfil.html?id='+id) && year2003.includes('Sentencia Corte IDH'), 'Capítulo anual actualizado: '+id);
+}
+assert.equal(CASES.filter(p => p.sources.includes('CORTEIDH392')).length, 3, 'Tres víctimas del mismo caso sin duplicar identidades');
+assert.ok(year2003.includes('noindex,nofollow,noarchive') && year2003.includes('no es el total de 2003'));
+
 // PROVEA anexo 5, pp. 548–553: lote 66–112, adultos con identidad y edad explícitas.
 const adult2003Batch=["leonel-anza-2003","winder-alexander-olivero-seijas-2003","roberto-antonio-guaicara-romero-2003","carlos-giovanni-marcano-tineo-2003","jhoan-julio-alvarado-paredes-2003","jhon-peter-perez-2003","arturo-contreras-arias-2003","jose-tovar-nava-2003","jose-de-jesus-cordero-2003","darwin-castillo-2003","ronald-ricardo-sojo-bonilla-2003","humberto-de-jesus-hernandez-guevara-2003","juan-carlos-benedetti-otaola-2003","hanner-monterrosa-jordan-2003","javier-pantoja-hernandez-2003","gustavo-daniel-flores-salas-2003","johan-rafael-torres-hernandez-2003","jhonder-javier-rodriguez-gomez-2003","jorjan-antonio-coronel-lara-2003","ivan-ali-zabala-medina-2003","yorbi-joan-ruiz-guerrero-2003","jesus-manuel-rodriguez-indriago-2003","enmary-dahiana-cava-2003","jose-luis-peraza-2003","rafael-rivero-tovar-2003","yilme-jesus-antequera-zeppa-2003","maikel-liendo-2003","carlos-jose-caldera-mena-2003","javier-alexander-gomez-2003","lenin-monasterios-2003","kelvin-dominguez-2003","anibal-hernandez-2003","carlos-enrique-madriz-2003","ubaldino-martinez-colorado-2003"];
 assert.equal(adult2003Batch.length,34);

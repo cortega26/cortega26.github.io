@@ -14,7 +14,7 @@ assert.ok(CASES.length >= 230, 'La colección ampliada exige al menos 230 regist
 assert.equal(CASES.filter(p=>p.episode==='2002-11A').length,19,'Las 19 víctimas nominales del 11A deben figurar');
 const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
 const cases2003 = CASES.filter(p => p.year === 2003);
-assert.equal(cases2003.length, 52, 'Lote parcial de adultos 2003 PROVEA');
+assert.equal(cases2003.length, 89, 'Lote parcial de adultos 2003 PROVEA');
 assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2003/"'), 'Enlace al capítulo 2003');
 assert.ok(year2003.includes('noindex,nofollow,noarchive') && year2003.includes('no es el total de 2003'), 'Robots y alcance parcial 2003');
 for (const p of cases2003) { assert.ok(p.sources.includes('PRO2003JAN') && p.episode==='2003', 'Fuente/episodio 2003: '+p.id); assert.ok(year2003.includes('perfil.html?id='+p.id), 'Enlace nominal 2003: '+p.id); }
@@ -847,3 +847,12 @@ for (const id of ["jose-rafael-nunez-2002","carlos-miguel-rivas-vargas-2002","fr
 }
 for (const id of ['robert-alberto-petaquero-2002','jean-carlos-arriechi-marvacia-2002','franklin-jose-gonzalez-2002']) assert.ok(!CASES.some(p=>p.id===id),'Menor reservado: '+id);
 assert.ok(SOURCES.PRO2003ANNEX.url.includes('03_anexos.pdf')&&year2002.includes('93 FICHAS · REVISIÓN EN CURSO'));
+
+// PROVEA anexo 5 pp. 554–559: 37 adultos nominales; 16 reservas por edad, identidad o fecha.
+const batch2003_554_559=["luis-alberto-orellana-2003","segundo-andujar-2003","juan-carlos-andujar-2003","juvenal-antonio-morales-vergel-2003","luis-raul-tovar-villanueva-2003","ali-alexander-perez-2003","ruben-gamboa-2003","ciro-jacinto-segura-gonzalez-2003","jose-gregorio-marin-garcia-2003","michel-merchan-2003","yorman-vladimir-lopez-manrique-2003","glerys-bracho-de-perozo-2003","leon-alfonso-canache-garnier-2003","miguel-angel-gil-sanchez-2003","leonardo-guerrieri-2003","jorge-jose-mendez-2003","alexander-elpidio-hernandez-2003","juan-rafael-osorio-2003","deivy-javier-rico-2003","ramon-antonio-jimenez-2003","walter-leonardo-blanco-2003","jesus-alberto-gonzalez-2003","antonio-garcia-farfan-2003","giuseppe-morillo-2003","jesus-graffe-2003","jesus-albino-2003","robinson-lander-2003","tirso-hernandez-2003","harrison-fuenmayor-2003","richard-sanchez-2003","jeanfer-alexis-crespo-velasquez-2003","nelson-jose-tovar-2003","javier-jose-lezama-2003","sergio-miranda-carvajal-2003","giovanni-ramirez-rojas-2003","freddy-jose-chirinos-martinez-2003","wilfredo-antonio-briceno-montilla-2003"];
+assert.equal(batch2003_554_559.length,37);
+for(const id of batch2003_554_559){const p=CASES.find(x=>x.id===id);assert.ok(p&&p.year===2003&&p.sources.includes('PRO2003JAN')&&!Object.hasOwn(p,'date'),'Ficha adulta: '+id);assert.ok(p.note.includes('fecha tabulada del episodio')&&p.note.includes('sin atribución penal individual firme'),'Atribución: '+id);assert.ok(year2003.includes('perfil.html?id='+id),'Enlace anual: '+id);}
+for(const name of ["Jorge Eliécer Vera Guevara","Johan Kelpin González Petit","Yeferson Yunez Ochoa","Elisaúl Carvajal","Eucaris Frangely Pérez Lugo","Ángel Alejandro Pereira","Iván José Cabrera Belmonte","Rafael Celestino Zacarías","Danny Zacarías","Wendel José Ravelo","Robert Dirinot"])assert.ok(!CASES.some(p=>p.name===name),'Reserva: '+name);
+assert.ok(year2003.includes('89 FICHAS · ATRIBUCIONES')&&year2003.includes('noindex,nofollow,noarchive'));
+assert.ok(CASES.find(p=>p.id==='richard-sanchez-2003').note.includes('fecha discordante'));
+assert.ok(CASES.find(p=>p.id==='jesus-alberto-gonzalez-2003').note.includes('accidentalmente'));

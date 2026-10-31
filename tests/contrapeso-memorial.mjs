@@ -680,13 +680,16 @@ assert.ok(gamez2001[0].note.includes('n.º 211')&&gamez2001[0].note.includes('ve
 assert.ok(year2001.includes('perfil.html?id=isidro-rafael-gamez-salazar-2001'));
 assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));
 
-// Hito judicial acotado: tres víctimas del mismo expediente de la Corte IDH, sin duplicación.
+// Hito judicial acotado: tres víctimas del mismo expediente de la Corte IDH.
 const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
-const diaz2003 = CASES.filter(p => p.episode === '2003');
-assert.equal(diaz2003.length,3,'Tres víctimas judicialmente identificadas, no recuento anual');
-assert.equal(new Set(diaz2003.map(p=>p.id)).size,3,'Tres identidades distintas');
-assert.ok(diaz2003.every(p=>p.sources.includes('CORTEIDH392') && p.date==='2003-01-06'));
-assert.ok(diaz2003.every(p=>year2003.includes('perfil.html?id='+p.id)));
+assert.equal(CASES.filter(p=>p.episode==='2003').length,3,'Tres víctimas, no recuento anual');
+for (const id of ['robert-ignacio-diaz-loreto-2003','octavio-ignacio-diaz-alvarez-2003','david-octavio-diaz-loreto-2003']) {
+  const person=CASES.find(p=>p.id===id);
+  assert.ok(person, `Identidad judicial: ${id}`);
+  assert.equal(person.date,'2003-01-06');
+  assert.deepEqual(person.sources,['CORTEIDH392']);
+  assert.ok(year2003.includes('perfil.html?id='+id));
+}
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(year2003.includes('no equivale a condena penal individual'));
 assert.ok(index.includes('/venezuela-lab/museo/victimas/2003/'));

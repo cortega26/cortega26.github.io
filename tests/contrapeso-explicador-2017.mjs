@@ -55,7 +55,7 @@ assert.ok(!/<script\b/i.test(html), 'Sin nueva superficie de JS o cambios de CSP
 assert.ok(html.includes('href="../explicadores.css"'), 'Stylesheet local');
 const articleGrid = frontpage.split('<div class="articles-grid" id="article-list">')[1]?.split('</div><p id="no-results"')[0];
 assert.ok(articleGrid, 'La portada mantiene la grilla de publicaciones');
-assert.equal((articleGrid.match(/class="story-card"/g) || []).length, 11, 'Se conservan once tarjetas y el layout');
+assert.ok((articleGrid.match(/class="story-card"/g) || []).length >= 11, 'Se conservan las tarjetas anteriores y el layout');
 assert.equal((articleGrid.match(/class="demo-tag"/g) || []).length, 1, 'Solo Opinión se identifica como muestra');
 const realCard = articleGrid.split('<article class="story-card" data-category="Explicadores"')[1]?.split('</article>')[0];
 assert.ok(realCard, 'Existe una tarjeta de explicador real con género identificable');

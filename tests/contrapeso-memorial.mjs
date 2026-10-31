@@ -118,6 +118,7 @@ assert.ok(year2000.includes('noindex,nofollow,noarchive'),'Preservación de noin
 
 const year2001 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2001/index.html', import.meta.url), 'utf8');
 const cases2001 = CASES.filter(p => p.year === 2001);
+assert.ok(CASES.some(p => p.id === 'luis-delgado-falcon-2001' && p.sources.includes('ELPAIS2001') && p.date === '2001-03-30' && p.category === 'investigacion'), 'Caso agrario de 2001 sin imputación estatal');
 assert.ok(cases2001.length >= 16, 'Conservar trece fichas previas y tres casos nominales de enero 2001');
 assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2001/"'), 'Navegación al capítulo 2001');
 assert.ok(Object.hasOwn(EPISODES, '2001'), 'Episodio anual 2001 disponible en filtros');

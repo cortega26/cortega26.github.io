@@ -1,5 +1,13 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## Lote nominal · 31-10-2026, 09:36 Chile — PROVEA anexo 6 pp. 562–567 · PR #180 · PRODUCCIÓN/ACUMULACIÓN
+
+- **Fuente primaria inspeccionada:** [PROVEA, informe octubre 2001–septiembre 2002, anexo 6, pp. 562–567, n.os 70–115](https://archivo.provea.org/wp-content/uploads/anexos0001.pdf#page=17). Cotejados 46 renglones consecutivos, 32 altas nominales enero–marzo 2002; 40→72 fichas 2002 y 559→591 globales, sin duplicados exactos. Año parcial. Fechas de episodio, no certificados de defunción; sin imputaciones penales individuales ni motivo político común presumido.
+- **Reservas:** n.os 72 José Antonio Rodríguez y 75 Douglas José Hernández, posibles homónimos de 2001; 73 Rafael Enrique Blanco (12) y 97 Erick Daniel Quintero Lozano (17), menores pendientes de privacidad y corroboración; 80 Robin José Rojas con fecha impresa 12-01-2001; 108 Richard Arrieta con fecha de episodio 23-03-2002 pero fallecimiento narrado el 18-03-2002. Ya documentados 81 Heriberto González, 87 Alfredo Ortiz, 109–113 (cinco víctimas de Acarigua) y 115 José Alberto Valenzuela: sin duplicación. N.os 116–119 reservados para tramo de abril, con varios ya existentes.
+- **Producción:** dataset, capítulo 2002, fuente PRO2002Q1, tests focalizados y roadmap en PR activo. Libertad individual: aplica con evidencia; propiedad privada: no aplica como abuso acreditado; control del poder: aplica con evidencia, sin autoría penal presumida. No se publican identidades de familiares, testigos o agentes.
+- **QA ligero incremental:** parseo de 591 registros, IDs/nombres únicos, 72 registros y enlaces de 2002, robots noindex,nofollow,noarchive, exclusiones y fuente. **Sin auditoría final de batch**, build/Playwright/Codacy ni Codex (NO SOLICITADO — revisión selectiva). Sin merge, lanzamiento ni indexación. Próximo: p. 567 n.º 116 y siguientes, cotejar duplicados y resolver n.º 108.
+
+
 ## Lote nominal · 31-10-2026, 07:36 Chile — PROVEA 2002–2003 pp. 311–313 · PR #180 · PRODUCCIÓN/ACUMULACIÓN
 
 - **Fuentes inspeccionadas:** [PROVEA, Derecho a la Vida, informe octubre 2002–septiembre 2003, pp. 311–313](https://archivo.provea.org/wp-content/uploads/03_derecho_a_la_vida.pdf#page=12); [reproducción no oficial de sentencia TSJ Sala Penal n.º 234, 22-04-2008](https://app.venley.ai/sentencias/sentencia-nro-234-sala-de-casacion-penal-2008-cv2y4). No se acreditó consulta del original judicial.

@@ -20,7 +20,7 @@ for (const id of ["jose-alejandro-ibarra-2002","mauricio-marin-2002","david-varg
 }
 assert.equal(CASES.find(p=>p.id==='jose-alejandro-ibarra-2002')?.date,'2002-05-18','Fecha real de fallecimiento posterior');
 assert.deepEqual(CASES.find(p=>p.id==='rommy-jose-nieto-laya-2002')?.sources,['PROVIDA2002','COFROSTROS2011']);
-assert.ok(year2002.includes('<strong>37</strong>') && year2002.includes('5 FICHAS NOMINALES') && year2002.includes('noindex,nofollow,noarchive'));
+assert.ok(year2002.includes('<strong>72</strong>') && year2002.includes('5 FICHAS NOMINALES') && year2002.includes('noindex,nofollow,noarchive'));
 
 // PROVEA 2002–2003: adultos, fechas controvertidas y ausencia de sentencia firme.
 for (const id of ["juvenal-antonio-isturiz-irigoyen-2002","bertin-ramirez-2002","jhonny-rafael-diaz-2002"]) {
@@ -33,7 +33,7 @@ for (const id of ["juvenal-antonio-isturiz-irigoyen-2002","bertin-ramirez-2002",
 assert.ok(SOURCES.TSJ234REPRO.scope.includes('Original del TSJ no cotejado'));
 assert.ok(CASES.find(p=>p.id==='bertin-ramirez-2002').note.includes('27-09-2002'));
 assert.ok(CASES.find(p=>p.id==='jhonny-rafael-diaz-2002').note.includes('07-11-2002'));
-assert.ok(year2002.includes('<strong>40</strong>') && year2002.includes('16 FICHAS · REVISIÓN EN CURSO'));
+assert.ok(year2002.includes('<strong>72</strong>') && year2002.includes('48 FICHAS · REVISIÓN EN CURSO'));
 
 assert.equal(CASES.filter(p=>p.episode==='1999').length,3,'Tres casos nominales de fallecimiento documentado en 1999');
 assert.equal(CASES.find(p=>p.id==='jhon-alejandro-linares-pena')?.category,'policial','Jhon Linares no falleció durante una protesta');
@@ -795,3 +795,12 @@ assert.deepEqual(argenisAi[0].sources,['PRO2001','AI2002']);
 assert.equal(argenisAi[0].date,'2001-02-09');
 assert.ok(year2001.includes('Argenis Antonio González')&&SOURCES.AI2002.url.includes('amnesty/2002'));
 assert.ok(year2001.includes(`${cases2001.length} FICHAS NOMINALES`)&&year2001.includes('noindex,nofollow,noarchive'));
+
+// PROVEA anexo 6, pp. 562–567: lote nominal 2002, sin inferir fecha de defunción.
+const lote2002Q1=CASES.filter(p=>p.year===2002&&p.sources.includes('PRO2002Q1'));
+assert.equal(lote2002Q1.length,32);
+assert.equal(CASES.filter(p=>p.year===2002).length,72);
+assert.equal(new Set(CASES.map(p=>p.id)).size,CASES.length);
+for(const p of lote2002Q1){assert.ok(!Object.hasOwn(p,'date')&&p.note.includes('fecha consignada del episodio')&&p.note.includes('no se inspeccionaron expediente penal'));assert.ok(year2002.includes('perfil.html?id='+p.id));}
+for(const id of ['douglas-jose-hernandez-2002','jose-antonio-rodriguez-2002','robin-jose-rojas-2002','rafael-enrique-blanco-2002','erick-daniel-quintero-lozano-2002','richard-arrieta-2002'])assert.ok(!CASES.some(p=>p.id===id),'Caso reservado: '+id);
+assert.ok(SOURCES.PRO2002Q1.url.includes('anexos0001.pdf')&&year2002.includes('48 FICHAS · REVISIÓN EN CURSO'));

@@ -31,11 +31,11 @@ for (const url of [
 assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
 assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 'Reutiliza CSS existente');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
-assert.equal((grid.match(/class="story-card"/g) || []).length, 10, 'Diez tarjetas');
+assert.equal((grid.match(/class="story-card"/g) || []).length, 11, 'Once tarjetas');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Una muestra');
 const card = grid.split('data-search="maria corina machado regresa venezuela octubre 2026')[1]?.split('</article>')[0];
 assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
-assert.ok(home.includes('9 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
+assert.ok(home.includes('10 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Balance editorial actualizado');
 if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/actualidad/regreso-machado-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(built) && built.includes('María Corina Machado regresó'), 'Build de noticia noindex');
@@ -58,7 +58,7 @@ assert.ok(march.includes('https://www.infobae.com/america/agencias/2026/10/28/ac
 assert.ok(!/<script\b|<form\b/i.test(march), 'Sin JS ni formularios nuevos');
 const marchCard = grid.split('data-search="marcha miraflores 28 octubre 2026')[1]?.split('</article>')[0];
 assert.ok(marchCard?.includes(`href="${marchPath}"`) && !marchCard.includes('demo-tag'), 'Tarjeta de actualidad enlaza a noticia real');
-assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 5, 'Cinco noticias reales en Actualidad');
+assert.equal((grid.match(/data-category="Actualidad"/g) || []).length, 6, 'Seis noticias reales en Actualidad');
 if (process.argv.includes('--built')) {
   const builtMarch = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-miraflores-28oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtMarch) && builtMarch.includes('Miraflores'), 'Build conserva noticia y noindex');
@@ -126,4 +126,22 @@ assert.ok(oilCard?.includes(`href="${oilPath}"`) && !oilCard.includes('demo-tag'
 if (process.argv.includes('--built')) {
   const builtOil = readFileSync(new URL('../dist/venezuela-lab/actualidad/petroleo-nabep-30oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtOil), 'Build petrolero conserva noindex');
+}
+
+const warrantsPath = '/venezuela-lab/actualidad/detenciones-orden-judicial-31oct-2026/';
+const warrants = readFileSync(new URL('../public/venezuela-lab/actualidad/detenciones-orden-judicial-31oct-2026/index.html', import.meta.url), 'utf8');
+assert.ok(prototypeOnlyRoutes.some((r) => r.id === 'contrapeso:news:detenciones-orden-judicial-31oct-2026' && r.path === warrantsPath), 'Noticia de detenciones inventariada');
+assert.ok(!routeGroups.some((g) => Object.values(g.paths).includes(warrantsPath)), 'Noticia de detenciones fuera de sitemap');
+assert.ok(hasNoindexMeta(warrants) && warrants.includes('noindex,nofollow,noarchive'), 'Robots completos en noticia de detenciones');
+assert.match(warrants, /Hecho: alocución del 29 de octubre y respuesta del 30 de octubre de 2026/, 'Fechas de hechos diferenciadas');
+assert.match(warrants, /Publicado: 31 de octubre de 2026/, 'Fecha editorial');
+assert.match(warrants, /sin reporteo propio/, 'Procedencia explícita');
+assert.match(warrants, /Qué falta verificar/, 'Límites de evidencia');
+assert.ok(warrants.includes('https://efe.com/mundo/2026-10-29/venezuela-discurso-delcy-rodriguez-medidas-machado/') && warrants.includes('https://eldiario.com/2026/10/30/foropanal-represion-politica/') && warrants.includes('https://www.bcn.cl/procesoconstituyente/comparadordeconstituciones/constitucion/ven'), 'Fuente de anuncio, respuesta y norma');
+assert.ok(!/<script\b|<form\b/i.test(warrants), 'Sin JS ni captación');
+const warrantsCard = grid.split('data-search="orden judicial detenciones foro penal 30 octubre 2026')[1]?.split('</article>')[0];
+assert.ok(warrantsCard?.includes(`href="${warrantsPath}"`) && !warrantsCard.includes('demo-tag'), 'Tarjeta real enlazada');
+if (process.argv.includes('--built')) {
+  const builtWarrants = readFileSync(new URL('../dist/venezuela-lab/actualidad/detenciones-orden-judicial-31oct-2026/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(builtWarrants), 'Build conserva noindex de detenciones');
 }

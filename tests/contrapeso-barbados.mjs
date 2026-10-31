@@ -34,7 +34,7 @@ assert.ok(caseCard.includes('Barbados: cuatro compromisos') && caseCard.includes
 assert.ok(caseCard.includes('href="/venezuela-lab/museo/#expediente-barbados"'), 'Tarjeta enlaza al expediente real');
 assert.ok(!caseCard.includes('demo-tag') && !caseCard.includes('data-article='), 'Expediente no se presenta como modal ficticio');
 assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Solo Opinión es muestra');
-assert.ok(home.includes('9 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Conteo documental actualizado');
+assert.ok(home.includes('10 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Conteo documental actualizado');
 
 assert.ok(home.includes('href="/venezuela-lab/museo/#expediente-2024"'), 'La portada conduce al 001 real');
 assert.ok(!home.includes('data-article="actas"'), 'No presenta el expediente real como ejemplo');

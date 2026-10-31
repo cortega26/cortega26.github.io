@@ -627,10 +627,17 @@ for(const [id,name,num] of [['danner-pastor-barreto-torres','Danner Pastor Barre
  assert.equal(p.name,name,`Nombre PROVEA ${num}`);
  assert.equal(p.date,'2001-06-05',`Fecha PROVEA ${num}`);
  assert.equal(p.category,'policial',`Sin atribución penal automática ${num}`);
- assert.deepEqual(p.sources,['PRO2001','COVICIL2001','PRO2002'],`Fuentes de ${num}`);
+ assert.deepEqual(p.sources,['PRO2001','COVICIL2001','PRO2002','COVICIL2011'],`Fuentes de ${num}`);
  assert.ok(p.note.includes('p. 477')&&p.note.includes('anulada')&&p.note.includes('04-06-2001')&&p.note.includes('05-06-2001'),`Contradicción y estado judicial ${num}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
+// Contradicción documental COVICIL 2011 frente a su investigación de 2012; no duplicar víctima ni validar sentencia anulada.
+for(const id of ['danner-pastor-barreto-torres','luis-javier-gimenez-2001']){
+ const p=cases2001.find(person=>person.id===id);
+ assert.ok(p.note.includes('Luis Javier Alvarado')&&p.note.includes('cuatro condenados')&&p.note.includes('cinco condenados'),`Divergencia de identidad y sentencia ${id}`);
+ assert.ok(year2001.includes('Luis Javier Alvarado'),'Advertencia pública sobre discrepancia nominal');
+}
+assert.ok(SOURCES.COVICIL2011.url.includes('covicil-sentenciados-18-funcionarios'),'Fuente contemporánea trazable');
 assert.ok(cases2001.length>=136,'Preservar al menos 136 fichas parciales de 2001');
 assert.ok(CASES.length>=437,'Preservar al menos 437 fichas nominales');
 assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length,'Enlaces anuales sincronizados con dataset');

@@ -210,6 +210,14 @@
 - **Estado:** FASE DE PRODUCCIÓN / LOTE EN PROGRESO. QA ligero incremental de IDs únicos, conteos, fuentes y robots sin cambios; **sin auditoría final, Codacy, Codex, Playwright ni merge** en esta corrida. Próximo tramo: PROVEA p. 484 n.os 236–241, cotejo de n.º 215/220 y fuentes adicionales para menores antes del cierre de hito. Noindex y prototipo intactos.
 
 
+## Investigación nominal · 30-10-2026, 22:38 Chile — PROVEA Derecho a la Tierra, 2001–2002
+
+- **Fuente primaria recuperada e inspeccionada visualmente:** [PROVEA, Informe anual octubre 2001–septiembre 2002, Derecho a la Tierra, PDF pp. 8–9](https://provea.org/wp-content/uploads/2017/08/006_derecho_a_la_tierra-2.pdf#page=8), sección «Violencia en el Sur del Lago de Maracaibo». Dos páginas consecutivas (índices PDF 7–8); **dos víctimas de 2001 ya incluidas**, cero altas y cero duplicados. Ambas fichas enlazan ahora el original contemporáneo, en vez de depender solo de citas retrospectivas CIDH/Corte.
+- **Willmer/Wilmer Avendaño:** PROVEA imprime **Willmer**, 02-02-2001, Caño Caimán, El Vigía, **Mérida** (no Zulia); muerte en vivienda por desconocidos, investigación no aclarada al publicar. CIDH/Corte imprimen Wilmer: se conserva ID y grafía visible anterior, se registra variante y se corrige geografía. Sin autoría estatal demostrada.
+- **Licinio Lago:** PROVEA imprime **51 años**, 30-10-2001, barrio Rómulo Betancourt, Santa Cruz del Zulia, municipio Colón, **Zulia**; falleció por disparos de hombres armados y el caso no estaba aclarado al cierre. Se precisa lugar, edad y contexto sin identificar ni imputar a terceros. «Lucino» continúa como variante no duplicada.
+- **Exclusiones temporales:** Luis Mora Durán (10-01-2002), Pedro José Doria Castillo (25-08-2002), Armando García y Carlos Parra (19-09-2002) son muertes **de 2002**, no fichas 2001; José Huertas sobrevivió al atentado de 10-01-2002. El recuento de cuatro dirigentes del informe corresponde al período editorial, no al año calendario 2001. Próximo lote: cotejar esas personas en el año 2002 y buscar fuentes nominales independientes de menores pendientes.
+- **Principios:** libertad individual — aplica con evidencia a las muertes; propiedad privada — aplica con evidencia al contexto de disputas de tenencia, sin atribuir homicidio a un propietario; control del poder — aplica con evidencia a la necesidad de investigación y al contexto institucional, sin sentencia individual verificada. **PRODUCCIÓN/ACUMULACIÓN; QA ligero incremental, no auditoría final de batch.** Codex NO SOLICITADO — revisión selectiva. No merge, lanzamiento ni indexación.
+
 ## Cotejo documental · 29-10-2026, 17:45 Chile — PROVEA p. 479, n.os 208–212
 
 - **Preflight GitHub:** `master@da804398523c1cbab1f6f578b99e7cb0c54ead9e`, PR #172–#177 integrados, sin PR abiertos. Estado inicial: 141 fichas 2001 / 442 totales, año parcial.

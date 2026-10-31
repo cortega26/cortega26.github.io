@@ -33,7 +33,7 @@ for (const id of ["juvenal-antonio-isturiz-irigoyen-2002","bertin-ramirez-2002",
 assert.ok(SOURCES.TSJ234REPRO.scope.includes('Original del TSJ no cotejado'));
 assert.ok(CASES.find(p=>p.id==='bertin-ramirez-2002').note.includes('27-09-2002'));
 assert.ok(CASES.find(p=>p.id==='jhonny-rafael-diaz-2002').note.includes('07-11-2002'));
-assert.ok(year2002.includes('<strong>88</strong>') && year2002.includes('64 FICHAS · REVISIÓN EN CURSO'));
+assert.ok(year2002.includes('<strong>88</strong>') && year2002.includes('77 FICHAS · REVISIÓN EN CURSO'));
 
 assert.equal(CASES.filter(p=>p.episode==='1999').length,3,'Tres casos nominales de fallecimiento documentado en 1999');
 assert.equal(CASES.find(p=>p.id==='jhon-alejandro-linares-pena')?.category,'policial','Jhon Linares no falleció durante una protesta');
@@ -798,8 +798,8 @@ assert.ok(year2001.includes(`${cases2001.length} FICHAS NOMINALES`)&&year2001.in
 
 // PROVEA anexo 6, pp. 562–567: lote nominal 2002, sin inferir fecha de defunción.
 const lote2002Q1=CASES.filter(p=>p.year===2002&&p.sources.includes('PRO2002Q1'));
-assert.equal(lote2002Q1.length,48);
-assert.equal(CASES.filter(p=>p.year===2002).length,88);
+assert.equal(lote2002Q1.length,61);
+assert.equal(CASES.filter(p=>p.year===2002).length,101);
 assert.equal(new Set(CASES.map(p=>p.id)).size,CASES.length);
 for(const p of lote2002Q1){assert.ok(!Object.hasOwn(p,'date')&&p.note.includes('fecha consignada del episodio')&&p.note.includes('no se inspeccionaron expediente penal'));assert.ok(year2002.includes('perfil.html?id='+p.id));}
 for(const id of ['douglas-jose-hernandez-2002','jose-antonio-rodriguez-2002','robin-jose-rojas-2002','rafael-enrique-blanco-2002','erick-daniel-quintero-lozano-2002','richard-arrieta-2002'])assert.ok(!CASES.some(p=>p.id===id),'Caso reservado: '+id);
@@ -813,3 +813,13 @@ for(const id of ["ricardo-jose-madrid-2002","javier-antonio-rojo-medina-2002","e
  assert.ok(p.note.includes('no se inspeccionaron expediente penal'),'Límite probatorio: '+id);
 }
 for(const id of ['erixon-javier-perez-colmenares-2002','jose-elias-vargas-sayago-2002','jackson-manuel-thomas-herrera-2002','san-miguel-de-jesus-lanz-2002','junior-oscar-mijares-2002'])assert.ok(!CASES.some(x=>x.id===id),'Reserva: '+id);
+
+// PROVEA anexo 6, pp. 570–573: 13 personas adultas; fechas de episodio no equivalen a certificados de defunción.
+for(const id of ["stanlyn-chaurant-2002","franchesco-jose-sanchez-rivero-2002","freddy-almao-2002","milexy-josefina-marcano-2002","luis-antonio-rodriguez-marquez-2002","rafael-silverio-torrealba-2002","eleazar-vivas-zambrano-2002","edwin-javier-rangel-2002","alfonso-espinoza-2002","henry-alberto-marimon-2002","jose-antonio-gordon-2002","adolfo-arcia-2002","elvis-montesinos-2002"]) {
+ const p=CASES.find(x=>x.id===id);
+ assert.ok(p&&p.year===2002&&p.sources.includes('PRO2002Q1')&&!Object.hasOwn(p,'date'),'Adulto documental sin fecha certificada: '+id);
+ assert.ok(p.note.includes('fecha consignada del episodio')&&p.note.includes('no se inspeccionaron expediente penal'),'Cautela documental: '+id);
+ assert.ok(year2002.includes('perfil.html?id='+id),'Enlace anual: '+id);
+}
+for(const id of ['francisco-jesus-graterol-aramburo-2002','jesus-alfredo-aponte-navas-2002','angel-ronier-aparecedo-2002','william-esteban-rodriguez-parada-2002'])assert.ok(!CASES.some(x=>x.id===id),'Menor reservado: '+id);
+assert.ok(year2002.includes('77 FICHAS · REVISIÓN EN CURSO')&&year2002.includes('noindex,nofollow,noarchive'));

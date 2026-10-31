@@ -869,3 +869,12 @@ for(const name of ["Jorge Eliécer Vera Guevara","Johan Kelpin González Petit",
 assert.ok(year2003.includes('89 FICHAS · ATRIBUCIONES')&&year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(CASES.find(p=>p.id==='richard-sanchez-2003').note.includes('fecha discordante'));
 assert.ok(CASES.find(p=>p.id==='jesus-alberto-gonzalez-2003').note.includes('accidentalmente'));
+
+// Regresión documental: PROVEA p. 544 n.º 32 imprime «Octatio Ignacio Díaz Loreto»;
+// no atribuirle el nombre «Díaz Álvarez», documentado por la Corte IDH.
+const octavioDiaz2003 = CASES.find(p => p.id === 'octavio-ignacio-diaz-alvarez-2003');
+assert.ok(octavioDiaz2003);
+assert.ok(octavioDiaz2003.note.includes('«Octatio Ignacio Díaz Loreto»'));
+assert.ok(octavioDiaz2003.note.includes('Octavio Ignacio Díaz Álvarez'));
+assert.ok(SOURCES.CORTEIDH392.scope.includes('«Octatio Ignacio Díaz Loreto»'));
+assert.ok(year2003.includes('«Octatio Ignacio Díaz Loreto»'));

@@ -20,7 +20,7 @@ for (const id of ["jose-alejandro-ibarra-2002","mauricio-marin-2002","david-varg
 }
 assert.equal(CASES.find(p=>p.id==='jose-alejandro-ibarra-2002')?.date,'2002-05-18','Fecha real de fallecimiento posterior');
 assert.deepEqual(CASES.find(p=>p.id==='rommy-jose-nieto-laya-2002')?.sources,['PROVIDA2002','COFROSTROS2011']);
-assert.ok(year2002.includes('<strong>88</strong>') && year2002.includes('5 FICHAS NOMINALES') && year2002.includes('noindex,nofollow,noarchive'));
+assert.ok(year2002.includes(`<strong>${CASES.filter(p=>p.year===2002).length}</strong>`) && year2002.includes('5 FICHAS NOMINALES') && year2002.includes('noindex,nofollow,noarchive'));
 
 // PROVEA 2002–2003: adultos, fechas controvertidas y ausencia de sentencia firme.
 for (const id of ["juvenal-antonio-isturiz-irigoyen-2002","bertin-ramirez-2002","jhonny-rafael-diaz-2002"]) {
@@ -33,7 +33,7 @@ for (const id of ["juvenal-antonio-isturiz-irigoyen-2002","bertin-ramirez-2002",
 assert.ok(SOURCES.TSJ234REPRO.scope.includes('Original del TSJ no cotejado'));
 assert.ok(CASES.find(p=>p.id==='bertin-ramirez-2002').note.includes('27-09-2002'));
 assert.ok(CASES.find(p=>p.id==='jhonny-rafael-diaz-2002').note.includes('07-11-2002'));
-assert.ok(year2002.includes('<strong>88</strong>') && year2002.includes('77 FICHAS · REVISIÓN EN CURSO'));
+assert.ok(year2002.includes(`<strong>${CASES.filter(p=>p.year===2002).length}</strong>`) && year2002.includes(`${CASES.filter(p=>p.year===2002).length-24} FICHAS · REVISIÓN EN CURSO`));
 
 assert.equal(CASES.filter(p=>p.episode==='1999').length,3,'Tres casos nominales de fallecimiento documentado en 1999');
 assert.equal(CASES.find(p=>p.id==='jhon-alejandro-linares-pena')?.category,'policial','Jhon Linares no falleció durante una protesta');
@@ -799,11 +799,11 @@ assert.ok(year2001.includes(`${cases2001.length} FICHAS NOMINALES`)&&year2001.in
 // PROVEA anexo 6, pp. 562–567: lote nominal 2002, sin inferir fecha de defunción.
 const lote2002Q1=CASES.filter(p=>p.year===2002&&p.sources.includes('PRO2002Q1'));
 assert.equal(lote2002Q1.length,61);
-assert.equal(CASES.filter(p=>p.year===2002).length,101);
+assert.ok(CASES.filter(p=>p.year===2002).length>=117);
 assert.equal(new Set(CASES.map(p=>p.id)).size,CASES.length);
 for(const p of lote2002Q1){assert.ok(!Object.hasOwn(p,'date')&&p.note.includes('fecha consignada del episodio')&&p.note.includes('no se inspeccionaron expediente penal'));assert.ok(year2002.includes('perfil.html?id='+p.id));}
 for(const id of ['douglas-jose-hernandez-2002','jose-antonio-rodriguez-2002','robin-jose-rojas-2002','rafael-enrique-blanco-2002','erick-daniel-quintero-lozano-2002','richard-arrieta-2002'])assert.ok(!CASES.some(p=>p.id===id),'Caso reservado: '+id);
-assert.ok(SOURCES.PRO2002Q1.url.includes('anexos0001.pdf')&&year2002.includes('64 FICHAS · REVISIÓN EN CURSO'));
+assert.ok(SOURCES.PRO2002Q1.url.includes('anexos0001.pdf')&&year2002.includes(`${CASES.filter(p=>p.year===2002).length-24} FICHAS · REVISIÓN EN CURSO`));
 
 // PROVEA anexo 6, pp. 567–569: fichas adultas y reservas documentales.
 for(const id of ["ricardo-jose-madrid-2002","javier-antonio-rojo-medina-2002","edgar-johan-ramirez-2002","johan-javier-de-la-hoz-gutierrez-2002","daniela-alejandra-marquez-moreno-2002","renny-jose-rincon-boscan-2002","abraham-rafael-sanchez-2002","robinson-guillen-chacon-2002","michael-guillen-chacon-2002","jose-gregorio-rodriguez-2002","hector-jose-mendez-2002","francisco-javier-mogollon-2002","paulino-jose-sequera-torrealba-2002","juan-carlos-cedeno-2002","luis-jose-garcia-2002","jean-carlos-moreno-2002"]) {
@@ -822,4 +822,14 @@ for(const id of ["stanlyn-chaurant-2002","franchesco-jose-sanchez-rivero-2002","
  assert.ok(year2002.includes('perfil.html?id='+id),'Enlace anual: '+id);
 }
 for(const id of ['francisco-jesus-graterol-aramburo-2002','jesus-alfredo-aponte-navas-2002','angel-ronier-aparecedo-2002','william-esteban-rodriguez-parada-2002'])assert.ok(!CASES.some(x=>x.id===id),'Menor reservado: '+id);
-assert.ok(year2002.includes('77 FICHAS · REVISIÓN EN CURSO')&&year2002.includes('noindex,nofollow,noarchive'));
+assert.ok(year2002.includes(`${CASES.filter(p=>p.year===2002).length-24} FICHAS · REVISIÓN EN CURSO`)&&year2002.includes('noindex,nofollow,noarchive'));
+
+// PROVEA 2002–2003, anexo 5 pp. 541–544: lote de adultos, sin equiparar denuncias a sentencias.
+for (const id of ["jose-rafael-nunez-2002","carlos-miguel-rivas-vargas-2002","frank-josue-zibada-2002","jesus-salvador-rivero-prado-2002","ridert-gustavo-rodriguez-2002","luis-ernesto-castro-2002","joel-jesus-rodriguez-2002","luis-gregorio-villalba-2002","edwin-manuel-flores-2002","jorge-luis-ariza-2002","hector-enrique-herrera-gonzalez-2002","eduardo-javier-medina-2002","daniel-enrique-rodriguez-tovar-2002","kelvin-jose-boada-lemus-2002","jhoan-jose-boada-lemus-2002","reinaldo-jose-bellorin-lopez-2002"]) {
+ const p=CASES.find(x=>x.id===id);
+ assert.ok(p&&p.year===2002&&p.sources.includes('PRO2003ANNEX')&&!Object.hasOwn(p,'date'),'Ficha nominal sin fecha certificada: '+id);
+ assert.ok(p.note.includes('fecha consignada del episodio')&&p.note.includes('no se inspeccionaron expediente penal'),'Cautela documental: '+id);
+ assert.ok(year2002.includes('perfil.html?id='+id),'Enlace anual: '+id);
+}
+for (const id of ['robert-alberto-petaquero-2002','jean-carlos-arriechi-marvacia-2002','franklin-jose-gonzalez-2002']) assert.ok(!CASES.some(p=>p.id===id),'Menor reservado: '+id);
+assert.ok(SOURCES.PRO2003ANNEX.url.includes('03_anexos.pdf')&&year2002.includes('93 FICHAS · REVISIÓN EN CURSO'));

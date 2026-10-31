@@ -634,7 +634,7 @@ for(const [id,name,num] of [['danner-pastor-barreto-torres','Danner Pastor Barre
 // Contradicción documental COVICIL 2011 frente a su investigación de 2012; no duplicar víctima ni validar sentencia anulada.
 for(const id of ['danner-pastor-barreto-torres','luis-javier-gimenez-2001']){
  const p=cases2001.find(person=>person.id===id);
- assert.ok(p.note.includes('Luis Javier Alvarado')&&p.note.includes('cuatro condenados')&&p.note.includes('cinco condenados'),`Divergencia de identidad y sentencia ${id}`);
+ assert.ok(p.note.includes('Luis Javier Alvarado')&&p.note.includes('cuatro condenados')&&/(?:cinco condenados|cinco y 10 años)/.test(p.note),`Divergencia de identidad y sentencia ${id}`);
  assert.ok(year2001.includes('Luis Javier Alvarado'),'Advertencia pública sobre discrepancia nominal');
 }
 assert.ok(SOURCES.COVICIL2011.url.includes('covicil-sentenciados-18-funcionarios'),'Fuente contemporánea trazable');

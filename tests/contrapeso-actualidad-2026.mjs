@@ -145,3 +145,11 @@ if (process.argv.includes('--built')) {
   const builtWarrants = readFileSync(new URL('../dist/venezuela-lab/actualidad/detenciones-orden-judicial-31oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtWarrants), 'Build conserva noindex de detenciones');
 }
+
+const featured = home.split('<section class="wrap feature-section"')[1]?.split('</section>')[0] ?? '';
+assert.ok(featured.includes('href="/venezuela-lab/actualidad/tps-fallo-30oct-2026/"') && featured.includes('href="/venezuela-lab/explicadores/sentencias-155-156-2017/"'), 'Destacados conducen a dos publicaciones reales');
+assert.ok(!featured.includes('demo-tag') && !featured.includes('data-article='), 'Destacados no ofrecen muestras ficticias');
+assert.ok(home.includes('<a class="nav-cta" href="/venezuela-lab/metodo/">NUESTRO MÉTODO'), 'CTA principal lleva a una función disponible, no al boletín inactivo');
+const newsCards = [...grid.matchAll(/<article class="story-card" data-category="Actualidad"[\s\S]*?<\/article>/g)].map((m) => m[0]);
+const newsDates = newsCards.map((card) => Number(card.match(/<span>ACTUALIDAD · (\d+) OCT 2026<\/span>/)?.[1]));
+assert.ok(newsDates.length >= 7 && newsDates.every(Number.isFinite) && newsDates.every((day, i) => i === 0 || newsDates[i - 1] >= day), 'Portada muestra Actualidad en orden cronológico descendente');

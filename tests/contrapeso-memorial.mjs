@@ -12,6 +12,16 @@ const year1999 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/19
 
 assert.ok(CASES.length >= 230, 'La colección ampliada exige al menos 230 registros documentales');
 assert.equal(CASES.filter(p=>p.episode==='2002-11A').length,19,'Las 19 víctimas nominales del 11A deben figurar');
+const year2002 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2002/index.html', import.meta.url),'utf8');
+for (const id of ["jose-alejandro-ibarra-2002","mauricio-marin-2002","david-vargas-2002","yurmi-noe-nieto-laya-2002","rommy-jose-nieto-laya-2002"]) {
+  const person = CASES.find(p=>p.id===id);
+  assert.ok(person && person.year===2002 && person.episode==='2002', 'Perfil documentado de abril 2002: '+id);
+  assert.ok(year2002.includes('perfil.html?id='+id), 'Enlace anual 2002: '+id);
+}
+assert.equal(CASES.find(p=>p.id==='jose-alejandro-ibarra-2002')?.date,'2002-05-18','Fecha real de fallecimiento posterior');
+assert.deepEqual(CASES.find(p=>p.id==='rommy-jose-nieto-laya-2002')?.sources,['PROVIDA2002','COFROSTROS2011']);
+assert.ok(year2002.includes('<strong>37</strong>') && year2002.includes('5 FICHAS NOMINALES') && year2002.includes('noindex,nofollow,noarchive'));
+
 assert.equal(CASES.filter(p=>p.episode==='1999').length,3,'Tres casos nominales de fallecimiento documentado en 1999');
 assert.equal(CASES.find(p=>p.id==='jhon-alejandro-linares-pena')?.category,'policial','Jhon Linares no falleció durante una protesta');
 assert.ok(index.includes('data-filter="policial"'),'Filtro específico de intervenciones policiales');

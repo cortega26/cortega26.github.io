@@ -12,6 +12,13 @@ const year1999 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/19
 
 assert.ok(CASES.length >= 230, 'La colección ampliada exige al menos 230 registros documentales');
 assert.equal(CASES.filter(p=>p.episode==='2002-11A').length,19,'Las 19 víctimas nominales del 11A deben figurar');
+const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
+const cases2003 = CASES.filter(p => p.year === 2003);
+assert.equal(cases2003.length, 18, 'Lote parcial de adultos 2003 PROVEA');
+assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2003/"'), 'Enlace al capítulo 2003');
+assert.ok(year2003.includes('noindex,nofollow,noarchive') && year2003.includes('no es el total de 2003'), 'Robots y alcance parcial 2003');
+for (const p of cases2003) { assert.ok(p.sources.includes('PRO2003JAN') && p.episode==='2003', 'Fuente/episodio 2003: '+p.id); assert.ok(year2003.includes('perfil.html?id='+p.id), 'Enlace nominal 2003: '+p.id); }
+for (const n of ['Egli Yorman Martínez','Michael Bolívar','Carlos Alberto Lezama','José Humberto Moreno','Raúl Guerra']) assert.ok(!cases2003.some(p=>p.name===n), 'Reserva sensible o temporal: '+n);
 const year2002 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2002/index.html', import.meta.url),'utf8');
 for (const id of ["jose-alejandro-ibarra-2002","mauricio-marin-2002","david-vargas-2002","yurmi-noe-nieto-laya-2002","rommy-jose-nieto-laya-2002"]) {
   const person = CASES.find(p=>p.id===id);

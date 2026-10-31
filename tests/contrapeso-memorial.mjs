@@ -216,7 +216,7 @@ assert.ok(SOURCES.PRO2001.title.includes('460–484'), 'Cobertura acumulada PROV
 assert.ok(year2001.includes('Los registros 62–'), 'Cobertura del anexo p. 462 explicitada');
 
 // Sexta unidad: PROVEA p. 463, registros 84–91 (20–25 de enero de 2001).
-const sixthBatch2001 = [["eduardo-jesus-marchan","Eduardo Jesús Marchán","2001-01-20","policial"],["pedro-antonio-anzola","Pedro Antonio Anzola","2001-01-20","policial"],["juan-quintero-2001","Juan Quintero",undefined,"policial"],["luis-marin-2001","Luis Marín",undefined,"policial"],["reuca-jose-mijares-e","Reuca José Mijares E.","2001-01-21","custodia"],["darwin-edison-rodriguez-cedeno","Darwin Edison Rodríguez Cedeño","2001-01-23","policial"],["manuel-guevara-pino","Manuel Guevara Pino","2001-01-24","policial"],["juan-carlos-garcia-mejias","Jean Carlos García Mejías","2001-01-25","policial"]];
+const sixthBatch2001 = [["eduardo-jesus-marchan","Eduardo Jesús Marchán","2001-01-20","policial"],["pedro-antonio-anzola","Pedro Antonio Anzola","2001-01-20","policial"],["juan-quintero-2001","Juan Quintero",undefined,"policial"],["luis-marin-2001","Luis Marín",undefined,"policial"],["reuca-jose-mijares-e","Reuca José Mijares Escalona","2001-01-21","custodia"],["darwin-edison-rodriguez-cedeno","Darwin Edison Rodríguez Cedeño","2001-01-23","policial"],["manuel-guevara-pino","Manuel Guevara Pino","2001-01-24","policial"],["juan-carlos-garcia-mejias","Jean Carlos García Mejías","2001-01-25","policial"]];
 assert.equal(sixthBatch2001.length, 8, 'Ocho registros nominales nuevos en PROVEA p. 463');
 assert.ok(cases2001.length >= 34, 'Conservar 34 fichas documentadas hasta el registro 91');
 for (const [id, name, date, category] of sixthBatch2001) {
@@ -228,7 +228,7 @@ for (const [id, name, date, category] of sixthBatch2001) {
   assert.deepEqual(matches[0].sources, ['PRO2001'], `Fuente documental p. 463: ${id}`);
   assert.ok(year2001.includes(`perfil.html?id=${id}`), `Perfil anual enlazado: ${id}`);
 }
-assert.ok(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.note.includes('literalmente «MIJARES E. Reuca José»'), 'No resolver por conjetura la grafía ni inicial de Mijares');
+assert.ok(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.note.includes('abrevia «MIJARES E. Reuca José»'), 'Conservar abreviatura PROVEA y nombre completo cotejado de Mijares');
 assert.equal(cases2001.find(p => p.id === 'reuca-jose-mijares-e')?.category, 'custodia', 'Muerte en prisión bajo custodia');
 assert.ok(year2001.includes('Los registros 62–') && SOURCES.PRO2001.title.includes('460–'), 'Cobertura del sexto lote explícita');
 assert.ok(year2001.includes('El registro es parcial') || year2001.includes('El registro es parcial'.toLowerCase()), 'Sin declarar exhaustividad anual');
@@ -287,7 +287,7 @@ assert.ok(year2001.includes('No es un balance anual exhaustivo'),'Sin declarar c
 
 // Novena unidad: PROVEA p. 466, registros 107–116 (febrero 2001).
 const ninthBatch2001 = [
-  ["argenis-gonzalez-2001","Argenis González","2001-02-09","policial"],
+  ["argenis-gonzalez-2001","Argenis Antonio González","2001-02-09","policial"],
   ["jose-raul-cumare-jimenez","José Raúl Cumare Jiménez","2001-02-09","investigacion"],
   ["williams-gonzalez-2001","Williams González","2001-02-10","policial"],
   ["dairilis-yulibet-sanchez-perez","Dairilis Yulibet Sánchez Pérez","2001-02-14","investigacion"],

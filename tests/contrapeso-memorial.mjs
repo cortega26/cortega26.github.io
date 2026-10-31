@@ -22,6 +22,19 @@ assert.equal(CASES.find(p=>p.id==='jose-alejandro-ibarra-2002')?.date,'2002-05-1
 assert.deepEqual(CASES.find(p=>p.id==='rommy-jose-nieto-laya-2002')?.sources,['PROVIDA2002','COFROSTROS2011']);
 assert.ok(year2002.includes('<strong>37</strong>') && year2002.includes('5 FICHAS NOMINALES') && year2002.includes('noindex,nofollow,noarchive'));
 
+// PROVEA 2002–2003: adultos, fechas controvertidas y ausencia de sentencia firme.
+for (const id of ["juvenal-antonio-isturiz-irigoyen-2002","bertin-ramirez-2002","jhonny-rafael-diaz-2002"]) {
+  const person = CASES.find(p=>p.id===id);
+  assert.ok(person && person.year===2002 && person.episode==='2002');
+  assert.ok(person.sources.includes('PROVIDA2003'));
+  assert.ok(!person.date, 'No inventar día en fuente contradictoria: '+id);
+  assert.ok(year2002.includes('perfil.html?id='+id));
+}
+assert.ok(SOURCES.TSJ234REPRO.scope.includes('Original del TSJ no cotejado'));
+assert.ok(CASES.find(p=>p.id==='bertin-ramirez-2002').note.includes('27-09-2002'));
+assert.ok(CASES.find(p=>p.id==='jhonny-rafael-diaz-2002').note.includes('07-11-2002'));
+assert.ok(year2002.includes('<strong>40</strong>') && year2002.includes('16 FICHAS · REVISIÓN EN CURSO'));
+
 assert.equal(CASES.filter(p=>p.episode==='1999').length,3,'Tres casos nominales de fallecimiento documentado en 1999');
 assert.equal(CASES.find(p=>p.id==='jhon-alejandro-linares-pena')?.category,'policial','Jhon Linares no falleció durante una protesta');
 assert.ok(index.includes('data-filter="policial"'),'Filtro específico de intervenciones policiales');

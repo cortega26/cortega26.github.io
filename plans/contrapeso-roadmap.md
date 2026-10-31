@@ -1,5 +1,13 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## Lote nominal · 31-10-2026, 07:36 Chile — PROVEA 2002–2003 pp. 311–313 · PR #180 · PRODUCCIÓN/ACUMULACIÓN
+
+- **Fuentes inspeccionadas:** [PROVEA, Derecho a la Vida, informe octubre 2002–septiembre 2003, pp. 311–313](https://archivo.provea.org/wp-content/uploads/03_derecho_a_la_vida.pdf#page=11); [reproducción no oficial de sentencia TSJ Sala Penal n.º 234, 22-04-2008](https://app.venley.ai/sentencias/sentencia-nro-234-sala-de-casacion-penal-2008-cv2y4). No se acreditó consulta del original judicial.
+- **Tres adultos nominales:** Juvenal Antonio Istúriz Irigoyen (37), disparos en control militar cercano a Miraflores, diciembre 2002, pero PROVEA también imprime 15.12.03 (nota de prensa 16-12-2002). Bertín Ramírez, fallecido bajo custodia en Aragua: PROVEA imprime 27-10-2002, la transcripción judicial 27-09-2002 y variantes Bertín Rubén Ramírez Romero / Bertín Romero Ramírez, además de referencia contradictoria a 2000. La decisión TSJ de 2008 ordenó continuar juicio, no es condena. Jhonny Rafael Díaz (31), denuncia de detención y muerte en Barcelona: texto 11-11-2002, cita hemerográfica 07-11-2002. Se dejan días sin fijar y se registra la contradicción; no se identifican funcionarios, familiares ni testigos.
+- **Producción:** +3 registros de 2002, 37 → 40 en capítulo, 556 → 559 globales; 0 duplicados nominales detectados. 2001/2002 parciales. Libertad individual: aplica con evidencia; propiedad privada: no aplica; control del poder: aplica con evidencia, sin prejuzgar responsabilidad penal.
+- **QA ligero incremental:** controles de unicidad nominal/ID, fuentes, 40 enlaces de perfil, robots noindex,nofollow,noarchive. No auditoría final de batch, build/Playwright/Codacy ni Codex (NO SOLICITADO — revisión selectiva). Sin merge, lanzamiento o indexación. Próximo: original TSJ y fechas contradictorias; continuar lote nominal 2002 o fuente auténtica pendiente de fines de 2001.
+
+
 ## Lote nominal · 31-10-2026, 06:32 Chile — sucesos del 12–14 de abril de 2002 · PR #180 · PRODUCCIÓN/ACUMULACIÓN
 
 - **Fuentes primarias inspeccionadas:** [PROVEA, *Derecho a la Vida*, informe octubre 2001–septiembre 2002, PDF pp. 15 y 23–24, tabla n.os 20–23](https://provea.org/wp-content/uploads/2017/08/001_derecho_a_la_vida-2.pdf#page=23), y [COFAVIC, *Rostros y voces de la impunidad* (2011), pp. 53–57](https://cofavic.org/wp-content/uploads/2020/12/Rostros-y-voces-de-la-impunidad.pdf#page=53). Aporrea (2006) reproduce datos de estos emisores: no se contabiliza como investigación independiente.

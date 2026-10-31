@@ -307,7 +307,7 @@ for(const [id,name,date,category] of ninthBatch2001) {
  assert.equal(found[0].name,name,`Nombre PROVEA: ${id}`);
  assert.equal(found[0].date,date,`Fecha PROVEA: ${id}`);
  assert.equal(found[0].category,category,`Categoría: ${id}`);
- assert.deepEqual(found[0].sources,['PRO2001'],`Fuente: ${id}`);
+ assert.ok(found[0].sources.includes('PRO2001') && found[0].sources.every(key => Object.hasOwn(SOURCES,key)),`Fuente primaria y ampliaciones verificables: ${id}`);
  assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace nominal: ${id}`);
 }
 for(const id of ['williams-gonzalez-2001','pedro-antonio-belisario'])

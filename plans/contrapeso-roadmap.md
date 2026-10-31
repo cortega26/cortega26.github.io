@@ -1,3 +1,10 @@
+
+## Lote documental · 31-10-2026, 10:36 Chile — PROVEA anexo 6 pp. 567–569 · PR #180 · PRODUCCIÓN/ACUMULACIÓN
+
+- **Fuente primaria inspeccionada visualmente:** [p. 567 n.os 116–119](https://archivo.provea.org/wp-content/uploads/anexos0001.pdf#page=22), [p. 568 n.os 120–132](https://archivo.provea.org/wp-content/uploads/anexos0001.pdf#page=23), [p. 569 n.os 133–141](https://archivo.provea.org/wp-content/uploads/anexos0001.pdf#page=24). 26 renglones cotejados: **16 altas nominales adultas**, 5 ya existentes (117–119, 125, 141), 5 reservas (121, 134, 136: edad no acreditada; 139: imputación grave pendiente de corroboración independiente; 140: menor). Sin duplicación; no se publican nombres de familiares, testigos ni agentes.
+- **Propuesta:** 237 fichas 2001, 88 fichas 2002 y 607 globales, todos los años parciales. Denuncias y versiones oficiales diferenciadas; cartel del «Vengador Anónimo» no prueba autoría policial; fechas tabuladas de episodio no certifican defunción. Libertad individual: aplica con evidencia (vida/integridad); propiedad privada: no aplica; control del poder: aplica con evidencia solo a denuncias policiales, no automáticamente a autores desconocidos.
+- **QA ligero incremental:** estructura/IDs/nombres/fuentes/enlaces/robots comprobados antes de push; suite completa, build, Playwright, Codacy y auditoría final de batch no acreditados. Codex **NO SOLICITADO — revisión selectiva**. Sin merge, lanzamiento ni indexación. Próxima unidad: anexo 6 p. 570, n.º 142 en adelante, con cotejo de homónimos y reservas.
+
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
 ## Lote nominal · 31-10-2026, 09:36 Chile — PROVEA anexo 6 pp. 562–567 · PR #180 · PRODUCCIÓN/ACUMULACIÓN

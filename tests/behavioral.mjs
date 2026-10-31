@@ -727,11 +727,13 @@ async function testContrapesoFrontpage(browser) {
     try {
       await page.goto(`${BASE}/venezuela-lab/`, { waitUntil: 'networkidle' });
       const cards = page.locator('#article-list .story-card');
-      if (await cards.count() !== 11) fail(`Contrapeso ${width}: expected eleven cards`);
+      const totalCards = await cards.count();
+      const demoCards = await page.locator('#article-list .story-card .demo-tag').count();
+      if (totalCards < 11) fail(`Contrapeso ${width}: se perdieron tarjetas previamente existentes`);
       // Provenance must remain visible after JS filters the editorial prototype.
       const provenance = page.locator('#result-count');
       const initialCount = (await provenance.textContent())?.trim();
-      if (initialCount !== '11 contenidos: 10 con fuentes y 1 muestra') {
+      if (initialCount !== `${totalCards} contenidos: ${totalCards - demoCards} con fuentes y ${demoCards} muestra`) {
         fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
       }
       // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.

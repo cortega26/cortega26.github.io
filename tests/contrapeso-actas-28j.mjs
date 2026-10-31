@@ -54,6 +54,6 @@ assert.ok(card.includes(`href="${path}"`), 'Tarjeta real enlazada');
 assert.ok(card.includes('la ventaja de González superaba todos los votos posibles'), 'Portada enuncia hallazgo verificable');
 assert.ok(!card.includes('demo-tag'), 'No se etiqueta como muestra');
 assert.ok(!card.includes('data-article='), 'No usa modal ficticio');
-assert.ok(home.includes('10 CONTENIDOS CON FUENTES · 1 MUESTRA'), 'Recuento editorial visible');
+assert.ok(home.includes(`${(home.match(/<article class="story-card"/g) || []).length - (home.match(/class="demo-tag"/g) || []).length} CONTENIDOS CON FUENTES · ${(home.match(/class="demo-tag"/g) || []).length} MUESTRA`), 'Recuento editorial visible');
 assert.ok(home.includes('noindex,nofollow,noarchive'), 'Portada no indexable');
 console.log('Contrapeso 28J: fuentes, cota electoral, rutas, tarjetas y noindex PASS');

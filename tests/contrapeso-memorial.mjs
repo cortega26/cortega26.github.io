@@ -703,7 +703,7 @@ for (const id of provea2003Ids) {
   assert.ok(person && person.year === 2003 && person.episode === '2003');
   assert.deepEqual(person.sources, ['PRO2003JAN']);
   assert.ok(!person.date && person.note.includes('fecha tabulada del episodio'));
-  assert.ok(year2003.includes('perfil.html?id=' + id));
+  assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
 assert.ok(!CASES.some(p => p.id === 'pablo-celestino-guanare-2003'));
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));

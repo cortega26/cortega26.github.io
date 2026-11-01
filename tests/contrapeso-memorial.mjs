@@ -772,7 +772,7 @@ for(const id of ['maikel-liendo-2003','carlos-enrique-madriz-2003']){
 assert.ok(!CASES.some(p=>p.id==='andison-jose-larrosa-teran-2003'),'Menor de la fila 112 reservado');
 assert.ok(SOURCES.PRO2003JAN.scope.includes('pp. 551–553'));
 assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length,'Roster anual sincronizado');
-assert.ok(year2003.includes('3 judiciales y 46 documentales')&&year2003.includes('noindex,nofollow,noarchive'));
+assert.ok(year2003.includes(`3 judiciales y ${cases2003.length-3} documentales`)&&year2003.includes('noindex,nofollow,noarchive'));
 
 // PROVEA anexo 5, p. 554: extracción documental de siete adultos del #180 congelado.
 const provea2003Junio554=["luis-alberto-orellana-2003","segundo-andujar-2003","juan-carlos-andujar-2003","juvenal-antonio-morales-vergel-2003","luis-raul-tovar-villanueva-2003","ali-alexander-perez-2003","ruben-gamboa-2003"];

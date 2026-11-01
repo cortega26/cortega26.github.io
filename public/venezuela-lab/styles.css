@@ -83,3 +83,7 @@ dialog{background:var(--paper);border:0;box-shadow:0 24px 100px #0a100eb0;color:
 .museum-secondary-link:hover {
   color: #fff;
 }
+
+/* Estado vacío recuperable del filtro editorial */
+.filter-reset{background:transparent;border:1px solid var(--red);color:var(--ink);padding:11px 15px;font-size:11px;font-weight:800;letter-spacing:.05em}
+.filter-reset:hover{background:var(--red);color:white}

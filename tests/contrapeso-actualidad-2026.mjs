@@ -152,7 +152,7 @@ assert.ok(featured.includes('href="/venezuela-lab/actualidad/tarifa-urbana-1nov-
 assert.ok(!featured.includes('demo-tag') && !featured.includes('data-article='), 'Destacados no ofrecen muestras ficticias');
 assert.ok(home.includes('<a class="nav-cta" href="/venezuela-lab/metodo/">NUESTRO MÉTODO'), 'CTA principal lleva a una función disponible, no al boletín inactivo');
 const newsCards = [...grid.matchAll(/<article class="story-card" data-category="Actualidad"[\s\S]*?<\/article>/g)].map((m) => m[0]);
-assert.ok(newsCards[1].includes(`href="${warrantsPath}"`), 'La noticia del 31 de octubre aparece después de noviembre y antes de las del 30');
+assert.ok(newsCards[2].includes(`href="${warrantsPath}"`), 'La noticia del 31 de octubre aparece después de las dos publicadas el 1 de noviembre y antes de las del 30');
 const newsDates = newsCards.map((card) => { const m = card.match(/<span>ACTUALIDAD · (\d+) (OCT|NOV) 2026<\/span>/); return m ? Date.UTC(2026, m[2] === 'NOV' ? 10 : 9, Number(m[1])) : NaN; });
 assert.ok(newsDates.length >= 7 && newsDates.every(Number.isFinite) && newsDates.every((day, i) => i === 0 || newsDates[i - 1] >= day), 'Portada muestra Actualidad en orden cronológico descendente');
 
@@ -175,4 +175,26 @@ assert.ok(newsCards[0].includes(`href="${farePath}"`), 'La noticia de noviembre 
 if (process.argv.includes('--built')) {
   const builtFare = readFileSync(new URL('../dist/venezuela-lab/actualidad/tarifa-urbana-1nov-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtFare), 'Build conserva noindex de tarifa');
+}
+
+
+const equalityPath = '/venezuela-lab/actualidad/marcha-igualdad-31oct-2026/';
+const equality = readFileSync(new URL('../public/venezuela-lab/actualidad/marcha-igualdad-31oct-2026/index.html', import.meta.url), 'utf8');
+assert.ok(prototypeOnlyRoutes.some((r) => r.id === 'contrapeso:news:marcha-igualdad-31oct-2026' && r.path === equalityPath), 'Marcha de derechos civiles inventariada');
+assert.ok(!routeGroups.some((g) => Object.values(g.paths).includes(equalityPath)), 'Marcha fuera del sitemap');
+assert.ok(hasNoindexMeta(equality) && equality.includes('noindex,nofollow,noarchive'), 'Robots completos de marcha');
+assert.match(equality, /Hecho: 31 de octubre de 2026/, 'Fecha del hecho');
+assert.match(equality, /Publicado: 1 de noviembre de 2026/, 'Fecha editorial');
+assert.match(equality, /Revisado: 1 de noviembre de 2026/, 'Revisión fechada');
+assert.match(equality, /sin reporteo propio/, 'No se inventa reporteo');
+assert.match(equality, /Qué falta verificar/, 'Límites documentados');
+assert.match(equality, /no se verificó el acuerdo original/i, 'Denuncia institucional no se convierte en hecho acreditado');
+assert.ok(equality.includes('https://efe.com/english/latest-news/2026-10-31/lgbti-community-protests-in-caracas-to-demand-recognition-of-their-rights/') && equality.includes('https://panorama.onl/justicia/marcha-del-orgullo-en-caracas-se-realizo-sin-respaldo-oficial-20261031-1319.html'), 'Fuentes originales identificadas');
+assert.ok(!/<script\b|<form\b/i.test(equality), 'Sin JS ni formularios');
+const equalityCard = grid.split('data-search="marcha igualdad derechos civiles lgbti caracas')[1]?.split('</article>')[0];
+assert.ok(equalityCard?.includes(`href="${equalityPath}"`) && !equalityCard.includes('demo-tag'), 'Tarjeta real de marcha enlazada');
+assert.ok(newsCards[1].includes(`href="${equalityPath}"`), 'Marcha publicada el 1 de noviembre se ubica tras la tarifa del mismo día');
+if (process.argv.includes('--built')) {
+  const builtEquality = readFileSync(new URL('../dist/venezuela-lab/actualidad/marcha-igualdad-31oct-2026/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(builtEquality), 'Build de marcha conserva noindex');
 }

@@ -1,5 +1,13 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## MUSEO · 01-11-2026, 07:36 Chile — cuarta extracción controlada de #180, PROVEA pp. 549–550
+
+- **Origen:** #180 congelado en 725 fichas. `master@ea9e6666c7beabcdbc58b0875113139cd2dac97c` tiene 463 fichas; se extraen 10 adultos ya investigados en #180 (n.os 75–79, 83–84 y 86–88), para 473 fichas propuestas y capítulo 2003 de 20 a 30 perfiles. No contar como integradas antes de merge/QA. Deuda neta #180 tras eventual integración: 252 IDs si no hay merges concurrentes.
+- **Fuente primaria cotejada visualmente:** [PROVEA, anexo 5, pp. 549–550](https://archivo.provea.org/wp-content/uploads/03_anexos.pdf#page=29). Son denuncias, no sentencias. En 76 se atribuye la versión oficial; en 75, 78, 79 y 84 las alegaciones de familiares. En 87–88 se documentan muertes en incidente carcelario, sin presumir misma causa inmediata.
+- **Reservas:** n.º 74 imprime **08.03.02**, no 2003 (en #180 se había asignado a 2003); 80 pérdida gestacional sin identidad nominal; 81 y 85 menores; 82 y 89 edad no consignada. No publicar familiares, testigos, agentes ni domicilios. Sin peritajes, certificados de defunción ni sentencias individuales inspeccionados; fecha tabulada = episodio.
+- **Auditoría propia 10/10:** identidad, edad, episodio, lugar, versiones y privacidad cotejados; sin duplicación frente a master ni atribución penal individual o móvil político presumidos. Libertad individual: **aplica con evidencia** documental a vida/custodia; propiedad privada: **no aplica** como abuso probado; control del poder: **aplica con evidencia** a denuncias de actuaciones estatales. Sin revisión de sesión aislada; Codex NO SOLICITADO — revisión selectiva.
+- **Fase cierre:** source/build/Playwright/visual exact-SHA, Codacy 0, protecciones, merge expected HEAD y deploy/robots live por verificar. Autoevaluación `CONTRAPESO-SELF-REVIEW-2026-11-01` ya registrada en #180: no duplicar.
+
 ## MUSEO · 01-11-2026, 03:36 Chile — cierre de deuda #180, subsección PROVEA 2003
 
 - Unidad separada de #180 (congelado): **nueve adultos** de PROVEA, anexo 5, pp. 546–548, n.os **47, 48, 50, 61–63, 66, 72–73**; inspección visual del original. #185 y #187 ya incorporaron 11 fichas de 2003 en master; esta unidad propone 9 adicionales, sin duplicar. La fuente no equivale a sentencia y las fechas son de episodio.

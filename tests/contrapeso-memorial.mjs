@@ -787,7 +787,7 @@ for (const id of provea2003Junio554) {
 }
 assert.equal(CASES.find(p=>p.id==='ruben-gamboa-2003').category,'policial','Patrulla no acredita detención formal');
 assert.ok(!CASES.some(p=>p.id==='sin-identificar-2003-120'),'No publicar adolescente anónimo');
-assert.ok(year2003.includes('3 judiciales y 66 documentales'));
+assert.ok(year2003.includes(`3 judiciales y ${cases2003.length-3} documentales`));
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
 
 // PROVEA, anexo 5, pp. 555–556: trece adultos ya contenidos en el lote #180 congelado.
@@ -803,6 +803,25 @@ for (const id of provea2003JunioJulio555556) {
   assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
 for(const id of ['jorge-eliecer-vera-guevara-2003','johan-kelpin-gonzalez-petit-2003','yeferson-yunez-ochoa-2003']) assert.ok(!CASES.some(p=>p.id===id),'Menor reservado');
-assert.ok(year2003.includes('3 judiciales y 66 documentales'));
-assert.ok(year2003.includes('<strong>69</strong>'));
+assert.ok(year2003.includes(`3 judiciales y ${cases2003.length-3} documentales`));
+assert.ok(year2003.includes(`<strong>${cases2003.length}</strong>`));
+assert.ok(year2003.includes('noindex,nofollow,noarchive'));
+
+// PROVEA anexo 5 pp. 557–558: extracción de diez adultos del lote #180 congelado.
+const provea2003Agosto557558=["walter-leonardo-blanco-2003","antonio-garcia-farfan-2003","giuseppe-morillo-2003","jesus-graffe-2003","jesus-albino-2003","robinson-lander-2003","tirso-hernandez-2003","harrison-fuenmayor-2003","richard-sanchez-2003","nelson-jose-tovar-2003"];
+assert.equal(provea2003Agosto557558.length,10);
+for (const id of provea2003Agosto557558) {
+  const matches=CASES.filter(p=>p.id===id);
+  assert.equal(matches.length,1,`Identidad única agosto 2003: ${id}`);
+  assert.equal(matches[0].year,2003);
+  assert.deepEqual(matches[0].sources,['PRO2003JAN']);
+  assert.ok(matches[0].note.includes('p. 557')||matches[0].note.includes('p. 558'));
+  assert.ok(matches[0].note.includes('sin atribución penal individual firme'));
+  assert.ok(year2003.includes(`perfil.html?id=${id}`));
+}
+assert.ok(CASES.find(p=>p.id==='richard-sanchez-2003').note.includes('fecha discordante'));
+assert.ok(!CASES.some(p=>p.id==='jesus-alberto-gonzalez-2003'||p.id==='jeanfer-alexis-crespo-velasquez-2003'),'No presentar disparos accidentales como abusos acreditados');
+assert.ok(year2003.includes('3 judiciales y 76 documentales'));
+assert.ok(year2003.includes('<strong>79</strong>'));
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length);
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));

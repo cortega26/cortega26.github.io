@@ -1,3 +1,10 @@
+## MUSEO · 01-11-2026, 17:36 Chile — extracción de PROVEA p. 559, #180 congelado
+
+- **Base viva:** master@9f899e2c41d28198ac7e653343c88ea91f258515, 522 fichas y 79 en 2003; #180@32fdedb7395487cef885307101324906f3b9a6b3 con **724 objetos nominales** según recuento programático, no 725 como dicen notas anteriores. Deuda real 202; cinco adultos ya existentes en #180 se proponen para master (522→527, 79→84), deuda 202→197 **solo tras merge**. #180 permanece congelado.
+- **Fuente primaria visual:** [PROVEA, anexo 5, p. 559](https://archivo.provea.org/wp-content/uploads/03_anexos.pdf#page=39), filas 158–165. Cinco adultos de edad consignada: 158 Javier José Lezama (21), 159 Sergio Miranda Carvajal (29), 160 Giovanni Ramírez Rojas (20), 164 Freddy José Chirinos Martínez (21), 165 Wilfredo Antonio Briceño Montilla (22). Se reservan 161–163 por edad no consignada. En 160 se denuncia detención por Guardia Nacional, sin registro formal inspeccionado. En 164–165 la fecha impresa es 15.08.03, aunque aparecen después de septiembre. No corregirla por inferencia.
+- **Auditoría propia 5/5:** identidad, edad, lugar, fecha de episodio, denuncia y privacidad cotejadas. PROVEA no acredita sentencia penal individual; no se presume móvil político. No se divulgan familiares, testigos, funcionarios ni domicilios. Corroboración externa y estado judicial posteriores pendientes. Libertad individual: aplica con evidencia documental; propiedad privada: no aplica como violación acreditada; control del poder: aplica a denuncias de actuación estatal. Auditoría propia, sin sesión aislada; Codex NO SOLICITADO — revisión selectiva.
+- **Cierre:** source/build/Playwright/visual exact-SHA, Codacy cero nuevos, protecciones y expected-head squash merge, deploy y HTML/robots live pendientes de acreditar. Prototipo noindex sin autorización de lanzamiento. Siguiente unidad: cotejar reservas y continuar extracción de #180 sin nuevas altas.
+
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
 ## MUSEO · 01-11-2026, 15:36 Chile — octava extracción del #180 congelado, PROVEA pp. 557–558

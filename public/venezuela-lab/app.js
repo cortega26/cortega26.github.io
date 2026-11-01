@@ -27,12 +27,14 @@ for(const button of filterButtons){
 }
 
 function applyFilter(){
-  const query=normalizeSearch(search.value).trim();
+  // Los términos se pueden escribir en cualquier orden; los signos separan palabras.
+  const terms=normalizeSearch(search.value).match(/[\p{L}\p{N}]+/gu)||[];
   let visible=0;
   for(const card of cards){
     // textContent también funciona con tarjetas ocultas por un filtro anterior.
     const matches=activeFilter==='Todas'||card.dataset.category===activeFilter;
-    const found=!query||normalizeSearch(`${card.dataset.search} ${card.textContent}`).includes(query);
+    const searchable=normalizeSearch(`${card.dataset.search} ${card.textContent}`);
+    const found=terms.every(term=>searchable.includes(term));
     card.hidden=!(matches&&found);
     if(!card.hidden)visible++;
   }

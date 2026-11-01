@@ -741,6 +741,8 @@ async function testContrapesoFrontpage(browser) {
       const searchBox = page.locator('#article-search');
       for (const [query, expected] of [
         ['garantias', 1], ['observacion', 1], ['OPINION', 1],
+        // Búsqueda por términos independientes del orden, tildes y puntuación.
+        ['actas 28j', 1], ['28j actas', 1], ['ACTAS, 28J', 1],
         ['ñ', 0], ['n\u0303', 0], ['N\u0303', 0],
       ]) {
         await searchBox.fill(query);

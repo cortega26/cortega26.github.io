@@ -1,6 +1,6 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
-### MUSEO · 01-11-2026, 03:36 Chile — cierre de deuda #180, subsección PROVEA 2003
+## MUSEO · 01-11-2026, 03:36 Chile — cierre de deuda #180, subsección PROVEA 2003
 
 - Unidad separada de #180 (congelado): **nueve adultos** de PROVEA, anexo 5, pp. 546–548, n.os **47, 48, 50, 61–63, 66, 72–73**; inspección visual del original. #185 y #187 ya incorporaron 11 fichas de 2003 en master; esta unidad propone 9 adicionales, sin duplicar. La fuente no equivale a sentencia y las fechas son de episodio.
 - Reservados: n.º 46 y 49 sin edad, n.º 51 y 65 menores, n.º 52 con fecha de defunción no cotejada, n.os 53–59 con año 2002 impreso, n.º 60 nombre incompleto, n.º 64 edad no consignada, n.º 67 niña de cuatro años, n.os 69–70 sin edad, n.º 71 menor; el n.º 68 adulto queda pendiente de examen reforzado por episodio compartido con niña. No divulgar familiares, agentes ni testigos.

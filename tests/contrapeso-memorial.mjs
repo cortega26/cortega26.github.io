@@ -682,7 +682,7 @@ assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));
 
 // Hito judicial acotado: tres víctimas del mismo expediente de la Corte IDH.
 const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
-assert.equal(CASES.filter(p=>p.episode==='2003').length,11,'Tres víctimas judiciales y ocho fichas documentales, no recuento anual');
+assert.equal(CASES.filter(p=>p.episode==='2003').length,20,'Tres víctimas judiciales y diecisiete fichas documentales, no recuento anual');
 for (const id of ['robert-ignacio-diaz-loreto-2003','octavio-ignacio-diaz-alvarez-2003','david-octavio-diaz-loreto-2003']) {
   const person=CASES.find(p=>p.id===id);
   assert.ok(person, `Identidad judicial: ${id}`);
@@ -708,6 +708,24 @@ for (const id of provea2003Ids) {
 assert.ok(!CASES.some(p => p.id === 'pablo-celestino-guanare-2003'));
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(SOURCES.PRO2003JAN.url.includes('archivo.provea.org'));
-assert.ok(SOURCES.PRO2003JAN.scope.includes('registros 29, 34 y 39–44'));
+assert.ok(SOURCES.PRO2003JAN.scope.includes('n.os 29, 34, 39–44'));
 assert.ok(CASES.find(p => p.id === 'damelis-vasquez-2003').note.includes('al parecer'));
 
+
+// Subconjunto auditado PROVEA 2003, anexo 5 pp. 546–548, nueve adultos sin sentencia atribuida.
+const provea2003Feb = ["pablo-otoniel-guaregua-2003","nestor-ivan-aristigueta-ramirez-2003","rodolfo-tovar-torres-2003","jose-alexander-salas-2003","juan-albino-de-da-silva-2003","wender-jason-loreto-sierra-2003","leonel-anza-2003","roberto-antonio-guaicara-romero-2003","carlos-giovanni-marcano-tineo-2003"];
+assert.equal(provea2003Feb.length,9);
+for (const id of provea2003Feb) {
+  const matches = CASES.filter(p => p.id === id);
+  assert.equal(matches.length,1,`Identidad única del lote febrero: ${id}`);
+  const p=matches[0];
+  assert.equal(p.year,2003);
+  assert.equal(p.episode,'2003');
+  assert.deepEqual(p.sources,['PRO2003JAN']);
+  assert.ok(!p.date && p.note.includes('fecha tabulada del episodio'));
+  assert.ok(p.note.includes('sin atribución penal individual firme'));
+  assert.ok(year2003.includes(`perfil.html?id=${id}`));
+}
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,20,'Roster 2003 sincronizado');
+assert.ok(year2003.includes('3 judiciales y 17 documentales')&&year2003.includes('noindex,nofollow,noarchive'));
+assert.ok(SOURCES.PRO2003JAN.scope.includes('47, 48, 50')&&SOURCES.PRO2003JAN.scope.includes('72–73'));

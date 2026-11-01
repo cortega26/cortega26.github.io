@@ -119,6 +119,42 @@ try {
       await context.close();
     }
   }
+
+  // La portada es otra superficie crítica: probar los filtros en Chromium real,
+  // tanto en móvil como en escritorio, y conservar evidencia visual.
+  for (const width of [390, 1440]) {
+    const context = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    const page = await context.newPage();
+    const errors = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.goto(`${origin}/venezuela-lab/`, { waitUntil: 'networkidle' });
+    const total = await page.locator('.story-card').count();
+    const actuality = await page.locator('.story-card[data-category="Actualidad"]').count();
+    const allBadge = (await page.locator('[data-filter="Todas"] [data-count]').textContent())?.trim();
+    const newsBadge = (await page.locator('[data-filter="Actualidad"] [data-count]').textContent())?.trim();
+    if (allBadge !== String(total) || newsBadge !== String(actuality)) {
+      findings.push(`portada/${width}: Category badges do not match DOM cards`);
+    }
+    await page.locator('[data-filter="Actualidad"]').click();
+    const newsVisible = await page.locator('.story-card:visible').count();
+    if (newsVisible !== actuality) findings.push(`portada/${width}: expected ${actuality} news cards, got ${newsVisible}`);
+    await page.locator('#article-search').fill('consulta-sin-resultados-contrapeso');
+    if (!(await page.locator('#no-results').isVisible())) findings.push(`portada/${width}: empty state not visible`);
+    await page.locator('#clear-filters').click();
+    const restored = await page.locator('.story-card:visible').count();
+    if (restored !== total) findings.push(`portada/${width}: reset restored ${restored} of ${total} cards`);
+    if (!(await page.locator('[data-filter="Todas"]').getAttribute('aria-pressed') === 'true')) {
+      findings.push(`portada/${width}: reset did not restore the all-category state`);
+    }
+    const focused = await page.evaluate(() => document.activeElement?.id === 'article-search');
+    if (!focused) findings.push(`portada/${width}: reset did not restore keyboard focus`);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+    if (overflow) findings.push(`portada/${width}: horizontal page overflow`);
+    for (const error of errors) findings.push(`portada/${width}: browser error: ${error}`);
+    await page.screenshot({ path: resolve(out, `portada-filtros-${width}.png`) });
+    reviewed++;
+    await context.close();
+  }
 } finally {
   await browser.close();
   await new Promise((done) => server.close(done));

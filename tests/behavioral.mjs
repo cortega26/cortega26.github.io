@@ -716,7 +716,7 @@ async function testFiltersOnPage(browser, path) {
   return checked;
 }
 
-// Contrapeso's prototype frontpage must distinguish sourced publications from demos.
+// Contrapeso's prototype frontpage exposes only real, sourced publications.
 async function testContrapesoFrontpage(browser) {
   const explainerPath = '/venezuela-lab/explicadores/sentencias-155-156-2017/';
   for (const width of [390, 1280]) {
@@ -729,12 +729,13 @@ async function testContrapesoFrontpage(browser) {
       const cards = page.locator('#article-list .story-card');
       const totalCards = await cards.count();
       const demoCards = await page.locator('#article-list .story-card .demo-tag').count();
+      if (demoCards !== 0) fail(`Contrapeso ${width}: no demo cards allowed`);
       if (totalCards < 11) fail(`Contrapeso ${width}: se perdieron tarjetas previamente existentes`);
       // Provenance must remain visible after JS filters the editorial prototype.
       const provenance = page.locator('#result-count');
       const initialCount = (await provenance.textContent())?.trim();
-      if (initialCount !== `${totalCards} contenidos: ${totalCards - demoCards} con fuentes y ${demoCards} ${demoCards === 1 ? 'muestra' : 'muestras'}`) {
-        fail(`Contrapeso ${width}: initial count must reflect sourced content and any remaining demos`, initialCount);
+      if (initialCount !== `${totalCards} contenidos con fuentes`) {
+        fail(`Contrapeso ${width}: initial count must reflect sourced content`, initialCount);
       }
       // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.
       const searchBox = page.locator('#article-search');
@@ -751,13 +752,13 @@ async function testContrapesoFrontpage(browser) {
       await searchBox.fill('');
       await page.locator('[data-filter="Opinión"]').click();
       const opinionCount = (await provenance.textContent())?.trim();
-      if (opinionCount !== '1 contenido: 1 con fuentes y 0 muestras') {
+      if (opinionCount !== '1 contenido con fuentes') {
         fail(`Contrapeso ${width}: opinion institutional article counts as sourced publication`, opinionCount);
       }
       await page.locator('[data-filter="Todas"]').click();
       await page.locator('#article-search').fill('___sin_resultados___');
       const emptyCount = (await provenance.textContent())?.trim();
-      if (emptyCount !== '0 contenidos: 0 con fuentes y 0 muestras') {
+      if (emptyCount !== '0 contenidos con fuentes') {
         fail(`Contrapeso ${width}: empty search provenance must be accurate`, emptyCount);
       }
       await page.locator('#article-search').fill('');

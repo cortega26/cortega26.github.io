@@ -152,7 +152,7 @@ assert.ok(featured.includes('href="/venezuela-lab/actualidad/tps-fallo-30oct-202
 assert.ok(!featured.includes('demo-tag') && !featured.includes('data-article='), 'Destacados no ofrecen muestras ficticias');
 assert.ok(home.includes('<a class="nav-cta" href="/venezuela-lab/metodo/">NUESTRO MÉTODO'), 'CTA principal lleva a una función disponible, no al boletín inactivo');
 const newsCards = [...grid.matchAll(/<article class="story-card" data-category="Actualidad"[\s\S]*?<\/article>/g)].map((m) => m[0]);
-assert.ok(newsCards[0].includes(`href="${warrantsPath}"`), 'La noticia del 31 de octubre aparece antes de las del 30');
+assert.ok(newsCards[1].includes(`href="${warrantsPath}"`), 'La noticia del 31 de octubre aparece después de noviembre y antes de las del 30');
 const newsDates = newsCards.map((card) => { const m = card.match(/<span>ACTUALIDAD · (\d+) (OCT|NOV) 2026<\/span>/); return m ? Date.UTC(2026, m[2] === 'NOV' ? 10 : 9, Number(m[1])) : NaN; });
 assert.ok(newsDates.length >= 7 && newsDates.every(Number.isFinite) && newsDates.every((day, i) => i === 0 || newsDates[i - 1] >= day), 'Portada muestra Actualidad en orden cronológico descendente');
 

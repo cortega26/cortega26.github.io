@@ -127,7 +127,7 @@ try {
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', (error) => errors.push(error.message));
-    await page.goto(origin + '/venezuela-lab/', { waitUntil: 'networkidle' });
+    await page.goto(`${origin}/venezuela-lab/`, { waitUntil: 'networkidle' });
     const total = await page.locator('.story-card').count();
     const actuality = await page.locator('.story-card[data-category="Actualidad"]').count();
     const allBadge = (await page.locator('[data-filter="Todas"] [data-count]').textContent())?.trim();

@@ -751,3 +751,25 @@ assert.ok(year2003.includes(`3 judiciales y ${cases2003.length-3} documentales`)
 assert.ok(SOURCES.PRO2003JAN.scope.includes('pp. 549–550'));
 assert.ok(!CASES.some(p=>p.id==='jhoan-julio-alvarado-paredes-2003'),'Excluir fila con año 2002');
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
+
+// Cierre documental #180, PROVEA 2003 pp. 551–553, 19 adultos (sin inferir condenas).
+const provea2003MayJun=["gustavo-daniel-flores-salas-2003","johan-rafael-torres-hernandez-2003","jhonder-javier-rodriguez-gomez-2003","jorjan-antonio-coronel-lara-2003","ivan-ali-zabala-medina-2003","yorbi-joan-ruiz-guerrero-2003","jesus-manuel-rodriguez-indriago-2003","enmary-dahiana-cava-2003","jose-luis-peraza-2003","rafael-rivero-tovar-2003","yilme-jesus-antequera-zeppa-2003","maikel-liendo-2003","carlos-jose-caldera-mena-2003","javier-alexander-gomez-2003","lenin-monasterios-2003","kelvin-dominguez-2003","anibal-hernandez-2003","carlos-enrique-madriz-2003","ubaldino-martinez-colorado-2003"];
+assert.equal(provea2003MayJun.length,19);
+for(const id of provea2003MayJun){
+  const matches=CASES.filter(p=>p.id===id);
+  assert.equal(matches.length,1,`Ficha única de mayo-junio: ${id}`);
+  const person=matches[0];
+  assert.equal(person.year,2003);
+  assert.equal(person.episode,'2003');
+  assert.deepEqual(person.sources,['PRO2003JAN']);
+  assert.ok(!person.date&&person.note.includes('fecha tabulada del episodio'));
+  assert.ok(person.note.includes('sin atribución penal individual firme'));
+  assert.ok(year2003.includes(`perfil.html?id=${id}`));
+}
+for(const id of ['maikel-liendo-2003','carlos-enrique-madriz-2003']){
+  assert.equal(CASES.find(p=>p.id===id)?.category,'policial','No confundir traslado o auxilio con custodia acreditada');
+}
+assert.ok(!CASES.some(p=>p.id==='andison-jose-larrosa-teran-2003'),'Menor de la fila 112 reservado');
+assert.ok(SOURCES.PRO2003JAN.scope.includes('pp. 551–553'));
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length,'Roster anual sincronizado');
+assert.ok(year2003.includes('3 judiciales y 46 documentales')&&year2003.includes('noindex,nofollow,noarchive'));

@@ -17,6 +17,10 @@ for (const doc of [charter, manual, contracts]) {
   assert.ok(doc.includes('control del poder') || doc.includes('Control del poder') || doc.includes('control institucional del poder'), 'Control del poder en normas');
 }
 assert.ok(method.includes('id="orientacion"'), 'El método publica la orientación editorial');
+assert.ok(method.includes('verificación editorial propia de imputaciones sensibles'), 'El método público refleja la auditoría editorial interna');
+assert.ok(method.includes('sin revisión editorial humana por pieza'), 'El método no impone aprobación editorial humana por publicación');
+assert.ok(!method.includes('la revisión humana de imputaciones sensibles'), 'El método no conserva el gate editorial humano obsoleto');
+assert.ok(method.includes('autorización expresa del propietario para lanzar e indexar'), 'Lanzamiento e indexación permanecen reservados');
 
 const pages = readdirSync(prototype, { recursive: true, withFileTypes: true })
   .filter((entry) => entry.isFile() && entry.name.endsWith('.html'))

@@ -141,6 +141,7 @@ assert.ok(warrants.includes('https://efe.com/mundo/2026-10-29/venezuela-discurso
 assert.ok(!/<script\b|<form\b/i.test(warrants), 'Sin JS ni captación');
 const warrantsCard = grid.split('data-search="orden judicial detenciones foro penal 30 octubre 2026')[1]?.split('</article>')[0];
 assert.ok(warrantsCard?.includes(`href="${warrantsPath}"`) && !warrantsCard.includes('demo-tag'), 'Tarjeta real enlazada');
+assert.ok(warrantsCard.includes('ACTUALIDAD · 31 OCT 2026') && warrantsCard.includes('PUBLICADO 31 OCT 2026') && warrantsCard.includes('HECHOS 29–30 OCT'), 'La tarjeta distingue fecha de publicación de fechas del suceso');
 if (process.argv.includes('--built')) {
   const builtWarrants = readFileSync(new URL('../dist/venezuela-lab/actualidad/detenciones-orden-judicial-31oct-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(builtWarrants), 'Build conserva noindex de detenciones');
@@ -151,5 +152,6 @@ assert.ok(featured.includes('href="/venezuela-lab/actualidad/tps-fallo-30oct-202
 assert.ok(!featured.includes('demo-tag') && !featured.includes('data-article='), 'Destacados no ofrecen muestras ficticias');
 assert.ok(home.includes('<a class="nav-cta" href="/venezuela-lab/metodo/">NUESTRO MÉTODO'), 'CTA principal lleva a una función disponible, no al boletín inactivo');
 const newsCards = [...grid.matchAll(/<article class="story-card" data-category="Actualidad"[\s\S]*?<\/article>/g)].map((m) => m[0]);
+assert.ok(newsCards[0].includes(`href="${warrantsPath}"`), 'La noticia del 31 de octubre aparece antes de las del 30');
 const newsDates = newsCards.map((card) => Number(card.match(/<span>ACTUALIDAD · (\d+) OCT 2026<\/span>/)?.[1]));
 assert.ok(newsDates.length >= 7 && newsDates.every(Number.isFinite) && newsDates.every((day, i) => i === 0 || newsDates[i - 1] >= day), 'Portada muestra Actualidad en orden cronológico descendente');

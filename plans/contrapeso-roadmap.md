@@ -1,5 +1,13 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## MUSEO · 01-11-2026, 09:36 Chile — quinta extracción de #180, PROVEA pp. 551–553
+
+- **Base verificada:** master@ca0a6957ab6f35a555ebd65e0c4af1c1937f1baf con 473 fichas; #180 congelado@32fdedb con 725. Se separan 19 adultos de filas 92–97 y 99–111 ya presentes en #180; propuesta 473→492, capítulo 2003 30→49. **No contar como integrados hasta squash, deploy y QA live.** Deuda pendiente: 252 antes, 233 después solo si se integra sin otros cambios.
+- **Fuente primaria inspeccionada visualmente:** [PROVEA, anexo 5, pp. 551–553](https://archivo.provea.org/wp-content/uploads/03_anexos.pdf#page=31). Se cotejaron 23 filas (90–112): 19 adultos incluidos, 90–91 y 98 sin edad, 112 adolescente reservado. Las fechas son de episodio y las denuncias no equivalen a condenas. Se mantienen versiones oficiales cuando aparecen (92, 105) y las alegaciones familiares/testimoniales atribuidas. En 104 y 110 se corrige categoría de custodia a actuación policial: no consta detención formal.
+- **Auditoría propia 19/19:** identidad, edad, episodio, lugar, categoría, incertidumbre, atribución y privacidad; no se incorporan familiares, testigos, agentes ni domicilios. Sin peritajes o sentencias individuales adicionales inspeccionados. Libertad individual: **aplica con evidencia documental** a vida e intervenciones; propiedad privada: **no aplica** como vulneración probada; control del poder: **aplica con evidencia** a denuncias de actuación estatal. **Sin revisión de sesión aislada. Codex NO SOLICITADO — revisión selectiva.**
+- **Fase cierre:** source/build/Playwright/visual exact-SHA, Codacy cero nuevos, protecciones y expected-head merge, postdeploy y robots live por acreditar. Sin lanzamiento ni indexación.
+
+
 ## MUSEO · 01-11-2026, 07:36 Chile — cuarta extracción controlada de #180, PROVEA pp. 549–550
 
 - **Origen:** #180 congelado en 725 fichas. `master@ea9e6666c7beabcdbc58b0875113139cd2dac97c` tiene 463 fichas; se extraen 10 adultos ya investigados en #180 (n.os 75–79, 83–84 y 86–88), para 473 fichas propuestas y capítulo 2003 de 20 a 30 perfiles. No contar como integradas antes de merge/QA. Deuda neta #180 tras eventual integración: 252 IDs si no hay merges concurrentes.

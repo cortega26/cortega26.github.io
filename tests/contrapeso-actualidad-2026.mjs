@@ -32,10 +32,10 @@ assert.ok(!/<script\b|<form\b/i.test(html), 'Sin JS ni captación de datos');
 assert.ok(html.includes('href="/venezuela-lab/explicadores/explicadores.css"'), 'Reutiliza CSS existente');
 const grid = home.split('<div class="articles-grid" id="article-list">')[1].split('</div><p id="no-results"')[0];
 assert.ok((grid.match(/class="story-card"/g) || []).length >= 11, 'Conserva las tarjetas previas');
-assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Una muestra');
+assert.equal((grid.match(/class="demo-tag"/g) || []).length, 0, 'Las tarjetas visibles son publicaciones reales');
 const card = grid.split('data-search="maria corina machado regresa venezuela octubre 2026')[1]?.split('</article>')[0];
 assert.ok(card.includes(`href="${path}"`) && !card.includes('demo-tag') && !card.includes('data-article='), 'Noticia enlazada y no demostrativa');
-assert.ok(home.includes(`${(grid.match(/<article class="story-card"/g) || []).length - (grid.match(/class="demo-tag"/g) || []).length} CONTENIDOS CON FUENTES · ${(grid.match(/class="demo-tag"/g) || []).length} MUESTRA`), 'Balance editorial actualizado');
+assert.ok(home.includes(`${(grid.match(/<article class="story-card"/g) || []).length} CONTENIDOS CON FUENTES`), 'Balance editorial actualizado');
 if (process.argv.includes('--built')) {
   const built = readFileSync(new URL('../dist/venezuela-lab/actualidad/regreso-machado-2026/index.html', import.meta.url), 'utf8');
   assert.ok(hasNoindexMeta(built) && built.includes('María Corina Machado regresó'), 'Build de noticia noindex');

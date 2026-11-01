@@ -733,8 +733,8 @@ async function testContrapesoFrontpage(browser) {
       // Provenance must remain visible after JS filters the editorial prototype.
       const provenance = page.locator('#result-count');
       const initialCount = (await provenance.textContent())?.trim();
-      if (initialCount !== `${totalCards} contenidos: ${totalCards - demoCards} con fuentes y ${demoCards} muestra`) {
-        fail(`Contrapeso ${width}: initial count must distinguish sourced content from demo`, initialCount);
+      if (initialCount !== `${totalCards} contenidos: ${totalCards - demoCards} con fuentes y ${demoCards} ${demoCards === 1 ? 'muestra' : 'muestras'}`) {
+        fail(`Contrapeso ${width}: initial count must reflect sourced content and any remaining demos`, initialCount);
       }
       // Accent-insensitive search must keep ñ distinct from n, including decomposed forms.
       const searchBox = page.locator('#article-search');
@@ -751,8 +751,8 @@ async function testContrapesoFrontpage(browser) {
       await searchBox.fill('');
       await page.locator('[data-filter="Opinión"]').click();
       const opinionCount = (await provenance.textContent())?.trim();
-      if (opinionCount !== '1 contenido: 0 con fuentes y 1 muestra') {
-        fail(`Contrapeso ${width}: opinion demo must not count as sourced publication`, opinionCount);
+      if (opinionCount !== '1 contenido: 1 con fuentes y 0 muestras') {
+        fail(`Contrapeso ${width}: opinion institutional article counts as sourced publication`, opinionCount);
       }
       await page.locator('[data-filter="Todas"]').click();
       await page.locator('#article-search').fill('___sin_resultados___');

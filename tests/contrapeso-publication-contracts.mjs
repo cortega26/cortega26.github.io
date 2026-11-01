@@ -109,7 +109,14 @@ const portada = readFileSync(join(prototype, 'index.html'), 'utf8');
 const portadaJs = readFileSync(join(prototype, 'app.js'), 'utf8');
 const fichasPortada = (portada.match(/<article class="story-card"/g) ?? []).length;
 assert.ok(fichasPortada > 0, 'La portada contiene tarjetas reales');
-assert.ok(portada.includes(`data-filter="Todas" aria-pressed="true">TODAS <span>${fichasPortada}</span>`), 'El contador visible coincide con las tarjetas');
+assert.ok(portada.includes(`data-filter="Todas" aria-pressed="true">TODAS <span data-count>${fichasPortada}</span>`), 'El contador visible coincide con las tarjetas');
+for (const [category, label] of [['Actualidad', 'ACTUALIDAD'], ['Explicadores', 'EXPLICADORES'], ['Opinión', 'OPINIÓN'], ['Expedientes', 'EXPEDIENTES'], ['Archivo', 'ARCHIVO']]) {
+  const matches = [...portada.matchAll(/<article class="story-card" data-category="([^"]+)"/g)].filter((match) => match[1] === category).length;
+  assert.ok(portada.includes(`data-filter="${category}" aria-pressed="false">${label} <span data-count>${matches}</span>`), `Contador correcto para ${category}`);
+}
+assert.ok(portada.includes('id="clear-filters"') && portadaJs.includes("clearFilters.addEventListener('click'"), 'El estado vacío permite restablecer filtros');
+assert.ok(portadaJs.includes('card.textContent'), 'La búsqueda sigue encontrando tarjetas previamente ocultas');
+assert.ok(portada.includes(`trece contenidos con fuentes`) && fichasPortada === 13, 'El texto editorial coincide con el inventario actual');
 assert.ok(portada.includes(`id="result-count" role="status" aria-live="polite">${fichasPortada} contenidos con fuentes`), 'El contador accesible coincide');
 assert.ok(!portada.includes('id="reader-dialog"') && !portada.includes('data-article='), 'No se conserva el lector de muestras');
 assert.ok(!portadaJs.includes('articleData=') && !portadaJs.includes('#reader-dialog'), 'JS sin contenido ni handlers demostrativos');

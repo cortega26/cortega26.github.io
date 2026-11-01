@@ -125,4 +125,17 @@ assert.ok(!portadaJs.includes('articleData=') && !portadaJs.includes('#reader-di
 assert.ok(/src="\.\/app\.js\?v=[0-9a-f]{8}"/.test(portada), 'Cache-bust de JS en formato de hash de contenido');
 assert.ok(portada.includes('name="robots" content="noindex,nofollow,noarchive"'), 'Portada no indexable');
 
+
+// El destacado principal de Actualidad debe corresponder a la primera noticia real
+// del listado (ordenado de más reciente a más antigua), no quedar anclado a una
+// noticia anterior cuando se agregue una nueva a la portada.
+const primeraNoticia = portada.match(/<article class="story-card" data-category="Actualidad"[\s\S]*?<\/article>/)?.[0] ?? '';
+const primerDestacado = portada.match(/<article class="feature-mini"[\s\S]*?<\/article>/)?.[0] ?? '';
+const enlaceNoticia = primeraNoticia.match(/href="([^"]+)"/)?.[1] ?? '';
+const titularNoticia = primeraNoticia.match(/<h3>([^<]+)<\/h3>/)?.[1] ?? '';
+assert.ok(enlaceNoticia.startsWith('/venezuela-lab/actualidad/'), 'Existe noticia principal real');
+assert.ok(titularNoticia.length > 0, 'La noticia principal tiene titular');
+assert.ok(primerDestacado.includes(`href="${enlaceNoticia}"`), 'El destacado enlaza la noticia más reciente');
+assert.ok(primerDestacado.includes(`<h3>${titularNoticia}</h3>`), 'El titular del destacado coincide con la noticia más reciente');
+
 console.log(`Contrapeso CP-011: ${checked} páginas con contratos por género y pruebas negativas PASS`);

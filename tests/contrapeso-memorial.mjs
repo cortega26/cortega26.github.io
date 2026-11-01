@@ -682,7 +682,7 @@ assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));
 
 // Hito judicial acotado: tres víctimas del mismo expediente de la Corte IDH.
 const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
-assert.equal(CASES.filter(p=>p.episode==='2003').length,20,'Tres víctimas judiciales y diecisiete fichas documentales, no recuento anual');
+assert.equal(CASES.filter(p=>p.episode==='2003').length,30,'Tres víctimas judiciales y veintisiete fichas documentales, no recuento anual');
 for (const id of ['robert-ignacio-diaz-loreto-2003','octavio-ignacio-diaz-alvarez-2003','david-octavio-diaz-loreto-2003']) {
   const person=CASES.find(p=>p.id===id);
   assert.ok(person, `Identidad judicial: ${id}`);

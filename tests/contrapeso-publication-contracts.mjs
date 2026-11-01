@@ -116,7 +116,9 @@ for (const [category, label] of [['Actualidad', 'ACTUALIDAD'], ['Explicadores', 
 }
 assert.ok(portada.includes('id="clear-filters"') && portadaJs.includes("clearFilters.addEventListener('click'"), 'El estado vacío permite restablecer filtros');
 assert.ok(portadaJs.includes('card.textContent'), 'La búsqueda sigue encontrando tarjetas previamente ocultas');
-assert.ok(portada.includes(`trece contenidos con fuentes`) && fichasPortada === 13, 'El texto editorial coincide con el inventario actual');
+assert.ok(portada.includes(`Incluye ${fichasPortada} contenidos con fuentes.`), 'La descripción de portada coincide con el inventario');
+assert.ok(portada.includes(`Identidad editorial en desarrollo: ${fichasPortada} contenidos con fuentes.`), 'El banner coincide con el inventario');
+assert.ok(portada.includes(`>${fichasPortada} CONTENIDOS CON FUENTES</span>`), 'El encabezado de publicaciones coincide con el inventario');
 assert.ok(portada.includes(`id="result-count" role="status" aria-live="polite">${fichasPortada} contenidos con fuentes`), 'El contador accesible coincide');
 assert.ok(!portada.includes('id="reader-dialog"') && !portada.includes('data-article='), 'No se conserva el lector de muestras');
 assert.ok(!portadaJs.includes('articleData=') && !portadaJs.includes('#reader-dialog'), 'JS sin contenido ni handlers demostrativos');

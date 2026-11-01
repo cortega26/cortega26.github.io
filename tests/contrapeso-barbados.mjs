@@ -33,10 +33,13 @@ assert.ok(caseCard, 'Tarjeta Expedientes visible en portada');
 assert.ok(caseCard.includes('Barbados: cuatro compromisos') && caseCard.includes('DOCUMENTADO'), 'Título y carácter documental, sin falsa actualidad');
 assert.ok(caseCard.includes('href="/venezuela-lab/museo/#expediente-barbados"'), 'Tarjeta enlaza al expediente real');
 assert.ok(!caseCard.includes('demo-tag') && !caseCard.includes('data-article='), 'Expediente no se presenta como modal ficticio');
-assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Solo Opinión es muestra');
 const totalCards = (grid.match(/class="story-card"/g) || []).length;
 const demoCards = (grid.match(/class="demo-tag"/g) || []).length;
-assert.ok(home.includes(`${totalCards - demoCards} CONTENIDOS CON FUENTES · ${demoCards} MUESTRA`), 'Conteo documental derivado del inventario visible');
+assert.equal(demoCards, 0, 'No quedan muestras editoriales en las tarjetas visibles');
+assert.ok(home.includes(`${totalCards} CONTENIDOS CON FUENTES`), 'Conteo documental derivado del inventario visible');
+const opinionCard = grid.split('<article class="story-card" data-category="Opinión"')[1]?.split('</article>')[0];
+assert.ok(opinionCard?.includes('href="/venezuela-lab/opinion/parlamento-limites-tsj-2017/"'), 'Opinión enlaza a columna institucional real');
+assert.ok(!opinionCard.includes('data-article=') && !opinionCard.includes('demo-tag'), 'Opinión no es modal ni ejemplo');
 
 assert.ok(home.includes('href="/venezuela-lab/museo/#expediente-2024"'), 'La portada conduce al 001 real');
 assert.ok(!home.includes('data-article="actas"'), 'No presenta el expediente real como ejemplo');

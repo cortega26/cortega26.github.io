@@ -773,3 +773,19 @@ assert.ok(!CASES.some(p=>p.id==='andison-jose-larrosa-teran-2003'),'Menor de la 
 assert.ok(SOURCES.PRO2003JAN.scope.includes('pp. 551–553'));
 assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length,'Roster anual sincronizado');
 assert.ok(year2003.includes('3 judiciales y 46 documentales')&&year2003.includes('noindex,nofollow,noarchive'));
+
+// PROVEA anexo 5, p. 554: extracción documental de siete adultos del #180 congelado.
+const provea2003Junio554=["luis-alberto-orellana-2003","segundo-andujar-2003","juan-carlos-andujar-2003","juvenal-antonio-morales-vergel-2003","luis-raul-tovar-villanueva-2003","ali-alexander-perez-2003","ruben-gamboa-2003"];
+assert.equal(provea2003Junio554.length,7);
+for (const id of provea2003Junio554) {
+  const matches=CASES.filter(p=>p.id===id);
+  assert.equal(matches.length,1,`Registro único: ${id}`);
+  assert.equal(matches[0].year,2003);
+  assert.deepEqual(matches[0].sources,['PRO2003JAN']);
+  assert.ok(matches[0].note.includes('p. 554'));
+  assert.ok(year2003.includes(`perfil.html?id=${id}`));
+}
+assert.equal(CASES.find(p=>p.id==='ruben-gamboa-2003').category,'policial','Patrulla no acredita detención formal');
+assert.ok(!CASES.some(p=>p.id==='sin-identificar-2003-120'),'No publicar adolescente anónimo');
+assert.ok(year2003.includes('3 judiciales y 53 documentales'));
+assert.ok(year2003.includes('noindex,nofollow,noarchive'));

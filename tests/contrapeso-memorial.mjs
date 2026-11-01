@@ -682,7 +682,7 @@ assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));
 
 // Hito judicial acotado: tres víctimas del mismo expediente de la Corte IDH.
 const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
-assert.equal(CASES.filter(p=>p.episode==='2003').length,3,'Tres víctimas, no recuento anual');
+assert.equal(CASES.filter(p=>p.episode==='2003').length,11,'Tres víctimas judiciales y ocho fichas documentales, no recuento anual');
 for (const id of ['robert-ignacio-diaz-loreto-2003','octavio-ignacio-diaz-alvarez-2003','david-octavio-diaz-loreto-2003']) {
   const person=CASES.find(p=>p.id===id);
   assert.ok(person, `Identidad judicial: ${id}`);
@@ -694,3 +694,17 @@ assert.ok(year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(year2003.includes('no equivale a condena penal individual'));
 assert.ok(index.includes('/venezuela-lab/museo/victimas/2003/'));
 assert.ok(SOURCES.CORTEIDH392.url.includes('corteidh.or.cr/docs/casos/articulos/resumen_392_esp.pdf'));
+
+// Subconjunto PROVEA 2003: ocho adultos cotejados en anexo 5, pp. 544–545.
+const provea2003Ids = ["jaime-jesus-guacai-bermudez-2003","elvis-javier-rodriguez-2003","rene-jesus-rengifo-2003","pablo-jose-nunez-2003","ricardo-aguirre-lopez-2003","freddy-garrido-munoz-2003","damelis-vasquez-2003","eligio-jose-rivero-2003"];
+assert.equal(provea2003Ids.length, 8);
+for (const id of provea2003Ids) {
+  const person = CASES.find(p => p.id === id);
+  assert.ok(person && person.year === 2003 && person.episode === '2003');
+  assert.deepEqual(person.sources, ['PRO2003JAN']);
+  assert.ok(!person.date && person.note.includes('fecha tabulada del episodio'));
+  assert.ok(year2003.includes('perfil.html?id=' + id));
+}
+assert.ok(!CASES.some(p => p.id === 'pablo-celestino-guanare-2003'));
+assert.ok(year2003.includes('noindex,nofollow,noarchive'));
+assert.ok(SOURCES.PRO2003JAN.url.includes('archivo.provea.org'));

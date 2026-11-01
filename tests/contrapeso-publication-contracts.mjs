@@ -103,4 +103,16 @@ const historicalRoute = '/venezuela-lab/explicadores/actas-28j-2024/';
 assert.ok(validatePublication(historical.replace('<span>26 de octubre de 2026</span>', ''), 'explainer', historicalRoute).includes('editorial-date'), 'El guard distingue fecha editorial de período investigado');
 const currentExplainer = historical.replace('EXPLICADOR HISTÓRICO', 'EXPLICADOR').replace('Revisión histórica de informes de 2024 y 2025; no es actualidad', 'Contexto vigente revisado');
 assert.deepEqual(validatePublication(currentExplainer, 'explainer', historicalRoute), [], 'Un explicador vigente no requiere etiqueta histórica');
+
+// La portada no presenta muestras ni un lector modal ficticio.
+const portada = readFileSync(join(prototype, 'index.html'), 'utf8');
+const portadaJs = readFileSync(join(prototype, 'app.js'), 'utf8');
+const fichasPortada = (portada.match(/<article class="story-card"/g) ?? []).length;
+assert.equal(fichasPortada, 13, 'La portada contiene 13 tarjetas reales');
+assert.ok(portada.includes(`data-filter="Todas" aria-pressed="true">TODAS <span>${fichasPortada}</span>`), 'El contador visible coincide con las tarjetas');
+assert.ok(portada.includes(`id="result-count" role="status" aria-live="polite">${fichasPortada} contenidos con fuentes`), 'El contador accesible coincide');
+assert.ok(!portada.includes('id="reader-dialog"') && !portada.includes('data-article='), 'No se conserva el lector de muestras');
+assert.ok(!portadaJs.includes('articleData=') && !portadaJs.includes('#reader-dialog'), 'JS sin contenido ni handlers demostrativos');
+assert.ok(portada.includes('name="robots" content="noindex,nofollow,noarchive"'), 'Portada no indexable');
+
 console.log(`Contrapeso CP-011: ${checked} páginas con contratos por género y pruebas negativas PASS`);

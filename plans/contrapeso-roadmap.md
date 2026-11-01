@@ -1,5 +1,13 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## MUSEO · 01-11-2026, 13:36 Chile — séptima extracción del #180 congelado, PROVEA pp. 555–556
+
+- **Preflight GitHub:** master@2baaaff959892d20b334d3f7823c5b43f40557b1 con 499 IDs; #180@32fdedb7395487cef885307101324906f3b9a6b3 con 725 IDs únicos comprobados mediante parseo de CASES; deuda neta 226, sin IDs de master ausentes del lote congelado. Este recuento programático discrepa del texto previo de #180 que declaraba 724: revisar el algoritmo de recuento anterior, no inventar una eliminación. Unidad de 13 adultos ya existentes en #180, propuesta 499→512, deuda 226→213 únicamente después de merge. No se modificó #180.
+- **Fuente primaria visual:** [PROVEA, anexo 5, pp. 555–556](https://archivo.provea.org/wp-content/uploads/03_anexos.pdf#page=35), n.os 121–139. Trece adultos incluidos: 122–125, 129–132 y 134–138; excluidos menores 121, 126 y 133, y sin edad/identidad suficientes 127, 128 y 139. Se cotejaron nombres, edades, localidades, fechas del episodio, versiones oficiales y denuncias. El episodio de cuatro personas de Los Valles del Tuy no constituye cuatro fuentes independientes. El n.º 129 refiere hospitalización de cuatro días; la fecha del cuadro no es fecha certificada de muerte. En 131–132 consta versión policial de enfrentamiento y 133 es adolescente excluido. En 136, testigos denunciaron disparos de militares durante manifestación; no se presenta como sentencia.
+- **Auditoría editorial propia 13/13:** versiones familiares y testimoniales atribuidas; sin autoría penal individual demostrada ni motivo político general inferido; no se publican familiares, testigos, agentes, domicilios ni menores. Libertad individual: **aplica con evidencia documental** a vida e integridad; propiedad privada: **no aplica** a este bloque; control del poder: **aplica con evidencia** a denuncias de actuación estatal y versiones contrapuestas. Sin revisión por sesión aislada. Codex **NO SOLICITADO — revisión selectiva**.
+- **Fase:** subconjunto separado en PR para cierre exact-SHA; pruebas source/build/Playwright/visual, Codacy, protecciones, expected-head squash merge y deploy/HTML live por acreditar. noindex,nofollow,noarchive intacto. No hay lanzamiento ni indexación.
+
+
 ## MUSEO · 01-11-2026, 11:36 Chile — sexta extracción del #180 congelado, PROVEA p. 554
 
 - **Base viva cotejada:** `master@af7ac5de905fc9405c6265c332b9f73e8d8b3d8e` con 492 IDs; `#180@32fdedb7395487cef885307101324906f3b9a6b3` con 724 IDs (cotejo anterior de 724); deuda inicial 232 IDs, objetivo de este PR: 7 adultos ya contenidos en #180, 492→499 y deuda 232→225 únicamente tras integración efectiva. #180 permanece congelado; no se agregan altas al lote original.

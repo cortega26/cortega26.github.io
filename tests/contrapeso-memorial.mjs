@@ -787,5 +787,22 @@ for (const id of provea2003Junio554) {
 }
 assert.equal(CASES.find(p=>p.id==='ruben-gamboa-2003').category,'policial','Patrulla no acredita detención formal');
 assert.ok(!CASES.some(p=>p.id==='sin-identificar-2003-120'),'No publicar adolescente anónimo');
-assert.ok(year2003.includes('3 judiciales y 53 documentales'));
+assert.ok(year2003.includes('3 judiciales y 66 documentales'));
+assert.ok(year2003.includes('noindex,nofollow,noarchive'));
+
+// PROVEA, anexo 5, pp. 555–556: trece adultos ya contenidos en el lote #180 congelado.
+const provea2003JunioJulio555556=["ciro-jacinto-segura-gonzalez-2003","jose-gregorio-marin-garcia-2003","michel-merchan-2003","yorman-vladimir-lopez-manrique-2003","glerys-bracho-de-perozo-2003","leon-alfonso-canache-garnier-2003","miguel-angel-gil-sanchez-2003","leonardo-guerrieri-2003","jorge-jose-mendez-2003","alexander-elpidio-hernandez-2003","juan-rafael-osorio-2003","deivy-javier-rico-2003","ramon-antonio-jimenez-2003"];
+assert.equal(provea2003JunioJulio555556.length,13);
+for (const id of provea2003JunioJulio555556) {
+  const matches=CASES.filter(p=>p.id===id);
+  assert.equal(matches.length,1,`Registro documental único: ${id}`);
+  assert.equal(matches[0].year,2003);
+  assert.deepEqual(matches[0].sources,['PRO2003JAN']);
+  assert.ok(matches[0].note.includes('p. 555') || matches[0].note.includes('p. 556'));
+  assert.ok(matches[0].note.includes('fecha tabulada del episodio'));
+  assert.ok(year2003.includes(`perfil.html?id=${id}`));
+}
+for(const id of ['jorge-eliecer-vera-guevara-2003','johan-kelpin-gonzalez-petit-2003','yeferson-yunez-ochoa-2003']) assert.ok(!CASES.some(p=>p.id===id),'Menor reservado');
+assert.ok(year2003.includes('3 judiciales y 66 documentales'));
+assert.ok(year2003.includes('<strong>69</strong>'));
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));

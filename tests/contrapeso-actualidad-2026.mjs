@@ -188,7 +188,7 @@ assert.match(equality, /Publicado: 1 de noviembre de 2026/, 'Fecha editorial');
 assert.match(equality, /Revisado: 1 de noviembre de 2026/, 'Revisión fechada');
 assert.match(equality, /sin reporteo propio/, 'No se inventa reporteo');
 assert.match(equality, /Qué falta verificar/, 'Límites documentados');
-assert.match(equality, /no se verificaron el acuerdo original/i, 'Denuncia institucional no se convierte en hecho acreditado');
+assert.match(equality, /no se verificó el acuerdo original/i, 'Denuncia institucional no se convierte en hecho acreditado');
 assert.ok(equality.includes('https://efe.com/english/latest-news/2026-10-31/lgbti-community-protests-in-caracas-to-demand-recognition-of-their-rights/') && equality.includes('https://panorama.onl/justicia/marcha-del-orgullo-en-caracas-se-realizo-sin-respaldo-oficial-20261031-1319.html'), 'Fuentes originales identificadas');
 assert.ok(!/<script\\b|<form\\b/i.test(equality), 'Sin JS ni formularios');
 const equalityCard = grid.split('data-search="marcha igualdad derechos civiles lgbti caracas')[1]?.split('</article>')[0];

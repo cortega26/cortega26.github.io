@@ -25,7 +25,7 @@ const ids = CASES.map(person => person.id);
 assert.equal(new Set(ids).size,CASES.length,'Identificadores únicos');
 assert.equal(new Set(CASES.map(person => person.name.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase())).size,CASES.length,'No duplicar nombres');
 assert.ok(CASES.filter(person => person.category === 'custodia').length>=29,'Custodia ampliada mediante registro JEP 2026');
-assert.equal(CASES.filter(person => person.category === 'operativo').length,7,'Siete personas de El Junquito según la CIDH');
+assert.equal(CASES.filter(person => person.episode === '2018-junquito').length,7,'Siete personas de El Junquito según la CIDH; la categoría operativo incluye otros episodios');
 assert.ok(CASES.filter(person => person.category === 'protesta').length >= 40,'Registros de manifestaciones');
 assert.ok(CASES.some(person => person.name === 'Óscar Alberto Pérez' && person.biography),'Óscar Pérez y su biografía documentada');
 assert.ok(CASES.some(person => person.name === 'Fernando Albán'),'Fernando Albán incluido');

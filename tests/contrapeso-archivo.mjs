@@ -22,9 +22,9 @@ assert.ok(!card.includes('demo-tag') && !card.includes('data-article='), 'El enl
 const totalCards = (grid.match(/class="story-card"/g) || []).length;
 const demoCards = (grid.match(/class="demo-tag"/g) || []).length;
 assert.ok(totalCards >= 11, 'Se conservan las publicaciones previas al agregar nuevas tarjetas');
-assert.equal((grid.match(/class="demo-tag"/g) || []).length, 1, 'Solo Opinión sigue como ejemplo');
-assert.ok(home.includes(`${totalCards - demoCards} CONTENIDOS CON FUENTES · ${demoCards} MUESTRA`), 'Balance editorial derivado de tarjetas reales');
-assert.ok(home.includes(`${totalCards} contenidos: ${totalCards - demoCards} con fuentes y ${demoCards} muestra`), 'Recuento inicial consistente con el DOM');
+assert.equal(demoCards, 0, 'La portada no contiene tarjetas de muestra');
+assert.ok(home.includes(`${totalCards} CONTENIDOS CON FUENTES`), 'Balance editorial derivado de tarjetas reales');
+assert.ok(home.includes(`${totalCards} contenidos con fuentes`), 'Recuento inicial consistente con el DOM');
 assert.ok(home.includes('data-filter="Archivo"'), 'Filtro Archivo disponible');
 assert.ok(hasNoindexMeta(home) && hasNoindexMeta(memorial), 'Ambas páginas permanecen noindex');
 assert.ok(memorial.includes('REGISTRO ABIERTO Y NO EXHAUSTIVO'), 'Destino confirma alcance limitado');

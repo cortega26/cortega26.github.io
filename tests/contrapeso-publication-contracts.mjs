@@ -113,7 +113,7 @@ assert.ok(portada.includes(`data-filter="Todas" aria-pressed="true">TODAS <span>
 assert.ok(portada.includes(`id="result-count" role="status" aria-live="polite">${fichasPortada} contenidos con fuentes`), 'El contador accesible coincide');
 assert.ok(!portada.includes('id="reader-dialog"') && !portada.includes('data-article='), 'No se conserva el lector de muestras');
 assert.ok(!portadaJs.includes('articleData=') && !portadaJs.includes('#reader-dialog'), 'JS sin contenido ni handlers demostrativos');
-assert.ok(portada.includes('src="./app.js?v=20261101"'), 'Cache-bust de JS tras retirar el diálogo');
+assert.ok(/src="\.\/app\.js\?v=[0-9a-f]{8}"/.test(portada), 'Cache-bust de JS en formato de hash de contenido');
 assert.ok(portada.includes('name="robots" content="noindex,nofollow,noarchive"'), 'Portada no indexable');
 
 console.log(`Contrapeso CP-011: ${checked} páginas con contratos por género y pruebas negativas PASS`);

@@ -821,7 +821,24 @@ for (const id of provea2003Agosto557558) {
 }
 assert.ok(CASES.find(p=>p.id==='richard-sanchez-2003').note.includes('fecha discordante'));
 assert.ok(!CASES.some(p=>p.id==='jesus-alberto-gonzalez-2003'||p.id==='jeanfer-alexis-crespo-velasquez-2003'),'No presentar disparos accidentales como abusos acreditados');
-assert.ok(year2003.includes('3 judiciales y 76 documentales'));
-assert.ok(year2003.includes('<strong>79</strong>'));
+assert.ok(year2003.includes('3 judiciales y 81 documentales'));
+assert.ok(year2003.includes('<strong>84</strong>'));
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length);
+assert.ok(year2003.includes('noindex,nofollow,noarchive'));
+
+// PROVEA p. 559: cinco adultos del lote #180 congelado, inspección visual.
+const provea2003P559=["javier-jose-lezama-2003","sergio-miranda-carvajal-2003","giovanni-ramirez-rojas-2003","freddy-jose-chirinos-martinez-2003","wilfredo-antonio-briceno-montilla-2003"];
+for(const id of provea2003P559){
+ const matches=CASES.filter(p=>p.id===id);
+ assert.equal(matches.length,1,`Único registro PROVEA p. 559: ${id}`);
+ assert.equal(matches[0].year,2003);
+ assert.deepEqual(matches[0].sources,['PRO2003JAN']);
+ assert.ok(matches[0].note.includes('p. 559'));
+ assert.ok(matches[0].note.includes('sin atribución penal individual firme'));
+ assert.ok(year2003.includes(`perfil.html?id=${id}`));
+}
+assert.equal(cases2003.length,84);
+assert.ok(year2003.includes('3 judiciales y 81 documentales'));
+assert.ok(year2003.includes('<strong>84</strong>'));
 assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length);
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));

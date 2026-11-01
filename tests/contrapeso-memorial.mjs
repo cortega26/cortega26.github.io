@@ -688,7 +688,7 @@ for (const id of ['robert-ignacio-diaz-loreto-2003','octavio-ignacio-diaz-alvare
   assert.ok(person, `Identidad judicial: ${id}`);
   assert.equal(person.date,'2003-01-06');
   assert.deepEqual(person.sources,['CORTEIDH392']);
-  assert.ok(year2003.includes('perfil.html?id='+id));
+  assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(year2003.includes('no equivale a condena penal individual'));

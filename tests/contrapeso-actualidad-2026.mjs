@@ -152,6 +152,27 @@ assert.ok(featured.includes('href="/venezuela-lab/actualidad/tps-fallo-30oct-202
 assert.ok(!featured.includes('demo-tag') && !featured.includes('data-article='), 'Destacados no ofrecen muestras ficticias');
 assert.ok(home.includes('<a class="nav-cta" href="/venezuela-lab/metodo/">NUESTRO MÉTODO'), 'CTA principal lleva a una función disponible, no al boletín inactivo');
 const newsCards = [...grid.matchAll(/<article class="story-card" data-category="Actualidad"[\s\S]*?<\/article>/g)].map((m) => m[0]);
-assert.ok(newsCards[0].includes(`href="${warrantsPath}"`), 'La noticia del 31 de octubre aparece antes de las del 30');
-const newsDates = newsCards.map((card) => Number(card.match(/<span>ACTUALIDAD · (\d+) OCT 2026<\/span>/)?.[1]));
+assert.ok(newsCards[1].includes(`href="${warrantsPath}"`), 'La noticia del 31 de octubre aparece después de noviembre y antes de las del 30');
+const newsDates = newsCards.map((card) => { const m = card.match(/<span>ACTUALIDAD · (\d+) (OCT|NOV) 2026<\/span>/); return m ? Date.UTC(2026, m[2] === 'NOV' ? 10 : 9, Number(m[1])) : NaN; });
 assert.ok(newsDates.length >= 7 && newsDates.every(Number.isFinite) && newsDates.every((day, i) => i === 0 || newsDates[i - 1] >= day), 'Portada muestra Actualidad en orden cronológico descendente');
+
+const farePath = '/venezuela-lab/actualidad/tarifa-urbana-1nov-2026/';
+const fare = readFileSync(new URL('../public/venezuela-lab/actualidad/tarifa-urbana-1nov-2026/index.html', import.meta.url), 'utf8');
+assert.ok(prototypeOnlyRoutes.some((r) => r.id === 'contrapeso:news:tarifa-urbana-1nov-2026' && r.path === farePath), 'Tarifa inventariada');
+assert.ok(!routeGroups.some((g) => Object.values(g.paths).includes(farePath)), 'Tarifa fuera de sitemap');
+assert.ok(hasNoindexMeta(fare) && fare.includes('noindex,nofollow,noarchive'), 'Tarifa conserva robots');
+assert.match(fare, /Hecho: anuncios del 29–31 de octubre/, 'Fechas de anuncio');
+assert.match(fare, /Publicado: 1 de noviembre de 2026/, 'Fecha editorial');
+assert.match(fare, /sin reporteo propio/, 'Procedencia transparente');
+assert.match(fare, /resolución oficial sigue sin cotejarse/, 'No equiparar anuncio con norma');
+assert.match(fare, /discrepan sobre si ese recargo/, 'Discrepancia de recargo');
+assert.match(fare, /Qué falta verificar/, 'Límites editoriales');
+assert.ok(fare.includes('https://eldiario.com/2026/10/31/aumento-pasaje-urbano-noviembre/') && fare.includes('https://primicia.com.ve/guayana/ciudad/aumento-pasaje-bolivar-noviembre/') && fare.includes('https://lacalle.com.ve/transportistas-de-carabobo-anuncian-nuevo-pasaje-urbano-minimo-en-230-bolivares-a-partir-del-1-de-noviembre/'), 'Fuentes fechadas');
+assert.ok(!/<script\b|<form\b/i.test(fare), 'Sin JS ni captación');
+const fareCard = grid.split('data-search="pasaje urbano transporte venezuela 230')[1]?.split('</article>')[0];
+assert.ok(fareCard?.includes(`href="${farePath}"`) && !fareCard.includes('demo-tag'), 'Tarjeta de tarifa real');
+assert.ok(newsCards[0].includes(`href="${farePath}"`), 'La noticia de noviembre encabeza Actualidad');
+if (process.argv.includes('--built')) {
+  const builtFare = readFileSync(new URL('../dist/venezuela-lab/actualidad/tarifa-urbana-1nov-2026/index.html', import.meta.url), 'utf8');
+  assert.ok(hasNoindexMeta(builtFare), 'Build conserva noindex de tarifa');
+}

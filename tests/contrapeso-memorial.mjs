@@ -729,7 +729,7 @@ for (const id of provea2003Feb) {
   assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
 assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length,'Roster 2003 sincronizado con dataset');
-assert.ok(year2003.includes('3 judiciales y 27 documentales')&&year2003.includes('noindex,nofollow,noarchive'));
+assert.ok(year2003.includes(`3 judiciales y ${cases2003.length-3} documentales`)&&year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(SOURCES.PRO2003JAN.scope.includes('47, 48, 50')&&SOURCES.PRO2003JAN.scope.includes('72–73'));
 
 // Subconjunto #180: 10 adultos cotejados en PROVEA, anexo 5, pp. 549–550.
@@ -747,7 +747,7 @@ for (const id of provea2003MarAbr) {
   assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
 assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length,'Roster 2003 sincronizado con dataset');
-assert.ok(year2003.includes('3 judiciales y 27 documentales'));
+assert.ok(year2003.includes(`3 judiciales y ${cases2003.length-3} documentales`));
 assert.ok(SOURCES.PRO2003JAN.scope.includes('pp. 549–550'));
 assert.ok(!CASES.some(p=>p.id==='jhoan-julio-alvarado-paredes-2003'),'Excluir fila con año 2002');
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));

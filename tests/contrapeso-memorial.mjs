@@ -708,7 +708,7 @@ for (const id of provea2003Ids) {
 assert.ok(!CASES.some(p => p.id === 'pablo-celestino-guanare-2003'));
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(SOURCES.PRO2003JAN.url.includes('archivo.provea.org'));
-assert.ok(SOURCES.PRO2003JAN.scope.includes('registros 29, 34 y 39–44'));
+assert.ok(SOURCES.PRO2003JAN.scope.includes('n.os 29, 34, 39–44'));
 assert.ok(CASES.find(p => p.id === 'damelis-vasquez-2003').note.includes('al parecer'));
 
 

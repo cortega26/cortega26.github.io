@@ -726,6 +726,26 @@ for (const id of provea2003Feb) {
   assert.ok(p.note.includes('sin atribución penal individual firme'));
   assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
-assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,20,'Roster 2003 sincronizado');
-assert.ok(year2003.includes('3 judiciales y 17 documentales')&&year2003.includes('noindex,nofollow,noarchive'));
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,30,'Roster 2003 sincronizado');
+assert.ok(year2003.includes('3 judiciales y 27 documentales')&&year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(SOURCES.PRO2003JAN.scope.includes('47, 48, 50')&&SOURCES.PRO2003JAN.scope.includes('72–73'));
+
+// Subconjunto #180: 10 adultos cotejados en PROVEA, anexo 5, pp. 549–550.
+const provea2003MarAbr=["jhon-peter-perez-2003","arturo-contreras-arias-2003","jose-tovar-nava-2003","jose-de-jesus-cordero-2003","darwin-castillo-2003","ronald-ricardo-sojo-bonilla-2003","humberto-de-jesus-hernandez-guevara-2003","juan-carlos-benedetti-otaola-2003","hanner-monterrosa-jordan-2003","javier-pantoja-hernandez-2003"];
+assert.equal(provea2003MarAbr.length,10);
+for (const id of provea2003MarAbr) {
+  const matches=CASES.filter(p=>p.id===id);
+  assert.equal(matches.length,1,`Ficha única marzo–abril: ${id}`);
+  const p=matches[0];
+  assert.equal(p.year,2003);
+  assert.equal(p.episode,'2003');
+  assert.deepEqual(p.sources,['PRO2003JAN']);
+  assert.ok(!p.date && p.note.includes('fecha tabulada del episodio'));
+  assert.ok(p.note.includes('sin atribución penal individual firme'));
+  assert.ok(year2003.includes(`perfil.html?id=${id}`));
+}
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,30,'Roster 2003 sincronizado');
+assert.ok(year2003.includes('3 judiciales y 27 documentales'));
+assert.ok(SOURCES.PRO2003JAN.scope.includes('pp. 549–550'));
+assert.ok(!CASES.some(p=>p.id==='jhoan-julio-alvarado-paredes-2003'),'Excluir fila con año 2002');
+assert.ok(year2003.includes('noindex,nofollow,noarchive'));

@@ -1,5 +1,13 @@
 # Contrapeso — Plan maestro y protocolo de ejecución (66 minutos)
 
+## MUSEO · 01-11-2026, 11:36 Chile — sexta extracción del #180 congelado, PROVEA p. 554
+
+- **Base viva cotejada:** `master@af7ac5de905fc9405c6265c332b9f73e8d8b3d8e` con 492 IDs; `#180@32fdedb7395487cef885307101324906f3b9a6b3` con 724 IDs (cotejo anterior de 724); deuda inicial 232 IDs, objetivo de este PR: 7 adultos ya contenidos en #180, 492→499 y deuda 232→225 únicamente tras integración efectiva. #180 permanece congelado; no se agregan altas al lote original.
+- **Fuente primaria visual:** [PROVEA, anexo 5, p. 554, n.os 113–120](https://archivo.provea.org/wp-content/uploads/03_anexos.pdf#page=34), consulta 01-11-2026. Se incluyen 113–119 (7 adultos, 18–48 años); n.º 120 figura sin nombre y con 14 años, **excluido**. El episodio de Andújar comprende dos fallecidos y denuncia familiar de sustracción de bienes, no sentencia. En Pérez y Gamboa consta versión policial de enfrentamiento; se distingue de testigos y familiares. En Gamboa se reclasifica `custodia`→`policial`: haber sido visto con funcionarios en una patrulla no prueba detención formal.
+- **Auditoría propia 7/7:** nombres, edades, fechas y lugares del episodio, categoría, versiones adversas, atribución a PROVEA y privacidad; sin nombres de agentes, testigos ni familiares ni atribución penal individual. Libertad individual: **aplica con evidencia** a denuncias de muertes y actuación policial; propiedad privada: **requiere investigación** sobre denuncia de sustracción de bienes en episodio Andújar, no hecho probado; control del poder: **aplica con evidencia** a denuncias y versiones oficiales, sin determinación penal acreditada. Auditoría propia, sin sesión aislada; Codex **NO SOLICITADO — revisión selectiva**.
+- **Fase de cierre:** source/build/Playwright/visual exact-SHA, Codacy 0, protecciones y expected-head squash merge, QA postdeploy y HTML robots live pendientes de acreditar. Prototipo noindex, sin autorización de lanzamiento.
+
+
 ## MUSEO · 01-11-2026, 09:36 Chile — quinta extracción de #180, PROVEA pp. 551–553
 
 - **Base verificada:** master@ca0a6957ab6f35a555ebd65e0c4af1c1937f1baf con 473 fichas; #180 congelado@32fdedb con 725. Se separan 19 adultos de filas 92–97 y 99–111 ya presentes en #180; propuesta 473→492, capítulo 2003 30→49. **No contar como integrados hasta squash, deploy y QA live.** Deuda pendiente: 252 antes, 233 después solo si se integra sin otros cambios.

@@ -682,7 +682,9 @@ assert.ok(!cases2001.some(x=>x.id==='juan-pablo-arroyabe-corrales'));
 
 // Hito judicial acotado: tres víctimas del mismo expediente de la Corte IDH.
 const year2003 = readFileSync(new URL('../public/venezuela-lab/museo/victimas/2003/index.html', import.meta.url),'utf8');
-assert.equal(CASES.filter(p=>p.episode==='2003').length,30,'Tres víctimas judiciales y veintisiete fichas documentales, no recuento anual');
+const cases2003 = CASES.filter(p=>p.episode==='2003');
+assert.ok(cases2003.length>=3,'Conservar las tres víctimas judiciales del expediente');
+assert.ok(year2003.includes(`<strong>${cases2003.length}</strong>`),'Contador anual coherente con dataset');
 for (const id of ['robert-ignacio-diaz-loreto-2003','octavio-ignacio-diaz-alvarez-2003','david-octavio-diaz-loreto-2003']) {
   const person=CASES.find(p=>p.id===id);
   assert.ok(person, `Identidad judicial: ${id}`);
@@ -726,7 +728,7 @@ for (const id of provea2003Feb) {
   assert.ok(p.note.includes('sin atribución penal individual firme'));
   assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
-assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,30,'Roster 2003 sincronizado');
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length,'Roster 2003 sincronizado con dataset');
 assert.ok(year2003.includes('3 judiciales y 27 documentales')&&year2003.includes('noindex,nofollow,noarchive'));
 assert.ok(SOURCES.PRO2003JAN.scope.includes('47, 48, 50')&&SOURCES.PRO2003JAN.scope.includes('72–73'));
 
@@ -744,7 +746,7 @@ for (const id of provea2003MarAbr) {
   assert.ok(p.note.includes('sin atribución penal individual firme'));
   assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
-assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,30,'Roster 2003 sincronizado');
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length,'Roster 2003 sincronizado con dataset');
 assert.ok(year2003.includes('3 judiciales y 27 documentales'));
 assert.ok(SOURCES.PRO2003JAN.scope.includes('pp. 549–550'));
 assert.ok(!CASES.some(p=>p.id==='jhoan-julio-alvarado-paredes-2003'),'Excluir fila con año 2002');

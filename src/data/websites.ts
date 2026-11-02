@@ -54,6 +54,29 @@ export const websites: Website[] = [
     capabilities: { es: ["Calculadoras y guías útiles","Navegación por situaciones reales"], en: ["Calculators and useful guides","Navigation by real-life scenarios"] },
   },
   {
+    id: 'pickfathom',
+    name: 'PickFathom',
+    domain: 'pickfathom.com',
+    url: 'https://pickfathom.com/',
+    group: 'editorial',
+    // Repository-backed product; public site availability not independently verified yet.
+    status: 'unverified',
+    tags: ['Astro', 'React', 'Comparador'],
+    description: {
+      es: 'Producto web en desarrollo para comparar monitores con especificaciones de fabricantes, filtros y comparaciones independientes.',
+      en: 'Early-stage product decision website with manufacturer-sourced monitor specs, filters and independent comparisons.',
+    },
+    highlight: { es: 'Tus prioridades. Tu elección.', en: 'Your priorities. Your pick.' },
+    benefit: {
+      es: 'Ayuda a evaluar diferencias concretas entre monitores sin rankings opacos ni precios inventados.',
+      en: 'Helps shoppers evaluate concrete monitor tradeoffs without opaque rankings or fabricated prices.',
+    },
+    capabilities: {
+      es: ['Catálogo inicial de tres monitores', 'Filtros y comparación lado a lado'],
+      en: ['Initial three-monitor catalog', 'Filters and side-by-side comparison'],
+    },
+  },
+  {
     id: 'ebano',
     name: 'El Rincón de Ébano',
     domain: 'elrincondeebano.com',

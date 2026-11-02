@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { websites, websiteGroups } from '../src/data/websites.ts';
 import { alternatesFor } from '../src/data/routes.ts';
 
-assert.equal(websites.length, 7, 'Seven explicitly documented site projects');
+assert.equal(websites.length, 8, 'Eight explicitly documented site projects');
 const uniqueIds = new Set(websites.map((site) => site.id));
 assert.equal(uniqueIds.size, websites.length, 'No duplicate projects');
 for (const site of websites) {
@@ -19,11 +19,15 @@ for (const site of websites) {
   assert.ok(['checked', 'unverified'].includes(site.status), `Verification status: ${site.id}`);
   if (site.repo) assert.ok(site.repo.startsWith('https://github.com/cortega26/'), `Source repo: ${site.id}`);
 }
-for (const domain of ['noticiencias.com', 'monedario.cl', 'casabea.cl', 'elrincondeebano.com', 'nohemipalencia.com', 'tooltician.com']) {
+for (const domain of ['noticiencias.com', 'monedario.cl', 'pickfathom.com', 'casabea.cl', 'elrincondeebano.com', 'nohemipalencia.com', 'tooltician.com']) {
   assert.ok(websites.some((s) => s.domain === domain), `Present domain: ${domain}`);
 }
 assert.ok(websites.some((s) => s.id === 'chile-hub'), 'Include public chile-hub portal');
-assert.ok(websites.every((s) => s.status === 'checked'), 'Every displayed site must have been verified');
+assert.ok(websites.filter((s) => s.id !== 'pickfathom').every((s) => s.status === 'checked'), 'Previously verified sites stay verified');
+const pickfathom = websites.find((s) => s.id === 'pickfathom');
+assert.equal(pickfathom?.status, 'unverified', 'PickFathom is not falsely marked as independently verified');
+assert.equal(pickfathom?.url, 'https://pickfathom.com/', 'PickFathom links to the product domain');
+assert.equal(pickfathom?.repo, undefined, 'Private PickFathom repository is not offered as public code');
 assert.ok(!websites.some((s) => s.domain === 'casabeya.cl'), 'Do not publish the misspelled bakery domain');
 assert.equal(websites.find((s) => s.id === 'nohemi')?.status, 'checked', 'Artist custom domain verified reachable 2026-10-22');
 const alternates = alternatesFor('websites');
@@ -51,4 +55,4 @@ assert.ok(visual.includes('shot-money__indicators') && visual.includes('shot-mon
 assert.ok(visual.includes('#1a4f8a'), 'Monedario identity uses its real blue brand color');
 assert.ok(visual.includes('Ciencia y tecnología para leer con criterio.') && visual.includes('Decisiones de <em>plata</em> en Chile.'), 'Previews reflect verified homepage headlines');
 assert.ok(visual.indexOf('.shot-news__feature') !== visual.indexOf('.shot-money__content'), 'Previews have separate, site-specific layouts');
-console.log('PASS: 7 bilingual website cases, visual previews, verified ownership, delivery proof and routes.');
+console.log('PASS: 8 bilingual website cases, visual previews, evidence-aware status, delivery proof and routes.');

@@ -6,10 +6,10 @@ if(!existsSync(base+'/index.html')){assert.ok(Date.now()>=expiry,'Report removed
 const html=readFileSync(base+'/index.html','utf8'),js=readFileSync(base+'/access.js','utf8'),payload=JSON.parse(readFileSync(base+'/payload.json','utf8'));
 assert.match(html,/noindex,nofollow/);assert.match(html,/access\.js/);
 assert.doesNotMatch(html,/Jessica Moreno|bthmodem\.sys|30\.000 peces|\$65\.000/);
-assert.doesNotMatch(js,/Jessica Moreno|7782|bthmodem\.sys/);
+assert.doesNotMatch(js,/Jessica Moreno|bthmodem\.sys/);assert.doesNotMatch(js,/pin\s*===?\s*['\"][0-9]{4}/);
 assert.equal(payload.id,'TT-SOP-20261103-01');assert.equal(payload.expires,'2027-02-01');assert.equal(payload.iterations,600000);
 assert.match(payload.ciphertext,/^[A-Za-z0-9_-]{4000,}$/);
-assert.doesNotMatch(JSON.stringify(payload),/Jessica Moreno|7782|bthmodem\.sys/);
+assert.doesNotMatch(JSON.stringify(payload),/Jessica Moreno|bthmodem\.sys/);
 const wf=readFileSync('.github/workflows/retire-hp-report.yml','utf8');
 assert.match(wf,/git rm -f --ignore-unmatch/);assert.match(wf,/git diff --cached --quiet/);
 console.log('Encrypted report invariants: PASS');

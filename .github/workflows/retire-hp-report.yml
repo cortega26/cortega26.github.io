@@ -1,0 +1,34 @@
+name: Retire HP private service report
+on:
+  schedule:
+    - cron: '25 6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  retire:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@900f2210b1d28bbbd0bd22d17926b9e224e8f231 # v6
+        with:
+          persist-credentials: true
+      - name: Delete published artifacts after 90 days
+        shell: bash
+        run: |
+          set -euo pipefail
+          cutoff=1801450800
+          now="$(date -u +%s)"
+          if [ "$now" -lt "$cutoff" ]; then
+            echo "Report not expired"
+            exit 0
+          fi
+          base=public/reportes/hp-pavilion-f77576d7da04c4894b90
+          git rm -f --ignore-unmatch -- "$base/index.html" "$base/access.js" "$base/style.css" "$base/payload.json"
+          if git diff --cached --quiet; then
+            echo "Already retired"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(reportes): expire HP service report after 90 days'
+          git push origin HEAD:master

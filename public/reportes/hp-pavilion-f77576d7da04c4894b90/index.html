@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es-CL"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet"><meta name="referrer" content="no-referrer">
+<title>Informe técnico de servicio | Tooltician</title>
+<link rel="stylesheet" href="/reportes/_assets/informe.css">
+<link rel="canonical" href="https://tooltician.com/reportes/hp-pavilion-f77576d7da04c4894b90/">
+</head><body>
+<main id="informe">
+<header class="topbar"><div class="brand">tooltician<small>Servicios técnicos · Informe de atención</small></div><div class="id">TT-SOP-20261103-01<br>Versión 0.1 · 03-11-2026</div></header>
+<p class="eyebrow">Informe de servicio · Equipo portátil</p>
+<h1>Diagnóstico, recuperación y resguardo de información</h1>
+<p class="deck">Resumen documentado de las pruebas y medidas realizadas en un equipo HP Pavilion con bloqueos intermitentes, reinicios inesperados y anomalías de imagen.</p>
+<div class="status"><strong>Estado: diagnóstico en curso</strong><span>Se completaron respaldos prioritarios y diversas pruebas. La causa raíz no está confirmada y el equipo aún requiere validación prolongada de estabilidad.</span></div>
+<section aria-label="Datos del servicio" class="meta">
+<div><span class="k">Equipo</span><span class="v">HP Pavilion 15</span></div>
+<div><span class="k">Período</span><span class="v">Octubre - noviembre 2026</span></div>
+<div><span class="k">Informe actualizado</span><span class="v">03-11-2026</span></div>
+</section>
+<section><h2>1. Motivo de atención</h2>
+<p>El portátil presentó fallos de inicio y recuperación automática de Windows, congelamientos completos, reinicios con pantallazo azul y alteraciones visuales. El propósito del servicio es preservar los datos, examinar las posibles causas y evitar medidas destructivas antes de contar con evidencia suficiente.</p></section>
+<section><h2>2. Trabajo realizado</h2>
+<div class="table-wrap"><table><thead><tr><th>Actividad</th><th>Resultado / alcance</th></tr></thead><tbody>
+<tr><td>Inspección y diagnóstico inicial</td><td>Revisión física del equipo, acceso al diagnóstico UEFI de HP y comprobación del comportamiento de arranque.</td></tr>
+<tr><td>Memoria RAM</td><td>Dos módulos de 8 GB probados individualmente; pruebas rápidas conjuntas satisfactorias. No descartan fallas intermitentes o incompatibilidades bajo carga.</td></tr>
+<tr><td>SSD NVMe</td><td>Pruebas de almacenamiento, estado y autodiagnóstico rápido satisfactorias; resultado no equivale a una certificación absoluta del disco.</td></tr>
+<tr><td>Subsistema de video</td><td>Pruebas de memoria de video y paleta de colores de HP satisfactorias tras completar correctamente la prueba interactiva.</td></tr>
+<tr><td>Windows</td><td>Inicio normal observado posteriormente. SFC detectó y reparó un archivo protegido, <code>bthmodem.sys</code>, asociado a comunicaciones Bluetooth.</td></tr>
+<tr><td>Análisis de fallas</td><td>Revisión de eventos de Windows y cinco minidumps con WinDbg; se localizaron errores repetidos de corrupción o acceso indebido a memoria.</td></tr>
+<tr><td>Investigación PCI Express</td><td>Registros WHEA 17 anteriores al reemplazo de RAM en el puerto relacionado con la gráfica NVIDIA. El origen exacto aún no está determinado.</td></tr>
+<tr><td>Prueba reversible de gráficos</td><td>NVIDIA deshabilitada temporalmente en Windows; Intel UHD Graphics permanece operativa. La comparación de estabilidad sigue pendiente.</td></tr>
+</tbody></table></div></section>
+<section><h2>3. Respaldo y comprobaciones de integridad</h2>
+<div class="table-wrap"><table><thead><tr><th>Conjunto de datos</th><th>Evidencia obtenida</th><th>Estado</th></tr></thead><tbody>
+<tr><td>Carpeta prioritaria del Escritorio</td><td>305 archivos (992.869.544 bytes) comparados con los originales mediante checksums; sin diferencias ni errores de ejecución.</td><td class="ok">Verificado</td></tr>
+<tr><td>Carpeta de trabajo de ingeniería</td><td>20.803 archivos; 109.355.692.378 bytes copiados. rsync finalizó con código 0. En la comprobación global apareció un candidato que luego coincidió en SHA-256, sin diferencias en la revalidación individual.</td><td class="pending">Copia correcta; cierre de verificación global pendiente</td></tr>
+<tr><td>Archivos locales de perfiles Windows</td><td>Comparación de 5.617 archivos regulares fuera de AppData y OneDrive; sin archivos faltantes y con cuatro diferencias en archivos internos del registro Windows, no en documentos personales.</td><td class="pending">Documentación personal comprobada con excepciones</td></tr>
+<tr><td>Datos de aplicaciones y nube</td><td>Se detectaron diferencias dentro de AppData. Los elementos gestionados por OneDrive quedaron fuera del alcance solicitado; su disponibilidad en nube no fue verificada. Un PDF representado como marcador de nube tenía una copia vacía.</td><td class="pending">Excepciones documentadas</td></tr>
+</tbody></table></div>
+<p class="fineprint">La comprobación confirma coincidencia con el contenido original examinado; no permite garantizar que los archivos de origen estuvieran libres de daños previos. Los datos del cliente no están publicados en este informe.</p></section>
+<section><h2>4. Hallazgos técnicos</h2>
+<h3>Pantallazos azules</h3><p>Los eventos registraron nueve reinicios con comprobación de errores el 29 de octubre. Se preservaron y verificaron por SHA-256 los cinco minidumps disponibles. Se analizaron los códigos <code>0x13A</code>, <code>0xC2</code>, <code>0xBE</code>, <code>0x3B</code> y <code>0x1E</code>. Presentan corrupción o accesos inválidos a memoria, pero no identifican de forma concluyente un controlador culpable. Un evento adicional <code>0x124</code> requiere cautela por su relación con una excepción de máquina, aunque su volcado no estaba disponible.</p>
+<h3>Errores históricos PCIe</h3><p>Se observaron advertencias WHEA 17 de errores corregidos en un puerto PCI Express Intel vinculado a la NVIDIA GeForce GTX 1050 Max-Q. Estaban presentes antes del cambio de RAM. Esto prioriza la investigación del subsistema gráfico y su enlace, sin probar un defecto físico de la GPU.</p>
+<h3>Reparación del sistema</h3><p>El registro CBS identificó el archivo protegido <code>bthmodem.sys</code> como corrupto y posteriormente reparado mediante SFC. No hay evidencia suficiente para afirmar que este archivo fuera la causa de todos los fallos. Una verificación posterior con <code>sfc /verifyonly</code> quedó pendiente de incorporar al cierre.</p>
+<h3>Funcionamiento posterior</h3><p>El equipo logró arrancar Windows normalmente y permaneció operativo más de dos horas, según la observación comunicada durante la atención. La estabilidad sostenida todavía no se ha certificado y la mejoría no puede atribuirse a una intervención específica.</p></section>
+<section><h2>5. Pendientes y recomendaciones</h2>
+<ul><li>Registrar el resultado de <code>sfc /verifyonly</code> y completar una prueba de estabilidad reproducible.</li><li>Comparar el comportamiento con la gráfica NVIDIA deshabilitada y habilitada bajo condiciones equivalentes, solo si la estabilidad del equipo lo permite.</li><li>No reinstalar Windows ni sustituir componentes sin una necesidad demostrada por pruebas.</li><li>Conservar el respaldo externo sin eliminar los originales; validar con la persona propietaria los archivos de nube excluidos, especialmente el documento cuyo marcador local no contiene datos.</li><li>Actualizar el informe cuando exista diagnóstico concluyente o decisión de cierre técnico.</li></ul>
+<p class="fineprint"><strong>Alcance:</strong> informe de actividades y hallazgos documentados hasta el 03-11-2026. No constituye certificación de ausencia de fallas, garantía de recuperación de contenidos exclusivamente en la nube ni diagnóstico definitivo de hardware.</p>
+</section>
+<footer class="footer"><div>Tooltician · Servicios técnicos y soluciones digitales<br><a href="https://tooltician.com/">tooltician.com</a></div><div>Documento informativo · No incluye datos personales del cliente<br>ID: TT-SOP-20261103-01 · Versión 0.1</div></footer>
+</main></body></html>

@@ -1,0 +1,17 @@
+name: HP report security invariants
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@900f2210b1d28bbbd0bd22d17926b9e224e8f231 # v6
+      - uses: actions/setup-node@ad1b57eb8159e2fd3cc753317dd4a4016287218f # v6
+        with:
+          node-version: 24
+      - run: node tests/report-secure.mjs

@@ -23,7 +23,7 @@ jobs:
             exit 0
           fi
           base=public/reportes/hp-pavilion-f77576d7da04c4894b90
-          git rm -f --ignore-unmatch -- "$base/index.html" "$base/access.js" "$base/style.css" "$base/payload.json"
+          git rm -f --ignore-unmatch -- "$base/index.html" "$base/access.js" "$base/style.css" "$base/payload.json" "$base/addendum-20261105.json"
           if git diff --cached --quiet; then
             echo "Already retired"
             exit 0

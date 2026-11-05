@@ -12,7 +12,7 @@
   form.addEventListener('submit',async event=>{
     event.preventDefault();const pin=pinInput.value;
     if(!/^[0-9]{4}$/.test(pin)){message('Introduce los cuatro dígitos de tu clave.');return;}
-    submit.disabled=true;message('Verificando clave y descifrando el informe…');
+    submit.disabled=true;let phase='authentication';message('Verificando clave y descifrando el informe…');
     try{
       const response=await fetch('./payload.json',{cache:'no-store'});
       if(!response.ok)throw Error('missing');
@@ -23,11 +23,21 @@
       const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:bytes(data.salt),iterations:data.iterations,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
       const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:bytes(data.nonce),additionalData:encoder.encode(reportId)},key,bytes(data.ciphertext));
       const expanded=new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'));
-      report.innerHTML=await new Response(expanded).text();
+      const originalHtml=await new Response(expanded).text();
+      // Same derived key and the existing QR/PIN: separate nonce and AAD for the addendum.
+      phase='addendum';
+      const extraResponse=await fetch('./addendum-20261105.json',{cache:'no-store'});
+      if(!extraResponse.ok)throw Error('missing addendum');
+      const extra=await extraResponse.json();
+      if(extra.id!==reportId||extra.version!==1||extra.published!=='2026-11-05'||extra.compression!=='gzip'||!/^[-_A-Za-z0-9]{16}$/.test(extra.nonce)||!/^[-_A-Za-z0-9]{4000,}$/.test(extra.ciphertext))throw Error('invalid addendum');
+      const supplement=await crypto.subtle.decrypt({name:'AES-GCM',iv:bytes(extra.nonce),additionalData:encoder.encode(reportId+'|ADDENDUM-20261105')},key,bytes(extra.ciphertext));
+      const decompressed=new Blob([supplement]).stream().pipeThrough(new DecompressionStream('gzip'));
+      const appendixHtml=await new Response(decompressed).text();
+      report.innerHTML=originalHtml+appendixHtml;
       pinInput.value='';gate.hidden=true;unlocked.hidden=false;
       document.title='Informe técnico | Tooltician Soporte';
       window.scrollTo({top:0,behavior:'instant'});
-    }catch(_){message('No fue posible abrir el informe. Verifica la clave y vuelve a escanear el QR.');}
+    }catch(_){message(phase==='addendum'?'No fue posible cargar la actualización del 5 de noviembre. Intenta nuevamente o contacta a Tooltician.':'No fue posible abrir el informe. Verifica la clave y vuelve a escanear el QR.');}
     finally{submit.disabled=false;}
   });
 })();

@@ -10,6 +10,16 @@ assert.doesNotMatch(js,/bthmodem\.sys/);assert.doesNotMatch(js,/pin\s*===?\s*['\
 assert.equal(payload.id,'TT-SOP-20261103-01');assert.equal(payload.expires,'2027-02-01');assert.equal(payload.iterations,600000);
 assert.match(payload.ciphertext,/^[A-Za-z0-9_-]{4000,}$/);
 assert.doesNotMatch(JSON.stringify(payload),/bthmodem\.sys/);
+const appendix=JSON.parse(readFileSync(base+'/addendum-20261105.json','utf8'));
+assert.equal(appendix.id,payload.id);
+assert.equal(appendix.published,'2026-11-05');
+assert.equal(appendix.compression,'gzip');
+assert.match(appendix.nonce,/^[A-Za-z0-9_-]{16}$/);
+assert.match(appendix.ciphertext,/^[A-Za-z0-9_-]{4000,}$/);
+assert.doesNotMatch(JSON.stringify(appendix),/Jessica|MemTest86|cargador|0xF7|PIN/);
+assert.match(js,/addendum-20261105\.json/);
+assert.match(js,/ADDENDUM-20261105/);
+assert.match(js,/phase==='addendum'/);
 const wf=readFileSync('.github/workflows/retire-hp-report.yml','utf8');
-assert.match(wf,/git rm -f --ignore-unmatch/);assert.match(wf,/git diff --cached --quiet/);
+assert.match(wf,/git rm -f --ignore-unmatch/);assert.match(wf,/addendum-20261105\.json/);assert.match(wf,/git diff --cached --quiet/);
 console.log('Encrypted report invariants: PASS');

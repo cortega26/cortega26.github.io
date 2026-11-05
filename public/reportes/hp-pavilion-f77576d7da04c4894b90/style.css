@@ -2,5 +2,5 @@
 /* La actualización permanece dentro del informe descifrado y se imprime junto con él. */
 .report-content.hp-addendum{margin-top:48px;border-top:4px solid var(--gold);padding-top:30px}
 .hp-addendum .report-header{border-bottom-color:var(--gold)}
-.hp-addendum .report-content h1{margin-top:0}
+.hp-addendum h1{margin-top:0}
 @media print{.hp-addendum{break-before:page;margin-top:0!important;padding-top:12px!important}}

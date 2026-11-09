@@ -9,6 +9,7 @@ import { readFileSync, existsSync, readdirSync, statSync } from 'fs';
 import { join } from 'path';
 import './websites-showcase.mjs';
 import './contrapeso-documentary.mjs';
+import './contrapeso-mobile-nav.mjs';
 import './contrapeso-barbados.mjs';
 import './contrapeso-archivo.mjs';
 import './contrapeso-instituciones.mjs';

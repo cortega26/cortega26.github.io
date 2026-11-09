@@ -57,6 +57,13 @@ for(const link of document.querySelectorAll('[data-nav-filter]'))link.addEventLi
   const details=link.closest('details');
   if(details)details.open=false;
 });
+// Cerrar el menú móvil también al navegar a secciones sin filtro.
+for (const link of document.querySelectorAll('.mobile-nav a:not([data-nav-filter])')) {
+  link.addEventListener('click', () => {
+    const menu = link.closest('details');
+    if (menu) menu.open = false;
+  });
+}
 clearFilters.addEventListener('click',()=>{
   activeFilter='Todas';
   search.value='';

@@ -842,3 +842,32 @@ assert.ok(year2003.includes('3 judiciales y 81 documentales'));
 assert.ok(year2003.includes('<strong>84</strong>'));
 assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length);
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
+
+// Hito 2002: cinco casos de Acarigua cotejados con PROVEA, PDF p. 5.
+const year2002 = readFileSync(
+  new URL('../public/venezuela-lab/museo/victimas/2002/index.html', import.meta.url),
+  'utf8'
+);
+const acariguaIds = [
+  'juan-ramon-linares-2002',
+  'sandy-lopez-2002',
+  'antonio-jose-osta-2002',
+  'juan-jose-valera-torralba-2002',
+  'marcelino-escalona-colmenares-2002'
+];
+const acariguaCases = CASES.filter(person => acariguaIds.includes(person.id));
+
+assert.ok(year2002.includes('noindex,nofollow,noarchive'), 'Capítulo 2002 conserva robots');
+assert.ok(index.includes('href="/venezuela-lab/museo/victimas/2002/"'), 'Memorial enlaza el capítulo 2002');
+assert.ok(Object.hasOwn(EPISODES, '2002'), 'Filtro anual 2002');
+assert.deepEqual(
+  acariguaCases.map(person => person.id).sort(),
+  [...acariguaIds].sort(),
+  'Cinco identidades únicas del episodio Acarigua, sin ausencias ni duplicados'
+);
+for (const person of acariguaCases) {
+  assert.equal(person.year, 2002, `Año de ${person.id}`);
+  assert.equal(person.date, '2002-03-26', `Fecha de ${person.id}`);
+  assert.ok(person.sources.includes('PROVIDA2002'), `PROVEA acredita ${person.id}`);
+  assert.ok(year2002.includes(`perfil.html?id=${person.id}`), `Enlace nominal de ${person.id}`);
+}

@@ -12,6 +12,8 @@ for (const year of [1999, 2000, 2001, 2002, 2003]) {
   const href = `/venezuela-lab/museo/victimas/${year}/`;
   assert.ok(fallback.includes(`href="${href}"`), `Fallback enlaza capítulo ${year}`);
   assert.ok(existsSync(join(root, `public${href}index.html`)), `Capítulo ${year} existe`);
+  const chapter = readFileSync(join(root, `public${href}index.html`), 'utf8');
+  assert.match(chapter, /name="robots" content="noindex,nofollow,noarchive"/, `Capítulo ${year} conserva noindex`);
 }
 assert.match(index, /name="robots" content="noindex,nofollow,noarchive"/, 'Prototipo no indexable');
 assert.ok(!index.includes('2002 · CINCO VÍCTIMAS DOCUMENTADAS EN ACARIGUA'), 'Rótulo anual no se limita a un episodio');

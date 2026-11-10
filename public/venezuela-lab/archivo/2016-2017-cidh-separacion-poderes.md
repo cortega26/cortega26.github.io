@@ -1,8 +1,8 @@
 # Archivo histórico | Venezuela, 2016–2017: advertencias de la CIDH sobre la separación de poderes
 
 **Tipo:** ficha documental de archivo, no noticia reciente ni sentencia judicial.  
-**Estado:** investigación parcial, pendiente de publicación como página HTML navegable.  
-**Fecha de revisión:** 9 de noviembre de 2026.  
+**Estado:** investigación parcial; existe una página HTML propuesta en este mismo PR, aún no integrada ni verificada en el sitio live.  
+**Fecha de revisión:** 10 de noviembre de 2026.  
 **Documentos primarios inspeccionados:** Comisión Interamericana de Derechos Humanos, comunicados 132/16 (14 de septiembre de 2016) y 041/17 (31 de marzo de 2017); cuerpo de ambos comunicados sobre la Asamblea Nacional y las decisiones de la Sala Constitucional.  
 **Originales:** https://www.oas.org/es/cidh/prensa/comunicados/2016/132.asp y https://www.oas.org/es/cidh/prensa/comunicados/2017/041.asp
 
@@ -25,7 +25,7 @@ Los dos comunicados originales acreditan la **posición pública y fechada de la
 
 **Evaluación editorial:** libertad individual — aplica con evidencia a derechos políticos y expresión según la CIDH; propiedad privada — no aplica a esta fuente; control del poder — aplica con evidencia a independencia de poderes y representación parlamentaria. La interpretación crítica se distingue de las constataciones documentales.
 
-**Correcciones:** /venezuela-lab/metodo/. Esta ficha no autoriza indexación ni lanzamiento del prototipo.
+**Correcciones:** /venezuela-lab/metodo/. La página HTML de esta ficha está propuesta en `archivo/2016-2017-cidh-separacion-poderes/index.html`; su presencia en el PR no acredita despliegue ni publicación verificada. Esta ficha no autoriza indexación ni lanzamiento del prototipo.
 
 
 ## Cotejo documental incremental — 9 de noviembre de 2026

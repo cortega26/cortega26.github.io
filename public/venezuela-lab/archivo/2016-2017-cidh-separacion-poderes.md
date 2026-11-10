@@ -13,6 +13,10 @@
 - **31 de marzo de 2017.** La CIDH calificó las decisiones como usurpación de funciones legislativas y anulación *de facto* de la representación electoral. Es una valoración institucional explícita de la Comisión, **no** una condena penal contra magistrados identificados.
 - **1 de abril de 2017.** Las rectificaciones posteriores se tratan en el explicador existente; **no están documentadas en el comunicado 041/17**, fechado el día anterior. No atribuirlas a esta fuente.
 
+## Derechos políticos, uso del derecho penal y acceso a observación
+
+El comunicado CIDH 041/17 también objeta expresamente la invocación de la figura de **traición a la patria** para silenciar o intimidar la crítica parlamentaria (párrafo que comienza «La Comisión Interamericana condena el uso del derecho penal»). La Comisión advierte que los poderes discrecionales descritos podrían limitar derechos humanos; **advierte sobre un riesgo**, sin acreditar en ese pasaje una medida concreta ya ejecutada contra una persona determinada. En el cierre del comunicado, la CIDH reitera su solicitud de anuencia estatal para una visita de observación que, según declara, venía solicitando desde 2004. Este dato acredita la solicitud de la Comisión, **no demuestra por sí solo los motivos de la ausencia de visita ni una negativa específica en marzo de 2017**. Fuente: [CIDH, comunicado 041/17, 31-03-2017, párrafos sobre derecho penal, discrecionalidad y visita](https://www.oas.org/es/cidh/prensa/comunicados/2017/041.asp).
+
 ## Qué prueba y qué no prueba
 
 Los dos comunicados originales acreditan la **posición pública y fechada de la CIDH** sobre las decisiones judiciales y el antecedente de 2016. No reemplaza la lectura directa de las sentencias 155, 156, 157 y 158, ni acredita por sí solo efectos posteriores, responsabilidades penales individuales o una disolución formal de la Asamblea. Para los extractos de los fallos y las rectificaciones, véase el explicador existente: /venezuela-lab/explicadores/sentencias-155-156-2017/.

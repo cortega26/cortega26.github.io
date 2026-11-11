@@ -18,6 +18,8 @@ import {
   basePrice,
   business,
   hardLaunchIssues,
+  homeVisitBundleOffer,
+  estimateHomeVisitBundle,
   neighborOffer,
   neighborServices,
   services,
@@ -332,6 +334,42 @@ test("the tax status states the subsistence registry without inventing a documen
   );
   assert.equal(business.notebookMaintenancePrice, 45000);
 });
+test("home-visit bundle discount applies only to distinct eligible on-site services", () => {
+  assert.equal(homeVisitBundleOffer.discountPerAdditionalService, 10000);
+  assert.equal(homeVisitBundleOffer.minServices, 2);
+  assert.equal(homeVisitBundleOffer.combinableWithNeighborRates, false);
+  assert.deepEqual(homeVisitBundleOffer.excludedServiceIds, ["diagnostico", "remoto"]);
+
+  const macul = estimateHomeVisitBundle("macul", ["windows", "respaldo", "upgrade"]);
+  assert.equal(macul.normalTotal, 100000);
+  assert.equal(macul.discount, 20000);
+  assert.equal(macul.total, 80000);
+  assert.deepEqual(macul.items.map(({ id, discount, total }) => ({ id, discount, total })), [
+    { id: "windows", discount: 0, total: 35000 },
+    { id: "respaldo", discount: 10000, total: 25000 },
+    { id: "upgrade", discount: 10000, total: 20000 },
+  ]);
+
+  const providencia = estimateHomeVisitBundle("providencia", ["upgrade", "windows"]);
+  assert.equal(providencia.total, 55000, "the first service includes the Providencia visit rate");
+  const visitFloor = estimateHomeVisitBundle("providencia", ["upgrade", "mantencion"]);
+  assert.equal(visitFloor.total, 65000, "discount and visit credit must never be counted twice");
+  const minimal = estimateHomeVisitBundle("nunoa", ["wifi", "respaldo"]);
+  assert.equal(minimal.discount, 10000);
+  assert.equal(minimal.total, 60000);
+
+  for (const invalid of [
+    { area: "macul", services: ["windows"] },
+    { area: "macul", services: ["windows", "windows"] },
+    { area: "macul", services: ["diagnostico", "windows"] },
+    { area: "macul", services: ["remoto", "windows"] },
+    { area: "macul", services: ["fake", "windows"] },
+    { area: "otra", services: ["windows", "respaldo"] },
+  ]) {
+    assert.throws(() => estimateHomeVisitBundle(invalid.area, invalid.services));
+  }
+});
+
 test("neighbors offer is residents-only, discounted by exactly $10.000, and excludes Wi-Fi", () => {
   assert.equal(neighborOffer.ready, false, "consultations are not permission to receive devices");
   assert.equal(neighborOffer.consultationsOpen, true, "owner opened enquiries only");

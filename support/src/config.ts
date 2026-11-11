@@ -111,8 +111,8 @@ export const services: Service[] = [
     problem: "Windows falla o quiero reinstalarlo",
     description:
       "Instalación o reinstalación de Windows, con o sin formateo, y configuración inicial.",
-    price: 40000,
-    detail: "El precio no incluye licencia. Si se requiere comprar una, su valor se cotiza y cobra por separado. El respaldo de archivos se cotiza aparte.",
+    price: 35000,
+    detail: "Tarifa base para una instalación normal. Si surgen problemas de hardware, se cotiza por separado cualquier intervención adicional, previa autorización. No incluye licencia: si hace falta adquirirla, se cotiza y cobra aparte. El respaldo de archivos se cotiza por separado.",
   },
   {
     id: "respaldo",

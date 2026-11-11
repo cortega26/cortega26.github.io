@@ -41,7 +41,7 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
   régimen afecto a IVA. Son precios finales al consumidor: no se agrega IVA ni
   ningún concepto, y no se afirma que incluyan IVA mientras rija el registro.
   Servicios: mantención desktop desde $40.000 y notebook desde $45.000; SSD/RAM
-  desde $30.000; Windows desde $40.000; respaldo y Wi-Fi desde $35.000; remoto
+  desde $30.000; formateo e instalación/reinstalación de Windows desde $35.000 (trabajos adicionales por problemas de hardware requieren cotización y autorización previas); respaldo y Wi-Fi desde $35.000; remoto
   $25.000. Se cobra la visita aunque el cliente no continúe con la reparación.
 - **WhatsApp verificado**: envío y recepción probados por el propietario con
   +56 9 5111 8901. `verified.realPhone` es true y ya no bloquea.

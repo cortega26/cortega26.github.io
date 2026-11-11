@@ -352,8 +352,8 @@ test("home-visit bundle discount applies only to distinct eligible on-site servi
 
   const providencia = estimateHomeVisitBundle("providencia", ["upgrade", "windows"]);
   assert.equal(providencia.total, 55000, "the first service includes the Providencia visit rate");
-  const visitFloor = estimateHomeVisitBundle("providencia", ["upgrade", "mantencion"]);
-  assert.equal(visitFloor.total, 65000, "discount and visit credit must never be counted twice");
+  const higherService = estimateHomeVisitBundle("providencia", ["upgrade", "mantencion"]);
+  assert.equal(higherService.total, 60000, "the highest-priced first service absorbs the visit charge");
   const minimal = estimateHomeVisitBundle("nunoa", ["wifi", "respaldo"]);
   assert.equal(minimal.discount, 10000);
   assert.equal(minimal.total, 60000);

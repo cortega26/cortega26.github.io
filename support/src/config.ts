@@ -107,12 +107,12 @@ export const services: Service[] = [
   },
   {
     id: "windows",
-    title: "Windows y configuración",
-    problem: "No inicia o muestra errores",
+    title: "Formateo e instalación o reinstalación de Windows",
+    problem: "Windows falla o quiero reinstalarlo",
     description:
-      "Diagnóstico de software, instalación y configuración según el caso.",
-    price: 40000,
-    detail: "Respaldo y licencia, si se necesitan, se acuerdan por separado.",
+      "Instalación o reinstalación de Windows, con o sin formateo, y configuración inicial.",
+    price: 35000,
+    detail: "Tarifa base para una instalación normal. Si surgen problemas de hardware, se cotiza por separado cualquier intervención adicional, previa autorización. No incluye licencia: si hace falta adquirirla, se cotiza y cobra aparte. El respaldo de archivos se cotiza por separado.",
   },
   {
     id: "respaldo",

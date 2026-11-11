@@ -20,6 +20,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    # The Playwright 1.60.0 image ships Chromium and its system libraries.
+    # Avoid apt-get/Ubuntu mirror DNS failures in the browser test stage.
+    container:
+      image: mcr.microsoft.com/playwright:v1.60.0-noble
     steps:
       - name: Checkout
         uses: actions/checkout@900f2210b1d28bbbd0bd22d17926b9e224e8f231 # v6
@@ -61,18 +65,14 @@ jobs:
         run: node tests/sitemap-i18n.mjs
       - name: Blog language-switch regression
         run: node tests/blog-language-switch.mjs
-      - name: Cache Playwright browsers
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5 — Node.js 24
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-      - name: Install Playwright browser
-        # tests/htw-snapshot.mjs launches real Chromium, whose binary is not
-        # present on a fresh runner (npm ci installs the npm package only).
-        # --with-deps also installs the OS libraries headless Chromium needs.
-        run: npx playwright install --with-deps chromium
+      - name: Verify preinstalled Playwright Chromium
+        run: |
+          node --input-type=module -e '
+            import { existsSync } from "node:fs";
+            import { chromium } from "playwright";
+            if (!existsSync(chromium.executablePath())) throw new Error("Chromium missing from CI image");
+            console.log("Chromium browser executable present");
+          '
       - name: HTW snapshot
         run: node tests/htw-snapshot.mjs
       - name: Behavioral tests

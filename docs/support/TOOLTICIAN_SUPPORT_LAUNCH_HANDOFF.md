@@ -649,7 +649,7 @@ La decisión de precio también busca evitar un salto brusco cuando eventualment
 | Mantención desktop | desde $40.000 |
 | Mantención notebook | desde $45.000 |
 | Instalación SSD/RAM | desde $30.000 |
-| Windows/configuración | desde $40.000 |
+| Formateo e instalación/reinstalación de Windows | desde $35.000 (fallas de hardware: intervención adicional previa cotización y autorización; licencia y respaldo aparte) |
 | Respaldo/migración | desde $35.000 |
 | Wi-Fi/impresoras | desde $35.000 |
 | Soporte remoto | $25.000 |

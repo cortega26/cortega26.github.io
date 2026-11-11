@@ -33,3 +33,13 @@ Los dos comunicados originales acreditan la **posición pública y fechada de la
 - **CIDH 132/16, cuerpo desde el párrafo sobre la Sala Constitucional:** documenta fecha de divulgación del fallo (5 de septiembre), nulidad general condicionada al desacato y argumento de la juramentación de tres diputados de Amazonas. La CIDH formula una advertencia sobre derechos políticos, no una sentencia judicial. https://www.oas.org/es/cidh/prensa/comunicados/2016/132.asp
 - **CIDH 041/17, párrafos iniciales:** describe las decisiones de 28–29 de marzo de 2017 y la crítica de la Comisión a la transferencia de funciones legislativas; cita expresamente su pronunciamiento de septiembre de 2016. https://www.oas.org/es/cidh/prensa/comunicados/2017/041.asp
 - **Reserva:** las comunicaciones de la CIDH son fuentes primarias de la posición de la Comisión, pero fuentes secundarias respecto del contenido judicial original. No se infiere sentencia penal individual ni se da por comprobada la totalidad de los efectos institucionales posteriores.
+
+## Verificación focalizada de fuente primaria — 11 de noviembre de 2026
+
+Se releyó directamente el comunicado CIDH [041/17](https://www.oas.org/es/cidh/prensa/comunicados/2017/041.asp), fechado **31 de marzo de 2017**, con localización por párrafos identificables:
+
+- **Párrafos que comienzan «Washington, DC» y «El 28 y 29 de marzo»:** la CIDH califica las decisiones como usurpación de funciones legislativas y describe levantamiento de inmunidades, referencia a traición a la patria, poderes discrecionales y ejercicio de competencias legislativas por la Sala Constitucional u órgano designado. Se atribuye la descripción y la valoración **a la CIDH**, no a un fallo penal.
+- **Párrafos que comienzan «La Comisión Interamericana condena el uso del derecho penal» y «Adicionalmente, la Comisión observa»:** la Comisión objeta la utilización del delito de traición a la patria y advierte de **potenciales** limitaciones a derechos humanos. No prueba que todas esas limitaciones se materializaran.
+- **Párrafo que comienza «La CIDH se pone a disposición»:** reitera la solicitud de anuencia para una visita de observación, formulada según la CIDH desde 2004. No se deduce una negativa concreta del Estado en marzo de 2017.
+
+**Resultado del cotejo:** estas tres atribuciones ya presentes en la ficha son consistentes con el texto consultado; no se halló en esos pasajes condena penal individual ni evidencia para imputarla. **Límite pendiente:** cotejar las sentencias originales y la versión institucional del TSJ antes de declarar concluido el expediente. Este control documental focalizado no sustituye auditoría final del PR ni QA técnico exact-SHA.

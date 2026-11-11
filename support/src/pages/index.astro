@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import portrait from '../assets/carlos-ortega-hq.webp';
 import Layout from '../Layout.astro';
 import Testimonials from '../components/Testimonials.astro';
-import { business, services, money, basePrice } from '../config';
+import { business, services, money, basePrice, homeVisitBundleOffer, estimateHomeVisitBundle } from '../config';
 import { devices, powerStates, whatsappUrl, directContactMessage } from '../lib/contact';
 const contactReady = __SUPPORT_RELEASE__ && /^569\d{8}$/.test(business.whatsapp);
 // Direct chat keeps a brief qualification template (form remains optional).
@@ -15,6 +15,7 @@ const faqs = [
   ['¿Se cobra aunque decida no reparar?', 'Sí. La visita remunera el traslado y el diagnóstico, aunque decidas no continuar con una reparación adicional. No se cobra trabajo adicional sin tu autorización.'],
   ['¿Y si el problema se resuelve durante la visita?', 'Si basta una solución simple dentro del tiempo incluido, pagas solo la visita. Desmontajes, repuestos y trabajos de mayor duración requieren una cotización previa.'],
   ['¿La visita se suma a la mano de obra?', business.visitCredit ? 'No. Si autorizas trabajo adicional en la misma visita, se cobra el mayor valor entre visita y servicio, más los repuestos, licencias y extras que autorices. Ejemplo: visita de $30.000 más un servicio de $40.000 se cobran $40.000, no $70.000.' : 'La visita y el trabajo adicional se detallan por separado en la cotización total, antes de que autorices.'],
+  ['¿Hay descuento si necesito varios trabajos?', `Sí. Para ${homeVisitBundleOffer.minServices} o más servicios distintos realizados a domicilio en la misma visita, descuentas ${money(homeVisitBundleOffer.discountPerAdditionalService)} de mano de obra por cada servicio adicional. El primero se cobra a precio normal. No aplica al diagnóstico ni al soporte remoto; no se acumula con tarifas especiales para vecinos. Los repuestos, licencias y segundas visitas se cotizan aparte.`],
   ['¿Hace falta una segunda visita?', 'A veces, por ejemplo si hay que comprar un repuesto o volver en otro día. En ese caso te informo antes el alcance y el precio de esa segunda etapa, y se acuerda contigo. No hay cobros sorpresa.'],
   ['¿Llevas repuestos? ¿Puedo comprarlos yo?', 'No trabajo con un inventario de repuestos. Puedes comprar directamente el SSD, la RAM u otro componente que te recomiende, después de comprobar compatibilidad. Si prefieres que lo compre yo, acordamos y pagamos el repuesto antes de pedirlo, conservando el comprobante.'],
   ['¿Qué medios de pago aceptas?', `${business.payment} Tooltician asume el costo del medio de pago. El detalle está en las condiciones del servicio.`],
@@ -28,11 +29,13 @@ const faqs = [
   ['¿Puedo recibir soporte remoto?', `Sí, si el problema se puede resolver sin intervenir físicamente el equipo. La sesión dura hasta ${business.remoteMinutes} minutos y termina sin dejar acceso desatendido permanente.`],
   ['¿Atiendes empresas?', 'No durante esta etapa. Tooltician Soporte atiende exclusivamente a consumidores finales, que es lo que permite el régimen tributario vigente. No se atienden oficinas, organizaciones ni clientes empresa, y no se ofrecen planes de soporte continuo. Tampoco se retiran equipos: la atención es a domicilio.'],
 ];
+const bundleExample = estimateHomeVisitBundle('macul', ['windows', 'respaldo', 'upgrade']);
+const bundleLabels: Record<string, string> = { windows: 'Instalación de Windows', respaldo: 'Respaldo de archivos', upgrade: 'Instalación SSD/RAM' };
 const featured = services.filter(s => ['diagnostico', 'mantencion', 'windows', 'upgrade'].includes(s.id));
 const additional = services.filter(s => !featured.includes(s));
 const primaryFaqs = faqs.filter(([question]) => [
   '¿Cuánto cuesta la visita?', '¿Se cobra aunque decida no reparar?',
-  '¿La visita se suma a la mano de obra?', '¿Qué garantía tiene el trabajo?',
+  '¿La visita se suma a la mano de obra?', '¿Hay descuento si necesito varios trabajos?', '¿Qué garantía tiene el trabajo?',
 ].includes(question ?? ''));
 const otherFaqs = faqs.filter(entry => !primaryFaqs.includes(entry));
 ---
@@ -66,6 +69,26 @@ const otherFaqs = faqs.filter(entry => !primaryFaqs.includes(entry));
   <section id="precios" class="section container" data-section-event="support_price_view"><div class="section-heading"><div><p class="eyebrow">SABER CUÁNTO, ANTES</p><h2>Precios a la vista.</h2></div><p>Valores en pesos chilenos. El total y el alcance se confirman antes de comenzar.</p></div>
     <div class="pricing-layout"><aside class="price-explainer"><h3>Visita y diagnóstico.<br />Sin cobros duplicados.</h3><p class="big-price">{money(basePrice())}<span>Macul y Ñuñoa</span></p><p>Incluye hasta {business.visitMinutes} minutos, explicación y soluciones simples. Si haces el trabajo en la misma visita, pagas el mayor valor entre visita y servicio, no ambos.</p><p><strong>Providencia: {money(business.areas[2]!.price)}</strong><br />Cobertura completa, previa coordinación.</p><p class="payment-note">Transferencia, efectivo o tarjeta · mismo precio</p><a class="button" href="#consulta" data-cta="pricing">Consultar mi caso ↗</a></aside>
     <div><table class="price-table"><caption>Mano de obra según servicio</caption><thead><tr><th scope="col">Servicio</th><th scope="col">Desde</th></tr></thead><tbody>{services.filter(s => s.id !== 'diagnostico').map(s => <tr><th scope="row">{s.title}<span>{s.detail}</span></th><td>{money(s.price)}</td></tr>)}</tbody></table><p class="price-note">{business.visitCredit ? 'En una misma visita, la mano de obra se cobra al mayor valor entre visita y servicio: no se suman ambos. A eso se agregan repuestos, licencias y extras que autorices.' : 'La visita y la mano de obra se cotizan por separado.'} Repuestos, licencias y nuevas visitas se acuerdan antes de sumar cualquier costo.</p></div></div>
+    <div class="bundle-offer" aria-labelledby="bundle-offer-title" data-bundle-offer>
+      <div class="bundle-offer-copy">
+        <p class="bundle-offer-kicker">EXCLUSIVO A DOMICILIO · UNA MISMA VISITA</p>
+        <h3 id="bundle-offer-title">¿Varios trabajos?<br /><em>Pagas menos.</em></h3>
+        <p class="bundle-offer-lead">Si contratas <strong>dos o más servicios distintos</strong> de la lista para realizarlos en una misma visita, el primero mantiene su precio habitual y <strong>cada servicio adicional tiene {money(homeVisitBundleOffer.discountPerAdditionalService)} de descuento</strong> en la mano de obra.</p>
+        <a class="bundle-offer-cta" href="#consulta" data-cta="bundle">Consultar por varios trabajos <span aria-hidden="true">↗</span></a>
+        <p class="bundle-offer-terms">Solo trabajos a domicilio durante una misma visita. No aplica a visita y diagnóstico ni a soporte remoto. No acumulable con tarifas especiales para vecinos. Repuestos, licencias y segundas visitas se cotizan por separado. El presupuesto se confirma antes de intervenir.</p>
+      </div>
+      <div class="bundle-example" aria-label="Ejemplo de descuento para tres servicios">
+        <div class="bundle-example-heading"><span>EJEMPLO · 3 SERVICIOS</span><strong>Ahorras {money(bundleExample.discount)}</strong></div>
+        <div class="bundle-example-items">
+          {bundleExample.items.map((item) => <div class="bundle-example-item">
+            <span>{bundleLabels[item.id] ?? item.title}{item.discount > 0 && <small>−{money(item.discount)} por servicio adicional</small>}</span>
+            <strong>{money(item.total)}</strong>
+          </div>)}
+        </div>
+        <div class="bundle-example-total"><span>Total mano de obra<br /><small>desde</small></span><strong>{money(bundleExample.total)}</strong></div>
+        <p class="bundle-example-caption">Sin promoción: {money(bundleExample.normalTotal)}. Ejemplo con tarifas base de Macul/Ñuñoa; el valor final depende del alcance acordado.</p>
+      </div>
+    </div>
   </section>
   <Testimonials />
   <section id="quien-te-atiende" class="about section" data-section-event="support_about_view"><div class="container about-grid"><div class="identity-card"><Image src={portrait} alt="Carlos Ortega, responsable de Tooltician Soporte" widths={[320, 480, 640, 800, 960]} sizes="(max-width: 760px) 320px, 370px" format="webp" quality={88} loading="lazy" /><p>Atención personal.<br /><strong>De la consulta al resultado.</strong></p></div><div><p class="eyebrow">QUIÉN TOCA TU EQUIPO IMPORTA</p><h2>Soy Carlos Ortega.<br />Yo mismo reviso tu equipo.</h2><p>Atención a domicilio, sin intermediarios. Te explico el diagnóstico, acordamos el precio y compruebo contigo el resultado.</p><p>Si quieres conocer mi trayectoria técnica, puedes consultar mis proyectos y perfil profesional.</p><div class="profile-links"><a href={business.parent}>Tooltician ↗</a><a href={business.github}>GitHub ↗</a><a href={business.linkedin}>LinkedIn ↗</a></div></div></div></section>

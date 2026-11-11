@@ -22,7 +22,9 @@ import { resolve as resolvePath } from 'path';
 // project first, and refuses to run against a server whose /en/ body does not
 // byte-match this worktree's dist/en/index.html.
 const PORT = 4400 + Math.floor(Math.random() * 500);
-const BASE = `http://localhost:${PORT}`;
+// Explicit IPv4 loopback: Linux containers may resolve localhost to ::1 while
+// Astro binds on IPv4, causing false preview-start timeouts.
+const BASE = `http://127.0.0.1:${PORT}`;
 const START_TIMEOUT_MS = 30000;
 const NPM = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 
@@ -46,7 +48,7 @@ function startPreview() {
       return;
     }
     const expectedBody = readFileSync(indexPath, 'utf8');
-    const child = spawn(NPM, ['run', 'preview', '--', '--port', String(PORT)], {
+    const child = spawn(NPM, ['run', 'preview', '--', '--host', '127.0.0.1', '--port', String(PORT)], {
       stdio: ['ignore', 'pipe', 'pipe'],
       detached: process.platform !== 'win32',
     });

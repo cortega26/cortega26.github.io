@@ -143,6 +143,47 @@ export const services: Service[] = [
   },
 ];
 
+/**
+ * Discount for distinct, on-site services completed during one home visit.
+ * The diagnostic/visit fee is already credited toward the first service; this
+ * promotion discounts only subsequent services. It never uses resident rates.
+ */
+export const homeVisitBundleOffer = {
+  discountPerAdditionalService: 10000,
+  minServices: 2,
+  excludedServiceIds: ["diagnostico", "remoto"],
+  combinableWithNeighborRates: false,
+} as const;
+
+export function estimateHomeVisitBundle(areaId: string, serviceIds: readonly string[]) {
+  const area = business.areas.find((candidate) => candidate.id === areaId);
+  if (!area) throw new Error("Comuna fuera de cobertura para la visita a domicilio");
+  if (serviceIds.length < homeVisitBundleOffer.minServices)
+    throw new Error("La promoción requiere al menos dos servicios distintos");
+  if (new Set(serviceIds).size !== serviceIds.length)
+    throw new Error("Cada servicio puede contarse una sola vez");
+
+  const selected = serviceIds.map((id) => {
+    const service = services.find((candidate) => candidate.id === id);
+    if (!service || homeVisitBundleOffer.excludedServiceIds.some((excluded) => excluded === id))
+      throw new Error(`Servicio no elegible para descuento a domicilio: ${id}`);
+    return service;
+  }).sort((a, b) => b.price - a.price);
+
+  const items = selected.map((service, index) => {
+    // The first line absorbs the visit charge, including Providencia's rate.
+    const normalPrice = index === 0 ? Math.max(area.price, service.price) : service.price;
+    const discount = index === 0 ? 0 : homeVisitBundleOffer.discountPerAdditionalService;
+    return { id: service.id, title: service.title, normalPrice, discount, total: normalPrice - discount };
+  });
+  return {
+    items,
+    normalTotal: items.reduce((sum, item) => sum + item.normalPrice, 0),
+    discount: items.reduce((sum, item) => sum + item.discount, 0),
+    total: items.reduce((sum, item) => sum + item.total, 0),
+  };
+}
+
 export const neighborOffer = {
   // Evaluation-only variant for residents of the owner's building. It must stay
   // non-public/non-indexed and without live contact until its residential

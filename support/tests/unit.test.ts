@@ -391,6 +391,18 @@ test("neighbor direct contact is brief, scoped to enquiries and contains no addr
   assert.doesNotMatch(neighborDirectMessage, /calle|departamento|direcci[oó]n|reserva|recepci[oó]n/i);
 });
 
+test("Windows reinstall offer is explicit about scope, licensing and separate backup", () => {
+  const windows = services.find((service) => service.id === "windows");
+  assert.ok(windows, "existing Windows service must remain in the catalogue");
+  assert.match(windows.title, /Formateo e instalación o reinstalación de Windows/);
+  assert.match(windows.description, /con o sin formateo/);
+  assert.equal(windows.price, 40000);
+  assert.match(windows.detail, /no incluye licencia/i);
+  assert.match(windows.detail, /se cotiza y cobra por separado/i);
+  assert.match(windows.detail, /respaldo de archivos se cotiza aparte/i);
+  assert.equal(services.filter((service) => service.id === "windows").length, 1);
+});
+
 test("neighbors intake never asks for apartment or area and identifies the resident flow", () => {
   const validNeighbor: NeighborIntake = {
     device: "Notebook",
@@ -402,7 +414,7 @@ test("neighbors intake never asks for apartment or area and identifies the resid
   assert.deepEqual(validateNeighborIntake(validNeighbor), {});
   const message = buildNeighborMessage(validNeighbor, "TS-A1B2C3D4E5F6");
   assert.match(message, /vecino\/a del edificio/);
-  assert.match(message, /Servicio: Windows y configuración/);
+  assert.match(message, /Servicio: Formateo e instalación o reinstalación de Windows/);
   assert.doesNotMatch(message, /Comuna:|departamento|direcci[oó]n/i);
   assert.throws(() =>
     buildNeighborMessage(

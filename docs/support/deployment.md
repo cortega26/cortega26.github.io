@@ -47,6 +47,7 @@ dentro de la propiedad existente. El ID conocido no se activa en previews.
   +56 9 5111 8901. `verified.realPhone` es true y ya no bloquea.
 - **Visita y mano de obra**: en la misma visita se cobra el mayor valor entre visita
   y servicio, más repuestos, licencias y extras autorizados. No se suman ambos.
+- **Descuento por varios servicios a domicilio**: si se ejecutan al menos dos servicios distintos del catálogo durante una sola visita en el domicilio del cliente, el primero se cobra al mayor valor entre su tarifa y la visita; cada servicio posterior tiene $10.000 de descuento sobre su mano de obra. Excluye diagnóstico y remoto; no se acumula con tarifas de vecinos; repuestos, licencias y segundas visitas se cotizan aparte. La cotización se confirma antes de intervenir.
 - **Segunda visita**: se informa alcance y precio antes, y requiere acuerdo previo.
 - **Repuestos**: el cliente puede comprar sus componentes; si los compra
   Tooltician, se acuerda y se paga previamente, con comprobante. Sin inventario

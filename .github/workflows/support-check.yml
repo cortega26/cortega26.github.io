@@ -33,8 +33,16 @@ jobs:
               console.log(name + " browser executable present");
             }
           '
-      - run: npm run support:e2e
-      - run: npm run support:e2e:release
+      # The container runs as root; Firefox requires HOME to be owned by root.
+      # GitHub Actions otherwise sets HOME=/github/home (owned by pwuser).
+      - name: Support browser E2E
+        run: npm run support:e2e
+        env:
+          HOME: /root
+      - name: Support release-mode browser E2E
+        run: npm run support:e2e:release
+        env:
+          HOME: /root
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         if: always()
         with:

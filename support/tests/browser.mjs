@@ -54,6 +54,13 @@ try {
     // Preview never exposes live one-tap links; the release gate stays intact.
     for (const location of ["hero", "header", "mobile"])
       assert.ok(!(await page.locator(`[data-cta="${location}"]`).getAttribute("href")).startsWith("https://wa.me/"));
+    // Bundle offer is discoverable and remains a standard, reachable on-page CTA.
+    const bundleOffer = page.locator("[data-bundle-offer]");
+    assert.equal(await bundleOffer.count(), 1);
+    assert.match(await bundleOffer.innerText(), /EXCLUSIVO A DOMICILIO/);
+    assert.match(await bundleOffer.innerText(), /Ahorras \$20\.000/);
+    assert.match(await bundleOffer.innerText(), /No acumulable con tarifas especiales para vecinos/);
+    assert.equal(await bundleOffer.locator('[data-cta="bundle"]').getAttribute("href"), "#consulta");
     // Real testimonials are shared with the public home, not just /vecinos/.
     assert.equal(await page.locator("#experiencias .neighbor-testimonial").count(), 3);
     assert.match(await page.locator("#experiencias").innerText(), /Greily Molina/);

@@ -697,6 +697,19 @@ mano de obra total $40.000
 NO $70.000
 ```
 
+## 7.2.1 Promoción exclusiva por varios servicios a domicilio
+
+Con dos o más **servicios distintos** del catálogo general, ejecutados durante una misma visita en el domicilio del cliente:
+
+- primer servicio: tarifa habitual (el cobro de visita ya está acreditado; se aplica el mayor valor entre ambos);
+- cada servicio adicional: **$10.000 menos sobre su mano de obra**;
+- se excluyen visita/diagnóstico y soporte remoto; no acumulable con precios especiales de vecinos;
+- repuestos, licencias, otros trabajos y nuevas visitas se cotizan por separado y requieren autorización previa.
+
+Ejemplo con tarifas base de Macul/Ñuñoa: Windows $35.000 + respaldo $25.000 (desde $35.000) + SSD/RAM $20.000 (desde $30.000) = **desde $80.000**, frente a $100.000 sin promoción. No confundir este ejemplo con un precio cerrado para cualquier complejidad.
+
+Fuente del cálculo: `homeVisitBundleOffer` y `estimateHomeVisitBundle` en `support/src/config.ts`. La promoción vive únicamente en la página pública de atención a domicilio y en las condiciones generales, no en `/vecinos/`.
+
 ## 7.3 Segunda visita
 
 Si requiere comprar repuesto, buscar una pieza, volver otro día o continuar una intervención, el alcance y precio se informan **antes** y requieren acuerdo.

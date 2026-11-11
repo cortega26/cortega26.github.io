@@ -219,6 +219,27 @@ test("public home and resident page both show the same three contextual referenc
   assert.doesNotMatch(home, /EXCLUSIVO PARA VECINOS DEL EDIFICIO/);
 });
 
+test("home-visit bundle promotion is visible, priced correctly and excluded from neighbor offer", { skip: requiresBuild }, () => {
+  const home = readFileSync(join(dist, "index.html"), "utf8");
+  const residents = readFileSync(join(dist, "vecinos", "index.html"), "utf8");
+  const terms = readFileSync(join(dist, "condiciones-del-servicio", "index.html"), "utf8");
+
+  assert.match(home, /data-bundle-offer/);
+  assert.match(home, /EXCLUSIVO A DOMICILIO/);
+  assert.match(home, /¿Varios trabajos\?/);
+  assert.match(home, /cada servicio adicional tiene \$10\.000 de descuento/i);
+  assert.match(home, /Ahorras \$20\.000/);
+  assert.match(home, /Sin promoción: \$100\.000/);
+  assert.match(home, /\$80\.000/);
+  assert.match(home, /No aplica a visita y diagnóstico ni a soporte remoto/);
+  assert.match(home, /No acumulable con tarifas especiales para vecinos/);
+  assert.match(home, /data-cta="bundle"/);
+  assert.doesNotMatch(residents, /data-bundle-offer|Ahorras \$20\.000/);
+  assert.match(terms, /Descuento por varios servicios a domicilio/);
+  assert.match(terms, /no se acumula con tarifas especiales para vecinos/);
+  assert.match(terms, /El descuento se aplica solo sobre mano de obra/);
+});
+
 test("diagnostic price cards never show an inert fake-button arrow", { skip: requiresBuild }, () => {
   for (const page of ["index.html", join("vecinos", "index.html")]) {
     const html = readFileSync(join(dist, page), "utf8");

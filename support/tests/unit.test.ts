@@ -323,7 +323,7 @@ test("the tax status states the subsistence registry without inventing a documen
       diagnostico: 30000,
       mantencion: 40000,
       upgrade: 30000,
-      windows: 40000,
+      windows: 35000,
       respaldo: 35000,
       wifi: 35000,
       remoto: 25000,
@@ -396,10 +396,12 @@ test("Windows reinstall offer is explicit about scope, licensing and separate ba
   assert.ok(windows, "existing Windows service must remain in the catalogue");
   assert.match(windows.title, /Formateo e instalación o reinstalación de Windows/);
   assert.match(windows.description, /con o sin formateo/);
-  assert.equal(windows.price, 40000);
+  assert.equal(windows.price, 35000);
   assert.match(windows.detail, /no incluye licencia/i);
-  assert.match(windows.detail, /se cotiza y cobra por separado/i);
-  assert.match(windows.detail, /respaldo de archivos se cotiza aparte/i);
+  assert.match(windows.detail, /problemas de hardware/i);
+  assert.match(windows.detail, /previa autorización/i);
+  assert.match(windows.detail, /se cotiza y cobra aparte/i);
+  assert.match(windows.detail, /respaldo de archivos se cotiza por separado/i);
   assert.equal(services.filter((service) => service.id === "windows").length, 1);
 });
 

@@ -92,7 +92,7 @@ assert.ok(!routeGroups.some((g) => Object.values(g.paths).includes(calendarPath)
 assert.ok(hasNoindexMeta(calendar) && calendar.includes('noindex,nofollow,noarchive'), 'Robots de noticia electoral');
 assert.match(calendar, /Hecho: 29 de octubre de 2026/, 'Fecha del hecho electoral');
 assert.match(calendar, /Publicado: 30 de octubre de 2026/, 'Fecha de edición diferenciada');
-assert.match(calendar, /Revisado: 30 de octubre de 2026/, 'Fecha de revisión');
+assert.match(calendar, /Revisado: 10 de noviembre de 2026/, 'Fecha de revisión actualizada tras incorporar el anuncio del 9 de noviembre');
 assert.match(calendar, /sin reporteo propio/, 'No se inventa reporteo');
 assert.match(calendar, /no hay confirmación independiente de un calendario formal/, 'Propuesta no es calendario oficial');
 assert.match(calendar, /No se inspeccionaron los videos o transcripciones oficiales/, 'Límite de acceso original');

@@ -787,13 +787,17 @@ assert.equal(ojedaCorroborado.date,'2001-04-20');
 assert.ok(ojedaCorroborado.note.includes('32 años')&&ojedaCorroborado.note.includes('35 en PROVEA')&&ojedaCorroborado.note.includes('anulada en apelación'));
 assert.ok(year2001.includes('una denuncia posterior del fallecimiento de abril'));
 
-// Cotejo PROVEA pp. 474–475, 480–481 (30-10-2026): nombres y fecha de detención.
-for(const [id,name] of [['norman-germain-perez-2001','Norman Germán Pérez'],['vladimir-gomez-2001','Rladimir Gómez'],['william-jaramillo-2001','Willian Jaramillo']]){
+// Cotejo PROVEA pp. 474–475, 480–481: la grafía de Norman se rectificó el 12-11-2026 tras revisión visual del n.º 214.
+for(const [id,name] of [['norman-germain-perez-2001','Norman Germain Pérez'],['vladimir-gomez-2001','Rladimir Gómez'],['william-jaramillo-2001','Willian Jaramillo']]){
  const p=cases2001.find(x=>x.id===id);assert.equal(p?.name,name);assert.ok(year2001.includes('perfil.html?id='+id));
 }
 for(const id of ['raul-alexander-nieves-palma','william-jaramillo-2001']){
  const p=cases2001.find(x=>x.id===id);assert.ok(p&&!Object.hasOwn(p,'date')&&p.note.includes('13-05-2001'));
 }
+const salazar2001=cases2001.find(p=>p.id==='rodolfo-jose-salazar-jimenez-2001');
+assert.ok(salazar2001?.note.includes('desnudaron a los hermanos de Salazar'),'PROVEA n.º 213 identifica a los hermanos, no a Rodolfo, como desnudados');
+assert.ok(!salazar2001.note.includes('lo desnudaron'),'No atribuir a Rodolfo una acción sufrida por sus hermanos');
+assert.ok(year2001.includes('Norman Germain Pérez'),'Capítulo anual debe preservar la grafía impresa en PROVEA n.º 214');
 const remigio=cases2001.filter(p=>p.id==='remigio-abbaie-tovar-diaz-2001');
 assert.equal(remigio.length,1);assert.equal(remigio[0].name,'Remigio Abbaie Tovar Díaz');
 assert.ok(!Object.hasOwn(remigio[0],'date')&&remigio[0].sources.includes('PRO2001')&&remigio[0].note.includes('n.º 220')&&remigio[0].note.includes('versión oficial'));

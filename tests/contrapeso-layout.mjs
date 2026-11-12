@@ -43,7 +43,8 @@ const pages = [
   { id: 'year-1999', path: '/venezuela-lab/museo/victimas/1999/', selector: '.year-card' },
   { id: 'year-2000', path: '/venezuela-lab/museo/victimas/2000/', selector: '.year-roster-item' },
   { id: 'year-2001', path: '/venezuela-lab/museo/victimas/2001/', selector: '.year-roster-item' },
-  { id: 'profile', path: '/venezuela-lab/museo/victimas/perfil.html?id=jaime-hilarion-palima-dominguez', selector: '.profile-name' }
+  { id: 'profile', path: '/venezuela-lab/museo/victimas/perfil.html?id=jaime-hilarion-palima-dominguez', selector: '.profile-name' },
+  { id: 'archive-cidh', path: '/venezuela-lab/archivo/2016-2017-cidh-separacion-poderes/', selector: '#contenido h1', background: 'rgb(247, 245, 240)' }
 ];
 const widths = [320, 390, 768, 1024, 1440];
 const findings = [];
@@ -66,16 +67,23 @@ try {
       if (result.documentWidth > result.viewportWidth + 2) {
         findings.push(`${target.id}/${width}: Horizontal overflow: ${result.documentWidth} > ${result.viewportWidth}`);
       }
-      if (result.background !== 'rgb(246, 245, 239)') {
+      if (result.background !== (target.background || 'rgb(246, 245, 239)')) {
         findings.push(`${target.id}/${width}: CSS missing: ${result.background}`);
       }
-      const headings = page.locator('.hero h1, .person-name, .profile-name, .year-card h3');
+      const headings = page.locator('.hero h1, .person-name, .profile-name, .year-card h3, #contenido h1');
       const headingCount = Math.min(await headings.count(), 24);
       for (let k = 0; k < headingCount; k++) {
         const rect = await headings.nth(k).boundingBox();
         if (rect && (rect.x < -2 || rect.x + rect.width > width + 2)) {
           findings.push(`${target.id}/${width}: Heading outside viewport at index ${k}`);
         }
+      }
+      if (target.id === 'archive-cidh') {
+        const robots = await page.locator('meta[name="robots"]').getAttribute('content');
+        if (robots !== 'noindex,nofollow,noarchive') findings.push(`archive-cidh/${width}: robots guard changed`);
+        if (await page.locator('#contenido h1').count() !== 1) findings.push(`archive-cidh/${width}: expected one article heading`);
+        const skipLink = page.locator('a.skip[href="#contenido"]');
+        if (await skipLink.count() !== 1) findings.push(`archive-cidh/${width}: missing skip link`);
       }
       if (target.id === 'directory') {
         const recordCards = page.locator('.person-card');
@@ -108,7 +116,7 @@ try {
         if (n !== expectedYearRecords) findings.push(`${target.id}/${width}: expected ${expectedYearRecords} year records, got ${n}`);
       }
       if ([390, 1440].includes(width)) {
-        await page.screenshot({ path: resolve(out, `${target.id}-${width}.png`) });
+        await page.screenshot({ path: resolve(out, `${target.id}-${width}.png`), fullPage: target.id === 'archive-cidh' });
         if (target.id === 'year-2000') {
           await page.locator('.year-roster').scrollIntoViewIfNeeded();
           await page.screenshot({ path: resolve(out, `year-2000-register-${width}.png`) });

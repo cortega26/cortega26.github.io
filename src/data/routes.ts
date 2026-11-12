@@ -147,6 +147,10 @@ export const prototypeOnlyRoutes = [
     id: 'contrapeso:explainer:tsj-2017',
     path: '/venezuela-lab/explicadores/sentencias-155-156-2017/',
   },
+  {
+    id: 'contrapeso:archive:cidh-2016-2017',
+    path: '/venezuela-lab/archivo/2016-2017-cidh-separacion-poderes/',
+  },
 ] as const;
 
 function normalizePath(pathname: string): string {

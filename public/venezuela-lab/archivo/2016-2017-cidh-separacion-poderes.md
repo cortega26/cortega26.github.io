@@ -4,7 +4,7 @@
 **Estado:** investigación parcial; existe una página HTML propuesta en este mismo PR, aún no integrada ni verificada en el sitio live.  
 **Fecha de revisión:** 10 de noviembre de 2026.  
 **Documentos primarios inspeccionados:** Comisión Interamericana de Derechos Humanos, comunicados 132/16 (14 de septiembre de 2016) y 041/17 (31 de marzo de 2017); cuerpo de ambos comunicados sobre la Asamblea Nacional y las decisiones de la Sala Constitucional.  
-**Originales:** https://www.oas.org/es/cidh/prensa/comunicados/2016/132.asp y https://www.oas.org/es/cidh/prensa/comunicados/2017/041.asp
+**Originales:** <https://www.oas.org/es/cidh/prensa/comunicados/2016/132.asp> y <https://www.oas.org/es/cidh/prensa/comunicados/2017/041.asp>
 
 ## Secuencia documentada
 
@@ -27,11 +27,10 @@ Los dos comunicados originales acreditan la **posición pública y fechada de la
 
 **Correcciones:** /venezuela-lab/metodo/. La página HTML de esta ficha está propuesta en `archivo/2016-2017-cidh-separacion-poderes/index.html`; su presencia en el PR no acredita despliegue ni publicación verificada. Esta ficha no autoriza indexación ni lanzamiento del prototipo.
 
-
 ## Cotejo documental incremental — 9 de noviembre de 2026
 
-- **CIDH 132/16, cuerpo desde el párrafo sobre la Sala Constitucional:** documenta fecha de divulgación del fallo (5 de septiembre), nulidad general condicionada al desacato y argumento de la juramentación de tres diputados de Amazonas. La CIDH formula una advertencia sobre derechos políticos, no una sentencia judicial. https://www.oas.org/es/cidh/prensa/comunicados/2016/132.asp
-- **CIDH 041/17, párrafos iniciales:** describe las decisiones de 28–29 de marzo de 2017 y la crítica de la Comisión a la transferencia de funciones legislativas; cita expresamente su pronunciamiento de septiembre de 2016. https://www.oas.org/es/cidh/prensa/comunicados/2017/041.asp
+- **CIDH 132/16, cuerpo desde el párrafo sobre la Sala Constitucional:** documenta fecha de divulgación del fallo (5 de septiembre), nulidad general condicionada al desacato y argumento de la juramentación de tres diputados de Amazonas. La CIDH formula una advertencia sobre derechos políticos, no una sentencia judicial. <https://www.oas.org/es/cidh/prensa/comunicados/2016/132.asp>
+- **CIDH 041/17, párrafos iniciales:** describe las decisiones de 28–29 de marzo de 2017 y la crítica de la Comisión a la transferencia de funciones legislativas; cita expresamente su pronunciamiento de septiembre de 2016. <https://www.oas.org/es/cidh/prensa/comunicados/2017/041.asp>
 - **Reserva:** las comunicaciones de la CIDH son fuentes primarias de la posición de la Comisión, pero fuentes secundarias respecto del contenido judicial original. No se infiere sentencia penal individual ni se da por comprobada la totalidad de los efectos institucionales posteriores.
 
 ## Verificación focalizada de fuente primaria — 11 de noviembre de 2026

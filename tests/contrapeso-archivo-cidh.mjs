@@ -18,7 +18,7 @@ for (const [id, year] of [['132', '2016'], ['041', '2017']]) {
 }
 const explainer = readFileSync(join(root, 'public/venezuela-lab/explicadores/sentencias-155-156-2017/index.html'), 'utf8');
 assert.ok(explainer.includes('/venezuela-lab/archivo/2016-2017-cidh-separacion-poderes/'), 'el explicador enlaza la ficha histórica');
-assert.match(html, /no una condena penal/);
-assert.match(html, /cotejo íntegro continúa pendiente/);
+assert.match(html, /no se atribuyen responsabilidades penales individuales/);
+assert.match(html, /el examen del conjunto judicial continúa pendiente/);
 assert.doesNotMatch(html, /<form\b|<script\b/i);
 console.log('Contrapeso archivo CIDH: source guard PASS');

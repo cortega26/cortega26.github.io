@@ -821,8 +821,8 @@ for (const id of provea2003Agosto557558) {
 }
 assert.ok(CASES.find(p=>p.id==='richard-sanchez-2003').note.includes('fecha discordante'));
 assert.ok(!CASES.some(p=>p.id==='jesus-alberto-gonzalez-2003'||p.id==='jeanfer-alexis-crespo-velasquez-2003'),'No presentar disparos accidentales como abusos acreditados');
-assert.ok(year2003.includes('3 judiciales y 81 documentales'));
-assert.ok(year2003.includes('<strong>84</strong>'));
+assert.ok(year2003.includes('3 judiciales y 82 documentales'));
+assert.ok(year2003.includes('<strong>85</strong>'));
 assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length);
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
 
@@ -837,9 +837,9 @@ for(const id of provea2003P559){
  assert.ok(matches[0].note.includes('sin atribución penal individual firme'));
  assert.ok(year2003.includes(`perfil.html?id=${id}`));
 }
-assert.equal(cases2003.length,84);
-assert.ok(year2003.includes('3 judiciales y 81 documentales'));
-assert.ok(year2003.includes('<strong>84</strong>'));
+assert.equal(cases2003.length,85);
+assert.ok(year2003.includes('3 judiciales y 82 documentales'));
+assert.ok(year2003.includes('<strong>85</strong>'));
 assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length);
 assert.ok(year2003.includes('noindex,nofollow,noarchive'));
 
@@ -871,3 +871,41 @@ for (const person of acariguaCases) {
   assert.ok(person.sources.includes('PROVIDA2002'), `PROVEA acredita ${person.id}`);
   assert.ok(year2002.includes(`perfil.html?id=${person.id}`), `Enlace nominal de ${person.id}`);
 }
+
+
+// Extracción excepcional del PR #180: seis adultos cotejados visualmente con PROVEA (13-11-2026).
+const extractedPROVEA2001 = [
+  'rodolfo-jose-salazar-jimenez-2001',
+  'rafael-naranjo-2001',
+  'jose-humberto-dugarte-guevara-2001',
+  'duber-yorlaes-2001',
+  'jhon-rodolfo-machillada-2001'
+];
+assert.equal(cases2001.length, 147, 'Cinco adultos auditados y extraídos sin alterar los anteriores');
+assert.ok(year2001.includes('<strong>147</strong>') && year2001.includes('147 FICHAS NOMINALES'), 'Contadores 2001 actualizados');
+for (const id of extractedPROVEA2001) {
+  const matches=CASES.filter(p=>p.id===id);
+  assert.equal(matches.length,1,`ID único 2001: ${id}`);
+  assert.equal(matches[0].year,2001);
+  assert.deepEqual(matches[0].sources,['PRO2001']);
+  assert.ok(year2001.includes(`perfil.html?id=${id}`));
+  assert.ok(matches[0].note.includes('p. 480'), 'Fuente localizable en PROVEA');
+}
+const naranjo=CASES.find(p=>p.id==='rafael-naranjo-2001');
+assert.ok(!Object.hasOwn(naranjo,'date'), 'La marca asteriscada no equivale a fecha de defunción');
+assert.ok(naranjo.note.includes('intentó herir')&&!naranjo.note.includes('hirió a un policía'), 'No alterar la conducta relatada');
+const salazar2001=CASES.find(p=>p.id==='rodolfo-jose-salazar-jimenez-2001');
+assert.ok(salazar2001.note.includes('desnudaron a los hermanos'), 'No atribuir a Rodolfo la desnudez de sus hermanos');
+const winder=CASES.filter(p=>p.id==='winder-alexander-olivero-seijas-2003');
+assert.equal(winder.length,1,'Identidad única en 2003');
+assert.equal(winder[0].year,2003);
+assert.deepEqual(winder[0].sources,['PRO2003JAN']);
+assert.ok(winder[0].note.includes('n.os 67–68')&&winder[0].note.includes('sin sentencia penal individual'), 'Fuente y atribución precisas');
+assert.ok(year2003.includes('perfil.html?id=winder-alexander-olivero-seijas-2003'));
+assert.equal(cases2003.length,85);
+for (const id of ['pablo-celestino-guanare-2003','jhoan-julio-alvarado-paredes-2003','jesus-alberto-gonzalez-2003','jeanfer-alexis-crespo-velasquez-2003']) {
+  assert.ok(!CASES.some(p=>p.id===id), `Excluir caso incierto o accidental: ${id}`);
+}
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,cases2001.length);
+assert.equal((year2003.match(/class="year-roster-item"/g)||[]).length,cases2003.length);
+assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2003.includes('noindex,nofollow,noarchive'));

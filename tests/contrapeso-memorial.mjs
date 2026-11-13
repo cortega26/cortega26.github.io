@@ -646,12 +646,12 @@ for (const [id,name,date,num] of provea478) {
   assert.ok(p.note.includes('No se inspeccionaron')||p.note.includes('no se inspeccionaron'),`Límites probatorios ${num}`);
   assert.ok(year2001.includes(`perfil.html?id=${id}`),`Enlace anual ${num}`);
 }
-assert.equal(cases2001.length,142,'142 fichas parciales 2001 tras PROVEA p. 479');
+assert.equal(cases2001.length,147,'147 fichas parciales 2001 tras la extracción auditada de PROVEA p. 480');
 assert.ok(CASES.length>=443,'Conservar las 443 fichas de la línea base de PROVEA p. 479');
-assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,142,'Roster anual exacto');
+assert.equal((year2001.match(/class="year-roster-item"/g)||[]).length,147,'Roster anual exacto');
 assert.ok(SOURCES.PRO2001.title.includes('479')&&SOURCES.PRO2001.scope.includes('n.º 206'),'Fuente y casos reservados');
 assert.ok(cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('compañera')&&cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('a la mujer en un brazo')&&!cases2001.find(p=>p.id==='edgar-antonio-pereira-2001').note.includes('madre'),'Distinguir lesión de compañera y muerte de Pereira, sin inventar parentesco');
-assert.ok(year2001.includes('142 FICHAS NOMINALES')&&year2001.includes('<strong>142</strong>'),'Contadores visibles');
+assert.ok(year2001.includes('147 FICHAS NOMINALES')&&year2001.includes('<strong>147</strong>'),'Contadores visibles');
 assert.ok(year2001.includes('noindex,nofollow,noarchive')&&year2001.includes('No es un balance anual exhaustivo'),'Robots y cautelas');
 
 // PROVEA p. 478, n.º 207: un adulto, atribución documental sin convertirla en condena; n.º 206 pendiente.

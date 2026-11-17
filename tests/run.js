@@ -15,6 +15,7 @@ import './contrapeso-archivo.mjs';
 import './contrapeso-instituciones.mjs';
 import './contrapeso-represion.mjs';
 import './contrapeso-memorial.mjs';
+import './contrapeso-provea-2001-p484-239.mjs';
 import './contrapeso-explicador-2017.mjs';
 import './contrapeso-archivo-cidh.mjs';
 import './contrapeso-actas-28j.mjs';
